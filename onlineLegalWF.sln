@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33801.447
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "onlineLegalWF", "onlineLegalWF.csproj", "{75259150-C841-433C-BA4A-0EACD18EF078}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75259150-C841-433C-BA4A-0EACD18EF078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75259150-C841-433C-BA4A-0EACD18EF078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75259150-C841-433C-BA4A-0EACD18EF078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75259150-C841-433C-BA4A-0EACD18EF078}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FA0AA44E-DC4D-4A5C-8EDC-3F10F50B3B75}
+	EndGlobalSection
+EndGlobal
