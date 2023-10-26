@@ -176,6 +176,7 @@
     <Content Include="Site.Master" />
     <Content Include="test\testReplaceDoc1.aspx" />
     <Content Include="test\testReplaceDoc2.aspx" />
+    <Content Include="userControls\ucPersonSign.ascx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -264,6 +265,13 @@
     <Compile Include="test\testReplaceDoc2.aspx.designer.cs">
       <DependentUpon>testReplaceDoc2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="userControls\ucPersonSign.ascx.cs">
+      <DependentUpon>ucPersonSign.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userControls\ucPersonSign.ascx.designer.cs">
+      <DependentUpon>ucPersonSign.ascx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -278,7 +286,6 @@
     <Folder Include="frmCommregis\" />
     <Folder Include="frmLitigation\" />
     <Folder Include="frmPermit\" />
-    <Folder Include="userControls\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
