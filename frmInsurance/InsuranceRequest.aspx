@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestForm1.aspx.cs" Inherits="onlineLegalWF.test.TestForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InsuranceRequest.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceRequest" %>
 
 <!DOCTYPE html>
 

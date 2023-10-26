@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.test
+namespace onlineLegalWF.frmInsurance
 {
-    public partial class TestForm1 : System.Web.UI.Page
+    public partial class InsuranceRequest : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

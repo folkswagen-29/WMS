@@ -132,6 +132,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="frmInsurance\InsuranceRequest.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -210,6 +211,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="frmInsurance\InsuranceRequest.aspx.cs">
+      <DependentUpon>InsuranceRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceRequest.aspx.designer.cs">
+      <DependentUpon>InsuranceRequest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -268,7 +276,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
     <Folder Include="frmCommregis\" />
-    <Folder Include="frmInsurance\" />
     <Folder Include="frmLitigation\" />
     <Folder Include="frmPermit\" />
     <Folder Include="userControls\" />

@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace onlineLegalWF.test
+namespace onlineLegalWF.frmInsurance
 {
 
 
-    public partial class TestForm1
+    public partial class InsuranceRequest
     {
 
         /// <summary>
