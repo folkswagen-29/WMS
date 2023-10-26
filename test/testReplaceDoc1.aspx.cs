@@ -47,6 +47,8 @@ namespace onlineLegalWF.test
             dr0["tagvalue"] = tag2.Replace(",", "!comma");
             dtStr.Rows.Add(dr0);
             #endregion
+
+            
             #region Sample ReplaceTable
 
             //DataTable Column Properties
@@ -253,7 +255,7 @@ namespace onlineLegalWF.test
                                 '" + templatefile + @"', 
                                 '" + outputfoler + @"', 
                                 '" + outputfn + @"',  
-                                '" + "0" + @"', 
+                                '" + "0" + @"',
                             ) ";
 
             zdb.ExecNonQuery(sql, zconnstr); 

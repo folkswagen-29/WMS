@@ -60,15 +60,6 @@ namespace onlineLegalWF.frmInsurance
         protected global::System.Web.UI.WebControls.TextBox doc_no;
 
         /// <summary>
-        /// req_date control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox req_date;
-
-        /// <summary>
         /// subject control.
         /// </summary>
         /// <remarks>

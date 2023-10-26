@@ -35,7 +35,7 @@
                         <label>Request No. </label>
                     </td>
                     <td colspan="3">
-                        <asp:Label ID="req_no" runat="server" Text="xxxxxxx"></asp:Label>
+                        <asp:Label ID="req_no" runat="server" Text=""></asp:Label>
                     </td>
                 </tr>
                 <tr>
@@ -66,14 +66,14 @@
                         <asp:TextBox ID="doc_no" runat="server" Width="500px"></asp:TextBox>
                     </td>
                 </tr>
-                <tr>
+                <%--<tr>
                     <td class="auto-style2">
                         <label>Date </label>
                     </td>
                     <td colspan="3">
                         <asp:TextBox ID="req_date" TextMode="Date" runat="server"></asp:TextBox>
                     </td>
-                </tr>
+                </tr>--%>
                 <tr>
                     <td class="auto-style2">
                         <label>Subject </label>
