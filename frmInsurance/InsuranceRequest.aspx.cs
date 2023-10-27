@@ -17,7 +17,6 @@ namespace onlineLegalWF.frmInsurance
         public DbControllerBase zdb = new DbControllerBase();
         //public string zconnstr = ConfigurationSettings.AppSettings["BMPDB"].ToString();
         public string zconnstr = ConfigurationManager.AppSettings["BMPDB"].ToString();
-
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -439,6 +438,19 @@ namespace onlineLegalWF.frmInsurance
             Response.BinaryWrite(outputbyte);
             Response.ContentEncoding = System.Text.Encoding.UTF8;
             Response.End();
+        }
+
+        protected void btn_save_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public int SaveRequest() 
+        {
+            int ret = 0;
+
+
+            return ret;
         }
     }
 }
