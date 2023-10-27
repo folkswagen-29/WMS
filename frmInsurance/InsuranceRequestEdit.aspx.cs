@@ -1,35 +1,115 @@
-﻿using Microsoft.Office.Interop.Word;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using DataTable = System.Data.DataTable;
 
 namespace onlineLegalWF.frmInsurance
 {
-    public partial class InsuranceRequest : System.Web.UI.Page
+    public partial class InsuranceRequestEdit : System.Web.UI.Page
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
-        //public string zconnstr = ConfigurationSettings.AppSettings["BMPDB"].ToString();
         public string zconnstr = ConfigurationManager.AppSettings["BMPDB"].ToString();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
-                setData();
+                string id = Request.QueryString["id"];
+
+                if (!string.IsNullOrEmpty(id)) 
+                {
+                    setDataEditRequest(id);
+                }
+                
             }
         }
-        private void setData()
+
+        private void setDataEditRequest(string id) 
         {
-            string xreq_no = System.DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
-            req_no.Text = xreq_no;
+            string sql = "select * from li_insurance_request where req_no='"+ id + "'";
+
+            var res = zdb.ExecSql_DataTable(sql, zconnstr);
+
+            if (res.Rows.Count > 0) 
+            {
+                req_no.Text = res.Rows[0]["req_no"].ToString();
+                req_date.Value = Convert.ToDateTime(res.Rows[0]["req_date"]).ToString("dd/MM/yyyy");
+                type_req.SelectedValue = res.Rows[0]["toreq_code"].ToString();
+                company.Text = res.Rows[0]["company_name"].ToString();
+                doc_no.Text = res.Rows[0]["document_no"].ToString();
+                subject.Text = res.Rows[0]["subject"].ToString();
+                to.Text = res.Rows[0]["dear"].ToString();
+                purpose.Text = res.Rows[0]["objective"].ToString();
+                background.Text = res.Rows[0]["reason"].ToString();
+                type_pi.SelectedValue = res.Rows[0]["top_ins_code"].ToString();
+                indemnity_period.Text = res.Rows[0]["indemnityperiod"].ToString();
+                sum_insured.Text = res.Rows[0]["suminsured"].ToString();
+                start_date.Text = Convert.ToDateTime(res.Rows[0]["startdate"]).ToString("yyyy-MM-dd");
+                end_date.Text = Convert.ToDateTime(res.Rows[0]["enddate"]).ToString("yyyy-MM-dd");
+                approve_des.Text = res.Rows[0]["approved_desc"].ToString();
+            }
+        }
+
+        protected void btn_save_Click(object sender, EventArgs e)
+        {
+            int res = UpdateRequest();
+
+            if (res > 0)
+            {
+                Response.Write("<script>alert('Successfully Updated');</script>");
+                Response.Redirect("/frmInsurance/InsuranceRequestList");
+            }
+            else
+            {
+                Response.Write("<script>alert('Error !!!');</script>");
+            }
+        }
+
+        private int UpdateRequest() 
+        {
+            int ret = 0;
+
+            var xreq_no = req_no.Text.Trim();
+            var xtype_req = type_req.SelectedValue.ToString();
+            var xcompany = company.Text.Trim();
+            var xdoc_no = doc_no.Text.Trim();
+            var xsubject = subject.Text.Trim();
+            var xto = to.Text.Trim();
+            var xpurpose = purpose.Text.Trim();
+            var xbackground = background.Text.Trim();
+            var xtype_pi = type_pi.SelectedValue.ToString();
+            var xindemnity_period = indemnity_period.Text.Trim();
+            var xsum_insured = sum_insured.Text.Trim();
+            var xstart_date = start_date.Text.Trim();
+            var xend_date = end_date.Text.Trim();
+            var xapprove_des = approve_des.Text.Trim();
+
+            string sql = @"UPDATE [dbo].[li_insurance_request]
+                           SET [toreq_code] = '"+ xtype_req + @"'
+                              ,[company_name] = '"+ xcompany + @"'
+                              ,[document_no] = '"+ xdoc_no + @"'
+                              ,[subject] = '"+ xsubject + @"'
+                              ,[dear] = '"+ xto + @"'
+                              ,[objective] = '"+ xpurpose + @"'
+                              ,[reason] = '"+ xbackground + @"'
+                              ,[top_ins_code] = '"+ xtype_pi + @"'
+                              ,[indemnityperiod] = '"+ xindemnity_period + @"'
+                              ,[suminsured] = '"+ xsum_insured + @"'
+                              ,[startdate] = '"+ xstart_date + @"'
+                              ,[enddate] = '"+ xend_date + @"'
+                              ,[approved_desc] = '"+ xapprove_des + @"'
+                         WHERE [req_no] = '"+ xreq_no + "'";
+
+            ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
+
+            return ret;
         }
 
         protected void btn_gendocumnt_Click(object sender, EventArgs e)
@@ -37,13 +117,13 @@ namespace onlineLegalWF.frmInsurance
             GenDocumnet();
         }
 
-        private void GenDocumnet() 
+        private void GenDocumnet()
         {
             // Replace Doc
             var xtype_req = type_req.SelectedValue.ToString();
             var xcompany = company.Text.Trim();
             var xdoc_no = doc_no.Text.Trim();
-            var xreq_date = System.DateTime.Now;
+            var xreq_date = req_date.Value;
             var xsubject = subject.Text.Trim();
             var xto = to.Text.Trim();
             var xpurpose = purpose.Text.Trim();
@@ -85,7 +165,7 @@ namespace onlineLegalWF.frmInsurance
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#reqdate#";
-            dr0["tagvalue"] = xreq_date.ToString("dd/MM/yyyy").Replace(",", "!comma");
+            dr0["tagvalue"] = xreq_date.Replace(",", "!comma");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#objective#";
@@ -438,78 +518,6 @@ namespace onlineLegalWF.frmInsurance
             Response.BinaryWrite(outputbyte);
             Response.ContentEncoding = System.Text.Encoding.UTF8;
             Response.End();
-        }
-
-        protected void btn_save_Click(object sender, EventArgs e)
-        {
-            int res = SaveRequest();
-
-            if (res > 0) 
-            {
-                Response.Write("<script>alert('Successfully added');</script>");
-                Response.Redirect("/frmInsurance/InsuranceRequestList");
-            }
-            else
-            {
-                Response.Write("<script>alert('Error !!!');</script>");
-            }
-
-            
-        }
-
-        public int GetMaxProcessID()
-        {
-            string sql = "select isnull(max(process_id),0) as id from li_insurance_request";
-            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
-            return Convert.ToInt32(dt.Rows[0][0]);
-        }
-        private int SaveRequest() 
-        {
-            int ret = 0;
-
-            var xreq_no = req_no.Text.Trim();
-            var xprocess_id = string.Format("{0:000000}", (GetMaxProcessID() + 1));
-            var xtype_req = type_req.SelectedValue.ToString();
-            var xcompany = company.Text.Trim();
-            var xdoc_no = doc_no.Text.Trim();
-            var xreq_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            var xsubject = subject.Text.Trim();
-            var xto = to.Text.Trim();
-            var xpurpose = purpose.Text.Trim();
-            var xbackground = background.Text.Trim();
-            var xtype_pi = type_pi.SelectedValue.ToString();
-            var xindemnity_period = indemnity_period.Text.Trim();
-            var xsum_insured = sum_insured.Text.Trim();
-            var xstart_date = start_date.Text.Trim();
-            var xend_date = end_date.Text.Trim();
-            var xapprove_des = approve_des.Text.Trim();
-            var xstatus = "verify";
-
-            string sql = @"INSERT INTO [dbo].[li_insurance_request]
-                                   ([process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective],[reason],[top_ins_code],[indemnityperiod],[suminsured],[startdate],[enddate],[approved_desc],[status])
-                             VALUES
-                                   ('"+ xprocess_id + @"'
-                                   ,'"+ xreq_no + @"'
-                                   ,'"+ xreq_date + @"'
-                                   ,'"+ xtype_req + @"'
-                                   ,'"+ xcompany + @"'
-                                   ,'"+ xdoc_no + @"'
-                                   ,'"+ xsubject + @"'
-                                   ,'"+ xto + @"'
-                                   ,'"+ xpurpose + @"'
-                                   ,'"+ xbackground + @"'
-                                   ,'"+ xtype_pi + @"'
-                                   ,'"+ xindemnity_period + @"'
-                                   ,'"+ xsum_insured + @"'
-                                   ,'"+ xstart_date + @"'
-                                   ,'"+ xend_date + @"'
-                                   ,'"+ xapprove_des + @"'
-                                   ,'"+ xstatus + @"')";
-
-            ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
-
-
-            return ret;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InsuranceRequest.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceRequest" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InsuranceRequestEdit.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceRequestEdit" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc1" TagName="ucPersonSign" %>
 
 
@@ -6,7 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>InsuranceRequest</title>
+    <title>InsuranceRequestEdit</title>
     <style type="text/css">
     .auto-style1 {
         width: 1000px;
@@ -28,6 +28,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+
         <div style="font-family:Tahoma; font-size:10pt; margin-top: 20px;">
             <table cellpadding="0" cellspacing="0" class="auto-style1">
                 <tr>
@@ -181,7 +182,7 @@
                 <tr>
                     <td class="auto-style2">
                         &nbsp;
-                    </td>
+                        </td>
                     <td colspan="3">
                         <asp:Button ID="btn_save" runat="server" Text="Save" Width="200px" OnClick="btn_save_Click" />
                         &nbsp;&nbsp;<asp:Button ID="btn_gendocumnt" runat="server" Text="TestGenDocumnet" Width="200px" OnClick="btn_gendocumnt_Click" />
@@ -190,6 +191,7 @@
                 </tr>
             </table>
         </div>
+        <asp:HiddenField ID="req_date" runat="server" />
     </form>
 </body>
 </html>

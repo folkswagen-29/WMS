@@ -242,7 +242,7 @@ namespace onlineLegalWF
                 conn.Open();
                 DataSet ds = new DataSet();
                 SqlCommand SQLCmd = new SqlCommand(sql, conn);
-                SQLCmd.ExecuteNonQuery();
+                //SQLCmd.ExecuteNonQuery();
                 modified = SQLCmd.ExecuteNonQuery();
                 conn.Close();
 

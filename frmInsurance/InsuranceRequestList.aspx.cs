@@ -24,9 +24,9 @@ namespace onlineLegalWF.frmInsurance
 
         private void setDataRequestList() 
         {
-            string query = "select * from li_insurance_request";
+            string sql = "select * from li_insurance_request";
 
-            var res = zdb.ExecSql_DataTable(query, zconnstr);
+            var res = zdb.ExecSql_DataTable(sql, zconnstr);
 
             gvReqList.DataSource = res;
             gvReqList.DataBind();
