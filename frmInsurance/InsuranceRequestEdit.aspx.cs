@@ -21,6 +21,8 @@ namespace onlineLegalWF.frmInsurance
 
             if (!IsPostBack)
             {
+                setDataDDL();
+
                 string id = Request.QueryString["id"];
 
                 if (!string.IsNullOrEmpty(id)) 
@@ -29,6 +31,20 @@ namespace onlineLegalWF.frmInsurance
                 }
                 
             }
+        }
+        private void setDataDDL()
+        {
+            type_req.DataSource = GetTypeOfRequest();
+            type_req.DataBind();
+            type_req.DataTextField = "toreq_desc";
+            type_req.DataValueField = "toreq_code";
+            type_req.DataBind();
+
+            type_pi.DataSource = GetTypeOfPropertyInsured();
+            type_pi.DataBind();
+            type_pi.DataTextField = "top_ins_desc";
+            type_pi.DataValueField = "top_ins_code";
+            type_pi.DataBind();
         }
 
         private void setDataEditRequest(string id) 
@@ -55,6 +71,20 @@ namespace onlineLegalWF.frmInsurance
                 end_date.Text = Convert.ToDateTime(res.Rows[0]["enddate"]).ToString("yyyy-MM-dd");
                 approve_des.Text = res.Rows[0]["approved_desc"].ToString();
             }
+        }
+
+        public DataTable GetTypeOfRequest()
+        {
+            string sql = "select * from li_type_of_request order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
+
+        public DataTable GetTypeOfPropertyInsured()
+        {
+            string sql = "select * from li_type_of_property_insured order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
         }
 
         protected void btn_save_Click(object sender, EventArgs e)

@@ -30,6 +30,18 @@ namespace onlineLegalWF.frmInsurance
         {
             string xreq_no = System.DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
             req_no.Text = xreq_no;
+
+            type_req.DataSource = GetTypeOfRequest();
+            type_req.DataBind();
+            type_req.DataTextField = "toreq_desc";
+            type_req.DataValueField = "toreq_code";
+            type_req.DataBind();
+
+            type_pi.DataSource = GetTypeOfPropertyInsured();
+            type_pi.DataBind();
+            type_pi.DataTextField = "top_ins_desc";
+            type_pi.DataValueField = "top_ins_code";
+            type_pi.DataBind();
         }
 
         protected void btn_gendocumnt_Click(object sender, EventArgs e)
@@ -455,6 +467,20 @@ namespace onlineLegalWF.frmInsurance
             }
 
             
+        }
+
+        public DataTable GetTypeOfRequest()
+        {
+            string sql = "select * from li_type_of_request order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
+
+        public DataTable GetTypeOfPropertyInsured()
+        {
+            string sql = "select * from li_type_of_property_insured order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
         }
 
         public int GetMaxProcessID()
