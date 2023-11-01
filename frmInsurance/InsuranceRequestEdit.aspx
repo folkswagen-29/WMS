@@ -46,8 +46,6 @@
                     <td colspan="3">
                         <asp:DropDownList ID="type_req" runat="server" Width="300px">
                             <asp:ListItem>-Please select-</asp:ListItem>
-                            <asp:ListItem Value="01" Selected="True">ขอประกันภัยใหม่ เพิ่มทุน, ยกเลิก</asp:ListItem>
-                            <asp:ListItem Value="02">ขอต่ออายุประกันภัย</asp:ListItem>
                         </asp:DropDownList>
                     </td>
                 </tr>
@@ -102,12 +100,6 @@
                     <td colspan="3">
                         <asp:DropDownList ID="type_pi" runat="server" Width="300px">
                             <asp:ListItem>-Please select-</asp:ListItem>
-                            <asp:ListItem Value="01" Selected="True">IAR</asp:ListItem>
-                            <asp:ListItem Value="02">BI</asp:ListItem>
-                            <asp:ListItem Value="03">CGL/PL</asp:ListItem>
-                            <asp:ListItem Value="04">PV</asp:ListItem>
-                            <asp:ListItem Value="05">LPG</asp:ListItem>
-                            <asp:ListItem Value="06">D&O</asp:ListItem>
                         </asp:DropDownList>
                     </td>
                 </tr>

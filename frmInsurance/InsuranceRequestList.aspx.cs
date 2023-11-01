@@ -24,7 +24,7 @@ namespace onlineLegalWF.frmInsurance
 
         private void setDataRequestList() 
         {
-            string sql = "select * from li_insurance_request";
+            string sql = "select * from li_insurance_request where toreq_code='01'";
 
             var res = zdb.ExecSql_DataTable(sql, zconnstr);
 

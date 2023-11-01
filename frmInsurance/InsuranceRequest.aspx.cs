@@ -512,7 +512,7 @@ namespace onlineLegalWF.frmInsurance
             var xstatus = "verify";
 
             string sql = @"INSERT INTO [dbo].[li_insurance_request]
-                                   ([process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective],[reason],[top_ins_code],[indemnityperiod],[suminsured],[startdate],[enddate],[approved_desc],[status])
+                                   ([process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective],[reason],[approved_desc],[status])
                              VALUES
                                    ('"+ xprocess_id + @"'
                                    ,'"+ xreq_no + @"'
@@ -524,15 +524,26 @@ namespace onlineLegalWF.frmInsurance
                                    ,'"+ xto + @"'
                                    ,'"+ xpurpose + @"'
                                    ,'"+ xbackground + @"'
-                                   ,'"+ xtype_pi + @"'
-                                   ,'"+ xindemnity_period + @"'
-                                   ,'"+ xsum_insured + @"'
-                                   ,'"+ xstart_date + @"'
-                                   ,'"+ xend_date + @"'
                                    ,'"+ xapprove_des + @"'
                                    ,'"+ xstatus + @"')";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
+
+            if (ret > 0) 
+            {
+                string sqlInsertPropIns = @"INSERT INTO [dbo].[li_insurance_req_property_insured]
+                                                   ([req_no],[top_ins_code],[indemnityperiod],[suminsured],[startdate],[enddate],[created_datetime])
+                                             VALUES
+                                                   ('" + xreq_no + @"'
+                                                   ,'" + xtype_pi + @"'
+                                                   ,'" + xindemnity_period + @"'
+                                                   ,'" + xsum_insured + @"'
+                                                   ,'" + xstart_date + @"'
+                                                   ,'" + xend_date + @"'
+                                                   ,'" + xreq_date + @"')";
+
+                ret = zdb.ExecNonQueryReturnID(sqlInsertPropIns, zconnstr);
+            }
 
 
             return ret;
