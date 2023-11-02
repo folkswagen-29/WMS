@@ -1,17 +1,16 @@
-﻿using System;
+﻿using Spire.Doc;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
-using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using static iTextSharp.text.pdf.AcroFields;
 
 namespace onlineLegalWF.frmInsurance
 {
-    public partial class InsuranceRenewRequest : System.Web.UI.Page
+    public partial class InsuranceRenewRequestEdit : System.Web.UI.Page
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
@@ -21,115 +20,113 @@ namespace onlineLegalWF.frmInsurance
         {
             if (!IsPostBack)
             {
-                setData();
+
+                string id = Request.QueryString["id"];
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    setDataEditRenewRequest(id);
+                }
+
             }
         }
 
-        private void setData()
+        private void setDataEditRenewRequest(string id)
         {
-            string xreq_no = System.DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
-            req_no.Text = xreq_no;
-
-            iniData();
-        }
-
-        #region gv1
-        public void iniData()
-        {
-            var dt = iniDataTable();
-            gv1.DataSource = dt;
-            gv1.DataBind();
-
             ddl_bu.DataSource = GetBusinessUnit();
             ddl_bu.DataBind();
             ddl_bu.DataTextField = "bu_desc";
             ddl_bu.DataValueField = "bu_code";
             ddl_bu.DataBind();
+
+            string sql = "select * from li_insurance_request where req_no='" + id + "'";
+
+            var res = zdb.ExecSql_DataTable(sql, zconnstr);
+
+            if (res.Rows.Count > 0)
+            {
+                req_no.Text = res.Rows[0]["req_no"].ToString();
+                req_date.Value = Convert.ToDateTime(res.Rows[0]["req_date"]).ToString("dd/MM/yyyy");
+                type_req.SelectedValue = res.Rows[0]["toreq_code"].ToString();
+                company_name.Value = res.Rows[0]["company_name"].ToString();
+                doc_no.Text = res.Rows[0]["document_no"].ToString();
+                subject.Text = res.Rows[0]["subject"].ToString();
+                to.Text = res.Rows[0]["dear"].ToString();
+                purpose.Text = res.Rows[0]["objective"].ToString();
+                background.Text = res.Rows[0]["reason"].ToString();
+                ddl_bu.SelectedValue = res.Rows[0]["bu_code"].ToString();
+            }
+
+            var dt = iniDataTable(id);
+            gv1.DataSource = dt;
+            gv1.DataBind();
+
         }
-        public DataTable iniDataTable()
+        public DataTable GetBusinessUnit()
+        {
+            string sql = "select * from li_business_unit order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
+
+        public DataTable iniDataTable(string id)
         {
             //getData
             var dt = iniDTStructure();
             var dr = dt.NewRow();
 
             var dt_top_ins = GetTypeOfPropertyInsured();
+            var dt_prop_ins = GetDataPropertyInsuredByReqNo(id);
 
-            if (dt_top_ins.Rows.Count > 0) 
+            if (dt_top_ins.Rows.Count > 0)
             {
                 int no = 0;
-                
+
                 foreach (DataRow dr_ins in dt_top_ins.Rows)
                 {
+                    //init Data PropertyInsured
                     dr = dt.NewRow();
-                    dr["No"] = (no+1);
+                    dr["No"] = (no + 1);
                     dr["PropertyInsured"] = dr_ins["top_ins_desc"].ToString();
-                    dr["IndemnityPeriod"] = "";
-                    dr["SumInsured"] = "";
-                    dr["StartDate"] = "";
-                    dr["EndDate"] = "";
+
+                    //check Data from Db
+                    if (dt_prop_ins.Rows.Count > 0)
+                    {
+                        foreach (DataRow item in dt_prop_ins.Rows) 
+                        {
+                            //check data ins_code tb master == ins_code detail assign value
+                            if (item["top_ins_code"].ToString() == dr_ins["top_ins_code"].ToString())
+                            {
+                                
+                                dr["IndemnityPeriod"] = item["indemnityperiod"].ToString();
+                                dr["SumInsured"] = item["suminsured"].ToString();
+                                dr["StartDate"] = Convert.ToDateTime(item["startdate"]).ToString("yyyy-MM-dd");
+                                dr["EndDate"] = Convert.ToDateTime(item["enddate"]).ToString("yyyy-MM-dd");
+                                
+                            }
+                        }
+                        
+                    }
+                    else 
+                    {
+                        dr["IndemnityPeriod"] = "";
+                        dr["SumInsured"] = "";
+                        dr["StartDate"] = "";
+                        dr["EndDate"] = "";
+                    }
+
                     dr["Top_Ins_Code"] = dr_ins["top_ins_code"].ToString();
                     dt.Rows.Add(dr);
+
+
 
                     no++;
                 }
             }
 
-            //var dr = dt.NewRow();
-            //dr["No"] = "1";
-            //dr["PropertyInsured"] = "IAR";
-            //dr["IndemnityPeriod"] = "";
-            //dr["SumInsured"] = "";
-            //dr["StartDate"] = "";
-            //dr["EndDate"] = "";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr["No"] = "2";
-            //dr["PropertyInsured"] = "BI";
-            //dr["IndemnityPeriod"] = "";
-            //dr["SumInsured"] = "";
-            //dr["StartDate"] = "";
-            //dr["EndDate"] = "";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr["No"] = "3";
-            //dr["PropertyInsured"] = "CGL/PL";
-            //dr["IndemnityPeriod"] = "";
-            //dr["SumInsured"] = "";
-            //dr["StartDate"] = "";
-            //dr["EndDate"] = "";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr["No"] = "4";
-            //dr["PropertyInsured"] = "PV";
-            //dr["IndemnityPeriod"] = "";
-            //dr["SumInsured"] = "";
-            //dr["StartDate"] = "";
-            //dr["EndDate"] = "";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr["No"] = "5";
-            //dr["PropertyInsured"] = "LPG";
-            //dr["IndemnityPeriod"] = "";
-            //dr["SumInsured"] = "";
-            //dr["StartDate"] = "";
-            //dr["EndDate"] = "";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr["No"] = "6";
-            //dr["PropertyInsured"] = "D&O";
-            //dr["IndemnityPeriod"] = "";
-            //dr["SumInsured"] = "";
-            //dr["StartDate"] = "";
-            //dr["EndDate"] = "";
-            //dt.Rows.Add(dr);
-
             return dt;
         }
+
         public DataTable iniDTStructure()
         {
             DataTable dt = new DataTable();
@@ -142,26 +139,136 @@ namespace onlineLegalWF.frmInsurance
             dt.Columns.Add("Top_Ins_Code", typeof(string));
             return dt;
         }
-        public void gv1LoadData(DataTable dt, string mode)
-        {
-            gv1.DataSource = dt;
-            gv1.DataBind();
-            hidMode.Value = mode;
-        }
+
         public DataTable GetTypeOfPropertyInsured()
         {
             string sql = "select * from li_type_of_property_insured order by row_sort asc";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }
-        #endregion
+
+        public DataTable GetDataPropertyInsuredByReqNo(string id)
+        {
+            string sqlPropIns = "select * from li_insurance_req_property_insured where req_no='" + id + "'";
+            DataTable dt = zdb.ExecSql_DataTable(sqlPropIns, zconnstr);
+
+            return dt;
+        }
+
+        protected void btn_save_Click(object sender, EventArgs e)
+        {
+            int res = UpdateRenewRequest();
+
+            if (res > 0)
+            {
+                Response.Write("<script>alert('Successfully Updated');</script>");
+                Response.Redirect("/frmInsurance/InsuranceRenewRequestList");
+            }
+            else
+            {
+                Response.Write("<script>alert('Error !!!');</script>");
+            }
+        }
+
+        private int UpdateRenewRequest()
+        {
+            int ret = 0;
+
+            var xreq_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            var xreq_no = req_no.Text.Trim();
+            var xtype_req = type_req.SelectedValue.ToString();
+            var xbu_code = ddl_bu.SelectedValue.ToString();
+            var xcompany_name = ddl_bu.SelectedItem.Text.ToString();
+            var xdoc_no = doc_no.Text.Trim();
+            var xsubject = subject.Text.Trim();
+            var xto = to.Text.Trim();
+            var xpurpose = purpose.Text.Trim();
+            var xbackground = background.Text.Trim();
+
+
+            //Get Data from gv1 Insurance Detail
+            List<InsurancePropData> listInsurancePropData = new List<InsurancePropData>();
+            foreach (GridViewRow row in gv1.Rows)
+            {
+                InsurancePropData data = new InsurancePropData();
+                data.TypeOfPropertyInsured = (row.FindControl("gv1txttop_ins_code") as HiddenField).Value;
+                data.PropertyInsured = (row.FindControl("gv1txtPropertyInsured") as TextBox).Text;
+                data.IndemnityPeriod = (row.FindControl("gv1txtIndemnityPeriod") as TextBox).Text;
+                data.SumInsured = (row.FindControl("gv1txtSumInsured") as TextBox).Text;
+                data.StartDate = (row.FindControl("gv1txtSdate") as TextBox).Text;
+                data.EndDate = (row.FindControl("gv1txtEdate") as TextBox).Text;
+
+                if (!string.IsNullOrEmpty(data.IndemnityPeriod) && !string.IsNullOrEmpty(data.SumInsured) && !string.IsNullOrEmpty(data.StartDate) && !string.IsNullOrEmpty(data.EndDate))
+                {
+                    listInsurancePropData.Add(data);
+                }
+
+            }
+
+            string sql = @"UPDATE [dbo].[li_insurance_request]
+                               SET [toreq_code] = '" + xtype_req + @"'
+                                  ,[company_name] = '" + xcompany_name + @"'
+                                  ,[document_no] = '" + xdoc_no + @"'
+                                  ,[subject] = '" + xsubject + @"'
+                                  ,[dear] = '" + xto + @"'
+                                  ,[objective] = '" + xpurpose + @"'
+                                  ,[reason] = '" + xbackground + @"'
+                                  ,[updated_datetime] = '" + xreq_date + @"'
+                                  ,[bu_code] = '" + xbu_code + @"'
+                             WHERE [req_no] ='" + xreq_no + "'";
+
+            ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
+
+            if (ret > 0)
+            {
+                if (listInsurancePropData.Count > 0)
+                {
+                    string sqlDeletePropIns = @"DELETE FROM [li_insurance_req_property_insured] WHERE req_no='" + xreq_no + "'";
+
+                    ret = zdb.ExecNonQueryReturnID(sqlDeletePropIns, zconnstr);
+
+                    if (ret > 0) 
+                    {
+                        foreach (var item in listInsurancePropData)
+                        {
+                            string sqlInsertPropIns = @"INSERT INTO [dbo].[li_insurance_req_property_insured]
+                                                   ([req_no],[top_ins_code],[indemnityperiod],[suminsured],[startdate],[enddate],[created_datetime],[updated_datetime])
+                                             VALUES
+                                                   ('" + xreq_no + @"'
+                                                   ,'" + item.TypeOfPropertyInsured + @"'
+                                                   ,'" + item.IndemnityPeriod + @"'
+                                                   ,'" + item.SumInsured + @"'
+                                                   ,'" + item.StartDate + @"'
+                                                   ,'" + item.EndDate + @"'
+                                                   ,'" + xreq_date + @"'
+                                                   ,'" + xreq_date + @"')";
+
+                            ret = zdb.ExecNonQueryReturnID(sqlInsertPropIns, zconnstr);
+                        }
+                    }
+                    
+                }
+
+            }
+
+            return ret;
+        }
+
+        public class InsurancePropData
+        {
+            public string TypeOfPropertyInsured { get; set; }
+            public string PropertyInsured { get; set; }
+            public string IndemnityPeriod { get; set; }
+            public string SumInsured { get; set; }
+            public string StartDate { get; set; }
+            public string EndDate { get; set; }
+        }
 
         protected void btn_gendocumnt_Click(object sender, EventArgs e)
         {
             GenDocumnet();
         }
-
-        private void GenDocumnet() 
+        private void GenDocumnet()
         {
             // Replace Doc
             var xreq_date = System.DateTime.Now;
@@ -572,127 +679,6 @@ namespace onlineLegalWF.frmInsurance
 
 
             #endregion
-        }
-
-        protected void btn_save_Click(object sender, EventArgs e)
-        {
-            int res = SaveRenewRequest();
-
-            if (res > 0)
-            {
-                Response.Write("<script>alert('Successfully added');</script>");
-                Response.Redirect("/frmInsurance/InsuranceRenewRequestList");
-            }
-            else
-            {
-                Response.Write("<script>alert('Error !!!');</script>");
-            }
-
-        }
-
-        public int GetMaxProcessID()
-        {
-            string sql = "select isnull(max(process_id),0) as id from li_insurance_request";
-            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
-            return Convert.ToInt32(dt.Rows[0][0]);
-        }
-
-        public DataTable GetBusinessUnit()
-        {
-            string sql = "select * from li_business_unit order by row_sort asc";
-            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
-            return dt;
-        }
-
-        private int SaveRenewRequest() 
-        {
-            int ret = 0;
-
-            var xreq_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            var xprocess_id = string.Format("{0:000000}", (GetMaxProcessID() + 1));
-            var xreq_no = req_no.Text.Trim();
-            var xtype_req = type_req.SelectedValue.ToString();
-            var xbu_code = ddl_bu.SelectedValue.ToString();
-            var xcompany_name = ddl_bu.SelectedItem.Text.ToString();
-            var xdoc_no = doc_no.Text.Trim();
-            var xsubject = subject.Text.Trim();
-            var xto = to.Text.Trim();
-            var xpurpose = purpose.Text.Trim();
-            var xbackground = background.Text.Trim();
-            var xstatus = "verify";
-
-
-            //Get Data from gv1 Insurance Detail
-            List<InsurancePropData> listInsurancePropData = new List<InsurancePropData>();
-            foreach (GridViewRow row in gv1.Rows)
-            {
-                InsurancePropData data = new InsurancePropData();
-                data.TypeOfPropertyInsured = (row.FindControl("gv1txttop_ins_code") as HiddenField).Value;
-                data.PropertyInsured = (row.FindControl("gv1txtPropertyInsured") as TextBox).Text;
-                data.IndemnityPeriod = (row.FindControl("gv1txtIndemnityPeriod") as TextBox).Text;
-                data.SumInsured = (row.FindControl("gv1txtSumInsured") as TextBox).Text;
-                data.StartDate = (row.FindControl("gv1txtSdate") as TextBox).Text;
-                data.EndDate = (row.FindControl("gv1txtEdate") as TextBox).Text;
-
-                if (!string.IsNullOrEmpty(data.IndemnityPeriod) && !string.IsNullOrEmpty(data.SumInsured) && !string.IsNullOrEmpty(data.StartDate) && !string.IsNullOrEmpty(data.EndDate)) 
-                {
-                    listInsurancePropData.Add(data);
-                }
-                
-            }
-
-            string sql = @"INSERT INTO [dbo].[li_insurance_request]
-                                   ([process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective],[reason],[status],[bu_code])
-                             VALUES
-                                   ('" + xprocess_id + @"'
-                                   ,'" + xreq_no + @"'
-                                   ,'" + xreq_date + @"'
-                                   ,'" + xtype_req + @"'
-                                   ,'" + xcompany_name + @"'
-                                   ,'" + xdoc_no + @"'
-                                   ,'" + xsubject + @"'
-                                   ,'" + xto + @"'
-                                   ,'" + xpurpose + @"'
-                                   ,'" + xbackground + @"'
-                                   ,'" + xstatus + @"'
-                                   ,'" + xbu_code + @"')";
-
-            ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
-
-            if (ret > 0)
-            {
-                if (listInsurancePropData.Count > 0) 
-                {
-                    foreach (var item in listInsurancePropData)
-                    {
-                        string sqlInsertPropIns = @"INSERT INTO [dbo].[li_insurance_req_property_insured]
-                                                   ([req_no],[top_ins_code],[indemnityperiod],[suminsured],[startdate],[enddate],[created_datetime])
-                                             VALUES
-                                                   ('" + xreq_no + @"'
-                                                   ,'" + item.TypeOfPropertyInsured + @"'
-                                                   ,'" + item.IndemnityPeriod + @"'
-                                                   ,'" + item.SumInsured + @"'
-                                                   ,'" + item.StartDate + @"'
-                                                   ,'" + item.EndDate + @"'
-                                                   ,'" + xreq_date + @"')";
-
-                        ret = zdb.ExecNonQueryReturnID(sqlInsertPropIns, zconnstr);
-                    }
-                }
-                
-            }
-
-            return ret;
-        }
-
-        public class InsurancePropData
-        {
-            public string TypeOfPropertyInsured { get; set; } 
-            public string PropertyInsured { get; set; } 
-            public string IndemnityPeriod { get; set; }  
-            public string SumInsured { get; set; }  
-            public string StartDate { get; set; }  
-            public string EndDate { get; set; }  
         }
     }
 }

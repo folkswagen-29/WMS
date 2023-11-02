@@ -133,6 +133,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="frmInsurance\InsuranceRenewRequest.aspx" />
+    <Content Include="frmInsurance\InsuranceRenewRequestEdit.aspx" />
+    <Content Include="frmInsurance\InsuranceRenewRequestList.aspx" />
     <Content Include="frmInsurance\InsuranceRequest.aspx" />
     <Content Include="frmInsurance\InsuranceRequestEdit.aspx" />
     <Content Include="frmInsurance\InsuranceRequestList.aspx" />
@@ -221,6 +223,20 @@
     </Compile>
     <Compile Include="frmInsurance\InsuranceRenewRequest.aspx.designer.cs">
       <DependentUpon>InsuranceRenewRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceRenewRequestEdit.aspx.cs">
+      <DependentUpon>InsuranceRenewRequestEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceRenewRequestEdit.aspx.designer.cs">
+      <DependentUpon>InsuranceRenewRequestEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceRenewRequestList.aspx.cs">
+      <DependentUpon>InsuranceRenewRequestList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceRenewRequestList.aspx.designer.cs">
+      <DependentUpon>InsuranceRenewRequestList.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmInsurance\InsuranceRequest.aspx.cs">
       <DependentUpon>InsuranceRequest.aspx</DependentUpon>
