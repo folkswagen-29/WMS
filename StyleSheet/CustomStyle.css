@@ -1,0 +1,675 @@
+﻿body {
+    background-color:transparent;
+}
+
+
+.banner-normal {
+    color: black;
+    background-color: darkcyan;
+    height: 40px;
+    font-family: Tahoma;
+    font-size: 12pt;
+    border-radius: 3px 3px;
+    box-shadow: dimgray 3px;
+    padding: 4px 3px 3px 4px;
+    margin-top: 2.5%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    text-align: center;
+    vertical-align: middle;
+    box-shadow: silver 2px 2px;
+}
+
+.banner-egat {
+    
+    color :#164396;
+    background-color: #FFCC00;
+    height: 40px;
+    font-family: Tahoma;
+    font-size: 12pt;
+    border-radius: 3px 3px;
+    box-shadow: dimgray 3px;
+    padding: 4px 3px 3px 4px;
+    margin-top: 2.5%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    text-align: center;
+    vertical-align: middle;
+    box-shadow: silver 2px 2px;
+}
+
+.div0 {
+    padding: 5px;
+    border-color: dimgray;
+    border-left: 1px;
+    border-top: 1px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    min-width: 800px;
+    border-radius: 10px;
+    min-height: 80px;
+    background-color: whitesmoke;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.5) !important;
+    border-radius: 0px !important;
+}
+
+.div1 {
+    padding: 5px;
+    border-color: dimgray;
+    border-left: 1px;
+    border-top: 1px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    min-width: 1100px;
+    border-radius: 10px;
+    min-height: 80px;
+    background-color: whitesmoke;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.5) !important;
+    border-radius: 0px !important;
+}
+
+.div_50 {
+    padding: 5px;
+    border-color: dimgray;
+    border-left: 1px;
+    border-top: 1px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    min-width: 50%;
+    border-radius: 10px;
+    min-height: 80px;
+    background-color: whitesmoke;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.5) !important;
+    border-radius: 0px !important;
+}
+
+.div_90 {
+    padding: 5px;
+    border-color: dimgray;
+    border-left: 1px;
+    border-top: 1px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    min-width: 90%;
+    border-radius: 10px;
+    min-height: 80px;
+    background-color: whitesmoke;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.5) !important;
+    border-radius: 0px !important;
+}
+
+.div_100{
+    padding: 5px;
+    border-color: dimgray;
+    border-left: 1px;
+    border-top: 1px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    min-width: 100%;
+    border-radius: 10px;
+    min-height: 80px;
+    background-color: whitesmoke;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.5) !important;
+    border-radius: 0px !important;
+}
+
+.ddl-normal {
+    margin-top: 2px;
+    margin-left: 2px;
+    color: dimgray;
+    background-color: whitesmoke;
+    font-family: Tahoma;
+    font-size: 10pt;
+    border-radius: 3px 3px;
+}
+
+.ddl-sm {
+    margin-top: 2px;
+    margin-left: 2px;
+    color: dimgray;
+    background-color: white;
+    font-family: Tahoma;
+    font-size: 10pt;
+    border-radius: 3px 3px;
+    width: 100px;
+}
+
+.ddl-md {
+    margin-top: 2px;
+    margin-left: 2px;
+    color: dimgray;
+    background-color: white;
+    font-family: Tahoma;
+    font-size: 10pt;
+    border-radius: 3px 3px;
+    width: 400px;
+}
+
+.ddl-lg {
+    margin-top: 2px;
+    margin-left: 2px;
+    color: dimgray;
+    background-color: white;
+    font-family: Tahoma;
+    font-size: 10pt;
+    border-radius: 3px 3px;
+    width: 800px;
+}
+
+.rdl-normal {
+    color: dimgray;
+    background-color: transparent;
+    font-family: Tahoma;
+    font-size: 10pt;
+    padding: 2px;
+}
+.cb-normal {
+    color: dimgray;
+    background-color: transparent;
+    font-family: Tahoma;
+    font-size: 10pt;
+    padding: 2px;
+}
+
+.Label_sm {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 9pt;
+    width: 100px;
+    background-color: transparent;
+}
+
+.Label_md {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    width: 200px;
+    background-color: transparent;
+}
+
+.Label_lg {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 11pt;
+    width: auto;
+    background-color: transparent;
+}
+.Label_xlg {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 12pt;
+    width: auto;
+    background-color: transparent;
+}
+.Label_sm_blue {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 9pt;
+    color:blue;
+    width: 100px;
+    background-color: transparent;
+}
+
+.Label_md_blue {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: blue;
+    width: 200px;
+    background-color: transparent;
+}
+
+.Label_lg_blue {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 11pt;
+    color: blue;
+    width: auto;
+    background-color: transparent;
+}
+.Label_xlg_blue {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 12pt;
+    color: blue;
+    width: auto;
+    background-color: transparent;
+}
+
+.Label_sm_red {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 9pt;
+    color: red;
+    width: 100px;
+    background-color: transparent;
+}
+
+.Label_md_red {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: red;
+    width: 200px;
+    background-color: transparent;
+}
+
+.Label_lg_red {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 11pt;
+    color: red;
+    width: auto;
+    background-color: transparent;
+}
+
+.Label_xlg_red {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 12pt;
+    color: red;
+    width: auto;
+    background-color: transparent;
+}
+.Text_sm {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color:rgb(35, 34, 34);
+    width: 100px;
+    background-color: white;
+    border-color:silver;
+    border-radius:2px;
+}
+
+.Text_md {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: rgb(35, 34, 34);
+    width: 250px;
+    background-color: white;
+    border-color: silver;
+    border-radius: 2px;
+}
+
+.Text_lg {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: rgb(35, 34, 34);
+    width: 400px;
+    background-color: white;
+    border-color: silver;
+    border-radius: 2px;
+}
+
+.Text_60 {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: rgb(35, 34, 34);
+    width: 60px;
+    background-color: white;
+    border-color: silver;
+    border-radius: 2px;
+}
+.Text_150 {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: rgb(35, 34, 34);
+    width: 150px;
+    background-color: white;
+    border-color: silver;
+    border-radius: 2px;
+}
+.Text_200 {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: rgb(35, 34, 34);
+    width: 200px;
+    background-color: white;
+    border-color: silver;
+    border-radius: 2px;
+}
+.Text_400 {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: rgb(35, 34, 34);
+    width: 400px;
+    background-color: white;
+    border-color: silver;
+    border-radius: 2px;
+}
+.Text_500 {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: rgb(35, 34, 34);
+    width: 500px;
+    background-color: white;
+    border-color: silver;
+    border-radius: 2px;
+}
+.btn_normal {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 9pt;
+    color: black;
+    height: 30px;
+    width: 120px;
+    background-color: silver;
+    border: solid;
+    border-width: 1px;
+    border-color: silver;
+    box-shadow: rgb(128, 128, 128) 2px 2px;
+    border-radius: 2px 2px;
+}
+
+.btn_normal_blue {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 9pt;
+    color: white;
+    height: 30px;
+    width: 120px;
+    background-color: blue;
+    border: solid;
+    border-width: 1px;
+    border-color: transparent;
+    box-shadow: rgb(128, 128, 128) 2px 2px;
+    border-radius: 2px 2px;
+}
+
+.btn_normal_silver {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 9pt;
+    color: dimgray;
+    height: 30px;
+    width: 120px;
+    background-color: silver;
+    border: solid;
+    border-width: 1px;
+    border-color: transparent;
+    box-shadow: rgb(128, 128, 128) 2px 2px;
+    border-radius: 2px 2px;
+}
+
+.btn_normal_red {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 9pt;
+    color: white;
+    height: 30px;
+    width: 120px;
+    background-color: red;
+    border: solid;
+    border-width: 1px;
+    border-color: transparent;
+    box-shadow: rgb(128, 128, 128) 2px 2px;
+    border-radius: 2px 2px;
+}
+
+.btn_small_blue {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 9pt;
+    color: white;
+    height: 30px;
+    /*width: 100px;*/
+    background-color: blue;
+    border: solid;
+    border-width: 1px;
+    border-color: transparent;
+    box-shadow: rgb(128, 128, 128) 2px 2px;
+    border-radius: 2px 2px;
+}
+
+.btn_small_silver {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 9pt;
+    color: dimgray;
+    height: 30px;
+    /*width: 100px;*/
+    background-color: silver;
+    border: solid;
+    border-width: 1px;
+    border-color: transparent;
+    box-shadow: rgb(128, 128, 128) 2px 2px;
+    border-radius: 2px 2px;
+}
+
+.btn_small_red {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 9pt;
+    color: white;
+    height: 30px;
+    /*width: 100px;*/
+    background-color: red;
+    border: solid;
+    border-width: 1px;
+    border-color: transparent;
+    box-shadow: rgb(128, 128, 128) 2px 2px;
+    border-radius: 2px 2px;
+}
+.div_sm {
+    padding: 0.5%;
+    margin-left: 2.5%;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: black;
+    height: auto;
+    width: 30%;
+    background-color: white;
+    border: solid;
+    border-width: 1px;
+    border-color: silver;
+    box-shadow: silver 2px 2px;
+    border-radius: 3px 3px;
+}
+
+.div_md {
+    padding: 0.5%;
+    margin-left: 2.5%;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: black;
+    height: auto;
+    width: 50%;
+    background-color: white;
+    border: solid;
+    border-width: 1px;
+    border-color: silver;
+    box-shadow: silver 2px 2px;
+    border-radius: 3px 3px;
+}
+
+.div_lg {
+    padding: 0.5%;
+    margin-left: 2.5%;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: black;
+    height: auto;
+    width: 95%;
+    background-color: white;
+    border: solid;
+    border-width: 1px;
+    border-color: silver;
+    box-shadow: silver 2px 2px;
+    border-radius: 3px 3px;
+    min-height: 100px;
+}
+.table_header_grey_lefttop {
+    background-color: silver;
+    color: black;
+    text-align: left;
+    vertical-align: top;
+}
+.table_body_lefttop {
+    background-color: transparent;
+    color: black;
+    text-align: left;
+    vertical-align: top;
+}
+.table_header_grey_centertop {
+    background-color: silver;
+    color: black;
+    text-align: center;
+    vertical-align: top;
+}
+.table_header_grey_leftmiddle {
+    background-color: silver;
+    color: black;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.table_header_grey_centermiddle{
+    background-color: silver;
+    color: black;
+    text-align: center;
+    vertical-align: middle;
+}
+.table_header_grey_leftbottom {
+    background-color: silver;
+    color: black;
+    text-align: left;
+    vertical-align: bottom;
+}
+.table_header_grey_centerbottom {
+    background-color: silver;
+    color: black;
+    text-align: center;
+    vertical-align: bottom;
+}
+.gv_normal {
+    padding: 0.5%;
+    margin-left: 2.5%;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: black;
+    height: auto;
+    width: 95%;
+    background-color: white;
+    border: solid;
+    border-width: 1px;
+    border-color: silver;
+    box-shadow: silver 2px 2px;
+    border-radius: 3px 3px;
+    min-height: 50px;
+    
+}
+.gv_header_blue {
+    background-color: steelblue;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+.gv_header_black {
+    background-color: black;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+.gv_header_green {
+    background-color: darkslategrey;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+.gv_header_red {
+    background-color: red;
+    color: white;
+    text-align:center;
+    vertical-align:middle;
+}
+.gv_header_grey {
+    background-color: silver;
+    color: black;
+    text-align: center;
+    vertical-align: middle;
+}
+.gv_header_whitesmoke {
+    background-color: whitesmoke;
+    color: black;
+    text-align: center;
+    vertical-align: middle;
+}
+.gv_item_w_sm {
+    width: 200px;
+    text-align: center;
+}
+.gv_item_w_md {
+    width: 500px;
+    text-align: center;
+}
+.gv_item_w_lg {
+    width: 1000px;
+    text-align: center;
+}
+.gv_item_w_sm_left {
+    width: 200px;
+    text-align:left;
+}
+
+.gv_item_w_md_left {
+    width: 500px;
+    text-align: left;
+}
+
+.gv_item_w_lg_left {
+    width: 1000px;
+    text-align: left;
+}
+.gv_item_w_sm_right {
+    width: 200px;
+    text-align: right;
+}
+
+.gv_item_w_md_right {
+    width: 500px;
+    text-align: right;
+}
+
+.gv_item_w_lg_right {
+    width: 1000px;
+    text-align: right;
+}
+
+
+
+    
