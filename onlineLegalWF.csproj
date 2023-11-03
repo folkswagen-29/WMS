@@ -132,6 +132,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="frmInsurance\InsuranceClaim.aspx" />
     <Content Include="frmInsurance\InsuranceRenewRequest.aspx" />
     <Content Include="frmInsurance\InsuranceRenewRequestEdit.aspx" />
     <Content Include="frmInsurance\InsuranceRenewRequestList.aspx" />
@@ -216,6 +217,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceClaim.aspx.cs">
+      <DependentUpon>InsuranceClaim.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceClaim.aspx.designer.cs">
+      <DependentUpon>InsuranceClaim.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmInsurance\InsuranceRenewRequest.aspx.cs">
       <DependentUpon>InsuranceRenewRequest.aspx</DependentUpon>
