@@ -1,4 +1,5 @@
-﻿using System;
+﻿using onlineLegalWF.Class;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -56,7 +57,7 @@ namespace onlineLegalWF.frmInsurance
             if (res.Rows.Count > 0) 
             {
                 req_no.Text = res.Rows[0]["req_no"].ToString();
-                req_date.Value = Convert.ToDateTime(res.Rows[0]["req_date"]).ToString("dd/MM/yyyy");
+                req_date.Value = Convert.ToDateTime(res.Rows[0]["req_date"]).ToString("yyyy-MM-dd");
                 type_req.SelectedValue = res.Rows[0]["toreq_code"].ToString();
                 company.Text = res.Rows[0]["company_name"].ToString();
                 doc_no.Text = res.Rows[0]["document_no"].ToString();
@@ -173,7 +174,7 @@ namespace onlineLegalWF.frmInsurance
             //var xtype_req = type_req.SelectedValue.ToString();
             var xcompany = company.Text.Trim();
             var xdoc_no = doc_no.Text.Trim();
-            var xreq_date = req_date.Value;
+            var xreq_date = Utillity.ConvertStringToDate(req_date.Value);
             var xsubject = subject.Text.Trim();
             var xto = to.Text.Trim();
             var xpurpose = purpose.Text.Trim();
@@ -215,7 +216,7 @@ namespace onlineLegalWF.frmInsurance
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#reqdate#";
-            dr0["tagvalue"] = xreq_date.Replace(",", "!comma");
+            dr0["tagvalue"] = Utillity.ConvertDateToLongDateTime(xreq_date, "en");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#objective#";

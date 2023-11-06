@@ -1,4 +1,5 @@
-﻿using Spire.Doc;
+﻿using onlineLegalWF.Class;
+using Spire.Doc;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -46,7 +47,7 @@ namespace onlineLegalWF.frmInsurance
             if (res.Rows.Count > 0)
             {
                 req_no.Text = res.Rows[0]["req_no"].ToString();
-                req_date.Value = Convert.ToDateTime(res.Rows[0]["req_date"]).ToString("dd/MM/yyyy");
+                req_date.Value = Convert.ToDateTime(res.Rows[0]["req_date"]).ToString("yyyy-MM-dd");
                 type_req.SelectedValue = res.Rows[0]["toreq_code"].ToString();
                 company_name.Value = res.Rows[0]["company_name"].ToString();
                 doc_no.Text = res.Rows[0]["document_no"].ToString();
@@ -271,7 +272,7 @@ namespace onlineLegalWF.frmInsurance
         private void GenDocumnet()
         {
             // Replace Doc
-            var xreq_date = System.DateTime.Now;
+            var xreq_date = Utillity.ConvertStringToDate(req_date.Value);
             var xreq_no = req_no.Text.Trim();
             var xbu_code = ddl_bu.SelectedValue.ToString();
             var xcompany_name = ddl_bu.SelectedItem.Text.ToString();
@@ -312,7 +313,8 @@ namespace onlineLegalWF.frmInsurance
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#reqdate#";
-            dr0["tagvalue"] = xreq_date.ToString("dd/MM/yyyy").Replace(",", "!comma");
+            //dr0["tagvalue"] = xreq_date.ToString("dd/MM/yyyy").Replace(",", "!comma");
+            dr0["tagvalue"] = Utillity.ConvertDateToLongDateTime(xreq_date, "en");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#objective#";
@@ -472,8 +474,8 @@ namespace onlineLegalWF.frmInsurance
             dr["header_font"] = "Tahoma";
             dr["header_fontsize"] = "9";
             dr["header_fontbold"] = "true";
-            dr["header_align"] = "Middle";
-            dr["header_valign"] = "Center";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
             dr["header_fontcolor"] = "White";
             dr["row_height"] = "16";
             dtProperties1.Rows.Add(dr);

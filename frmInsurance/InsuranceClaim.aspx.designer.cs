@@ -33,6 +33,15 @@ namespace onlineLegalWF.frmInsurance
         protected global::System.Web.UI.WebControls.TextBox doc_no;
 
         /// <summary>
+        /// company_name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox company_name;
+
+        /// <summary>
         /// ddl_bu control.
         /// </summary>
         /// <remarks>
@@ -60,13 +69,13 @@ namespace onlineLegalWF.frmInsurance
         protected global::System.Web.UI.WebControls.TextBox occurred_date;
 
         /// <summary>
-        /// submissio_date control.
+        /// submission_date control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox submissio_date;
+        protected global::System.Web.UI.WebControls.TextBox submission_date;
 
         /// <summary>
         /// incident_summary control.

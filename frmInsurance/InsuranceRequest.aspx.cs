@@ -1,4 +1,5 @@
 ﻿using Microsoft.Office.Interop.Word;
+using onlineLegalWF.Class;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -97,7 +98,7 @@ namespace onlineLegalWF.frmInsurance
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#reqdate#";
-            dr0["tagvalue"] = xreq_date.ToString("dd/MM/yyyy").Replace(",", "!comma");
+            dr0["tagvalue"] = Utillity.ConvertDateToLongDateTime(xreq_date, "en");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#objective#";

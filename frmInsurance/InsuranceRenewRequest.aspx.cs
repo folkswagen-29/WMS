@@ -1,4 +1,5 @@
-﻿using System;
+﻿using onlineLegalWF.Class;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -205,7 +206,7 @@ namespace onlineLegalWF.frmInsurance
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#reqdate#";
-            dr0["tagvalue"] = xreq_date.ToString("dd/MM/yyyy").Replace(",", "!comma");
+            dr0["tagvalue"] = Utillity.ConvertDateToLongDateTime(xreq_date, "en");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#objective#";
@@ -365,8 +366,8 @@ namespace onlineLegalWF.frmInsurance
             dr["header_font"] = "Tahoma";
             dr["header_fontsize"] = "9";
             dr["header_fontbold"] = "true";
-            dr["header_align"] = "Middle";
-            dr["header_valign"] = "Center";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
             dr["header_fontcolor"] = "White";
             dr["row_height"] = "16";
             dtProperties1.Rows.Add(dr);

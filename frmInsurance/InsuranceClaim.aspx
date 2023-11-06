@@ -26,8 +26,16 @@
                     <td class="auto-style2">
                         <label>Document No.</label>
                     </td>
-                    <td>
+                    <td colspan="3">
                         <asp:TextBox ID="doc_no" runat="server" Width="500px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style2">
+                        <label>Company </label>
+                    </td>
+                    <td >
+                        <asp:TextBox ID="company_name" runat="server" Width="500px"></asp:TextBox>
                     </td>
                     <td class="auto-style2">
                         <label>BU </label>
@@ -57,7 +65,7 @@
                         <label>Date Submissio </label>
                     </td>
                     <td>
-                        <asp:TextBox ID="submissio_date" TextMode="Date" runat="server" ></asp:TextBox>
+                        <asp:TextBox ID="submission_date" TextMode="Date" runat="server" ></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -172,7 +180,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label>Proceeds from claim มูลค่าสินไหม (C )</label>
+                                    <label>Proceeds from claim มูลค่าสินไหม (C)</label>
                                 </td>
                                 <td>
                                     <asp:TextBox ID="iar_pfc" runat="server"></asp:TextBox>
