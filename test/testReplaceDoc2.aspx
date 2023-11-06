@@ -14,7 +14,8 @@
         <div>
             <asp:Label ID="Label1" runat="server" Text="Input Message" CssClass="Label_lg_blue"></asp:Label>
 &nbsp; 
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBox1" runat="server" CssClass="Text_400"></asp:TextBox>
+            <br />
         </div>
     </form>
 </body>
