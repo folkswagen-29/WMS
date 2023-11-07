@@ -186,7 +186,7 @@ namespace onlineLegalWF.frmInsurance
             var xend_date = end_date.Text.Trim();
             var xapprove_des = approve_des.Text.Trim();
 
-            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplate2.docx";
+            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateRequest.docx";
             string outputfoler = @"C:\WordTemplate\Insurance\Output";
             string outputfn = outputfoler + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
@@ -523,8 +523,8 @@ namespace onlineLegalWF.frmInsurance
             dr1["Property Insured"] = xtype_pi.Replace(",", "!comma");  // "xxxxx";//.Text.Replace(",", "!comma");
             dr1["Indemnity Period"] = xindemnity_period.Replace(",", "!comma"); // "1,000,000".Replace(",", "!comma"); ;
             dr1["Sum Insured"] = xsum_insured.Replace(",", "!comma");  // "15,000".Replace(",", "!comma"); ;
-            dr1["Start Date"] = xstart_date.ToString().Replace(",", "!comma");
-            dr1["End Date"] = xend_date.ToString().Replace(",", "!comma");
+            dr1["Start Date"] = Utillity.ConvertDateToLongDateTime(Utillity.ConvertStringToDate(xstart_date), "en");
+            dr1["End Date"] = Utillity.ConvertDateToLongDateTime(Utillity.ConvertStringToDate(xend_date), "en");
             dt.Rows.Add(dr1);
             #endregion
 

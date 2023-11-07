@@ -141,6 +141,7 @@
     <Content Include="frmInsurance\InsuranceRequest.aspx" />
     <Content Include="frmInsurance\InsuranceRequestEdit.aspx" />
     <Content Include="frmInsurance\InsuranceRequestList.aspx" />
+    <Content Include="frmInsurance\InsuranceTrackingRenew.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -151,6 +152,14 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="images\icon_assign_job.png" />
+    <Content Include="images\icon_close.png" />
+    <Content Include="images\icon_comment.png" />
+    <Content Include="images\icon_delete.png" />
+    <Content Include="images\icon_edit.png" />
+    <Content Include="images\icon_search.png" />
+    <Content Include="images\icon_upload.png" />
+    <Content Include="images\icon_view.png" />
     <Content Include="legalPortal\legalPortal.aspx" />
     <Content Include="legalPortal\loginPage.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -284,6 +293,13 @@
     </Compile>
     <Compile Include="frmInsurance\InsuranceRequestList.aspx.designer.cs">
       <DependentUpon>InsuranceRequestList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceTrackingRenew.aspx.cs">
+      <DependentUpon>InsuranceTrackingRenew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceTrackingRenew.aspx.designer.cs">
+      <DependentUpon>InsuranceTrackingRenew.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

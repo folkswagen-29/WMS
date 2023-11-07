@@ -629,8 +629,8 @@ namespace onlineLegalWF.frmInsurance
                     drGV["Property Insured"] = item.PropertyInsured;
                     drGV["Indemnity Period"] = item.IndemnityPeriod;
                     drGV["Sum Insured"] = item.SumInsured;
-                    drGV["Start Date"] = item.StartDate;
-                    drGV["End Date"] = item.EndDate;
+                    drGV["Start Date"] = Utillity.ConvertDateToLongDateTime(Utillity.ConvertStringToDate(item.StartDate), "en");
+                    drGV["End Date"] = Utillity.ConvertDateToLongDateTime(Utillity.ConvertStringToDate(item.EndDate), "en");
                     dt.Rows.Add(drGV);
 
                     no++;

@@ -26,13 +26,14 @@ namespace onlineLegalWF.Class
             if (lang == "th")
             {
 
-                return DateValidateInput(dt) ? dt.ToString("d MMMM yyyy", new CultureInfo("th-TH")) : "";
+                return DateValidateInput(dt) ? dt.ToString("d MMM yyyy", new CultureInfo("th-TH")) : "";
             }
             else
             {
-                return DateValidateInput(dt) ? dt.ToString("d MMMM yyyy", new CultureInfo("en-US")) : "";
+                return DateValidateInput(dt) ? dt.ToString("d MMM yyyy", new CultureInfo("en-US")) : "";
             }
         }
+
 
         public static DateTime ConvertStringToDate(string yyyyMMdd)
         {
