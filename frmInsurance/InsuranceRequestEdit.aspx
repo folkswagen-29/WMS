@@ -30,7 +30,7 @@
     <form id="form1" runat="server">
 
         <div style="font-family:Tahoma; font-size:10pt; margin-top: 20px;">
-            <table cellpadding="0" cellspacing="0" class="auto-style1">
+            <table cellpadding="0" cellspacing="0" style="width: 100%;" class="auto-style1">
                 <tr>
                     <td class="auto-style2">
                         <label>Request No. </label>

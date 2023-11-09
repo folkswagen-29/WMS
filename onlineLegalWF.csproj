@@ -132,6 +132,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="frmInsurance\InsuranceApprove.aspx" />
     <Content Include="frmInsurance\InsuranceClaim.aspx" />
     <Content Include="frmInsurance\InsuranceClaimEdit.aspx" />
     <Content Include="frmInsurance\InsuranceClaimList.aspx" />
@@ -152,6 +153,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="images\AWC_Logo.png" />
     <Content Include="images\icon_assign_job.png" />
     <Content Include="images\icon_close.png" />
     <Content Include="images\icon_comment.png" />
@@ -162,6 +164,7 @@
     <Content Include="images\icon_view.png" />
     <Content Include="legalPortal\legalPortal.aspx" />
     <Content Include="legalPortal\loginPage.aspx" />
+    <Content Include="render\Pdf.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -231,6 +234,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceApprove.aspx.cs">
+      <DependentUpon>InsuranceApprove.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceApprove.aspx.designer.cs">
+      <DependentUpon>InsuranceApprove.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmInsurance\InsuranceClaim.aspx.cs">
       <DependentUpon>InsuranceClaim.aspx</DependentUpon>
@@ -320,6 +330,13 @@
       <DependentUpon>loginPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="render\Pdf.aspx.cs">
+      <DependentUpon>Pdf.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="render\Pdf.aspx.designer.cs">
+      <DependentUpon>Pdf.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

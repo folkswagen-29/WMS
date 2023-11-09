@@ -854,9 +854,8 @@
     width: 100%;
 }
 
-.table td, #table th {
-    border: 1px solid #ddd;
-    padding: 8px;
+.table tr:nth-child(even) {
+    background-color: #F7F6F3;
 }
 .table_header_grey_lefttop {
     background-color: silver;

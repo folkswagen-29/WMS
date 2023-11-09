@@ -13,7 +13,7 @@
             <asp:ListView ID="ListView1" runat="server">
                 <LayoutTemplate>
                     <table id="itemPlaceholderContainer" runat="server" class="table">
-                        <tr class="table_header_grey_centermiddle" style="height: 30px;">
+                        <tr class="gv_header_blue" style="height: 30px;">
                             <td></td>
                             <td>No.</td>
                             <td>Bussiness Group/BU</td>
@@ -69,11 +69,19 @@
                             <asp:Label runat="server" Text='<%# Eval("DOSumInsured") %>' />
                         </td>
                         <td>
-                            <div>
-                                <asp:Button runat="server" CssClass="pointer" Text="Edit" />
-                                <asp:Button runat="server" CssClass="pointer" Text="Delete" />
-                                <asp:Button runat="server" CssClass="btn_small_red pointer" Text="Reject" />
-                            </div>
+                            <table style="color: #333333; border-collapse: collapse;">
+                                <tr>
+                                    <td style="border : 0px !important;">
+                                        <asp:ImageButton ID="btn_Edit" runat="server" Height="35px" ImageUrl="~/images/icon_edit.png" />
+                                    </td>
+                                    <td style="border : 0px !important;">
+                                        <asp:ImageButton ID="btn_Delete" runat="server" Height="35px" ImageUrl="~/images/icon_delete.png" />
+                                    </td>
+                                    <td style="border : 0px !important;">
+                                        <asp:Button runat="server" CssClass="btn_small_red pointer" Text="Reject" />
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </ItemTemplate>
