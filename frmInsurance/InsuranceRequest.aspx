@@ -7,29 +7,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>InsuranceRequest</title>
-     <link href="../StyleSheet/CustomStyle.css" rel="stylesheet" type="text/css"/>
-
-
-  
+    <link href="../StyleSheet/CustomStyle.css" rel="stylesheet" type="text/css" />
     <metaviewport name="viewport" content="width=device-width, initial-scale=1.0">
-    <%--<style type="text/css">
-    .auto-style1 {
-        width: 1000px;
-    }
-    .auto-style2 {
-        width: 170px;
-    }
-    .auto-style3 {
-        width: 400px;
-        height: 100px;
-    }
-    .auto-style4 {
-        width: 290px;
-    }
-    .auto-style5 {
-        height: 110px;
-    }  
-    </style>--%>
 </head>
 <body>
     <form id="form1" runat="server">

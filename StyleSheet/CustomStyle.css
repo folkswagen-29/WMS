@@ -1,5 +1,6 @@
 ﻿body {
     background-color:transparent;
+    margin: 0;
 }
 
 
@@ -317,7 +318,7 @@
 }
 
 .div1 {
-    padding: 5px;
+    /*padding: 5px;*/
     min-width: 100%;
     min-height: 80px;
     background-color: ghostwhite;
