@@ -121,43 +121,43 @@
                                         <table>
                                             <tr class="text_center">
                                                 <td colspan="6">
-                                                    <asp:GridView ID="gv1" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="9pt" ForeColor="#333333" GridLines="None" Width="698px">
+                                                    <asp:GridView ID="gv1" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="9pt" ForeColor="#333333" GridLines="None">
                                                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                                         <Columns>
                                                             <asp:TemplateField HeaderText="No">
                                                                 <ItemTemplate>
-                                                                    <asp:TextBox ID="gv1txtNo" Text='<%# Bind("No") %>' runat="server" Font-Names="Tahoma" Font-Size="9pt" Width="60px"></asp:TextBox>
+                                                                    <asp:TextBox ID="gv1txtNo" Text='<%# Bind("No") %>' runat="server" CssClass="Text_60"></asp:TextBox>
                                                                 </ItemTemplate>
                                                                 <ItemStyle Width="60px" />
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Property Insured">
                                                                 <ItemTemplate>
                                                                     <asp:HiddenField ID="gv1txttop_ins_code" Value='<%# Bind("Top_Ins_Code") %>' runat="server" />
-                                                                    <asp:TextBox ID="gv1txtPropertyInsured" Text='<%# Bind("PropertyInsured") %>' runat="server" Font-Names="Tahoma" Font-Size="9pt" Width="100px"></asp:TextBox>
+                                                                    <asp:TextBox ID="gv1txtPropertyInsured" Text='<%# Bind("PropertyInsured") %>' runat="server" CssClass="Text_sm"></asp:TextBox>
                                                                 </ItemTemplate>
                                                                 <ItemStyle Width="100px" />
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Indemnity Period">
                                                                 <ItemTemplate>
-                                                                    <asp:TextBox ID="gv1txtIndemnityPeriod" Text='<%# Bind("IndemnityPeriod") %>' runat="server" Font-Names="Tahoma" Font-Size="9pt" Width="100px"></asp:TextBox>
+                                                                    <asp:TextBox ID="gv1txtIndemnityPeriod" Text='<%# Bind("IndemnityPeriod") %>' runat="server" CssClass="Text_sm"></asp:TextBox>
                                                                 </ItemTemplate>
                                                                 <ItemStyle Width="100px" />
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Sum Insured">
                                                                 <ItemTemplate>
-                                                                    <asp:TextBox ID="gv1txtSumInsured" Text='<%# Bind("SumInsured") %>' runat="server" Font-Names="Tahoma" Font-Size="9pt" Width="100px"></asp:TextBox>
+                                                                    <asp:TextBox ID="gv1txtSumInsured" Text='<%# Bind("SumInsured") %>' runat="server" CssClass="Text_sm"></asp:TextBox>
                                                                 </ItemTemplate>
                                                                 <ItemStyle Width="130px" />
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Start Date">
                                                                 <ItemTemplate>
-                                                                    <asp:TextBox ID="gv1txtSdate" Text='<%# Bind("StartDate") %>' TextMode="Date" runat="server" Font-Names="Tahoma" Font-Size="9pt" Width="130px"></asp:TextBox>
+                                                                    <asp:TextBox ID="gv1txtSdate" Text='<%# Bind("StartDate") %>' TextMode="Date" runat="server" CssClass="Text_sm"></asp:TextBox>
                                                                 </ItemTemplate>
                                                                 <ItemStyle Width="100px" />
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="End Date">
                                                                 <ItemTemplate>
-                                                                    <asp:TextBox ID="gv1txtEdate" Text='<%# Bind("EndDate") %>' TextMode="Date" runat="server" Font-Names="Tahoma" Font-Size="9pt" Width="130px"></asp:TextBox>
+                                                                    <asp:TextBox ID="gv1txtEdate" Text='<%# Bind("EndDate") %>' TextMode="Date" runat="server" CssClass="Text_sm"></asp:TextBox>
                                                                 </ItemTemplate>
                                                                 <ItemStyle Width="100px" />
                                                             </asp:TemplateField>

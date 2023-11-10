@@ -80,6 +80,18 @@
   /*  min-height: 80px;*/
     background-color: transparent;
 }
+.cell_content_20PC {
+    padding: 5px;
+    border-color: transparent;
+    border-left: 0px;
+    border-top: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    min-width: 20%;
+    width: 20%;
+    /* min-height: 80px;*/
+    background-color: transparent;
+}
 .cell_content_40PC {
     padding: 5px;
     border-color: transparent;
@@ -144,7 +156,7 @@
     vertical-align:top;
 }
 .cell_content_PC_TL {
-    padding: 5px;
+    /*padding: 5px;*/
     border-color: transparent;
     border-left: 0px;
     border-top: 0px;
