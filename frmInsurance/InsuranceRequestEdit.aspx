@@ -35,7 +35,7 @@
                                     </td>
                                     <td>&nbsp;</td>
                                     <td class="cell_content_80PC_TL">
-                                        <asp:DropDownList ID="type_req" runat="server" CssClass="Text_400">
+                                        <asp:DropDownList ID="type_req" runat="server" CssClass="Text_200">
                                             <%--<asp:ListItem>-Please select-</asp:ListItem>
                                     <asp:ListItem Value="01" Selected="True">ขอประกันภัยใหม่ เพิ่มทุน, ยกเลิก</asp:ListItem>
                                     <asp:ListItem Value="02">ขอต่ออายุประกันภัย</asp:ListItem>--%>
@@ -60,6 +60,18 @@
                                     <td>&nbsp;</td>
                                     <td class="cell_content_80PC_TL">
                                         <asp:TextBox ID="doc_no" runat="server" CssClass="Text_400"></asp:TextBox>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell_content_20PC_TR">
+                                        <label class="Label_md">BU </label>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td class="cell_content_80PC_TL">
+                                        <asp:DropDownList ID="ddl_bu" runat="server" CssClass="Text_200">
+                                            <asp:ListItem>-Please select-</asp:ListItem>
+                                        </asp:DropDownList>
                                     </td>
                                     <td>&nbsp;</td>
                                 </tr>

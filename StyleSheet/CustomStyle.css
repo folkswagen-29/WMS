@@ -696,6 +696,9 @@
     border-color: silver;
     border-radius: 2px;
 }
+.text_center {
+    text-align: center !important;
+}
 
 .pointer{
     cursor: pointer;
@@ -715,6 +718,7 @@
     border-color: silver;
     box-shadow: rgb(128, 128, 128) 2px 2px;
     border-radius: 2px 2px;
+    cursor: pointer;
 }
 
 .btn_normal_blue {
@@ -731,6 +735,7 @@
     border-color: transparent;
     box-shadow: rgb(128, 128, 128) 2px 2px;
     border-radius: 2px 2px;
+    cursor: pointer;
 }
 
 .btn_normal_silver {
@@ -747,6 +752,7 @@
     border-color: transparent;
     box-shadow: rgb(128, 128, 128) 2px 2px;
     border-radius: 2px 2px;
+    cursor: pointer;
 }
 
 .btn_normal_red {
@@ -763,6 +769,7 @@
     border-color: transparent;
     box-shadow: rgb(128, 128, 128) 2px 2px;
     border-radius: 2px 2px;
+    cursor: pointer;
 }
 
 .btn_small_blue {
@@ -779,6 +786,7 @@
     border-color: transparent;
     box-shadow: rgb(128, 128, 128) 2px 2px;
     border-radius: 2px 2px;
+    cursor: pointer;
 }
 
 .btn_small_silver {
@@ -795,6 +803,7 @@
     border-color: transparent;
     box-shadow: rgb(128, 128, 128) 2px 2px;
     border-radius: 2px 2px;
+    cursor: pointer;
 }
 
 .btn_small_red {
@@ -811,6 +820,7 @@
     border-color: transparent;
     box-shadow: rgb(128, 128, 128) 2px 2px;
     border-radius: 2px 2px;
+    cursor: pointer;
 }
 
 

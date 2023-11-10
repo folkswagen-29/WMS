@@ -143,12 +143,6 @@ namespace onlineLegalWF.frmInsurance
             dt.Columns.Add("Top_Ins_Code", typeof(string));
             return dt;
         }
-        public void gv1LoadData(DataTable dt, string mode)
-        {
-            gv1.DataSource = dt;
-            gv1.DataBind();
-            hidMode.Value = mode;
-        }
         public DataTable GetTypeOfPropertyInsured()
         {
             string sql = "select * from li_type_of_property_insured order by row_sort asc";
@@ -168,7 +162,7 @@ namespace onlineLegalWF.frmInsurance
             var xreq_date = System.DateTime.Now;
             var xreq_no = req_no.Text.Trim();
             var xbu_code = ddl_bu.SelectedValue.ToString();
-            var xcompany_name = ddl_bu.SelectedItem.Text.ToString();
+            var xcompany_name = company_name.Text.ToString();
             var xdoc_no = doc_no.Text.Trim();
             var xsubject = subject.Text.Trim();
             var xto = to.Text.Trim();
@@ -614,7 +608,7 @@ namespace onlineLegalWF.frmInsurance
             var xreq_no = req_no.Text.Trim();
             var xtype_req = type_req.SelectedValue.ToString();
             var xbu_code = ddl_bu.SelectedValue.ToString();
-            var xcompany_name = ddl_bu.SelectedItem.Text.ToString();
+            var xcompany_name = company_name.Text.ToString();
             var xdoc_no = doc_no.Text.Trim();
             var xsubject = subject.Text.Trim();
             var xto = to.Text.Trim();

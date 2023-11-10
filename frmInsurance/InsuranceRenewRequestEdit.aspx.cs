@@ -49,7 +49,7 @@ namespace onlineLegalWF.frmInsurance
                 req_no.Text = res.Rows[0]["req_no"].ToString();
                 req_date.Value = Convert.ToDateTime(res.Rows[0]["req_date"]).ToString("yyyy-MM-dd");
                 type_req.SelectedValue = res.Rows[0]["toreq_code"].ToString();
-                company_name.Value = res.Rows[0]["company_name"].ToString();
+                company_name.Text = res.Rows[0]["company_name"].ToString();
                 doc_no.Text = res.Rows[0]["document_no"].ToString();
                 subject.Text = res.Rows[0]["subject"].ToString();
                 to.Text = res.Rows[0]["dear"].ToString();

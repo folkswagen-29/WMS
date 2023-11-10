@@ -46,6 +46,12 @@ namespace onlineLegalWF.frmInsurance
             type_pi.DataTextField = "top_ins_desc";
             type_pi.DataValueField = "top_ins_code";
             type_pi.DataBind();
+
+            ddl_bu.DataSource = GetBusinessUnit();
+            ddl_bu.DataBind();
+            ddl_bu.DataTextField = "bu_desc";
+            ddl_bu.DataValueField = "bu_code";
+            ddl_bu.DataBind();
         }
 
         private void setDataEditRequest(string id) 
@@ -66,6 +72,7 @@ namespace onlineLegalWF.frmInsurance
                 purpose.Text = res.Rows[0]["objective"].ToString();
                 background.Text = res.Rows[0]["reason"].ToString();
                 approve_des.Text = res.Rows[0]["approved_desc"].ToString();
+                ddl_bu.SelectedValue = res.Rows[0]["bu_code"].ToString();
             }
 
             string sqlPropIns = "select  top 1 * from li_insurance_req_property_insured where req_no='"+ id + "'";
@@ -80,6 +87,13 @@ namespace onlineLegalWF.frmInsurance
                 start_date.Text = Convert.ToDateTime(resPropIns.Rows[0]["startdate"]).ToString("yyyy-MM-dd");
                 end_date.Text = Convert.ToDateTime(resPropIns.Rows[0]["enddate"]).ToString("yyyy-MM-dd");
             }
+        }
+
+        public DataTable GetBusinessUnit()
+        {
+            string sql = "select * from li_business_unit order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
         }
 
         public DataTable GetTypeOfRequest()
@@ -130,6 +144,7 @@ namespace onlineLegalWF.frmInsurance
             var xend_date = end_date.Text.Trim();
             var xapprove_des = approve_des.Text.Trim();
             var xupdate_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            var xbu_code = ddl_bu.SelectedValue.ToString();
 
             string sql = @"UPDATE [dbo].[li_insurance_request]
                            SET [toreq_code] = '"+ xtype_req + @"'
@@ -141,6 +156,7 @@ namespace onlineLegalWF.frmInsurance
                               ,[reason] = '"+ xbackground + @"'
                               ,[approved_desc] = '"+ xapprove_des + @"'
                               ,[updated_datetime] = '" + xupdate_date + @"'
+                              ,[bu_code] = '" + xbu_code + @"'
                          WHERE [req_no] = '" + xreq_no + "'";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);

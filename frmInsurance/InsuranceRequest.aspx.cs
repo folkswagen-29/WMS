@@ -43,6 +43,12 @@ namespace onlineLegalWF.frmInsurance
             type_pi.DataTextField = "top_ins_desc";
             type_pi.DataValueField = "top_ins_code";
             type_pi.DataBind();
+
+            ddl_bu.DataSource = GetBusinessUnit();
+            ddl_bu.DataBind();
+            ddl_bu.DataTextField = "bu_desc";
+            ddl_bu.DataValueField = "bu_code";
+            ddl_bu.DataBind();
         }
 
         protected void btn_gendocumnt_Click(object sender, EventArgs e)
@@ -469,7 +475,12 @@ namespace onlineLegalWF.frmInsurance
 
             
         }
-
+        public DataTable GetBusinessUnit()
+        {
+            string sql = "select * from li_business_unit order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
         public DataTable GetTypeOfRequest()
         {
             string sql = "select * from li_type_of_request order by row_sort asc";
@@ -511,11 +522,12 @@ namespace onlineLegalWF.frmInsurance
             var xend_date = end_date.Text.Trim();
             var xapprove_des = approve_des.Text.Trim();
             var xstatus = "verify";
+            var xbu_code = ddl_bu.SelectedValue.ToString();
 
             string sql = @"INSERT INTO [dbo].[li_insurance_request]
-                                   ([process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective],[reason],[approved_desc],[status])
+                                   ([process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective],[reason],[approved_desc],[status],[bu_code])
                              VALUES
-                                   ('"+ xprocess_id + @"'
+                                   ('" + xprocess_id + @"'
                                    ,'"+ xreq_no + @"'
                                    ,'"+ xreq_date + @"'
                                    ,'"+ xtype_req + @"'
@@ -526,7 +538,8 @@ namespace onlineLegalWF.frmInsurance
                                    ,'"+ xpurpose + @"'
                                    ,'"+ xbackground + @"'
                                    ,'"+ xapprove_des + @"'
-                                   ,'"+ xstatus + @"')";
+                                   ,'"+ xstatus + @"'
+                                   ,'"+ xbu_code + @"')";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
 
