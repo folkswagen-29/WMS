@@ -10,6 +10,11 @@
     
   
     <metaviewport name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        .auto-style1 {
+            width: 201px;
+        }
+    </style>
     </head>
     
 <body>
@@ -85,7 +90,7 @@
 
                     </asp:Panel>
                 </td>
-                <td class="cell_content_60PC">
+                <td class="auto-style1">
                      <asp:Panel ID="Panel3" runat="server" CssClass="div_90" height="400px">
 
                     </asp:Panel>
