@@ -1,4 +1,5 @@
 ﻿using onlineLegalWF.Class;
+using onlineLegalWF.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -35,6 +36,8 @@ namespace onlineLegalWF.frmInsurance
         }
         private void setDataDDL()
         {
+            ucHeader1.setHeader("Edit Request");
+
             type_req.DataSource = GetTypeOfRequest();
             type_req.DataBind();
             type_req.DataTextField = "toreq_desc";

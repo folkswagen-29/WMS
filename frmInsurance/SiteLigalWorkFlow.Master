@@ -1,0 +1,65 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteLigalWorkFlow.master.cs" Inherits="onlineLegalWF.SiteLigalWorkFlow" %>
+
+<%@ Register Src="~/userControls/ucMenu.ascx" TagPrefix="uc1" TagName="ucMenu" %>
+
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Legal Workflow</title>
+    <link href="../StyleSheet/CustomStyle.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .bg_banner_img {
+            width: 255px;
+            background-color: darkred;
+            height: 150px;
+            text-align: center;
+        }
+    </style>
+    <metaviewport name="viewport" content="width=device-width, initial-scale=1.0">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="div1">
+            <table class="w-100">
+                <tr>
+                    <td colspan="2">
+                        <table class="w-100" style="min-width: 250px;">
+                            <tr>
+                                <td style="vertical-align: top; text-align: left;" class="cell_content_20PC">
+                                    <table class="w-100">
+                                        <tr>
+                                            <td class="bg_banner_img">
+                                                <img alt="Logo AWC" src="/images/AWC_Logo.png" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="vertical-align: top; text-align: left;">
+                                                <asp:LinkButton ID="lbtnMenu" runat="server" Font-Names="Tahoma" Font-Size="8pt" ForeColor="#009999" OnClick="lbtnMenu_Click" Width="120px">Menu [+]</asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="vertical-align: top; text-align: left;">
+                                                <uc1:ucMenu runat="server" ID="ucMenu01" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="vertical-align: top; text-align: left;" class="cell_content_80PC">
+                                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                    </asp:ContentPlaceHolder>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    
+                </tr>
+            </table>
+            
+        </div>
+    </form>
+</body>
+</html>

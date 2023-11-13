@@ -7,29 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace onlineLegalWF.frmInsurance
+namespace onlineLegalWF.userControls
 {
 
 
-    public partial class InsuranceRequestList
+    public partial class ucHeader
     {
 
         /// <summary>
-        /// ucHeader1 control.
+        /// lblHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucHeader ucHeader1;
-
-        /// <summary>
-        /// lvReqList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lvReqList;
+        protected global::System.Web.UI.WebControls.Label lblHeader;
     }
 }

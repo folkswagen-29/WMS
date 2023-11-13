@@ -1,5 +1,6 @@
 ﻿using Microsoft.Office.Interop.Word;
 using onlineLegalWF.Class;
+using onlineLegalWF.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -29,6 +30,7 @@ namespace onlineLegalWF.frmInsurance
         }
         private void setData()
         {
+            ucHeader1.setHeader("New Request");
             string xreq_no = System.DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
             req_no.Text = xreq_no;
 

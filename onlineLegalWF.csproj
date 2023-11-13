@@ -198,6 +198,8 @@
     <Content Include="test\testCSS1.aspx" />
     <Content Include="test\testReplaceDoc1.aspx" />
     <Content Include="test\testReplaceDoc2.aspx" />
+    <Content Include="userControls\ucHeader.ascx" />
+    <Content Include="userControls\ucMenu.ascx" />
     <Content Include="userControls\ucPersonSign.ascx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -351,6 +353,13 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
+    <Compile Include="frmInsurance\SiteLigalWorkFlow.Master.cs">
+      <DependentUpon>SiteLigalWorkFlow.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmInsurance\SiteLigalWorkFlow.Master.designer.cs">
+      <DependentUpon>SiteLigalWorkFlow.Master</DependentUpon>
+    </Compile>
     <Compile Include="test\testCSS1.aspx.cs">
       <DependentUpon>testCSS1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -371,6 +380,20 @@
     </Compile>
     <Compile Include="test\testReplaceDoc2.aspx.designer.cs">
       <DependentUpon>testReplaceDoc2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="userControls\ucHeader.ascx.cs">
+      <DependentUpon>ucHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userControls\ucHeader.ascx.designer.cs">
+      <DependentUpon>ucHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="userControls\ucMenu.ascx.cs">
+      <DependentUpon>ucMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userControls\ucMenu.ascx.designer.cs">
+      <DependentUpon>ucMenu.ascx</DependentUpon>
     </Compile>
     <Compile Include="userControls\ucPersonSign.ascx.cs">
       <DependentUpon>ucPersonSign.ascx</DependentUpon>
@@ -398,6 +421,7 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="frmInsurance\SiteLigalWorkFlow.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

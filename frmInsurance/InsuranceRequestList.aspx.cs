@@ -24,12 +24,14 @@ namespace onlineLegalWF.frmInsurance
 
         private void setDataRequestList() 
         {
+            ucHeader1.setHeader("My Request List");
+
             string sql = "select * from li_insurance_request where toreq_code='01'";
 
             var res = zdb.ExecSql_DataTable(sql, zconnstr);
 
-            gvReqList.DataSource = res;
-            gvReqList.DataBind();
+            lvReqList.DataSource = res;
+            lvReqList.DataBind();
         }
     }
 }

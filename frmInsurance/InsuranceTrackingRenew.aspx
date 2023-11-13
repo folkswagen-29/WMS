@@ -14,18 +14,18 @@
                 <LayoutTemplate>
                     <table id="itemPlaceholderContainer" runat="server" class="table">
                         <tr class="gv_header_blue" style="height: 30px;">
-                            <td></td>
-                            <td>No.</td>
-                            <td>Bussiness Group/BU</td>
-                            <td>Status</td>
-                            <td>Submitted Date</td>
-                            <td>IAR</td>
-                            <td>BI</td>
-                            <td>CGL/PL</td>
-                            <td>PV</td>
-                            <td>LPG</td>
-                            <td>D&O</td>
-                            <td></td>
+                            <th></th>
+                            <th>No.</th>
+                            <th>Bussiness Group/BU</th>
+                            <th>Status</th>
+                            <th>Submitted Date</th>
+                            <th>IAR</th>
+                            <th>BI</th>
+                            <th>CGL/PL</th>
+                            <th>PV</th>
+                            <th>LPG</th>
+                            <th>D&O</th>
+                            <th></th>
                         </tr>
                         <tr id="itemPlaceholder" runat="server">
                         </tr>
