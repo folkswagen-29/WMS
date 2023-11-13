@@ -1,4 +1,5 @@
-﻿using System;
+﻿using onlineLegalWF.userControls;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -25,12 +26,13 @@ namespace onlineLegalWF.frmInsurance
 
         private void setDataRenewRequestList()
         {
+            ucHeader1.setHeader("My Renew Request List");
             string sql = "select * from li_insurance_request where toreq_code='02'";
 
             var res = zdb.ExecSql_DataTable(sql, zconnstr);
 
-            gvRenewReqList.DataSource = res;
-            gvRenewReqList.DataBind();
+            lvRenewReqList.DataSource = res;
+            lvRenewReqList.DataBind();
 
         }
     }

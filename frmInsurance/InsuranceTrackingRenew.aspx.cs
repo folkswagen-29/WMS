@@ -27,7 +27,7 @@ namespace onlineLegalWF.frmInsurance
 
         public void setDataTrackingRenew() 
         {
-            
+            ucHeader1.setHeader("Tracking Renew");
             string sqlreqres = "select req.process_id,req.req_no,req.req_date,req.[status],bu.bu_desc from li_insurance_request as req inner join li_business_unit as bu on bu.bu_code = req.bu_code where req.toreq_code='02'";
 
             var reqres = zdb.ExecSql_DataTable(sqlreqres, zconnstr);

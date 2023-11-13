@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
 using onlineLegalWF.Class;
+using onlineLegalWF.userControls;
 
 namespace onlineLegalWF.frmInsurance
 {
@@ -41,6 +42,8 @@ namespace onlineLegalWF.frmInsurance
 
         private void SetData_ddl() 
         {
+            ucHeader1.setHeader("Claim Request");
+
             ddl_bu.DataSource = GetBusinessUnit();
             ddl_bu.DataBind();
             ddl_bu.DataTextField = "bu_desc";

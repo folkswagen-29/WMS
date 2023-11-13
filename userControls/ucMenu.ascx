@@ -60,8 +60,21 @@
             <td class="auto-style7"></td>
             <td class="auto-style9">&nbsp;</td>
             <td class="auto-style4" colspan="2">&nbsp;
-             
-        <asp:LinkButton ID="lbtn1" runat="server" ForeColor="White" OnClick="lbtn1_Click">My Request List</asp:LinkButton>
+            <asp:LinkButton ID="lbtn1" runat="server" ForeColor="White" OnClick="lbtn1_Click">My Request List</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td class="auto-style7"></td>
+            <td class="auto-style9">&nbsp;</td>
+            <td class="auto-style4" colspan="2">&nbsp;
+                <asp:LinkButton ID="LinkButton2" runat="server" ForeColor="White" OnClick="LinkButton2_Click">My Renew Request List</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td class="auto-style7"></td>
+            <td class="auto-style9">&nbsp;</td>
+            <td class="auto-style4" colspan="2">&nbsp;
+                <asp:LinkButton ID="LinkButton3" runat="server" ForeColor="White" OnClick="LinkButton3_Click">My Claim Request List</asp:LinkButton>
             </td>
         </tr>
         <tr>

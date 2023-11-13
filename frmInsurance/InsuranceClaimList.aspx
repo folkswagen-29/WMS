@@ -1,27 +1,60 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InsuranceClaimList.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceClaimList" %>
+﻿<%@ Page Title="ClaimRequestList" Language="C#" MasterPageFile="SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceClaimList.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceClaimList" %>
+<%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
+<%@ Import Namespace="onlineLegalWF.Class" %> 
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>InsuranceClaimList</title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <asp:GridView ID="gvClaimList" runat="server" AutoGenerateColumns="false">
-            <Columns>
-                <asp:BoundField DataField="process_id" HeaderText="Process ID" />
-                <asp:BoundField DataField="company_name" HeaderText="Company Name" />
-                <asp:BoundField DataField="incident" HeaderText="Incident" />
-                <asp:BoundField DataField="claim_date" HeaderText="Submitted Date" />
-                <asp:BoundField DataField="status" HeaderText="Status" />
-                <asp:TemplateField HeaderText="Action">
-                    <ItemTemplate>
-                        <asp:HyperLink runat="server" NavigateUrl='<%# "~/frmInsurance/InsuranceClaimEdit.aspx?id="+Eval("claim_no") %>' Text="Edit"></asp:HyperLink>
-                    </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
-    </form>
-</body>
-</html>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <table class="cell_content_100PC">
+        <tr>
+            <td colspan="2">
+                <div style="background-color: gainsboro;">
+                    <uc2:ucheader runat="server" id="ucHeader1" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="div_90">
+                    <asp:ListView ID="lvClaimList" runat="server">
+                        <LayoutTemplate>
+                            <table id="itemPlaceholderContainer" runat="server" class="table">
+                                <tr style="height: 35px;">
+                                    <th>Process ID</th>
+                                    <th>Company Name</th>
+                                    <th>Incident</th>
+                                    <th>Submitted Date</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                                <tr id="itemPlaceholder" runat="server">
+                                </tr>
+                            </table>
+                        </LayoutTemplate>
+                        <ItemTemplate>
+                            <tr>
+                                <td>
+                                    <asp:Label runat="server" Text='<%# Eval("process_id") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" Text='<%# Eval("company_name") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" Text='<%# Eval("incident") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" Text='<%# Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(Eval("claim_date")), "en") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" Text='<%# Eval("status") %>' />
+                                </td>
+                                <td>
+                                    <asp:ImageButton ID="btn_Edit" runat="server" Height="35px" PostBackUrl='<%# "~/frmInsurance/InsuranceClaimEdit.aspx?id="+Eval("claim_no") %>' ImageUrl="~/images/icon_edit.png" />
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:ListView>
+                </div>
+                
+            </td>
+        </tr>
+    </table>
+</asp:Content>

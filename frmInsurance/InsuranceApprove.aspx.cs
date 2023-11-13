@@ -34,6 +34,8 @@ namespace onlineLegalWF.frmInsurance
         }
 
         private void setDataApprove(string id, string type) {
+            ucHeader1.setHeader("Insurance Approve");
+
             if (type == "req")
             {
                 string sql = "select * from li_insurance_request where req_no='" + id + "'";

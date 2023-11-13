@@ -1,4 +1,5 @@
 ﻿using onlineLegalWF.Class;
+using onlineLegalWF.userControls;
 using Spire.Doc;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,8 @@ namespace onlineLegalWF.frmInsurance
 
         private void setDataEditClaimRequest(string id) 
         {
+            ucHeader1.setHeader("Claim Edit Request");
+
             ddl_bu.DataSource = GetBusinessUnit();
             ddl_bu.DataBind();
             ddl_bu.DataTextField = "bu_desc";
