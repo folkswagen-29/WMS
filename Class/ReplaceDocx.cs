@@ -52,11 +52,12 @@ namespace ReplaceDocx.Class
            
             for (int i = 0; i < tagdata.Count; i++)
             {
-                if (tagdata[i].string_tag == true)  // Replace String
-                {
-                   // myDoc.Replace(tagdata[i].tagname, tagdata[i].tagvalue, true, true);
-                }
-                else if (tagdata[i].image_tag == true) // Replace Image
+                //if (tagdata[i].string_tag == true)  // Replace String
+                //{
+                //   // myDoc.Replace(tagdata[i].tagname, tagdata[i].tagvalue, true, true);
+                //}
+                //else if (tagdata[i].image_tag == true) // Replace Image
+                if (tagdata[i].image_tag == true) // Replace Image
                 {
                     Section section = myDoc.Sections[0];
                     TextSelection[] selections = myDoc.FindAllString(tagdata[i].tagname, true, true);

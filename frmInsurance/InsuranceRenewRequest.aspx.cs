@@ -618,6 +618,7 @@ namespace onlineLegalWF.frmInsurance
             var xpurpose = purpose.Text.Trim();
             var xbackground = background.Text.Trim();
             var xstatus = "verify";
+            var xprop_ins_name = prop_ins_name.Text.Trim();
 
 
             //Get Data from gv1 Insurance Detail
@@ -640,7 +641,7 @@ namespace onlineLegalWF.frmInsurance
             }
 
             string sql = @"INSERT INTO [dbo].[li_insurance_request]
-                                   ([process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective],[reason],[status],[bu_code])
+                                   ([process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective],[reason],[status],[bu_code],[property_insured_name])
                              VALUES
                                    ('" + xprocess_id + @"'
                                    ,'" + xreq_no + @"'
@@ -653,7 +654,8 @@ namespace onlineLegalWF.frmInsurance
                                    ,'" + xpurpose + @"'
                                    ,'" + xbackground + @"'
                                    ,'" + xstatus + @"'
-                                   ,'" + xbu_code + @"')";
+                                   ,'" + xbu_code + @"'
+                                   ,'" + xprop_ins_name + @"')";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
 

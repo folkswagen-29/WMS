@@ -59,6 +59,7 @@ namespace onlineLegalWF.frmInsurance
                 purpose.Text = res.Rows[0]["objective"].ToString();
                 background.Text = res.Rows[0]["reason"].ToString();
                 ddl_bu.SelectedValue = res.Rows[0]["bu_code"].ToString();
+                prop_ins_name.Text = res.Rows[0]["property_insured_name"].ToString();
             }
 
             var dt = iniDataTable(id);
@@ -188,6 +189,7 @@ namespace onlineLegalWF.frmInsurance
             var xto = to.Text.Trim();
             var xpurpose = purpose.Text.Trim();
             var xbackground = background.Text.Trim();
+            var xprop_ins_name = prop_ins_name.Text.Trim();
 
 
             //Get Data from gv1 Insurance Detail
@@ -219,6 +221,7 @@ namespace onlineLegalWF.frmInsurance
                                   ,[reason] = '" + xbackground + @"'
                                   ,[updated_datetime] = '" + xreq_date + @"'
                                   ,[bu_code] = '" + xbu_code + @"'
+                                  ,[property_insured_name] = '" + xprop_ins_name + @"'
                              WHERE [req_no] ='" + xreq_no + "'";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);

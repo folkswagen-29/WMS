@@ -114,6 +114,15 @@ namespace onlineLegalWF.frmInsurance
         protected global::System.Web.UI.WebControls.TextBox background;
 
         /// <summary>
+        /// prop_ins_name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox prop_ins_name;
+
+        /// <summary>
         /// type_pi control.
         /// </summary>
         /// <remarks>

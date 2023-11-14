@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using static ReplaceDocx.Class.ReplaceDocx;
+using onlineLegalWF.Class;
 
 namespace onlineLegalWF.test
 {
@@ -61,11 +62,11 @@ namespace onlineLegalWF.test
 
                 var fileByte = xsign_upload.FileBytes;
 
-                //MOA
-                #region MOA 
+                //DOA
+                #region DOA 
                 var requestor = "คุณรุ่งเรือง วิโรจน์ชีวัน";
                 var requestorpos = "Head of Operations";
-                var requestordate = System.DateTime.Now.ToString("dd/MM/yyyy");
+                var requestordate = Utillity.ConvertDateToLongDateTime(System.DateTime.Now, "en");
 
                 var apv1 = "คุณจรูณศักดิ์ นามะฮง";
                 var apv1pos = "Insurance Specialist";

@@ -76,6 +76,7 @@ namespace onlineLegalWF.frmInsurance
                 background.Text = res.Rows[0]["reason"].ToString();
                 approve_des.Text = res.Rows[0]["approved_desc"].ToString();
                 ddl_bu.SelectedValue = res.Rows[0]["bu_code"].ToString();
+                prop_ins_name.Text = res.Rows[0]["property_insured_name"].ToString();
             }
 
             string sqlPropIns = "select  top 1 * from li_insurance_req_property_insured where req_no='"+ id + "'";
@@ -148,6 +149,7 @@ namespace onlineLegalWF.frmInsurance
             var xapprove_des = approve_des.Text.Trim();
             var xupdate_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
             var xbu_code = ddl_bu.SelectedValue.ToString();
+            var xprop_ins_name = prop_ins_name.Text.Trim();
 
             string sql = @"UPDATE [dbo].[li_insurance_request]
                            SET [toreq_code] = '"+ xtype_req + @"'
@@ -160,6 +162,7 @@ namespace onlineLegalWF.frmInsurance
                               ,[approved_desc] = '"+ xapprove_des + @"'
                               ,[updated_datetime] = '" + xupdate_date + @"'
                               ,[bu_code] = '" + xbu_code + @"'
+                              ,[property_insured_name] = '" + xprop_ins_name + @"'
                          WHERE [req_no] = '" + xreq_no + "'";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);

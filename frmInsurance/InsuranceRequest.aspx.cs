@@ -525,9 +525,10 @@ namespace onlineLegalWF.frmInsurance
             var xapprove_des = approve_des.Text.Trim();
             var xstatus = "verify";
             var xbu_code = ddl_bu.SelectedValue.ToString();
+            var xprop_ins_name = prop_ins_name.Text.Trim();
 
             string sql = @"INSERT INTO [dbo].[li_insurance_request]
-                                   ([process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective],[reason],[approved_desc],[status],[bu_code])
+                                   ([process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective],[reason],[approved_desc],[status],[bu_code],[property_insured_name])
                              VALUES
                                    ('" + xprocess_id + @"'
                                    ,'"+ xreq_no + @"'
@@ -541,7 +542,8 @@ namespace onlineLegalWF.frmInsurance
                                    ,'"+ xbackground + @"'
                                    ,'"+ xapprove_des + @"'
                                    ,'"+ xstatus + @"'
-                                   ,'"+ xbu_code + @"')";
+                                   ,'"+ xbu_code + @"'
+                                   ,'"+ xprop_ins_name + @"')";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
 
