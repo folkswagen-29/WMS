@@ -11,15 +11,16 @@
         <div>
             <br />
             <br />
-            TAG NAME&nbsp; #1#&nbsp;&nbsp;
+            <%--TAG NAME&nbsp; #1#&nbsp;&nbsp;
             <asp:TextBox ID="tagname1" runat="server"></asp:TextBox>
             <br />
             TAG NAME #2#&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="tagname2" runat="server"></asp:TextBox>
+            <asp:TextBox ID="tagname2" runat="server"></asp:TextBox>--%>
             <br />
             <br />
             <br />
             <br />
+            <asp:FileUpload ID="sign_upload" runat="server" />
             <asp:Button ID="btnTestRun" runat="server" OnClick="btnTestRun_Click" Text="Test Run" />
         </div>
     </form>

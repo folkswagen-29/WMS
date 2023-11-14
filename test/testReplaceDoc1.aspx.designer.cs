@@ -24,22 +24,13 @@ namespace onlineLegalWF.test
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// tagname1 control.
+        /// sign_upload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tagname1;
-
-        /// <summary>
-        /// tagname2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tagname2;
+        protected global::System.Web.UI.WebControls.FileUpload sign_upload;
 
         /// <summary>
         /// btnTestRun control.
