@@ -16,10 +16,10 @@
             <br />
             TAG NAME #2#&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="tagname2" runat="server"></asp:TextBox>--%>
+            <%--<br />
             <br />
             <br />
-            <br />
-            <br />
+            <br />--%>
             <asp:FileUpload ID="sign_upload" runat="server" />
             <asp:Button ID="btnTestRun" runat="server" OnClick="btnTestRun_Click" Text="Test Run" />
         </div>
