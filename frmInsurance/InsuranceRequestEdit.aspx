@@ -130,7 +130,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:DropDownList ID="type_pi" runat="server" CssClass="Text_400">
+                                <asp:DropDownList ID="type_pi" runat="server" CssClass="Text_200">
                                 </asp:DropDownList>
                             </td>
                             <td>&nbsp;</td>
