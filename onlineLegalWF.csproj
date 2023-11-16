@@ -222,6 +222,7 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Class\DbControllerBase.cs" />
+    <Compile Include="Class\EmpInfo.cs" />
     <Compile Include="Class\LogHelper.cs" />
     <Compile Include="Class\MargePDF.cs" />
     <Compile Include="Class\memoDocClass.cs" />

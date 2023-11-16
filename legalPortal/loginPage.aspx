@@ -58,7 +58,7 @@
                                         <asp:Label ID="Label3" runat="server" Font-Names="tahoma" Font-Size="10pt" Text="User Login"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="TextBox1" runat="server" Width="200px"></asp:TextBox>
+                                        <asp:TextBox ID="txtLoginName" runat="server" Width="200px"></asp:TextBox>
                                     </td>
                                     <td>&nbsp;</td>
                                 </tr>
@@ -68,7 +68,7 @@
                                         <asp:Label ID="Label4" runat="server" Font-Names="tahoma" Font-Size="10pt" Text="Password"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="TextBox2" runat="server" TextMode="Password" Width="200px"></asp:TextBox>
+                                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="200px"></asp:TextBox>
                                     </td>
                                     <td>&nbsp;</td>
                                 </tr>
