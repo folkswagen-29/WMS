@@ -204,6 +204,7 @@
     <Content Include="test\testReplaceDoc2.aspx" />
     <Content Include="userControls\ucHeader.ascx" />
     <Content Include="userControls\ucMenu.ascx" />
+    <Content Include="userControls\ucMenulist.ascx" />
     <Content Include="userControls\ucPersonSign.ascx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -405,6 +406,13 @@
     </Compile>
     <Compile Include="userControls\ucMenu.ascx.designer.cs">
       <DependentUpon>ucMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="userControls\ucMenulist.ascx.cs">
+      <DependentUpon>ucMenulist.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userControls\ucMenulist.ascx.designer.cs">
+      <DependentUpon>ucMenulist.ascx</DependentUpon>
     </Compile>
     <Compile Include="userControls\ucPersonSign.ascx.cs">
       <DependentUpon>ucPersonSign.ascx</DependentUpon>
