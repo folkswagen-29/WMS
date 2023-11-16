@@ -33,12 +33,24 @@
                                     <table class="w-100">
                                         <tr>
                                             <td class="bg_banner_img">
-                                                <img alt="Logo AWC" src="/images/AWC_Logo.png" />
+                                                <asp:ImageButton ImageUrl="/images/AWC_Logo.png" AlternateText="Logo Awc" PostBackUrl="/legalPortal/legalPortal.aspx" runat="server" />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="vertical-align: top; text-align: left;">
-                                                <asp:LinkButton ID="lbtnMenu" runat="server" Font-Names="Tahoma" Font-Size="8pt" ForeColor="#009999" OnClick="lbtnMenu_Click" Width="120px">Menu [+]</asp:LinkButton>
+                                                <table class="w-100" style="background-color: lightsteelblue">
+                                                    <tr>
+                                                        <td class="cell_content_80PC">
+                                                            <label class="Label_md">Login : </label>
+                                                            <asp:Label ID="login_name" runat="server" CssClass="Label_md" Text=""></asp:Label>&nbsp; 
+                                                            <label class="Label_md"> / </label>
+                                                            <asp:Label ID="login_bu" runat="server" CssClass="Label_md" Text=""></asp:Label>&nbsp; 
+                                                        </td>
+                                                        <td style="vertical-align: top; text-align: right; padding: 5px;">
+                                                            <asp:Button ID="btn_logout" runat="server" CssClass="btn_small_silver" Text="Logout" OnClick="btn_logout_Click" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </td>
                                         </tr>
                                         <tr>

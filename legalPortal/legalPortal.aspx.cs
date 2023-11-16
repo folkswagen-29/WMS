@@ -11,21 +11,25 @@ namespace onlineLegalWF.legalPortal
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!IsPostBack)
+            {
+                checkSession();
+            }
         }
         public void checkSession() 
         {
-            var is_login = Session["is_login"].ToString(); 
-            if (is_login == "Y")
-            {
-                // Load Menu
+            ucHeader1.setHeader("Legal Portal");
+            //var is_login = Session["is_login"].ToString(); 
+            //if (is_login == "Y")
+            //{
+            //    // Load Menu
                 
-            }
-            else
-            {
-                // go to Login page
-                Response.Redirect("loginPage.aspx"); 
-            }
+            //}
+            //else
+            //{
+            //    // go to Login page
+            //    Response.Redirect("loginPage.aspx"); 
+            //}
         }
     }
 }

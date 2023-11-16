@@ -41,6 +41,7 @@ namespace onlineLegalWF.legalPortal
 
             var emp = empFunc.getEmpInfo(xusername); 
             Session.Clear();
+            Session.Add("is_login", "Y");
             Session.Add("user_login", emp.user_login);
             Session.Add("user_name", emp.full_name_en);
             Session.Add("user_position", emp.position_en);
