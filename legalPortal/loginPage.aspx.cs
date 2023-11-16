@@ -42,11 +42,13 @@ namespace onlineLegalWF.legalPortal
             var emp = empFunc.getEmpInfo(xusername); 
             Session.Clear();
             Session.Add("user_login", emp.user_login);
-            Session.Add("user_name", emp.user_name);
-            Session.Add("user_position", emp.position);
-            Session.Add("division", emp.divisiton);
+            Session.Add("user_name", emp.full_name_en);
+            Session.Add("user_position", emp.position_en);
+            Session.Add("division", emp.division);
             Session.Add("department", emp.department);
             Session.Add("bu", emp.bu);
+
+            var resListEmp = empFunc.getApprovalList(xusername);
 
         }
 
