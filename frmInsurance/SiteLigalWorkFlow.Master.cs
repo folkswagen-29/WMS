@@ -19,18 +19,26 @@ namespace onlineLegalWF
 
         private void SetDataLogin() 
         {
-            var user_login = Session["user_login"].ToString();
-            var user_bu = Session["bu"].ToString();
-            if (!string.IsNullOrEmpty(user_login))
+            if (Session["user_login"] != null) 
             {
-                login_name.Text = user_login;
-                login_bu.Text = user_bu;
+                var user_login = Session["user_login"].ToString();
+                var user_bu = Session["bu"].ToString();
+                if (!string.IsNullOrEmpty(user_login))
+                {
+                    login_name.Text = user_login;
+                    login_bu.Text = user_bu;
+                }
             }
+            else 
+            {
+                Response.Redirect("/legalPortal/loginPage.aspx");
+            }
+            
         }
 
         protected void btn_logout_Click(object sender, EventArgs e)
         {
-            //Session.Clear();
+            Session.Clear();
             Response.Redirect("/legalPortal/loginPage.aspx");
         }
     }
