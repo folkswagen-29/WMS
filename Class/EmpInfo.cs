@@ -14,6 +14,7 @@ namespace onlineLegalWF.Class
         public DbControllerBase zdb = new DbControllerBase();
         //public string zconnstr = ConfigurationSettings.AppSettings["BMPDB"].ToString();
         public string zconnstr = ConfigurationManager.AppSettings["RPADB"].ToString();
+        public string zconnstrbpm = ConfigurationManager.AppSettings["BMPDB"].ToString();
         #endregion
        public EmpModel getEmpInfo(string xuser_login)
         {
@@ -21,6 +22,7 @@ namespace onlineLegalWF.Class
             // get query 
 
             string sql = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + xuser_login + "' ";
+            string sqlbpm = "select * from li_user where user_login = '" + xuser_login + "' ";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
 
             if (dt.Rows.Count > 0)
