@@ -161,8 +161,7 @@
             <td class="auto-style8">&nbsp;</td>
             <td class="auto-style10">&nbsp;</td>
             <td colspan="2">
-
-                <%--        <asp:LinkButton ID="lbtn8" runat="server" Width="150px" Font-Bold="True" ForeColor="#333333">Legal Request - Commercial Registration</asp:LinkButton>--%>
+                <asp:LinkButton ID="lbtn8" runat="server" Width="150px" Font-Bold="True" ForeColor="#333333">Legal Request - Commercial Registration</asp:LinkButton>
             </td>
         </tr>
         <tr>
@@ -170,8 +169,7 @@
             <td class="auto-style10">&nbsp;</td>
             <td class="auto-style5">&nbsp;</td>
             <td class="auto-style16">
-
-                <%--<asp:LinkButton ID="lbtn9" runat="server" ForeColor="White">Commercial Registration Request</asp:LinkButton>--%>
+                <asp:LinkButton ID="lbtn9" runat="server" ForeColor="White" OnClick="lbtn9_Click">Commercial Registration Request</asp:LinkButton>
             </td>
         </tr>
         <tr>
@@ -179,8 +177,7 @@
             <td class="auto-style12"></td>
             <td class="auto-style13"></td>
             <td class="auto-style14">
-
-                <%--        <asp:LinkButton ID="lbtn10" runat="server" ForeColor="White">Work Assignment</asp:LinkButton>--%>
+                <asp:LinkButton ID="lbtn10" runat="server" ForeColor="White">Work Assignment</asp:LinkButton>
             </td>
         </tr>
         <tr>
@@ -188,8 +185,7 @@
             <td class="auto-style10">&nbsp;</td>
             <td class="auto-style5">&nbsp;</td>
             <td class="auto-style16">
-
-                <%--        <asp:LinkButton ID="lbtn11" runat="server" ForeColor="White">Tracking Report</asp:LinkButton>--%>
+                <asp:LinkButton ID="lbtn11" runat="server" ForeColor="White">Tracking Report</asp:LinkButton>
             </td>
         </tr>
         <tr>
@@ -202,8 +198,7 @@
             <td class="auto-style8">&nbsp;</td>
             <td class="auto-style10">&nbsp;</td>
             <td colspan="2">
-
-                <%--<asp:LinkButton ID="lbtn12" runat="server" Width="150px" Font-Bold="True" ForeColor="#333333">Legal Request - Permit</asp:LinkButton>--%>
+                <asp:LinkButton ID="lbtn12" runat="server" Width="150px" Font-Bold="True" ForeColor="#333333">Legal Request - Permit</asp:LinkButton>
             </td>
         </tr>
         <tr>
@@ -211,8 +206,7 @@
             <td class="auto-style10">&nbsp;</td>
             <td class="auto-style5">&nbsp;</td>
             <td class="auto-style16">
-
-                <%--<asp:LinkButton ID="lbtn13" runat="server" ForeColor="White">Permit Request</asp:LinkButton>--%>
+                <asp:LinkButton ID="lbtn13" runat="server" ForeColor="White">Permit Request</asp:LinkButton>
             </td>
         </tr>
         <tr>
@@ -220,8 +214,7 @@
             <td class="auto-style10">&nbsp;</td>
             <td class="auto-style5">&nbsp;</td>
             <td class="auto-style16">
-
-                <%--<asp:LinkButton ID="lbtn14" runat="server" ForeColor="White">Work Assignment</asp:LinkButton>--%>
+                <asp:LinkButton ID="lbtn14" runat="server" ForeColor="White">Work Assignment</asp:LinkButton>
             </td>
         </tr>
         <tr>
@@ -229,8 +222,7 @@
             <td class="auto-style10">&nbsp;</td>
             <td class="auto-style5">&nbsp;</td>
             <td class="auto-style16">
-
-                <%--<asp:LinkButton ID="lbtn15" runat="server" ForeColor="White">Tracking Report</asp:LinkButton>--%>
+                <asp:LinkButton ID="lbtn15" runat="server" ForeColor="White">Tracking Report</asp:LinkButton>
             </td>
         </tr>
         <tr>
@@ -243,33 +235,32 @@
             <td class="auto-style8">&nbsp;</td>
             <td class="auto-style10">&nbsp;</td>
             <td colspan="2">
-
-                <%--<asp:LinkButton ID="lbtn16" runat="server" Width="150px" Font-Bold="True" ForeColor="#333333">Legal Request - Ligitation</asp:LinkButton>--%>
+                <asp:LinkButton ID="lbtn16" runat="server" Width="150px" Font-Bold="True" ForeColor="#333333">Legal Request - Ligitation</asp:LinkButton>
             </td>
         </tr>
         <tr>
-            <td class="auto-style7"></td>
-            <td class="auto-style9">&nbsp;</td>
-            <td class="auto-style6"></td>
-            <td class="auto-style14"></td>
+            <td class="auto-style8">&nbsp;</td>
+            <td class="auto-style10">&nbsp;</td>
+            <td class="auto-style5">&nbsp;</td>
+            <td class="auto-style16">
+                <asp:LinkButton ID="LinkButton4" runat="server" ForeColor="White">Ligitation Request</asp:LinkButton>
+            </td>
         </tr>
         <tr>
             <td class="auto-style8">&nbsp;</td>
             <td class="auto-style10">&nbsp;</td>
             <td class="auto-style5">&nbsp;</td>
-            <td class="auto-style16">&nbsp;</td>
+            <td class="auto-style16">
+                <asp:LinkButton ID="LinkButton5" runat="server" ForeColor="White">Work Assignment</asp:LinkButton>
+            </td>
         </tr>
         <tr>
             <td class="auto-style8">&nbsp;</td>
             <td class="auto-style10">&nbsp;</td>
             <td class="auto-style5">&nbsp;</td>
-            <td class="auto-style16">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style8">&nbsp;</td>
-            <td class="auto-style10">&nbsp;</td>
-            <td class="auto-style5">&nbsp;</td>
-            <td class="auto-style16">&nbsp;</td>
+            <td class="auto-style16">
+                <asp:LinkButton ID="LinkButton6" runat="server" ForeColor="White">Tracking Report</asp:LinkButton>
+            </td>
         </tr>
         <tr>
             <td class="auto-style8">&nbsp;</td>

@@ -202,6 +202,8 @@
     <Content Include="test\testCSS1.aspx" />
     <Content Include="test\testReplaceDoc1.aspx" />
     <Content Include="test\testReplaceDoc2.aspx" />
+    <Content Include="userControls\ucAttachment.ascx" />
+    <Content Include="userControls\ucCommentlog.ascx" />
     <Content Include="userControls\ucHeader.ascx" />
     <Content Include="userControls\ucMenu.ascx" />
     <Content Include="userControls\ucMenulist.ascx" />
@@ -393,6 +395,20 @@
     </Compile>
     <Compile Include="test\testReplaceDoc2.aspx.designer.cs">
       <DependentUpon>testReplaceDoc2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="userControls\ucAttachment.ascx.cs">
+      <DependentUpon>ucAttachment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userControls\ucAttachment.ascx.designer.cs">
+      <DependentUpon>ucAttachment.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="userControls\ucCommentlog.ascx.cs">
+      <DependentUpon>ucCommentlog.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userControls\ucCommentlog.ascx.designer.cs">
+      <DependentUpon>ucCommentlog.ascx</DependentUpon>
     </Compile>
     <Compile Include="userControls\ucHeader.ascx.cs">
       <DependentUpon>ucHeader.ascx</DependentUpon>
