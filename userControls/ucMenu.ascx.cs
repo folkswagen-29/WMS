@@ -58,5 +58,25 @@ namespace onlineLegalWF.userControls
         {
             Response.Redirect("/frmCommregis/CommRegisWorkAssign.aspx");
         }
+
+        protected void lbtn13_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/frmPermit/PermitLicense.aspx");
+        }
+
+        protected void LinkButton7_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/frmPermit/PermitSignageTax.aspx");
+        }
+
+        protected void LinkButton8_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/frmPermit/PermitLandTax.aspx");
+        }
+
+        protected void LinkButton9_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/frmPermit/PermitTrademark.aspx");
+        }
     }
 }

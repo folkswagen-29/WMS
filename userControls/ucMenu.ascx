@@ -206,7 +206,31 @@
             <td class="auto-style10">&nbsp;</td>
             <td class="auto-style5">&nbsp;</td>
             <td class="auto-style16">
-                <asp:LinkButton ID="lbtn13" runat="server" ForeColor="White">Permit Request</asp:LinkButton>
+                <asp:LinkButton ID="lbtn13" runat="server" ForeColor="White" OnClick="lbtn13_Click">Permit License Request</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td class="auto-style8">&nbsp;</td>
+            <td class="auto-style10">&nbsp;</td>
+            <td class="auto-style5">&nbsp;</td>
+            <td class="auto-style16">
+                <asp:LinkButton ID="LinkButton7" runat="server" ForeColor="White" OnClick="LinkButton7_Click">Permit Signage TAX Request</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td class="auto-style8">&nbsp;</td>
+            <td class="auto-style10">&nbsp;</td>
+            <td class="auto-style5">&nbsp;</td>
+            <td class="auto-style16">
+                <asp:LinkButton ID="LinkButton8" runat="server" ForeColor="White" OnClick="LinkButton8_Click">Permit Land and Building Tax Request</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td class="auto-style8">&nbsp;</td>
+            <td class="auto-style10">&nbsp;</td>
+            <td class="auto-style5">&nbsp;</td>
+            <td class="auto-style16">
+                <asp:LinkButton ID="LinkButton9" runat="server" ForeColor="White" OnClick="LinkButton9_Click">Permit Trademarks Request</asp:LinkButton>
             </td>
         </tr>
         <tr>

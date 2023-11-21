@@ -145,6 +145,10 @@
     <Content Include="frmInsurance\InsuranceRequestEdit.aspx" />
     <Content Include="frmInsurance\InsuranceRequestList.aspx" />
     <Content Include="frmInsurance\InsuranceTrackingRenew.aspx" />
+    <Content Include="frmPermit\PermitLandTax.aspx" />
+    <Content Include="frmPermit\PermitLicense.aspx" />
+    <Content Include="frmPermit\PermitSignageTax.aspx" />
+    <Content Include="frmPermit\PermitTrademark.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -338,6 +342,34 @@
     <Compile Include="frmInsurance\InsuranceTrackingRenew.aspx.designer.cs">
       <DependentUpon>InsuranceTrackingRenew.aspx</DependentUpon>
     </Compile>
+    <Compile Include="frmPermit\PermitLandTax.aspx.cs">
+      <DependentUpon>PermitLandTax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmPermit\PermitLandTax.aspx.designer.cs">
+      <DependentUpon>PermitLandTax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmPermit\PermitLicense.aspx.cs">
+      <DependentUpon>PermitLicense.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmPermit\PermitLicense.aspx.designer.cs">
+      <DependentUpon>PermitLicense.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmPermit\PermitSignageTax.aspx.cs">
+      <DependentUpon>PermitSignageTax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmPermit\PermitSignageTax.aspx.designer.cs">
+      <DependentUpon>PermitSignageTax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmPermit\PermitTrademark.aspx.cs">
+      <DependentUpon>PermitTrademark.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmPermit\PermitTrademark.aspx.designer.cs">
+      <DependentUpon>PermitTrademark.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -466,7 +498,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
     <Folder Include="frmLitigation\" />
-    <Folder Include="frmPermit\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
