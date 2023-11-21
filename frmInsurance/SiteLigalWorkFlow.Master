@@ -9,6 +9,7 @@
 <head runat="server">
     <title>Legal Workflow</title>
     <link href="../StyleSheet/CustomStyle.css" rel="stylesheet" type="text/css" />
+    <%--<link href="../Content/bootstrap.css" rel="stylesheet" />--%>
     <style type="text/css">
         .bg_banner_img {
             width: 255px;

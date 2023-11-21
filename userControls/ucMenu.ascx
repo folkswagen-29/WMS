@@ -177,7 +177,7 @@
             <td class="auto-style12"></td>
             <td class="auto-style13"></td>
             <td class="auto-style14">
-                <asp:LinkButton ID="lbtn10" runat="server" ForeColor="White">Work Assignment</asp:LinkButton>
+                <asp:LinkButton ID="lbtn10" runat="server" ForeColor="White" OnClick="lbtn10_Click">Work Assignment</asp:LinkButton>
             </td>
         </tr>
         <tr>

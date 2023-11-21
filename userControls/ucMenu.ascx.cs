@@ -53,5 +53,10 @@ namespace onlineLegalWF.userControls
         {
             Response.Redirect("/frmCommregis/CommRegisRequest.aspx");
         }
+
+        protected void lbtn10_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/frmCommregis/CommRegisWorkAssign.aspx");
+        }
     }
 }

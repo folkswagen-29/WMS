@@ -133,6 +133,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="frmCommregis\CommRegisRequest.aspx" />
+    <Content Include="frmCommregis\CommRegisWorkAssign.aspx" />
     <Content Include="frmInsurance\InsuranceApprove.aspx" />
     <Content Include="frmInsurance\InsuranceClaim.aspx" />
     <Content Include="frmInsurance\InsuranceClaimEdit.aspx" />
@@ -208,6 +209,7 @@
     <Content Include="userControls\ucMenu.ascx" />
     <Content Include="userControls\ucMenulist.ascx" />
     <Content Include="userControls\ucPersonSign.ascx" />
+    <Content Include="userControls\ucWorkflowlist.ascx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -251,6 +253,13 @@
     </Compile>
     <Compile Include="frmCommregis\CommRegisRequest.aspx.designer.cs">
       <DependentUpon>CommRegisRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCommregis\CommRegisWorkAssign.aspx.cs">
+      <DependentUpon>CommRegisWorkAssign.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCommregis\CommRegisWorkAssign.aspx.designer.cs">
+      <DependentUpon>CommRegisWorkAssign.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmInsurance\InsuranceApprove.aspx.cs">
       <DependentUpon>InsuranceApprove.aspx</DependentUpon>
@@ -437,6 +446,13 @@
     </Compile>
     <Compile Include="userControls\ucPersonSign.ascx.designer.cs">
       <DependentUpon>ucPersonSign.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="userControls\ucWorkflowlist.ascx.cs">
+      <DependentUpon>ucWorkflowlist.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userControls\ucWorkflowlist.ascx.designer.cs">
+      <DependentUpon>ucWorkflowlist.ascx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

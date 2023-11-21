@@ -477,7 +477,7 @@
                             <td>&nbsp;</td>
                         </tr>
                     </table>
-                    <table id="section4">
+                    <table id="section4" style="display: none;">
                         <tr>
                             <td class="cell_content_20PC_TR">
                                 <label class="Label_md">วัตถุประสงค์ที่แก้ไขเพิ่มเติม</label>
@@ -488,7 +488,7 @@
                             <td>&nbsp;</td>
                         </tr>
                     </table>
-                    <table id="section5">
+                    <table id="section5" style="display: none;">
                         <tr>
                             <td class="cell_content_20PC_TR">
                                 <label class="Label_md">ข้อบังคับ</label>
@@ -508,7 +508,7 @@
                             <td>&nbsp;</td>
                         </tr>
                     </table>
-                    <table id="section6">
+                    <table id="section6" style="display: none;">
                         <tr>
                             <td class="cell_content_20PC_TR">
                                 <label class="Label_md">รายชื่อกรรมการเข้า </label>
@@ -665,30 +665,30 @@
                             </td>
                             <td>&nbsp;</td>
                         </tr>
-<tr>
-    <td class="cell_content_20PC_TR">
-        <label class="Label_md">รหัสไปรษณีย์ </label>
-    </td>
-    <td>&nbsp;</td>
-    <td class="cell_content_80PC_TL" style="padding: 0;">
-        <table>
-            <tr>
-                <td class="cell_content_PC_TL">
-                    <asp:TextBox ID="TextBox35" runat="server" CssClass="Text_150"></asp:TextBox>
-                </td>
-                <td style="width: 55px; min-width: 55px; text-align: right; vertical-align: top;">
-                    <label class="Label_md">เบอร์โทร </label>
-                </td>
-                <td class="cell_content_PC_TL">
-                    <asp:TextBox ID="TextBox36" runat="server" CssClass="Text_150"></asp:TextBox>
-                </td>
-            </tr>
-        </table>
-    </td>
-    <td>&nbsp;</td>
-</tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">รหัสไปรษณีย์ </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL" style="padding: 0;">
+                                <table>
+                                    <tr>
+                                        <td class="cell_content_PC_TL">
+                                            <asp:TextBox ID="TextBox35" runat="server" CssClass="Text_150"></asp:TextBox>
+                                        </td>
+                                        <td style="width: 55px; min-width: 55px; text-align: right; vertical-align: top;">
+                                            <label class="Label_md">เบอร์โทร </label>
+                                        </td>
+                                        <td class="cell_content_PC_TL">
+                                            <asp:TextBox ID="TextBox36" runat="server" CssClass="Text_150"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
                     </table>
-                    <table id="section7">
+                    <table id="section7" style="display: none;">
                         <tr>
                             <td class="cell_content_20PC_TR">
                                 <label class="Label_md">ที่ตั้งสำนักงานใหญ่</label>
