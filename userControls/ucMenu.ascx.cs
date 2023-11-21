@@ -78,5 +78,10 @@ namespace onlineLegalWF.userControls
         {
             Response.Redirect("/frmPermit/PermitTrademark.aspx");
         }
+
+        protected void lbtn14_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/frmPermit/PermitWorkAssign.aspx");
+        }
     }
 }

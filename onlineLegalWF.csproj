@@ -149,6 +149,7 @@
     <Content Include="frmPermit\PermitLicense.aspx" />
     <Content Include="frmPermit\PermitSignageTax.aspx" />
     <Content Include="frmPermit\PermitTrademark.aspx" />
+    <Content Include="frmPermit\PermitWorkAssign.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -369,6 +370,13 @@
     </Compile>
     <Compile Include="frmPermit\PermitTrademark.aspx.designer.cs">
       <DependentUpon>PermitTrademark.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmPermit\PermitWorkAssign.aspx.cs">
+      <DependentUpon>PermitWorkAssign.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmPermit\PermitWorkAssign.aspx.designer.cs">
+      <DependentUpon>PermitWorkAssign.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
