@@ -145,6 +145,7 @@
     <Content Include="frmInsurance\InsuranceRequestEdit.aspx" />
     <Content Include="frmInsurance\InsuranceRequestList.aspx" />
     <Content Include="frmInsurance\InsuranceTrackingRenew.aspx" />
+    <Content Include="frmLitigation\LitigationRequest.aspx" />
     <Content Include="frmPermit\PermitLandTax.aspx" />
     <Content Include="frmPermit\PermitLicense.aspx" />
     <Content Include="frmPermit\PermitSignageTax.aspx" />
@@ -343,6 +344,13 @@
     <Compile Include="frmInsurance\InsuranceTrackingRenew.aspx.designer.cs">
       <DependentUpon>InsuranceTrackingRenew.aspx</DependentUpon>
     </Compile>
+    <Compile Include="frmLitigation\LitigationRequest.aspx.cs">
+      <DependentUpon>LitigationRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmLitigation\LitigationRequest.aspx.designer.cs">
+      <DependentUpon>LitigationRequest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="frmPermit\PermitLandTax.aspx.cs">
       <DependentUpon>PermitLandTax.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -505,7 +513,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
-    <Folder Include="frmLitigation\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
