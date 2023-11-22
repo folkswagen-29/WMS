@@ -513,6 +513,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
+    <Folder Include="Temp\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

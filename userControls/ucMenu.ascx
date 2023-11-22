@@ -267,7 +267,7 @@
             <td class="auto-style10">&nbsp;</td>
             <td class="auto-style5">&nbsp;</td>
             <td class="auto-style16">
-                <asp:LinkButton ID="LinkButton4" runat="server" ForeColor="White">Ligitation Request</asp:LinkButton>
+                <asp:LinkButton ID="LinkButton4" runat="server" ForeColor="White" OnClick="LinkButton4_Click">Ligitation Request</asp:LinkButton>
             </td>
         </tr>
         <tr>
