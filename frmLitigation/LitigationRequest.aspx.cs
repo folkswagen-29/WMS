@@ -88,7 +88,8 @@ namespace onlineLegalWF.frmLitigation
                 //close the connection  
                 conn.Close();
 
-                System.IO.File.Delete(path);
+                //delete file inside the Temp of the server 
+                File.Delete(path);
             }
                 
         }
