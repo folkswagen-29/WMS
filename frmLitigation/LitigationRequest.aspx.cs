@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
+using System.Drawing;
 
 namespace onlineLegalWF.frmLitigation
 {
@@ -65,7 +66,8 @@ namespace onlineLegalWF.frmLitigation
                     ConStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
                 }
                 //making query  
-                string query = "SELECT * FROM [Sheet1$]";
+                //string query = "SELECT * FROM [Sheet1$]";
+                string query = "";
                 //Providing connection  
                 OleDbConnection conn = new OleDbConnection(ConStr);
                 //checking that connection state is closed or not if closed the   
@@ -74,6 +76,12 @@ namespace onlineLegalWF.frmLitigation
                 {
                     conn.Open();
                 }
+
+                //get sheetname
+                DataTable dtExcelSheetName = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                string getExcelSheetName = dtExcelSheetName.Rows[0]["Table_Name"].ToString();
+                query = "SELECT * FROM [" + getExcelSheetName + "]";
+
                 //create command object  
                 OleDbCommand cmd = new OleDbCommand(query, conn);
                 // create a data adapter and get the data into dataadapter  
