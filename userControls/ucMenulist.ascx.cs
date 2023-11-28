@@ -1,4 +1,5 @@
-﻿using System;
+﻿using onlineLegalWF.frmInsurance;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -67,13 +68,17 @@ namespace onlineLegalWF.userControls
         protected void gvA_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-            string xurl = "";
+            //string xurl = "";
             if (e.CommandName == "openprogram")
             {
-                var rowitem = e.CommandArgument;
-                //var xmenu_code = ((Label)e.FindControl("gvAlblMenuCode")).Text;
-                //var xurl = ((Label)gvA.Rows[i].FindControl("gvAlblMenuUrl")).Text;
-                Response.Redirect(xurl); 
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                GridView grid = sender as GridView;
+
+                //var xmenu_code = ((Label)grid.Rows[index].FindControl("gvAlblMenuCode")).Text;
+                var xurl = ((Label)grid.Rows[index].FindControl("gvAlblMenuUrl")).Text;
+                Response.Redirect(xurl);
+
             }
         }
     }
