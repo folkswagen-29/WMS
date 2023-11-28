@@ -259,7 +259,7 @@
             <td class="auto-style8">&nbsp;</td>
             <td class="auto-style10">&nbsp;</td>
             <td colspan="2">
-                <asp:LinkButton ID="lbtn16" runat="server" Width="150px" Font-Bold="True" ForeColor="#333333">Legal Request - Ligitation</asp:LinkButton>
+                <asp:LinkButton ID="lbtn16" runat="server" Width="150px" Font-Bold="True" ForeColor="#333333">Legal Request - Litigation</asp:LinkButton>
             </td>
         </tr>
         <tr>
@@ -267,7 +267,7 @@
             <td class="auto-style10">&nbsp;</td>
             <td class="auto-style5">&nbsp;</td>
             <td class="auto-style16">
-                <asp:LinkButton ID="LinkButton4" runat="server" ForeColor="White" OnClick="LinkButton4_Click">Ligitation Request</asp:LinkButton>
+                <asp:LinkButton ID="LinkButton4" runat="server" ForeColor="White" OnClick="LinkButton4_Click">Litigation Request</asp:LinkButton>
             </td>
         </tr>
         <tr>

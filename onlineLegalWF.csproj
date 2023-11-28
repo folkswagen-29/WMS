@@ -146,6 +146,7 @@
     <Content Include="frmInsurance\InsuranceRequestList.aspx" />
     <Content Include="frmInsurance\InsuranceTrackingRenew.aspx" />
     <Content Include="frmLitigation\LitigationRequest.aspx" />
+    <Content Include="frmLitigation\LitigationRequestEdit.aspx" />
     <Content Include="frmPermit\PermitLandTax.aspx" />
     <Content Include="frmPermit\PermitLicense.aspx" />
     <Content Include="frmPermit\PermitSignageTax.aspx" />
@@ -350,6 +351,13 @@
     </Compile>
     <Compile Include="frmLitigation\LitigationRequest.aspx.designer.cs">
       <DependentUpon>LitigationRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmLitigation\LitigationRequestEdit.aspx.cs">
+      <DependentUpon>LitigationRequestEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmLitigation\LitigationRequestEdit.aspx.designer.cs">
+      <DependentUpon>LitigationRequestEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmPermit\PermitLandTax.aspx.cs">
       <DependentUpon>PermitLandTax.aspx</DependentUpon>

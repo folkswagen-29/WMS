@@ -19,13 +19,11 @@
                                 <label class="Label_md">From : </label>
                             </td>
                             <td class="cell_content_80PC_TL">
-                                <asp:Label ID="from" runat="server" CssClass="Label_md"></asp:Label>&nbsp;
+                                <asp:Label ID="from" runat="server" CssClass="Label_md"></asp:Label>
                             <label class="Label_md">Document No. : </label>
-                                &nbsp;
-                            <asp:Label ID="doc_no" runat="server" CssClass="Label_md"></asp:Label>&nbsp;
+                            <asp:Label ID="doc_no" runat="server" CssClass="Label_md"></asp:Label>
                             <label class="Label_md">Submitted Date : </label>
-                                &nbsp;
-                            <asp:Label ID="req_date" runat="server" CssClass="Label_md"></asp:Label>&nbsp;
+                            <asp:Label ID="req_date" runat="server" CssClass="Label_md"></asp:Label>
                             </td>
                         </tr>
                         <tr>
