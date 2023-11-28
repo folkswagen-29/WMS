@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="testCSS1.aspx.cs" Inherits="onlineLegalWF.test.testCSS1" %>
 
+<%@ Register src="../userControls/ucMenulist.ascx" tagname="ucMenulist" tagprefix="uc1" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,6 +15,20 @@
     <style type="text/css">
         .auto-style1 {
             width: 201px;
+        }
+        .auto-style2 {
+            min-width: 40%;
+            border-left-style: none;
+            border-left-color: inherit;
+            border-left-width: 0px;
+            border-right-color: transparent;
+            border-right-width: 0px;
+            border-top-style: none;
+            border-top-color: inherit;
+            border-top-width: 0px;
+            border-bottom-color: transparent;
+            border-bottom-width: 0px;
+            background-color: transparent;
         }
     </style>
     </head>
@@ -94,6 +110,14 @@
                      <asp:Panel ID="Panel3" runat="server" CssClass="div_90" height="400px">
 
                     </asp:Panel>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style2" colspan="2">
+                     <uc1:ucMenulist ID="ucMenulist1" runat="server" />
+                     <br />
+                     <br />
+                     <br />
                 </td>
             </tr>
         </table>

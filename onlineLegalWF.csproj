@@ -168,7 +168,7 @@
     <Content Include="images\icon_comment.png" />
     <Content Include="images\icon_delete.png" />
     <Content Include="images\icon_edit.png" />
-    <Content Include="images\icon_mengroup.png" />
+    <Content Include="images\icon_menugroup.png" />
     <Content Include="images\icon_menuitem.png" />
     <Content Include="images\icon_menulist.png" />
     <Content Include="images\icon_search.png" />

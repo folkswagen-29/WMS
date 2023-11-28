@@ -11,7 +11,14 @@ namespace onlineLegalWF.test
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack) 
+            {
+                ini_objects(); 
+            }
+        }
+        private void ini_objects()
+        {
+            ucMenulist1.bind_menu(""); 
         }
     }
 }
