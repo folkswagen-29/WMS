@@ -177,39 +177,21 @@ namespace onlineLegalWF.frmLitigation
         protected global::System.Web.UI.WebControls.TextBox ref_contact_no;
 
         /// <summary>
-        /// btn_save control.
+        /// btn_update control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_save;
+        protected global::System.Web.UI.WebControls.Button btn_update;
 
         /// <summary>
-        /// btn_submit control.
+        /// btn_preview control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_submit;
-
-        /// <summary>
-        /// btn_gendocumnt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_gendocumnt;
-
-        /// <summary>
-        /// btn_cancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_cancel;
+        protected global::System.Web.UI.WebControls.Button btn_preview;
     }
 }

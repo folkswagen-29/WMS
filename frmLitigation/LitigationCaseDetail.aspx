@@ -203,10 +203,8 @@
 
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
-                <asp:Button ID="btn_save" runat="server" CssClass="btn_normal_silver" Text="Save" />
-                <asp:Button ID="btn_submit" runat="server" CssClass="btn_normal_silver" Text="Submit" />
-                <asp:Button ID="btn_gendocumnt" runat="server" CssClass="btn_normal_silver" Text="Preview" />
-                <asp:Button ID="btn_cancel" runat="server" CssClass="btn_normal_silver" Text="Cancel" />
+                <asp:Button ID="btn_update" runat="server" CssClass="btn_normal_silver" Text="Update" />
+                <asp:Button ID="btn_preview" runat="server" CssClass="btn_normal_silver" Text="Preview" />
             </td>
 
         </tr>
