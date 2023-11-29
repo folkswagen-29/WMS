@@ -46,7 +46,9 @@ namespace onlineLegalWF.userControls
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
             if (e.CommandName == "expandmenu") 
             {
+                
                 int i = System.Convert.ToInt32(e.CommandArgument);
+                //gv.Rows[i].FindControl("gvlbtnMenu").Focus();
                 var xmenu_group_name = ((Label)gv.Rows[i].FindControl("gvlblMenuGroupName")).Text;
                 var gvA = ((GridView)gv.Rows[i].FindControl("gvA"));
                 string sql = @"

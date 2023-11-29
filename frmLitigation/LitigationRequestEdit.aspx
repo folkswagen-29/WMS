@@ -176,18 +176,20 @@
                                 </table>
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+
+                                <asp:Button ID="btn_update" runat="server" Text="Update" CssClass="btn_normal_silver" />
+
+                            </td>
+                        </tr>
                     </table>
                 </asp:Panel>
             </td>
-
         </tr>
     </table>
-</asp:Content>
-<asp:Content ID="Content2" runat="server" contentplaceholderid="head">
-    <style type="text/css">
-        .auto-style17 {
-            width: 77px;
-        }
-    </style>
 </asp:Content>
 
