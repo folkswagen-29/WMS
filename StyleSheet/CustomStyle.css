@@ -186,6 +186,11 @@ button.close {
 }
 /******************************/
 
+.menu {
+    background-color: lightslategray;
+    padding: 5px 0px;
+}
+
 .banner-normal {
     color: black;
     background-color: darkcyan;

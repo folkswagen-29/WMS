@@ -1,6 +1,8 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteLigalWorkFlow.master.cs" Inherits="onlineLegalWF.SiteLigalWorkFlow" %>
 
-<%@ Register Src="~/userControls/ucMenu.ascx" TagPrefix="uc1" TagName="ucMenu" %>
+<%--<%@ Register Src="~/userControls/ucMenu.ascx" TagPrefix="uc1" TagName="ucMenu" %>--%>
+<%@ Register Src="~/userControls/ucMenulist.ascx" TagPrefix="uc1" TagName="ucMenulist" %>
+
 
 
 <!DOCTYPE html>
@@ -56,7 +58,8 @@
                                         </tr>
                                         <tr>
                                             <td style="vertical-align: top; text-align: left;">
-                                                <uc1:ucMenu runat="server" ID="ucMenu01" />
+                                                <uc1:ucMenulist runat="server" ID="ucMenulist" />
+                                                <%--<uc1:ucMenu runat="server" ID="ucMenu01" />--%>
                                             </td>
                                         </tr>
                                     </table>

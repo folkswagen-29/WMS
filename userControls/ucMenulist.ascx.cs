@@ -21,7 +21,7 @@ namespace onlineLegalWF.userControls
         {
             if (!IsPostBack) 
             {
-            
+                bind_menu("");
             }
         }
         public void bind_menu(string userrole)

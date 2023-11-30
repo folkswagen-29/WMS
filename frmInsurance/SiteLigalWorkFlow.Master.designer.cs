@@ -60,13 +60,13 @@ namespace onlineLegalWF
         protected global::System.Web.UI.WebControls.Button btn_logout;
 
         /// <summary>
-        /// ucMenu01 control.
+        /// ucMenulist control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucMenu ucMenu01;
+        protected global::onlineLegalWF.userControls.ucMenulist ucMenulist;
 
         /// <summary>
         /// ContentPlaceHolder1 control.
