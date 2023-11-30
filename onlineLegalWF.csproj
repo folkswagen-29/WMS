@@ -213,6 +213,7 @@
     <Content Include="test\testCSS1.aspx" />
     <Content Include="test\testReplaceDoc1.aspx" />
     <Content Include="test\testReplaceDoc2.aspx" />
+    <Content Include="test\testuploadgridview.aspx" />
     <Content Include="userControls\ucAttachment.ascx" />
     <Content Include="userControls\ucCommentlog.ascx" />
     <Content Include="userControls\ucHeader.ascx" />
@@ -484,6 +485,13 @@
     </Compile>
     <Compile Include="test\testReplaceDoc2.aspx.designer.cs">
       <DependentUpon>testReplaceDoc2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="test\testuploadgridview.aspx.cs">
+      <DependentUpon>testuploadgridview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test\testuploadgridview.aspx.designer.cs">
+      <DependentUpon>testuploadgridview.aspx</DependentUpon>
     </Compile>
     <Compile Include="userControls\ucAttachment.ascx.cs">
       <DependentUpon>ucAttachment.ascx</DependentUpon>
