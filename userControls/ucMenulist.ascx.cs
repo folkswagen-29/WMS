@@ -62,9 +62,19 @@ namespace onlineLegalWF.userControls
                 gvA.DataBind(); 
             }
         }
-        private void bind_gvA(DataSet ds)
+        private void bind_gvA_menu(string menu_group_name, int length)
         {
+           // var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+           // var gvA = ((GridView)gv.Rows[length].FindControl("gvA"));
+           // string sql = @"
+           //select  menu_code, menu_name, ( '" + host_url + @"' + menu_icon_filename) as menu_icon_filename, menu_url , row_sort
 
+           // from m_portal_menu 
+           // where menu_group_name = '" + menu_group_name + @"' and menu_url <> '' 
+           // order by row_sort";
+           // var ds = zdb.ExecSql_DataSet(sql, zconnstr);
+           // gvA.DataSource = ds;
+           // gvA.DataBind();
         }
         //gvA_RowCommand
         protected void gvA_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -77,8 +87,9 @@ namespace onlineLegalWF.userControls
 
                 GridView grid = sender as GridView;
 
-                //var xmenu_code = ((Label)grid.Rows[index].FindControl("gvAlblMenuCode")).Text;
+                //var xmenu_code = ((Label)grid.Rows[index].FindControl("gvAlblMenuGroupName")).Text;
                 var xurl = ((Label)grid.Rows[index].FindControl("gvAlblMenuUrl")).Text;
+                Session["group_menu"] = ((Label)grid.Rows[index].FindControl("gvAlblMenuGroupName")).Text;
                 Response.Redirect(xurl);
 
             }

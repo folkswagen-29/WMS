@@ -46,7 +46,9 @@ namespace onlineLegalWF.test
         protected void DownloadData(object sender, EventArgs e)
         {
             string filePath = (sender as LinkButton).CommandArgument;
-            Response.ContentType = ContentType;
+            //Response.ContentType = ContentType;
+            var mimeType = MimeMapping.GetMimeMapping(Path.GetFileName(filePath));
+            Response.ContentType = mimeType;
             Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
             Response.WriteFile(filePath);
             Response.End();
