@@ -17,6 +17,7 @@ namespace onlineLegalWF.frmInsurance
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BMPDB"].ToString();
+        public WFFunctions zwf = new WFFunctions();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -60,6 +61,8 @@ namespace onlineLegalWF.frmInsurance
                 background.Text = res.Rows[0]["reason"].ToString();
                 ddl_bu.SelectedValue = res.Rows[0]["bu_code"].ToString();
                 prop_ins_name.Text = res.Rows[0]["property_insured_name"].ToString();
+                lblPID.Text = res.Rows[0]["process_id"].ToString();
+                hid_PID.Value = res.Rows[0]["process_id"].ToString();
             }
 
             var dt = iniDataTable(id);

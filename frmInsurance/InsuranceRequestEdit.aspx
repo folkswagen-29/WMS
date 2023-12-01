@@ -58,7 +58,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:TextBox ID="doc_no" runat="server" CssClass="Text_400"></asp:TextBox>
+                                <asp:Label ID="doc_no" runat="server" CssClass="Label_md"></asp:Label>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -245,8 +245,12 @@
                 <asp:Button ID="btn_gendocumnt" runat="server" CssClass="btn_normal_silver" Text="Preview" OnClick="btn_gendocumnt_Click" />
                 <asp:Button ID="btn_cancel" runat="server" CssClass="btn_normal_silver" Text="Cancel" />
             </td>
-
         </tr>
     </table>
     <asp:HiddenField ID="req_date" runat="server" />
+    <asp:HiddenField ID="hid_PID" runat="server" />
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <asp:Label ID="lblPID" runat="server" CssClass="Label_sm"></asp:Label>
 </asp:Content>

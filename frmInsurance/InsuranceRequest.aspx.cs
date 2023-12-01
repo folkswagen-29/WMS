@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -20,6 +21,7 @@ namespace onlineLegalWF.frmInsurance
         public DbControllerBase zdb = new DbControllerBase();
         //public string zconnstr = ConfigurationSettings.AppSettings["BMPDB"].ToString();
         public string zconnstr = ConfigurationManager.AppSettings["BMPDB"].ToString();
+        public WFFunctions zwf = new WFFunctions();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -51,6 +53,10 @@ namespace onlineLegalWF.frmInsurance
             ddl_bu.DataTextField = "bu_desc";
             ddl_bu.DataValueField = "bu_code";
             ddl_bu.DataBind();
+
+            string pid = zwf.iniPID("LEGALWF");
+            lblPID.Text = pid;
+            hid_PID.Value = pid;
         }
 
         protected void btn_gendocumnt_Click(object sender, EventArgs e)
@@ -507,8 +513,14 @@ namespace onlineLegalWF.frmInsurance
         {
             int ret = 0;
 
+            if (doc_no.Text.Trim() == "")
+            {
+                doc_no.Text = zwf.genDocNo("INS-" + System.DateTime.Now.ToString("yyyy", new CultureInfo("en-US")) + "-", 4);
+            }
+
             var xreq_no = req_no.Text.Trim();
-            var xprocess_id = string.Format("{0:000000}", (GetMaxProcessID() + 1));
+            //var xprocess_id = string.Format("{0:000000}", (GetMaxProcessID() + 1));
+            var xprocess_id = hid_PID.Value.ToString();
             var xtype_req = type_req.SelectedValue.ToString();
             var xcompany = company.Text.Trim();
             var xdoc_no = doc_no.Text.Trim();

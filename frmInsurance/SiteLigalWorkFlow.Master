@@ -71,7 +71,12 @@
                             </tr>
                         </table>
                     </td>
-                    
+                </tr>
+                <tr>
+                    <td style="vertical-align: top; text-align: left; padding: 0px 5px;" class="cell_content_100PC">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
                 </tr>
             </table>
             

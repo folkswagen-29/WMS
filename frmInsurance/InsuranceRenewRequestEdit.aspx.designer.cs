@@ -66,7 +66,7 @@ namespace onlineLegalWF.frmInsurance
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox doc_no;
+        protected global::System.Web.UI.WebControls.Label doc_no;
 
         /// <summary>
         /// ddl_bu control.
@@ -256,5 +256,23 @@ namespace onlineLegalWF.frmInsurance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField req_date;
+
+        /// <summary>
+        /// hid_PID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hid_PID;
+
+        /// <summary>
+        /// lblPID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPID;
     }
 }

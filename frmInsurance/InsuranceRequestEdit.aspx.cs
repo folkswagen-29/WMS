@@ -77,6 +77,8 @@ namespace onlineLegalWF.frmInsurance
                 approve_des.Text = res.Rows[0]["approved_desc"].ToString();
                 ddl_bu.SelectedValue = res.Rows[0]["bu_code"].ToString();
                 prop_ins_name.Text = res.Rows[0]["property_insured_name"].ToString();
+                lblPID.Text = res.Rows[0]["process_id"].ToString();
+                hid_PID.Value = res.Rows[0]["process_id"].ToString();
             }
 
             string sqlPropIns = "select  top 1 * from li_insurance_req_property_insured where req_no='"+ id + "'";

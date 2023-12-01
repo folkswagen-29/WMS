@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.DynamicData;
@@ -18,6 +19,7 @@ namespace onlineLegalWF.frmInsurance
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BMPDB"].ToString();
+        public WFFunctions zwf = new WFFunctions();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,6 +37,10 @@ namespace onlineLegalWF.frmInsurance
             req_no.Text = xreq_no;
 
             iniData();
+
+            string pid = zwf.iniPID("LEGALWF");
+            lblPID.Text = pid;
+            hid_PID.Value = pid;
         }
 
         #region gv1
@@ -605,9 +611,13 @@ namespace onlineLegalWF.frmInsurance
         private int SaveRenewRequest() 
         {
             int ret = 0;
-
+            if (doc_no.Text.Trim() == "")
+            {
+                doc_no.Text = zwf.genDocNo("INS-" + System.DateTime.Now.ToString("yyyy", new CultureInfo("en-US")) + "-", 4);
+            }
             var xreq_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            var xprocess_id = string.Format("{0:000000}", (GetMaxProcessID() + 1));
+            //var xprocess_id = string.Format("{0:000000}", (GetMaxProcessID() + 1));
+            var xprocess_id = hid_PID.Value.ToString();
             var xreq_no = req_no.Text.Trim();
             var xtype_req = type_req.SelectedValue.ToString();
             var xbu_code = ddl_bu.SelectedValue.ToString();

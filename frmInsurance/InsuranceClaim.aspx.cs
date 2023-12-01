@@ -18,6 +18,7 @@ namespace onlineLegalWF.frmInsurance
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BMPDB"].ToString();
+        public WFFunctions zwf = new WFFunctions();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -52,6 +53,10 @@ namespace onlineLegalWF.frmInsurance
 
             string xclaim_no = System.DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
             claim_no.Value = xclaim_no;
+
+            string pid = zwf.iniPID("LEGALWF");
+            lblPID.Text = pid;
+            hid_PID.Value = pid;
         }
 
         protected void btn_save_Click(object sender, EventArgs e)
@@ -72,8 +77,12 @@ namespace onlineLegalWF.frmInsurance
         private int SaveClaim() 
         {
             int ret = 0;
-
-            var xprocess_id = string.Format("{0:000000}", (GetMaxProcessID() + 1));
+            if (doc_no.Text.Trim() == "")
+            {
+                doc_no.Text = zwf.genDocNo("INS-" + System.DateTime.Now.ToString("yyyy", new CultureInfo("en-US")) + "-", 4);
+            }
+            //var xprocess_id = string.Format("{0:000000}", (GetMaxProcessID() + 1));
+            var xprocess_id = hid_PID.Value.ToString();
             var xcompany_name = company_name.Text.Trim();
             var xclaim_no = claim_no.Value;
             var xclaim_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");

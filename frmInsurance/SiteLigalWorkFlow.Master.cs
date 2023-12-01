@@ -1,4 +1,5 @@
-﻿using System;
+﻿using onlineLegalWF.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ namespace onlineLegalWF
 {
     public partial class SiteLigalWorkFlow : System.Web.UI.MasterPage
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) 
@@ -28,6 +30,7 @@ namespace onlineLegalWF
                     login_name.Text = user_login;
                     login_bu.Text = user_bu;
                 }
+                
             }
             else 
             {
