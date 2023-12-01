@@ -2,6 +2,8 @@
 
 <%@ Register src="../userControls/ucMenulist.ascx" tagname="ucMenulist" tagprefix="uc1" %>
 
+<%@ Register src="../userControls/ucAttachment.ascx" tagname="ucAttachment" tagprefix="uc2" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -45,14 +47,24 @@
                           <table class="auto-style1">
                               <tr>
                                   <td class="cell_content_20PC_TR">
+                                      <asp:Label ID="Label4" runat="server" CssClass="Label_md" Text="Document No."></asp:Label>
+                                  </td>
+                                  <td>&nbsp;</td>
+                                  <td class="cell_content_80PC_TL">
+                                      <asp:Label ID="lblDocNo" runat="server" CssClass="Label_md"></asp:Label>
+                                  </td>
+                                  <td>
+                                      &nbsp;</td>
+                              </tr>
+                              <tr>
+                                  <td class="cell_content_20PC_TR">
                                       <asp:Label ID="Label1" runat="server" CssClass="Label_md" Text="Request by"></asp:Label>
                                   </td>
                                   <td>&nbsp;</td>
                                   <td class="cell_content_80PC_TL">
                                       <asp:TextBox ID="txtReqBy" runat="server" CssClass="Text_400"></asp:TextBox>
                                   </td>
-                                  <td>
-                                      &nbsp;</td>
+                                  <td>&nbsp;</td>
                               </tr>
                               <tr>
                                   <td class="cell_content_20PC_TR">
@@ -93,10 +105,14 @@
             </tr>
             <tr class="cell_content_100PC">
                 <td colspan="2" class="cell_content_100PC">
-                      <asp:Button ID="Button1" runat="server" CssClass="btn_normal_silver" Text="Save" />
+                      <asp:Button ID="Button1" runat="server" CssClass="btn_normal_silver" Text="Save" OnClick="Button1_Click" />
                       <asp:Button ID="Button2" runat="server" CssClass="btn_normal_silver" Text="Preview" />
                       <asp:Button ID="Button3" runat="server" CssClass="btn_normal_blue" Text="Approve" />
 &nbsp;<asp:Button ID="Button4" runat="server" CssClass="btn_normal_red" Text="Reject" />
+                      <br />
+                      <uc2:ucAttachment ID="ucAttachment1" runat="server" />
+                      <br />
+                      <asp:Label ID="lblPID" runat="server" CssClass="Label_sm"></asp:Label>
                 </td>
                 
             </tr>

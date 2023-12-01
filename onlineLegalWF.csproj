@@ -244,6 +244,7 @@
     <Compile Include="Class\ReplaceDocx.cs" />
     <Compile Include="Class\ReplaceDocxData.cs" />
     <Compile Include="Class\Utillity.cs" />
+    <Compile Include="Class\WFFunctions.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
