@@ -1,16 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucAttachment.ascx.cs" Inherits="onlineLegalWF.userControls.ucAttachment" %>
  <link href="../StyleSheet/CustomStyle.css" rel="stylesheet" type="text/css"/>
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --%>
-<style type="text/css">
-    .auto-style1 {
-        width: 100px;
-    }
-</style>
-<%--<asp:ScriptManager runat="server">
-    <Scripts>
-        <asp:ScriptReference Name="jquery" />
-    </Scripts>
-</asp:ScriptManager>--%>
+
 <div>
     <asp:Panel ID="Panel1" runat="server" CssClass="div_90">
         <table cellpadding="0" cellspacing="0" class="w-100">
@@ -87,9 +77,3 @@
 </div>
 
 <asp:HiddenField ID="hidPID" runat="server" />
-<script type="text/javascript">    
-    $(document).ready(function () {
-        //$('#fileGridview').DataTable();
-        console.log($('#fileGridview'),"$('#fileGridview')");
-    });
-</script> 

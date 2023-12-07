@@ -168,8 +168,25 @@ namespace onlineLegalWF.userControls
         protected void DeleteData(object sender, EventArgs e)
         {
             string filePath = (sender as LinkButton).CommandArgument;
-            File.Delete(filePath);
-            ini_data();
+            //File.Delete(filePath);
+            //ini_data();
+            string filename = Path.GetFileName(filePath);
+            string sql = "select * from wf_attachment where pid = '" + hidPID.Value + "' and  attached_filename= '" + filename + "'";
+
+            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+
+            if (dt.Rows.Count > 0)
+            {
+                string sqldelete = "delete wf_attachment where pid = '" + hidPID.Value + "' and  attached_filename= '" + filename + "'";
+
+                zdb.ExecNonQuery(sqldelete, zconnstr);
+                File.Delete(filePath);
+                //Response.Redirect(Request.Url.AbsoluteUri);
+                ini_data();
+
+            }
+
+            
 
         }
     }

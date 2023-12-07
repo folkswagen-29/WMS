@@ -58,7 +58,7 @@
                                         </tr>
                                         <tr>
                                             <td style="vertical-align: top; text-align: left;">
-                                                <uc1:ucMenulist runat="server" ID="ucMenulist" />
+                                                <uc1:ucMenulist runat="server" ID="ucMenulist1" />
                                                 <%--<uc1:ucMenu runat="server" ID="ucMenu01" />--%>
                                             </td>
                                         </tr>

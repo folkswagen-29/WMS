@@ -57,6 +57,8 @@ namespace onlineLegalWF.frmInsurance
             string pid = zwf.iniPID("LEGALWF");
             lblPID.Text = pid;
             hid_PID.Value = pid;
+            ucAttachment1.ini_object(pid);
+
         }
 
         protected void btn_gendocumnt_Click(object sender, EventArgs e)

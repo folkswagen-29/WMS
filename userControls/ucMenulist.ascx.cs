@@ -89,7 +89,7 @@ namespace onlineLegalWF.userControls
 
                 //var xmenu_code = ((Label)grid.Rows[index].FindControl("gvAlblMenuGroupName")).Text;
                 var xurl = ((Label)grid.Rows[index].FindControl("gvAlblMenuUrl")).Text;
-                Session["group_menu"] = ((Label)grid.Rows[index].FindControl("gvAlblMenuGroupName")).Text;
+                ////Session["group_menu"] = ((Label)grid.Rows[index].FindControl("gvAlblMenuGroupName")).Text;
                 Response.Redirect(xurl);
 
             }
