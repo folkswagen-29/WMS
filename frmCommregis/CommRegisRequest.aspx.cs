@@ -1,4 +1,5 @@
-﻿using System;
+﻿using onlineLegalWF.Class;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -15,6 +16,7 @@ namespace onlineLegalWF.frmCommregis
         public DbControllerBase zdb = new DbControllerBase();
         //public string zconnstr = ConfigurationSettings.AppSettings["BMPDB"].ToString();
         public string zconnstr = ConfigurationManager.AppSettings["BMPDB"].ToString();
+        public WFFunctions zwf = new WFFunctions();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,6 +37,11 @@ namespace onlineLegalWF.frmCommregis
             type_comm_regis.DataTextField = "toc_regis_desc";
             type_comm_regis.DataValueField = "toc_regis_code";
             type_comm_regis.DataBind();
+
+            string pid = zwf.iniPID("LEGALWF");
+            lblPID.Text = pid;
+            hid_PID.Value = pid;
+            ucAttachment1.ini_object(pid);
         }
 
         public DataTable GetTypeOfRequest()

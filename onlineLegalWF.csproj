@@ -146,6 +146,7 @@
     <Content Include="frmInsurance\InsuranceRequestList.aspx" />
     <Content Include="frmInsurance\InsuranceTrackingRenew.aspx" />
     <Content Include="frmInsurance\InsuranceTrackingRequest.aspx" />
+    <Content Include="frmLitigation\LitigationWorkAssign.aspx" />
     <Content Include="frmLitigation\LitigationActionPlan.aspx" />
     <Content Include="frmLitigation\LitigationCaseDetail.aspx" />
     <Content Include="frmLitigation\LitigationRequest.aspx" />
@@ -356,6 +357,13 @@
     </Compile>
     <Compile Include="frmInsurance\InsuranceTrackingRequest.aspx.designer.cs">
       <DependentUpon>InsuranceTrackingRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmLitigation\LitigationWorkAssign.aspx.cs">
+      <DependentUpon>LitigationWorkAssign.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmLitigation\LitigationWorkAssign.aspx.designer.cs">
+      <DependentUpon>LitigationWorkAssign.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmLitigation\LitigationActionPlan.aspx.cs">
       <DependentUpon>LitigationActionPlan.aspx</DependentUpon>

@@ -1,4 +1,5 @@
-﻿using onlineLegalWF.userControls;
+﻿using onlineLegalWF.Class;
+using onlineLegalWF.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,6 +16,7 @@ namespace onlineLegalWF.frmPermit
         public DbControllerBase zdb = new DbControllerBase();
         //public string zconnstr = ConfigurationSettings.AppSettings["BMPDB"].ToString();
         public string zconnstr = ConfigurationManager.AppSettings["BMPDB"].ToString();
+        public WFFunctions zwf = new WFFunctions();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,6 +31,11 @@ namespace onlineLegalWF.frmPermit
             ucHeader1.setHeader("Land and Building Tax Request");
             string xreq_no = System.DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
             req_no.Text = xreq_no;
+
+            string pid = zwf.iniPID("LEGALWF");
+            lblPID.Text = pid;
+            hid_PID.Value = pid;
+            ucAttachment1.ini_object(pid);
         }
 
 

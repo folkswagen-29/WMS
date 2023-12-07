@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Edit ClaimRequest" Language="C#" MasterPageFile="SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceClaimEdit.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceClaimEdit" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc1" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
+<%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table class="cell_content_100PC" style="font-family: Tahoma;">
@@ -276,7 +277,12 @@
                 <br />
             </td>
         </tr>
+        <tr class="cell_content_100PC">
+            <td colspan="2" class="cell_content_100PC">
+                <uc3:ucAttachment runat="server" ID="ucAttachment1" />
+            </td>
 
+        </tr>
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
                 <label>For Property</label>

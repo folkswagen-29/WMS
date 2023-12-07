@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -79,6 +80,7 @@ namespace onlineLegalWF.frmInsurance
                 prop_ins_name.Text = res.Rows[0]["property_insured_name"].ToString();
                 lblPID.Text = res.Rows[0]["process_id"].ToString();
                 hid_PID.Value = res.Rows[0]["process_id"].ToString();
+                ucAttachment1.ini_object(res.Rows[0]["process_id"].ToString());
             }
 
             string sqlPropIns = "select  top 1 * from li_insurance_req_property_insured where req_no='"+ id + "'";

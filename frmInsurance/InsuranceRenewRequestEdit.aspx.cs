@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -63,6 +64,7 @@ namespace onlineLegalWF.frmInsurance
                 prop_ins_name.Text = res.Rows[0]["property_insured_name"].ToString();
                 lblPID.Text = res.Rows[0]["process_id"].ToString();
                 hid_PID.Value = res.Rows[0]["process_id"].ToString();
+                ucAttachment1.ini_object(hid_PID.Value = res.Rows[0]["process_id"].ToString());
             }
 
             var dt = iniDataTable(id);

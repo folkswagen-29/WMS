@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Edit Request" Language="C#" MasterPageFile="SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceRequestEdit.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceRequestEdit" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc1" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
+<%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
 
 
 
@@ -198,6 +199,12 @@
                 </asp:Panel>
                 <br />
             </td>
+        </tr>
+        <tr class="cell_content_100PC">
+            <td colspan="2" class="cell_content_100PC">
+                <uc3:ucAttachment runat="server" ID="ucAttachment1" />
+            </td>
+
         </tr>
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">

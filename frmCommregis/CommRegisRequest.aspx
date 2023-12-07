@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Commercial Registration Request" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="CommRegisRequest.aspx.cs" Inherits="onlineLegalWF.frmCommregis.CommRegisRequest" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc2" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
+<%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -790,6 +791,12 @@
         </tr>
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
+                <uc3:ucAttachment runat="server" ID="ucAttachment1" />
+            </td>
+
+        </tr>
+        <tr class="cell_content_100PC">
+            <td colspan="2" class="cell_content_100PC">
                 <asp:Panel ID="Panel2" runat="server" CssClass="div_90" Height="200px">
                     <table class="cell_content_100PC">
                         <tr>
@@ -898,4 +905,9 @@
             });
         });
     </script>
+    <asp:HiddenField ID="hid_PID" runat="server" />
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <asp:Label ID="lblPID" runat="server" CssClass="Label_sm"></asp:Label>
 </asp:Content>

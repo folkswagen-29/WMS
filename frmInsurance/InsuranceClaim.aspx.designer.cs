@@ -321,6 +321,15 @@ namespace onlineLegalWF.frmInsurance
         protected global::System.Web.UI.WebControls.TextBox remark;
 
         /// <summary>
+        /// ucAttachment1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::onlineLegalWF.userControls.ucAttachment ucAttachment1;
+
+        /// <summary>
         /// Panel2 control.
         /// </summary>
         /// <remarks>
