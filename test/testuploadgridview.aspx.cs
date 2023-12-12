@@ -48,10 +48,12 @@ namespace onlineLegalWF.test
             string filePath = (sender as LinkButton).CommandArgument;
             //Response.ContentType = ContentType;
             var mimeType = MimeMapping.GetMimeMapping(Path.GetFileName(filePath));
+
             Response.ContentType = mimeType;
             Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
             Response.WriteFile(filePath);
             Response.End();
+
         }
         //protected void PreviewData(object sender, EventArgs e)
         //{

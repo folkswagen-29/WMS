@@ -136,10 +136,20 @@ namespace onlineLegalWF.userControls
             string filePath = (sender as LinkButton).CommandArgument;
             var mimeType = MimeMapping.GetMimeMapping(Path.GetFileName(filePath));
             //Response.ContentType = ContentType;
-            Response.ContentType = mimeType;
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
-            Response.WriteFile(filePath);
-            Response.End();
+            string extension = Path.GetExtension(filePath);
+
+            if (extension == ".pdf")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+                pdf_render.Attributes["src"] = "/render/pdf?id=" + filePath;
+            }
+            else
+            {
+                Response.ContentType = mimeType;
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
+                Response.WriteFile(filePath);
+                Response.End();
+            }
         }
 
         ////delete from db
