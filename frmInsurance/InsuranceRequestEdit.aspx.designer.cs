@@ -303,6 +303,15 @@ namespace onlineLegalWF.frmInsurance
         protected global::onlineLegalWF.userControls.ucAttachment ucAttachment1;
 
         /// <summary>
+        /// ucCommentlog1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::onlineLegalWF.userControls.ucCommentlog ucCommentlog1;
+
+        /// <summary>
         /// req_date control.
         /// </summary>
         /// <remarks>

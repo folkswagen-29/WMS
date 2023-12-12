@@ -65,6 +65,7 @@ namespace onlineLegalWF.frmInsurance
                 lblPID.Text = res.Rows[0]["process_id"].ToString();
                 hid_PID.Value = res.Rows[0]["process_id"].ToString();
                 ucAttachment1.ini_object(hid_PID.Value = res.Rows[0]["process_id"].ToString());
+                ucCommentlog1.ini_object(hid_PID.Value = res.Rows[0]["process_id"].ToString());
             }
 
             var dt = iniDataTable(id);

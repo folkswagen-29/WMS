@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Litigation Request" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationRequest.aspx.cs" Inherits="onlineLegalWF.frmLitigation.LitigationRequest" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
+<%@ Register Src="~/userControls/ucCommentlog.ascx" TagPrefix="uc4" TagName="ucCommentlog" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table class="cell_content_100PC">
@@ -97,6 +98,11 @@
                 <uc3:ucAttachment runat="server" ID="ucAttachment1" />
             </td>
 
+        </tr>
+        <tr class="cell_content_100PC">
+            <td colspan="2" class="cell_content_100PC">
+                <uc4:ucCommentlog runat="server" ID="ucCommentlog1" />
+            </td>
         </tr>
     </table>
     <asp:HiddenField ID="hid_PID" runat="server" />

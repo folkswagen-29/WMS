@@ -58,6 +58,7 @@ namespace onlineLegalWF.frmInsurance
             lblPID.Text = pid;
             hid_PID.Value = pid;
             ucAttachment1.ini_object(pid);
+            ucCommentlog1.ini_object(pid);
         }
 
         protected void btn_save_Click(object sender, EventArgs e)
