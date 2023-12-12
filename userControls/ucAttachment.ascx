@@ -1,12 +1,13 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucAttachment.ascx.cs" Inherits="onlineLegalWF.userControls.ucAttachment" %>
  <link href="../StyleSheet/CustomStyle.css" rel="stylesheet" type="text/css"/>
-<asp:ScriptManager runat="server">
+<asp:ScriptManager ID="script1" runat="server">
     <Scripts>
         <asp:ScriptReference Name="jquery" />
         <asp:ScriptReference Name="bootstrap" />
     </Scripts>
 </asp:ScriptManager>
 
+<br />
 <div>
     <asp:Panel ID="Panel1" runat="server" CssClass="div_90">
         <table cellpadding="0" cellspacing="0" class="w-100">
@@ -79,8 +80,11 @@
                 </td>
             </tr>
         </table>
+        
     </asp:Panel>
+    
 </div>
+<br />
 
 <asp:HiddenField ID="hidPID" runat="server" />
 
