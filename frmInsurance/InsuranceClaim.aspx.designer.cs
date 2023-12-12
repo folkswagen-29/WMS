@@ -321,15 +321,6 @@ namespace onlineLegalWF.frmInsurance
         protected global::System.Web.UI.WebControls.TextBox remark;
 
         /// <summary>
-        /// ucAttachment1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::onlineLegalWF.userControls.ucAttachment ucAttachment1;
-
-        /// <summary>
         /// Panel2 control.
         /// </summary>
         /// <remarks>
@@ -490,6 +481,15 @@ namespace onlineLegalWF.frmInsurance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_cancel;
+
+        /// <summary>
+        /// ucAttachment1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::onlineLegalWF.userControls.ucAttachment ucAttachment1;
 
         /// <summary>
         /// claim_no control.

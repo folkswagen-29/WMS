@@ -96,15 +96,6 @@ namespace onlineLegalWF.frmPermit
         protected global::System.Web.UI.WebControls.TextBox email_accounting;
 
         /// <summary>
-        /// ucAttachment1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::onlineLegalWF.userControls.ucAttachment ucAttachment1;
-
-        /// <summary>
         /// Panel2 control.
         /// </summary>
         /// <remarks>
@@ -184,6 +175,15 @@ namespace onlineLegalWF.frmPermit
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_cancel;
+
+        /// <summary>
+        /// ucAttachment1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::onlineLegalWF.userControls.ucAttachment ucAttachment1;
 
         /// <summary>
         /// hid_PID control.
