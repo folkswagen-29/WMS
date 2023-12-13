@@ -293,6 +293,10 @@ namespace onlineLegalWF.frmInsurance
             dr0["tagname"] = "#date1#";
             dr0["tagvalue"] = requestordate.Replace(",", "!comma");
             dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#sign_name1#";
+            dr0["tagvalue"] = "อนุมัติผ่านระบบ";
+            dtStr.Rows.Add(dr0);
 
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name2#";
@@ -305,6 +309,10 @@ namespace onlineLegalWF.frmInsurance
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#date2#";
             dr0["tagvalue"] = apv1date.Replace(",", "!comma");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#sign_name2#";
+            dr0["tagvalue"] = apv4remark.Replace(",", "!comma");
             dtStr.Rows.Add(dr0);
 
             dr0 = dtStr.NewRow();
@@ -319,6 +327,10 @@ namespace onlineLegalWF.frmInsurance
             dr0["tagname"] = "#date3#";
             dr0["tagvalue"] = apv2date.Replace(",", "!comma");
             dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#sign_name3#";
+            dr0["tagvalue"] = apv4remark.Replace(",", "!comma");
+            dtStr.Rows.Add(dr0);
 
 
             dr0 = dtStr.NewRow();
@@ -332,6 +344,10 @@ namespace onlineLegalWF.frmInsurance
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#date4#";
             dr0["tagvalue"] = apv3date.Replace(",", "!comma");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#sign_name4#";
+            dr0["tagvalue"] = apv4remark.Replace(",", "!comma");
             dtStr.Rows.Add(dr0);
 
             dr0 = dtStr.NewRow();
