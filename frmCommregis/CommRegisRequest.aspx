@@ -5,11 +5,6 @@
 <%@ Register Src="~/userControls/ucCommentlog.ascx" TagPrefix="uc4" TagName="ucCommentlog" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:ScriptManager runat="server">
-        <Scripts>
-            <asp:ScriptReference Name="jquery" />
-        </Scripts>
-    </asp:ScriptManager>
     <table class="cell_content_100PC">
         <tr>
             <td colspan="2">
@@ -843,7 +838,7 @@
             //console.log('ddl value', $('#type_comm_regis option:selected').val());
 
             $('#ContentPlaceHolder1_type_comm_regis').change(function (event) {
-                console.log('val', $(this).val());
+                //console.log('val', $(this).val());
                 if ($(this).val() == "01") {
                     $('#section1').show();
                     $('#section2').hide();
