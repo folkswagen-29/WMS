@@ -12,8 +12,8 @@ namespace onlineLegalWF.Class
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
-        //public string zconnstr = ConfigurationSettings.AppSettings["BMPDB"].ToString();
-        public string zconnstr = ConfigurationManager.AppSettings["BMPDB"].ToString();
+        //public string zconnstr = ConfigurationSettings.AppSettings["BPMDB"].ToString();
+        public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
         #endregion
 
 

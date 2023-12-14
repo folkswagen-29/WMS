@@ -18,7 +18,7 @@ namespace ReplaceDocx.Class
     public class ReplaceDocx
     {
         #region Public
-        private string zBMPDB = ConfigurationManager.AppSettings["BMPDB"].ToString();
+        private string zBPMDB = ConfigurationManager.AppSettings["BPMDB"].ToString();
        
         #endregion
         public byte[] ReplaceData(List<TagData> tagdata, string template_filepath,string output_directory, string output_filepath, bool delete_output)
@@ -585,7 +585,7 @@ namespace ReplaceDocx.Class
             var zdb = new DbControllerBase();
             var pdf_content = new byte[0]; 
             string sql = "select * from z_replacedocx_log where replacedocx_reqno = '"+request_no+"'";
-            var dt = zdb.ExecSql_DataTable(sql, zBMPDB);
+            var dt = zdb.ExecSql_DataTable(sql, zBPMDB);
             if (dt.Rows.Count > 0)
             {
                 DataRow dr = dt.Rows[0];
@@ -608,7 +608,7 @@ namespace ReplaceDocx.Class
                  pdf_content = convertDOCtoPDF(para.output_filepath, para.output_filepath.Replace(".docx", ".pdf"), false);
                
                 sql = " update z_replacedocx_log set  status='Complete' where replacedocx_reqno ='" + request_no + "' ";
-                zdb.ExecNonQuery(sql, zBMPDB);
+                zdb.ExecNonQuery(sql, zBPMDB);
 
             }
             return pdf_content; 

@@ -15,7 +15,7 @@ namespace onlineLegalWF.test
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
-        public string zconnstr = ConfigurationSettings.AppSettings["BMPDB"].ToString();
+        public string zconnstr = ConfigurationSettings.AppSettings["BPMDB"].ToString();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {

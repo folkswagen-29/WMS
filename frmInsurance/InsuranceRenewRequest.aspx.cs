@@ -18,7 +18,7 @@ namespace onlineLegalWF.frmInsurance
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
-        public string zconnstr = ConfigurationManager.AppSettings["BMPDB"].ToString();
+        public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
         public WFFunctions zwf = new WFFunctions();
         #endregion
         protected void Page_Load(object sender, EventArgs e)

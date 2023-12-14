@@ -12,9 +12,9 @@ namespace onlineLegalWF.Class
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
-        //public string zconnstr = ConfigurationSettings.AppSettings["BMPDB"].ToString();
+        //public string zconnstr = ConfigurationSettings.AppSettings["BPMDB"].ToString();
         public string zconnstr = ConfigurationManager.AppSettings["RPADB"].ToString();
-        //public string zconnstrbpm = ConfigurationManager.AppSettings["BMPDB"].ToString();
+        //public string zconnstrbpm = ConfigurationManager.AppSettings["BPMDB"].ToString();
         #endregion
        public EmpModel getEmpInfo(string xuser_login)
         {
