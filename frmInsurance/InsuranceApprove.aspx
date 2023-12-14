@@ -1,5 +1,7 @@
 ﻿<%@ Title="Insurance Approve" Language="C#" MasterPageFile="SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceApprove.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceApprove" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
+<%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
+<%@ Register Src="~/userControls/ucCommentlog.ascx" TagPrefix="uc4" TagName="ucCommentlog" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table class="cell_content_100PC" style="font-family: Tahoma;">
@@ -52,6 +54,11 @@
             </td>
 
         </tr>
+        <tr class="cell_content_100PC">
+            <td colspan="6" class="cell_content_100PC">
+                <uc4:ucCommentlog runat="server" ID="ucCommentlog1" />
+            </td>
+        </tr>
         <%--<tr class="cell_content_100PC">
         <td colspan="2" class="cell_content_100PC">
             <asp:Panel ID="Panel2" runat="server" CssClass="div_90">
@@ -71,6 +78,16 @@
                 <asp:Button runat="server" CssClass="btn_normal_red" Text="Reject" />
             </td>
         </tr>
+        <tr class="cell_content_100PC">
+            <td colspan="2" class="cell_content_100PC">
+                <uc3:ucAttachment runat="server" ID="ucAttachment1" />
+            </td>
+        </tr>
     </table>
     <asp:HiddenField ID="req_no" runat="server" />
+    <asp:HiddenField ID="hid_PID" runat="server" />
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <asp:Label ID="lblPID" runat="server" CssClass="Label_sm"></asp:Label>
 </asp:Content>

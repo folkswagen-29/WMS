@@ -78,6 +78,24 @@ namespace onlineLegalWF.frmInsurance
         protected global::System.Web.UI.HtmlControls.HtmlIframe pdf_render;
 
         /// <summary>
+        /// ucCommentlog1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::onlineLegalWF.userControls.ucCommentlog ucCommentlog1;
+
+        /// <summary>
+        /// ucAttachment1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::onlineLegalWF.userControls.ucAttachment ucAttachment1;
+
+        /// <summary>
         /// req_no control.
         /// </summary>
         /// <remarks>
@@ -85,5 +103,23 @@ namespace onlineLegalWF.frmInsurance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField req_no;
+
+        /// <summary>
+        /// hid_PID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hid_PID;
+
+        /// <summary>
+        /// lblPID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPID;
     }
 }

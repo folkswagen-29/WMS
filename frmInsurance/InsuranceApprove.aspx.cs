@@ -1,10 +1,12 @@
 ﻿using Microsoft.Office.Interop.Word;
 using onlineLegalWF.Class;
+using onlineLegalWF.userControls;
 using Spire.Doc;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -49,6 +51,9 @@ namespace onlineLegalWF.frmInsurance
                     from.Text = res.Rows[0]["company_name"].ToString();
                     doc_no.Text = res.Rows[0]["document_no"].ToString();
                     subject.Text = res.Rows[0]["subject"].ToString();
+
+                    //init data UcAttachAndCommentLogs
+                    initDataAttachAndComment(res.Rows[0]["process_id"].ToString());
                 }
 
                 string sqlfile = "select top 1 *  from  z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
@@ -65,6 +70,14 @@ namespace onlineLegalWF.frmInsurance
             {
 
             }
+        }
+
+        private void initDataAttachAndComment(string pid) 
+        {
+            lblPID.Text = pid;
+            hid_PID.Value = pid;
+            ucAttachment1.ini_object(pid);
+            ucCommentlog1.ini_object(pid);
         }
     }
 }
