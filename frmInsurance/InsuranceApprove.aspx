@@ -59,19 +59,6 @@
                 <uc4:ucCommentlog runat="server" ID="ucCommentlog1" />
             </td>
         </tr>
-        <%--<tr class="cell_content_100PC">
-        <td colspan="2" class="cell_content_100PC">
-            <asp:Panel ID="Panel2" runat="server" CssClass="div_90">
-                <table style="border-collapse: collapse; font-size: 9pt; margin-left: auto; margin-right: auto;">
-                    <tr>
-                        <td colspan="4">
-                            <iframe id="pdf_render" runat="server" width="920" height="680" frameborder="0"></iframe>
-                        </td>
-                    </tr>
-                </table>
-            </asp:Panel>
-        </td>
-    </tr>--%>
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
                 <asp:Button runat="server" CssClass="btn_normal_blue" Text="Approve" />
