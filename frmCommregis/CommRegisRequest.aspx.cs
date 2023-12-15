@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -54,7 +55,19 @@ namespace onlineLegalWF.frmCommregis
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
+            string xtype_comm_regis = type_comm_regis.SelectedValue;
 
+            if (doc_no.Text.Trim() == "")
+            {
+                doc_no.Text = zwf.genDocNo("CCR-" + System.DateTime.Now.ToString("yyyy", new CultureInfo("en-US")) + "-", 4);
+            }
+            var xreq_no = req_no.Text.Trim();
+            var xprocess_id = hid_PID.Value.ToString();
+
+            if (xtype_comm_regis == "01") 
+            {
+                
+            }
         }
 
         protected void btn_gendocumnt_Click(object sender, EventArgs e)

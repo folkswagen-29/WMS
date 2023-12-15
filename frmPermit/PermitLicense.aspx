@@ -104,7 +104,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:DropDownList ID="DropDownList1" runat="server" CssClass="Text_400">
+                                <asp:DropDownList ID="license_code" runat="server" CssClass="Text_400">
                                     <asp:ListItem Value="01">Hotel License </asp:ListItem>
                                     <asp:ListItem Value="02">Hotel Manager Certificate </asp:ListItem>
                                     <asp:ListItem Value="03">Operation Hotel License </asp:ListItem>

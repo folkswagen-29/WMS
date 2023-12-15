@@ -49,6 +49,34 @@
                             </td>
                             <td>&nbsp;</td>
                         </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">อ้างถึงมติที่ประชุม </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL" style="padding: 0;">
+                                <table>
+                                    <tr>
+                                        <td class="cell_content_PC_TL">
+                                            <asp:TextBox ID="mt_res_desc" runat="server" CssClass="Text_200"></asp:TextBox>
+                                        </td>
+                                        <td style="width: 55px; min-width: 55px; text-align: right; vertical-align: top;">
+                                            <label class="Label_md">ครั้งที่ </label>
+                                        </td>
+                                        <td class="cell_content_PC_TL">
+                                            <asp:TextBox ID="mt_res_no" runat="server" CssClass="Text_150"></asp:TextBox>
+                                        </td>
+                                        <td style="width: 55px; min-width: 55px; text-align: right; vertical-align: top;">
+                                            <label class="Label_md">วันที่ </label>
+                                        </td>
+                                        <td class="cell_content_PC_TL">
+                                            <asp:TextBox ID="mt_res_date" TextMode="Date" runat="server" CssClass="Text_150"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
                     </table>
 
                     <table id="section1">
@@ -78,7 +106,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <input type="file"  value="Input File" />
+                                <asp:FileUpload ID="seal_attach" runat="server" />
                             </td>
                             <td>&nbsp;</td>
                         </tr>

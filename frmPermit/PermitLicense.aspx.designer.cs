@@ -78,13 +78,13 @@ namespace onlineLegalWF.frmPermit
         protected global::System.Web.UI.WebControls.DropDownList type_req_license;
 
         /// <summary>
-        /// DropDownList1 control.
+        /// license_code control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList license_code;
 
         /// <summary>
         /// contact_agency control.

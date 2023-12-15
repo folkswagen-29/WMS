@@ -60,6 +60,33 @@ namespace onlineLegalWF.frmCommregis
         protected global::System.Web.UI.WebControls.TextBox doc_no;
 
         /// <summary>
+        /// mt_res_desc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox mt_res_desc;
+
+        /// <summary>
+        /// mt_res_no control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox mt_res_no;
+
+        /// <summary>
+        /// mt_res_date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox mt_res_date;
+
+        /// <summary>
         /// company_name_th control.
         /// </summary>
         /// <remarks>
@@ -76,6 +103,15 @@ namespace onlineLegalWF.frmCommregis
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox company_name_en;
+
+        /// <summary>
+        /// seal_attach control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload seal_attach;
 
         /// <summary>
         /// sec1_no control.
