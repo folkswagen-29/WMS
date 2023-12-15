@@ -34,7 +34,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:TextBox ID="doc_no" runat="server" CssClass="Text_400"></asp:TextBox>
+                                <asp:Label ID="doc_no" runat="server" CssClass="Label_md"></asp:Label>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -59,59 +59,8 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:DropDownList ID="type_project" runat="server" CssClass="Text_200">
-                                    <asp:ListItem>เลอ เมอริเดียน เชียงใหม่</asp:ListItem>
-                                    <asp:ListItem>ภูเก็ต แมริออท</asp:ListItem>
-                                    <asp:ListItem>คอร์ท ยาท ภูเก็ต</asp:ListItem>
-                                    <asp:ListItem>บันยันทรี สมุย</asp:ListItem>
-                                    <asp:ListItem>วนาเบลล์</asp:ListItem>
-                                    <asp:ListItem>เชอราตัน สมุย</asp:ListItem>
-                                    <asp:ListItem>มิเลีย สมุย</asp:ListItem>
-                                    <asp:ListItem>บันยันทรี พัทยา (จอมเทียน)</asp:ListItem>
-                                    <asp:ListItem>พันธ์ทิพย์ งามวงศ์วาน</asp:ListItem>
-                                    <asp:ListItem>ตลาดต่อยอด อยุธยา </asp:ListItem>
-                                    <asp:ListItem>อิมพีเรียล แม่ปิง</asp:ListItem>
-                                    <asp:ListItem>มิเลีย เชียงใหม่</asp:ListItem>
-                                    <asp:ListItem>บันยันทรี กระบี่</asp:ListItem>
-                                    <asp:ListItem>แมริออท มาร์คีส์ ควีนสปาร์ค</asp:ListItem>
-                                    <asp:ListItem>ดับเบิ้ล ทรี</asp:ListItem>
-                                    <asp:ListItem>ฮิลตัน สุขุมวิท</asp:ListItem>
-                                    <asp:ListItem>เลอ เมอริเดียน กรุงเทพ</asp:ListItem>
-                                    <asp:ListItem>แมริออท สุรวงศ์</asp:ListItem>
-                                    <asp:ListItem>EAC</asp:ListItem>
-                                    <asp:ListItem>ดิ แอทธินี  AHLC+ ราชินีมูลนิธิ</asp:ListItem>
-                                    <asp:ListItem>แกรนด์ โซเล</asp:ListItem>
-                                    <asp:ListItem>แมริออท พัทยา</asp:ListItem>
-                                    <asp:ListItem>แมริออท หัวหิน</asp:ListItem>
-                                    <asp:ListItem>อิมพีเรียล หัวหิน</asp:ListItem>
-                                    <asp:ListItem>อาคาร 208</asp:ListItem>
-                                    <asp:ListItem>Empire Tower</asp:ListItem>
-                                    <asp:ListItem>ดิ โอกุระ </asp:ListItem>
-                                    <asp:ListItem>แอทธินี ทาวเวอร์</asp:ListItem>
-                                    <asp:ListItem>พันธ์ทิพย์ เชียงใหม่ </asp:ListItem>
-                                    <asp:ListItem>เจริญกรุง 93</asp:ListItem>
-                                    <asp:ListItem>แมริออท พัทยา</asp:ListItem>
-                                    <asp:ListItem>เอเชีย ทีค</asp:ListItem>
-                                    <asp:ListItem>Gateway บางซื่อ</asp:ListItem>
-                                    <asp:ListItem>ซิกม่า</asp:ListItem>
-                                    <asp:ListItem>อินไซค์ สุขุมวิท 50</asp:ListItem>
-                                    <asp:ListItem>พันธ์ทิพย์ ประตูน้ำ</asp:ListItem>
-                                    <asp:ListItem>OP Place</asp:ListItem>
-                                    <asp:ListItem>ฮอลิเดย์ อินน์ เอ็กซ์เพรส</asp:ListItem>
-                                    <asp:ListItem>ลาซาล อเวนิว</asp:ListItem>
-                                    <asp:ListItem>ตะวันนา 1</asp:ListItem>
-                                    <asp:ListItem>Inter Link</asp:ListItem>
-                                    <asp:ListItem>ล้ง 1919 </asp:ListItem>
-                                    <asp:ListItem>Gateway เอกมัย</asp:ListItem>
-                                    <asp:ListItem>บุญมีพัฒนา</asp:ListItem>
-                                    <asp:ListItem>เริงชัย</asp:ListItem>
-                                    <asp:ListItem>เวิ้งนาครเขษม </asp:ListItem>
-                                    <asp:ListItem>อิมม์ โฮเต๊ล เจริญกรุง</asp:ListItem>
-                                    <asp:ListItem>ทรงวาด โรงแรม</asp:ListItem>
-                                    <asp:ListItem>ทรงวาด ที่จอดรถ</asp:ListItem>
-                                    <asp:ListItem>ลาซาล (ฝั่งตรงข้าม)</asp:ListItem>
-                                    <asp:ListItem>โกลเด้นไทรแองเกิ้ล</asp:ListItem>
-                                    <asp:ListItem>บุดดา มิวเซียม</asp:ListItem>
+                                <asp:DropDownList ID="type_lt_project" runat="server" CssClass="Text_200">
+
                                 </asp:DropDownList>
                             </td>
                             <td>&nbsp;</td>

@@ -34,7 +34,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:TextBox ID="doc_no" runat="server" CssClass="Text_400"></asp:TextBox>
+                                <asp:Label ID="doc_no" runat="server" CssClass="Label_md"></asp:Label>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -60,27 +60,27 @@
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
                                 <asp:DropDownList ID="type_project" runat="server" CssClass="Text_200">
-                                    <asp:ListItem Value="CYM">CYM</asp:ListItem>
-                                    <asp:ListItem Value="MSBK">MSBK</asp:ListItem>
-                                    <asp:ListItem Value="westin">westin</asp:ListItem>
-                                    <asp:ListItem Value="MSM">MSM</asp:ListItem>
-                                    <asp:ListItem Value="MLCM">MLCM</asp:ListItem>
-                                    <asp:ListItem Value="INS">INS</asp:ListItem>
-                                    <asp:ListItem Value="VBL">VBL</asp:ListItem>
-                                    <asp:ListItem Value="SSRM">SSRM</asp:ListItem>
-                                    <asp:ListItem Value="PMN">PMN</asp:ListItem>
-                                    <asp:ListItem Value="OPB">OPB</asp:ListItem>
-                                    <asp:ListItem Value="LMB">LMB</asp:ListItem>
-                                    <asp:ListItem Value="HES">HES</asp:ListItem>
-                                    <asp:ListItem Value="HTBK">HTBK</asp:ListItem>
-                                    <asp:ListItem Value="DTH">DTH</asp:ListItem>
-                                    <asp:ListItem Value="BYTKB">BYTKB</asp:ListItem>
-                                    <asp:ListItem Value="BYSM">BYSM</asp:ListItem>
-                                    <asp:ListItem Value="LMCM">LMCM</asp:ListItem>
-                                    <asp:ListItem Value="ASTS">ASTS</asp:ListItem>
-                                    <asp:ListItem Value="BMQ">BMQ</asp:ListItem>
-                                    <asp:ListItem Value="AHLC">AHLC</asp:ListItem>
-                                    <asp:ListItem Value="MHH">MHH</asp:ListItem>
+                                    <asp:ListItem Value="01">CYM</asp:ListItem>
+                                    <asp:ListItem Value="02">MSBK</asp:ListItem>
+                                    <asp:ListItem Value="03">westin</asp:ListItem>
+                                    <asp:ListItem Value="04">MSM</asp:ListItem>
+                                    <asp:ListItem Value="05">MLCM</asp:ListItem>
+                                    <asp:ListItem Value="06">INS</asp:ListItem>
+                                    <asp:ListItem Value="07">VBL</asp:ListItem>
+                                    <asp:ListItem Value="08">SSRM</asp:ListItem>
+                                    <asp:ListItem Value="09">PMN</asp:ListItem>
+                                    <asp:ListItem Value="10">OPB</asp:ListItem>
+                                    <asp:ListItem Value="11">LMB</asp:ListItem>
+                                    <asp:ListItem Value="12">HES</asp:ListItem>
+                                    <asp:ListItem Value="13">HTBK</asp:ListItem>
+                                    <asp:ListItem Value="14">DTH</asp:ListItem>
+                                    <asp:ListItem Value="15">BYTKB</asp:ListItem>
+                                    <asp:ListItem Value="16">BYSM</asp:ListItem>
+                                    <asp:ListItem Value="17">LMCM</asp:ListItem>
+                                    <asp:ListItem Value="18">ASTS</asp:ListItem>
+                                    <asp:ListItem Value="19">BMQ</asp:ListItem>
+                                    <asp:ListItem Value="20">AHLC</asp:ListItem>
+                                    <asp:ListItem Value="21">MHH</asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                             <td>&nbsp;</td>

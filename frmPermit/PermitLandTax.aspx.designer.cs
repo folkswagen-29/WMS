@@ -48,7 +48,7 @@ namespace onlineLegalWF.frmPermit
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox doc_no;
+        protected global::System.Web.UI.WebControls.Label doc_no;
 
         /// <summary>
         /// type_requester control.
@@ -60,13 +60,13 @@ namespace onlineLegalWF.frmPermit
         protected global::System.Web.UI.WebControls.DropDownList type_requester;
 
         /// <summary>
-        /// type_project control.
+        /// type_lt_project control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList type_project;
+        protected global::System.Web.UI.WebControls.DropDownList type_lt_project;
 
         /// <summary>
         /// contact_agency control.
