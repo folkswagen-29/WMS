@@ -3,6 +3,7 @@ using onlineLegalWF.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -38,6 +39,12 @@ namespace onlineLegalWF.frmPermit
             hid_PID.Value = pid;
             ucAttachment1.ini_object(pid);
             ucCommentlog1.ini_object(pid);
+
+            type_project.DataSource = GetTypeOfPermitProject();
+            type_project.DataBind();
+            type_project.DataTextField = "project_desc";
+            type_project.DataValueField = "project_code";
+            type_project.DataBind();
         }
 
 
@@ -59,6 +66,13 @@ namespace onlineLegalWF.frmPermit
         protected void btn_gendocumnt_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public DataTable GetTypeOfPermitProject()
+        {
+            string sql = "select * from li_permit_project order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
         }
 
         private int SaveRequest()

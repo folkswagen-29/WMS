@@ -3,6 +3,7 @@ using Spire.Doc;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -38,6 +39,18 @@ namespace onlineLegalWF.frmPermit
             hid_PID.Value = pid;
             ucAttachment1.ini_object(pid);
             ucCommentlog1.ini_object(pid);
+
+            type_project.DataSource = GetTypeOfPermitProject();
+            type_project.DataBind();
+            type_project.DataTextField = "project_desc";
+            type_project.DataValueField = "project_code";
+            type_project.DataBind();
+
+            license_code.DataSource = GetTypeOfPermitLicense();
+            license_code.DataBind();
+            license_code.DataTextField = "license_desc";
+            license_code.DataValueField = "license_code";
+            license_code.DataBind();
         }
 
 
@@ -60,7 +73,19 @@ namespace onlineLegalWF.frmPermit
         {
 
         }
+        public DataTable GetTypeOfPermitProject()
+        {
+            string sql = "select * from li_permit_project order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
 
+        public DataTable GetTypeOfPermitLicense()
+        {
+            string sql = "select * from li_permit_license order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
         private int SaveRequest()
         {
             int ret = 0;

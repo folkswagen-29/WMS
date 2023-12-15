@@ -60,27 +60,6 @@
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
                                 <asp:DropDownList ID="type_project" runat="server" CssClass="Text_200">
-                                    <asp:ListItem Value="01">CYM</asp:ListItem>
-                                    <asp:ListItem Value="02">MSBK</asp:ListItem>
-                                    <asp:ListItem Value="03">westin</asp:ListItem>
-                                    <asp:ListItem Value="04">MSM</asp:ListItem>
-                                    <asp:ListItem Value="05">MLCM</asp:ListItem>
-                                    <asp:ListItem Value="06">INS</asp:ListItem>
-                                    <asp:ListItem Value="07">VBL</asp:ListItem>
-                                    <asp:ListItem Value="08">SSRM</asp:ListItem>
-                                    <asp:ListItem Value="09">PMN</asp:ListItem>
-                                    <asp:ListItem Value="10">OPB</asp:ListItem>
-                                    <asp:ListItem Value="11">LMB</asp:ListItem>
-                                    <asp:ListItem Value="12">HES</asp:ListItem>
-                                    <asp:ListItem Value="13">HTBK</asp:ListItem>
-                                    <asp:ListItem Value="14">DTH</asp:ListItem>
-                                    <asp:ListItem Value="15">BYTKB</asp:ListItem>
-                                    <asp:ListItem Value="16">BYSM</asp:ListItem>
-                                    <asp:ListItem Value="17">LMCM</asp:ListItem>
-                                    <asp:ListItem Value="18">ASTS</asp:ListItem>
-                                    <asp:ListItem Value="19">BMQ</asp:ListItem>
-                                    <asp:ListItem Value="20">AHLC</asp:ListItem>
-                                    <asp:ListItem Value="21">MHH</asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                             <td>&nbsp;</td>
@@ -105,38 +84,6 @@
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
                                 <asp:DropDownList ID="license_code" runat="server" CssClass="Text_400">
-                                    <asp:ListItem Value="01">Hotel License </asp:ListItem>
-                                    <asp:ListItem Value="02">Hotel Manager Certificate </asp:ListItem>
-                                    <asp:ListItem Value="03">Operation Hotel License </asp:ListItem>
-                                    <asp:ListItem Value="04">Swimming Pool License </asp:ListItem>
-                                    <asp:ListItem Value="05">Bakery License </asp:ListItem>
-                                    <asp:ListItem Value="06">Preservation Food License </asp:ListItem>
-                                    <asp:ListItem Value="07">Laundry licnese </asp:ListItem>
-                                    <asp:ListItem Value="08">Fitness Center License  </asp:ListItem>
-                                    <asp:ListItem Value="09">Beauty License</asp:ListItem>
-                                    <asp:ListItem Value="10">Massage Thai License </asp:ListItem>
-                                    <asp:ListItem Value="11">Suana License </asp:ListItem>
-                                    <asp:ListItem Value="12">Entertainment License </asp:ListItem>
-                                    <asp:ListItem Value="13">Spa License </asp:ListItem>
-                                    <asp:ListItem Value="14">Food & Beverage Licenses  </asp:ListItem>
-                                    <asp:ListItem Value="15">Certificate of notification operation of the food(>200Sq)</asp:ListItem>
-                                    <asp:ListItem Value="16">Generator Elictricity License </asp:ListItem>
-                                    <asp:ListItem Value="17">Money Exchange License </asp:ListItem>
-                                    <asp:ListItem Value="18">To selling alcohol at restricted time </asp:ListItem>
-                                    <asp:ListItem Value="19">Foreign Liquor Sales License </asp:ListItem>
-                                    <asp:ListItem Value="20">Cigarette Sale (Thai -Foreign) License </asp:ListItem>
-                                    <asp:ListItem Value="21">license Establish Radio Station </asp:ListItem>
-                                    <asp:ListItem Value="22">Walkie – Talkie License </asp:ListItem>
-                                    <asp:ListItem Value="23">Music Copyright License </asp:ListItem>
-                                    <asp:ListItem Value="24">Ammunition License </asp:ListItem>
-                                    <asp:ListItem Value="25">LPG License</asp:ListItem>
-                                    <asp:ListItem Value="26">Gas Notifications </asp:ListItem>
-                                    <asp:ListItem Value="27">Excise  Permit(Spa) </asp:ListItem>
-                                    <asp:ListItem Value="28">Artesian well Permit</asp:ListItem>
-                                    <asp:ListItem Value="29">Usage Ground Water License </asp:ListItem>
-                                    <asp:ListItem Value="30">Boiller License </asp:ListItem>
-                                    <asp:ListItem Value="31">Boiler notification </asp:ListItem>
-                                    <asp:ListItem Value="32">Energy Saving notification </asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                             <td>&nbsp;</td>

@@ -60,27 +60,7 @@
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
                                 <asp:DropDownList ID="type_project" runat="server" CssClass="Text_200">
-                                    <asp:ListItem Value="01">CYM</asp:ListItem>
-                                    <asp:ListItem Value="02">MSBK</asp:ListItem>
-                                    <asp:ListItem Value="03">westin</asp:ListItem>
-                                    <asp:ListItem Value="04">MSM</asp:ListItem>
-                                    <asp:ListItem Value="05">MLCM</asp:ListItem>
-                                    <asp:ListItem Value="06">INS</asp:ListItem>
-                                    <asp:ListItem Value="07">VBL</asp:ListItem>
-                                    <asp:ListItem Value="08">SSRM</asp:ListItem>
-                                    <asp:ListItem Value="09">PMN</asp:ListItem>
-                                    <asp:ListItem Value="10">OPB</asp:ListItem>
-                                    <asp:ListItem Value="11">LMB</asp:ListItem>
-                                    <asp:ListItem Value="12">HES</asp:ListItem>
-                                    <asp:ListItem Value="13">HTBK</asp:ListItem>
-                                    <asp:ListItem Value="14">DTH</asp:ListItem>
-                                    <asp:ListItem Value="15">BYTKB</asp:ListItem>
-                                    <asp:ListItem Value="16">BYSM</asp:ListItem>
-                                    <asp:ListItem Value="17">LMCM</asp:ListItem>
-                                    <asp:ListItem Value="18">ASTS</asp:ListItem>
-                                    <asp:ListItem Value="19">BMQ</asp:ListItem>
-                                    <asp:ListItem Value="20">AHLC</asp:ListItem>
-                                    <asp:ListItem Value="21">MHH</asp:ListItem>
+
                                 </asp:DropDownList>
                             </td>
                             <td>&nbsp;</td>

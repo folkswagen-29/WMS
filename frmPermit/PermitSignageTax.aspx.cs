@@ -40,7 +40,11 @@ namespace onlineLegalWF.frmPermit
             ucAttachment1.ini_object(pid);
             ucCommentlog1.ini_object(pid);
 
-            
+            type_project.DataSource = GetTypeOfPermitProject();
+            type_project.DataBind();
+            type_project.DataTextField = "project_desc";
+            type_project.DataValueField = "project_code";
+            type_project.DataBind();
         }
 
 
@@ -63,7 +67,12 @@ namespace onlineLegalWF.frmPermit
         {
 
         }
-
+        public DataTable GetTypeOfPermitProject()
+        {
+            string sql = "select * from li_permit_project order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
         private int SaveRequest()
         {
             int ret = 0;
