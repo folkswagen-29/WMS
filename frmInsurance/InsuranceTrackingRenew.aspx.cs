@@ -119,7 +119,7 @@ namespace onlineLegalWF.frmInsurance
                         HiddenField xreq_no = (HiddenField)row.FindControl("req_no");
                         if (xreq_no != null)
                         {
-                            string refreq_no = xreq_no.Value;
+                            string refreq_no = "'"+ xreq_no.Value + "'";
                             listreq_no.Add(refreq_no);
                         }
                     }
@@ -127,6 +127,9 @@ namespace onlineLegalWF.frmInsurance
             }
 
             string reslistreq_no = string.Join(", ", listreq_no);
+
+            string sql = "select * from li_insurance_request where req_no in ("+reslistreq_no+")";
+            var reqres = zdb.ExecSql_DataTable(sql, zconnstr);
         }
     }
 }

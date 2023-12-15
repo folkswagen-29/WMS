@@ -141,6 +141,7 @@
     <Content Include="frmInsurance\InsuranceRenewRequest.aspx" />
     <Content Include="frmInsurance\InsuranceRenewRequestEdit.aspx" />
     <Content Include="frmInsurance\InsuranceRenewRequestList.aspx" />
+    <Content Include="frmInsurance\InsuranceRenewSearch.aspx" />
     <Content Include="frmInsurance\InsuranceRequest.aspx" />
     <Content Include="frmInsurance\InsuranceRequestEdit.aspx" />
     <Content Include="frmInsurance\InsuranceRequestList.aspx" />
@@ -322,6 +323,13 @@
     </Compile>
     <Compile Include="frmInsurance\InsuranceRenewRequestList.aspx.designer.cs">
       <DependentUpon>InsuranceRenewRequestList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceRenewSearch.aspx.cs">
+      <DependentUpon>InsuranceRenewSearch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceRenewSearch.aspx.designer.cs">
+      <DependentUpon>InsuranceRenewSearch.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmInsurance\InsuranceRequest.aspx.cs">
       <DependentUpon>InsuranceRequest.aspx</DependentUpon>
