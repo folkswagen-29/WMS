@@ -23,10 +23,28 @@
     <metaviewport name="viewport" content="width=device-width, initial-scale=1.0">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <script type="text/javascript">
+        function showAlertSuccess(msg) {
+            $("#success-alert").text(msg);
+            $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+                $("#success-alert").slideUp(500);
+            });
+        }
+        function showAlertError(msg) {
+            $("#danger-alert").text(msg);
+            $("#danger-alert").fadeTo(2000, 500).slideUp(500, function () {
+                $("#danger-alert").slideUp(500);
+            });
+        }
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="div1">
+            <%--Validation Tag--%>
+            <div class="alert alert-success" id="success-alert"></div>
+            <div class="alert alert-danger" id="danger-alert"></div>
+
             <table class="w-100">
                 <tr>
                     <td colspan="2">

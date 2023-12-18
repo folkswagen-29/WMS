@@ -488,18 +488,57 @@ namespace onlineLegalWF.frmInsurance
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            int res = SaveRequest();
-
-            if (res > 0) 
+            try
             {
-                Response.Write("<script>alert('Successfully added');</script>");
-                Response.Redirect("/frmInsurance/InsuranceRequestList");
-            }
-            else
-            {
-                Response.Write("<script>alert('Error !!!');</script>");
-            }
+                // Validate
+                if (string.IsNullOrEmpty(company.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input company");
+                    return;
+                }
+                if (string.IsNullOrEmpty(subject.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input subject");
+                    return;
+                }
+                if (string.IsNullOrEmpty(to.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input to");
+                    return;
+                }
+                if (string.IsNullOrEmpty(purpose.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input purpose");
+                    return;
+                }
+                if (string.IsNullOrEmpty(background.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input background");
+                    return;
+                }
+                if (string.IsNullOrEmpty(prop_ins_name.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input Property Insured Name");
+                    return;
+                }
 
+                int res = SaveRequest();
+
+                if (res > 0)
+                {
+                    Response.Write("<script>alert('Successfully added');</script>");
+                    Response.Redirect("/frmInsurance/InsuranceRequestList");
+                }
+                else
+                {
+                    Response.Write("<script>alert('Error !!!');</script>");
+                }
+            }
+            catch (Exception ex)
+            {
+                showAlertError("alertErr", ex.Message);
+            }
+            
             
         }
         public DataTable GetBusinessUnit()
@@ -592,10 +631,21 @@ namespace onlineLegalWF.frmInsurance
                                                    ,'" + xreq_date + @"')";
 
                 ret = zdb.ExecNonQueryReturnID(sqlInsertPropIns, zconnstr);
+                showAlertSuccess("alertSuccess", "Insert success");
             }
 
 
             return ret;
+        }
+
+        void showAlertSuccess(string key, string msg)
+        {
+            ClientScript.RegisterStartupScript(GetType(), key, "showAlertSuccess('" + msg + "');", true);
+        }
+
+        void showAlertError(string key, string msg)
+        {
+            ClientScript.RegisterStartupScript(GetType(), key, "showAlertError('" + msg + "');", true);
         }
     }
 }

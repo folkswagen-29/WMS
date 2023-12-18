@@ -7,6 +7,39 @@
     width: 100%;
 }
 
+/***********Validation************/
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+div#success-alert, div#danger-alert {
+    width: 80%;
+    position: fixed;
+    margin: 1% auto;
+    left: 0;
+    right: 0;
+    display: none;
+    z-index: 100;
+}
+
+/***********End Validation********/
+
 /***********Modal*************/
 .close {
     float: right;
