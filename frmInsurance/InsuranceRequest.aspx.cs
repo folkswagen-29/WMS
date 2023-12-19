@@ -526,12 +526,13 @@ namespace onlineLegalWF.frmInsurance
 
                 if (res > 0)
                 {
-                    Response.Write("<script>alert('Successfully added');</script>");
+                    showAlertSuccess("alertSuccess", "Insert success");
+                    //Response.Write("<script>alert('Successfully added');</script>");
                     Response.Redirect("/frmInsurance/InsuranceRequestList");
                 }
                 else
                 {
-                    Response.Write("<script>alert('Error !!!');</script>");
+                    showAlertError("alertErr", "Error !!!");
                 }
             }
             catch (Exception ex)
