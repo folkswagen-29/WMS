@@ -21,7 +21,6 @@ namespace onlineLegalWF.userControls
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
-        //public string zconnstr = ConfigurationSettings.AppSettings["BPMDB"].ToString();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
         public string zpath_attachment = ConfigurationManager.AppSettings["path_attachment"].ToString();
         #endregion

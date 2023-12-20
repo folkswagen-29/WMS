@@ -3,6 +3,8 @@
 <%@ Register src="../userControls/ucMenulist.ascx" tagname="ucMenulist" tagprefix="uc1" %>
 
 <%@ Register src="../userControls/ucAttachment.ascx" tagname="ucAttachment" tagprefix="uc2" %>
+<%@ Register Src="~/userControls/UcAttachForm.ascx" TagPrefix="uc3" TagName="UcAttachForm" %>
+
 
 <!DOCTYPE html>
 
@@ -134,6 +136,14 @@
                      <br />
                      <br />
                      <br />
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style2" colspan="2">
+                    <uc3:UcAttachForm runat="server" ID="UcAttachForm1" />
+                    <br />
+                    <br />
+                    <br />
                 </td>
             </tr>
         </table>
