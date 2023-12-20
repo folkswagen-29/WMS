@@ -86,7 +86,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:TextBox ID="company_name_th" runat="server" CssClass="Text_400"></asp:TextBox>
+                                <asp:TextBox ID="sec1_company_name_th" runat="server" CssClass="Text_400"></asp:TextBox>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -96,7 +96,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:TextBox ID="company_name_en" runat="server" CssClass="Text_400"></asp:TextBox>
+                                <asp:TextBox ID="sec1_company_name_en" runat="server" CssClass="Text_400"></asp:TextBox>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -106,7 +106,9 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:FileUpload ID="seal_attach" runat="server" />
+                                <asp:FileUpload ID="sec1_seal_attach" runat="server" /> 
+                                &nbsp; <asp:Button ID="sec1_btnUpload" runat="server" CssClass="btn-group" Text="Upload" /> 
+                                &nbsp; <asp:Button ID="sec1_btnEditupload" runat="server" CssClass="btn-group" Visible="false" Text="Edit" />
                             </td>
                             <td>&nbsp;</td>
                         </tr>

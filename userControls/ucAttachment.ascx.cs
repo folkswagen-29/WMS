@@ -39,7 +39,7 @@ namespace onlineLegalWF.userControls
         }
         private void ini_data_wf_attach()
         {
-            string sql = "select * from wf_attachment where pid = '" + hidPID.Value + "' ";
+            string sql = "select * from wf_attachment where pid = '" + hidPID.Value + "' and e_form IS NULL ";
 
             var ds = zdb.ExecSql_DataSet(sql, zconnstr);
 

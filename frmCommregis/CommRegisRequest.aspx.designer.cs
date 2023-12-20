@@ -87,31 +87,49 @@ namespace onlineLegalWF.frmCommregis
         protected global::System.Web.UI.WebControls.TextBox mt_res_date;
 
         /// <summary>
-        /// company_name_th control.
+        /// sec1_company_name_th control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox company_name_th;
+        protected global::System.Web.UI.WebControls.TextBox sec1_company_name_th;
 
         /// <summary>
-        /// company_name_en control.
+        /// sec1_company_name_en control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox company_name_en;
+        protected global::System.Web.UI.WebControls.TextBox sec1_company_name_en;
 
         /// <summary>
-        /// seal_attach control.
+        /// sec1_seal_attach control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload seal_attach;
+        protected global::System.Web.UI.WebControls.FileUpload sec1_seal_attach;
+
+        /// <summary>
+        /// sec1_btnUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button sec1_btnUpload;
+
+        /// <summary>
+        /// sec1_btnEditupload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button sec1_btnEditupload;
 
         /// <summary>
         /// sec1_no control.

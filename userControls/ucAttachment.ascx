@@ -41,7 +41,7 @@
             <tr>
                 <td colspan="3">
                     <div>
-                        <asp:GridView ID="fileGridview" UseAccessibleHeader="true" runat="server" CssClass="table w-100" GridLines="None" AutoGenerateColumns="false" EmptyDataText="No Files Uploaded">
+                        <asp:GridView ID="fileGridview" ShowHeader="false" UseAccessibleHeader="true" runat="server" CssClass="table w-100" GridLines="None" AutoGenerateColumns="false" EmptyDataText="No Files Uploaded">
                             <Columns>
                                 <asp:TemplateField>
                                     <ItemTemplate>
