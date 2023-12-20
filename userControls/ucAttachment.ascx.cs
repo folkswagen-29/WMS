@@ -29,7 +29,7 @@ namespace onlineLegalWF.userControls
         {
             if (!IsPostBack) 
             {
-                ini_data();
+                ini_data_wf_attach();
             }
         }
         public void ini_object(string xPID) 
@@ -37,7 +37,7 @@ namespace onlineLegalWF.userControls
             hidPID.Value = xPID;
             //ini_data(); 
         }
-        private void ini_data()
+        private void ini_data_wf_attach()
         {
             string sql = "select * from wf_attachment where pid = '" + hidPID.Value + "' ";
 
@@ -122,7 +122,7 @@ namespace onlineLegalWF.userControls
                     //    conn.Close();
                     //}
 
-                    ini_data();
+                    ini_data_wf_attach();
 
 
 
@@ -192,7 +192,7 @@ namespace onlineLegalWF.userControls
                 zdb.ExecNonQuery(sqldelete, zconnstr);
                 File.Delete(filePath);
                 //Response.Redirect(Request.Url.AbsoluteUri);
-                ini_data();
+                ini_data_wf_attach();
 
             }
 

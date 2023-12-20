@@ -362,7 +362,11 @@
         </tr>
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
-                <uc3:ucAttachment runat="server" ID="ucAttachment1" />
+                <br />
+                <asp:Panel ID="Panel4" runat="server" CssClass="div_90">
+                    <uc3:ucAttachment runat="server" ID="ucAttachment1" />
+                </asp:Panel>
+                <br />
             </td>
 
         </tr>

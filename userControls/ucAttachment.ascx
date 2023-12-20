@@ -7,9 +7,9 @@
     </Scripts>
 </asp:ScriptManager>
 
-<br />
+<%--<br />--%>
 <div>
-    <asp:Panel ID="Panel1" runat="server" CssClass="div_90">
+    <%--<asp:Panel ID="Panel1" runat="server" CssClass="div_90">--%>
         <table cellpadding="0" cellspacing="0" class="w-100">
             <tr>
                 <td>
@@ -81,10 +81,10 @@
             </tr>
         </table>
         
-    </asp:Panel>
+    <%--</asp:Panel>--%>
     
 </div>
-<br />
+<%--<br />--%>
 
 <asp:HiddenField ID="hidPID" runat="server" />
 
