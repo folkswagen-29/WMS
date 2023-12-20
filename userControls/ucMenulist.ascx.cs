@@ -1,4 +1,5 @@
-﻿using onlineLegalWF.frmInsurance;
+﻿using Microsoft.Office.Interop.Word;
+using onlineLegalWF.frmInsurance;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,6 +23,11 @@ namespace onlineLegalWF.userControls
             if (!IsPostBack) 
             {
                 bind_menu("");
+
+                if (Session["group_menu"] != null && Session["group_menu_index"] != null)
+                {
+                    bind_gvA_menu(Session["group_menu"].ToString(), Session["group_menu_index"].ToString());
+                }
             }
         }
         public void bind_menu(string userrole)
@@ -49,32 +55,34 @@ namespace onlineLegalWF.userControls
                 
                 int i = System.Convert.ToInt32(e.CommandArgument);
                 //gv.Rows[i].FindControl("gvlbtnMenu").Focus();
+                Session["group_menu_index"] = i;
                 var xmenu_group_name = ((Label)gv.Rows[i].FindControl("gvlblMenuGroupName")).Text;
                 var gvA = ((GridView)gv.Rows[i].FindControl("gvA"));
                 string sql = @"
-           select  menu_code, menu_name, ( '" + host_url + @"' + menu_icon_filename) as menu_icon_filename, menu_url , row_sort
+           select  menu_code, menu_name, ( '" + host_url + @"' + menu_icon_filename) as menu_icon_filename, menu_url , row_sort ,menu_group_name
 
             from m_portal_menu 
-            where menu_group_name = '"+ xmenu_group_name + @"' and menu_url <> '' 
+            where menu_group_name = '" + xmenu_group_name + @"' and menu_url <> '' 
             order by row_sort";
                 var ds = zdb.ExecSql_DataSet(sql, zconnstr);
                 gvA.DataSource = ds;
                 gvA.DataBind(); 
             }
         }
-        private void bind_gvA_menu(string menu_group_name, int length)
+        private void bind_gvA_menu(string menu_group_name,string index)
         {
-           // var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-           // var gvA = ((GridView)gv.Rows[length].FindControl("gvA"));
-           // string sql = @"
-           //select  menu_code, menu_name, ( '" + host_url + @"' + menu_icon_filename) as menu_icon_filename, menu_url , row_sort
+            int length = System.Convert.ToInt32(index);
+            var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+            var gvA = ((GridView)gv.Rows[length].FindControl("gvA"));
+            string sql = @"
+            select  menu_code, menu_name, ( '" + host_url + @"' + menu_icon_filename) as menu_icon_filename, menu_url , row_sort ,menu_group_name
 
-           // from m_portal_menu 
-           // where menu_group_name = '" + menu_group_name + @"' and menu_url <> '' 
-           // order by row_sort";
-           // var ds = zdb.ExecSql_DataSet(sql, zconnstr);
-           // gvA.DataSource = ds;
-           // gvA.DataBind();
+             from m_portal_menu 
+             where menu_group_name = '" + menu_group_name + @"' and menu_url <> '' 
+             order by row_sort";
+            var ds = zdb.ExecSql_DataSet(sql, zconnstr);
+            gvA.DataSource = ds;
+            gvA.DataBind();
         }
         //gvA_RowCommand
         protected void gvA_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -89,7 +97,7 @@ namespace onlineLegalWF.userControls
 
                 //var xmenu_code = ((Label)grid.Rows[index].FindControl("gvAlblMenuGroupName")).Text;
                 var xurl = ((Label)grid.Rows[index].FindControl("gvAlblMenuUrl")).Text;
-                ////Session["group_menu"] = ((Label)grid.Rows[index].FindControl("gvAlblMenuGroupName")).Text;
+                Session["group_menu"] = ((Label)grid.Rows[index].FindControl("gvAlblMenuGroupName")).Text;
                 Response.Redirect(xurl);
 
             }

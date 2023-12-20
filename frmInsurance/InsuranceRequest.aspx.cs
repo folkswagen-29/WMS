@@ -60,6 +60,8 @@ namespace onlineLegalWF.frmInsurance
             ucAttachment1.ini_object(pid);
             ucCommentlog1.ini_object(pid);
 
+            
+
         }
 
         protected void btn_gendocumnt_Click(object sender, EventArgs e)
