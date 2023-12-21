@@ -195,12 +195,12 @@ namespace onlineLegalWF.test
         protected global::onlineLegalWF.userControls.ucMenulist ucMenulist1;
 
         /// <summary>
-        /// UcAttachForm1 control.
+        /// ucAttachmentEform control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.UcAttachForm UcAttachForm1;
+        protected global::onlineLegalWF.userControls.ucAttachment ucAttachmentEform;
     }
 }

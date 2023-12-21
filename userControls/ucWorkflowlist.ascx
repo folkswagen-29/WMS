@@ -1,10 +1,10 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucWorkflowlist.ascx.cs" Inherits="onlineLegalWF.userControls.ucWorkflowlist" %>
-<asp:ScriptManager runat="server">
+<%--<asp:ScriptManager runat="server">
     <Scripts>
         <asp:ScriptReference Name="jquery" />
         <asp:ScriptReference Name="bootstrap" />
     </Scripts>
-</asp:ScriptManager>
+</asp:ScriptManager>--%>
 <div style="font-family:Tahoma;font-size:10pt;">
     <asp:GridView ID="gv1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="w-100 table">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />

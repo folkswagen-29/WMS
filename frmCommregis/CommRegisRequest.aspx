@@ -45,7 +45,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:TextBox ID="doc_no" runat="server" CssClass="Text_400"></asp:TextBox>
+                                <asp:Label ID="doc_no" runat="server" CssClass="Label_md"></asp:Label>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -106,9 +106,10 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:FileUpload ID="sec1_seal_attach" runat="server" /> 
+                                <uc3:ucAttachment runat="server" ID="ucAttachmentSec1" />
+                                <%--<asp:FileUpload ID="sec1_seal_attach" runat="server" /> 
                                 &nbsp; <asp:Button ID="sec1_btnUpload" runat="server" CssClass="btn-group" Text="Upload" /> 
-                                &nbsp; <asp:Button ID="sec1_btnEditupload" runat="server" CssClass="btn-group" Visible="false" Text="Edit" />
+                                &nbsp; <asp:Button ID="sec1_btnEditupload" runat="server" CssClass="btn-group" Visible="false" Text="Edit" />--%>
                             </td>
                             <td>&nbsp;</td>
                         </tr>

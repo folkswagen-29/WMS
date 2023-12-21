@@ -15,22 +15,31 @@ namespace onlineLegalWF.userControls
     {
 
         /// <summary>
-        /// script1 control.
+        /// seal_attach control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager script1;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow seal_attach;
 
         /// <summary>
-        /// Label2 control.
+        /// lblSecAttach control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label lblSecAttach;
+
+        /// <summary>
+        /// lbltitleAttach control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell lbltitleAttach;
 
         /// <summary>
         /// Label1 control.
@@ -76,6 +85,24 @@ namespace onlineLegalWF.userControls
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hidPID;
+
+        /// <summary>
+        /// eformID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField eformID;
+
+        /// <summary>
+        /// eformSecNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField eformSecNo;
 
         /// <summary>
         /// pdf_render control.

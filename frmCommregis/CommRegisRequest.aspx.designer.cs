@@ -57,7 +57,7 @@ namespace onlineLegalWF.frmCommregis
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox doc_no;
+        protected global::System.Web.UI.WebControls.Label doc_no;
 
         /// <summary>
         /// mt_res_desc control.
@@ -105,31 +105,13 @@ namespace onlineLegalWF.frmCommregis
         protected global::System.Web.UI.WebControls.TextBox sec1_company_name_en;
 
         /// <summary>
-        /// sec1_seal_attach control.
+        /// ucAttachmentSec1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload sec1_seal_attach;
-
-        /// <summary>
-        /// sec1_btnUpload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button sec1_btnUpload;
-
-        /// <summary>
-        /// sec1_btnEditupload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button sec1_btnEditupload;
+        protected global::onlineLegalWF.userControls.ucAttachment ucAttachmentSec1;
 
         /// <summary>
         /// sec1_no control.

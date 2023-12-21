@@ -1,11 +1,10 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucAttachment.ascx.cs" Inherits="onlineLegalWF.userControls.ucAttachment" %>
- <link href="../StyleSheet/CustomStyle.css" rel="stylesheet" type="text/css"/>
-<asp:ScriptManager ID="script1" runat="server">
+<%--<asp:ScriptManager ID="scriptAttach" runat="server">
     <Scripts>
         <asp:ScriptReference Name="jquery" />
         <asp:ScriptReference Name="bootstrap" />
     </Scripts>
-</asp:ScriptManager>
+</asp:ScriptManager>--%>
 
 <%--<br />--%>
 <div>
@@ -14,19 +13,19 @@
             <tr>
                 <td>
                     <table cellpadding="0" cellspacing="0" >
-                        <tr>
+                        <tr id="seal_attach" runat="server">
                             <td>
-                                <asp:Label ID="Label2" runat="server" CssClass="Label_lg_blue" Text="Attachments"></asp:Label>
+                                <asp:Label ID="lblSecAttach" runat="server" CssClass="Label_lg_blue" Text="Attachments"></asp:Label>
                             </td>
                             <td>&nbsp;</td>
                             <td>
                                 &nbsp;</td>
                         </tr>
                         <tr>
-                            <td>
-                                <asp:Label ID="Label1" runat="server" CssClass="Label_md" Text="Please select and input file"></asp:Label>
+                            <td ID="lbltitleAttach" runat="server">
+                                <asp:Label ID="Label1" runat="server" CssClass="Label_md" Text="Please select and input file"></asp:Label> &nbsp;
                             </td>
-                            <td>&nbsp;
+                            <td>
                                 <asp:FileUpload ID="FileUpload1" runat="server" />
                             </td>
                             <td>
@@ -87,6 +86,8 @@
 <%--<br />--%>
 
 <asp:HiddenField ID="hidPID" runat="server" />
+<asp:HiddenField ID="eformID" runat="server" />
+<asp:HiddenField ID="eformSecNo" runat="server" />
 
 <div class="modal fade" id="modalattach" role="dialog">
     <div class="modal-dialog modal-lg">

@@ -43,7 +43,9 @@ namespace onlineLegalWF.frmCommregis
             lblPID.Text = pid;
             hid_PID.Value = pid;
             ucAttachment1.ini_object(pid);
+            ucAttachmentSec1.ini_object(pid,"comregissec1","1");
             ucCommentlog1.ini_object(pid);
+
         }
 
         public DataTable GetTypeOfRequest()

@@ -31,14 +31,31 @@ namespace onlineLegalWF.userControls
                 ini_data_wf_attach();
             }
         }
-        public void ini_object(string xPID) 
+        public void ini_object(string xPID,string xEform = "", string xEfomSecNo = "") 
         {
             hidPID.Value = xPID;
-            //ini_data(); 
+            eformID.Value = xEform;
+            eformSecNo.Value = xEfomSecNo;
+            ////ini_data_wf_attach();
+            if (!string.IsNullOrEmpty(eformID.Value)) 
+            {
+                lblSecAttach.CssClass = "Label_lg";
+                seal_attach.Visible = false;
+                lbltitleAttach.Visible = false;
+            }
         }
         private void ini_data_wf_attach()
         {
-            string sql = "select * from wf_attachment where pid = '" + hidPID.Value + "' and e_form IS NULL ";
+            string sql = "";
+            if (string.IsNullOrEmpty(eformID.Value))
+            {
+                sql = "select * from wf_attachment where pid = '" + hidPID.Value + "' and e_form IS NULL ";
+            }
+            else 
+            {
+                sql = "select * from wf_attachment where pid = '" + hidPID.Value + "' and e_form = '"+ eformID.Value + "' and e_form_sec_no ="+ eformSecNo.Value;
+            }
+            
 
             var ds = zdb.ExecSql_DataSet(sql, zconnstr);
 
@@ -75,12 +92,18 @@ namespace onlineLegalWF.userControls
                     string xpid = hidPID.Value;
                     string xattach_fn = FileUpload1.FileName;
                     string xattach_fp = fn;
-                    var xattach_ct_byte = FileUpload1.FileBytes;
+                    //var xattach_ct_byte = FileUpload1.FileBytes;
+                    string xeform = eformID.Value;
+                    string xeform_sec_no = eformSecNo.Value;
                     string xattach_ctt = FileUpload1.PostedFile.ContentType;
                     string xcreate_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff", new CultureInfo("en-US"));
 
                     // insert into db
-                    string sql = @"INSERT INTO [dbo].[wf_attachment] 
+
+                    string sql = "";
+                    if (string.IsNullOrEmpty(eformID.Value))
+                    {
+                        sql = @"INSERT INTO [dbo].[wf_attachment] 
                                         ([pid],[attached_filename],[attached_filepath],[content_type],[created_datetime])
                                          VALUES
                                                ('" + xpid + @"'
@@ -88,6 +111,20 @@ namespace onlineLegalWF.userControls
                                                ,'" + xattach_fp + @"'
                                                ,'" + xattach_ctt + @"'
                                                ,'" + xcreate_date + @"')";
+                    }
+                    else
+                    {
+                        sql = @"INSERT INTO [dbo].[wf_attachment] 
+                                        ([pid],[e_form],[e_form_sec_no],[attached_filename],[attached_filepath],[content_type],[created_datetime])
+                                         VALUES
+                                               ('" + xpid + @"'
+                                               ,'" + xeform + @"'
+                                               ,'" + xeform_sec_no + @"'
+                                               ,'" + xattach_fn + @"'
+                                               ,'" + xattach_fp + @"'
+                                               ,'" + xattach_ctt + @"'
+                                               ,'" + xcreate_date + @"')";
+                    }
                     zdb.ExecNonQuery(sql, zconnstr);
 
 
@@ -180,13 +217,32 @@ namespace onlineLegalWF.userControls
             //File.Delete(filePath);
             //ini_data();
             string filename = Path.GetFileName(filePath);
-            string sql = "select * from wf_attachment where pid = '" + hidPID.Value + "' and  attached_filename= '" + filename + "'";
+            string sql = "";
+
+            if (string.IsNullOrEmpty(eformID.Value))
+            {
+                sql = "select * from wf_attachment where pid = '" + hidPID.Value + "' and  attached_filename= '" + filename + "'";
+            }
+            else 
+            {
+                sql = "select * from wf_attachment where pid = '" + hidPID.Value + "' and  attached_filename= '" + filename + "' and e_form = '" + eformID.Value + "' and e_form_sec_no =" + eformSecNo.Value;
+            }
+            
 
             var dt = zdb.ExecSql_DataTable(sql, zconnstr);
 
             if (dt.Rows.Count > 0)
             {
-                string sqldelete = "delete wf_attachment where pid = '" + hidPID.Value + "' and  attached_filename= '" + filename + "'";
+                string sqldelete = "";
+                if (string.IsNullOrEmpty(eformID.Value))
+                {
+                    sqldelete = "delete wf_attachment where pid = '" + hidPID.Value + "' and  attached_filename= '" + filename + "'";
+                }
+                else 
+                {
+                    sqldelete = "delete wf_attachment where pid = '" + hidPID.Value + "' and  attached_filename= '" + filename + "' and e_form = '" + eformID.Value + "' and e_form_sec_no =" + eformSecNo.Value;
+                }
+                
 
                 zdb.ExecNonQuery(sqldelete, zconnstr);
                 File.Delete(filePath);

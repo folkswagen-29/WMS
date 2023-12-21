@@ -7,6 +7,10 @@
     width: 100%;
 }
 
+.d-none {
+    display: none;
+}
+
 /***********Validation************/
 .alert {
     padding: 15px;

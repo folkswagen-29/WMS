@@ -3,7 +3,10 @@
 <%@ Register src="../userControls/ucMenulist.ascx" tagname="ucMenulist" tagprefix="uc1" %>
 
 <%@ Register src="../userControls/ucAttachment.ascx" tagname="ucAttachment" tagprefix="uc2" %>
-<%@ Register Src="~/userControls/UcAttachForm.ascx" TagPrefix="uc3" TagName="UcAttachForm" %>
+<%--<%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>--%>
+
+
+<%--<%@ Register Src="~/userControls/UcAttachForm.ascx" TagPrefix="uc3" TagName="UcAttachForm" %>--%>
 
 
 <!DOCTYPE html>
@@ -140,7 +143,8 @@
             </tr>
             <tr>
                 <td class="auto-style2" colspan="2">
-                    <uc3:UcAttachForm runat="server" ID="UcAttachForm1" />
+                    <%--<uc3:UcAttachForm runat="server" ID="UcAttachForm1" />--%>
+                    <uc2:ucAttachment runat="server" ID="ucAttachmentEform" />
                     <br />
                     <br />
                     <br />

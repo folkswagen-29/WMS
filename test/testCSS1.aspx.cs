@@ -24,6 +24,7 @@ namespace onlineLegalWF.test
             ucMenulist1.bind_menu("");
             lblPID.Text = zwf.iniPID("LEGALWF");
             ucAttachment1.ini_object(lblPID.Text);
+            ucAttachmentEform.ini_object(lblPID.Text,"test","1");
         }
 
         protected void Button1_Click(object sender, EventArgs e)

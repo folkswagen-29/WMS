@@ -11,7 +11,8 @@
 <head runat="server">
     <title>Legal Workflow</title>
     <link href="../StyleSheet/CustomStyle.css" rel="stylesheet" type="text/css" />
-    <%--<link href="../Content/bootstrap.css" rel="stylesheet" />--%>
+    <script src="../Scripts/jquery-3.4.1.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
     <style type="text/css">
         .bg_banner_img {
             width: 255px;
@@ -21,24 +22,30 @@
         }
     </style>
     <metaviewport name="viewport" content="width=device-width, initial-scale=1.0">
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
-    <script type="text/javascript">
-        function showAlertSuccess(msg) {
-            $("#success-alert").text(msg);
-            $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
-                $("#success-alert").slideUp(500);
-            });
-        }
-        function showAlertError(msg) {
-            $("#danger-alert").text(msg);
-            $("#danger-alert").fadeTo(2000, 500).slideUp(500, function () {
-                $("#danger-alert").slideUp(500);
-            });
-        }
-    </script>
+        <asp:ContentPlaceHolder ID="head" runat="server">
+        </asp:ContentPlaceHolder>
+        <script type="text/javascript">
+            function showAlertSuccess(msg) {
+                $("#success-alert").text(msg);
+                $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+                    $("#success-alert").slideUp(500);
+                });
+            }
+            function showAlertError(msg) {
+                $("#danger-alert").text(msg);
+                $("#danger-alert").fadeTo(2000, 500).slideUp(500, function () {
+                    $("#danger-alert").slideUp(500);
+                });
+            }
+        </script>
 </head>
 <body>
+    <%--<asp:ScriptManager ID="scriptAttach" runat="server">
+        <Scripts>
+            <asp:ScriptReference Name="jquery" />
+            <asp:ScriptReference Name="bootstrap" />
+        </Scripts>
+    </asp:ScriptManager>--%>
     <form id="form1" runat="server">
         <div class="div1">
             <%--Validation Tag--%>
