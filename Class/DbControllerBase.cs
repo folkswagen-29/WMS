@@ -81,9 +81,7 @@ namespace onlineLegalWF
         }
         public SqlDataReader ExecuteSql(string sql, CommandType cmdType = CommandType.Text)
         {
-            try
-            {
-                if (sqlReader != null && !sqlReader.IsClosed)
+             if (sqlReader != null && !sqlReader.IsClosed)
                 {
                     sqlReader.Close();
                 }
@@ -93,13 +91,7 @@ namespace onlineLegalWF
                 sqlCmd.Connection = conn;
                 sqlReader = sqlCmd.ExecuteReader();
 
-            }
-            catch (Exception e)
-            {
-                LogHelper.Write(sql);
-                LogHelper.Write(e);
-                throw;
-            }
+          
 
             return sqlReader;
         }
@@ -108,36 +100,22 @@ namespace onlineLegalWF
         {
             DataSet ds = new DataSet();
 
-            try
-            {
                 SqlConnection conn = new SqlConnection(xconnstr);
                 conn.Open();
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sql, conn);
                 sqlDataAdapter.Fill(ds);
                 conn.Close();
-            }
-            catch (Exception e)
-            {
-                LogHelper.Write(sql);
-                LogHelper.Write(e);
-            }
+          
             return ds;
         }
         public DataSet ExecSql_DataSet(string sql, SqlConnection conn)
         {
 
             DataSet ds = new DataSet();
-             
-            try
-            {
+            
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sql, conn);
                 sqlDataAdapter.Fill(ds);
-            }
-            catch (Exception e)
-            {
-                LogHelper.Write(sql);
-                LogHelper.Write(e);
-            }
+           
             return ds;
         }
         public DataTable ExecSql_DataTable(string sql, string xconnstr)
@@ -203,41 +181,28 @@ namespace onlineLegalWF
 
         public void ExecNonQuery(string sql, string xconnstr)
         {
-            try
-            {
+            
                 SqlConnection conn = new SqlConnection(xconnstr); 
                 conn.Open();
                 DataSet ds = new DataSet();
                 SqlCommand SQLCmd = new SqlCommand(sql, conn);
                 SQLCmd.ExecuteNonQuery();
                 conn.Close();
-            }
-            catch (Exception e)
-            {
-                LogHelper.Write(sql);
-                LogHelper.Write(e);
-            }
+          
         }
         public void ExecNonQuery(string sql, SqlConnection conn)
         {
-            try
-            {
+           
                 DataSet ds = new DataSet();
                 SqlCommand SQLCmd = new SqlCommand(sql, conn);
                 SQLCmd.ExecuteNonQuery();
                 conn.Close();
-            }
-            catch (Exception e)
-            {
-                LogHelper.Write(sql);
-                LogHelper.Write(e);
-            }
+           
         }
         public int ExecNonQueryReturnID(string sql, string xconnstr)
         {
             int modified = 0;
-            try
-            {
+            
                 SqlConnection conn = new SqlConnection(xconnstr);
                 conn.Open();
                 DataSet ds = new DataSet();
@@ -246,19 +211,13 @@ namespace onlineLegalWF
                 modified = SQLCmd.ExecuteNonQuery();
                 conn.Close();
 
-            }
-            catch (Exception e)
-            {
-                LogHelper.Write(sql);
-                LogHelper.Write(e);
-            }
+           
             return modified;
         }
         public int ExecuteScalar(string sql, string xconnstr)
         {
             int modified = 0;
-            try
-            {
+            
                 SqlConnection conn = new SqlConnection(xconnstr);
                 conn.Open();
                 DataSet ds = new DataSet();
@@ -267,12 +226,7 @@ namespace onlineLegalWF
                 modified = Convert.ToInt32(SQLCmd.ExecuteScalar());
                 conn.Close();
 
-            }
-            catch (Exception e)
-            {
-                LogHelper.Write(sql);
-                LogHelper.Write(e);
-            }
+         
             return modified;
         }
     }
