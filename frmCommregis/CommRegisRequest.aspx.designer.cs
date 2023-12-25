@@ -357,6 +357,15 @@ namespace onlineLegalWF.frmCommregis
         protected global::System.Web.UI.WebControls.TextBox sec2_companynameen;
 
         /// <summary>
+        /// ucAttachmentSec2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::onlineLegalWF.userControls.ucAttachment ucAttachmentSec2;
+
+        /// <summary>
         /// sec3_reg_capital_add control.
         /// </summary>
         /// <remarks>

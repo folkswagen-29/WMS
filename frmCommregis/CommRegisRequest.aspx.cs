@@ -44,6 +44,7 @@ namespace onlineLegalWF.frmCommregis
             hid_PID.Value = pid;
             ucAttachment1.ini_object(pid);
             ucAttachmentSec1.ini_object(pid,"comregissec1","1");
+            ucAttachmentSec2.ini_object(pid,"comregissec2","1");
             ucCommentlog1.ini_object(pid);
 
         }

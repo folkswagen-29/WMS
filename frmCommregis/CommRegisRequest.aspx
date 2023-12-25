@@ -439,7 +439,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <input type="file" id="sec2_sealattach" value="Input File" />
+                                <uc3:ucAttachment runat="server" ID="ucAttachmentSec2" />
                             </td>
                             <td>&nbsp;</td>
                         </tr>
