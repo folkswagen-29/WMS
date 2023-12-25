@@ -114,94 +114,94 @@ namespace onlineLegalWF.frmCommregis
         protected global::onlineLegalWF.userControls.ucAttachment ucAttachmentSec1;
 
         /// <summary>
-        /// sec1_no control.
+        /// sec1_hq_no control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_no;
+        protected global::System.Web.UI.WebControls.TextBox sec1_hq_no;
 
         /// <summary>
-        /// sec1_building control.
+        /// sec1_hq_building control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_building;
+        protected global::System.Web.UI.WebControls.TextBox sec1_hq_building;
 
         /// <summary>
-        /// sec1_road control.
+        /// sec1_hq_road control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_road;
+        protected global::System.Web.UI.WebControls.TextBox sec1_hq_road;
 
         /// <summary>
-        /// sec1_subdistrict control.
+        /// sec1_hq_subdistrict control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_subdistrict;
+        protected global::System.Web.UI.WebControls.TextBox sec1_hq_subdistrict;
 
         /// <summary>
-        /// sec1_district control.
+        /// sec1_hq_district control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_district;
+        protected global::System.Web.UI.WebControls.TextBox sec1_hq_district;
 
         /// <summary>
-        /// sec1_province control.
+        /// sec1_hq_province control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_province;
+        protected global::System.Web.UI.WebControls.TextBox sec1_hq_province;
 
         /// <summary>
-        /// sec1_postcode control.
+        /// sec1_hq_postcode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_postcode;
+        protected global::System.Web.UI.WebControls.TextBox sec1_hq_postcode;
 
         /// <summary>
-        /// sec1_phonenumber control.
+        /// sec1_hq_phonenumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_phonenumber;
+        protected global::System.Web.UI.WebControls.TextBox sec1_hq_phonenumber;
 
         /// <summary>
-        /// sec1_typebu control.
+        /// sec1_type_bu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_typebu;
+        protected global::System.Web.UI.WebControls.TextBox sec1_type_bu;
 
         /// <summary>
-        /// sec1_typeactivity control.
+        /// sec1_type_activity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_typeactivity;
+        protected global::System.Web.UI.WebControls.TextBox sec1_type_activity;
 
         /// <summary>
         /// sec1_object control.
@@ -240,94 +240,94 @@ namespace onlineLegalWF.frmCommregis
         protected global::System.Web.UI.WebControls.TextBox sec1_paidcapital;
 
         /// <summary>
-        /// sec1_shareholdername control.
+        /// sec1_shareholder_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_shareholdername;
+        protected global::System.Web.UI.WebControls.TextBox sec1_shareholder_name;
 
         /// <summary>
-        /// sec1_shareholderamount control.
+        /// sec1_shareholder_amount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_shareholderamount;
+        protected global::System.Web.UI.WebControls.TextBox sec1_shareholder_amount;
 
         /// <summary>
-        /// sec1_shareholdervalue control.
+        /// sec1_shareholder_value control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_shareholdervalue;
+        protected global::System.Web.UI.WebControls.TextBox sec1_shareholder_value;
 
         /// <summary>
-        /// sec1_shareholderpaid control.
+        /// sec1_shareholder_paid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_shareholderpaid;
+        protected global::System.Web.UI.WebControls.TextBox sec1_shareholder_paid;
 
         /// <summary>
-        /// sec1_rule control.
+        /// sec1_rule_desc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_rule;
+        protected global::System.Web.UI.WebControls.TextBox sec1_rule_desc;
 
         /// <summary>
-        /// sec1_directorname control.
+        /// sec1_director_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_directorname;
+        protected global::System.Web.UI.WebControls.TextBox sec1_director_name;
 
         /// <summary>
-        /// sec1_directorposittion control.
+        /// sec1_director_posittion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_directorposittion;
+        protected global::System.Web.UI.WebControls.TextBox sec1_director_posittion;
 
         /// <summary>
-        /// sec1_laymanname control.
+        /// sec1_layman_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_laymanname;
+        protected global::System.Web.UI.WebControls.TextBox sec1_layman_name;
 
         /// <summary>
-        /// sec1_auditname control.
+        /// sec1_audit_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_auditname;
+        protected global::System.Web.UI.WebControls.TextBox sec1_audit_name;
 
         /// <summary>
-        /// sec1_auditlicense control.
+        /// sec1_audit_license control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec1_auditlicense;
+        protected global::System.Web.UI.WebControls.TextBox sec1_audit_license;
 
         /// <summary>
         /// sec1_costperyear control.
@@ -474,103 +474,103 @@ namespace onlineLegalWF.frmCommregis
         protected global::System.Web.UI.WebControls.TextBox sec6_directorposition_out;
 
         /// <summary>
-        /// sec6_old control.
+        /// sec6_director_old control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec6_old;
+        protected global::System.Web.UI.WebControls.TextBox sec6_director_old;
 
         /// <summary>
-        /// sec6_nationality control.
+        /// sec6_director_nationality control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec6_nationality;
+        protected global::System.Web.UI.WebControls.TextBox sec6_director_nationality;
 
         /// <summary>
-        /// sec6_identityno control.
+        /// sec6_director_identityno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec6_identityno;
+        protected global::System.Web.UI.WebControls.TextBox sec6_director_identityno;
 
         /// <summary>
-        /// sec6_no control.
+        /// sec6_director_no control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec6_no;
+        protected global::System.Web.UI.WebControls.TextBox sec6_director_no;
 
         /// <summary>
-        /// sec6_building control.
+        /// sec6_director_building control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec6_building;
+        protected global::System.Web.UI.WebControls.TextBox sec6_director_building;
 
         /// <summary>
-        /// sec6_road control.
+        /// sec6_director_road control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec6_road;
+        protected global::System.Web.UI.WebControls.TextBox sec6_director_road;
 
         /// <summary>
-        /// sec6_subdistrict control.
+        /// sec6_director_subdistrict control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec6_subdistrict;
+        protected global::System.Web.UI.WebControls.TextBox sec6_director_subdistrict;
 
         /// <summary>
-        /// sec6_district control.
+        /// sec6_director_district control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec6_district;
+        protected global::System.Web.UI.WebControls.TextBox sec6_director_district;
 
         /// <summary>
-        /// sec6_province control.
+        /// sec6_director_province control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec6_province;
+        protected global::System.Web.UI.WebControls.TextBox sec6_director_province;
 
         /// <summary>
-        /// sec6_postcode control.
+        /// sec6_director_postcode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec6_postcode;
+        protected global::System.Web.UI.WebControls.TextBox sec6_director_postcode;
 
         /// <summary>
-        /// sec6_phonenumber control.
+        /// sec6_director_phonenumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sec6_phonenumber;
+        protected global::System.Web.UI.WebControls.TextBox sec6_director_phonenumber;
 
         /// <summary>
         /// sec7_no control.

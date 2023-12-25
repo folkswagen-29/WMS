@@ -128,19 +128,19 @@
                                 <table>
                                     <tr>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec1_no" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_hq_no" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                         <td style="width:55px; min-width: 55px; text-align: right; vertical-align: top;">
                                             <label class="Label_md">อาคาร </label>
                                         </td>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec1_building" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_hq_building" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                         <td style="width:55px; min-width: 55px; text-align: right; vertical-align: top;">
                                             <label class="Label_md">ถนน </label>
                                         </td>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec1_road" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_hq_road" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                     </tr>
                                 </table>
@@ -156,19 +156,19 @@
                                 <table>
                                     <tr>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec1_subdistrict" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_hq_subdistrict" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                         <td style="width:55px; min-width: 55px; text-align: right; vertical-align: top;">
                                             <label class="Label_md">เขต </label>
                                         </td>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec1_district" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_hq_district" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                         <td style="width:55px; min-width: 55px; text-align: right; vertical-align: top;">
                                             <label class="Label_md">จังหวัด </label>
                                         </td>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec1_province" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_hq_province" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                     </tr>
                                 </table>
@@ -184,13 +184,13 @@
                                 <table>
                                     <tr>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec1_postcode" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_hq_postcode" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                         <td style="width: 55px; min-width: 55px; text-align: right; vertical-align: top;">
                                             <label class="Label_md">เบอร์โทร </label>
                                         </td>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec1_phonenumber" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_hq_phonenumber" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                     </tr>
                                 </table>
@@ -206,14 +206,14 @@
                                 <table>
                                     <tr>
                                         <td class="cell_content_40PC_TL" style="padding: 0;">
-                                            <asp:TextBox ID="sec1_typebu" runat="server" CssClass="Text_200"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_type_bu" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                         <td class="cell_content_PC_TL">
                                             <label class="Label_md">หมวดกิจกรรม </label>
                                         </td>
                                         <td class="cell_content_40PC_TL" style="padding: 0;">
-                                            <asp:TextBox ID="sec1_typeactivity" runat="server" CssClass="Text_200"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_type_activity" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                     </tr>
@@ -277,14 +277,14 @@
                                 <table>
                                     <tr>
                                         <td class="cell_content_40PC_TL" style="padding: 0;">
-                                            <asp:TextBox ID="sec1_shareholdername" runat="server" CssClass="Text_200"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_shareholder_name" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                         <td class="cell_content_PC_TL">
                                             <label class="Label_md">จำนวน </label>
                                         </td>
                                         <td class="cell_content_40PC_TL" style="padding: 0;">
-                                            <asp:TextBox ID="sec1_shareholderamount" runat="server" CssClass="Text_200"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_shareholder_amount" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                     </tr>
@@ -301,14 +301,14 @@
                                 <table>
                                     <tr>
                                         <td class="cell_content_40PC_TL" style="padding: 0;">
-                                            <asp:TextBox ID="sec1_shareholdervalue" runat="server" CssClass="Text_200"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_shareholder_value" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                         <td class="cell_content_PC_TL">
                                             <label class="Label_md">ชำระแล้ว </label>
                                         </td>
                                         <td class="cell_content_40PC_TL" style="padding: 0;">
-                                            <asp:TextBox ID="sec1_shareholderpaid" runat="server" CssClass="Text_200"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_shareholder_paid" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                     </tr>
@@ -322,7 +322,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td>
-                                <asp:TextBox ID="sec1_rule" runat="server" CssClass="Text_600" TextMode="MultiLine" Height="100"></asp:TextBox></td>
+                                <asp:TextBox ID="sec1_rule_desc" runat="server" CssClass="Text_600" TextMode="MultiLine" Height="100"></asp:TextBox></td>
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
@@ -340,14 +340,14 @@
                                 <table>
                                     <tr>
                                         <td class="cell_content_40PC_TL" style="padding: 0;">
-                                            <asp:TextBox ID="sec1_directorname" runat="server" CssClass="Text_200"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_director_name" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                         <td class="cell_content_PC_TL">
                                             <label class="Label_md">ตำแหน่ง </label>
                                         </td>
                                         <td class="cell_content_40PC_TL" style="padding: 0;">
-                                            <asp:TextBox ID="sec1_directorposittion" runat="server" CssClass="Text_200"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_director_posittion" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                     </tr>
@@ -367,7 +367,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL" style="padding: 0;">
-                                <asp:TextBox ID="sec1_laymanname" runat="server" CssClass="Text_400"></asp:TextBox>
+                                <asp:TextBox ID="sec1_layman_name" runat="server" CssClass="Text_400"></asp:TextBox>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -386,14 +386,14 @@
                                 <table>
                                     <tr>
                                         <td class="cell_content_40PC_TL" style="padding: 0;">
-                                            <asp:TextBox ID="sec1_auditname" runat="server" CssClass="Text_200"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_audit_name" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                         <td class="cell_content_PC_TL">
                                             <label class="Label_md">ใบอนุญาตเลขที่ </label>
                                         </td>
                                         <td class="cell_content_40PC_TL" style="padding: 0;">
-                                            <asp:TextBox ID="sec1_auditlicense" runat="server" CssClass="Text_200"></asp:TextBox>
+                                            <asp:TextBox ID="sec1_audit_license" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                     </tr>
@@ -605,14 +605,14 @@
                                 <table>
                                     <tr>
                                         <td class="cell_content_40PC_TL" style="padding: 0;">
-                                            <asp:TextBox ID="sec6_old" runat="server" CssClass="Text_200"></asp:TextBox>
+                                            <asp:TextBox ID="sec6_director_old" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                         <td class="cell_content_PC_TL">
                                             <label class="Label_md">สัญชาติ </label>
                                         </td>
                                         <td class="cell_content_40PC_TL" style="padding: 0;">
-                                            <asp:TextBox ID="sec6_nationality" runat="server" CssClass="Text_200"></asp:TextBox>
+                                            <asp:TextBox ID="sec6_director_nationality" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                     </tr>
@@ -626,7 +626,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:TextBox ID="sec6_identityno" runat="server" CssClass="Text_200"></asp:TextBox>
+                                <asp:TextBox ID="sec6_director_identityno" runat="server" CssClass="Text_200"></asp:TextBox>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -645,19 +645,19 @@
                                 <table>
                                     <tr>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec6_no" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec6_director_no" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                         <td style="width: 55px; min-width: 55px; text-align: right; vertical-align: top;">
                                             <label class="Label_md">อาคาร </label>
                                         </td>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec6_building" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec6_director_building" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                         <td style="width: 55px; min-width: 55px; text-align: right; vertical-align: top;">
                                             <label class="Label_md">ถนน </label>
                                         </td>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec6_road" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec6_director_road" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                     </tr>
                                 </table>
@@ -673,19 +673,19 @@
                                 <table>
                                     <tr>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec6_subdistrict" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec6_director_subdistrict" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                         <td style="width: 55px; min-width: 55px; text-align: right; vertical-align: top;">
                                             <label class="Label_md">เขต </label>
                                         </td>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec6_district" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec6_director_district" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                         <td style="width: 55px; min-width: 55px; text-align: right; vertical-align: top;">
                                             <label class="Label_md">จังหวัด </label>
                                         </td>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec6_province" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec6_director_province" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                     </tr>
                                 </table>
@@ -701,13 +701,13 @@
                                 <table>
                                     <tr>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec6_postcode" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec6_director_postcode" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                         <td style="width: 55px; min-width: 55px; text-align: right; vertical-align: top;">
                                             <label class="Label_md">เบอร์โทร </label>
                                         </td>
                                         <td class="cell_content_PC_TL">
-                                            <asp:TextBox ID="sec6_phonenumber" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="sec6_director_phonenumber" runat="server" CssClass="Text_150"></asp:TextBox>
                                         </td>
                                     </tr>
                                 </table>
