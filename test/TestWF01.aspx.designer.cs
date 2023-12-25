@@ -60,13 +60,13 @@ namespace onlineLegalWF.test
         protected global::System.Web.UI.WebControls.TextBox txtSubject1;
 
         /// <summary>
-        /// ucAttachment1 control.
+        /// txtProcessID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucAttachment ucAttachment1;
+        protected global::System.Web.UI.WebControls.TextBox txtProcessID;
 
         /// <summary>
         /// Button1 control.

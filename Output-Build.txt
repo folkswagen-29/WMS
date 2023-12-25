@@ -1,0 +1,4 @@
+﻿Build started...
+1>------ Build started: Project: onlineLegalWF, Configuration: Debug Any CPU ------
+1>C:\workspace14\onlineLegalWF\test\TestWF01.aspx.cs(113,41,113,41): error CS1002: ; expected
+========== Build: 0 succeeded, 1 failed, 0 up-to-date, 0 skipped ==========

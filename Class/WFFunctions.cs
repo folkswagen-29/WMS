@@ -152,6 +152,18 @@ namespace onlineLegalWF.Class
             }
             return x; 
         }
+        public Boolean isExistingWFStep(string process_id, string process_code, int version_no, int step_no)
+        {
+            var x = false; 
+            string sql = " select * from wf_routing where process_id = '"+ process_id + "' and process_code = '" + process_code + "' and version_no = " + version_no.ToString() + " and step_no = " + step_no.ToString();
+
+            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                x = true; 
+            }
+            return x; 
+        }
         public wf_attributes getCurrentStep(string process_id, string process_code, int version_no)
         {
             var x = new wf_attributes(); 
@@ -177,7 +189,7 @@ namespace onlineLegalWF.Class
                 }
                 catch
                 {
-                    x.step_no = 1;
+                    x.step_no = -1;
                 }
                 x.step_name = dr["step_name"].ToString();
                 x.assto_login = dr["assto_login"].ToString();
@@ -229,7 +241,7 @@ namespace onlineLegalWF.Class
                     }
                     catch
                     {
-                        x.step_no = 1;
+                        x.step_no = -1;
                     }
                     x.step_name = dr["step_name"].ToString();
                     x.assto_login = dr["assto_login"].ToString();
@@ -250,18 +262,21 @@ namespace onlineLegalWF.Class
             }
             return x ;
         }
-        public string updateProcess(wf_attributes wfA)
+
+        public wf_attributes updateProcess(wf_attributes wfA) //return next_step_attribute
         {
             string x = "";
             // Update Current Step
-            string sql = " select * from wf_routing where process_id = '" + wfA.process_id + "' and process_code = '" + wfA.process_code + "' and version_no = " + wfA.version_no.ToString() + "' and step_no = " + wfA.step_no.ToString();
+            string sql = " select * from wf_routing where process_id = '" + wfA.process_id + "' and process_code = '" + wfA.process_code + "' and version_no = " + wfA.version_no.ToString() + " and step_no = " + wfA.step_no.ToString();
             var dt = zdb.ExecSql_DataTable(sql, zconnstr);
             if (dt.Rows.Count > 0)
             {
                 var dr = dt.Rows[0];
                 string sqlupd = @"update wf_routing 
                 set 
-                    wf_status = '"+wfA.wf_status+@"' ,
+                    submit_answer = '" + wfA.submit_answer + @"' ,
+                    submit_by = '" + wfA.submit_by + @"' ,
+                    wf_status = '" + wfA.wf_status+@"' ,
                     attr_apv_value = '" + wfA.attr_apv_value + @"' 
                 where process_id = '"+wfA.process_id+@"' and step_no = "+wfA.step_no+@"
                 ";
@@ -271,7 +286,7 @@ namespace onlineLegalWF.Class
             {
                 string sqlins = @" insert into wf_routing (process_id, process_code, version_no, subject,
                                 step_no, step_name, assto_login,
-                                wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer) 
+                                wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer, submit_by) 
                                 values (
                                     '" + wfA.process_id+ @"', 
                                     '" + wfA.process_code + @"', 
@@ -280,12 +295,13 @@ namespace onlineLegalWF.Class
                                     " + wfA.step_no.ToString() + @", 
                                     '" + wfA.step_name + @"', 
                                      '" + wfA.assto_login + @"', 
-                                    '', 
+                                     '" + wfA.wf_status + @"', 
                                     '" + wfA.attr_apv_value + @"', 
                                     " + wfA.istrue_nextstep.ToString() + @", 
                                     " + wfA.isfalse_nextstep.ToString() + @", 
                                     '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + @"',
-                                    ''
+                                    '" + wfA.submit_answer + @"',
+                                    '" + wfA.submit_by + @"'
                                     ) ";
                 zdb.ExecNonQuery(sqlins, zconnstr);
             }
@@ -301,31 +317,49 @@ namespace onlineLegalWF.Class
             }
             // Insert new step into Inbox
             var wfDefault_step = getDefaultStep(wfA.process_code, wfA.version_no, next_step);
-            if (wfDefault_step.step_name.ToUpper() != "") 
+            wfDefault_step.subject = wfA.subject;
+            wfDefault_step.process_id = wfA.process_id;
+               
+            
+            return wfDefault_step; 
+        }
+
+        public string Insert_NextStep(wf_attributes wfDefault_step)
+        {
+            string x = "";
+            if (wfDefault_step.step_name.ToUpper() != "")
             {
-                string sqlins = @" insert into wf_routing (process_id, process_code, version_no, subject,
-                                step_no, step_name, assto_login,
-                                wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer) 
-                                values (
-                                    '" + wfA.process_id + @"', 
-                                    '" + wfDefault_step.process_code + @"', 
-                                    " + wfDefault_step.version_no.ToString() + @", 
-                                    '" + wfA.subject + @"', 
-                                    " + wfDefault_step.step_no.ToString() + @", 
-                                    '" + wfDefault_step.step_name + @"', 
-                                     '" + wfA.assto_login + @"', 
-                                    '', 
-                                    '" + wfDefault_step.attr_apv_value + @"', 
-                                    " + wfDefault_step.istrue_nextstep.ToString() + @", 
-                                    " + wfDefault_step.isfalse_nextstep.ToString() + @", 
-                                    '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + @"'
-                                    ''
-                                    ) ";
-                zdb.ExecNonQuery(sqlins, zconnstr);
+                if (!isExistingWFStep(wfDefault_step.process_id, wfDefault_step.process_code, wfDefault_step.version_no,wfDefault_step.step_no)) // Check used to add New Step already or not?
+                {
+                    string sqlins = @" insert into wf_routing (process_id, process_code, version_no, subject,
+                                    step_no, step_name, assto_login,
+                                    wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer, submit_by) 
+                                    values (
+                                        '" + wfDefault_step.process_id + @"', 
+                                        '" + wfDefault_step.process_code + @"', 
+                                        " + wfDefault_step.version_no.ToString() + @", 
+                                        '" + wfDefault_step.subject + @"', 
+                                        " + wfDefault_step.step_no.ToString() + @", 
+                                        '" + wfDefault_step.step_name + @"', 
+                                         '" + wfDefault_step.next_assto_login + @"', 
+                                        '', 
+                                        '" + wfDefault_step.attr_apv_value + @"', 
+                                        " + wfDefault_step.istrue_nextstep.ToString() + @", 
+                                        " + wfDefault_step.isfalse_nextstep.ToString() + @", 
+                                        '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + @"',
+                                        '',
+                                        ''
+                                        ) ";
+                    zdb.ExecNonQuery(sqlins, zconnstr);
+                }
+               
+
             }
-            return x = "Success"; 
+            return x = "Success";
         }
     }
+  
+
     public class wf_attributes
     {
         public string process_id { get; set; }
@@ -344,5 +378,6 @@ namespace onlineLegalWF.Class
         public DateTime created_datetime { get; set; }
         public DateTime updated_datetime { get; set;  }
         public string submit_answer { get; set; }
+        public string submit_by { get; set; }
     }
 }

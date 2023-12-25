@@ -26,14 +26,15 @@
             To&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="txtSubject1" runat="server" Width="630px"></asp:TextBox>
             <br />
+            Process ID&nbsp;&nbsp;
+            <asp:TextBox ID="txtProcessID" runat="server" Width="630px"></asp:TextBox>
             <br />
         </div>
-        <uc1:ucAttachment ID="ucAttachment1" runat="server" />
         <br />
         <br />
         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Save" Width="169px" />
         <asp:Button ID="Button2" runat="server" Text="Submit" Width="169px" />
-        <asp:Button ID="Button3" runat="server" Text="Approve" Width="169px" />
+        <asp:Button ID="Button3" runat="server" Text="Approve" Width="169px" OnClick="Button3_Click" />
         <asp:Button ID="Button4" runat="server" Text="Reject" Width="169px" />
     </form>
 </body>
