@@ -224,6 +224,7 @@
     <Content Include="userControls\ucMenu.ascx" />
     <Content Include="userControls\ucMenulist.ascx" />
     <Content Include="userControls\ucPersonSign.ascx" />
+    <Content Include="userControls\ucTaskList.ascx" />
     <Content Include="userControls\ucWorkflowlist.ascx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -567,6 +568,13 @@
     </Compile>
     <Compile Include="userControls\ucPersonSign.ascx.designer.cs">
       <DependentUpon>ucPersonSign.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="userControls\ucTaskList.ascx.cs">
+      <DependentUpon>ucTaskList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userControls\ucTaskList.ascx.designer.cs">
+      <DependentUpon>ucTaskList.ascx</DependentUpon>
     </Compile>
     <Compile Include="userControls\ucWorkflowlist.ascx.cs">
       <DependentUpon>ucWorkflowlist.ascx</DependentUpon>

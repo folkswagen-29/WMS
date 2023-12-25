@@ -51,9 +51,10 @@ namespace onlineLegalWF.test
             wfAttr.next_assto_login = "eknawat.c, worawut.m";
             wfAttr.submit_by = "eknawat.c";
             // wf.updateProcess
-            wf.updateProcess(wfAttr); 
+            var wfA_NextStep = wf.updateProcess(wfAttr);
+            wfA_NextStep.next_assto_login = findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name);
+            wf.Insert_NextStep(wfA_NextStep);
 
-            
         }
 
         protected void Button3_Click(object sender, EventArgs e)
