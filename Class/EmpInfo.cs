@@ -85,7 +85,7 @@ namespace onlineLegalWF.Class
 
                     //empData.property_name = dtbpm.Rows[0]["CompanyNameEN"].ToString();
 
-                    if (!string.IsNullOrEmpty(dtbpm.Rows[0]["SupervisorCode"].ToString()))
+                    if (!string.IsNullOrEmpty(dtbpm.Rows[0]["supervisor_login"].ToString()))
                     {
                         string sqlbpmSupervisor = "select * from li_user where supervisor_login='" + dtbpm.Rows[0]["supervisor_login"].ToString() + "' ";
                         var resbpmSupervisor = zdb.ExecSql_DataTable(sqlbpmSupervisor, zconnstr);
