@@ -22,15 +22,15 @@ namespace onlineLegalWF.Class
             // get query 
 
             string sql = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + xuser_login + "' ";
-            //string sqlbpm = "select * from li_user where user_login = '" + xuser_login + "' ";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
 
+            // set values check data from rpa and get data
             if (dt.Rows.Count > 0)
             {
                 var userLogin = dt.Rows[0]["Login"].ToString().Split(new char[] { '\\' });
                 empData.user_login = userLogin[1].Trim();
-                empData.full_name_th = dt.Rows[0]["PrefixTH"].ToString() + " "+ dt.Rows[0]["FirstNameTH"].ToString() + " " + dt.Rows[0]["LastNameTH"].ToString();
-                empData.full_name_en = dt.Rows[0]["PrefixEN"].ToString() + " "+ dt.Rows[0]["FirstNameEN"].ToString() + " " + dt.Rows[0]["LastNameEN"].ToString();
+                empData.full_name_th = dt.Rows[0]["PrefixTH"].ToString() + " " + dt.Rows[0]["FirstNameTH"].ToString() + " " + dt.Rows[0]["LastNameTH"].ToString();
+                empData.full_name_en = dt.Rows[0]["PrefixEN"].ToString() + " " + dt.Rows[0]["FirstNameEN"].ToString() + " " + dt.Rows[0]["LastNameEN"].ToString();
                 empData.position_th = dt.Rows[0]["PositionNameTH"].ToString();
                 empData.position_en = dt.Rows[0]["PositionNameEN"].ToString();
                 empData.email = dt.Rows[0]["Email"].ToString();
@@ -39,22 +39,68 @@ namespace onlineLegalWF.Class
                 empData.bu = dt.Rows[0]["FunctionCode"].ToString();
                 empData.property_name = dt.Rows[0]["CompanyNameEN"].ToString();
 
-                if (!string.IsNullOrEmpty(dt.Rows[0]["SupervisorCode"].ToString())) 
+                if (!string.IsNullOrEmpty(dt.Rows[0]["SupervisorCode"].ToString()))
                 {
                     string sqlSupervisor = "select * from Rpa_Mst_HrNameList where EmployeeCode='" + dt.Rows[0]["SupervisorCode"].ToString() + "' ";
                     var resSupervisor = zdb.ExecSql_DataTable(sqlSupervisor, zconnstr);
 
-                    if (resSupervisor.Rows.Count > 0) 
+                    if (resSupervisor.Rows.Count > 0)
                     {
                         var resUserLogin = resSupervisor.Rows[0]["Login"].ToString().Split(new char[] { '\\' });
                         empData.next_line_mgr_login = resUserLogin[1].Trim();
                     }
-                    
+
+                }
+
+            }
+            else 
+            {
+                string sqlbpm = "select * from li_user where user_login = '" + xuser_login + "' ";
+                DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                if (dtbpm.Rows.Count > 0) 
+                {
+                    empData.user_login = dtbpm.Rows[0]["user_login"].ToString();
+                    //empData.full_name_th = dtbpm.Rows[0]["PrefixTH"].ToString() + " " + dtbpm.Rows[0]["FirstNameTH"].ToString() + " " + dtbpm.Rows[0]["LastNameTH"].ToString();
+                    empData.full_name_en = dtbpm.Rows[0]["prefix_en"].ToString() + " " + dtbpm.Rows[0]["firstname_en"].ToString() + " " + dtbpm.Rows[0]["lastname_en"].ToString();
+                    //empData.position_th = dtbpm.Rows[0]["PositionNameTH"].ToString();
+                    empData.position_en = dtbpm.Rows[0]["position_en"].ToString();
+                    empData.email = dtbpm.Rows[0]["email"].ToString();
+                    empData.division = dtbpm.Rows[0]["division_en"].ToString();
+                    //empData.department = dtbpm.Rows[0]["DepartmentEN"].ToString();
+                    //empData.bu = dtbpm.Rows[0]["FunctionCode"].ToString();
+
+                    //////get bu name by bu_code
+                    string sqlbpmbu = "select * from li_business_unit where bu_code = '" + dtbpm.Rows[0]["bu_code"].ToString() + "' ";
+                    DataTable dtbpmbu = zdb.ExecSql_DataTable(sqlbpmbu, zconnstr);
+
+                    if (dtbpmbu.Rows.Count > 0) 
+                    {
+                        empData.bu = dtbpm.Rows[0]["bu_desc"].ToString();
+                    }
+                    else
+                    {
+                        empData.bu = "";
+                    }
+
+                    //empData.property_name = dtbpm.Rows[0]["CompanyNameEN"].ToString();
+
+                    if (!string.IsNullOrEmpty(dtbpm.Rows[0]["SupervisorCode"].ToString()))
+                    {
+                        string sqlbpmSupervisor = "select * from li_user where supervisor_login='" + dtbpm.Rows[0]["supervisor_login"].ToString() + "' ";
+                        var resbpmSupervisor = zdb.ExecSql_DataTable(sqlbpmSupervisor, zconnstr);
+
+                        if (resbpmSupervisor.Rows.Count > 0)
+                        {
+                            empData.next_line_mgr_login = resbpmSupervisor.Rows[0]["user_login"].ToString();
+                        }
+
+                    }
                 }
                 
             }
 
-            // set values
+            
             return empData; 
         }
         public List<EmpModel> getApprovalList(string xuser_login)
