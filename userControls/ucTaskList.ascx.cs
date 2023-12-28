@@ -48,15 +48,15 @@ namespace onlineLegalWF.userControls
             switch  (hidMode.Value)
             {
                 case "MyRequest": {
-
+                        getMyRequest(); 
                      };break;
                 case "MyWorkList":
                     {
-
+                        getMyWorkList(); 
                     }; break;
                 case "CompleteList":
                     {
-
+                        getCompleteList(); 
                     }; break;
                
             }
@@ -64,6 +64,7 @@ namespace onlineLegalWF.userControls
         public DataTable getMyRequest()
         {
             var dt = ini_data();
+           
             return dt; 
         }
         public DataTable getMyWorkList()
@@ -76,5 +77,12 @@ namespace onlineLegalWF.userControls
             var dt = ini_data();
             return dt;
         }
+        #region gv1
+        public void bind_gv1(DataTable dt)
+        {
+            gv1.DataSource = dt;
+            gv1.DataBind(); 
+        }
+        #endregion 
     }
 }
