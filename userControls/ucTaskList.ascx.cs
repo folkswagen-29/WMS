@@ -61,31 +61,35 @@ namespace onlineLegalWF.userControls
                      };break;
                 case "myworklist":
                     {
-                        getMyWorkList(); 
+                        bind_gv1(getMyWorkList()); 
                     }; break;
                 case "completelist":
                     {
-                        getCompleteList(); 
+                        bind_gv1(getCompleteList()); 
                     }; break;
                
             }
         }
         public DataTable getMyRequest()
         {
-            var dt = ini_data();
-            //string sql = "Select * from wf_routing where process_id = 'PID_LEGALWF_2023_000189'and submit_by = 'eknawat.c'";
-            //DataTable dt = zdb.ExecSql_DataTable(sql, zconnstrbpm);
+            //var dt = ini_data();
+            string sql = "Select * from wf_routing where process_id in (Select process_id from wf_routing where submit_by = '"+ hidLogin.Value + "' and wf_status='' )";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstrbpm);
 
             return dt; 
         }
         public DataTable getMyWorkList()
         {
-            var dt = ini_data();
+            //var dt = ini_data();
+            string sql = "Select * from wf_routing where process_id in (Select process_id from wf_routing where assto_login like '"+ hidLogin.Value + "' and submit_answer = '' )";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstrbpm);
             return dt;
         }
         public DataTable getCompleteList()
         {
-            var dt = ini_data();
+            //var dt = ini_data();
+            string sql = "Select * from wf_routing where process_id in (Select process_id from wf_routing where submit_by = '"+ hidLogin.Value + "' and step_name = 'End' )";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstrbpm);
             return dt;
         }
         #region gv1

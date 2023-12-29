@@ -85,7 +85,7 @@ namespace onlineLegalWF.test
             wfAttr.submit_by = "eknawat.c";
             wfAttr.wf_status = wfAttr.step_name + " Approved"; 
             wfAttr.submit_answer = "APPROVED";
-            wfAttr.submit_by = "eknawat.c";
+            //wfAttr.submit_by = "eknawat.c";
             // wf.updateProcess
             var wfA_NextStep = wf.updateProcess(wfAttr);
 
