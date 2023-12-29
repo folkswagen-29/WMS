@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
@@ -10,9 +11,17 @@ namespace onlineLegalWF.userControls
 {
     public partial class ucTaskList : System.Web.UI.UserControl
     {
+        #region Public
+        public DbControllerBase zdb = new DbControllerBase();
+        public string zconnstr = ConfigurationManager.AppSettings["RPADB"].ToString();
+        public string zconnstrbpm = ConfigurationManager.AppSettings["BPMDB"].ToString();
+        #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!IsPostBack) 
+            {
+                bind_gv();
+            }
         }
         public void bindData(string xlogin_name, string xmode)
         {
@@ -47,14 +56,14 @@ namespace onlineLegalWF.userControls
         {
             switch  (hidMode.Value)
             {
-                case "MyRequest": {
-                        getMyRequest(); 
+                case "myrequest": {
+                        bind_gv1(getMyRequest()); 
                      };break;
-                case "MyWorkList":
+                case "myworklist":
                     {
                         getMyWorkList(); 
                     }; break;
-                case "CompleteList":
+                case "completelist":
                     {
                         getCompleteList(); 
                     }; break;
@@ -64,7 +73,9 @@ namespace onlineLegalWF.userControls
         public DataTable getMyRequest()
         {
             var dt = ini_data();
-           
+            //string sql = "Select * from wf_routing where process_id = 'PID_LEGALWF_2023_000189'and submit_by = 'eknawat.c'";
+            //DataTable dt = zdb.ExecSql_DataTable(sql, zconnstrbpm);
+
             return dt; 
         }
         public DataTable getMyWorkList()

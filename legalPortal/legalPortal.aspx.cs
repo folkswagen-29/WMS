@@ -23,13 +23,26 @@ namespace onlineLegalWF.legalPortal
             //if (is_login == "Y")
             //{
             //    // Load Menu
-                
+
             //}
             //else
             //{
             //    // go to Login page
             //    Response.Redirect("loginPage.aspx"); 
             //}
+            if (Session["user_login"] != null) 
+            {
+                var xlogin_name = Session["user_login"].ToString();
+                var xhid_mode = Request.QueryString["m"];
+
+                if (!string.IsNullOrEmpty(xhid_mode)) 
+                {
+                    ucTaskList1.bindData(xlogin_name, xhid_mode);
+                }
+                
+            }
+
         }
+
     }
 }

@@ -28,7 +28,7 @@ namespace onlineLegalWF.legalPortal
             {
                 // clear session 
                 addSession(txtLoginName.Text);
-                Response.Redirect("legalPortal.aspx"); 
+                Response.Redirect("legalportal.aspx?m=myrequest"); 
             }
         }
         public void checkAuthen(string xusername, string xpassword) 

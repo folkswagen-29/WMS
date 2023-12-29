@@ -12,11 +12,10 @@ namespace onlineLegalWF.Class
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
-        //public string zconnstr = ConfigurationSettings.AppSettings["BPMDB"].ToString();
         public string zconnstr = ConfigurationManager.AppSettings["RPADB"].ToString();
-        //public string zconnstrbpm = ConfigurationManager.AppSettings["BPMDB"].ToString();
+        public string zconnstrbpm = ConfigurationManager.AppSettings["BPMDB"].ToString();
         #endregion
-       public EmpModel getEmpInfo(string xuser_login)
+        public EmpModel getEmpInfo(string xuser_login)
         {
             var empData = new EmpModel();
             // get query 
@@ -56,7 +55,7 @@ namespace onlineLegalWF.Class
             else 
             {
                 string sqlbpm = "select * from li_user where user_login = '" + xuser_login + "' ";
-                DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+                DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstrbpm);
 
                 if (dtbpm.Rows.Count > 0) 
                 {
@@ -72,7 +71,7 @@ namespace onlineLegalWF.Class
 
                     //////get bu name by bu_code
                     string sqlbpmbu = "select * from li_business_unit where bu_code = '" + dtbpm.Rows[0]["bu_code"].ToString() + "' ";
-                    DataTable dtbpmbu = zdb.ExecSql_DataTable(sqlbpmbu, zconnstr);
+                    DataTable dtbpmbu = zdb.ExecSql_DataTable(sqlbpmbu, zconnstrbpm);
 
                     if (dtbpmbu.Rows.Count > 0) 
                     {
@@ -88,7 +87,7 @@ namespace onlineLegalWF.Class
                     if (!string.IsNullOrEmpty(dtbpm.Rows[0]["supervisor_login"].ToString()))
                     {
                         string sqlbpmSupervisor = "select * from li_user where supervisor_login='" + dtbpm.Rows[0]["supervisor_login"].ToString() + "' ";
-                        var resbpmSupervisor = zdb.ExecSql_DataTable(sqlbpmSupervisor, zconnstr);
+                        var resbpmSupervisor = zdb.ExecSql_DataTable(sqlbpmSupervisor, zconnstrbpm);
 
                         if (resbpmSupervisor.Rows.Count > 0)
                         {
