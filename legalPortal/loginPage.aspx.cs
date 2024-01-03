@@ -49,7 +49,7 @@ namespace onlineLegalWF.legalPortal
             Session.Add("department", emp.department);
             Session.Add("bu", emp.bu);
 
-            var resListEmp = empFunc.getApprovalList(xusername);
+            //var resListEmp = empFunc.getApprovalList(xusername);
 
         }
 
