@@ -132,6 +132,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="forms\apv.aspx" />
     <Content Include="frmCommregis\CommRegisRequest.aspx" />
     <Content Include="frmCommregis\CommRegisWorkAssign.aspx" />
     <Content Include="frmInsurance\InsuranceApprove.aspx" />
@@ -263,6 +264,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\apv.aspx.cs">
+      <DependentUpon>apv.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\apv.aspx.designer.cs">
+      <DependentUpon>apv.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmCommregis\CommRegisRequest.aspx.cs">
       <DependentUpon>CommRegisRequest.aspx</DependentUpon>

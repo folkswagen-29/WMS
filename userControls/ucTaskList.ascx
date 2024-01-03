@@ -19,7 +19,7 @@
         <Columns>
             <asp:TemplateField HeaderText="Request No">
                 <ItemTemplate>
-                    <asp:LinkButton ID="lbtnReqNo" runat="server" Font-Names="Tahoma" Font-Size="10pt" Text='<%# Bind("process_id") %>' ForeColor="#003399"></asp:LinkButton>
+                    <asp:HyperLink ID="lbtnReqNo" runat="server" Font-Names="Tahoma" Font-Size="10pt" Text='<%# Bind("process_id") %>' ForeColor="#003399" NavigateUrl='<%# Bind("link_url_format") %>'></asp:HyperLink>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Subject">

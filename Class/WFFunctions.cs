@@ -285,7 +285,7 @@ namespace onlineLegalWF.Class
             else // in case start flow
             {
                 string sqlins = @" insert into wf_routing (process_id, process_code, version_no, subject,
-                                step_no, step_name, assto_login,
+                                step_no, step_name, assto_login,link_url_format,
                                 wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer, submit_by) 
                                 values (
                                     '" + wfA.process_id+ @"', 
@@ -295,6 +295,7 @@ namespace onlineLegalWF.Class
                                     " + wfA.step_no.ToString() + @", 
                                     '" + wfA.step_name + @"', 
                                      '" + wfA.assto_login + @"', 
+                                     '/forms/apv.aspx?req=" + wfA.process_id + @"', 
                                      '" + wfA.wf_status + @"', 
                                     '" + wfA.attr_apv_value + @"', 
                                     " + wfA.istrue_nextstep.ToString() + @", 
@@ -332,7 +333,7 @@ namespace onlineLegalWF.Class
                 if (!isExistingWFStep(wfDefault_step.process_id, wfDefault_step.process_code, wfDefault_step.version_no,wfDefault_step.step_no)) // Check used to add New Step already or not?
                 {
                     string sqlins = @" insert into wf_routing (process_id, process_code, version_no, subject,
-                                    step_no, step_name, assto_login,
+                                    step_no, step_name, assto_login,link_url_format,
                                     wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer, submit_by) 
                                     values (
                                         '" + wfDefault_step.process_id + @"', 
@@ -342,6 +343,7 @@ namespace onlineLegalWF.Class
                                         " + wfDefault_step.step_no.ToString() + @", 
                                         '" + wfDefault_step.step_name + @"', 
                                          '" + wfDefault_step.next_assto_login + @"', 
+                                        '/forms/apv.aspx?req=" + wfDefault_step.process_id + @"', 
                                         '', 
                                         '" + wfDefault_step.attr_apv_value + @"', 
                                         " + wfDefault_step.istrue_nextstep.ToString() + @", 
