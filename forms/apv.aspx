@@ -61,8 +61,8 @@
         </tr>
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
-                <asp:Button runat="server" CssClass="btn_normal_blue" Text="Approve" />
-                <asp:Button runat="server" CssClass="btn_normal_red" Text="Reject" />
+                <asp:Button ID="btn_Approve" runat="server" CssClass="btn_normal_blue" Text="Approve" OnClick="btn_Approve_Click" />
+                <asp:Button ID="btn_Reject" runat="server" CssClass="btn_normal_red" Text="Reject" />
             </td>
         </tr>
         <tr class="cell_content_100PC">

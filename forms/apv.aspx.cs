@@ -14,6 +14,7 @@ namespace onlineLegalWF.forms
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
+        public WFFunctions zwf = new WFFunctions();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,22 +22,22 @@ namespace onlineLegalWF.forms
             {
 
                 string req = Request.QueryString["req"];
+                string process_code = Request.QueryString["pc"];
 
-                if (!string.IsNullOrEmpty(req))
+                if (!string.IsNullOrEmpty(req) && !string.IsNullOrEmpty(process_code))
                 {
-                    setDataApprove(req);
+                    setDataApprove(req, process_code);
                 }
 
             }
         }
 
-        private void setDataApprove(string req)
+        private void setDataApprove(string req, string process_code)
         {
+            string id = "";
 
-            if (!string.IsNullOrEmpty(req))
+            if (process_code == "INR_NEW" || process_code == "INR_RENEW")
             {
-                string id = "";
-
                 string sqlinsreq = "select * from li_insurance_request where process_id='" + req + "'";
                 var resinsreq = zdb.ExecSql_DataTable(sqlinsreq, zconnstr);
 
@@ -55,8 +56,10 @@ namespace onlineLegalWF.forms
 
                     getDocument(id);
                 }
-
-                string sqlinsclaim = "select * from li_insurance_request where process_id='" + req + "'";
+            }
+            else if (process_code == "INR_CLAIM") 
+            {
+                string sqlinsclaim = "select * from li_insurance_claim where process_id='" + req + "'";
                 var resinsclaim = zdb.ExecSql_DataTable(sqlinsclaim, zconnstr);
 
                 //get data ins req
@@ -96,6 +99,45 @@ namespace onlineLegalWF.forms
             hid_PID.Value = pid;
             ucAttachment1.ini_object(pid);
             ucCommentlog1.ini_object(pid);
+        }
+
+        protected void btn_Approve_Click(object sender, EventArgs e)
+        {
+            string process_code = Request.QueryString["pc"];
+            int version_no = 1;
+
+            if (!string.IsNullOrEmpty(process_code)) 
+            {
+                // getCurrentStep
+                var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+
+                // check session_user
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+                    var empFunc = new EmpInfo();
+
+                    //get data user
+                    var emp = empFunc.getEmpInfo(xlogin_name);
+
+                    // set WF Attributes
+                    wfAttr.subject = subject.Text.Trim();
+                    wfAttr.assto_login = emp.next_line_mgr_login;
+                    wfAttr.wf_status = wfAttr.step_name + " Approved";
+                    wfAttr.submit_answer = "APPROVED";
+                    //wfAttr.next_assto_login = emp.next_line_mgr_login;
+                    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login);
+                    wfAttr.submit_by = emp.user_login;
+                    // wf.updateProcess
+                    var wfA_NextStep = zwf.updateProcess(wfAttr);
+                    //wfA_NextStep.next_assto_login = emp.next_line_mgr_login;
+                    wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login);
+                    zwf.Insert_NextStep(wfA_NextStep);
+
+                }
+            }
+
+            
         }
     }
 }

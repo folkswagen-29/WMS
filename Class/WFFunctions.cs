@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Antlr.Runtime;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace onlineLegalWF.Class
 {
@@ -295,7 +297,7 @@ namespace onlineLegalWF.Class
                                     " + wfA.step_no.ToString() + @", 
                                     '" + wfA.step_name + @"', 
                                      '" + wfA.assto_login + @"', 
-                                     '/forms/apv.aspx?req=" + wfA.process_id + @"', 
+                                     '/forms/apv.aspx?req=" + wfA.process_id + "&pc="+ wfA.process_code + @"', 
                                      '" + wfA.wf_status + @"', 
                                     '" + wfA.attr_apv_value + @"', 
                                     " + wfA.istrue_nextstep.ToString() + @", 
@@ -343,7 +345,7 @@ namespace onlineLegalWF.Class
                                         " + wfDefault_step.step_no.ToString() + @", 
                                         '" + wfDefault_step.step_name + @"', 
                                          '" + wfDefault_step.next_assto_login + @"', 
-                                        '/forms/apv.aspx?req=" + wfDefault_step.process_id + @"', 
+                                        '/forms/apv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + @"', 
                                         '', 
                                         '" + wfDefault_step.attr_apv_value + @"', 
                                         " + wfDefault_step.istrue_nextstep.ToString() + @", 
@@ -358,6 +360,87 @@ namespace onlineLegalWF.Class
 
             }
             return x = "Success";
+        }
+        public string findNextStep_Assignee(string process_code, string next_step_name, string user_login)
+        {
+            string xname = "";
+            //get data user
+            var empFunc = new EmpInfo();
+            var emp = empFunc.getEmpInfo(user_login);
+            if (process_code == "INR_RENEW")
+            {
+                /* stepname list 
+              Start
+              GM Approve
+              BU C - Level Approve
+              Legal Insurance
+              Legal Insurance Update
+              End
+              Edit Request
+            */
+
+                if (next_step_name == "Start")
+                {
+                    xname = emp.user_login; //Requestor = Login account
+                }
+                else if (next_step_name == "GM Approve")
+                {
+                    xname = emp.next_line_mgr_login; //GM Login
+                }
+                else if (next_step_name == "BU Approve")
+                {
+                    xname = emp.next_line_mgr_login; //BU Approve Login
+                }
+                else if (next_step_name == "Legal Insurance")
+                {
+                    xname = ""; //Legal Insurance Login
+                }
+                else if (next_step_name == "Legal Insurance Update")
+                {
+                    xname = ""; //Legal Insurance Update Login
+                }
+                else if (next_step_name == "End")
+                {
+                    xname = ""; //End
+                }
+            }
+            else if (process_code == "INR_NEW") 
+            {
+                if (next_step_name == "Start")
+                {
+                    xname = emp.user_login; //Requestor = Login account
+                }
+                else if (next_step_name == "Insurance Specialist Approve") 
+                {
+                    xname = "jaroonsak.n"; //Insurance Specialist account
+                }
+                else if (next_step_name == "Head of Legal Approve")
+                {
+                    xname = "chalothorn.s"; //Head of Legal Approve
+                }
+                else if (next_step_name == "Head of Risk Management Approve")
+                {
+                    xname = "chayut.a"; //Head of Risk Management Approve
+                }
+                else if (next_step_name == "CCO Approve")
+                {
+                    xname = "siwate.r"; //CCO Approve
+                }
+                else if (next_step_name == "Legal Insurance")
+                {
+                    xname = ""; //Legal Insurance Login
+                }
+                else if (next_step_name == "Legal Insurance Update")
+                {
+                    xname = ""; //Legal Insurance Update Login
+                }
+                else if (next_step_name == "End")
+                {
+                    xname = ""; //End
+                }
+            }
+            
+            return xname;
         }
     }
   

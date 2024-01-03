@@ -18,6 +18,7 @@ namespace onlineLegalWF.frmInsurance
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
+        public WFFunctions zwf = new WFFunctions();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -612,6 +613,42 @@ namespace onlineLegalWF.frmInsurance
             Response.BinaryWrite(outputbyte);
             Response.ContentEncoding = System.Text.Encoding.UTF8;
             Response.End();
+        }
+        protected void btn_submit_Click(object sender, EventArgs e)
+        {
+            // Sample Submit
+            string process_code = "INR_NEW";
+            int version_no = 1;
+
+            // getCurrentStep
+            var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+
+            // check session_user
+            if (Session["user_login"] != null)
+            {
+                var xlogin_name = Session["user_login"].ToString();
+                var empFunc = new EmpInfo();
+
+                //get data user
+                var emp = empFunc.getEmpInfo(xlogin_name);
+
+                // set WF Attributes
+                wfAttr.subject = subject.Text.Trim();
+                wfAttr.assto_login = emp.next_line_mgr_login;
+                wfAttr.wf_status = "SUBMITTED";
+                wfAttr.submit_answer = "SUBMITTED";
+                //wfAttr.next_assto_login = emp.next_line_mgr_login;
+                wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login);
+                wfAttr.submit_by = emp.user_login;
+                // wf.updateProcess
+                var wfA_NextStep = zwf.updateProcess(wfAttr);
+                //wfA_NextStep.next_assto_login = emp.next_line_mgr_login;
+                wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login);
+                zwf.Insert_NextStep(wfA_NextStep);
+
+            }
+
+
         }
     }
 }
