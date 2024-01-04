@@ -135,9 +135,17 @@ namespace onlineLegalWF.frmInsurance
 
             //DOA
             #region DOA 
-            var requestor = "คุณรุ่งเรือง วิโรจน์ชีวัน";
-            var requestorpos = "Head of Operations";
-            var requestordate = System.DateTime.Now.ToString("dd/MM/yyyy");
+
+            var requestor = "";
+            var requestorpos = "";
+            var requestordate = "";
+            if (Session["user_login"] != null)
+            {
+                requestor = Session["user_name"].ToString();
+                requestorpos = Session["user_position"].ToString();
+                requestordate = System.DateTime.Now.ToString("dd/MM/yyyy");
+            }
+            
             var apv1 = "คุณจรูณศักดิ์ นามะฮง";
             var apv1pos = "Insurance Specialist";
             var apv1date = "";
@@ -671,12 +679,13 @@ namespace onlineLegalWF.frmInsurance
 
                 // set WF Attributes
                 wfAttr.subject = subject.Text.Trim();
-                wfAttr.assto_login = emp.next_line_mgr_login;
+                //wfAttr.assto_login = emp.next_line_mgr_login;
                 wfAttr.wf_status = "SUBMITTED";
                 wfAttr.submit_answer = "SUBMITTED";
                 //wfAttr.next_assto_login = emp.next_line_mgr_login;
                 wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login);
-                wfAttr.submit_by = emp.user_login;
+                //wfAttr.submit_by = emp.user_login;
+                wfAttr.submit_by = wfAttr.submit_by;
                 // wf.updateProcess
                 var wfA_NextStep = zwf.updateProcess(wfAttr);
                 //wfA_NextStep.next_assto_login = emp.next_line_mgr_login;

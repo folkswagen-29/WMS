@@ -352,7 +352,7 @@ namespace onlineLegalWF.Class
                                         " + wfDefault_step.isfalse_nextstep.ToString() + @", 
                                         '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + @"',
                                         '',
-                                        ''
+                                        '" + wfDefault_step.submit_by + @"'
                                         ) ";
                     zdb.ExecNonQuery(sqlins, zconnstr);
                 }
@@ -409,6 +409,14 @@ namespace onlineLegalWF.Class
                 if (next_step_name == "Start")
                 {
                     xname = emp.user_login; //Requestor = Login account
+                }
+                else if (next_step_name == "GM Approve")
+                {
+                    xname = emp.next_line_mgr_login; //GM Login
+                }
+                else if (next_step_name == "BU Approve")
+                {
+                    xname = emp.next_line_mgr_login; //BU Approve Login
                 }
                 else if (next_step_name == "Insurance Specialist Approve") 
                 {

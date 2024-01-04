@@ -36,6 +36,7 @@ namespace onlineLegalWF.forms
         {
             string id = "";
 
+            ucHeader1.setHeader(process_code + " Approve");
             if (process_code == "INR_NEW" || process_code == "INR_RENEW")
             {
                 string sqlinsreq = "select * from li_insurance_request where process_id='" + req + "'";
@@ -132,6 +133,7 @@ namespace onlineLegalWF.forms
                     var wfA_NextStep = zwf.updateProcess(wfAttr);
                     //wfA_NextStep.next_assto_login = emp.next_line_mgr_login;
                     wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login);
+                    wfA_NextStep.submit_by = emp.user_login;
                     zwf.Insert_NextStep(wfA_NextStep);
 
                 }

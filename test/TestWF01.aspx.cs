@@ -36,7 +36,7 @@ namespace onlineLegalWF.test
         {
 
             // Sample Submit
-            string process_code = "INR_NEW";
+            string process_code = "INR_RENEW";
             int version_no = 1;
             lblPID.Text = wf.iniPID("LEGALWF");
             txtProcessID.Text = lblPID.Text; 
@@ -60,7 +60,7 @@ namespace onlineLegalWF.test
         protected void Button3_Click(object sender, EventArgs e)
         {
             // Sample Approve
-            string process_code = "INR_NEW";
+            string process_code = "INR_RENEW";
             int version_no = 1;
             lblPID.Text = txtProcessID.Text; 
             // getCurrentStep
