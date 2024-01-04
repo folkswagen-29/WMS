@@ -157,7 +157,7 @@ namespace onlineLegalWF.frmInsurance
 
                 //}
                 Response.Write("<script>alert('Successfully Updated');</script>");
-                Response.Redirect("/frmInsurance/InsuranceRequestList");
+                //Response.Redirect("/frmInsurance/InsuranceRequestList");
             }
             else
             {

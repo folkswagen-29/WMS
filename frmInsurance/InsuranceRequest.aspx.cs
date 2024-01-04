@@ -568,7 +568,7 @@ namespace onlineLegalWF.frmInsurance
                     //}
                     showAlertSuccess("alertSuccess", "Insert success");
                     //Response.Write("<script>alert('Successfully added');</script>");
-                    Response.Redirect("/frmInsurance/InsuranceRequestList");
+                    Response.Redirect("/frmInsurance/InsuranceRequestEdit.aspx?id="+ req_no.Text.Trim());
                 }
                 else
                 {
