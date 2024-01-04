@@ -128,7 +128,7 @@ namespace onlineLegalWF.forms
                     wfAttr.submit_answer = "APPROVED";
                     //wfAttr.next_assto_login = emp.next_line_mgr_login;
                     wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login);
-                    //wfAttr.submit_by = emp.user_login;
+                    wfAttr.updated_by = emp.user_login;
                     wfAttr.submit_by = wfAttr.submit_by;
                     // wf.updateProcess
                     var wfA_NextStep = zwf.updateProcess(wfAttr);

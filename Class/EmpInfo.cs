@@ -53,7 +53,7 @@ namespace onlineLegalWF.Class
 
                 if (!string.IsNullOrEmpty(dtbpm.Rows[0]["supervisor_login"].ToString()))
                 {
-                    string sqlbpmSupervisor = "select * from li_user where supervisor_login='" + dtbpm.Rows[0]["supervisor_login"].ToString() + "' ";
+                    string sqlbpmSupervisor = "select * from li_user where user_login='" + dtbpm.Rows[0]["supervisor_login"].ToString() + "' ";
                     var resbpmSupervisor = zdb.ExecSql_DataTable(sqlbpmSupervisor, zconnstrbpm);
 
                     if (resbpmSupervisor.Rows.Count > 0)
