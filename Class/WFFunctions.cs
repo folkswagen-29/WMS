@@ -209,7 +209,8 @@ namespace onlineLegalWF.Class
                 x.wf_status = dr["wf_status"].ToString();
                 x.comment = dr["comment"].ToString();
                 x.submit_answer = dr["submit_answer"].ToString(); 
-                
+                x.submit_by = dr["submit_by"].ToString();
+
                 if  (dr["created_datetime"].ToString() != "")
                 {
                     x.created_datetime = System.Convert.ToDateTime( dr["created_datetime"]);
@@ -322,6 +323,7 @@ namespace onlineLegalWF.Class
             var wfDefault_step = getDefaultStep(wfA.process_code, wfA.version_no, next_step);
             wfDefault_step.subject = wfA.subject;
             wfDefault_step.process_id = wfA.process_id;
+            wfDefault_step.submit_by = wfA.submit_by;
                
             
             return wfDefault_step; 
@@ -393,7 +395,7 @@ namespace onlineLegalWF.Class
                 }
                 else if (next_step_name == "Legal Insurance")
                 {
-                    xname = ""; //Legal Insurance Login
+                    xname = "jaroonsak.n"; //Legal Insurance Login
                 }
                 else if (next_step_name == "Legal Insurance Update")
                 {
@@ -436,7 +438,7 @@ namespace onlineLegalWF.Class
                 }
                 else if (next_step_name == "Legal Insurance")
                 {
-                    xname = ""; //Legal Insurance Login
+                    xname = "jaroonsak.n"; //Legal Insurance Login
                 }
                 else if (next_step_name == "Legal Insurance Update")
                 {

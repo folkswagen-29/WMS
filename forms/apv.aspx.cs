@@ -128,12 +128,14 @@ namespace onlineLegalWF.forms
                     wfAttr.submit_answer = "APPROVED";
                     //wfAttr.next_assto_login = emp.next_line_mgr_login;
                     wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login);
-                    wfAttr.submit_by = emp.user_login;
+                    //wfAttr.submit_by = emp.user_login;
+                    wfAttr.submit_by = wfAttr.submit_by;
                     // wf.updateProcess
                     var wfA_NextStep = zwf.updateProcess(wfAttr);
                     //wfA_NextStep.next_assto_login = emp.next_line_mgr_login;
                     wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login);
-                    wfA_NextStep.submit_by = emp.user_login;
+                    //wfA_NextStep.submit_by = emp.user_login;
+                    wfA_NextStep.submit_by = wfA_NextStep.submit_by;
                     zwf.Insert_NextStep(wfA_NextStep);
 
                 }
