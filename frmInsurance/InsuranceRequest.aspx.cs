@@ -536,39 +536,40 @@ namespace onlineLegalWF.frmInsurance
 
                 if (res > 0)
                 {
-                    //// wf save draft
-                    //string process_code = "INR_NEW";
-                    //int version_no = 1;
+                    // wf save draft
+                    string process_code = "INR_NEW";
+                    int version_no = 1;
 
-                    //// getCurrentStep
-                    //var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+                    // getCurrentStep
+                    var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
 
-                    //// check session_user
-                    //if (Session["user_login"] != null)
-                    //{
-                    //    var xlogin_name = Session["user_login"].ToString();
-                    //    var empFunc = new EmpInfo();
+                    // check session_user
+                    if (Session["user_login"] != null)
+                    {
+                        var xlogin_name = Session["user_login"].ToString();
+                        var empFunc = new EmpInfo();
 
-                    //    //get data user
-                    //    var emp = empFunc.getEmpInfo(xlogin_name);
+                        //get data user
+                        var emp = empFunc.getEmpInfo(xlogin_name);
 
-                    //    // set WF Attributes
-                    //    wfAttr.subject = subject.Text.Trim();
-                    //    //wfAttr.assto_login = emp.next_line_mgr_login;
-                    //    wfAttr.wf_status = "DRAFT";
-                    //    wfAttr.submit_answer = "DRAFT";
-                    //    //wfAttr.next_assto_login = emp.next_line_mgr_login;
-                    //    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login);
-                    //    //wfAttr.submit_by = emp.user_login;
-                    //    wfAttr.submit_by = wfAttr.submit_by;
+                        // set WF Attributes
+                        wfAttr.subject = subject.Text.Trim();
+                        //wfAttr.assto_login = emp.next_line_mgr_login;
+                        wfAttr.wf_status = "SAVE";
+                        wfAttr.submit_answer = "SAVE";
+                        //wfAttr.next_assto_login = emp.next_line_mgr_login;
+                        wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login);
+                        //wfAttr.submit_by = emp.user_login;
+                        wfAttr.submit_by = wfAttr.submit_by;
 
-                    //    // wf.updateProcess
-                    //    var wfA_NextStep = zwf.updateProcess(wfAttr);
+                        // wf.updateProcess
+                        var wfA_NextStep = zwf.updateProcess(wfAttr);
 
-                    //}
+                    }
                     showAlertSuccess("alertSuccess", "Insert success");
                     //Response.Write("<script>alert('Successfully added');</script>");
-                    Response.Redirect("/frmInsurance/InsuranceRequestEdit.aspx?id="+ req_no.Text.Trim());
+                    Response.Redirect("/frmInsurance/InsuranceRequestEdit.aspx?id=" + req_no.Text.Trim());
+                    //Response.Redirect("/legalportal/legalportal.aspx?m=myrequest");
                 }
                 else
                 {

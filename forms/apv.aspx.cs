@@ -136,7 +136,12 @@ namespace onlineLegalWF.forms
                     wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login);
                     //wfA_NextStep.submit_by = emp.user_login;
                     wfA_NextStep.submit_by = wfA_NextStep.submit_by;
-                    zwf.Insert_NextStep(wfA_NextStep);
+                    string status = zwf.Insert_NextStep(wfA_NextStep);
+
+                    if (status == "Success") 
+                    {
+                        Response.Redirect("/legalportal/legalportal.aspx?m=myworklist");
+                    }
 
                 }
             }
