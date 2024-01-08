@@ -50,7 +50,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Last updated by">
                   <ItemTemplate>
-                    <asp:Label ID="lblLastupdateby" runat="server" Font-Names="Tahoma" Font-Size="10pt" Text='<%# Bind("submit_by") %>' ForeColor="#003399"></asp:Label>
+                    <asp:Label ID="lblLastupdateby" runat="server" Font-Names="Tahoma" Font-Size="10pt" Text='<%# Bind("updated_by") %>' ForeColor="#003399"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

@@ -340,6 +340,15 @@ namespace onlineLegalWF.Class
             {
                 if (!isExistingWFStep(wfDefault_step.process_id, wfDefault_step.process_code, wfDefault_step.version_no,wfDefault_step.step_no)) // Check used to add New Step already or not?
                 {
+                    string xurl = "";
+                    if (wfDefault_step.step_name == "Legal Insurance")
+                    {
+                        xurl = "/forms/legalassign.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
+                    }
+                    else 
+                    {
+                        xurl = "/forms/apv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
+                    }
                     string sqlins = @" insert into wf_routing (process_id, process_code, version_no, subject,
                                     step_no, step_name, assto_login,link_url_format,
                                     wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer, submit_by,updated_by,updated_datetime) 
@@ -351,7 +360,7 @@ namespace onlineLegalWF.Class
                                         " + wfDefault_step.step_no.ToString() + @", 
                                         '" + wfDefault_step.step_name + @"', 
                                          '" + wfDefault_step.next_assto_login + @"', 
-                                        '/forms/apv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + @"', 
+                                        '"+ xurl + @"', 
                                         '', 
                                         '" + wfDefault_step.attr_apv_value + @"', 
                                         " + wfDefault_step.istrue_nextstep.ToString() + @", 

@@ -73,7 +73,7 @@ namespace onlineLegalWF.userControls
         public DataTable getMyRequest()
         {
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-            string sql = "Select process_id,subject,submit_by,created_datetime,wf_status,updated_datetime, ( '" + host_url+ "' + link_url_format) as link_url_format from " +
+            string sql = "Select process_id,subject,submit_by,updated_by,created_datetime,wf_status,updated_datetime, ( '" + host_url+ "' + link_url_format) as link_url_format from " +
                 "wf_routing where process_id in (Select process_id from wf_routing where submit_by = '"+ hidLogin.Value + "' and wf_status='SAVE' ) and wf_status='SAVE'";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstrbpm);
 
@@ -82,7 +82,7 @@ namespace onlineLegalWF.userControls
         public DataTable getMyWorkList()
         {
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-            string sql = "Select process_id,subject,submit_by,created_datetime,wf_status,updated_datetime, ( '" + host_url + "' + link_url_format) as link_url_format from " +
+            string sql = "Select process_id,subject,submit_by,updated_by,created_datetime,wf_status,updated_datetime, ( '" + host_url + "' + link_url_format) as link_url_format from " +
                 "wf_routing where process_id in (Select process_id from wf_routing where assto_login like '" + hidLogin.Value + "' and submit_answer = '') and submit_answer = ''";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstrbpm);
             return dt;
@@ -90,7 +90,7 @@ namespace onlineLegalWF.userControls
         public DataTable getCompleteList()
         {
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-            string sql = "Select process_id,subject,submit_by,created_datetime,wf_status,updated_datetime, ( '" + host_url + "' + link_url_format) as link_url_format from " +
+            string sql = "Select process_id,subject,submit_by,updated_by,created_datetime,wf_status,updated_datetime, ( '" + host_url + "' + link_url_format) as link_url_format from " +
                 "wf_routing where process_id in (Select process_id from wf_routing where submit_by = '" + hidLogin.Value + "' and step_name = 'End') and step_name = 'End'";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstrbpm);
             return dt;
