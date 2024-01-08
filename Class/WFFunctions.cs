@@ -369,7 +369,7 @@ namespace onlineLegalWF.Class
             }
             return x = "Success";
         }
-        public string findNextStep_Assignee(string process_code, string next_step_name, string user_login)
+        public string findNextStep_Assignee(string process_code, string next_step_name, string user_login,string submit_by)
         {
             string xname = "";
             //get data user
@@ -455,7 +455,47 @@ namespace onlineLegalWF.Class
                     xname = ""; //End
                 }
             }
-            
+            else if (process_code == "INR_CLAIM")
+            {
+                if (next_step_name == "Start")
+                {
+                    xname = emp.user_login; //Requestor = Login account
+                }
+                else if (next_step_name == "GM Approve")
+                {
+                    xname = emp.next_line_mgr_login; //GM Login
+                }
+                else if (next_step_name == "BU Approve")
+                {
+                    xname = emp.next_line_mgr_login; //BU Approve Login
+                }
+                ////Check เงื่อนไข Deviation เพิ่มเติมเพื่อ set คนอนุมัติ
+                else if (next_step_name == "AWC Validate Approved")
+                {
+                    xname = "jaroonsak.n"; //AWC Validate Approved
+                }
+                else if (next_step_name == "AWC Reviewer Approved")
+                {
+                    xname = "warin.k"; //AWC Reviewer Approved
+                }
+                else if (next_step_name == "AWC Approval Approved")
+                {
+                    xname = "chalothorn.s"; //AWC Approval Approved
+                }
+                else if (next_step_name == "Legal Insurance")
+                {
+                    xname = "jaroonsak.n"; //Legal Insurance
+                }
+                else if (next_step_name == "Requester Receive Approval")
+                {
+                    xname = submit_by; //Requester Receive Approval
+                }
+                else if (next_step_name == "End")
+                {
+                    xname = ""; //End
+                }
+            }
+
             return xname;
         }
     }
