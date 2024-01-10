@@ -36,7 +36,7 @@
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
                                 <asp:DropDownList ID="type_req" runat="server" CssClass="Text_200">
-                                    <asp:ListItem Value="02" Selected="True">Renew insurance</asp:ListItem>
+                                    <asp:ListItem Value="07" Selected="True">Renew insurance</asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                             <td>&nbsp;</td>

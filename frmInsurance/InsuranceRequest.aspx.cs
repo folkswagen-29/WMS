@@ -592,7 +592,7 @@ namespace onlineLegalWF.frmInsurance
         }
         public DataTable GetTypeOfRequest()
         {
-            string sql = "select * from li_type_of_request order by row_sort asc";
+            string sql = "select * from li_type_of_request where toreq_code not in (07) order by row_sort asc";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }
