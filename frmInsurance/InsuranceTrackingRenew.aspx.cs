@@ -128,8 +128,9 @@ namespace onlineLegalWF.frmInsurance
 
             string reslistreq_no = string.Join(", ", listreq_no);
 
-            string sql = "select * from li_insurance_request where req_no in ("+reslistreq_no+")";
-            var reqres = zdb.ExecSql_DataTable(sql, zconnstr);
+            Response.Redirect("/frmInsurance/InsuranceRenewAWC.aspx?id=" + reslistreq_no);
+            //string sql = "select * from li_insurance_request where req_no in ("+reslistreq_no+")";
+            //var reqres = zdb.ExecSql_DataTable(sql, zconnstr);
         }
     }
 }

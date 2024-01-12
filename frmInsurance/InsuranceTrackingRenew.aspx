@@ -91,7 +91,7 @@
                     </asp:ListView>
                     <br />
                     <div>
-                        <asp:Button runat="server" CssClass="btn_normal_blue pointer" Text="Approve" OnClick="Approve_Click" />
+                        <asp:Button runat="server" CssClass="btn_normal_blue pointer" Text="GenMemo" OnClick="Approve_Click" />
                         <asp:Button runat="server" CssClass="btn_normal_silver pointer" Text="Preview" />
                     </div>
                 </div>

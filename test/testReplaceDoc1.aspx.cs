@@ -8,6 +8,8 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using static ReplaceDocx.Class.ReplaceDocx;
 using onlineLegalWF.Class;
+using System.Globalization;
+using Spire.Doc;
 
 namespace onlineLegalWF.test
 {
@@ -19,6 +21,21 @@ namespace onlineLegalWF.test
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
+            var tag1 = int.Parse("1,500,500", NumberStyles.AllowThousands);
+            var tag2 = int.Parse("1500500", NumberStyles.AllowThousands);
+
+            tagname1.Text = tag1.ToString();
+
+            tagname2.Text = tag2.ToString();
+
+            string file1 = @"C__WordTemplate_Insurance_Output_inreq_20240108_133407.docx";
+            string file2 = @"C__WordTemplate_Insurance_Output_inreq_20240108_114222.docx";
+            string folder = @"D:\Users\worawut.m\Downloads\";
+            Document document = new Document();
+            document.LoadFromFile(folder+file1, FileFormat.Docx);
+            document.InsertTextFromFile(folder+file2, FileFormat.Docx);
+            document.SaveToFile(folder+"MergedFile.docx", FileFormat.Docx);
+            System.Diagnostics.Process.Start(folder+"MergedFile.docx");
 
         }
 
