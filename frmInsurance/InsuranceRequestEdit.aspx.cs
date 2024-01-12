@@ -665,8 +665,20 @@ namespace onlineLegalWF.frmInsurance
                 // set WF Attributes
                 wfAttr.subject = subject.Text.Trim();
                 wfAttr.assto_login = emp.next_line_mgr_login;
-                wfAttr.wf_status = "SUBMITTED";
-                wfAttr.submit_answer = "SUBMITTED";
+                //check step review 
+                string stepname = Request.QueryString["st"];
+                if (!string.IsNullOrEmpty(stepname))
+                {
+                    wfAttr.wf_status = "REVIEWED";
+                    wfAttr.submit_answer = "REVIEWED";
+                }
+                else 
+                {
+                    wfAttr.wf_status = "SUBMITTED";
+                    wfAttr.submit_answer = "SUBMITTED";
+                }
+                //wfAttr.wf_status = "SUBMITTED";
+                //wfAttr.submit_answer = "SUBMITTED";
                 //wfAttr.next_assto_login = emp.next_line_mgr_login;
                 wfAttr.submit_by = emp.user_login;
                 wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by);

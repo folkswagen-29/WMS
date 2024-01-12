@@ -345,7 +345,22 @@ namespace onlineLegalWF.Class
                     {
                         xurl = "/forms/legalassign.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                     }
-                    else 
+                    else if (wfDefault_step.step_name == "GM Review") 
+                    {
+                        if (wfDefault_step.process_code == "INR_NEW") 
+                        {
+                            string sql = " select * from li_insurance_request where process_id = " + wfDefault_step.process_id;
+                            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dr = dt.Rows[0];
+                                string id = dr["req_no"].ToString();
+
+                                xurl = "/frmInsurance/InsuranceRequestEdit.aspx?id=" + id + "&st=" + wfDefault_step.step_name;
+                            }
+                        }
+                    }
+                    else
                     {
                         xurl = "/forms/apv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                     }
@@ -427,17 +442,17 @@ namespace onlineLegalWF.Class
                 {
                     xname = emp.user_login; //Requestor = Login account
                 }
-                else if (next_step_name == "GM Approve")
+                else if (next_step_name == "GM Review")
                 {
                     xname = emp.next_line_mgr_login; //GM Login
                 }
-                else if (next_step_name == "BU Approve")
-                {
-                    xname = emp.next_line_mgr_login; //BU Approve Login
-                }
-                else if (next_step_name == "Insurance Specialist Approve") 
+                else if (next_step_name == "Insurance Specialist Approve")
                 {
                     xname = "jaroonsak.n"; //Insurance Specialist account
+                }
+                else if (next_step_name == "Head of Compliance and Insurance") 
+                {
+                    xname = "warin.k"; //Head of Compliance and Insurance account
                 }
                 else if (next_step_name == "Head of Legal Approve")
                 {
