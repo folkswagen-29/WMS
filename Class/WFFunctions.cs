@@ -349,7 +349,7 @@ namespace onlineLegalWF.Class
                     {
                         if (wfDefault_step.process_code == "INR_NEW") 
                         {
-                            string sql = " select * from li_insurance_request where process_id = " + wfDefault_step.process_id;
+                            string sql = @"select * from li_insurance_request where process_id = '"+wfDefault_step.process_id +"'";
                             var dt = zdb.ExecSql_DataTable(sql, zconnstr);
                             if (dt.Rows.Count > 0)
                             {
