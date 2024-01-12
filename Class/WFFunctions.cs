@@ -356,7 +356,7 @@ namespace onlineLegalWF.Class
                                 var dr = dt.Rows[0];
                                 string id = dr["req_no"].ToString();
 
-                                xurl = "/frmInsurance/InsuranceRequestEdit.aspx?id=" + id + "&st=" + wfDefault_step.step_name;
+                                xurl = "/frminsurance/insurancerequestedit.aspx?id=" + id + "&st=" + wfDefault_step.step_name;
                             }
                         }
                     }
@@ -450,7 +450,7 @@ namespace onlineLegalWF.Class
                 {
                     xname = "jaroonsak.n"; //Insurance Specialist account
                 }
-                else if (next_step_name == "Head of Compliance and Insurance") 
+                else if (next_step_name == "Head of Compliance and Insurance Approve") 
                 {
                     xname = "warin.k"; //Head of Compliance and Insurance account
                 }
