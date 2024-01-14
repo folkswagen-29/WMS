@@ -677,9 +677,6 @@ namespace onlineLegalWF.frmInsurance
                     wfAttr.wf_status = "SUBMITTED";
                     wfAttr.submit_answer = "SUBMITTED";
                 }
-                //wfAttr.wf_status = "SUBMITTED";
-                //wfAttr.submit_answer = "SUBMITTED";
-                //wfAttr.next_assto_login = emp.next_line_mgr_login;
                 wfAttr.submit_by = emp.user_login;
                 wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by);
                 wfAttr.updated_by = emp.user_login;
