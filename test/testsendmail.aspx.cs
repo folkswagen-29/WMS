@@ -9,52 +9,31 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using MailMessage = System.Net.Mail.MailMessage;
 using onlineLegalWF.userControls;
+using onlineLegalWF.Class;
 
 namespace onlineLegalWF.test
 {
     public partial class testsendmail : System.Web.UI.Page
     {
+        #region Public
+        public SendMail zsendmail = new SendMail();
+        #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack) 
+            if (!IsPostBack)
             {
-                _ = sendEmail();
+                sendEmail();
             }
         }
 
-        public async Task<bool> sendEmail() 
+        public void sendEmail()
         {
-            bool status = false;
-            try
-            {
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-                var client = new SmtpClient("smtp.office365.com")
-                {
-                    Port = 587,
-                    UseDefaultCredentials = false,
-                    EnableSsl = true,
-                    Credentials = new NetworkCredential("no_reply@assetworldcorp-th.com", "Awc@2019")
-                };
+            string filepath = @"D:\Users\worawut.m\Downloads\mergePdf_20240115_124616.pdf";
+            string mailto = "Hello worawut";
+            string subject = "worawut.m@assetworldcorp-th.com";
+            string body = "Test attach file";
 
-                var filepath = @"D:\Users\worawut.m\Downloads\mergePdf_20240115_124616.pdf";
-                var attachment = new System.Net.Mail.Attachment(filepath);
-                var mailMessage = new MailMessage { From = new MailAddress("no_reply@assetworldcorp-th.com") };
-                mailMessage.To.Add("worawut.m@assetworldcorp-th.com");
-                mailMessage.Body = "Test attach file";
-                mailMessage.Subject = "Hello worawut";
-                mailMessage.IsBodyHtml = true;
-                mailMessage.Attachments.Add(attachment);
-
-                await client.SendMailAsync(mailMessage);
-                status = true;
-                return status;
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Write(ex);
-                throw ex;
-                //return status;
-            }
+            _ = zsendmail.sendEmail(subject, mailto, body, filepath);
         }
     }
 }
