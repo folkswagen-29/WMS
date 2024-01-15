@@ -29,9 +29,9 @@ namespace onlineLegalWF.test
         public void sendEmail()
         {
             string filepath = @"D:\Users\worawut.m\Downloads\mergePdf_20240115_124616.pdf";
-            string mailto = "Hello worawut";
+            string mailto = "Test Send Mail to worawut";
             string subject = "worawut.m@assetworldcorp-th.com";
-            string body = "Test attach file";
+            string body = "Test attach file to worawut";
 
             _ = zsendmail.sendEmail(subject, mailto, body, filepath);
         }
