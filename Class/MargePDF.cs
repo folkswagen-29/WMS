@@ -1,4 +1,5 @@
-﻿using iTextSharp.text.pdf;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -39,6 +40,26 @@ namespace onlineLegalWF
                 bytes = finalStream.ToArray();
             }
             return bytes;
+        }
+
+        public void mergefilePDF(string[] listfiles, string outputfile) 
+        {
+            Document doc = new Document();
+            //string basePath = @"D:\Users\worawut.m\Downloads\";
+            string basePath = outputfile;
+            string outputfn = basePath + "mergePdf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
+            PdfCopy copy = new PdfCopy(doc, new FileStream(outputfn, FileMode.Create));
+            doc.Open();
+            //string[] pdfFiles = { @"C__WordTemplate_Insurance_Output_inreq_20240114_204952.pdf", @"C__WordTemplate_Insurance_Output_inreq_20240112_165348.pdf" };
+            string[] pdfFiles = listfiles;
+            foreach (string filename in pdfFiles)
+            {
+                PdfReader reader = new PdfReader(basePath + filename);
+                copy.AddDocument(reader);
+                reader.Close();
+            }
+            doc.Close();
+            System.Diagnostics.Process.Start(outputfn);
         }
     }
 }

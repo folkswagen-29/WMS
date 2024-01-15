@@ -243,8 +243,8 @@ namespace onlineLegalWF.frmInsurance
             var xdocref = "1.TestDoc \r\n 2.TestDoc2 \r\n 3.TestDoc3 \r\n";
 
             string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateClaim.docx";
-            string outputfoler = @"C:\WordTemplate\Insurance\Output";
-            string outputfn = outputfoler + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+            string outputfolder = @"C:\WordTemplate\Insurance\Output";
+            string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();
 
@@ -536,14 +536,14 @@ namespace onlineLegalWF.frmInsurance
                                 '" + jsonDTProperties1 + @"', 
                                 '" + jsonDTdata + @"', 
                                 '" + templatefile + @"', 
-                                '" + outputfoler + @"', 
+                                '" + outputfolder + @"', 
                                 '" + outputfn + @"',  
                                 '" + "0" + @"'
                             ) ";
 
             zdb.ExecNonQuery(sql, zconnstr);
 
-            var outputbyte = rdoc.ReplaceData2(jsonDTStr, jsonDTProperties1, jsonDTdata, templatefile, outputfoler, outputfn, false);
+            var outputbyte = rdoc.ReplaceData2(jsonDTStr, jsonDTProperties1, jsonDTdata, templatefile, outputfolder, outputfn, false);
 
             repl.convertDOCtoPDF(outputfn, outputfn.Replace(".docx", ".pdf"), false);
             // Dowload Word 

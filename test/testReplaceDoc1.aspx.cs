@@ -9,7 +9,12 @@ using System.Configuration;
 using static ReplaceDocx.Class.ReplaceDocx;
 using onlineLegalWF.Class;
 using System.Globalization;
-using Spire.Doc;
+//using Spire.Doc;
+//using Spire.Pdf;
+using iTextSharp.text.pdf;
+using System.IO;
+using iTextSharp.text;
+
 
 namespace onlineLegalWF.test
 {
@@ -18,6 +23,7 @@ namespace onlineLegalWF.test
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationSettings.AppSettings["BPMDB"].ToString();
+        public MargePDF zmergepdf = new MargePDF();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,14 +34,49 @@ namespace onlineLegalWF.test
 
             tagname2.Text = tag2.ToString();
 
-            string file1 = @"C__WordTemplate_Insurance_Output_inreq_20240108_133407.docx";
-            string file2 = @"C__WordTemplate_Insurance_Output_inreq_20240108_114222.docx";
-            string folder = @"D:\Users\worawut.m\Downloads\";
-            Document document = new Document();
-            document.LoadFromFile(folder+file1, FileFormat.Docx);
-            document.InsertTextFromFile(folder+file2, FileFormat.Docx);
-            document.SaveToFile(folder+"MergedFile.docx", FileFormat.Docx);
-            System.Diagnostics.Process.Start(folder+"MergedFile.docx");
+            //string file1 = @"C__WordTemplate_Insurance_Output_inreq_20240108_133407.docx";
+            //string file2 = @"C__WordTemplate_Insurance_Output_inreq_20240114_204952.docx";
+            //string folder = @"D:\Users\worawut.m\Downloads\";
+            //Document document = new Document();
+            //document.LoadFromFile(folder+file1, Spire.Doc.FileFormat.Docx);
+            //document.InsertTextFromFile(folder+file2, Spire.Doc.FileFormat.PDF);
+            //document.SaveToFile(folder+"MergedFile.docx", Spire.Doc.FileFormat.Docx);
+            //System.Diagnostics.Process.Start(folder+"MergedFile.docx");
+
+            //String[] files = new String[] { @"C__WordTemplate_Insurance_Output_inreq_20240114_204952.pdf", @"C__WordTemplate_Insurance_Output_inreq_20240112_165348.pdf" };
+            //PdfDocument[] docs = new PdfDocument[files.Length];
+            //for (int i = 0; i < files.Length; i++)
+            //{
+            //    docs[i] = new PdfDocument();
+            //    docs[i].LoadFromFile(folder + files[i]);
+            //}
+            //for (int i = 1; i < files.Length; i++)
+            //{
+            //    docs[0].AppendPage(docs[i]);
+            //}
+            //docs[0].SaveToFile(folder + "MergePDF.pdf", Spire.Pdf.FileFormat.PDF);
+            //System.Diagnostics.Process.Start(folder + "MergePDF.pdf");
+
+            //Document doc = new Document();
+            //string basePath = @"D:\Users\worawut.m\Downloads\";
+            //PdfCopy copy = new PdfCopy(doc, new FileStream(basePath + "mergePdf.pdf", FileMode.Create));
+            //doc.Open();
+            //string[] pdfFiles = { @"C__WordTemplate_Insurance_Output_inreq_20240114_204952.pdf", @"C__WordTemplate_Insurance_Output_inreq_20240112_165348.pdf" };
+            //foreach (string filename in pdfFiles)
+            //{
+            //    PdfReader reader = new PdfReader(basePath + filename);
+            //    copy.AddDocument(reader);
+            //    reader.Close();
+            //}
+            //doc.Close();
+            //System.Diagnostics.Process.Start(basePath + "mergePdf.pdf");
+
+            //get ouput file form tb z_replacedocx_log
+            string basePath = @"D:\Users\worawut.m\Downloads\";
+            //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
+            string[] pdfFiles = { @"C__WordTemplate_Insurance_Output_inreq_20240114_204952.pdf", @"C__WordTemplate_Insurance_Output_inreq_20240112_165348.pdf" };
+
+            zmergepdf.mergefilePDF(pdfFiles, basePath);
 
         }
 
@@ -49,8 +90,8 @@ namespace onlineLegalWF.test
             var xsign_upload = sign_upload;
 
             string templatefile = @"C:\WordTemplate\test\testReplaceSign.docx";
-            string outputfoler = @"C:\WordTemplate\test\Output";
-            string outputfn = outputfoler + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+            string outputfolder = @"C:\WordTemplate\test\Output";
+            string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();
 
@@ -244,7 +285,7 @@ namespace onlineLegalWF.test
 
                 //if (extension == ".jpg")
                 //{
-                //    xsign_upload.SaveAs(outputfoler + xsign_upload.FileName);
+                //    xsign_upload.SaveAs(outputfolder + xsign_upload.FileName);
 
                 //}
                 //else
@@ -459,16 +500,16 @@ namespace onlineLegalWF.test
             ////                    '" + jsonDTProperties1 + @"', 
             ////                    '" + jsonDTdata + @"', 
             ////                    '" + templatefile + @"', 
-            ////                    '" + outputfoler + @"', 
+            ////                    '" + outputfolder + @"', 
             ////                    '" + outputfn + @"',  
             ////                    '" + "0" + @"',
             ////                ) ";
 
             ////zdb.ExecNonQuery(sql, zconnstr); 
 
-            //var outputbyte = rdoc.ReplaceData2(jsonDTStr, jsonDTProperties1, jsonDTdata, templatefile, outputfoler, outputfn, false);
+            //var outputbyte = rdoc.ReplaceData2(jsonDTStr, jsonDTProperties1, jsonDTdata, templatefile, outputfolder, outputfn, false);
 
-            var outputbyte = rdoc.ReplaceData(listTagData, templatefile, outputfoler, outputfn, false);
+            var outputbyte = rdoc.ReplaceData(listTagData, templatefile, outputfolder, outputfn, false);
 
             ReplaceDocx.Class.ReplaceDocx repl = new ReplaceDocx.Class.ReplaceDocx();
             repl.convertDOCtoPDF(outputfn, outputfn.Replace(".docx", ".pdf"), false);
@@ -490,8 +531,8 @@ namespace onlineLegalWF.test
         //    var tag2 = tagname2.Text.Trim();
 
         //    string templatefile = @"C:\WordTemplate\test\testReplaceSign.docx";
-        //    string outputfoler = @"C:\WordTemplate\test\Output";
-        //    string outputfn = outputfoler + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+        //    string outputfolder = @"C:\WordTemplate\test\Output";
+        //    string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
         //    var rdoc = new ReplaceDocx.Class.ReplaceDocx();
 
@@ -716,14 +757,14 @@ namespace onlineLegalWF.test
         //    //                    '" + jsonDTProperties1 + @"', 
         //    //                    '" + jsonDTdata + @"', 
         //    //                    '" + templatefile + @"', 
-        //    //                    '" + outputfoler + @"', 
+        //    //                    '" + outputfolder + @"', 
         //    //                    '" + outputfn + @"',  
         //    //                    '" + "0" + @"',
         //    //                ) ";
 
         //    //zdb.ExecNonQuery(sql, zconnstr); 
 
-        //    var outputbyte = rdoc.ReplaceData2(jsonDTStr, jsonDTProperties1, jsonDTdata, templatefile, outputfoler, outputfn, false);
+        //    var outputbyte = rdoc.ReplaceData2(jsonDTStr, jsonDTProperties1, jsonDTdata, templatefile, outputfolder, outputfn, false);
 
         //    repl.convertDOCtoPDF(outputfn, outputfn.Replace(".docx", ".pdf"), false);
         //    // Dowload Word 
