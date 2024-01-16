@@ -656,6 +656,9 @@ namespace onlineLegalWF.frmInsurance
             // check session_user
             if (Session["user_login"] != null)
             {
+                // getCurrentStep
+                var wfAttrct = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+
                 var xlogin_name = Session["user_login"].ToString();
                 var empFunc = new EmpInfo();
 
@@ -671,13 +674,15 @@ namespace onlineLegalWF.frmInsurance
                 {
                     wfAttr.wf_status = "REVIEWED";
                     wfAttr.submit_answer = "REVIEWED";
+                    wfAttr.submit_by = wfAttrct.submit_by;
                 }
                 else 
                 {
                     wfAttr.wf_status = "SUBMITTED";
                     wfAttr.submit_answer = "SUBMITTED";
+                    wfAttr.submit_by = emp.user_login;
                 }
-                wfAttr.submit_by = emp.user_login;
+                
                 wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by);
                 wfAttr.updated_by = emp.user_login;
                 

@@ -30,9 +30,13 @@ namespace onlineLegalWF.Class
                 mailMessage.Body = body;
                 mailMessage.Subject = subject;
                 mailMessage.IsBodyHtml = true;
-                mailMessage.Attachments.Add(attachment);
+                if (attachment != null) 
+                {
+                    mailMessage.Attachments.Add(attachment);
+                }
+                
 
-                await client.SendMailAsync(mailMessage);
+                await client.SendMailAsync(mailMessage).ConfigureAwait(false);
                 status = true;
                 return status;
             }

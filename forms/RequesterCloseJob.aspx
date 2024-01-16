@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Approve" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="apv.aspx.cs" Inherits="onlineLegalWF.forms.apv" %>
+﻿<%@ Page Title="Close Job" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="RequesterCloseJob.aspx.cs" Inherits="onlineLegalWF.forms.RequesterCloseJob" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
 <%@ Register Src="~/userControls/ucCommentlog.ascx" TagPrefix="uc4" TagName="ucCommentlog" %>
@@ -61,8 +61,8 @@
         </tr>
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
-                <asp:Button ID="btn_Approve" runat="server" CssClass="btn_normal_blue" Text="Approve" OnClick="btn_Approve_Click" />
-                <asp:Button ID="btn_Reject" runat="server" CssClass="btn_normal_red" Text="Reject" />
+                <asp:Button ID="btn_Submit" runat="server" CssClass="btn_normal_blue" Text="Submit" OnClick="btn_Submit_Click" />
+                <%--<asp:Button ID="btn_Reject" runat="server" CssClass="btn_normal_red" Text="Reject" />--%>
             </td>
         </tr>
         <tr class="cell_content_100PC">

@@ -71,15 +71,56 @@ namespace onlineLegalWF.test
             //doc.Close();
             //System.Diagnostics.Process.Start(basePath + "mergePdf.pdf");
 
-            //get ouput file form tb z_replacedocx_log
-            string basePath = @"D:\Users\worawut.m\Downloads\";
-            //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
-            string[] pdfFiles = { @"C__WordTemplate_Insurance_Output_inreq_20240114_204952.pdf", @"C__WordTemplate_Insurance_Output_inreq_20240112_165348.pdf" };
+            ////get ouput file form tb z_replacedocx_log
+            //string basePath = @"D:\Users\worawut.m\Downloads\";
+            ////get list pdf file from tb z_replacedocx_log where replacedocx_reqno
+            //string[] pdfFiles = { @"C__WordTemplate_Insurance_Output_inreq_20240114_204952.pdf", @"C__WordTemplate_Insurance_Output_inreq_20240112_165348.pdf" };
 
-            zmergepdf.mergefilePDF(pdfFiles, basePath);
+            //zmergepdf.mergefilePDF(pdfFiles, basePath);
 
+            string process_id = "PID_LEGALWF_2024_000082";
+
+            string sql = @"select * from li_insurance_request where process_id = '" + process_id + "'";
+            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                var dr = dt.Rows[0];
+                string id = dr["req_no"].ToString();
+
+                string pathfileins = "";
+                string outputdirectory = "";
+
+                string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                if (resfile.Rows.Count > 0)
+                {
+                    pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+                    outputdirectory = resfile.Rows[0]["output_directory"].ToString();
+
+                    List<string> listpdf = new List<string>();
+                    listpdf.Add(pathfileins);
+
+                    string sqlattachfile = "select * from wf_attachment where pid = '" + process_id + "' and e_form IS NULL";
+
+                    var resattachfile = zdb.ExecSql_DataTable(sqlattachfile, zconnstr);
+
+                    if (resattachfile.Rows.Count > 0)
+                    {
+                        foreach (DataRow item in resattachfile.Rows)
+                        {
+                            listpdf.Add(item["attached_filepath"].ToString());
+                        }
+                    }
+                    //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
+                    string[] pdfFiles = listpdf.ToArray();
+
+                    zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
+                }
+
+            }
         }
-
         protected void btnTestRun_Click(object sender, EventArgs e)
         {
             // Replace Doc

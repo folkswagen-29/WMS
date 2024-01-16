@@ -1,7 +1,11 @@
 ﻿using Antlr.Runtime;
+using iTextSharp.text.pdf;
+using Microsoft.Office.Interop.Word;
+using Spire.Doc;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -345,19 +349,16 @@ namespace onlineLegalWF.Class
                     {
                         xurl = "/forms/legalassign.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                     }
-                    else if (wfDefault_step.step_name == "GM Review") 
+                    else if (wfDefault_step.step_name == "GM Review" && wfDefault_step.process_code == "INR_NEW") 
                     {
-                        if (wfDefault_step.process_code == "INR_NEW") 
+                        string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
+                        var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                        if (dt.Rows.Count > 0)
                         {
-                            string sql = @"select * from li_insurance_request where process_id = '"+wfDefault_step.process_id +"'";
-                            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
-                            if (dt.Rows.Count > 0)
-                            {
-                                var dr = dt.Rows[0];
-                                string id = dr["req_no"].ToString();
+                            var dr = dt.Rows[0];
+                            string id = dr["req_no"].ToString();
 
-                                xurl = "/frminsurance/insurancerequestedit.aspx?id=" + id + "&st=" + wfDefault_step.step_name;
-                            }
+                            xurl = "/frminsurance/insurancerequestedit.aspx?id=" + id + "&st=" + wfDefault_step.step_name;
                         }
                     }
                     else

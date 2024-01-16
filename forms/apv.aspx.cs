@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -15,6 +16,9 @@ namespace onlineLegalWF.forms
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
         public WFFunctions zwf = new WFFunctions();
+        public string zconnstrrpa = ConfigurationManager.AppSettings["RPADB"].ToString();
+        public MargePDF zmergepdf = new MargePDF();
+        public SendMail zsendmail = new SendMail();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -140,7 +144,90 @@ namespace onlineLegalWF.forms
 
                     if (status == "Success") 
                     {
-                        Response.Redirect("/legalportal/legalportal.aspx?m=myworklist");
+                        if (wfAttr.step_name == "CCO Approve" && wfAttr.process_code == "INR_NEW")
+                        {
+                            string subject = "";
+                            string body = "";
+                            string sql = @"select * from li_insurance_request where process_id = '" + wfAttr.process_id + "'";
+                            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dr = dt.Rows[0];
+                                string id = dr["req_no"].ToString();
+                                subject = dr["subject"].ToString();
+                                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว";
+
+                                string pathfileins = "";
+                                string outputdirectory = "";
+
+                                string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                                var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                                if (resfile.Rows.Count > 0)
+                                {
+                                    pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+                                    outputdirectory = resfile.Rows[0]["output_directory"].ToString();
+
+                                    List<string> listpdf = new List<string>();
+                                    listpdf.Add(pathfileins);
+
+                                    string sqlattachfile = "select * from wf_attachment where pid = '" + wfAttr.process_id + "' and e_form IS NULL";
+
+                                    var resattachfile = zdb.ExecSql_DataTable(sqlattachfile, zconnstr);
+
+                                    if (resattachfile.Rows.Count > 0)
+                                    {
+                                        foreach (DataRow item in resattachfile.Rows)
+                                        {
+                                            listpdf.Add(item["attached_filepath"].ToString());
+                                        }
+                                    }
+                                    //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
+                                    string[] pdfFiles = listpdf.ToArray();
+
+                                    ////get mail from db
+                                    //string email = "";
+                                    //string sqlbpm = "select * from li_user where user_login = '" + wfDefault_step.submit_by + "' ";
+                                    //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                    //if (dtbpm.Rows.Count > 0)
+                                    //{
+                                    //    email = dtbpm.Rows[0]["email"].ToString();
+
+                                    //}
+                                    //else
+                                    //{
+                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfDefault_step.submit_by + "' ";
+                                    //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                    //    if (dt.Rows.Count > 0)
+                                    //    {
+                                    //        email = dtrpa.Rows[0]["Email"].ToString();
+                                    //    }
+
+                                    //}
+
+                                    string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
+
+                                    //send mail to requester
+
+                                    ////fix mail test
+                                    string email = "worawut.m@assetworldcorp-th.com";
+                                    _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
+
+                                    //send mait to Procurement
+                                    _ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
+
+                                    //send mail to jaroonsak.n
+                                    _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
+
+                                }
+
+                            }
+                        }
+
+                        //Response.Redirect("/legalportal/legalportal.aspx?m=myworklist");
                     }
 
                 }
