@@ -361,6 +361,22 @@ namespace onlineLegalWF.Class
                             xurl = "/frminsurance/insurancerequestedit.aspx?id=" + id + "&st=" + wfDefault_step.step_name;
                         }
                     }
+                    else if (wfDefault_step.step_name == "Requester Receive Approval" && wfDefault_step.process_code == "INR_NEW")
+                    {
+                        string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
+                        var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                        if (dt.Rows.Count > 0)
+                        {
+                            var dr = dt.Rows[0];
+                            string id = dr["req_no"].ToString();
+
+                            xurl = "/forms/requesterclosejob.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
+                        }
+                    }
+                    else if (wfDefault_step.step_name == "End")
+                    {
+                        xurl = "/forms/complete.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
+                    }
                     else
                     {
                         xurl = "/forms/apv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
@@ -377,7 +393,7 @@ namespace onlineLegalWF.Class
                                         '" + wfDefault_step.step_name + @"', 
                                          '" + wfDefault_step.next_assto_login + @"', 
                                         '"+ xurl + @"', 
-                                        '', 
+                                        '"+ wfDefault_step.wf_status + @"', 
                                         '" + wfDefault_step.attr_apv_value + @"', 
                                         " + wfDefault_step.istrue_nextstep.ToString() + @", 
                                         " + wfDefault_step.isfalse_nextstep.ToString() + @", 

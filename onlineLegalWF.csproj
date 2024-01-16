@@ -136,6 +136,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="forms\apv.aspx" />
+    <Content Include="forms\Complete.aspx" />
     <Content Include="forms\LegalAssign.aspx" />
     <Content Include="forms\RequesterCloseJob.aspx" />
     <Content Include="frmCommregis\CommRegisRequest.aspx" />
@@ -227,7 +228,9 @@
     <Content Include="test\TestWF01.aspx" />
     <Content Include="userControls\UcAttachForm.ascx" />
     <Content Include="userControls\ucAttachment.ascx" />
+    <Content Include="userControls\ucAttachmentdata.ascx" />
     <Content Include="userControls\ucCommentlog.ascx" />
+    <Content Include="userControls\ucCommentlogdata.ascx" />
     <Content Include="userControls\ucHeader.ascx" />
     <Content Include="userControls\ucMenu.ascx" />
     <Content Include="userControls\ucMenulist.ascx" />
@@ -279,6 +282,13 @@
     </Compile>
     <Compile Include="forms\apv.aspx.designer.cs">
       <DependentUpon>apv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\Complete.aspx.cs">
+      <DependentUpon>Complete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\Complete.aspx.designer.cs">
+      <DependentUpon>Complete.aspx</DependentUpon>
     </Compile>
     <Compile Include="forms\LegalAssign.aspx.cs">
       <DependentUpon>LegalAssign.aspx</DependentUpon>
@@ -578,12 +588,26 @@
     <Compile Include="userControls\ucAttachment.ascx.designer.cs">
       <DependentUpon>ucAttachment.ascx</DependentUpon>
     </Compile>
+    <Compile Include="userControls\ucAttachmentdata.ascx.cs">
+      <DependentUpon>ucAttachmentdata.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userControls\ucAttachmentdata.ascx.designer.cs">
+      <DependentUpon>ucAttachmentdata.ascx</DependentUpon>
+    </Compile>
     <Compile Include="userControls\ucCommentlog.ascx.cs">
       <DependentUpon>ucCommentlog.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="userControls\ucCommentlog.ascx.designer.cs">
       <DependentUpon>ucCommentlog.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="userControls\ucCommentlogdata.ascx.cs">
+      <DependentUpon>ucCommentlogdata.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userControls\ucCommentlogdata.ascx.designer.cs">
+      <DependentUpon>ucCommentlogdata.ascx</DependentUpon>
     </Compile>
     <Compile Include="userControls\ucHeader.ascx.cs">
       <DependentUpon>ucHeader.ascx</DependentUpon>

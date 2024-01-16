@@ -139,6 +139,14 @@ namespace onlineLegalWF.forms
                     //wfA_NextStep.next_assto_login = emp.next_line_mgr_login;
                     wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by);
                     //wfA_NextStep.submit_by = emp.user_login;
+                    if (wfAttr.step_name == "CCO Approve" && wfAttr.process_code == "INR_NEW")
+                    {
+                        wfA_NextStep.wf_status = "WAITATCH";
+                    }
+                    else if (wfAttr.step_name == "End") 
+                    {
+                        wfA_NextStep.wf_status = "COMPLETED";
+                    }
                     wfA_NextStep.submit_by = wfA_NextStep.submit_by;
                     string status = zwf.Insert_NextStep(wfA_NextStep);
 
