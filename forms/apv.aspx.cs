@@ -209,7 +209,7 @@ namespace onlineLegalWF.forms
                                     //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfDefault_step.submit_by + "' ";
                                     //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
 
-                                    //    if (dt.Rows.Count > 0)
+                                    //    if (dtrpa.Rows.Count > 0)
                                     //    {
                                     //        email = dtrpa.Rows[0]["Email"].ToString();
                                     //    }

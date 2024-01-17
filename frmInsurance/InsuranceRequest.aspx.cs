@@ -21,6 +21,7 @@ namespace onlineLegalWF.frmInsurance
         public DbControllerBase zdb = new DbControllerBase();
         //public string zconnstr = ConfigurationSettings.AppSettings["BPMDB"].ToString();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
+        public string zconnstrrpa = ConfigurationManager.AppSettings["RPADB"].ToString();
         public WFFunctions zwf = new WFFunctions();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
@@ -136,19 +137,52 @@ namespace onlineLegalWF.frmInsurance
             //DOA
             #region DOA 
 
+            ////get gm or am check external domain
+            string xbu_code = ddl_bu.SelectedValue.ToString();
+            string sqlbu = @"select * from li_business_unit where bu_code = '"+ xbu_code + "'";
+
+            var res = zdb.ExecSql_DataTable(sqlbu, zconnstr);
+
+
             var requestor = "";
             var requestorpos = "";
             var requestordate = "";
-            if (Session["user_login"] != null)
+            var signname1 = "";
+            var signname2 = "";
+            var signname22 = "";
+            var signname3 = "";
+            var signname4 = "";
+            var signname5 = "";
+            if (res.Rows.Count > 0)
             {
-                requestor = Session["user_name"].ToString();
-                requestorpos = Session["user_position"].ToString();
-                requestordate = System.DateTime.Now.ToString("dd/MM/yyyy");
+                string xexternal_domain = res.Rows[0]["external_domain"].ToString();
+                string xgm = res.Rows[0]["gm"].ToString();
+                string xam = res.Rows[0]["adm_bp"].ToString();
+                var empFunc = new EmpInfo();
+
+                if (xexternal_domain == "Y") 
+                {
+                    //get data user
+                    var emp = empFunc.getEmpInfo(xam);
+                    requestor = emp.full_name_en;
+                    requestorpos = emp.position_en;
+                }
+                else 
+                {
+                    //get data user
+                    var emp = empFunc.getEmpInfo(xgm);
+                    requestor = emp.full_name_en;
+                    requestorpos = emp.position_en;
+                }
+
+                
             }
             
             var apv1 = "คุณจรูณศักดิ์ นามะฮง";
             var apv1pos = "Insurance Specialist";
             var apv1date = "";
+            var apv1_2 = "คุณวารินทร์ เกลียวไพศาล";
+            var apv1_2date = "";
             var apv2 = "คุณชโลทร ศรีสมวงษ์";
             var apv2pos = "Head of Legal";
             var apv2date = "";
@@ -165,100 +199,114 @@ namespace onlineLegalWF.frmInsurance
 
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name1#";
-            dr0["tagvalue"] = requestor.Replace(",", "!comma");
+            dr0["tagvalue"] = requestor;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#position1#";
-            dr0["tagvalue"] = requestorpos.Replace(",", "!comma");
+            dr0["tagvalue"] = requestorpos;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#date1#";
-            dr0["tagvalue"] = requestordate.Replace(",", "!comma");
+            dr0["tagvalue"] = requestordate;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#sign_name1#";
-            dr0["tagvalue"] = "อนุมัติผ่านระบบ";
+            dr0["tagvalue"] = signname1;
             dtStr.Rows.Add(dr0);
 
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name2#";
-            dr0["tagvalue"] = apv1.Replace(",", "!comma");
+            dr0["tagvalue"] = apv1;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#position2#";
-            dr0["tagvalue"] = apv1pos.Replace(",", "!comma");
+            dr0["tagvalue"] = apv1pos;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#date2#";
-            dr0["tagvalue"] = apv1date.Replace(",", "!comma");
+            dr0["tagvalue"] = apv1date;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#sign_name2#";
-            dr0["tagvalue"] = apv4remark.Replace(",", "!comma");
+            dr0["tagvalue"] = signname2;
+            dtStr.Rows.Add(dr0);
+
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#name22#";
+            dr0["tagvalue"] = apv1_2;
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#date22#";
+            dr0["tagvalue"] = apv1_2date;
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#sign_name22#";
+            dr0["tagvalue"] = signname22;
             dtStr.Rows.Add(dr0);
 
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name3#";
-            dr0["tagvalue"] = apv2.Replace(",", "!comma");
+            dr0["tagvalue"] = apv2;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#position3#";
-            dr0["tagvalue"] = apv2pos.Replace(",", "!comma");
+            dr0["tagvalue"] = apv2pos;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#date3#";
-            dr0["tagvalue"] = apv2date.Replace(",", "!comma");
+            dr0["tagvalue"] = apv2date;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#sign_name3#";
-            dr0["tagvalue"] = apv4remark.Replace(",", "!comma");
+            dr0["tagvalue"] = signname3;
             dtStr.Rows.Add(dr0);
 
 
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name4#";
-            dr0["tagvalue"] = apv3.Replace(",", "!comma");
+            dr0["tagvalue"] = apv3;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#position4#";
-            dr0["tagvalue"] = apv3pos.Replace(",", "!comma");
+            dr0["tagvalue"] = apv3pos;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#date4#";
-            dr0["tagvalue"] = apv3date.Replace(",", "!comma");
+            dr0["tagvalue"] = apv3date;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#sign_name4#";
-            dr0["tagvalue"] = apv4remark.Replace(",", "!comma");
+            dr0["tagvalue"] = signname4;
             dtStr.Rows.Add(dr0);
 
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name5#";
-            dr0["tagvalue"] = apv4.Replace(",", "!comma");
+            dr0["tagvalue"] = apv4;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#position5#";
-            dr0["tagvalue"] = apv4pos.Replace(",", "!comma");
+            dr0["tagvalue"] = apv4pos;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#date5#";
-            dr0["tagvalue"] = apv4date.Replace(",", "!comma");
+            dr0["tagvalue"] = apv4date;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#sign_name5#";
-            dr0["tagvalue"] = apv4remark.Replace(",", "!comma");
+            dr0["tagvalue"] = signname5;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#cb1#";
-            dr0["tagvalue"] = apv4cb1.Replace(",", "!comma");
+            dr0["tagvalue"] = apv4cb1;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#cb2#";
-            dr0["tagvalue"] = apv4cb2.Replace(",", "!comma");
+            dr0["tagvalue"] = apv4cb2;
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#remark5#";
-            dr0["tagvalue"] = apv4remark.Replace(",", "!comma");
+            dr0["tagvalue"] = apv4remark;
             dtStr.Rows.Add(dr0);
             #endregion 
 
