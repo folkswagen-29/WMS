@@ -23,6 +23,7 @@ namespace onlineLegalWF.frmInsurance
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
         public string zconnstrrpa = ConfigurationManager.AppSettings["RPADB"].ToString();
         public WFFunctions zwf = new WFFunctions();
+        public ReplaceInsNew zreplaceinsnew = new ReplaceInsNew();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -94,65 +95,26 @@ namespace onlineLegalWF.frmInsurance
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();
 
-            #region prepare data
-            //Replace TAG STRING
-            DataTable dtStr = new DataTable();
-            dtStr.Columns.Add("tagname", typeof(string));
-            dtStr.Columns.Add("tagvalue", typeof(string));
+            #region gentagstr data form
+            ReplaceInsNew_TagData data = new ReplaceInsNew_TagData();
 
-            DataRow dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#docno#";
-            dr0["tagvalue"] = xdoc_no.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#company#";
-            dr0["tagvalue"] = xcompany.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#to#";
-            dr0["tagvalue"] = xto.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#subject#";
-            dr0["tagvalue"] = xsubject.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#reqdate#";
-            dr0["tagvalue"] = Utillity.ConvertDateToLongDateTime(xreq_date, "en");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#objective#";
-            dr0["tagvalue"] = xpurpose.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#reason#";
-            dr0["tagvalue"] = xbackground.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#approve#";
-            dr0["tagvalue"] = xapprove_des.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            #endregion
-
-            //DOA
-            #region DOA 
+            data.docno = xdoc_no.Replace(",", "!comma");
+            data.company = xcompany.Replace(",", "!comma");
+            data.to = xto.Replace(",", "!comma");
+            data.subject = xsubject.Replace(",", "!comma");
+            data.reqdate = Utillity.ConvertDateToLongDateTime(xreq_date, "en");
+            data.objective = xpurpose.Replace(",", "!comma");
+            data.reason = xbackground.Replace(",", "!comma");
+            data.approve = xapprove_des.Replace(",", "!comma");
 
             ////get gm or am check external domain
             string xbu_code = ddl_bu.SelectedValue.ToString();
-            string sqlbu = @"select * from li_business_unit where bu_code = '"+ xbu_code + "'";
+            string sqlbu = @"select * from li_business_unit where bu_code = '" + xbu_code + "'";
 
             var res = zdb.ExecSql_DataTable(sqlbu, zconnstr);
 
-
             var requestor = "";
             var requestorpos = "";
-            var requestordate = "";
-            var signname1 = "";
-            var signname2 = "";
-            var signname22 = "";
-            var signname3 = "";
-            var signname4 = "";
-            var signname5 = "";
             if (res.Rows.Count > 0)
             {
                 string xexternal_domain = res.Rows[0]["external_domain"].ToString();
@@ -160,14 +122,14 @@ namespace onlineLegalWF.frmInsurance
                 string xam = res.Rows[0]["adm_bp"].ToString();
                 var empFunc = new EmpInfo();
 
-                if (xexternal_domain == "Y") 
+                if (xexternal_domain == "Y")
                 {
                     //get data user
                     var emp = empFunc.getEmpInfo(xam);
                     requestor = emp.full_name_en;
                     requestorpos = emp.position_en;
                 }
-                else 
+                else
                 {
                     //get data user
                     var emp = empFunc.getEmpInfo(xgm);
@@ -175,140 +137,271 @@ namespace onlineLegalWF.frmInsurance
                     requestorpos = emp.position_en;
                 }
 
-                
+
             }
-            
+
             var apv1 = "คุณจรูณศักดิ์ นามะฮง";
             var apv1pos = "Insurance Specialist";
-            var apv1date = "";
             var apv1_2 = "คุณวารินทร์ เกลียวไพศาล";
-            var apv1_2date = "";
             var apv2 = "คุณชโลทร ศรีสมวงษ์";
             var apv2pos = "Head of Legal";
-            var apv2date = "";
             var apv3 = "คุณชยุต อมตวนิช";
             var apv3pos = "Head of Risk Management";
-            var apv3date = "";
 
             var apv4 = "ดร.สิเวศ โรจนสุนทร";
             var apv4pos = "CCO";
-            var apv4date = "";
-            var apv4cb1 = "";
-            var apv4cb2 = "";
-            var apv4remark = "";
 
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#name1#";
-            dr0["tagvalue"] = requestor;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#position1#";
-            dr0["tagvalue"] = requestorpos;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#date1#";
-            dr0["tagvalue"] = requestordate;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#sign_name1#";
-            dr0["tagvalue"] = signname1;
-            dtStr.Rows.Add(dr0);
+            data.sign_name1 = "";
+            data.name1 = requestor;
+            data.position1 = requestorpos;
+            data.date1 = "";
 
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#name2#";
-            dr0["tagvalue"] = apv1;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#position2#";
-            dr0["tagvalue"] = apv1pos;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#date2#";
-            dr0["tagvalue"] = apv1date;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#sign_name2#";
-            dr0["tagvalue"] = signname2;
-            dtStr.Rows.Add(dr0);
+            data.sign_name2 = "";
+            data.name2 = apv1;
+            data.position2 = apv1pos;
+            data.date2 = "";
 
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#name22#";
-            dr0["tagvalue"] = apv1_2;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#date22#";
-            dr0["tagvalue"] = apv1_2date;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#sign_name22#";
-            dr0["tagvalue"] = signname22;
-            dtStr.Rows.Add(dr0);
+            data.sign_name22 = "";
+            data.name22 = apv1_2;
+            data.date22 = "";
 
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#name3#";
-            dr0["tagvalue"] = apv2;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#position3#";
-            dr0["tagvalue"] = apv2pos;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#date3#";
-            dr0["tagvalue"] = apv2date;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#sign_name3#";
-            dr0["tagvalue"] = signname3;
-            dtStr.Rows.Add(dr0);
+            data.sign_name3 = "";
+            data.name3 = apv2;
+            data.position3 = apv2pos;
+            data.date3 = "";
+
+            data.sign_name4 = "";
+            data.name4 = apv3;
+            data.position4 = apv3pos;
+            data.date4 = "";
+
+            data.sign_name5 = "";
+            data.name5 = apv4;
+            data.position5 = apv4pos;
+            data.date5 = "";
+            data.cb1 = "";
+            data.cb2 = "";
+            data.remark5 = "";
+
+            DataTable dtStr = zreplaceinsnew.genTagData(data);
+            #endregion
+
+            #region prepare data
+            ////Replace TAG STRING
+
+            //DataTable dtStr = new DataTable();
+            //dtStr.Columns.Add("tagname", typeof(string));
+            //dtStr.Columns.Add("tagvalue", typeof(string));
+
+            //DataRow dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#docno#";
+            //dr0["tagvalue"] = xdoc_no.Replace(",", "!comma");
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#company#";
+            //dr0["tagvalue"] = xcompany.Replace(",", "!comma");
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#to#";
+            //dr0["tagvalue"] = xto.Replace(",", "!comma");
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#subject#";
+            //dr0["tagvalue"] = xsubject.Replace(",", "!comma");
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#reqdate#";
+            //dr0["tagvalue"] = Utillity.ConvertDateToLongDateTime(xreq_date, "en");
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#objective#";
+            //dr0["tagvalue"] = xpurpose.Replace(",", "!comma");
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#reason#";
+            //dr0["tagvalue"] = xbackground.Replace(",", "!comma");
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#approve#";
+            //dr0["tagvalue"] = xapprove_des.Replace(",", "!comma");
+            //dtStr.Rows.Add(dr0);
+            #endregion
+
+            //DOA
+            #region DOA 
+
+            ////get gm or am check external domain
+            //string xbu_code = ddl_bu.SelectedValue.ToString();
+            //string sqlbu = @"select * from li_business_unit where bu_code = '"+ xbu_code + "'";
+
+            //var res = zdb.ExecSql_DataTable(sqlbu, zconnstr);
 
 
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#name4#";
-            dr0["tagvalue"] = apv3;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#position4#";
-            dr0["tagvalue"] = apv3pos;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#date4#";
-            dr0["tagvalue"] = apv3date;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#sign_name4#";
-            dr0["tagvalue"] = signname4;
-            dtStr.Rows.Add(dr0);
+            //var requestor = "";
+            //var requestorpos = "";
+            //var requestordate = "";
+            //var signname1 = "";
+            //var signname2 = "";
+            //var signname22 = "";
+            //var signname3 = "";
+            //var signname4 = "";
+            //var signname5 = "";
+            //if (res.Rows.Count > 0)
+            //{
+            //    string xexternal_domain = res.Rows[0]["external_domain"].ToString();
+            //    string xgm = res.Rows[0]["gm"].ToString();
+            //    string xam = res.Rows[0]["adm_bp"].ToString();
+            //    var empFunc = new EmpInfo();
 
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#name5#";
-            dr0["tagvalue"] = apv4;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#position5#";
-            dr0["tagvalue"] = apv4pos;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#date5#";
-            dr0["tagvalue"] = apv4date;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#sign_name5#";
-            dr0["tagvalue"] = signname5;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#cb1#";
-            dr0["tagvalue"] = apv4cb1;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#cb2#";
-            dr0["tagvalue"] = apv4cb2;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#remark5#";
-            dr0["tagvalue"] = apv4remark;
-            dtStr.Rows.Add(dr0);
-            #endregion 
+            //    if (xexternal_domain == "Y") 
+            //    {
+            //        //get data user
+            //        var emp = empFunc.getEmpInfo(xam);
+            //        requestor = emp.full_name_en;
+            //        requestorpos = emp.position_en;
+            //    }
+            //    else 
+            //    {
+            //        //get data user
+            //        var emp = empFunc.getEmpInfo(xgm);
+            //        requestor = emp.full_name_en;
+            //        requestorpos = emp.position_en;
+            //    }
+
+
+            //}
+
+            //var apv1 = "คุณจรูณศักดิ์ นามะฮง";
+            //var apv1pos = "Insurance Specialist";
+            //var apv1date = "";
+            //var apv1_2 = "คุณวารินทร์ เกลียวไพศาล";
+            //var apv1_2date = "";
+            //var apv2 = "คุณชโลทร ศรีสมวงษ์";
+            //var apv2pos = "Head of Legal";
+            //var apv2date = "";
+            //var apv3 = "คุณชยุต อมตวนิช";
+            //var apv3pos = "Head of Risk Management";
+            //var apv3date = "";
+
+            //var apv4 = "ดร.สิเวศ โรจนสุนทร";
+            //var apv4pos = "CCO";
+            //var apv4date = "";
+            //var apv4cb1 = "";
+            //var apv4cb2 = "";
+            //var apv4remark = "";
+
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#name1#";
+            //dr0["tagvalue"] = requestor;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#position1#";
+            //dr0["tagvalue"] = requestorpos;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#date1#";
+            //dr0["tagvalue"] = requestordate;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#sign_name1#";
+            //dr0["tagvalue"] = signname1;
+            //dtStr.Rows.Add(dr0);
+
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#name2#";
+            //dr0["tagvalue"] = apv1;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#position2#";
+            //dr0["tagvalue"] = apv1pos;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#date2#";
+            //dr0["tagvalue"] = apv1date;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#sign_name2#";
+            //dr0["tagvalue"] = signname2;
+            //dtStr.Rows.Add(dr0);
+
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#name22#";
+            //dr0["tagvalue"] = apv1_2;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#date22#";
+            //dr0["tagvalue"] = apv1_2date;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#sign_name22#";
+            //dr0["tagvalue"] = signname22;
+            //dtStr.Rows.Add(dr0);
+
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#name3#";
+            //dr0["tagvalue"] = apv2;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#position3#";
+            //dr0["tagvalue"] = apv2pos;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#date3#";
+            //dr0["tagvalue"] = apv2date;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#sign_name3#";
+            //dr0["tagvalue"] = signname3;
+            //dtStr.Rows.Add(dr0);
+
+
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#name4#";
+            //dr0["tagvalue"] = apv3;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#position4#";
+            //dr0["tagvalue"] = apv3pos;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#date4#";
+            //dr0["tagvalue"] = apv3date;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#sign_name4#";
+            //dr0["tagvalue"] = signname4;
+            //dtStr.Rows.Add(dr0);
+
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#name5#";
+            //dr0["tagvalue"] = apv4;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#position5#";
+            //dr0["tagvalue"] = apv4pos;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#date5#";
+            //dr0["tagvalue"] = apv4date;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#sign_name5#";
+            //dr0["tagvalue"] = signname5;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#cb1#";
+            //dr0["tagvalue"] = apv4cb1;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#cb2#";
+            //dr0["tagvalue"] = apv4cb2;
+            //dtStr.Rows.Add(dr0);
+            //dr0 = dtStr.NewRow();
+            //dr0["tagname"] = "#remark5#";
+            //dr0["tagvalue"] = apv4remark;
+            //dtStr.Rows.Add(dr0);
+            #endregion
 
 
             #region Sample ReplaceTable
@@ -461,44 +554,28 @@ namespace onlineLegalWF.frmInsurance
             dr["row_height"] = "16";
             dtProperties1.Rows.Add(dr);
 
-            //  DataTable dt = new DataTable();
-            DataTable dt = new DataTable();
-            dt.Columns.Add("tagname", typeof(string));
-            dt.Columns.Add("No", typeof(string));
-            dt.Columns.Add("Property Insured", typeof(string));
-            dt.Columns.Add("Indemnity Period", typeof(string));
-            dt.Columns.Add("Sum Insured", typeof(string));
-            dt.Columns.Add("Start Date", typeof(string));
-            dt.Columns.Add("End Date", typeof(string));
+            DataTable dt = zreplaceinsnew.genTagTableData(lblPID.Text);
+            //DataTable dt = new DataTable();
+            //dt.Columns.Add("tagname", typeof(string));
+            //dt.Columns.Add("No", typeof(string));
+            //dt.Columns.Add("Property Insured", typeof(string));
+            //dt.Columns.Add("Indemnity Period", typeof(string));
+            //dt.Columns.Add("Sum Insured", typeof(string));
+            //dt.Columns.Add("Start Date", typeof(string));
+            //dt.Columns.Add("End Date", typeof(string));
 
-            //DataTable for #table1#
-            //var dataGV = iniDataTable();
+            ////DataTable for #table1#
 
-            //for (int i = 0; i < dataGV.Rows.Count; i++)
-            //{
-            //    var drGV = dataGV.Rows[i];
-
-            //    DataRow dr1 = dt.NewRow();
-            //    dr1["tagname"] = "#table1#";
-            //    dr1["No"] = drGV["No"].ToString();
-            //    dr1["Property Insured"] = drGV["PropertyInsured"].ToString();  // "xxxxx";//.Text.Replace(",", "!comma");
-            //    dr1["Indemnity Period"] = drGV["IndemnityPeriod"].ToString(); // "1,000,000".Replace(",", "!comma"); ;
-            //    dr1["Sum Insured"] = drGV["SumInsured"].ToString();  // "15,000".Replace(",", "!comma"); ;
-            //    dr1["Start Date"] = drGV["StartDate"].ToString();
-            //    dr1["End Date"] = drGV["EndDate"].ToString();
-            //    dt.Rows.Add(dr1);
-            //}
-
-            //Assign DataTable for #table#
-            DataRow dr1 = dt.NewRow();
-            dr1["tagname"] = "#table1#";
-            dr1["No"] = "1";
-            dr1["Property Insured"] = xtype_pi.Replace(",", "!comma");  // "xxxxx";//.Text.Replace(",", "!comma");
-            dr1["Indemnity Period"] = xindemnity_period.Replace(",", "!comma"); // "1,000,000".Replace(",", "!comma"); ;
-            dr1["Sum Insured"] = xsum_insured.Replace(",", "!comma");  // "15,000".Replace(",", "!comma"); ;
-            dr1["Start Date"] = Utillity.ConvertDateToLongDateTime(Utillity.ConvertStringToDate(xstart_date),"en");
-            dr1["End Date"] = Utillity.ConvertDateToLongDateTime(Utillity.ConvertStringToDate(xend_date), "en");
-            dt.Rows.Add(dr1);
+            ////Assign DataTable for #table#
+            //DataRow dr1 = dt.NewRow();
+            //dr1["tagname"] = "#table1#";
+            //dr1["No"] = "1";
+            //dr1["Property Insured"] = xtype_pi.Replace(",", "!comma");  // "xxxxx";//.Text.Replace(",", "!comma");
+            //dr1["Indemnity Period"] = xindemnity_period.Replace(",", "!comma"); // "1,000,000".Replace(",", "!comma"); ;
+            //dr1["Sum Insured"] = xsum_insured.Replace(",", "!comma");  // "15,000".Replace(",", "!comma"); ;
+            //dr1["Start Date"] = Utillity.ConvertDateToLongDateTime(Utillity.ConvertStringToDate(xstart_date), "en");
+            //dr1["End Date"] = Utillity.ConvertDateToLongDateTime(Utillity.ConvertStringToDate(xend_date), "en");
+            //dt.Rows.Add(dr1);
             #endregion
 
             // Convert to JSONString
@@ -604,8 +681,8 @@ namespace onlineLegalWF.frmInsurance
                         wfAttr.subject = subject.Text.Trim();
                         wfAttr.wf_status = "SAVE";
                         wfAttr.submit_answer = "SAVE";
-                        wfAttr.submit_by = wfAttr.submit_by;
-                        wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by);
+                        wfAttr.submit_by = emp.user_login;
+                        wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, emp.user_login);
                         
 
                         // wf.updateProcess

@@ -137,6 +137,7 @@ namespace onlineLegalWF.forms
                     //wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by);
                     //wfA_NextStep.submit_by = emp.user_login;
                     wfA_NextStep.submit_by = wfAttr.submit_by;
+                    wfA_NextStep.wf_status = "COMPLETED";
                     string status = zwf.Insert_NextStep(wfA_NextStep);
 
                     if (status == "Success")
