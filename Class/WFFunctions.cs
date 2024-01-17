@@ -342,7 +342,7 @@ namespace onlineLegalWF.Class
                                     " + wfA.step_no.ToString() + @", 
                                     '" + wfA.step_name + @"', 
                                      '" + wfA.assto_login + @"', 
-                                     '/forms/apv.aspx?req=" + wfA.process_id + "&pc="+ wfA.process_code + @"', 
+                                     '"+ xurl + @"', 
                                      '" + wfA.wf_status + @"', 
                                     '" + wfA.attr_apv_value + @"', 
                                     " + wfA.istrue_nextstep.ToString() + @", 
@@ -362,6 +362,17 @@ namespace onlineLegalWF.Class
                     next_step = 3;
                 }
                 else 
+                {
+                    next_step = 4;
+                }
+            }
+            else if (wfA.step_name == "GM Approve" && wfA.process_code == "INR_RENEW")
+            {
+                if (wfA.external_domain == "Y")
+                {
+                    next_step = 3;
+                }
+                else
                 {
                     next_step = 4;
                 }
