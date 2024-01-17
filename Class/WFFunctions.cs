@@ -294,6 +294,43 @@ namespace onlineLegalWF.Class
             }
             else // in case start flow
             {
+                string xurl = "";
+                if (wfA.process_code == "INR_NEW")
+                {
+                    string sqlreq = @"select * from li_insurance_request where process_id = '" + wfA.process_id + "'";
+                    var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                    if (dtreq.Rows.Count > 0)
+                    {
+                        var drreq = dtreq.Rows[0];
+                        string id = drreq["req_no"].ToString();
+
+                        xurl = "/frminsurance/insurancerequestedit.aspx?id=" + id + "&st=" + wfA.step_name;
+                    }
+                }
+                else if (wfA.process_code == "INR_RENEW")
+                {
+                    string sqlreq = @"select * from li_insurance_request where process_id = '" + wfA.process_id + "'";
+                    var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                    if (dtreq.Rows.Count > 0)
+                    {
+                        var drreq = dtreq.Rows[0];
+                        string id = drreq["req_no"].ToString();
+
+                        xurl = "/frminsurance/insurancerenewrequestedit.aspx?id=" + id + "&st=" + wfA.step_name;
+                    }
+                }
+                else if (wfA.process_code == "INR_CLAIM")
+                {
+                    string sqlreq = @"select * from li_insurance_claim where process_id = '" + wfA.process_id + "'";
+                    var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                    if (dtreq.Rows.Count > 0)
+                    {
+                        var drreq = dtreq.Rows[0];
+                        string id = drreq["claim_no"].ToString();
+
+                        xurl = "/frminsurance/insuranceclaimedit.aspx?id=" + id + "&st=" + wfA.step_name;
+                    }
+                }
                 string sqlins = @" insert into wf_routing (process_id, process_code, version_no, subject,
                                 step_no, step_name, assto_login,link_url_format,
                                 wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer, submit_by) 
@@ -317,15 +354,30 @@ namespace onlineLegalWF.Class
                 zdb.ExecNonQuery(sqlins, zconnstr);
             }
             //  Finding next step 
-            int next_step = 0; 
-            if (wfA.attr_apv_value == wfA.submit_answer)
+            int next_step = 0;
+            if (wfA.step_name == "GM Review" && wfA.process_code == "INR_NEW")
             {
-                next_step = wfA.istrue_nextstep; 
+                if (wfA.external_domain == "Y")
+                {
+                    next_step = 3;
+                }
+                else 
+                {
+                    next_step = 4;
+                }
             }
-            else
+            else 
             {
-                next_step = wfA.isfalse_nextstep;
+                if (wfA.attr_apv_value == wfA.submit_answer)
+                {
+                    next_step = wfA.istrue_nextstep;
+                }
+                else
+                {
+                    next_step = wfA.isfalse_nextstep;
+                }
             }
+            
             // Insert new step into Inbox
             var wfDefault_step = getDefaultStep(wfA.process_code, wfA.version_no, next_step);
             wfDefault_step.subject = wfA.subject;
@@ -440,14 +492,14 @@ namespace onlineLegalWF.Class
                 {
                     xname = emp.next_line_mgr_login; //BU Approve Login
                 }
-                else if (next_step_name == "Legal Insurance")
+                else if (next_step_name == "Requester Receive Approval")
                 {
-                    xname = "jaroonsak.n"; //Legal Insurance Login
+                    xname = submit_by; //Requester Receive Approval
                 }
-                else if (next_step_name == "Legal Insurance Update")
-                {
-                    xname = ""; //Legal Insurance Update Login
-                }
+                //else if (next_step_name == "Legal Insurance Update")
+                //{
+                //    xname = ""; //Legal Insurance Update Login
+                //}
                 else if (next_step_name == "End")
                 {
                     xname = ""; //End
@@ -462,6 +514,10 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "GM Review")
                 {
                     xname = emp.next_line_mgr_login; //GM Login
+                }
+                else if (next_step_name == "Head AM Approve")
+                {
+                    xname = emp.next_line_mgr_login; //Head AM Login
                 }
                 else if (next_step_name == "Insurance Specialist Approve")
                 {
@@ -483,14 +539,14 @@ namespace onlineLegalWF.Class
                 {
                     xname = "siwate.r"; //CCO Approve
                 }
-                else if (next_step_name == "Legal Insurance")
+                else if (next_step_name == "Requester Receive Approval")
                 {
-                    xname = "jaroonsak.n"; //Legal Insurance Login
+                    xname = submit_by; //Requester Receive Approval
                 }
-                else if (next_step_name == "Legal Insurance Update")
-                {
-                    xname = ""; //Legal Insurance Update Login
-                }
+                //else if (next_step_name == "Legal Insurance Update")
+                //{
+                //    xname = ""; //Legal Insurance Update Login
+                //}
                 else if (next_step_name == "End")
                 {
                     xname = ""; //End
@@ -562,5 +618,6 @@ namespace onlineLegalWF.Class
         public string submit_answer { get; set; }
         public string submit_by { get; set; }
         public string updated_by { get; set; }
+        public string external_domain { get; set; }
     }
 }

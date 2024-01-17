@@ -1,9 +1,11 @@
-﻿using onlineLegalWF.Class;
+﻿using iTextSharp.text.pdf;
+using onlineLegalWF.Class;
 using onlineLegalWF.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Security.Cryptography;
@@ -656,8 +658,18 @@ namespace onlineLegalWF.frmInsurance
             // check session_user
             if (Session["user_login"] != null)
             {
-                // getCurrentStep
-                var wfAttrct = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+                //get check external domain
+                string sql = @"select [row_id],[process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective]
+                                  ,[reason],[approved_desc],[status],[updated_datetime], ins.[bu_code],bu.[external_domain],[property_insured_name] from li_insurance_request as ins
+                              INNER JOIN li_business_unit as bu on ins.bu_code = bu.bu_code
+                              where process_id = '"+ wfAttr.process_id +"'";
+
+                var res = zdb.ExecSql_DataTable(sql, zconnstr);
+
+                if (res.Rows.Count > 0)
+                {
+                    wfAttr.external_domain = res.Rows[0]["external_domain"].ToString();
+                }
 
                 var xlogin_name = Session["user_login"].ToString();
                 var empFunc = new EmpInfo();
@@ -670,11 +682,11 @@ namespace onlineLegalWF.frmInsurance
                 wfAttr.assto_login = emp.next_line_mgr_login;
                 //check step review 
                 string stepname = Request.QueryString["st"];
-                if (!string.IsNullOrEmpty(stepname))
+                if (!string.IsNullOrEmpty(stepname) && stepname == "GM Review")
                 {
                     wfAttr.wf_status = "REVIEWED";
                     wfAttr.submit_answer = "REVIEWED";
-                    wfAttr.submit_by = wfAttrct.submit_by;
+                    wfAttr.submit_by = wfAttr.submit_by;
                 }
                 else 
                 {
