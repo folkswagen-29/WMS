@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -377,6 +378,17 @@ namespace onlineLegalWF.Class
                     next_step = 4;
                 }
             }
+            else if (wfA.step_name == "GM Approve" && wfA.process_code == "INR_CLAIM")
+            {
+                if (wfA.external_domain == "Y")
+                {
+                    next_step = 3;
+                }
+                else
+                {
+                    next_step = 4;
+                }
+            }
             else 
             {
                 if (wfA.attr_apv_value == wfA.submit_answer)
@@ -436,6 +448,18 @@ namespace onlineLegalWF.Class
                             xurl = "/forms/requesterclosejob.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                         }
                     }
+                    else if (wfDefault_step.step_name == "Requester Receive Approval" && wfDefault_step.process_code == "INR_CLAIM")
+                    {
+                        string sql = @"select * from li_insurance_claim where process_id = '" + wfDefault_step.process_id + "'";
+                        var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                        if (dt.Rows.Count > 0)
+                        {
+                            var dr = dt.Rows[0];
+                            string id = dr["req_no"].ToString();
+
+                            xurl = "/forms/requesterclosejob.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
+                        }
+                    }
                     else if (wfDefault_step.step_name == "End")
                     {
                         xurl = "/forms/complete.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
@@ -473,9 +497,12 @@ namespace onlineLegalWF.Class
             }
             return x = "Success";
         }
-        public string findNextStep_Assignee(string process_code, string next_step_name, string user_login,string submit_by)
+        public string findNextStep_Assignee(string process_code, string next_step_name, string user_login,string submit_by,string process_id = "")
         {
             string xname = "";
+            string xawcname1 = "";
+            string xawcname2 = "";
+            string xawcname3 = "";
             //get data user
             var empFunc = new EmpInfo();
             var emp = empFunc.getEmpInfo(user_login);
@@ -565,6 +592,63 @@ namespace onlineLegalWF.Class
             }
             else if (process_code == "INR_CLAIM")
             {
+                string xiar_pfc = "";
+                string xiar_uatc = "";
+                //get data form li_insurance_claim
+                string sqlinsclaim = "select * from li_insurance_claim where process_id='" + process_id + "'";
+                var resinsclaim = zdb.ExecSql_DataTable(sqlinsclaim, zconnstr);
+
+                //get data ins req
+                if (resinsclaim.Rows.Count > 0)
+                {
+                    xiar_pfc = (!string.IsNullOrEmpty(resinsclaim.Rows[0]["iar_pfc"].ToString()) ? resinsclaim.Rows[0]["iar_pfc"].ToString() : "0");
+                    xiar_uatc = (!string.IsNullOrEmpty(resinsclaim.Rows[0]["iar_uatc"].ToString()) ? resinsclaim.Rows[0]["iar_uatc"].ToString() : "0");
+                }
+                else 
+                { 
+                    xiar_pfc = "0";
+                    xiar_uatc = "0";
+                }
+
+                ////Check เงื่อนไข Deviation เพิ่มเติมเพื่อ set คนอนุมัติ
+                float deviation = 0;
+                float cal_iar_uatc = float.Parse(int.Parse(xiar_uatc, NumberStyles.AllowThousands).ToString());
+                float cal_iar_pfc = float.Parse(int.Parse(xiar_pfc, NumberStyles.AllowThousands).ToString());
+                int int_iar_uatc = int.Parse(xiar_uatc, NumberStyles.AllowThousands);
+                deviation = cal_iar_uatc / cal_iar_pfc;
+                if (int_iar_uatc <= 100000)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname2 = "warin.k";
+                    xawcname3 = "chalothorn.s";
+
+                }
+                else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation <= 0.1)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname2 = "warin.k";
+                    xawcname3 = "chalothorn.s";
+                }
+                else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation > 0.1)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname2 = "chalothorn.s";
+                    xawcname3 = "siwate.r";
+                }
+                else if (int_iar_uatc > 1000000 && deviation <= 0.2)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname2 = "chalothorn.s";
+                    xawcname3 = "siwate.r";
+                }
+                else if (int_iar_uatc > 1000000 && deviation > 0.2)
+                {
+                    xawcname1 = "chalothorn.s";
+                    xawcname2 = "siwate.r";
+                    xawcname3 = "Wallapa";
+                }
+
+
                 if (next_step_name == "Start")
                 {
                     xname = emp.user_login; //Requestor = Login account
@@ -573,26 +657,22 @@ namespace onlineLegalWF.Class
                 {
                     xname = emp.next_line_mgr_login; //GM Login
                 }
-                else if (next_step_name == "BU Approve")
+                else if (next_step_name == "Head AM Approve")
                 {
-                    xname = emp.next_line_mgr_login; //BU Approve Login
+                    xname = emp.next_line_mgr_login; //Head AM Approve Login
                 }
                 ////Check เงื่อนไข Deviation เพิ่มเติมเพื่อ set คนอนุมัติ
-                else if (next_step_name == "AWC Validate Approved")
+                else if (next_step_name == "AWC Validate Approve")
                 {
-                    xname = "jaroonsak.n"; //AWC Validate Approved
+                    xname = xawcname1; //AWC Validate Approve
                 }
-                else if (next_step_name == "AWC Reviewer Approved")
+                else if (next_step_name == "AWC Reviewer Approve")
                 {
-                    xname = "warin.k"; //AWC Reviewer Approved
+                    xname = xawcname2; //AWC Reviewer Approve
                 }
-                else if (next_step_name == "AWC Approval Approved")
+                else if (next_step_name == "AWC Approval Approve")
                 {
-                    xname = "chalothorn.s"; //AWC Approval Approved
-                }
-                else if (next_step_name == "Legal Insurance")
-                {
-                    xname = "jaroonsak.n"; //Legal Insurance
+                    xname = xawcname3; //AWC Approval Approved
                 }
                 else if (next_step_name == "Requester Receive Approval")
                 {

@@ -11,6 +11,7 @@ using System.Xml.Linq;
 using Newtonsoft.Json.Linq;
 using onlineLegalWF.Class;
 using onlineLegalWF.userControls;
+using static onlineLegalWF.Class.ReplaceInsClaim;
 
 namespace onlineLegalWF.frmInsurance
 {
@@ -20,6 +21,7 @@ namespace onlineLegalWF.frmInsurance
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
         public WFFunctions zwf = new WFFunctions();
+        public ReplaceInsClaim zreplaceinsclaim = new ReplaceInsClaim();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -86,13 +88,10 @@ namespace onlineLegalWF.frmInsurance
 
                     // set WF Attributes
                     wfAttr.subject = incident.Text.Trim();
-                    //wfAttr.assto_login = emp.next_line_mgr_login;
                     wfAttr.wf_status = "SAVE";
                     wfAttr.submit_answer = "SAVE";
-                    //wfAttr.next_assto_login = emp.next_line_mgr_login;
-                    wfAttr.submit_by = wfAttr.submit_by;
+                    wfAttr.submit_by = emp.user_login;
                     wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by);
-                    //wfAttr.submit_by = emp.user_login;
 
 
                     // wf.updateProcess
@@ -100,7 +99,8 @@ namespace onlineLegalWF.frmInsurance
 
                 }
                 Response.Write("<script>alert('Successfully added');</script>");
-                Response.Redirect("/frmInsurance/InsuranceClaimList");
+                //Response.Redirect("/frmInsurance/InsuranceClaimList");
+                Response.Redirect("/frmInsurance/InsuranceClaimEdit.aspx?id=" + claim_no.Value.Trim());
             }
             else
             {
@@ -240,7 +240,7 @@ namespace onlineLegalWF.frmInsurance
             var xttl_pfc = (!string.IsNullOrEmpty(ttl_pfc.Text.Trim()) ? ttl_pfc.Text.Trim() : null);
             var xttl_uatc = (!string.IsNullOrEmpty(ttl_uatc.Text.Trim()) ? ttl_uatc.Text.Trim() : null);
             var xremark = (!string.IsNullOrEmpty(remark.Text.Trim()) ? remark.Text.Trim() : null);
-            var xdocref = "1.TestDoc \r\n 2.TestDoc2 \r\n 3.TestDoc3 \r\n";
+            var xdocref = GetListDoc(lblPID.Text);
 
             string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateClaim.docx";
             string outputfolder = @"C:\WordTemplate\Insurance\Output";
@@ -248,64 +248,178 @@ namespace onlineLegalWF.frmInsurance
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();
 
+            ReplaceInsClaim_TagData data = new ReplaceInsClaim_TagData();
+
             #region prepare data
             //Replace TAG STRING
-            DataTable dtStr = new DataTable();
-            dtStr.Columns.Add("tagname", typeof(string));
-            dtStr.Columns.Add("tagvalue", typeof(string));
+            data.company = xcompany_name.Replace(",", "!comma");
+            data.propertyname = xbu_name.Replace(",", "!comma");
+            data.incident = xincident.Replace(",", "!comma");
+            data.occurreddate = xoccurred_date;
+            data.submidate = xsubmission_date;
+            data.submiday = xsubmission_day + " days";
+            data.incidentsummary = xincident_summary.Replace(",", "!comma");
+            data.docref = xdocref.Replace(",", "!comma");
+            data.surveyor = xsurveyor_name.Replace(",", "!comma");
+            data.companysurveyor = xsurveyor_company.Replace(",", "!comma");
+            data.stmdate = xsettlement_date;
+            data.stmday = xsettlement_day + " days";
+            data.remark = xremark.Replace(",", "!comma");
 
-            DataRow dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#company#";
-            dr0["tagvalue"] = xcompany_name.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#propertyname#";
-            dr0["tagvalue"] = xbu_name.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#incident#";
-            dr0["tagvalue"] = xincident.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#occurreddate#";
-            dr0["tagvalue"] = xoccurred_date;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#submidate#";
-            dr0["tagvalue"] = xsubmission_date;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#submiday#";
-            dr0["tagvalue"] = xsubmission_day + " days";
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#incidentsummary#";
-            dr0["tagvalue"] = xincident_summary.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#docref#";
-            dr0["tagvalue"] = xdocref.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#surveyor#";
-            dr0["tagvalue"] = xsurveyor_name.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#companysurveyor#";
-            dr0["tagvalue"] = xsurveyor_company.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#stmdate#";
-            dr0["tagvalue"] = xsettlement_date;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#stmday#";
-            dr0["tagvalue"] = xsettlement_day + " days";
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#remark#";
-            dr0["tagvalue"] = xremark.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
+            ////get moa claim get gm or am check external domain
+            string xbu_code = ddl_bu.SelectedValue.ToString();
+            string sqlbu = @"select * from li_business_unit where bu_code = '" + xbu_code + "'";
+            var res = zdb.ExecSql_DataTable(sqlbu, zconnstr);
+
+            var requestor = "";
+            var requestorpos = "";
+            var gmname = "";
+            var gmpos = "";
+            var amname = "";
+            var ampos = "";
+            if (res.Rows.Count > 0)
+            {
+                var empFunc = new EmpInfo();
+                if (Session["user_login"] != null) 
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+                    var emp = empFunc.getEmpInfo(xlogin_name);
+                    requestor = emp.full_name_en;
+                    requestorpos = emp.position_en;
+                }
+                string xexternal_domain = res.Rows[0]["external_domain"].ToString();
+                string xgm = res.Rows[0]["gm"].ToString();
+                string xam = res.Rows[0]["adm_bp"].ToString();
+                //get data am user
+                if (!string.IsNullOrEmpty(xam)) 
+                {
+                    var empam = empFunc.getEmpInfo(xam);
+                    if (empam.user_login != null)
+                    {
+                        amname = empam.full_name_en;
+                        ampos = empam.position_en;
+                    }
+                }
+                //get data gm user
+                if(!string.IsNullOrEmpty(xgm)) 
+                {
+                    var empgm = empFunc.getEmpInfo(xgm);
+                    if (empgm.user_login != null)
+                    {
+                        gmname = empgm.full_name_en;
+                        gmpos = empgm.position_en;
+                    }
+                }
+            }
+            data.sign_propname1 = "";
+            data.propname1 = requestor;
+            data.propposition1 = requestorpos;
+            data.propdate1 = "";
+
+            data.sign_propname2 = "";
+            data.propname2 = gmname;
+            data.propposition2 = gmpos;
+            data.propdate2 = "";
+
+            data.sign_propname3 = "";
+            data.propname3 = amname;
+            data.propposition3 = ampos;
+            data.propdate3 = "";
+
+            //check corditon deviation claim
+            float deviation = 0;
+            float cal_iar_uatc = float.Parse(int.Parse(xiar_uatc, NumberStyles.AllowThousands).ToString());
+            float cal_iar_pfc = float.Parse(int.Parse(xiar_pfc, NumberStyles.AllowThousands).ToString());
+            int int_iar_uatc = int.Parse(xiar_uatc, NumberStyles.AllowThousands);
+            deviation = cal_iar_uatc / cal_iar_pfc;
+            if (int_iar_uatc <= 100000) 
+            {
+                data.sign_awcname1 = "";
+                data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
+                data.awcposition1 = "Insurance Specialist";
+                data.awcdate1 = "";
+
+                data.sign_awcname2 = "";
+                data.awcname2 = "คุณวารินทร์ เกลียวไพศาล";
+                data.awcposition2 = "Head of Compliance";
+                data.awcdate2 = "";
+
+                data.sign_awcname3 = "";
+                data.awcname3 = "คุณชโลทร ศรีสมวงษ์";
+                data.awcposition3 = "Head of Legal";
+                data.awcdate3 = "";
+            }
+            else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation <= 0.1)
+            {
+                data.sign_awcname1 = "";
+                data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
+                data.awcposition1 = "Insurance Specialist";
+                data.awcdate1 = "";
+
+                data.sign_awcname2 = "";
+                data.awcname2 = "คุณวารินทร์ เกลียวไพศาล";
+                data.awcposition2 = "Head of Compliance";
+                data.awcdate2 = "";
+
+                data.sign_awcname3 = "";
+                data.awcname3 = "คุณชโลทร ศรีสมวงษ์";
+                data.awcposition3 = "Head of Legal";
+                data.awcdate3 = "";
+            }
+            else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation > 0.1)
+            {
+                data.sign_awcname1 = "";
+                data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
+                data.awcposition1 = "Insurance Specialist";
+                data.awcdate1 = "";
+
+                data.sign_awcname2 = "";
+                data.awcname2 = "คุณชโลทร ศรีสมวงษ์";
+                data.awcposition2 = "Head of Legal";
+                data.awcdate2 = "";
+
+                data.sign_awcname3 = "";
+                data.awcname3 = "ดร.สิเวศ โรจนสุนทร";
+                data.awcposition3 = "CCO";
+                data.awcdate3 = "";
+            }
+            else if (int_iar_uatc > 1000000 && deviation <= 0.2)
+            {
+                data.sign_awcname1 = "";
+                data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
+                data.awcposition1 = "Insurance Specialist";
+                data.awcdate1 = "";
+
+                data.sign_awcname2 = "";
+                data.awcname2 = "คุณชโลทร ศรีสมวงษ์";
+                data.awcposition2 = "Head of Legal";
+                data.awcdate2 = "";
+
+                data.sign_awcname3 = "";
+                data.awcname3 = "ดร.สิเวศ โรจนสุนทร";
+                data.awcposition3 = "CCO";
+                data.awcdate3 = "";
+            }
+            else if (int_iar_uatc > 1000000 && deviation > 0.2)
+            {
+                data.sign_awcname1 = "";
+                data.awcname1 = "คุณชโลทร ศรีสมวงษ์";
+                data.awcposition1 = "Head of Legal";
+                data.awcdate1 = "";
+
+                data.sign_awcname2 = "";
+                data.awcname2 = "ดร.สิเวศ โรจนสุนทร";
+                data.awcposition2 = "CCO";
+                data.awcdate2 = "";
+
+                data.sign_awcname3 = "";
+                data.awcname3 = "วัลลภา ไตรโสรัส";
+                data.awcposition3 = "CEO";
+                data.awcdate3 = "";
+            }
+
+            DataTable dtStr = zreplaceinsclaim.genTagData(data);
+
             #endregion
 
             //DataTable Column Properties
@@ -462,55 +576,7 @@ namespace onlineLegalWF.frmInsurance
             dr["row_height"] = "16";
             dtProperties1.Rows.Add(dr);
 
-            DataTable dt = new DataTable();
-            dt.Columns.Add("tagname", typeof(string));
-            dt.Columns.Add("Estimated losses to claim", typeof(string));
-            dt.Columns.Add("IAR", typeof(string));
-            dt.Columns.Add("BI", typeof(string));
-            dt.Columns.Add("PL/CGL", typeof(string));
-            dt.Columns.Add("PV", typeof(string));
-            dt.Columns.Add("Total", typeof(string));
-
-            //Assign DataTable for #tableeltc#
-            DataRow dr1 = dt.NewRow();
-            dr1["tagname"] = "#tableeltc#";
-            dr1["Estimated losses to claim"] = "Amount to claim มูลค่าเรียกร้อง (a)";
-            dr1["IAR"] = (!string.IsNullOrEmpty(xiar_atc) ? xiar_atc.Replace(",", "!comma") : "");
-            dr1["BI"] = (!string.IsNullOrEmpty(xbi_atc) ? xbi_atc.Replace(",", "!comma") : "");
-            dr1["PL/CGL"] = (!string.IsNullOrEmpty(xpl_cgl_atc) ? xpl_cgl_atc.Replace(",", "!comma") : "");
-            dr1["PV"] = (!string.IsNullOrEmpty(xpv_atc) ? xpv_atc.Replace(",", "!comma") : "");
-            dr1["Total"] = (!string.IsNullOrEmpty(xttl_atc) ? xttl_atc.Replace(",", "!comma") : "");
-            dt.Rows.Add(dr1);
-
-            dr1 = dt.NewRow();
-            dr1["tagname"] = "#tableeltc#";
-            dr1["Estimated losses to claim"] = "Deductible ค่ารับผิดส่วนแรก (b)";
-            dr1["IAR"] = (!string.IsNullOrEmpty(xiar_ded) ? xiar_ded.Replace(",", "!comma") : "");
-            dr1["BI"] = (!string.IsNullOrEmpty(xbi_ded) ? xbi_ded.Replace(",", "!comma") : "");
-            dr1["PL/CGL"] = (!string.IsNullOrEmpty(xpl_cgl_ded) ? xpl_cgl_ded.Replace(",", "!comma") : "");
-            dr1["PV"] = (!string.IsNullOrEmpty(xpv_ded) ? xpv_ded.Replace(",", "!comma") : "");
-            dr1["Total"] = (!string.IsNullOrEmpty(xttl_ded) ? xttl_ded.Replace(",", "!comma") : "");
-            dt.Rows.Add(dr1);
-
-            dr1 = dt.NewRow();
-            dr1["tagname"] = "#tableeltc#";
-            dr1["Estimated losses to claim"] = "Proceeds from claim มูลค่าสินไหม (C)";
-            dr1["IAR"] = (!string.IsNullOrEmpty(xiar_pfc) ? xiar_pfc.Replace(",", "!comma") : "");
-            dr1["BI"] = (!string.IsNullOrEmpty(xbi_pfc) ? xbi_pfc.Replace(",", "!comma") : "");
-            dr1["PL/CGL"] = (!string.IsNullOrEmpty(xpl_cgl_pfc) ? xpl_cgl_pfc.Replace(",", "!comma") : "");
-            dr1["PV"] = (!string.IsNullOrEmpty(xpv_pfc) ? xpv_pfc.Replace(",", "!comma") : "");
-            dr1["Total"] = (!string.IsNullOrEmpty(xttl_pfc) ? xttl_pfc.Replace(",", "!comma") : "");
-            dt.Rows.Add(dr1);
-
-            dr1 = dt.NewRow();
-            dr1["tagname"] = "#tableeltc#";
-            dr1["Estimated losses to claim"] = "Under amount to claim ส่วนต่างมูลค่าการเคลม (a-b-c)";
-            dr1["IAR"] = (!string.IsNullOrEmpty(xiar_uatc) ? xiar_uatc.Replace(",", "!comma") : "");
-            dr1["BI"] = (!string.IsNullOrEmpty(xbi_uatc) ? xbi_uatc.Replace(",", "!comma") : "");
-            dr1["PL/CGL"] = (!string.IsNullOrEmpty(xpl_cgl_uatc) ? xpl_cgl_uatc.Replace(",", "!comma") : "");
-            dr1["PV"] = (!string.IsNullOrEmpty(xpv_uatc) ? xpv_uatc.Replace(",", "!comma") : "");
-            dr1["Total"] = (!string.IsNullOrEmpty(xttl_uatc) ? xttl_uatc.Replace(",", "!comma") : "");
-            dt.Rows.Add(dr1);
+            DataTable dt = zreplaceinsclaim.genTagTableData(lblPID.Text);
 
             // Convert to JSONString
             DataTable dtTagPropsTable = new DataTable();
@@ -523,13 +589,10 @@ namespace onlineLegalWF.frmInsurance
             ReplaceDocx.Class.ReplaceDocx repl = new ReplaceDocx.Class.ReplaceDocx();
             var jsonDTStr = repl.DataTableToJSONWithStringBuilder(dtStr);
             var jsonDTProperties1 = repl.DataTableToJSONWithStringBuilder(dtProperties1);
-            //var jsonDTProperties2 = repl.DataTableToJSONWithStringBuilder(dtProperties2);
             var jsonDTdata = repl.DataTableToJSONWithStringBuilder(dt);
-            //var jsonDTdata2 = repl.DataTableToJSONWithStringBuilder(dt2);
             //end prepare data
 
             // Save to Database z_replacedocx_log
-
             string sql = @"insert into z_replacedocx_log (replacedocx_reqno,jsonTagString, jsonTableProp, jsonTableData,template_filepath , output_directory,output_filepath, delete_output ) 
                         values('" + xclaim_no + @"',
                                '" + jsonDTStr + @"', 
@@ -579,21 +642,422 @@ namespace onlineLegalWF.frmInsurance
                 wfAttr.submit_answer = "SUBMITTED";
                 //wfAttr.next_assto_login = emp.next_line_mgr_login;
                 wfAttr.submit_by = emp.user_login;
-                wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by);
+                wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by,wfAttr.process_id);
                 wfAttr.updated_by = emp.user_login;
 
                 // wf.updateProcess
                 var wfA_NextStep = zwf.updateProcess(wfAttr);
                 //wfA_NextStep.next_assto_login = emp.next_line_mgr_login;
-                wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by);
+                wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by, wfAttr.process_id);
                 string status = zwf.Insert_NextStep(wfA_NextStep);
 
                 if (status == "Success")
                 {
+                    GenDocumnetInsClaim(lblPID.Text);
                     Response.Redirect("/legalportal/legalportal.aspx?m=myworklist");
                 }
 
             }
-        }   
+        }
+
+        private void GenDocumnetInsClaim(string pid)
+        {
+            string xclaim_no = "";
+            var xdocref = GetListDoc(hid_PID.Value);
+            var xiar_pfc = "";
+            var xiar_uatc = "";
+
+            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateClaim.docx";
+            string outputfolder = @"C:\WordTemplate\Insurance\Output";
+            string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+            var rdoc = new ReplaceDocx.Class.ReplaceDocx();
+
+            ReplaceInsClaim_TagData data = new ReplaceInsClaim_TagData();
+
+            #region prepare data
+
+            data.docref = xdocref;
+
+            string sqlinsclaim = "select * from li_insurance_claim where process_id='" + pid + "'";
+            var resinsclaim = zdb.ExecSql_DataTable(sqlinsclaim, zconnstr);
+
+            //get data ins req
+            if (resinsclaim.Rows.Count > 0)
+            {
+                xclaim_no = resinsclaim.Rows[0]["claim_no"].ToString();
+                xiar_pfc = (!string.IsNullOrEmpty(resinsclaim.Rows[0]["iar_pfc"].ToString()) ? resinsclaim.Rows[0]["iar_pfc"].ToString() : null);
+                xiar_uatc = (!string.IsNullOrEmpty(resinsclaim.Rows[0]["iar_uatc"].ToString()) ? resinsclaim.Rows[0]["iar_uatc"].ToString() : null);
+
+                ////get moa claim get gm or am check external domain
+                string xbu_code = resinsclaim.Rows[0]["bu_code"].ToString();
+                string sqlbu = @"select * from li_business_unit where bu_code = '" + xbu_code + "'";
+                var res = zdb.ExecSql_DataTable(sqlbu, zconnstr);
+
+                var requestor = "";
+                var requestorpos = "";
+                var gmname = "";
+                var gmpos = "";
+                var amname = "";
+                var ampos = "";
+                if (res.Rows.Count > 0)
+                {
+                    var empFunc = new EmpInfo();
+                    if (Session["user_login"] != null)
+                    {
+                        var xlogin_name = Session["user_login"].ToString();
+                        var emp = empFunc.getEmpInfo(xlogin_name);
+                        requestor = emp.full_name_en;
+                        requestorpos = emp.position_en;
+                    }
+                    string xexternal_domain = res.Rows[0]["external_domain"].ToString();
+                    string xgm = res.Rows[0]["gm"].ToString();
+                    string xam = res.Rows[0]["adm_bp"].ToString();
+                    //get data am user
+                    if (!string.IsNullOrEmpty(xam))
+                    {
+                        var empam = empFunc.getEmpInfo(xam);
+                        if (empam.user_login != null)
+                        {
+                            amname = empam.full_name_en;
+                            ampos = empam.position_en;
+                        }
+                    }
+                    //get data gm user
+                    if (!string.IsNullOrEmpty(xgm))
+                    {
+                        var empgm = empFunc.getEmpInfo(xgm);
+                        if (empgm.user_login != null)
+                        {
+                            gmname = empgm.full_name_en;
+                            gmpos = empgm.position_en;
+                        }
+                    }
+                }
+                data.sign_propname1 = "";
+                data.propname1 = requestor;
+                data.propposition1 = requestorpos;
+                data.propdate1 = "";
+
+                data.sign_propname2 = "";
+                data.propname2 = gmname;
+                data.propposition2 = gmpos;
+                data.propdate2 = "";
+
+                data.sign_propname3 = "";
+                data.propname3 = amname;
+                data.propposition3 = ampos;
+                data.propdate3 = "";
+
+                //check corditon deviation claim
+                float deviation = 0;
+                float cal_iar_uatc = float.Parse(int.Parse(xiar_uatc, NumberStyles.AllowThousands).ToString());
+                float cal_iar_pfc = float.Parse(int.Parse(xiar_pfc, NumberStyles.AllowThousands).ToString());
+                int int_iar_uatc = int.Parse(xiar_uatc, NumberStyles.AllowThousands);
+                deviation = cal_iar_uatc / cal_iar_pfc;
+                if (int_iar_uatc <= 100000)
+                {
+                    data.sign_awcname1 = "";
+                    data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
+                    data.awcposition1 = "Insurance Specialist";
+                    data.awcdate1 = "";
+
+                    data.sign_awcname2 = "";
+                    data.awcname2 = "คุณวารินทร์ เกลียวไพศาล";
+                    data.awcposition2 = "Head of Compliance";
+                    data.awcdate2 = "";
+
+                    data.sign_awcname3 = "";
+                    data.awcname3 = "คุณชโลทร ศรีสมวงษ์";
+                    data.awcposition3 = "Head of Legal";
+                    data.awcdate3 = "";
+                }
+                else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation <= 0.1)
+                {
+                    data.sign_awcname1 = "";
+                    data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
+                    data.awcposition1 = "Insurance Specialist";
+                    data.awcdate1 = "";
+
+                    data.sign_awcname2 = "";
+                    data.awcname2 = "คุณวารินทร์ เกลียวไพศาล";
+                    data.awcposition2 = "Head of Compliance";
+                    data.awcdate2 = "";
+
+                    data.sign_awcname3 = "";
+                    data.awcname3 = "คุณชโลทร ศรีสมวงษ์";
+                    data.awcposition3 = "Head of Legal";
+                    data.awcdate3 = "";
+                }
+                else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation > 0.1)
+                {
+                    data.sign_awcname1 = "";
+                    data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
+                    data.awcposition1 = "Insurance Specialist";
+                    data.awcdate1 = "";
+
+                    data.sign_awcname2 = "";
+                    data.awcname2 = "คุณชโลทร ศรีสมวงษ์";
+                    data.awcposition2 = "Head of Legal";
+                    data.awcdate2 = "";
+
+                    data.sign_awcname3 = "";
+                    data.awcname3 = "ดร.สิเวศ โรจนสุนทร";
+                    data.awcposition3 = "CCO";
+                    data.awcdate3 = "";
+                }
+                else if (int_iar_uatc > 1000000 && deviation <= 0.2)
+                {
+                    data.sign_awcname1 = "";
+                    data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
+                    data.awcposition1 = "Insurance Specialist";
+                    data.awcdate1 = "";
+
+                    data.sign_awcname2 = "";
+                    data.awcname2 = "คุณชโลทร ศรีสมวงษ์";
+                    data.awcposition2 = "Head of Legal";
+                    data.awcdate2 = "";
+
+                    data.sign_awcname3 = "";
+                    data.awcname3 = "ดร.สิเวศ โรจนสุนทร";
+                    data.awcposition3 = "CCO";
+                    data.awcdate3 = "";
+                }
+                else if (int_iar_uatc > 1000000 && deviation > 0.2)
+                {
+                    data.sign_awcname1 = "";
+                    data.awcname1 = "คุณชโลทร ศรีสมวงษ์";
+                    data.awcposition1 = "Head of Legal";
+                    data.awcdate1 = "";
+
+                    data.sign_awcname2 = "";
+                    data.awcname2 = "ดร.สิเวศ โรจนสุนทร";
+                    data.awcposition2 = "CCO";
+                    data.awcdate2 = "";
+
+                    data.sign_awcname3 = "";
+                    data.awcname3 = "วัลลภา ไตรโสรัส";
+                    data.awcposition3 = "CEO";
+                    data.awcdate3 = "";
+                }
+            }
+            DataTable dtStr = zreplaceinsclaim.bindTagData(lblPID.Text, data);
+
+            #endregion
+
+            //DataTable Column Properties
+            DataTable dtProperties1 = new DataTable();
+            dtProperties1.Columns.Add("tagname", typeof(string));
+            dtProperties1.Columns.Add("col_name", typeof(string));
+            dtProperties1.Columns.Add("col_width", typeof(string));
+            dtProperties1.Columns.Add("col_align", typeof(string)); //Left, Right, Center
+            dtProperties1.Columns.Add("col_valign", typeof(string)); //Top, Middle, Bottom
+            dtProperties1.Columns.Add("col_font", typeof(string));
+            dtProperties1.Columns.Add("col_fontsize", typeof(string));
+            dtProperties1.Columns.Add("col_fontcolor", typeof(string));
+            dtProperties1.Columns.Add("col_color", typeof(string));
+            dtProperties1.Columns.Add("header_height", typeof(string));
+            dtProperties1.Columns.Add("header_color", typeof(string));
+            dtProperties1.Columns.Add("header_font", typeof(string));
+            dtProperties1.Columns.Add("header_fontsize", typeof(string));
+            dtProperties1.Columns.Add("header_fontbold", typeof(string));
+            dtProperties1.Columns.Add("header_align", typeof(string)); //Left, Right, Center
+            dtProperties1.Columns.Add("header_valign", typeof(string)); //Top, Middle, Bottom
+            dtProperties1.Columns.Add("header_fontcolor", typeof(string));
+            dtProperties1.Columns.Add("row_height", typeof(string));
+
+            // Replace #tableeltc# ------------------------------------------------------
+            DataRow dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tableeltc#";
+            //dr["col_name"] = "Estimated losses to claim \r\n มูลค่าความเสียหาย";
+            dr["col_name"] = "Estimated losses to claim";
+            dr["col_width"] = "450";
+            dr["col_align"] = "Left";
+            dr["col_valign"] = "Bottom";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tableeltc#";
+            //dr["col_name"] = "IAR \r\n ทรัพย์สินเสียหาย";
+            dr["col_name"] = "IAR";
+            dr["col_width"] = "150";
+            dr["col_align"] = "Right";
+            dr["col_valign"] = "Bottom";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tableeltc#";
+            //dr["col_name"] = "BI \r\n ธุรกิจหยุดชะงัก";
+            dr["col_name"] = "BI";
+            dr["col_width"] = "150";
+            dr["col_align"] = "Right";
+            dr["col_valign"] = "Bottom";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tableeltc#";
+            //dr["col_name"] = "PL/CGL \r\n รับผิดบุคคลภายนอก";
+            dr["col_name"] = "PL/CGL";
+            dr["col_width"] = "150";
+            dr["col_align"] = "Right";
+            dr["col_valign"] = "Bottom";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tableeltc#";
+            //dr["col_name"] = "PV \r\n สาเหตุทางการเมือง";
+            dr["col_name"] = "PV";
+            dr["col_width"] = "150";
+            dr["col_align"] = "Right";
+            dr["col_valign"] = "Bottom";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tableeltc#";
+            //dr["col_name"] = "Total \r\n รวม";
+            dr["col_name"] = "Total";
+            dr["col_width"] = "150";
+            dr["col_align"] = "Right";
+            dr["col_valign"] = "Bottom";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            DataTable dt = zreplaceinsclaim.genTagTableData(lblPID.Text);
+
+            // Convert to JSONString
+            DataTable dtTagPropsTable = new DataTable();
+            dtTagPropsTable.Columns.Add("tagname", typeof(string));
+            dtTagPropsTable.Columns.Add("jsonstring", typeof(string));
+
+            DataTable dtTagDataTable = new DataTable();
+            dtTagDataTable.Columns.Add("tagname", typeof(string));
+            dtTagDataTable.Columns.Add("jsonstring", typeof(string));
+            ReplaceDocx.Class.ReplaceDocx repl = new ReplaceDocx.Class.ReplaceDocx();
+            var jsonDTStr = repl.DataTableToJSONWithStringBuilder(dtStr);
+            var jsonDTProperties1 = repl.DataTableToJSONWithStringBuilder(dtProperties1);
+            var jsonDTdata = repl.DataTableToJSONWithStringBuilder(dt);
+            //end prepare data
+
+            // Save to Database z_replacedocx_log
+            string sql = @"insert into z_replacedocx_log (replacedocx_reqno,jsonTagString, jsonTableProp, jsonTableData,template_filepath , output_directory,output_filepath, delete_output ) 
+                        values('" + xclaim_no + @"',
+                               '" + jsonDTStr + @"', 
+                                '" + jsonDTProperties1 + @"', 
+                                '" + jsonDTdata + @"', 
+                                '" + templatefile + @"', 
+                                '" + outputfolder + @"', 
+                                '" + outputfn + @"',  
+                                '" + "0" + @"'
+                            ) ";
+
+            zdb.ExecNonQuery(sql, zconnstr);
+
+            var outputbyte = rdoc.ReplaceData2(jsonDTStr, jsonDTProperties1, jsonDTdata, templatefile, outputfolder, outputfn, false);
+
+            repl.convertDOCtoPDF(outputfn, outputfn.Replace(".docx", ".pdf"), false);
+            // Dowload Word 
+            //Response.Clear();
+            //Response.ContentType = "text/xml";
+            //Response.AddHeader("content-disposition", $"attachment; filename={outputfn}");
+            //Response.BinaryWrite(outputbyte);
+            //Response.ContentEncoding = System.Text.Encoding.UTF8;
+            //Response.End();
+        }
+        private string GetListDoc(string pid)
+        {
+            string res = "";
+
+            string sql = @"select * from wf_attachment where pid = '" + pid + "'";
+            var dtattach = zdb.ExecSql_DataTable(sql, zconnstr);
+
+            if (dtattach.Rows.Count > 0)
+            {
+                int no = 0;
+                foreach (DataRow dr in dtattach.Rows)
+                {
+                    res += (no + 1) + "." + dr["attached_filename"] + "\r\n";
+                    no++;
+                }
+            }
+
+            return res;
+        }
     }
 }
