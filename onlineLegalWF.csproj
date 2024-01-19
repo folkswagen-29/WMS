@@ -146,6 +146,7 @@
     <Content Include="frmInsurance\InsuranceClaimEdit.aspx" />
     <Content Include="frmInsurance\InsuranceClaimList.aspx" />
     <Content Include="frmInsurance\InsuranceRenewAWC.aspx" />
+    <Content Include="frmInsurance\InsuranceRenewAWCEdit.aspx" />
     <Content Include="frmInsurance\InsuranceRenewRequest.aspx" />
     <Content Include="frmInsurance\InsuranceRenewRequestEdit.aspx" />
     <Content Include="frmInsurance\InsuranceRenewRequestList.aspx" />
@@ -354,6 +355,13 @@
     </Compile>
     <Compile Include="frmInsurance\InsuranceRenewAWC.aspx.designer.cs">
       <DependentUpon>InsuranceRenewAWC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceRenewAWCEdit.aspx.cs">
+      <DependentUpon>InsuranceRenewAWCEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmInsurance\InsuranceRenewAWCEdit.aspx.designer.cs">
+      <DependentUpon>InsuranceRenewAWCEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmInsurance\InsuranceRenewRequest.aspx.cs">
       <DependentUpon>InsuranceRenewRequest.aspx</DependentUpon>

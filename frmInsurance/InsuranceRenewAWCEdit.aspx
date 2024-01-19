@@ -1,4 +1,4 @@
-﻿<%@ Page Title="AWCRenewInusurance Memo" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceRenewAWC.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceRenewAWC" %>
+﻿<%@ Page Title="AWCRenewInusurance Memo Edit" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceRenewAWCEdit.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceRenewAWCEdit" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc1" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
@@ -81,49 +81,49 @@
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="No">
                                                         <ItemTemplate>
-                                                            <asp:label ID="gvList_txt1" Text='<%# Bind("No") %>' runat="server" CssClass="Text_sm"></asp:label>
+                                                            <asp:Label ID="gvList_txt1" Text='<%# Bind("No") %>' runat="server" CssClass="Text_sm"></asp:Label>
                                                         </ItemTemplate>
                                                         <ItemStyle Width="50px" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Property Insured">
                                                         <ItemTemplate>
-                                                            <asp:label ID="gvList_txt2" Text='<%# Bind("PropertyInsured") %>' runat="server" CssClass="Text_sm"></asp:label>
+                                                            <asp:Label ID="gvList_txt2" Text='<%# Bind("PropertyInsured") %>' runat="server" CssClass="Text_sm"></asp:Label>
                                                         </ItemTemplate>
                                                         <ItemStyle Width="100px" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="IAR">
                                                         <ItemTemplate>
-                                                            <asp:label ID="gvList_txt3" Text='<%# Bind("IARSumInsured") %>' runat="server" CssClass="Text_sm"></asp:label>
+                                                            <asp:Label ID="gvList_txt3" Text='<%# Bind("IARSumInsured") %>' runat="server" CssClass="Text_sm"></asp:Label>
                                                         </ItemTemplate>
                                                         <ItemStyle Width="100px" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="BI">
                                                         <ItemTemplate>
-                                                            <asp:label ID="gvList_txt4" Text='<%# Bind("BISumInsured") %>' runat="server" CssClass="Text_sm"></asp:label>
+                                                            <asp:Label ID="gvList_txt4" Text='<%# Bind("BISumInsured") %>' runat="server" CssClass="Text_sm"></asp:Label>
                                                         </ItemTemplate>
                                                         <ItemStyle Width="100px" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="CGL_PL">
                                                         <ItemTemplate>
-                                                            <asp:label ID="gvList_txt5" Text='<%# Bind("CGLPLSumInsured") %>' runat="server" CssClass="Text_sm"></asp:label>
+                                                            <asp:Label ID="gvList_txt5" Text='<%# Bind("CGLPLSumInsured") %>' runat="server" CssClass="Text_sm"></asp:Label>
                                                         </ItemTemplate>
                                                         <ItemStyle Width="130px" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="PV">
                                                         <ItemTemplate>
-                                                            <asp:label ID="gvList_txt6" Text='<%# Bind("PVSumInsured") %>' runat="server" CssClass="Text_sm"></asp:label>
+                                                            <asp:Label ID="gvList_txt6" Text='<%# Bind("PVSumInsured") %>' runat="server" CssClass="Text_sm"></asp:Label>
                                                         </ItemTemplate>
                                                         <ItemStyle Width="100px" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="LPG">
                                                         <ItemTemplate>
-                                                            <asp:label ID="gvList_txt7" Text='<%# Bind("LPGSumInsured") %>' runat="server" CssClass="Text_sm"></asp:label>
+                                                            <asp:Label ID="gvList_txt7" Text='<%# Bind("LPGSumInsured") %>' runat="server" CssClass="Text_sm"></asp:Label>
                                                         </ItemTemplate>
                                                         <ItemStyle Width="100px" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="D_O">
                                                         <ItemTemplate>
-                                                            <asp:label ID="gvList_txt8" Text='<%# Bind("DOSumInsured") %>' runat="server" CssClass="Text_sm"></asp:label>
+                                                            <asp:Label ID="gvList_txt8" Text='<%# Bind("DOSumInsured") %>' runat="server" CssClass="Text_sm"></asp:Label>
                                                         </ItemTemplate>
                                                         <ItemStyle Width="100px" />
                                                     </asp:TemplateField>
@@ -267,7 +267,6 @@
                 <asp:Button ID="btn_save" runat="server" CssClass="btn_normal_silver" Text="Save" OnClick="btn_save_Click" />
                 <asp:Button ID="btn_submit" runat="server" CssClass="btn_normal_silver" Text="Submit" />
                 <asp:Button ID="btn_gendocumnt" runat="server" CssClass="btn_normal_silver" Text="Preview" />
-                <asp:Button ID="btn_cancel" runat="server" CssClass="btn_normal_silver" Text="Cancel" OnClientClick="JavaScript:window.history.back(1); return false;" />
             </td>
 
         </tr>

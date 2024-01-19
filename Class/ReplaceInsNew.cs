@@ -294,6 +294,7 @@ namespace onlineLegalWF.Class
                     {
                         if (dr["wf_status"].ToString() != "")
                         {
+                            res.cb1 = "X";
                             res.sign_name5 = "อนุมัติผ่านระบบ";
                             res.date5 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
