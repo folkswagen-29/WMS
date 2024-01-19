@@ -155,6 +155,10 @@ namespace onlineLegalWF.forms
                     {
                         wfA_NextStep.wf_status = "WAITATCH";
                     }
+                    else if (wfAttr.step_name == "BU Approve" && wfAttr.process_code == "INR_RENEW")
+                    {
+                        wfA_NextStep.wf_status = "WAITATCH";
+                    }
                     else if (wfAttr.step_name == "End") 
                     {
                         wfA_NextStep.wf_status = "COMPLETED";
