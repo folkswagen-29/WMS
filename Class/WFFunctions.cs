@@ -356,7 +356,7 @@ namespace onlineLegalWF.Class
             }
             //  Finding next step 
             int next_step = 0;
-            if (wfA.step_name == "GM Review" && wfA.process_code == "INR_NEW")
+            if (wfA.step_name == "GM Approve" && wfA.process_code == "INR_NEW")
             {
                 if (wfA.external_domain == "Y")
                 {
@@ -424,18 +424,18 @@ namespace onlineLegalWF.Class
                     {
                         xurl = "/forms/legalassign.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                     }
-                    else if (wfDefault_step.step_name == "GM Review" && wfDefault_step.process_code == "INR_NEW") 
-                    {
-                        string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
-                        var dt = zdb.ExecSql_DataTable(sql, zconnstr);
-                        if (dt.Rows.Count > 0)
-                        {
-                            var dr = dt.Rows[0];
-                            string id = dr["req_no"].ToString();
+                    //else if (wfDefault_step.step_name == "GM Review" && wfDefault_step.process_code == "INR_NEW") 
+                    //{
+                    //    string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
+                    //    var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                    //    if (dt.Rows.Count > 0)
+                    //    {
+                    //        var dr = dt.Rows[0];
+                    //        string id = dr["req_no"].ToString();
 
-                            xurl = "/frminsurance/insurancerequestedit.aspx?id=" + id + "&st=" + wfDefault_step.step_name;
-                        }
-                    }
+                    //        xurl = "/frminsurance/insurancerequestedit.aspx?id=" + id + "&st=" + wfDefault_step.step_name;
+                    //    }
+                    //}
                     else if (wfDefault_step.step_name == "Requester Receive Approval" && wfDefault_step.process_code == "INR_NEW")
                     {
                         string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
@@ -497,7 +497,7 @@ namespace onlineLegalWF.Class
             }
             return x = "Success";
         }
-        public string findNextStep_Assignee(string process_code, string next_step_name, string user_login,string submit_by,string process_id = "")
+        public string findNextStep_Assignee(string process_code, string next_step_name, string user_login,string submit_by, string process_id = "",string xbu_code = "")
         {
             string xname = "";
             string xawcname1 = "";
@@ -506,6 +506,29 @@ namespace onlineLegalWF.Class
             //get data user
             var empFunc = new EmpInfo();
             var emp = empFunc.getEmpInfo(user_login);
+
+            string gm_login = "";
+            string head_am_login = "";
+            string c_level_login = "";
+
+            ////get gm heam_am c_level
+            if (!string.IsNullOrEmpty(xbu_code)) 
+            {
+                string sqlbu = @"select * from li_business_unit where bu_code = '" + xbu_code + "'";
+
+                var res = zdb.ExecSql_DataTable(sqlbu, zconnstr);
+
+                if (res.Rows.Count > 0) 
+                {
+                    DataRow dr = res.Rows[0];
+                    gm_login = dr["gm"].ToString();
+                    head_am_login = dr["head_am"].ToString();
+                    c_level_login = dr["c_level"].ToString();
+                }
+            }
+            
+
+
             if (process_code == "INR_RENEW")
             {
                 /* stepname list 
@@ -524,11 +547,15 @@ namespace onlineLegalWF.Class
                 }
                 else if (next_step_name == "GM Approve")
                 {
-                    xname = emp.next_line_mgr_login; //GM Login
+                    xname = gm_login; //GM Login
+                }
+                else if (next_step_name == "Head AM Approve")
+                {
+                    xname = head_am_login; //Head AM Approve Login
                 }
                 else if (next_step_name == "BU Approve")
                 {
-                    xname = emp.next_line_mgr_login; //BU Approve Login
+                    xname = c_level_login; //BU Approve Login
                 }
                 else if (next_step_name == "Requester Receive Approval")
                 {
@@ -549,13 +576,13 @@ namespace onlineLegalWF.Class
                 {
                     xname = emp.user_login; //Requestor = Login account
                 }
-                else if (next_step_name == "GM Review")
+                else if (next_step_name == "GM Approve")
                 {
-                    xname = emp.next_line_mgr_login; //GM Login
+                    xname = gm_login; //GM Login
                 }
                 else if (next_step_name == "Head AM Approve")
                 {
-                    xname = emp.next_line_mgr_login; //Head AM Login
+                    xname = head_am_login; //Head AM Login
                 }
                 else if (next_step_name == "Insurance Specialist Approve")
                 {
@@ -655,11 +682,11 @@ namespace onlineLegalWF.Class
                 }
                 else if (next_step_name == "GM Approve")
                 {
-                    xname = emp.next_line_mgr_login; //GM Login
+                    xname = gm_login; //GM Login
                 }
                 else if (next_step_name == "Head AM Approve")
                 {
-                    xname = emp.next_line_mgr_login; //Head AM Approve Login
+                    xname = head_am_login; //Head AM Approve Login
                 }
                 ////Check เงื่อนไข Deviation เพิ่มเติมเพื่อ set คนอนุมัติ
                 else if (next_step_name == "AWC Validate Approve")

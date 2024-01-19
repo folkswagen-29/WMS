@@ -52,6 +52,7 @@ namespace onlineLegalWF.forms
                     from.Text = resinsreq.Rows[0]["company_name"].ToString();
                     doc_no.Text = resinsreq.Rows[0]["document_no"].ToString();
                     subject.Text = resinsreq.Rows[0]["subject"].ToString();
+                    hid_bucode.Value = resinsreq.Rows[0]["bu_code"].ToString();
 
                     //init data UcAttachAndCommentLogs
                     initDataAttachAndComment(resinsreq.Rows[0]["process_id"].ToString());
@@ -73,6 +74,7 @@ namespace onlineLegalWF.forms
                     from.Text = resinsclaim.Rows[0]["company_name"].ToString();
                     doc_no.Text = resinsclaim.Rows[0]["document_no"].ToString();
                     subject.Text = resinsclaim.Rows[0]["incident"].ToString();
+                    hid_bucode.Value = resinsclaim.Rows[0]["bu_code"].ToString();
 
                     //init data UcAttachAndCommentLogs
                     initDataAttachAndComment(resinsclaim.Rows[0]["process_id"].ToString());
@@ -127,7 +129,7 @@ namespace onlineLegalWF.forms
                     wfAttr.assto_login = emp.next_line_mgr_login;
                     wfAttr.wf_status = wfAttr.step_name;
                     wfAttr.submit_answer = "COMPLETED";
-                    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by);
+                    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, hid_bucode.Value);
                     wfAttr.updated_by = emp.user_login;
                     wfAttr.submit_by = wfAttr.submit_by;
                     // wf.updateProcess

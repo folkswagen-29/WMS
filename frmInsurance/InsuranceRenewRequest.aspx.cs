@@ -229,26 +229,80 @@ namespace onlineLegalWF.frmInsurance
 
             //DOA
             #region DOA 
-            var requestor = "คุณรุ่งเรือง วิโรจน์ชีวัน";
-            var requestorpos = "Head of Operations";
+
             var requestordate = System.DateTime.Now.ToString("dd/MM/yyyy");
-            var apv1 = "คุณจรูณศักดิ์ นามะฮง";
-            var apv1pos = "Insurance Specialist";
+
+
+            ///get gm heam_am c_level
+            string sqlbu = @"select * from li_business_unit where bu_code = '" + xbu_code + "'";
+            var res = zdb.ExecSql_DataTable(sqlbu, zconnstr);
+
+            var requestor = "";
+            var requestorpos = "";
+            var gmname = "";
+            var amname = "";
+            var clevelname = "";
+            if (res.Rows.Count > 0)
+            {
+                var empFunc = new EmpInfo();
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+                    var emp = empFunc.getEmpInfo(xlogin_name);
+                    requestor = emp.full_name_en;
+                    requestorpos = emp.position_en;
+                }
+                string xgm = res.Rows[0]["gm"].ToString();
+                string xam = res.Rows[0]["head_am"].ToString();
+                string xclevel = res.Rows[0]["c_level"].ToString();
+                //get data am user
+                if (!string.IsNullOrEmpty(xam))
+                {
+                    var empam = empFunc.getEmpInfo(xam);
+                    if (empam.user_login != null)
+                    {
+                        amname = empam.full_name_en;
+                    }
+                }
+                //get data gm user
+                if (!string.IsNullOrEmpty(xgm))
+                {
+                    var empgm = empFunc.getEmpInfo(xgm);
+                    if (empgm.user_login != null)
+                    {
+                        gmname = empgm.full_name_en;
+                    }
+                }
+                //get data c_level user
+                if (!string.IsNullOrEmpty(xclevel))
+                {
+                    var empc = empFunc.getEmpInfo(xclevel);
+                    if (empc.user_login != null)
+                    {
+                        clevelname = empc.full_name_en;
+                    }
+                }
+            }
+
+            var apv1 = gmname;
+            var apv1pos = "GM";
             var apv1date = "";
-            var apv2 = "คุณชโลทร ศรีสมวงษ์";
-            var apv2pos = "Head of Legal";
+            var apv2 = amname;
+            var apv2pos = "AM";
             var apv2date = "";
-            var apv3 = "คุณชยุต อมตวนิช";
-            var apv3pos = "Head of Risk Management";
+            var apv3 = clevelname;
+            var apv3pos = "C-Level";
             var apv3date = "";
+            var signname1 = "";
+            var signname2 = "";
+            var signname3 = "";
+            var signname4 = "";
 
-            var apv4 = "ดร.สิเวศ โรจนสุนทร";
-            var apv4pos = "CCO";
-            var apv4date = "";
-            var apv4cb1 = "";
-            var apv4cb2 = "";
-            var apv4remark = "";
 
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#sign_name1#";
+            dr0["tagvalue"] = signname1;
+            dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name1#";
             dr0["tagvalue"] = requestor.Replace(",", "!comma");
@@ -263,6 +317,10 @@ namespace onlineLegalWF.frmInsurance
             dtStr.Rows.Add(dr0);
 
             dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#sign_name2#";
+            dr0["tagvalue"] = signname2;
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name2#";
             dr0["tagvalue"] = apv1.Replace(",", "!comma");
             dtStr.Rows.Add(dr0);
@@ -276,6 +334,10 @@ namespace onlineLegalWF.frmInsurance
             dtStr.Rows.Add(dr0);
 
             dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#sign_name3#";
+            dr0["tagvalue"] = signname3;
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name3#";
             dr0["tagvalue"] = apv2.Replace(",", "!comma");
             dtStr.Rows.Add(dr0);
@@ -288,7 +350,10 @@ namespace onlineLegalWF.frmInsurance
             dr0["tagvalue"] = apv2date.Replace(",", "!comma");
             dtStr.Rows.Add(dr0);
 
-
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#sign_name4#";
+            dr0["tagvalue"] = signname4;
+            dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name4#";
             dr0["tagvalue"] = apv3.Replace(",", "!comma");
@@ -302,34 +367,6 @@ namespace onlineLegalWF.frmInsurance
             dr0["tagvalue"] = apv3date.Replace(",", "!comma");
             dtStr.Rows.Add(dr0);
 
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#name5#";
-            dr0["tagvalue"] = apv4.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#position5#";
-            dr0["tagvalue"] = apv4pos.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#date5#";
-            dr0["tagvalue"] = apv4date.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#sign_name5#";
-            dr0["tagvalue"] = apv4remark.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#cb1#";
-            dr0["tagvalue"] = apv4cb1.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#cb2#";
-            dr0["tagvalue"] = apv4cb2.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#remark5#";
-            dr0["tagvalue"] = apv4remark.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
             #endregion 
 
             #region Sample ReplaceTable
@@ -589,6 +626,7 @@ namespace onlineLegalWF.frmInsurance
                 // wf save draft
                 string process_code = "INR_RENEW";
                 int version_no = 1;
+                string xbu_code = ddl_bu.SelectedValue;
 
                 // getCurrentStep
                 var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
@@ -609,7 +647,7 @@ namespace onlineLegalWF.frmInsurance
                     wfAttr.submit_answer = "SAVE";
                     //wfAttr.next_assto_login = emp.next_line_mgr_login;
                     wfAttr.submit_by = emp.user_login;
-                    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by);
+                    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text,xbu_code);
                     //wfAttr.submit_by = wfAttr.submit_by;
 
                     // wf.updateProcess

@@ -119,7 +119,7 @@ namespace onlineLegalWF.frmInsurance
             {
                 string xexternal_domain = res.Rows[0]["external_domain"].ToString();
                 string xgm = res.Rows[0]["gm"].ToString();
-                string xam = res.Rows[0]["adm_bp"].ToString();
+                string xam = res.Rows[0]["head_am"].ToString();
                 var empFunc = new EmpInfo();
 
                 if (xexternal_domain == "Y")
@@ -250,7 +250,7 @@ namespace onlineLegalWF.frmInsurance
             //{
             //    string xexternal_domain = res.Rows[0]["external_domain"].ToString();
             //    string xgm = res.Rows[0]["gm"].ToString();
-            //    string xam = res.Rows[0]["adm_bp"].ToString();
+            //    string xam = res.Rows[0]["head_am"].ToString();
             //    var empFunc = new EmpInfo();
 
             //    if (xexternal_domain == "Y") 
@@ -664,6 +664,7 @@ namespace onlineLegalWF.frmInsurance
                     // wf save draft
                     string process_code = "INR_NEW";
                     int version_no = 1;
+                    string xbu_code = ddl_bu.SelectedValue;
 
                     // getCurrentStep
                     var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
@@ -682,7 +683,7 @@ namespace onlineLegalWF.frmInsurance
                         wfAttr.wf_status = "SAVE";
                         wfAttr.submit_answer = "SAVE";
                         wfAttr.submit_by = emp.user_login;
-                        wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, emp.user_login);
+                        wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, emp.user_login,lblPID.Text, xbu_code);
                         
 
                         // wf.updateProcess

@@ -77,6 +77,7 @@
     </table>
     <asp:HiddenField ID="req_no" runat="server" />
     <asp:HiddenField ID="hid_PID" runat="server" />
+    <asp:HiddenField ID="hid_bucode" runat="server" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">

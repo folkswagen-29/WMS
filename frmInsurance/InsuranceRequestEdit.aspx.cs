@@ -277,7 +277,7 @@ namespace onlineLegalWF.frmInsurance
             {
                 string xexternal_domain = res.Rows[0]["external_domain"].ToString();
                 string xgm = res.Rows[0]["gm"].ToString();
-                string xam = res.Rows[0]["adm_bp"].ToString();
+                string xam = res.Rows[0]["head_am"].ToString();
                 var empFunc = new EmpInfo();
 
                 if (xexternal_domain == "Y")
@@ -406,7 +406,7 @@ namespace onlineLegalWF.frmInsurance
             //{
             //    string xexternal_domain = res.Rows[0]["external_domain"].ToString();
             //    string xgm = res.Rows[0]["gm"].ToString();
-            //    string xam = res.Rows[0]["adm_bp"].ToString();
+            //    string xam = res.Rows[0]["head_am"].ToString();
             //    var empFunc = new EmpInfo();
 
             //    if (xexternal_domain == "Y")
@@ -779,6 +779,7 @@ namespace onlineLegalWF.frmInsurance
             // Sample Submit
             string process_code = "INR_NEW";
             int version_no = 1;
+            string xbu_code = ddl_bu.SelectedValue;
 
             // getCurrentStep
             var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
@@ -823,13 +824,13 @@ namespace onlineLegalWF.frmInsurance
                     wfAttr.submit_by = emp.user_login;
                 }
                 
-                wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by);
+                wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by,lblPID.Text,xbu_code);
                 wfAttr.updated_by = emp.user_login;
                 
                 // wf.updateProcess
                 var wfA_NextStep = zwf.updateProcess(wfAttr);
                 //wfA_NextStep.next_assto_login = emp.next_line_mgr_login;
-                wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by);
+                wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, xbu_code);
                 string status = zwf.Insert_NextStep(wfA_NextStep);
 
                 if (status == "Success")
@@ -873,7 +874,7 @@ namespace onlineLegalWF.frmInsurance
                 {
                     string xexternal_domain = res.Rows[0]["external_domain"].ToString();
                     string xgm = res.Rows[0]["gm"].ToString();
-                    string xam = res.Rows[0]["adm_bp"].ToString();
+                    string xam = res.Rows[0]["head_am"].ToString();
                     var empFunc = new EmpInfo();
 
                     if (xexternal_domain == "Y")

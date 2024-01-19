@@ -234,7 +234,7 @@ namespace onlineLegalWF.Class
                 {
                     var dr = dt1.Rows[i];
 
-                    if (dr["step_name"].ToString() == "GM Review" && xexternal_domain == "N")
+                    if (dr["step_name"].ToString() == "GM Approve" && xexternal_domain == "N")
                     {
                         res.name1 = data.name1;
                         res.position1 = data.position1;
