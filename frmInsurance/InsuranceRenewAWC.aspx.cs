@@ -400,17 +400,9 @@ namespace onlineLegalWF.frmInsurance
             //DOA
             #region DOA 
 
-            var requestordate = System.DateTime.Now.ToString("dd/MM/yyyy");
+            var requestordate = "";
             var requestor = "";
             var requestorpos = "";
-            var empFunc = new EmpInfo();
-            if (Session["user_login"] != null)
-            {
-                var xlogin_name = Session["user_login"].ToString();
-                var emp = empFunc.getEmpInfo(xlogin_name);
-                requestor = emp.full_name_en;
-                requestorpos = emp.position_en;
-            }
 
             var apv1 = "คุณจรูณศักดิ์ นามะฮง";
             var apv1pos = "Insurance Specialist";
