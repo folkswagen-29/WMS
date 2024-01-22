@@ -156,7 +156,7 @@ namespace onlineLegalWF.Class
                 res.reqdate = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["req_date"]), "en");
                 res.objective = dr0["objective"].ToString();
                 res.reason = dr0["reason"].ToString();
-                //res.approve = dr0["approved_desc"].ToString();
+                res.approve = data.approve;
                 //xexternal_domain = dr0["external_domain"].ToString();
                 res.name1 = data.name1;
                 res.position1 = data.position1;
