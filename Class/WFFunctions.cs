@@ -710,6 +710,37 @@ namespace onlineLegalWF.Class
                     xname = ""; //End
                 }
             }
+            else if (process_code == "INR_AWC_RENEW")
+            {
+                if (next_step_name == "Start")
+                {
+                    xname = emp.user_login; //Requestor = Login account
+                }
+                else if (next_step_name == "Insurance Specialist Approve")
+                {
+                    xname = "jaroonsak.n"; //Insurance Specialist account
+                }
+                else if (next_step_name == "Head of Compliance and Insurance Approve")
+                {
+                    xname = "warin.k"; //Head of Compliance and Insurance account
+                }
+                else if (next_step_name == "Head of Legal Approve")
+                {
+                    xname = "chalothorn.s"; //Head of Legal Approve
+                }
+                else if (next_step_name == "Head of Risk Management Approve")
+                {
+                    xname = "chayut.a"; //Head of Risk Management Approve
+                }
+                else if (next_step_name == "CCO Approve")
+                {
+                    xname = "siwate.r"; //CCO Approve
+                }
+                else if (next_step_name == "End")
+                {
+                    xname = ""; //End
+                }
+            }
 
             return xname;
         }

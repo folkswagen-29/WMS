@@ -11,6 +11,7 @@ using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using static iTextSharp.text.pdf.AcroFields;
+using static onlineLegalWF.Class.ReplaceInsRenew;
 
 namespace onlineLegalWF.frmInsurance
 {
@@ -20,6 +21,7 @@ namespace onlineLegalWF.frmInsurance
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
         public WFFunctions zwf = new WFFunctions();
+        public ReplaceInsRenew zreplaceinsrenew = new ReplaceInsRenew();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -187,51 +189,18 @@ namespace onlineLegalWF.frmInsurance
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();
 
-            #region prepare data
-            //Replace TAG STRING
-            DataTable dtStr = new DataTable();
-            dtStr.Columns.Add("tagname", typeof(string));
-            dtStr.Columns.Add("tagvalue", typeof(string));
-
-            DataRow dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#docno#";
-            dr0["tagvalue"] = xdoc_no.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#from#";
-            dr0["tagvalue"] = xcompany_name.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#attn#";
-            dr0["tagvalue"] = xto.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#re#";
-            dr0["tagvalue"] = xsubject.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#reqdate#";
-            dr0["tagvalue"] = Utillity.ConvertDateToLongDateTime(xreq_date, "en");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#objective#";
-            dr0["tagvalue"] = xpurpose.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#reason#";
-            dr0["tagvalue"] = xbackground.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#approve#";
-            dr0["tagvalue"] = xapprove_des.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            #endregion
-
-            //DOA
-            #region DOA 
+            #region gentagstr data form
+            ReplaceInsReNew_TagData data = new ReplaceInsReNew_TagData();
+            data.docno = xdoc_no.Replace(",", "!comma");
+            data.from = xcompany_name.Replace(",", "!comma");
+            data.attn = xto.Replace(",", "!comma");
+            data.re = xsubject.Replace(",", "!comma");
+            data.reqdate = Utillity.ConvertDateToLongDateTime(xreq_date, "en");
+            data.objective = xpurpose.Replace(",", "!comma");
+            data.reason = xbackground.Replace(",", "!comma");
+            data.approve = xapprove_des.Replace(",", "!comma");
 
             var requestordate = System.DateTime.Now.ToString("dd/MM/yyyy");
-
 
             ///get gm heam_am c_level
             string sqlbu = @"select * from li_business_unit where bu_code = '" + xbu_code + "'";
@@ -240,6 +209,7 @@ namespace onlineLegalWF.frmInsurance
             var requestor = "";
             var requestorpos = "";
             var gmname = "";
+            var gmpos = "GM";
             var amname = "";
             var clevelname = "";
             if (res.Rows.Count > 0)
@@ -249,12 +219,31 @@ namespace onlineLegalWF.frmInsurance
                 {
                     var xlogin_name = Session["user_login"].ToString();
                     var emp = empFunc.getEmpInfo(xlogin_name);
-                    requestor = emp.full_name_en;
-                    requestorpos = emp.position_en;
+                    string sqlwf = "select * from wf_routing where process_id = '" + lblPID.Text + "' and step_name = 'Start'";
+                    var dtwf = zdb.ExecSql_DataTable(sqlwf, zconnstr) ;
+                    if (dtwf.Rows.Count > 0)
+                    {
+                        DataRow drwf = dtwf.Rows[0];
+                        var emprequester = empFunc.getEmpInfo(drwf["submit_by"].ToString());
+                        if (emprequester != null) 
+                        {
+                            requestor = emprequester.full_name_en;
+                            requestorpos = emprequester.position_en;
+                        }
+                        
+                    }
+                    else 
+                    {
+                        requestor = emp.full_name_en;
+                        requestorpos = emp.position_en;
+                    }
+
+                        
                 }
                 string xgm = res.Rows[0]["gm"].ToString();
                 string xam = res.Rows[0]["head_am"].ToString();
                 string xclevel = res.Rows[0]["c_level"].ToString();
+                string xexternal_domain = res.Rows[0]["external_domain"].ToString();
                 //get data am user
                 if (!string.IsNullOrEmpty(xam))
                 {
@@ -271,6 +260,10 @@ namespace onlineLegalWF.frmInsurance
                     if (empgm.user_login != null)
                     {
                         gmname = empgm.full_name_en;
+                        if (xexternal_domain == "Y") 
+                        {
+                            gmpos = empgm.position_en;
+                        }
                     }
                 }
                 //get data c_level user
@@ -285,10 +278,10 @@ namespace onlineLegalWF.frmInsurance
             }
 
             var apv1 = gmname;
-            var apv1pos = "GM";
+            var apv1pos = gmpos;
             var apv1date = "";
             var apv2 = amname;
-            var apv2pos = "AM";
+            var apv2pos = "Head AM";
             var apv2date = "";
             var apv3 = clevelname;
             var apv3pos = "C-Level";
@@ -298,81 +291,33 @@ namespace onlineLegalWF.frmInsurance
             var signname3 = "";
             var signname4 = "";
 
+            data.sign_name1 = signname1;
+            data.name1 = requestor.Replace(",", "!comma");
+            data.position1 = requestorpos.Replace(",", "!comma");
+            data.date1 = requestordate.Replace(",", "!comma");
 
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#sign_name1#";
-            dr0["tagvalue"] = signname1;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#name1#";
-            dr0["tagvalue"] = requestor.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#position1#";
-            dr0["tagvalue"] = requestorpos.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#date1#";
-            dr0["tagvalue"] = requestordate.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
+            data.sign_name2 = signname2;
+            data.name2 = apv1.Replace(",", "!comma");
+            data.position2 = apv1pos.Replace(",", "!comma");
+            data.date2 = apv1date.Replace(",", "!comma");
 
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#sign_name2#";
-            dr0["tagvalue"] = signname2;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#name2#";
-            dr0["tagvalue"] = apv1.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#position2#";
-            dr0["tagvalue"] = apv1pos.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#date2#";
-            dr0["tagvalue"] = apv1date.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
+            data.sign_name3 = signname3;
+            data.name3 = apv2.Replace(",", "!comma");
+            data.position3 = apv2pos.Replace(",", "!comma");
+            data.date3 = apv2date.Replace(",", "!comma");
 
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#sign_name3#";
-            dr0["tagvalue"] = signname3;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#name3#";
-            dr0["tagvalue"] = apv2.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#position3#";
-            dr0["tagvalue"] = apv2pos.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#date3#";
-            dr0["tagvalue"] = apv2date.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
+            data.sign_name4 = signname4;
+            data.name4 = apv3.Replace(",", "!comma");
+            data.position4 = apv3pos.Replace(",", "!comma");
+            data.date4 = apv3date.Replace(",", "!comma");
 
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#sign_name4#";
-            dr0["tagvalue"] = signname4;
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#name4#";
-            dr0["tagvalue"] = apv3.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#position4#";
-            dr0["tagvalue"] = apv3pos.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
-            dr0 = dtStr.NewRow();
-            dr0["tagname"] = "#date4#";
-            dr0["tagvalue"] = apv3date.Replace(",", "!comma");
-            dtStr.Rows.Add(dr0);
 
+            DataTable dtStr = zreplaceinsrenew.genTagData(data);
             #endregion 
 
             #region Sample ReplaceTable
 
             //DataTable Column Properties
-            //col_name, col_width, col_align, col_valign,
             DataTable dtProperties1 = new DataTable();
             dtProperties1.Columns.Add("tagname", typeof(string));
             dtProperties1.Columns.Add("col_name", typeof(string));
@@ -534,17 +479,17 @@ namespace onlineLegalWF.frmInsurance
             List<InsurancePropData> listInsurancePropData = new List<InsurancePropData>();
             foreach (GridViewRow row in gv1.Rows)
             {
-                InsurancePropData data = new InsurancePropData();
-                data.TypeOfPropertyInsured = (row.FindControl("gv1txttop_ins_code") as HiddenField).Value;
-                data.PropertyInsured = (row.FindControl("gv1txtPropertyInsured") as TextBox).Text;
-                data.IndemnityPeriod = (row.FindControl("gv1txtIndemnityPeriod") as TextBox).Text;
-                data.SumInsured = (row.FindControl("gv1txtSumInsured") as TextBox).Text;
-                data.StartDate = (row.FindControl("gv1txtSdate") as TextBox).Text;
-                data.EndDate = (row.FindControl("gv1txtEdate") as TextBox).Text;
+                InsurancePropData datasum = new InsurancePropData();
+                datasum.TypeOfPropertyInsured = (row.FindControl("gv1txttop_ins_code") as HiddenField).Value;
+                datasum.PropertyInsured = (row.FindControl("gv1txtPropertyInsured") as TextBox).Text;
+                datasum.IndemnityPeriod = (row.FindControl("gv1txtIndemnityPeriod") as TextBox).Text;
+                datasum.SumInsured = (row.FindControl("gv1txtSumInsured") as TextBox).Text;
+                datasum.StartDate = (row.FindControl("gv1txtSdate") as TextBox).Text;
+                datasum.EndDate = (row.FindControl("gv1txtEdate") as TextBox).Text;
 
-                if (!string.IsNullOrEmpty(data.IndemnityPeriod) && !string.IsNullOrEmpty(data.SumInsured) && !string.IsNullOrEmpty(data.StartDate) && !string.IsNullOrEmpty(data.EndDate))
+                if (!string.IsNullOrEmpty(datasum.IndemnityPeriod) && !string.IsNullOrEmpty(datasum.SumInsured) && !string.IsNullOrEmpty(datasum.StartDate) && !string.IsNullOrEmpty(datasum.EndDate))
                 {
-                    listInsurancePropData.Add(data);
+                    listInsurancePropData.Add(datasum);
                 }
 
             }
