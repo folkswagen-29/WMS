@@ -460,6 +460,18 @@ namespace onlineLegalWF.Class
                             xurl = "/forms/requesterclosejob.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                         }
                     }
+                    else if (wfDefault_step.step_name == "Requester Receive Approval" && wfDefault_step.process_code == "INR_RENEW")
+                    {
+                        string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
+                        var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                        if (dt.Rows.Count > 0)
+                        {
+                            var dr = dt.Rows[0];
+                            string id = dr["req_no"].ToString();
+
+                            xurl = "/forms/requesterclosejob.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
+                        }
+                    }
                     else if (wfDefault_step.step_name == "End")
                     {
                         xurl = "/forms/complete.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
@@ -531,16 +543,6 @@ namespace onlineLegalWF.Class
 
             if (process_code == "INR_RENEW")
             {
-                /* stepname list 
-              Start
-              GM Approve
-              BU C - Level Approve
-              Legal Insurance
-              Legal Insurance Update
-              End
-              Edit Request
-            */
-
                 if (next_step_name == "Start")
                 {
                     xname = emp.user_login; //Requestor = Login account
@@ -561,10 +563,6 @@ namespace onlineLegalWF.Class
                 {
                     xname = submit_by; //Requester Receive Approval
                 }
-                //else if (next_step_name == "Legal Insurance Update")
-                //{
-                //    xname = ""; //Legal Insurance Update Login
-                //}
                 else if (next_step_name == "End")
                 {
                     xname = ""; //End
@@ -608,10 +606,6 @@ namespace onlineLegalWF.Class
                 {
                     xname = submit_by; //Requester Receive Approval
                 }
-                //else if (next_step_name == "Legal Insurance Update")
-                //{
-                //    xname = ""; //Legal Insurance Update Login
-                //}
                 else if (next_step_name == "End")
                 {
                     xname = ""; //End

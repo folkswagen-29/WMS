@@ -265,8 +265,8 @@
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
                 <asp:Button ID="btn_save" runat="server" CssClass="btn_normal_silver" Text="Save" OnClick="btn_save_Click" />
-                <asp:Button ID="btn_submit" runat="server" CssClass="btn_normal_silver" Text="Submit" />
-                <asp:Button ID="btn_gendocumnt" runat="server" CssClass="btn_normal_silver" Text="Preview" />
+                <asp:Button ID="btn_submit" runat="server" CssClass="btn_normal_silver" Text="Submit" OnClick="btn_submit_Click" />
+                <asp:Button ID="btn_gendocumnt" runat="server" CssClass="btn_normal_silver" Text="Preview" OnClick="btn_gendocumnt_Click" />
             </td>
 
         </tr>
@@ -287,6 +287,8 @@
         </tr>
     </table>
     <asp:HiddenField ID="hid_PID" runat="server" />
+    <asp:HiddenField ID="hid_reqno" runat="server" />
+    <asp:HiddenField ID="req_date" runat="server" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">

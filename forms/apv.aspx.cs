@@ -14,6 +14,7 @@ using System.Web.UI.WebControls;
 using System.Xml.Linq;
 using static onlineLegalWF.Class.ReplaceInsClaim;
 using static onlineLegalWF.Class.ReplaceInsRenew;
+using static onlineLegalWF.Class.ReplaceInsRenewAWC;
 
 namespace onlineLegalWF.forms
 {
@@ -29,6 +30,7 @@ namespace onlineLegalWF.forms
         public ReplaceInsNew zreplaceinsnew = new ReplaceInsNew();
         public ReplaceInsClaim zreplaceinsclaim = new ReplaceInsClaim();
         public ReplaceInsRenew zreplaceinsrenew = new ReplaceInsRenew();
+        public ReplaceInsRenewAWC zreplaceinsrenewawc = new ReplaceInsRenewAWC();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -390,6 +392,88 @@ namespace onlineLegalWF.forms
                                     string[] pdfFiles = listpdf.ToArray();
 
                                     ////get mail from db
+                                    //string email = "";
+                                    //string sqlbpm = "select * from li_user where user_login = '" + wfDefault_step.submit_by + "' ";
+                                    //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                    //if (dtbpm.Rows.Count > 0)
+                                    //{
+                                    //    email = dtbpm.Rows[0]["email"].ToString();
+
+                                    //}
+                                    //else
+                                    //{
+                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfDefault_step.submit_by + "' ";
+                                    //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                    //    if (dtrpa.Rows.Count > 0)
+                                    //    {
+                                    //        email = dtrpa.Rows[0]["Email"].ToString();
+                                    //    }
+
+                                    //}
+
+                                    string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
+
+                                    //send mail to requester
+
+                                    ////fix mail test
+                                    string email = "worawut.m@assetworldcorp-th.com";
+                                    _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
+
+                                    //send mait to Procurement
+                                    _ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
+
+                                    //send mail to jaroonsak.n
+                                    _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
+
+                                }
+
+                            }
+                        }
+                        else if (wfAttr.step_name == "CCO Approve" && wfAttr.process_code == "INR_AWC_RENEW")
+                        {
+                            string subject = "";
+                            string body = "";
+                            string sql = @"select * from li_insurance_renew_awc_memo where process_id = '" + wfAttr.process_id + "'";
+                            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dr = dt.Rows[0];
+                                string id = dr["req_no"].ToString();
+                                subject = dr["subject"].ToString();
+                                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว";
+
+                                string pathfileins = "";
+                                string outputdirectory = "";
+
+                                string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                                var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                                if (resfile.Rows.Count > 0)
+                                {
+                                    pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+                                    outputdirectory = resfile.Rows[0]["output_directory"].ToString();
+
+                                    List<string> listpdf = new List<string>();
+                                    listpdf.Add(pathfileins);
+
+                                    string sqlattachfile = "select * from wf_attachment where pid = '" + wfAttr.process_id + "' and e_form IS NULL";
+
+                                    var resattachfile = zdb.ExecSql_DataTable(sqlattachfile, zconnstr);
+
+                                    if (resattachfile.Rows.Count > 0)
+                                    {
+                                        foreach (DataRow item in resattachfile.Rows)
+                                        {
+                                            listpdf.Add(item["attached_filepath"].ToString());
+                                        }
+                                    }
+                                    //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
+                                    string[] pdfFiles = listpdf.ToArray();
+
+                                    ////get req_no by process_id from li_insurance_renew_awc_memo_req from db loop for send mail
                                     //string email = "";
                                     //string sqlbpm = "select * from li_user where user_login = '" + wfDefault_step.submit_by + "' ";
                                     //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
@@ -1461,6 +1545,296 @@ namespace onlineLegalWF.forms
 
 
 
+        }
+
+        private void GenDocumnetInsRenewAWC(string pid)
+        {
+            // Replace Doc
+            string xreq_no = "";
+
+            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateRenewAWC.docx";
+            string outputfolder = @"C:\WordTemplate\Insurance\Output";
+            string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+            var rdoc = new ReplaceDocx.Class.ReplaceDocx();
+
+            ReplaceInsReNewAWC_TagData data = new ReplaceInsReNewAWC_TagData();
+
+            #region prepare data
+
+            string sqlinsmemo = "select * from li_insurance_renew_awc_memo where process_id='" + pid + "'";
+            var resinsmemo = zdb.ExecSql_DataTable(sqlinsmemo, zconnstr);
+
+            if (resinsmemo.Rows.Count > 0)
+            {
+                xreq_no = resinsmemo.Rows[0]["req_no"].ToString();
+            }
+
+            var requestor = "";
+            var requestorpos = "";
+
+            var apv1 = "คุณจรูณศักดิ์ นามะฮง";
+            var apv1pos = "Insurance Specialist";
+            var apv1_2 = "คุณวารินทร์ เกลียวไพศาล";
+            var apv2 = "คุณชโลทร ศรีสมวงษ์";
+            var apv2pos = "Head of Legal";
+            var apv3 = "คุณชยุต อมตวนิช";
+            var apv3pos = "Head of Risk Management";
+
+            var apv4 = "ดร.สิเวศ โรจนสุนทร";
+            var apv4pos = "CCO";
+
+            data.sign_name1 = "";
+            data.name1 = requestor;
+            data.position1 = requestorpos;
+            data.date1 = "";
+
+            data.sign_name2 = "";
+            data.name2 = apv1;
+            data.position2 = apv1pos;
+            data.date2 = "";
+
+            data.sign_name22 = "";
+            data.name22 = apv1_2;
+            data.date22 = "";
+
+            data.sign_name3 = "";
+            data.name3 = apv2;
+            data.position3 = apv2pos;
+            data.date3 = "";
+
+            data.sign_name4 = "";
+            data.name4 = apv3;
+            data.position4 = apv3pos;
+            data.date4 = "";
+
+            data.sign_name5 = "";
+            data.name5 = apv4;
+            data.position5 = apv4pos;
+            data.date5 = "";
+            data.cb1 = "";
+            data.cb2 = "";
+            data.remark5 = "";
+
+            System.Data.DataTable dtStr = zreplaceinsrenewawc.BindTagData(pid, data);
+
+            #endregion 
+
+            #region Sample ReplaceTable
+            ////DataTable Column Properties
+            System.Data.DataTable dtProperties1 = new System.Data.DataTable();
+            dtProperties1.Columns.Add("tagname", typeof(string));
+            dtProperties1.Columns.Add("col_name", typeof(string));
+            dtProperties1.Columns.Add("col_width", typeof(string));
+            dtProperties1.Columns.Add("col_align", typeof(string)); //Left, Right, Center
+            dtProperties1.Columns.Add("col_valign", typeof(string)); //Top, Middle, Bottom
+            dtProperties1.Columns.Add("col_font", typeof(string));
+            dtProperties1.Columns.Add("col_fontsize", typeof(string));
+            dtProperties1.Columns.Add("col_fontcolor", typeof(string));
+            dtProperties1.Columns.Add("col_color", typeof(string));
+            dtProperties1.Columns.Add("header_height", typeof(string));
+            dtProperties1.Columns.Add("header_color", typeof(string));
+            dtProperties1.Columns.Add("header_font", typeof(string));
+            dtProperties1.Columns.Add("header_fontsize", typeof(string));
+            dtProperties1.Columns.Add("header_fontbold", typeof(string));
+            dtProperties1.Columns.Add("header_align", typeof(string)); //Left, Right, Center
+            dtProperties1.Columns.Add("header_valign", typeof(string)); //Top, Middle, Bottom
+            dtProperties1.Columns.Add("header_fontcolor", typeof(string));
+            dtProperties1.Columns.Add("row_height", typeof(string));
+            // Replace #tablesum# ------------------------------------------------------
+            DataRow dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tablesum#";
+            dr["col_name"] = "กลุ่มธุรกิจ";
+            dr["col_width"] = "100";
+            dr["col_align"] = "Center";
+            dr["col_valign"] = "Top";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tablesum#";
+            dr["col_name"] = "IAR";
+            dr["col_width"] = "200";
+            dr["col_align"] = "Center";
+            dr["col_valign"] = "Top";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tablesum#";
+            dr["col_name"] = "BI";
+            dr["col_width"] = "200";
+            dr["col_align"] = "Center";
+            dr["col_valign"] = "Top";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tablesum#";
+            dr["col_name"] = "CGL/PL";
+            dr["col_width"] = "200";
+            dr["col_align"] = "Center";
+            dr["col_valign"] = "top";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tablesum#";
+            dr["col_name"] = "PV";
+            dr["col_width"] = "150";
+            dr["col_align"] = "Center";
+            dr["col_valign"] = "top";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tablesum#";
+            dr["col_name"] = "LPG";
+            dr["col_width"] = "150";
+            dr["col_align"] = "Center";
+            dr["col_valign"] = "top";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tablesum#";
+            dr["col_name"] = "D&O";
+            dr["col_width"] = "150";
+            dr["col_align"] = "Center";
+            dr["col_valign"] = "top";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            ////DataTable for #tablesum#
+            //Get Data from gv1 Insurance sum Detail
+            System.Data.DataTable dt = zreplaceinsrenewawc.genTagTableData(lblPID.Text);
+
+            // Convert to JSONString
+            System.Data.DataTable dtTagPropsTable = new System.Data.DataTable();
+            dtTagPropsTable.Columns.Add("tagname", typeof(string));
+            dtTagPropsTable.Columns.Add("jsonstring", typeof(string));
+
+            System.Data.DataTable dtTagDataTable = new System.Data.DataTable();
+            dtTagDataTable.Columns.Add("tagname", typeof(string));
+            dtTagDataTable.Columns.Add("jsonstring", typeof(string));
+            ReplaceDocx.Class.ReplaceDocx repl = new ReplaceDocx.Class.ReplaceDocx();
+            var jsonDTStr = repl.DataTableToJSONWithStringBuilder(dtStr);
+            var jsonDTProperties1 = repl.DataTableToJSONWithStringBuilder(dtProperties1);
+            var jsonDTdata = repl.DataTableToJSONWithStringBuilder(dt);
+            //end prepare data
+
+            // Save to Database z_replacedocx_log
+
+            string sql = @"insert into z_replacedocx_log (replacedocx_reqno,jsonTagString, jsonTableProp, jsonTableData,template_filepath , output_directory,output_filepath, delete_output ) 
+                        values('" + xreq_no + @"',
+                               '" + jsonDTStr + @"', 
+                                '" + jsonDTProperties1 + @"', 
+                                '" + jsonDTdata + @"', 
+                                '" + templatefile + @"', 
+                                '" + outputfolder + @"', 
+                                '" + outputfn + @"',  
+                                '" + "0" + @"'
+                            ) ";
+
+            zdb.ExecNonQuery(sql, zconnstr);
+
+            var outputbyte = rdoc.ReplaceData2(jsonDTStr, jsonDTProperties1, jsonDTdata, templatefile, outputfolder, outputfn, false);
+
+            repl.convertDOCtoPDF(outputfn, outputfn.Replace(".docx", ".pdf"), false);
+            // Dowload Word 
+            //Response.Clear();
+            //Response.ContentType = "text/xml";
+            //Response.AddHeader("content-disposition", $"attachment; filename={outputfn}");
+            //Response.BinaryWrite(outputbyte);
+            //Response.ContentEncoding = System.Text.Encoding.UTF8;
+            //Response.End();
+
+
+            #endregion
         }
 
     }

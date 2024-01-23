@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
+using static iTextSharp.text.pdf.AcroFields;
 
 namespace onlineLegalWF.Class
 {
@@ -14,6 +15,7 @@ namespace onlineLegalWF.Class
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
         public string zconnstrrpa = ConfigurationManager.AppSettings["RPADB"].ToString();
         public WFFunctions zwf = new WFFunctions();
+        
         #endregion
         public DataTable genTagData(ReplaceInsReNewAWC_TagData data)
         {
@@ -262,6 +264,54 @@ namespace onlineLegalWF.Class
 
             var dtStr = genTagData(res);
             return dtStr;
+        }
+
+        public DataTable genTagTableData(string xprocess_id)
+        {
+            #region Sample ReplaceTable
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("tagname", typeof(string));
+            dt.Columns.Add("TYPE_PROP", typeof(string));
+            dt.Columns.Add("IAR", typeof(string));
+            dt.Columns.Add("BI", typeof(string));
+            dt.Columns.Add("CGL_PL", typeof(string));
+            dt.Columns.Add("PV", typeof(string));
+            dt.Columns.Add("LPG", typeof(string));
+            dt.Columns.Add("D_O", typeof(string));
+            dt.Columns.Add("Row_Sort", typeof(string));
+
+            //DataTable for #tablesum#
+            string sqlinssum = @"select row_sort,type_prop
+                                  ,format(isnull(cast(sum_iar as int),0), '##,##0') as sum_iar
+                                  ,format(isnull(cast(sum_bi as int),0), '##,##0') as sum_bi
+                                  ,format(isnull(cast(sum_cgl_pv as int),0), '##,##0') as sum_cgl_pv
+                                  ,format(isnull(cast(sum_pv as int),0), '##,##0') as sum_pv
+                                  ,format(isnull(cast(sum_lpg as int),0), '##,##0') as sum_lpg
+                                  ,format(isnull(cast(sum_d_o as int),0), '##,##0') as sum_d_o
+                            from li_insurance_renew_awc_memo_sumins where process_id = '" + xprocess_id + "'";
+            var dtlinssum = zdb.ExecSql_DataTable(sqlinssum, zconnstr);
+
+            if (dtlinssum.Rows.Count > 0)
+            {
+                var drlinssum= dtlinssum.Rows[0];
+                //Assign DataTable for #tablesum#
+                DataRow drGV = dt.NewRow();
+                drGV["tagname"] = "#tablesum#";
+                drGV["TYPE_PROP"] = drlinssum["type_prop"].ToString().Replace(",", "!comma");
+                drGV["IAR"] = drlinssum["sum_iar"].ToString().Replace(",", "!comma");
+                drGV["BI"] = drlinssum["sum_bi"].ToString().Replace(",", "!comma");
+                drGV["CGL_PL"] = drlinssum["sum_cgl_pv"].ToString().Replace(",", "!comma");
+                drGV["PV"] = drlinssum["sum_pv"].ToString().Replace(",", "!comma");
+                drGV["LPG"] = drlinssum["sum_lpg"].ToString().Replace(",", "!comma");
+                drGV["D_O"] = drlinssum["sum_d_o"].ToString().Replace(",", "!comma");
+                drGV["Row_Sort"] = drlinssum["row_sort"].ToString().Replace(",", "!comma");
+                dt.Rows.Add(drGV);
+            }
+
+            #endregion
+
+            return dt;
         }
         public class ReplaceInsReNewAWC_TagData
         {
