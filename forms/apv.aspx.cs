@@ -229,7 +229,7 @@ namespace onlineLegalWF.forms
 
                                     ////get mail from db
                                     //string email = "";
-                                    //string sqlbpm = "select * from li_user where user_login = '" + wfDefault_step.submit_by + "' ";
+                                    //string sqlbpm = "select * from li_user where user_login = '" + wfAttr.submit_by + "' ";
                                     //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
 
                                     //if (dtbpm.Rows.Count > 0)
@@ -239,7 +239,7 @@ namespace onlineLegalWF.forms
                                     //}
                                     //else
                                     //{
-                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfDefault_step.submit_by + "' ";
+                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfAttr.submit_by + "' ";
                                     //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
 
                                     //    if (dtrpa.Rows.Count > 0)
@@ -311,7 +311,7 @@ namespace onlineLegalWF.forms
 
                                     ////get mail from db
                                     //string email = "";
-                                    //string sqlbpm = "select * from li_user where user_login = '" + wfDefault_step.submit_by + "' ";
+                                    //string sqlbpm = "select * from li_user where user_login = '" + wfAttr.submit_by + "' ";
                                     //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
 
                                     //if (dtbpm.Rows.Count > 0)
@@ -321,7 +321,7 @@ namespace onlineLegalWF.forms
                                     //}
                                     //else
                                     //{
-                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfDefault_step.submit_by + "' ";
+                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfAttr.submit_by + "' ";
                                     //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
 
                                     //    if (dtrpa.Rows.Count > 0)
@@ -393,7 +393,7 @@ namespace onlineLegalWF.forms
 
                                     ////get mail from db
                                     //string email = "";
-                                    //string sqlbpm = "select * from li_user where user_login = '" + wfDefault_step.submit_by + "' ";
+                                    //string sqlbpm = "select * from li_user where user_login = '" + wfAttr.submit_by + "' ";
                                     //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
 
                                     //if (dtbpm.Rows.Count > 0)
@@ -403,7 +403,7 @@ namespace onlineLegalWF.forms
                                     //}
                                     //else
                                     //{
-                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfDefault_step.submit_by + "' ";
+                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfAttr.submit_by + "' ";
                                     //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
 
                                     //    if (dtrpa.Rows.Count > 0)
@@ -474,8 +474,10 @@ namespace onlineLegalWF.forms
                                     string[] pdfFiles = listpdf.ToArray();
 
                                     ////get req_no by process_id from li_insurance_renew_awc_memo_req from db loop for send mail
+                                    //string sqlmemo = "select * from li_insurance_renew_awc_memo_req where process_id = '" + wfAttr.process_id + "'";
+                                    //System.Data.DataTable dtmemo = zdb.ExecSql_DataTable(sqlmemo, zconnstr);
                                     //string email = "";
-                                    //string sqlbpm = "select * from li_user where user_login = '" + wfDefault_step.submit_by + "' ";
+                                    //string sqlbpm = "select * from li_user where user_login = '" + wfAttr.submit_by + "' ";
                                     //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
 
                                     //if (dtbpm.Rows.Count > 0)
@@ -485,7 +487,7 @@ namespace onlineLegalWF.forms
                                     //}
                                     //else
                                     //{
-                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfDefault_step.submit_by + "' ";
+                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfAttr.submit_by + "' ";
                                     //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
 
                                     //    if (dtrpa.Rows.Count > 0)
