@@ -180,9 +180,14 @@ namespace onlineLegalWF.forms
                         else if (process_code == "INR_CLAIM")
                         {
                             GenDocumnetInsClaim(lblPID.Text);
-                        }else if (process_code == "INR_RENEW")
+                        }
+                        else if (process_code == "INR_RENEW")
                         {
                             GenDocumnetInsRenew(lblPID.Text);
+                        }
+                        else if (process_code == "INR_AWC_RENEW")
+                        {
+                            GenDocumnetInsRenewAWC(lblPID.Text);
                         }
 
                         if (wfAttr.step_name == "CCO Approve" && wfAttr.process_code == "INR_NEW")
