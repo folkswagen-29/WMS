@@ -271,7 +271,7 @@ namespace onlineLegalWF.Class
                             res.propdate3 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
-                    else if (dr["step_name"].ToString() == "AWC Validate Approved")
+                    else if (dr["step_name"].ToString() == "AWC Validate Approve")
                     {
                         if (dr["wf_status"].ToString() != "")
                         {
@@ -279,7 +279,7 @@ namespace onlineLegalWF.Class
                             res.awcdate1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
-                    else if (dr["step_name"].ToString() == "AWC Reviewer Approved")
+                    else if (dr["step_name"].ToString() == "AWC Reviewer Approve")
                     {
                         if (dr["wf_status"].ToString() != "")
                         {
@@ -287,7 +287,7 @@ namespace onlineLegalWF.Class
                             res.awcdate2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
-                    else if (dr["step_name"].ToString() == "AWC Approval Approved")
+                    else if (dr["step_name"].ToString() == "AWC Approval Approve")
                     {
                         if (dr["wf_status"].ToString() != "")
                         {
