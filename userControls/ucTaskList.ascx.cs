@@ -74,6 +74,7 @@ namespace onlineLegalWF.userControls
         public DataTable getMyRequest()
         {
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString(); 
+
             //string sql = "Select process_id,subject,submit_by,updated_by,created_datetime,wf_status,updated_datetime, ( '" + host_url+ "' + link_url_format) as link_url_format from " +
             //    "wf_routing where process_id in (Select process_id from wf_routing where submit_by = '"+ hidLogin.Value + "' and wf_status in ('SAVE','WAITATCH')) and wf_status in ('SAVE','WAITATCH')";
             
