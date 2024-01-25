@@ -28,7 +28,7 @@ namespace onlineLegalWF.frmInsurance
         public void setDataTrackingRenew() 
         {
             ucHeader1.setHeader("Tracking Renew");
-            string sqlreqres = "select req.process_id,req.req_no,req.req_date,req.[status],bu.bu_desc from li_insurance_request as req inner join li_business_unit as bu on bu.bu_code = req.bu_code where req.toreq_code='07' and status ='verify'";
+            string sqlreqres = "select req.process_id,req.req_no,req.req_date,req.[status],bu.bu_desc from li_insurance_request as req inner join li_business_unit as bu on bu.bu_code = req.bu_code where req.toreq_code='07' and status ='approve'";
 
             var reqres = zdb.ExecSql_DataTable(sqlreqres, zconnstr);
 
@@ -126,7 +126,7 @@ namespace onlineLegalWF.frmInsurance
                 }
             }
 
-            string reslistreq_no = string.Join(", ", listreq_no);
+            string reslistreq_no = (listreq_no.Count > 1 ? string.Join(", ", listreq_no) : listreq_no[0]);
 
             Response.Redirect("/frmInsurance/InsuranceRenewAWC.aspx?id=" + reslistreq_no);
             //string sql = "select * from li_insurance_request where req_no in ("+reslistreq_no+")";

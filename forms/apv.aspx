@@ -62,7 +62,7 @@
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
                 <asp:Button ID="btn_Approve" runat="server" CssClass="btn_normal_blue" Text="Approve" OnClick="btn_Approve_Click" />
-                <asp:Button ID="btn_Reject" runat="server" CssClass="btn_normal_red" Text="Reject" />
+                <asp:Button ID="btn_Reject" runat="server" CssClass="btn_normal_red" Text="Reject" OnClick="btn_Reject_Click" />
             </td>
         </tr>
         <tr class="cell_content_100PC">
@@ -82,4 +82,26 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <asp:Label ID="lblPID" runat="server" CssClass="Label_sm"></asp:Label>
+    <div class="modal fade" id="modalreject" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="border: 0;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div><asp:Label ID="Label2" runat="server" CssClass="Label_lg" Text="Comment"></asp:Label></div>
+                    <asp:TextBox ID="comment" runat="server" CssClass="Text_600" TextMode="MultiLine" Height="90"></asp:TextBox>
+                </div>
+                <div class="modal-footer" style="text-align: left; border-top: 0;">
+                    <asp:Button ID="btn_reject_submit" runat="server" Text="Submit" CssClass="btn_normal_blue" OnClick="btn_reject_submit_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function showModal() {
+            $("#modalreject").modal('show');
+        }
+    </script>
 </asp:Content>

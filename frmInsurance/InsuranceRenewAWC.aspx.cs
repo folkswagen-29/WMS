@@ -278,7 +278,7 @@ namespace onlineLegalWF.frmInsurance
                     }
 
                     //update status renew ins
-                    string sqlupdate = @"update li_insurance_request set status = 'gen memo' , updated_datetime = '"+xreq_date+"' where req_no in (" + id + ")";
+                    string sqlupdate = @"update li_insurance_request set status = 'genmemo' , updated_datetime = '"+xreq_date+"' where req_no in (" + id + ")";
                     ret = zdb.ExecNonQueryReturnID(sqlupdate, zconnstr);
                 }
 

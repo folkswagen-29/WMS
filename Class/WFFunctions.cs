@@ -175,7 +175,8 @@ namespace onlineLegalWF.Class
         {
             var x = new wf_attributes(); 
             string sql = " select * from wf_routing where process_id = '"+process_id+"' and process_code = '"+process_code+"' and version_no = " + version_no.ToString();
-            sql += " order by step_no desc "; 
+            //sql += " order by step_no desc "; 
+            sql += " order by created_datetime desc "; 
             var dt = zdb.ExecSql_DataTable(sql, zconnstr); 
             if (dt.Rows.Count > 0)
             {
@@ -358,35 +359,57 @@ namespace onlineLegalWF.Class
             int next_step = 0;
             if (wfA.step_name == "GM Approve" && wfA.process_code == "INR_NEW")
             {
-                if (wfA.external_domain == "Y")
+                if (wfA.attr_apv_value == wfA.submit_answer)
                 {
-                    next_step = 3;
+                    if (wfA.external_domain == "Y")
+                    {
+                        next_step = 3;
+                    }
+                    else
+                    {
+                        next_step = 4;
+                    }
                 }
-                else 
+                else
                 {
-                    next_step = 4;
+                    next_step = wfA.isfalse_nextstep;
                 }
             }
             else if (wfA.step_name == "GM Approve" && wfA.process_code == "INR_RENEW")
             {
-                if (wfA.external_domain == "Y")
+                if (wfA.attr_apv_value == wfA.submit_answer)
                 {
-                    next_step = 3;
+                    if (wfA.external_domain == "Y")
+                    {
+                        next_step = 3;
+                    }
+                    else
+                    {
+                        next_step = 4;
+                    }
                 }
-                else
+                else 
                 {
-                    next_step = 4;
+                    next_step = wfA.isfalse_nextstep;
                 }
+                
             }
             else if (wfA.step_name == "GM Approve" && wfA.process_code == "INR_CLAIM")
             {
-                if (wfA.external_domain == "Y")
+                if (wfA.attr_apv_value == wfA.submit_answer)
                 {
-                    next_step = 3;
+                    if (wfA.external_domain == "Y")
+                    {
+                        next_step = 3;
+                    }
+                    else
+                    {
+                        next_step = 4;
+                    }
                 }
                 else
                 {
-                    next_step = 4;
+                    next_step = wfA.isfalse_nextstep;
                 }
             }
             else 
@@ -417,8 +440,8 @@ namespace onlineLegalWF.Class
             string x = "";
             if (wfDefault_step.step_name.ToUpper() != "")
             {
-                if (!isExistingWFStep(wfDefault_step.process_id, wfDefault_step.process_code, wfDefault_step.version_no,wfDefault_step.step_no)) // Check used to add New Step already or not?
-                {
+                //if (!isExistingWFStep(wfDefault_step.process_id, wfDefault_step.process_code, wfDefault_step.version_no,wfDefault_step.step_no)) // Check used to add New Step already or not?
+                //{
                     string xurl = "";
                     if (wfDefault_step.step_name == "Legal Insurance")
                     {
@@ -515,7 +538,7 @@ namespace onlineLegalWF.Class
                                         '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + @"'
                                         ) ";
                     zdb.ExecNonQuery(sqlins, zconnstr);
-                }
+                //}
                
 
             }

@@ -127,7 +127,7 @@ namespace onlineLegalWF.forms
                     // set WF Attributes
                     wfAttr.subject = subject.Text.Trim();
                     wfAttr.assto_login = emp.next_line_mgr_login;
-                    wfAttr.wf_status = wfAttr.step_name;
+                    wfAttr.wf_status = "COMPLETED";
                     wfAttr.submit_answer = "COMPLETED";
                     wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, hid_bucode.Value);
                     wfAttr.updated_by = emp.user_login;
@@ -140,6 +140,21 @@ namespace onlineLegalWF.forms
 
                     if (status == "Success")
                     {
+                        if (wfA_NextStep.step_name == "End" && wfAttr.process_code == "INR_NEW")
+                        {
+                            string sqlupdate = @"update li_insurance_request set status='approved',updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where process_id = '" + wfAttr.process_id + "'";
+                            zdb.ExecNonQuery(sqlupdate, zconnstr);
+                        }
+                        else if (wfA_NextStep.step_name == "End" && wfAttr.process_code == "INR_CLAIM")
+                        {
+                            string sqlupdate = @"update li_insurance_claim set status='approved',updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where process_id = '" + wfAttr.process_id + "'";
+                            zdb.ExecNonQuery(sqlupdate, zconnstr);
+                        }
+                        else if (wfA_NextStep.step_name == "End" && wfAttr.process_code == "INR_RENEW")
+                        {
+                            string sqlupdate = @"update li_insurance_request set status='approved',updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where process_id = '" + wfAttr.process_id + "'";
+                            zdb.ExecNonQuery(sqlupdate, zconnstr);
+                        }
                         Response.Redirect("/legalportal/legalportal.aspx?m=completelist");
                     }
 
