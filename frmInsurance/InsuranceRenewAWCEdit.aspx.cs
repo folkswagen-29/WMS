@@ -652,13 +652,16 @@ namespace onlineLegalWF.frmInsurance
             var outputbyte = rdoc.ReplaceData2(jsonDTStr, jsonDTProperties1, jsonDTdata, templatefile, outputfolder, outputfn, false);
 
             repl.convertDOCtoPDF(outputfn, outputfn.Replace(".docx", ".pdf"), false);
-            // Dowload Word 
-            Response.Clear();
-            Response.ContentType = "text/xml";
-            Response.AddHeader("content-disposition", $"attachment; filename={outputfn}");
-            Response.BinaryWrite(outputbyte);
-            Response.ContentEncoding = System.Text.Encoding.UTF8;
-            Response.End();
+            //// Dowload Word 
+            //Response.Clear();
+            //Response.ContentType = "text/xml";
+            //Response.AddHeader("content-disposition", $"attachment; filename={outputfn}");
+            //Response.BinaryWrite(outputbyte);
+            //Response.ContentEncoding = System.Text.Encoding.UTF8;
+            //Response.End();
+            string filePath = outputfn.Replace(".docx", ".pdf");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+            pdf_render.Attributes["src"] = "/render/pdf?id=" + filePath;
 
 
             #endregion
