@@ -247,6 +247,14 @@ namespace onlineLegalWF.Class
                             res.propdate1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
+                    else if (dr["step_name"].ToString() == "Edit Request")
+                    {
+                        if (dr["wf_status"].ToString() != "")
+                        {
+                            res.sign_propname1 = "อนุมัติผ่านระบบ";
+                            res.propdate1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
                     else if (dr["step_name"].ToString() == "GM Approve")
                     {
                         if (dr["wf_status"].ToString() != "")

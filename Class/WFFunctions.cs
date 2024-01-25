@@ -436,45 +436,57 @@ namespace onlineLegalWF.Class
                     //        xurl = "/frminsurance/insurancerequestedit.aspx?id=" + id + "&st=" + wfDefault_step.step_name;
                     //    }
                     //}
-                    else if (wfDefault_step.step_name == "Requester Receive Approval" && wfDefault_step.process_code == "INR_NEW")
+                    else if (wfDefault_step.step_name == "Requester Receive Approval")
                     {
-                        string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
-                        var dt = zdb.ExecSql_DataTable(sql, zconnstr);
-                        if (dt.Rows.Count > 0)
-                        {
-                            var dr = dt.Rows[0];
-                            string id = dr["req_no"].ToString();
-
-                            xurl = "/forms/requesterclosejob.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
-                        }
-                    }
-                    else if (wfDefault_step.step_name == "Requester Receive Approval" && wfDefault_step.process_code == "INR_CLAIM")
-                    {
-                        string sql = @"select * from li_insurance_claim where process_id = '" + wfDefault_step.process_id + "'";
-                        var dt = zdb.ExecSql_DataTable(sql, zconnstr);
-                        if (dt.Rows.Count > 0)
-                        {
-                            var dr = dt.Rows[0];
-                            string id = dr["req_no"].ToString();
-
-                            xurl = "/forms/requesterclosejob.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
-                        }
-                    }
-                    else if (wfDefault_step.step_name == "Requester Receive Approval" && wfDefault_step.process_code == "INR_RENEW")
-                    {
-                        string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
-                        var dt = zdb.ExecSql_DataTable(sql, zconnstr);
-                        if (dt.Rows.Count > 0)
-                        {
-                            var dr = dt.Rows[0];
-                            string id = dr["req_no"].ToString();
-
-                            xurl = "/forms/requesterclosejob.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
-                        }
+                        xurl = "/forms/requesterclosejob.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                     }
                     else if (wfDefault_step.step_name == "End")
                     {
                         xurl = "/forms/complete.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
+                    }
+                    else if (wfDefault_step.step_name == "Edit Request")
+                    {
+                        if (wfDefault_step.process_code == "INR_NEW") 
+                        {
+                            string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
+                            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dr = dt.Rows[0];
+                                string id = dr["req_no"].ToString();
+
+                                xurl = "/frminsurance/insurancerequestedit.aspx?id=" + id;
+                            }
+                        }
+                        else if (wfDefault_step.process_code == "INR_RENEW")
+                        {
+                            string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
+                            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dr = dt.Rows[0];
+                                string id = dr["req_no"].ToString();
+
+                                xurl = "/frminsurance/insurancerenewrequestedit.aspx?id=" + id;
+                            }
+                        }
+                        else if (wfDefault_step.process_code == "INR_CLAIM")
+                        {
+                            string sql = @"select * from li_insurance_claim where process_id = '" + wfDefault_step.process_id + "'";
+                            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dr = dt.Rows[0];
+                                string id = dr["claim_no"].ToString();
+
+                                xurl = "/frminsurance/insuranceclaimedit.aspx?id=" + id;
+                            }
+                        }
+                        else if (wfDefault_step.process_code == "INR_AWC_RENEW")
+                        {
+                            xurl = "/frminsurance/insurancerenewawcedit.aspx?id=" + wfDefault_step.process_id;
+                        }
+
                     }
                     else
                     {
@@ -567,6 +579,10 @@ namespace onlineLegalWF.Class
                 {
                     xname = ""; //End
                 }
+                else if (next_step_name == "Edit Request")
+                {
+                    xname = submit_by; //Requester Edit Request
+                }
             }
             else if (process_code == "INR_NEW") 
             {
@@ -609,6 +625,10 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "End")
                 {
                     xname = ""; //End
+                }
+                else if (next_step_name == "Edit Request")
+                {
+                    xname = submit_by; //Requester Edit Request
                 }
             }
             else if (process_code == "INR_CLAIM")
@@ -703,6 +723,10 @@ namespace onlineLegalWF.Class
                 {
                     xname = ""; //End
                 }
+                else if (next_step_name == "Edit Request")
+                {
+                    xname = submit_by; //Requester Edit Request
+                }
             }
             else if (process_code == "INR_AWC_RENEW")
             {
@@ -733,6 +757,10 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "End")
                 {
                     xname = ""; //End
+                }
+                else if (next_step_name == "Edit Request")
+                {
+                    xname = submit_by; //Requester Edit Request
                 }
             }
 

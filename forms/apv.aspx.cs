@@ -154,14 +154,20 @@ namespace onlineLegalWF.forms
                     if (wfAttr.step_name == "CCO Approve" && wfAttr.process_code == "INR_NEW")
                     {
                         wfA_NextStep.wf_status = "WAITATCH";
+                        string sqlupdate = @"update li_insurance_request set status='approve' where process_id = '" + wfAttr.process_id + "'";
+                        zdb.ExecNonQuery(sqlupdate, zconnstr);
                     }
                     else if (wfAttr.step_name == "AWC Approval Approve" && wfAttr.process_code == "INR_CLAIM")
                     {
                         wfA_NextStep.wf_status = "WAITATCH";
+                        string sqlupdate = @"update li_insurance_claim set status='approve' where process_id = '" + wfAttr.process_id + "'";
+                        zdb.ExecNonQuery(sqlupdate, zconnstr);
                     }
                     else if (wfAttr.step_name == "BU Approve" && wfAttr.process_code == "INR_RENEW")
                     {
                         wfA_NextStep.wf_status = "WAITATCH";
+                        string sqlupdate = @"update li_insurance_request set status='approve' where process_id = '" + wfAttr.process_id + "'";
+                        zdb.ExecNonQuery(sqlupdate, zconnstr);
                     }
                     else if (wfAttr.step_name == "End") 
                     {

@@ -222,14 +222,6 @@ namespace onlineLegalWF.Class
             var dt1 = zdb.ExecSql_DataTable(sql, zconnstr); 
             if ( dt1.Rows.Count > 0)
             {
-              
-                //    List Step name 
-                //    Start
-                //    GM Approve
-                //    BU Approve
-                //    ??
-                //    ??
-                //    ??
                 for (int i = 0; i < dt1.Rows.Count; i++)
                 {
                     var dr = dt1.Rows[i];
