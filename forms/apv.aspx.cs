@@ -98,6 +98,28 @@ namespace onlineLegalWF.forms
                     getDocument(id);
                 }
             }
+            else if (process_code == "INR_AWC_RENEW")
+            {
+                string sqlinsmemo = "select * from li_insurance_renew_awc_memo where process_id='" + req + "'";
+                var resinsmemo = zdb.ExecSql_DataTable(sqlinsmemo, zconnstr);
+
+                //get data ins req
+                if (resinsmemo.Rows.Count > 0)
+                {
+                    id = resinsmemo.Rows[0]["req_no"].ToString();
+                    req_no.Value = resinsmemo.Rows[0]["req_no"].ToString();
+                    req_date.Text = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(resinsmemo.Rows[0]["req_date"]), "en");
+                    from.Text = resinsmemo.Rows[0]["company_name"].ToString();
+                    doc_no.Text = resinsmemo.Rows[0]["document_no"].ToString();
+                    subject.Text = resinsmemo.Rows[0]["subject"].ToString();
+                    hid_bucode.Value = "";
+
+                    //init data UcAttachAndCommentLogs
+                    initDataAttachAndComment(resinsmemo.Rows[0]["process_id"].ToString());
+
+                    getDocument(id);
+                }
+            }
         }
 
         private void getDocument(string id) 
