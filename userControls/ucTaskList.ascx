@@ -19,43 +19,43 @@
         <Columns>
             <asp:TemplateField HeaderText="Request No">
                 <ItemTemplate>
-                    <asp:HyperLink ID="lbtnReqNo" runat="server" Font-Names="Tahoma" Font-Size="10pt" Text='<%# Bind("process_id") %>' ForeColor="#003399" NavigateUrl='<%# Bind("link_url_format") %>'></asp:HyperLink>
+                    <asp:HyperLink ID="lbtnReqNo" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("process_id") %>' ForeColor="#003399" NavigateUrl='<%# Bind("link_url_format") %>'></asp:HyperLink>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Subject">
                   <ItemTemplate>
-                    <asp:Label ID="lblSubject" runat="server" Font-Names="Tahoma" Font-Size="10pt" Text='<%# Bind("subject") %>' ForeColor="#003399"></asp:Label>
+                    <asp:Label ID="lblSubject" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("subject") %>' ForeColor="#003399"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Request By">
                   <ItemTemplate>
-                    <asp:Label ID="lblReqBy" runat="server" Font-Names="Tahoma" Font-Size="10pt" Text='<%# Bind("submit_by") %>' ForeColor="#003399"></asp:Label>
+                    <asp:Label ID="lblReqBy" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("submit_by") %>' ForeColor="#003399"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Submitted Date">
                   <ItemTemplate>
-                    <asp:Label ID="lblSubmittedDate" runat="server" Font-Names="Tahoma" Font-Size="10pt" Text='<%# Bind("created_datetime" , "{0:dd/MM/yy}") %>' ForeColor="#003399"></asp:Label>
+                    <asp:Label ID="lblSubmittedDate" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("created_datetime" , "{0:dd/MM/yy}") %>' ForeColor="#003399"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Status">
                   <ItemTemplate>
-                    <asp:Label ID="lblStatus" runat="server" Font-Names="Tahoma" Font-Size="10pt" Text='<%# Bind("wf_status") %>' ForeColor="#003399"></asp:Label>
+                    <asp:Label ID="lblStatus" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("wf_status") %>' ForeColor="#003399"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Last updated">
                  <ItemTemplate>
-                    <asp:Label ID="lblLastupdated" runat="server" Font-Names="Tahoma" Font-Size="10pt" Text='<%# Bind("updated_datetime" , "{0:dd/MM/yy}") %>' ForeColor="#003399"></asp:Label>
+                    <asp:Label ID="lblLastupdated" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("updated_datetime" , "{0:dd/MM/yy}") %>' ForeColor="#003399"></asp:Label>
                 </ItemTemplate>
 
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Last updated by">
                   <ItemTemplate>
-                    <asp:Label ID="lblLastupdateby" runat="server" Font-Names="Tahoma" Font-Size="10pt" Text='<%# Bind("updated_by") %>' ForeColor="#003399"></asp:Label>
+                    <asp:Label ID="lblLastupdateby" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("updated_by") %>' ForeColor="#003399"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Assign To">
                 <ItemTemplate>
-                    <asp:Label ID="lblAssignto" runat="server" Font-Names="Tahoma" Font-Size="10pt" Text='<%# Bind("assto_login") %>' ForeColor="#003399"></asp:Label>
+                    <asp:Label ID="lblAssignto" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("assto_login") %>' ForeColor="#003399"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

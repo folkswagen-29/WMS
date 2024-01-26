@@ -74,10 +74,8 @@ namespace onlineLegalWF.userControls
         public DataTable getMyRequest()
         {
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString(); 
-
             //string sql = "Select process_id,subject,submit_by,updated_by,created_datetime,wf_status,updated_datetime, ( '" + host_url+ "' + link_url_format) as link_url_format from " +
             //    "wf_routing where process_id in (Select process_id from wf_routing where submit_by = '"+ hidLogin.Value + "' and wf_status in ('SAVE','WAITATCH')) and wf_status in ('SAVE','WAITATCH')";
-            
             string sql = "Select assto_login,process_id,subject,submit_by,updated_by,created_datetime,wf_status,updated_datetime,"+
                             "CASE "+
                                 "WHEN step_name = 'Start' or wf_status in ('SAVE', 'WAITATCH') THEN ('" + host_url+ "' + link_url_format) " +
@@ -100,6 +98,7 @@ namespace onlineLegalWF.userControls
             string sql = "Select assto_login,process_id,subject,submit_by,updated_by,created_datetime,wf_status,updated_datetime, ( '" + host_url + "' + link_url_format) as link_url_format from " +
                 "wf_routing where process_id in (Select process_id from wf_routing where assto_login like '" + hidLogin.Value + "' and submit_answer = '') and submit_answer = ''";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstrbpm);
+
             return dt;
         }
         public DataTable getCompleteList()
@@ -108,6 +107,7 @@ namespace onlineLegalWF.userControls
             string sql = "Select assto_login,process_id,subject,submit_by,updated_by,created_datetime,wf_status,updated_datetime, ( '" + host_url + "' + link_url_format) as link_url_format from " +
                 "wf_routing where process_id in (Select process_id from wf_routing where submit_by = '" + hidLogin.Value + "' and step_name = 'End') and step_name = 'End'";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstrbpm);
+
             return dt;
         }
         #region gv1
