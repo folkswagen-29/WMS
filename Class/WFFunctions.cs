@@ -289,7 +289,7 @@ namespace onlineLegalWF.Class
                     updated_by = '" + wfA.updated_by + @"' ,
                     wf_status = '" + wfA.wf_status+@"' ,
                     attr_apv_value = '" + wfA.attr_apv_value + @"',
-                    updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + @"' 
+                    updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + @"' 
                 where process_id = '"+wfA.process_id+@"' and step_no = "+wfA.step_no+@"
                 ";
                 zdb.ExecNonQuery(sqlupd, zconnstr); 
@@ -334,8 +334,8 @@ namespace onlineLegalWF.Class
                     }
                 }
                 string sqlins = @" insert into wf_routing (process_id, process_code, version_no, subject,
-                                step_no, step_name, assto_login,link_url_format,
-                                wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer, submit_by) 
+                                step_no, step_name,link_url_format,
+                                wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer, submit_by,updated_datetime,updated_by) 
                                 values (
                                     '" + wfA.process_id+ @"', 
                                     '" + wfA.process_code + @"', 
@@ -343,14 +343,15 @@ namespace onlineLegalWF.Class
                                     '" + wfA.subject + @"', 
                                     " + wfA.step_no.ToString() + @", 
                                     '" + wfA.step_name + @"', 
-                                     '" + wfA.assto_login + @"', 
                                      '"+ xurl + @"', 
                                      '" + wfA.wf_status + @"', 
                                     '" + wfA.attr_apv_value + @"', 
                                     " + wfA.istrue_nextstep.ToString() + @", 
                                     " + wfA.isfalse_nextstep.ToString() + @", 
-                                    '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + @"',
+                                    '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + @"',
                                     '" + wfA.submit_answer + @"',
+                                    '" + wfA.submit_by + @"',
+                                    '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + @"',
                                     '" + wfA.submit_by + @"'
                                     ) ";
                 zdb.ExecNonQuery(sqlins, zconnstr);
@@ -531,11 +532,11 @@ namespace onlineLegalWF.Class
                                         '" + wfDefault_step.attr_apv_value + @"', 
                                         " + wfDefault_step.istrue_nextstep.ToString() + @", 
                                         " + wfDefault_step.isfalse_nextstep.ToString() + @", 
-                                        '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + @"',
+                                        '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + @"',
                                         '',
                                         '" + wfDefault_step.submit_by + @"',
                                         '" + wfDefault_step.updated_by + @"',
-                                        '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + @"'
+                                        '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + @"'
                                         ) ";
                     zdb.ExecNonQuery(sqlins, zconnstr);
                 //}

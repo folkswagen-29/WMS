@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Edit ClaimRequest" Language="C#" MasterPageFile="SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceClaimEdit.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceClaimEdit" %>
+﻿<%@ Page Title="Edit ClaimRequest" Async="true" Language="C#" MasterPageFile="SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceClaimEdit.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceClaimEdit" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc1" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
