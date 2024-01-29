@@ -342,6 +342,16 @@ namespace onlineLegalWF.frmInsurance
                 data.awcposition1 = "Insurance Specialist";
                 data.awcdate1 = "";
 
+                //data.sign_awcname1_2 = "";
+                //data.awcname1_2 = "";
+                //data.awcposition1_2 = "";
+                //data.awcdate1_2 = "";
+
+                //data.sign_awcname1_3 = "";
+                //data.awcname1_3 = "";
+                //data.awcposition1_3 = "";
+                //data.awcdate1_3 = "";
+
                 data.sign_awcname2 = "";
                 data.awcname2 = "คุณวารินทร์ เกลียวไพศาล";
                 data.awcposition2 = "Head of Compliance";
@@ -358,6 +368,16 @@ namespace onlineLegalWF.frmInsurance
                 data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
                 data.awcposition1 = "Insurance Specialist";
                 data.awcdate1 = "";
+
+                //data.sign_awcname1_2 = "";
+                //data.awcname1_2 = "";
+                //data.awcposition1_2 = "";
+                //data.awcdate1_2 = "";
+
+                //data.sign_awcname1_3 = "";
+                //data.awcname1_3 = "";
+                //data.awcposition1_3 = "";
+                //data.awcdate1_3 = "";
 
                 data.sign_awcname2 = "";
                 data.awcname2 = "คุณวารินทร์ เกลียวไพศาล";
@@ -376,6 +396,16 @@ namespace onlineLegalWF.frmInsurance
                 data.awcposition1 = "Insurance Specialist";
                 data.awcdate1 = "";
 
+                //data.sign_awcname1_2 = "";
+                //data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
+                //data.awcposition1_2 = "Head of Compliance";
+                //data.awcdate1_2 = "";
+
+                //data.sign_awcname1_3 = "";
+                //data.awcname1_3 = "";
+                //data.awcposition1_3 = "";
+                //data.awcdate1_3 = "";
+
                 data.sign_awcname2 = "";
                 data.awcname2 = "คุณชโลทร ศรีสมวงษ์";
                 data.awcposition2 = "Head of Legal";
@@ -393,6 +423,16 @@ namespace onlineLegalWF.frmInsurance
                 data.awcposition1 = "Insurance Specialist";
                 data.awcdate1 = "";
 
+                //data.sign_awcname1_2 = "";
+                //data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
+                //data.awcposition1_2 = "Head of Compliance";
+                //data.awcdate1_2 = "";
+
+                //data.sign_awcname1_3 = "";
+                //data.awcname1_3 = "";
+                //data.awcposition1_3 = "";
+                //data.awcdate1_3 = "";
+
                 data.sign_awcname2 = "";
                 data.awcname2 = "คุณชโลทร ศรีสมวงษ์";
                 data.awcposition2 = "Head of Legal";
@@ -409,6 +449,21 @@ namespace onlineLegalWF.frmInsurance
                 data.awcname1 = "คุณชโลทร ศรีสมวงษ์";
                 data.awcposition1 = "Head of Legal";
                 data.awcdate1 = "";
+
+                //data.sign_awcname1 = "";
+                //data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
+                //data.awcposition1 = "Insurance Specialist";
+                //data.awcdate1 = "";
+
+                //data.sign_awcname1_2 = "";
+                //data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
+                //data.awcposition1_2 = "Head of Compliance";
+                //data.awcdate1_2 = "";
+
+                //data.sign_awcname1_3 = "";
+                //data.awcname1_3 = "คุณชโลทร ศรีสมวงษ์";
+                //data.awcposition1_3 = "Head of Legal";
+                //data.awcdate1_3 = "";
 
                 data.sign_awcname2 = "";
                 data.awcname2 = "ดร.สิเวศ โรจนสุนทร";

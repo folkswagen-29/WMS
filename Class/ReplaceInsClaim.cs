@@ -141,6 +141,41 @@ namespace onlineLegalWF.Class
             dr0["tagname"] = "#awcdate1#";
             dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcdate1) ? data.awcdate1.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
+
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#sign_awcname1_2#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_awcname1) ? data.sign_awcname1.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#awcname1_2#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcname1) ? data.awcname1.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#awcposition1_2#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcposition1) ? data.awcposition1.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#awcdate1_2#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcdate1) ? data.awcdate1.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#sign_awcname1_3#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_awcname1) ? data.sign_awcname1.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#awcname1_3#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcname1) ? data.awcname1.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#awcposition1_3#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcposition1) ? data.awcposition1.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#awcdate1_3#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcdate1) ? data.awcdate1.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#sign_awcname2#";
             dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_awcname2) ? data.sign_awcname2.Replace(",", "!comma") : "");
@@ -222,6 +257,12 @@ namespace onlineLegalWF.Class
                 res.awcname1 = data.awcname1;
                 res.awcposition1 = data.awcposition1;
                 res.awcdate1 = data.awcdate1;
+                //res.awcname1_2 = data.awcname1_2;
+                //res.awcposition1_2 = data.awcposition1_2;
+                //res.awcdate1_2 = data.awcdate1_2;
+                //res.awcname1_3 = data.awcname1_3;
+                //res.awcposition1_3 = data.awcposition1_3;
+                //res.awcdate1_3 = data.awcdate1_3;
                 res.awcname2 = data.awcname2;
                 res.awcposition2 = data.awcposition2;
                 res.awcdate2 = data.awcdate2;
@@ -404,6 +445,16 @@ namespace onlineLegalWF.Class
             public string awcname1 { get; set; }
             public string awcposition1 { get; set; }
             public string awcdate1 { get; set; }
+
+            public string sign_awcname1_2 { get; set; }
+            public string awcname1_2 { get; set; }
+            public string awcposition1_2 { get; set; }
+            public string awcdate1_2 { get; set; }
+
+            public string sign_awcname1_3 { get; set; }
+            public string awcname1_3 { get; set; }
+            public string awcposition1_3 { get; set; }
+            public string awcdate1_3 { get; set; }
 
             public string sign_awcname2 { get; set; }
             public string awcname2 { get; set; }
