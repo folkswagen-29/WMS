@@ -996,7 +996,7 @@ namespace onlineLegalWF.frmInsurance
                 if (status == "Success")
                 {
                     GenDocumnetInsRenewAWC(lblPID.Text);
-                    Response.Redirect("/legalportal/legalportal.aspx?m=myworklist");
+                    Response.Redirect("/legalportal/legalportal.aspx?m=myworklist", false);
                 }
 
             }

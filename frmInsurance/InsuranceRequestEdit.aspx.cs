@@ -914,7 +914,7 @@ namespace onlineLegalWF.frmInsurance
                         }
 
                     }
-                    Response.Redirect("/legalportal/legalportal.aspx?m=myworklist");
+                    Response.Redirect("/legalportal/legalportal.aspx?m=myworklist", false);
                 }
 
             }
