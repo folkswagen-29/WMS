@@ -624,6 +624,15 @@ namespace onlineLegalWF.frmInsurance
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
+            string sqlreq = "select * from li_insurance_claim where claim_no='" + claim_no.Value + "'";
+
+            var res = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+
+            if (res.Rows.Count == 0)
+            {
+                SaveClaim();
+            }
+
             string process_code = "INR_CLAIM";
             int version_no = 1;
 

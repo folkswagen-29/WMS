@@ -725,6 +725,15 @@ namespace onlineLegalWF.frmInsurance
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
+            string sqlreq = "select * from li_insurance_renew_awc_memo where req_no='" + hid_reqno.Value + "'";
+
+            var res = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+
+            if (res.Rows.Count == 0)
+            {
+                SaveRenewRequest();
+            }
+
             string process_code = "INR_AWC_RENEW";
             int version_no = 1;
 

@@ -723,6 +723,15 @@ namespace onlineLegalWF.frmInsurance
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
+            string sqlreq = "select * from li_insurance_request where req_no='" + req_no.Text + "'";
+
+            var res = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+
+            if (res.Rows.Count == 0)
+            {
+                SaveRenewRequest();
+            }
+
             string process_code = "INR_RENEW";
             int version_no = 1;
             string xbu_code = ddl_bu.SelectedValue;
