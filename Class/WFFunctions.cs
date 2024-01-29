@@ -321,7 +321,7 @@ namespace onlineLegalWF.Class
                         xurl = "/frminsurance/insurancerenewrequestedit.aspx?id=" + id + "&st=" + wfA.step_name;
                     }
                 }
-                else if (wfA.process_code == "INR_CLAIM")
+                else if (wfA.process_code == "INR_CLAIM" || wfA.process_code == "INR_CLAIM_2" || wfA.process_code == "INR_CLAIM_3")
                 {
                     string sqlreq = @"select * from li_insurance_claim where process_id = '" + wfA.process_id + "'";
                     var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
@@ -396,6 +396,42 @@ namespace onlineLegalWF.Class
                 
             }
             else if (wfA.step_name == "GM Approve" && wfA.process_code == "INR_CLAIM")
+            {
+                if (wfA.attr_apv_value == wfA.submit_answer)
+                {
+                    if (wfA.external_domain == "Y")
+                    {
+                        next_step = 3;
+                    }
+                    else
+                    {
+                        next_step = 4;
+                    }
+                }
+                else
+                {
+                    next_step = wfA.isfalse_nextstep;
+                }
+            }
+            else if (wfA.step_name == "GM Approve" && wfA.process_code == "INR_CLAIM_2")
+            {
+                if (wfA.attr_apv_value == wfA.submit_answer)
+                {
+                    if (wfA.external_domain == "Y")
+                    {
+                        next_step = 3;
+                    }
+                    else
+                    {
+                        next_step = 4;
+                    }
+                }
+                else
+                {
+                    next_step = wfA.isfalse_nextstep;
+                }
+            }
+            else if (wfA.step_name == "GM Approve" && wfA.process_code == "INR_CLAIM_3")
             {
                 if (wfA.attr_apv_value == wfA.submit_answer)
                 {
@@ -494,7 +530,7 @@ namespace onlineLegalWF.Class
                                 xurl = "/frminsurance/insurancerenewrequestedit.aspx?id=" + id;
                             }
                         }
-                        else if (wfDefault_step.process_code == "INR_CLAIM")
+                        else if (wfDefault_step.process_code == "INR_CLAIM" || wfDefault_step.process_code == "INR_CLAIM_2" || wfDefault_step.process_code == "INR_CLAIM_3")
                         {
                             string sql = @"select * from li_insurance_claim where process_id = '" + wfDefault_step.process_id + "'";
                             var dt = zdb.ExecSql_DataTable(sql, zconnstr);
@@ -549,6 +585,8 @@ namespace onlineLegalWF.Class
         {
             string xname = "";
             string xawcname1 = "";
+            string xawcname1_2 = "";
+            string xawcname1_3 = "";
             string xawcname2 = "";
             string xawcname3 = "";
             //get data user
@@ -730,6 +768,220 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "AWC Validate Approve")
                 {
                     xname = xawcname1; //AWC Validate Approve
+                }
+                else if (next_step_name == "AWC Reviewer Approve")
+                {
+                    xname = xawcname2; //AWC Reviewer Approve
+                }
+                else if (next_step_name == "AWC Approval Approve")
+                {
+                    xname = xawcname3; //AWC Approval Approved
+                }
+                else if (next_step_name == "Requester Receive Approval")
+                {
+                    xname = submit_by; //Requester Receive Approval
+                }
+                else if (next_step_name == "End")
+                {
+                    xname = ""; //End
+                }
+                else if (next_step_name == "Edit Request")
+                {
+                    xname = submit_by; //Requester Edit Request
+                }
+            }
+            else if (process_code == "INR_CLAIM_2")
+            {
+                string xiar_pfc = "";
+                string xiar_uatc = "";
+                //get data form li_insurance_claim
+                string sqlinsclaim = "select * from li_insurance_claim where process_id='" + process_id + "'";
+                var resinsclaim = zdb.ExecSql_DataTable(sqlinsclaim, zconnstr);
+
+                //get data ins req
+                if (resinsclaim.Rows.Count > 0)
+                {
+                    xiar_pfc = (!string.IsNullOrEmpty(resinsclaim.Rows[0]["iar_pfc"].ToString()) ? resinsclaim.Rows[0]["iar_pfc"].ToString() : "0");
+                    xiar_uatc = (!string.IsNullOrEmpty(resinsclaim.Rows[0]["iar_uatc"].ToString()) ? resinsclaim.Rows[0]["iar_uatc"].ToString() : "0");
+                }
+                else
+                {
+                    xiar_pfc = "0";
+                    xiar_uatc = "0";
+                }
+
+                ////Check เงื่อนไข Deviation เพิ่มเติมเพื่อ set คนอนุมัติ
+                float deviation = 0;
+                float cal_iar_uatc = float.Parse(int.Parse(xiar_uatc, NumberStyles.AllowThousands).ToString());
+                float cal_iar_pfc = float.Parse(int.Parse(xiar_pfc, NumberStyles.AllowThousands).ToString());
+                int int_iar_uatc = int.Parse(xiar_uatc, NumberStyles.AllowThousands);
+                deviation = cal_iar_uatc / cal_iar_pfc;
+                if (int_iar_uatc <= 100000)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname2 = "warin.k";
+                    xawcname3 = "chalothorn.s";
+
+                }
+                else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation <= 0.1)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname2 = "warin.k";
+                    xawcname3 = "chalothorn.s";
+                }
+                else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation > 0.1)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname1_2 = "warin.k";
+                    xawcname2 = "chalothorn.s";
+                    xawcname3 = "siwate.r";
+                }
+                else if (int_iar_uatc > 1000000 && deviation <= 0.2)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname1_2 = "warin.k";
+                    xawcname2 = "chalothorn.s";
+                    xawcname3 = "siwate.r";
+                }
+                else if (int_iar_uatc > 1000000 && deviation > 0.2)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname1_2 = "warin.k";
+                    xawcname1_3 = "chalothorn.s";
+                    xawcname2 = "siwate.r";
+                    xawcname3 = "Wallapa";
+                }
+
+
+                if (next_step_name == "Start")
+                {
+                    xname = emp.user_login; //Requestor = Login account
+                }
+                else if (next_step_name == "GM Approve")
+                {
+                    xname = gm_login; //GM Login
+                }
+                else if (next_step_name == "Head AM Approve")
+                {
+                    xname = head_am_login; //Head AM Approve Login
+                }
+                ////Check เงื่อนไข Deviation เพิ่มเติมเพื่อ set คนอนุมัติ
+                else if (next_step_name == "AWC Validate Approve")
+                {
+                    xname = xawcname1; //AWC Validate Approve
+                }
+                else if (next_step_name == "AWC Validate2 Approve")
+                {
+                    xname = xawcname1_2; //AWC Validate2 Approve
+                }
+                else if (next_step_name == "AWC Reviewer Approve")
+                {
+                    xname = xawcname2; //AWC Reviewer Approve
+                }
+                else if (next_step_name == "AWC Approval Approve")
+                {
+                    xname = xawcname3; //AWC Approval Approved
+                }
+                else if (next_step_name == "Requester Receive Approval")
+                {
+                    xname = submit_by; //Requester Receive Approval
+                }
+                else if (next_step_name == "End")
+                {
+                    xname = ""; //End
+                }
+                else if (next_step_name == "Edit Request")
+                {
+                    xname = submit_by; //Requester Edit Request
+                }
+            }
+            else if (process_code == "INR_CLAIM_3")
+            {
+                string xiar_pfc = "";
+                string xiar_uatc = "";
+                //get data form li_insurance_claim
+                string sqlinsclaim = "select * from li_insurance_claim where process_id='" + process_id + "'";
+                var resinsclaim = zdb.ExecSql_DataTable(sqlinsclaim, zconnstr);
+
+                //get data ins req
+                if (resinsclaim.Rows.Count > 0)
+                {
+                    xiar_pfc = (!string.IsNullOrEmpty(resinsclaim.Rows[0]["iar_pfc"].ToString()) ? resinsclaim.Rows[0]["iar_pfc"].ToString() : "0");
+                    xiar_uatc = (!string.IsNullOrEmpty(resinsclaim.Rows[0]["iar_uatc"].ToString()) ? resinsclaim.Rows[0]["iar_uatc"].ToString() : "0");
+                }
+                else
+                {
+                    xiar_pfc = "0";
+                    xiar_uatc = "0";
+                }
+
+                ////Check เงื่อนไข Deviation เพิ่มเติมเพื่อ set คนอนุมัติ
+                float deviation = 0;
+                float cal_iar_uatc = float.Parse(int.Parse(xiar_uatc, NumberStyles.AllowThousands).ToString());
+                float cal_iar_pfc = float.Parse(int.Parse(xiar_pfc, NumberStyles.AllowThousands).ToString());
+                int int_iar_uatc = int.Parse(xiar_uatc, NumberStyles.AllowThousands);
+                deviation = cal_iar_uatc / cal_iar_pfc;
+                if (int_iar_uatc <= 100000)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname2 = "warin.k";
+                    xawcname3 = "chalothorn.s";
+
+                }
+                else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation <= 0.1)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname2 = "warin.k";
+                    xawcname3 = "chalothorn.s";
+                }
+                else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation > 0.1)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname1_2 = "warin.k";
+                    xawcname2 = "chalothorn.s";
+                    xawcname3 = "siwate.r";
+                }
+                else if (int_iar_uatc > 1000000 && deviation <= 0.2)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname1_2 = "warin.k";
+                    xawcname2 = "chalothorn.s";
+                    xawcname3 = "siwate.r";
+                }
+                else if (int_iar_uatc > 1000000 && deviation > 0.2)
+                {
+                    xawcname1 = "jaroonsak.n";
+                    xawcname1_2 = "warin.k";
+                    xawcname1_3 = "chalothorn.s";
+                    xawcname2 = "siwate.r";
+                    xawcname3 = "Wallapa";
+                }
+
+
+                if (next_step_name == "Start")
+                {
+                    xname = emp.user_login; //Requestor = Login account
+                }
+                else if (next_step_name == "GM Approve")
+                {
+                    xname = gm_login; //GM Login
+                }
+                else if (next_step_name == "Head AM Approve")
+                {
+                    xname = head_am_login; //Head AM Approve Login
+                }
+                ////Check เงื่อนไข Deviation เพิ่มเติมเพื่อ set คนอนุมัติ
+                else if (next_step_name == "AWC Validate Approve")
+                {
+                    xname = xawcname1; //AWC Validate Approve
+                }
+                else if (next_step_name == "AWC Validate2 Approve")
+                {
+                    xname = xawcname1_2; //AWC Validate2 Approve
+                }
+                else if (next_step_name == "AWC Validate3 Approve")
+                {
+                    xname = xawcname1_3; //AWC Validate3 Approve
                 }
                 else if (next_step_name == "AWC Reviewer Approve")
                 {

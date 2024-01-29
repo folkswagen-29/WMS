@@ -257,12 +257,12 @@ namespace onlineLegalWF.Class
                 res.awcname1 = data.awcname1;
                 res.awcposition1 = data.awcposition1;
                 res.awcdate1 = data.awcdate1;
-                //res.awcname1_2 = data.awcname1_2;
-                //res.awcposition1_2 = data.awcposition1_2;
-                //res.awcdate1_2 = data.awcdate1_2;
-                //res.awcname1_3 = data.awcname1_3;
-                //res.awcposition1_3 = data.awcposition1_3;
-                //res.awcdate1_3 = data.awcdate1_3;
+                res.awcname1_2 = data.awcname1_2;
+                res.awcposition1_2 = data.awcposition1_2;
+                res.awcdate1_2 = data.awcdate1_2;
+                res.awcname1_3 = data.awcname1_3;
+                res.awcposition1_3 = data.awcposition1_3;
+                res.awcdate1_3 = data.awcdate1_3;
                 res.awcname2 = data.awcname2;
                 res.awcposition2 = data.awcposition2;
                 res.awcdate2 = data.awcdate2;
@@ -318,6 +318,22 @@ namespace onlineLegalWF.Class
                         {
                             res.sign_awcname1 = "อนุมัติผ่านระบบ";
                             res.awcdate1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    else if (dr["step_name"].ToString() == "AWC Validate2 Approve")
+                    {
+                        if (dr["wf_status"].ToString() != "")
+                        {
+                            res.sign_awcname1_2 = "อนุมัติผ่านระบบ";
+                            res.awcdate1_2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    else if (dr["step_name"].ToString() == "AWC Validate3 Approve")
+                    {
+                        if (dr["wf_status"].ToString() != "")
+                        {
+                            res.sign_awcname1_3 = "อนุมัติผ่านระบบ";
+                            res.awcdate1_3 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
                     else if (dr["step_name"].ToString() == "AWC Reviewer Approve")
