@@ -221,12 +221,14 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="StyleSheet\CustomStyle.css" />
+    <Content Include="test\test02.aspx" />
     <Content Include="test\testCSS1.aspx" />
     <Content Include="test\testReplaceDoc1.aspx" />
     <Content Include="test\testReplaceDoc2.aspx" />
     <Content Include="test\testsendmail.aspx" />
     <Content Include="test\testuploadgridview.aspx" />
     <Content Include="test\TestWF01.aspx" />
+    <Content Include="userControls\ucAssignment.ascx" />
     <Content Include="userControls\UcAttachForm.ascx" />
     <Content Include="userControls\ucAttachment.ascx" />
     <Content Include="userControls\ucAttachmentdata.ascx" />
@@ -544,6 +546,13 @@
     <Compile Include="frmInsurance\SiteLigalWorkFlow.Master.designer.cs">
       <DependentUpon>SiteLigalWorkFlow.Master</DependentUpon>
     </Compile>
+    <Compile Include="test\test02.aspx.cs">
+      <DependentUpon>test02.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test\test02.aspx.designer.cs">
+      <DependentUpon>test02.aspx</DependentUpon>
+    </Compile>
     <Compile Include="test\testCSS1.aspx.cs">
       <DependentUpon>testCSS1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -585,6 +594,13 @@
     </Compile>
     <Compile Include="test\TestWF01.aspx.designer.cs">
       <DependentUpon>TestWF01.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="userControls\ucAssignment.ascx.cs">
+      <DependentUpon>ucAssignment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userControls\ucAssignment.ascx.designer.cs">
+      <DependentUpon>ucAssignment.ascx</DependentUpon>
     </Compile>
     <Compile Include="userControls\UcAttachForm.ascx.cs">
       <DependentUpon>UcAttachForm.ascx</DependentUpon>
