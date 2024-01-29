@@ -283,7 +283,7 @@
     </div>
 
 <script type="text/javascript">
-    function showModal() {
+    function showModalDoc() {
         $("#modaldocument").modal('show');
     }
 </script>

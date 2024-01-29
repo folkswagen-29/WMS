@@ -687,7 +687,7 @@ namespace onlineLegalWF.frmInsurance
             //Response.ContentEncoding = System.Text.Encoding.UTF8;
             //Response.End();
             string filePath = outputfn.Replace(".docx", ".pdf");
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalDoc();", true);
             pdf_render.Attributes["src"] = "/render/pdf?id=" + filePath;
 
 

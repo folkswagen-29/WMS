@@ -76,7 +76,10 @@ namespace onlineLegalWF.userControls
             {
                 // check existing folder => path_attachment + \\pid\\
                 string xpath = zpath_attachment + "\\" + hidPID.Value;
-                if (!Directory.Exists(xpath)) { Directory.CreateDirectory(xpath); }
+                if (!Directory.Exists(xpath)) 
+                { 
+                    Directory.CreateDirectory(xpath); 
+                }
 
                 // check existing file
                 string fn = xpath + "\\" + FileUpload1.FileName;

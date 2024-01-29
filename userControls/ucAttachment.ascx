@@ -26,7 +26,10 @@
                                 <asp:Label ID="Label1" runat="server" CssClass="Label_md" Text="Please select and input file"></asp:Label> &nbsp;
                             </td>
                             <td>
-                                <asp:FileUpload ID="FileUpload1" runat="server" />
+                                <asp:FileUpload ID="FileUpload1" runat="server" accept=".pdf" />
+                                <%--<asp:RegularExpressionValidator ID="regpdf" ErrorMessage="Please upload only PDF file"
+                                    ControlToValidate="FileUpload1" ValidationExpression="^.*\.(pdf|PDF)$" runat="server"
+                                    Display="Dynamic" ForeColor="#ff3636" />--%>
                             </td>
                             <td>
                                 <asp:Button ID="btnUpload" runat="server" CssClass="btn-group" OnClick="btnUpload_Click" Text="Upload" />
