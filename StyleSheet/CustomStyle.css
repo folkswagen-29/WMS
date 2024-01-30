@@ -11,6 +11,10 @@
     display: none;
 }
 
+.aspNetDisabled {
+    cursor: default !important;
+    background-color: silver !important;
+}
 /***********Validation************/
 .alert {
     padding: 15px;

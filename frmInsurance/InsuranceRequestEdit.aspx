@@ -146,7 +146,7 @@
                                 <table>
                                     <tr>
                                         <td class="cell_content_40PC_TL">
-                                            <asp:TextBox ID="indemnity_period" runat="server" CssClass="Text_200"></asp:TextBox>
+                                            <asp:TextBox ID="indemnity_period" Enabled="false" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                         <td class="cell_content_PC_TL">
@@ -265,6 +265,27 @@
     </table>
     <asp:HiddenField ID="req_date" runat="server" />
     <asp:HiddenField ID="hid_PID" runat="server" />
+    <script type="text/javascript">
+        $(function () {
+            //console.log('ddl value', $('#type_comm_regis option:selected').val());
+
+            $('#ContentPlaceHolder1_type_pi').change(function (event) {
+                //console.log('val', $(this).val());
+                if ($(this).val() == "02") {
+                    $('#ContentPlaceHolder1_indemnity_period').prop('disabled', false);
+                    $('#ContentPlaceHolder1_indemnity_period').removeClass('aspNetDisabled');
+                    //console.log('enabled', $('#ContentPlaceHolder1_indemnity_period'));
+                }
+                else {
+                    //console.log('Text', $('#ContentPlaceHolder1_indemnity_period').empty());
+                    $('#ContentPlaceHolder1_indemnity_period').prop('disabled', true);
+                    $('#ContentPlaceHolder1_indemnity_period').val('');
+                    $('#ContentPlaceHolder1_indemnity_period').addClass('aspNetDisabled');
+
+                }
+            });
+        });
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
