@@ -321,6 +321,18 @@ namespace onlineLegalWF.Class
                         xurl = "/frminsurance/insurancerenewrequestedit.aspx?id=" + id + "&st=" + wfA.step_name;
                     }
                 }
+                else if (wfA.process_code == "INR_AWC_RENEW")
+                {
+                    string sqlreq = @"select * from li_insurance_renew_awc_memo where process_id = '" + wfA.process_id + "'";
+                    var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                    if (dtreq.Rows.Count > 0)
+                    {
+                        var drreq = dtreq.Rows[0];
+                        string id = drreq["process_id"].ToString();
+
+                        xurl = "/frminsurance/insurancerenewawcedit.aspx?id=" + id;
+                    }
+                }
                 else if (wfA.process_code == "INR_CLAIM" || wfA.process_code == "INR_CLAIM_2" || wfA.process_code == "INR_CLAIM_3")
                 {
                     string sqlreq = @"select * from li_insurance_claim where process_id = '" + wfA.process_id + "'";

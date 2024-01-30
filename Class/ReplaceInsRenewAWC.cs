@@ -291,22 +291,26 @@ namespace onlineLegalWF.Class
                                   ,format(isnull(cast(sum_d_o as int),0), '##,##0') as sum_d_o
                             from li_insurance_renew_awc_memo_sumins where process_id = '" + xprocess_id + "'";
             var dtlinssum = zdb.ExecSql_DataTable(sqlinssum, zconnstr);
+            var drGV = dt.NewRow();
 
             if (dtlinssum.Rows.Count > 0)
             {
-                var drlinssum= dtlinssum.Rows[0];
                 //Assign DataTable for #tablesum#
-                DataRow drGV = dt.NewRow();
-                drGV["tagname"] = "#tablesum#";
-                drGV["TYPE_PROP"] = drlinssum["type_prop"].ToString().Replace(",", "!comma");
-                drGV["IAR"] = drlinssum["sum_iar"].ToString().Replace(",", "!comma");
-                drGV["BI"] = drlinssum["sum_bi"].ToString().Replace(",", "!comma");
-                drGV["CGL_PL"] = drlinssum["sum_cgl_pv"].ToString().Replace(",", "!comma");
-                drGV["PV"] = drlinssum["sum_pv"].ToString().Replace(",", "!comma");
-                drGV["LPG"] = drlinssum["sum_lpg"].ToString().Replace(",", "!comma");
-                drGV["D_O"] = drlinssum["sum_d_o"].ToString().Replace(",", "!comma");
-                drGV["Row_Sort"] = drlinssum["row_sort"].ToString().Replace(",", "!comma");
-                dt.Rows.Add(drGV);
+                foreach (DataRow dritem in dtlinssum.Rows) 
+                {
+                    drGV = dt.NewRow();
+                    drGV["tagname"] = "#tablesum#";
+                    drGV["TYPE_PROP"] = dritem["type_prop"].ToString().Replace(",", "!comma");
+                    drGV["IAR"] = dritem["sum_iar"].ToString().Replace(",", "!comma");
+                    drGV["BI"] = dritem["sum_bi"].ToString().Replace(",", "!comma");
+                    drGV["CGL_PL"] = dritem["sum_cgl_pv"].ToString().Replace(",", "!comma");
+                    drGV["PV"] = dritem["sum_pv"].ToString().Replace(",", "!comma");
+                    drGV["LPG"] = dritem["sum_lpg"].ToString().Replace(",", "!comma");
+                    drGV["D_O"] = dritem["sum_d_o"].ToString().Replace(",", "!comma");
+                    drGV["Row_Sort"] = dritem["row_sort"].ToString().Replace(",", "!comma");
+                    dt.Rows.Add(drGV);
+                }
+                
             }
 
             #endregion
