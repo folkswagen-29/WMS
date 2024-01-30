@@ -144,36 +144,36 @@ namespace onlineLegalWF.Class
 
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#sign_awcname1_2#";
-            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_awcname1) ? data.sign_awcname1.Replace(",", "!comma") : "");
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_awcname1_2) ? data.sign_awcname1_2.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#awcname1_2#";
-            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcname1) ? data.awcname1.Replace(",", "!comma") : "");
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcname1_2) ? data.awcname1_2.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#awcposition1_2#";
-            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcposition1) ? data.awcposition1.Replace(",", "!comma") : "");
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcposition1_2) ? data.awcposition1_2.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#awcdate1_2#";
-            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcdate1) ? data.awcdate1.Replace(",", "!comma") : "");
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcdate1_2) ? data.awcdate1_2.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
 
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#sign_awcname1_3#";
-            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_awcname1) ? data.sign_awcname1.Replace(",", "!comma") : "");
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_awcname1_3) ? data.sign_awcname1_3.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#awcname1_3#";
-            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcname1) ? data.awcname1.Replace(",", "!comma") : "");
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcname1_3) ? data.awcname1_3.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#awcposition1_3#";
-            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcposition1) ? data.awcposition1.Replace(",", "!comma") : "");
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcposition1_3) ? data.awcposition1_3.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#awcdate1_3#";
-            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcdate1) ? data.awcdate1.Replace(",", "!comma") : "");
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.awcdate1_3) ? data.awcdate1_3.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
 
             dr0 = dtStr.NewRow();

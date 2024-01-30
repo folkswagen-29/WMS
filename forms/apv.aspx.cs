@@ -76,7 +76,7 @@ namespace onlineLegalWF.forms
                     getDocument(id);
                 }
             }
-            else if (process_code == "INR_CLAIM") 
+            else if (process_code == "INR_CLAIM" || process_code == "INR_CLAIM_2" || process_code == "INR_CLAIM_3") 
             {
                 string sqlinsclaim = "select * from li_insurance_claim where process_id='" + req + "'";
                 var resinsclaim = zdb.ExecSql_DataTable(sqlinsclaim, zconnstr);
@@ -180,11 +180,15 @@ namespace onlineLegalWF.forms
                         string sqlupdate = @"update li_insurance_request set status='approve',updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where process_id = '" + wfAttr.process_id + "'";
                         zdb.ExecNonQuery(sqlupdate, zconnstr);
                     }
-                    else if (wfAttr.step_name == "AWC Approval Approve" && wfAttr.process_code == "INR_CLAIM")
+                    else if (wfAttr.step_name == "AWC Approval Approve")
                     {
-                        wfA_NextStep.wf_status = "WAITATCH";
-                        string sqlupdate = @"update li_insurance_claim set status='approve',updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where process_id = '" + wfAttr.process_id + "'";
-                        zdb.ExecNonQuery(sqlupdate, zconnstr);
+                        if (wfAttr.process_code == "INR_CLAIM" || wfAttr.process_code == "INR_CLAIM_2" || wfAttr.process_code == "INR_CLAIM_3") 
+                        {
+                            wfA_NextStep.wf_status = "WAITATCH";
+                            string sqlupdate = @"update li_insurance_claim set status='approve',updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where process_id = '" + wfAttr.process_id + "'";
+                            zdb.ExecNonQuery(sqlupdate, zconnstr);
+                        }
+                        
                     }
                     else if (wfAttr.step_name == "BU Approve" && wfAttr.process_code == "INR_RENEW")
                     {
@@ -283,7 +287,7 @@ namespace onlineLegalWF.forms
                                 }
                             }
                         }
-                        else if (process_code == "INR_CLAIM")
+                        else if (process_code == "INR_CLAIM" || process_code == "INR_CLAIM_2" || process_code == "INR_CLAIM_3")
                         {
                             GenDocumnetInsClaim(lblPID.Text);
                             //check step not in step_name awc approval approve and end send email notification user assign_to approve or review
@@ -606,87 +610,91 @@ namespace onlineLegalWF.forms
 
                             }
                         }
-                        else if (wfAttr.step_name == "AWC Approval Approve" && wfAttr.process_code == "INR_CLAIM")
+                        else if (wfAttr.step_name == "AWC Approval Approve")
                         {
-                            string subject = "";
-                            string body = "";
-                            string sql = @"select * from li_insurance_claim where process_id = '" + wfAttr.process_id + "'";
-                            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
-                            if (dt.Rows.Count > 0)
+                            if (wfAttr.process_code == "INR_CLAIM" || wfAttr.process_code == "INR_CLAIM_2" || wfAttr.process_code == "INR_CLAIM_3") 
                             {
-                                var dr = dt.Rows[0];
-                                string id = dr["claim_no"].ToString();
-                                subject = dr["incident"].ToString();
-                                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว";
-
-                                string pathfileins = "";
-                                string outputdirectory = "";
-
-                                string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
-
-                                var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
-
-                                if (resfile.Rows.Count > 0)
+                                string subject = "";
+                                string body = "";
+                                string sql = @"select * from li_insurance_claim where process_id = '" + wfAttr.process_id + "'";
+                                var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                                if (dt.Rows.Count > 0)
                                 {
-                                    pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
-                                    outputdirectory = resfile.Rows[0]["output_directory"].ToString();
+                                    var dr = dt.Rows[0];
+                                    string id = dr["claim_no"].ToString();
+                                    subject = dr["incident"].ToString();
+                                    body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว";
 
-                                    List<string> listpdf = new List<string>();
-                                    listpdf.Add(pathfileins);
+                                    string pathfileins = "";
+                                    string outputdirectory = "";
 
-                                    string sqlattachfile = "select * from wf_attachment where pid = '" + wfAttr.process_id + "' and e_form IS NULL";
+                                    string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
 
-                                    var resattachfile = zdb.ExecSql_DataTable(sqlattachfile, zconnstr);
+                                    var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
 
-                                    if (resattachfile.Rows.Count > 0)
+                                    if (resfile.Rows.Count > 0)
                                     {
-                                        foreach (DataRow item in resattachfile.Rows)
+                                        pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+                                        outputdirectory = resfile.Rows[0]["output_directory"].ToString();
+
+                                        List<string> listpdf = new List<string>();
+                                        listpdf.Add(pathfileins);
+
+                                        string sqlattachfile = "select * from wf_attachment where pid = '" + wfAttr.process_id + "' and e_form IS NULL";
+
+                                        var resattachfile = zdb.ExecSql_DataTable(sqlattachfile, zconnstr);
+
+                                        if (resattachfile.Rows.Count > 0)
                                         {
-                                            listpdf.Add(item["attached_filepath"].ToString());
+                                            foreach (DataRow item in resattachfile.Rows)
+                                            {
+                                                listpdf.Add(item["attached_filepath"].ToString());
+                                            }
                                         }
+                                        //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
+                                        string[] pdfFiles = listpdf.ToArray();
+
+                                        ////get mail from db
+                                        //string email = "";
+                                        //string sqlbpm = "select * from li_user where user_login = '" + wfAttr.submit_by + "' ";
+                                        //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                        //if (dtbpm.Rows.Count > 0)
+                                        //{
+                                        //    email = dtbpm.Rows[0]["email"].ToString();
+
+                                        //}
+                                        //else
+                                        //{
+                                        //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfAttr.submit_by + "' ";
+                                        //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                        //    if (dtrpa.Rows.Count > 0)
+                                        //    {
+                                        //        email = dtrpa.Rows[0]["Email"].ToString();
+                                        //    }
+
+                                        //}
+
+                                        string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
+
+                                        //send mail to requester
+
+                                        ////fix mail test
+                                        string email = "worawut.m@assetworldcorp-th.com";
+                                        _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
+
+                                        //send mait to Procurement
+                                        //_ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
+
+                                        ////send mail to jaroonsak.n
+                                        //_ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
+
                                     }
-                                    //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
-                                    string[] pdfFiles = listpdf.ToArray();
-
-                                    ////get mail from db
-                                    //string email = "";
-                                    //string sqlbpm = "select * from li_user where user_login = '" + wfAttr.submit_by + "' ";
-                                    //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
-
-                                    //if (dtbpm.Rows.Count > 0)
-                                    //{
-                                    //    email = dtbpm.Rows[0]["email"].ToString();
-
-                                    //}
-                                    //else
-                                    //{
-                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfAttr.submit_by + "' ";
-                                    //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
-
-                                    //    if (dtrpa.Rows.Count > 0)
-                                    //    {
-                                    //        email = dtrpa.Rows[0]["Email"].ToString();
-                                    //    }
-
-                                    //}
-
-                                    string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
-
-                                    //send mail to requester
-
-                                    ////fix mail test
-                                    string email = "worawut.m@assetworldcorp-th.com";
-                                    _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
-
-                                    //send mait to Procurement
-                                    _ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
-
-                                    //send mail to jaroonsak.n
-                                    _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
 
                                 }
-
                             }
+                            
                         }
                         else if (wfAttr.step_name == "BU Approve" && wfAttr.process_code == "INR_RENEW")
                         {
@@ -1251,6 +1259,16 @@ namespace onlineLegalWF.forms
                     data.awcposition1 = "Insurance Specialist";
                     data.awcdate1 = "";
 
+                    data.sign_awcname1_2 = "";
+                    data.awcname1_2 = "";
+                    data.awcposition1_2 = "";
+                    data.awcdate1_2 = "";
+
+                    data.sign_awcname1_3 = "";
+                    data.awcname1_3 = "";
+                    data.awcposition1_3 = "";
+                    data.awcdate1_3 = "";
+
                     data.sign_awcname2 = "";
                     data.awcname2 = "คุณวารินทร์ เกลียวไพศาล";
                     data.awcposition2 = "Head of Compliance";
@@ -1267,6 +1285,16 @@ namespace onlineLegalWF.forms
                     data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
                     data.awcposition1 = "Insurance Specialist";
                     data.awcdate1 = "";
+
+                    data.sign_awcname1_2 = "";
+                    data.awcname1_2 = "";
+                    data.awcposition1_2 = "";
+                    data.awcdate1_2 = "";
+
+                    data.sign_awcname1_3 = "";
+                    data.awcname1_3 = "";
+                    data.awcposition1_3 = "";
+                    data.awcdate1_3 = "";
 
                     data.sign_awcname2 = "";
                     data.awcname2 = "คุณวารินทร์ เกลียวไพศาล";
@@ -1285,6 +1313,16 @@ namespace onlineLegalWF.forms
                     data.awcposition1 = "Insurance Specialist";
                     data.awcdate1 = "";
 
+                    data.sign_awcname1_2 = "";
+                    data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
+                    data.awcposition1_2 = "/Head of Compliance";
+                    data.awcdate1_2 = "";
+
+                    data.sign_awcname1_3 = "";
+                    data.awcname1_3 = "";
+                    data.awcposition1_3 = "";
+                    data.awcdate1_3 = "";
+
                     data.sign_awcname2 = "";
                     data.awcname2 = "คุณชโลทร ศรีสมวงษ์";
                     data.awcposition2 = "Head of Legal";
@@ -1302,6 +1340,16 @@ namespace onlineLegalWF.forms
                     data.awcposition1 = "Insurance Specialist";
                     data.awcdate1 = "";
 
+                    data.sign_awcname1_2 = "";
+                    data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
+                    data.awcposition1_2 = "/Head of Compliance";
+                    data.awcdate1_2 = "";
+
+                    data.sign_awcname1_3 = "";
+                    data.awcname1_3 = "";
+                    data.awcposition1_3 = "";
+                    data.awcdate1_3 = "";
+
                     data.sign_awcname2 = "";
                     data.awcname2 = "คุณชโลทร ศรีสมวงษ์";
                     data.awcposition2 = "Head of Legal";
@@ -1314,10 +1362,25 @@ namespace onlineLegalWF.forms
                 }
                 else if (int_iar_uatc > 1000000 && deviation > 0.2)
                 {
+                    //data.sign_awcname1 = "";
+                    //data.awcname1 = "คุณชโลทร ศรีสมวงษ์";
+                    //data.awcposition1 = "Head of Legal";
+                    //data.awcdate1 = "";
+
                     data.sign_awcname1 = "";
-                    data.awcname1 = "คุณชโลทร ศรีสมวงษ์";
-                    data.awcposition1 = "Head of Legal";
+                    data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
+                    data.awcposition1 = "Insurance Specialist";
                     data.awcdate1 = "";
+
+                    data.sign_awcname1_2 = "";
+                    data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
+                    data.awcposition1_2 = "/Head of Compliance";
+                    data.awcdate1_2 = "";
+
+                    data.sign_awcname1_3 = "";
+                    data.awcname1_3 = "คุณชโลทร ศรีสมวงษ์";
+                    data.awcposition1_3 = "/Head of Legal";
+                    data.awcdate1_3 = "";
 
                     data.sign_awcname2 = "";
                     data.awcname2 = "ดร.สิเวศ โรจนสุนทร";

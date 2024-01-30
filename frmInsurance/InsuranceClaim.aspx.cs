@@ -73,7 +73,46 @@ namespace onlineLegalWF.frmInsurance
             if (res > 0)
             {
                 // wf save draft
-                string process_code = "INR_CLAIM";
+                //string process_code = "INR_CLAIM";
+                var xiar_pfc = "";
+                var xiar_uatc = "";
+                string process_code = "";
+                string sqlreq = "select * from li_insurance_claim where claim_no='" + claim_no.Value + "'";
+
+                var resreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+
+                if (resreq.Rows.Count > 0)
+                {
+                    xiar_pfc = (!string.IsNullOrEmpty(resreq.Rows[0]["iar_pfc"].ToString()) ? resreq.Rows[0]["iar_pfc"].ToString() : null);
+                    xiar_uatc = (!string.IsNullOrEmpty(resreq.Rows[0]["iar_uatc"].ToString()) ? resreq.Rows[0]["iar_uatc"].ToString() : null);
+                }
+
+                //check corditon deviation claim
+                float deviation = 0;
+                float cal_iar_uatc = float.Parse(int.Parse(xiar_uatc, NumberStyles.AllowThousands).ToString());
+                float cal_iar_pfc = float.Parse(int.Parse(xiar_pfc, NumberStyles.AllowThousands).ToString());
+                int int_iar_uatc = int.Parse(xiar_uatc, NumberStyles.AllowThousands);
+                deviation = cal_iar_uatc / cal_iar_pfc;
+                if (int_iar_uatc <= 100000)
+                {
+                    process_code = "INR_CLAIM";
+                }
+                else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation <= 0.1)
+                {
+                    process_code = "INR_CLAIM";
+                }
+                else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation > 0.1)
+                {
+                    process_code = "INR_CLAIM_2";
+                }
+                else if (int_iar_uatc > 1000000 && deviation <= 0.2)
+                {
+                    process_code = "INR_CLAIM_2";
+                }
+                else if (int_iar_uatc > 1000000 && deviation > 0.2)
+                {
+                    process_code = "INR_CLAIM_3";
+                }
                 int version_no = 1;
                 string xbu_code = ddl_bu.SelectedValue;
 
@@ -342,15 +381,15 @@ namespace onlineLegalWF.frmInsurance
                 data.awcposition1 = "Insurance Specialist";
                 data.awcdate1 = "";
 
-                //data.sign_awcname1_2 = "";
-                //data.awcname1_2 = "";
-                //data.awcposition1_2 = "";
-                //data.awcdate1_2 = "";
+                data.sign_awcname1_2 = "";
+                data.awcname1_2 = "";
+                data.awcposition1_2 = "";
+                data.awcdate1_2 = "";
 
-                //data.sign_awcname1_3 = "";
-                //data.awcname1_3 = "";
-                //data.awcposition1_3 = "";
-                //data.awcdate1_3 = "";
+                data.sign_awcname1_3 = "";
+                data.awcname1_3 = "";
+                data.awcposition1_3 = "";
+                data.awcdate1_3 = "";
 
                 data.sign_awcname2 = "";
                 data.awcname2 = "คุณวารินทร์ เกลียวไพศาล";
@@ -369,15 +408,15 @@ namespace onlineLegalWF.frmInsurance
                 data.awcposition1 = "Insurance Specialist";
                 data.awcdate1 = "";
 
-                //data.sign_awcname1_2 = "";
-                //data.awcname1_2 = "";
-                //data.awcposition1_2 = "";
-                //data.awcdate1_2 = "";
+                data.sign_awcname1_2 = "";
+                data.awcname1_2 = "";
+                data.awcposition1_2 = "";
+                data.awcdate1_2 = "";
 
-                //data.sign_awcname1_3 = "";
-                //data.awcname1_3 = "";
-                //data.awcposition1_3 = "";
-                //data.awcdate1_3 = "";
+                data.sign_awcname1_3 = "";
+                data.awcname1_3 = "";
+                data.awcposition1_3 = "";
+                data.awcdate1_3 = "";
 
                 data.sign_awcname2 = "";
                 data.awcname2 = "คุณวารินทร์ เกลียวไพศาล";
@@ -396,15 +435,15 @@ namespace onlineLegalWF.frmInsurance
                 data.awcposition1 = "Insurance Specialist";
                 data.awcdate1 = "";
 
-                //data.sign_awcname1_2 = "";
-                //data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
-                //data.awcposition1_2 = "Head of Compliance";
-                //data.awcdate1_2 = "";
+                data.sign_awcname1_2 = "";
+                data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
+                data.awcposition1_2 = "/Head of Compliance";
+                data.awcdate1_2 = "";
 
-                //data.sign_awcname1_3 = "";
-                //data.awcname1_3 = "";
-                //data.awcposition1_3 = "";
-                //data.awcdate1_3 = "";
+                data.sign_awcname1_3 = "";
+                data.awcname1_3 = "";
+                data.awcposition1_3 = "";
+                data.awcdate1_3 = "";
 
                 data.sign_awcname2 = "";
                 data.awcname2 = "คุณชโลทร ศรีสมวงษ์";
@@ -423,15 +462,15 @@ namespace onlineLegalWF.frmInsurance
                 data.awcposition1 = "Insurance Specialist";
                 data.awcdate1 = "";
 
-                //data.sign_awcname1_2 = "";
-                //data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
-                //data.awcposition1_2 = "Head of Compliance";
-                //data.awcdate1_2 = "";
+                data.sign_awcname1_2 = "";
+                data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
+                data.awcposition1_2 = "/Head of Compliance";
+                data.awcdate1_2 = "";
 
-                //data.sign_awcname1_3 = "";
-                //data.awcname1_3 = "";
-                //data.awcposition1_3 = "";
-                //data.awcdate1_3 = "";
+                data.sign_awcname1_3 = "";
+                data.awcname1_3 = "";
+                data.awcposition1_3 = "";
+                data.awcdate1_3 = "";
 
                 data.sign_awcname2 = "";
                 data.awcname2 = "คุณชโลทร ศรีสมวงษ์";
@@ -445,25 +484,25 @@ namespace onlineLegalWF.frmInsurance
             }
             else if (int_iar_uatc > 1000000 && deviation > 0.2)
             {
-                data.sign_awcname1 = "";
-                data.awcname1 = "คุณชโลทร ศรีสมวงษ์";
-                data.awcposition1 = "Head of Legal";
-                data.awcdate1 = "";
-
                 //data.sign_awcname1 = "";
-                //data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
-                //data.awcposition1 = "Insurance Specialist";
+                //data.awcname1 = "คุณชโลทร ศรีสมวงษ์";
+                //data.awcposition1 = "Head of Legal";
                 //data.awcdate1 = "";
 
-                //data.sign_awcname1_2 = "";
-                //data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
-                //data.awcposition1_2 = "Head of Compliance";
-                //data.awcdate1_2 = "";
+                data.sign_awcname1 = "";
+                data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
+                data.awcposition1 = "Insurance Specialist";
+                data.awcdate1 = "";
 
-                //data.sign_awcname1_3 = "";
-                //data.awcname1_3 = "คุณชโลทร ศรีสมวงษ์";
-                //data.awcposition1_3 = "Head of Legal";
-                //data.awcdate1_3 = "";
+                data.sign_awcname1_2 = "";
+                data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
+                data.awcposition1_2 = "/Head of Compliance";
+                data.awcdate1_2 = "";
+
+                data.sign_awcname1_3 = "";
+                data.awcname1_3 = "คุณชโลทร ศรีสมวงษ์";
+                data.awcposition1_3 = "/Head of Legal";
+                data.awcdate1_3 = "";
 
                 data.sign_awcname2 = "";
                 data.awcname2 = "ดร.สิเวศ โรจนสุนทร";
@@ -681,6 +720,9 @@ namespace onlineLegalWF.frmInsurance
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
+            var xiar_pfc = "";
+            var xiar_uatc = "";
+            string process_code = "";
             string sqlreq = "select * from li_insurance_claim where claim_no='" + claim_no.Value + "'";
 
             var res = zdb.ExecSql_DataTable(sqlreq, zconnstr);
@@ -688,10 +730,45 @@ namespace onlineLegalWF.frmInsurance
             if (res.Rows.Count == 0)
             {
                 SaveClaim();
+                xiar_pfc = (!string.IsNullOrEmpty(iar_pfc.Text.Trim().ToString()) ? iar_pfc.Text.Trim().ToString() : null);
+                xiar_uatc = (!string.IsNullOrEmpty(iar_uatc.Text.Trim().ToString()) ? iar_uatc.Text.Trim().ToString() : null);
+            }
+            else 
+            {
+                xiar_pfc = (!string.IsNullOrEmpty(res.Rows[0]["iar_pfc"].ToString()) ? res.Rows[0]["iar_pfc"].ToString() : null);
+                xiar_uatc = (!string.IsNullOrEmpty(res.Rows[0]["iar_uatc"].ToString()) ? res.Rows[0]["iar_uatc"].ToString() : null);
             }
 
-            string process_code = "INR_CLAIM";
+            //check corditon deviation claim
+            float deviation = 0;
+            float cal_iar_uatc = float.Parse(int.Parse(xiar_uatc, NumberStyles.AllowThousands).ToString());
+            float cal_iar_pfc = float.Parse(int.Parse(xiar_pfc, NumberStyles.AllowThousands).ToString());
+            int int_iar_uatc = int.Parse(xiar_uatc, NumberStyles.AllowThousands);
+            deviation = cal_iar_uatc / cal_iar_pfc;
+            if (int_iar_uatc <= 100000)
+            {
+                process_code = "INR_CLAIM";
+            }
+            else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation <= 0.1)
+            {
+                process_code = "INR_CLAIM";
+            }
+            else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation > 0.1)
+            {
+                process_code = "INR_CLAIM_2";
+            }
+            else if (int_iar_uatc > 1000000 && deviation <= 0.2)
+            {
+                process_code = "INR_CLAIM_2";
+            }
+            else if (int_iar_uatc > 1000000 && deviation > 0.2)
+            {
+                process_code = "INR_CLAIM_3";
+            }
+
+
             int version_no = 1;
+            string xbu_code = ddl_bu.SelectedValue;
 
             // getCurrentStep
             var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
@@ -712,13 +789,13 @@ namespace onlineLegalWF.frmInsurance
                 wfAttr.submit_answer = "SUBMITTED";
                 //wfAttr.next_assto_login = emp.next_line_mgr_login;
                 wfAttr.submit_by = emp.user_login;
-                wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by,wfAttr.process_id);
+                wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by,wfAttr.process_id, xbu_code);
                 wfAttr.updated_by = emp.user_login;
 
                 // wf.updateProcess
                 var wfA_NextStep = zwf.updateProcess(wfAttr);
                 //wfA_NextStep.next_assto_login = emp.next_line_mgr_login;
-                wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by, wfAttr.process_id);
+                wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by, wfAttr.process_id, xbu_code);
                 string status = zwf.Insert_NextStep(wfA_NextStep);
 
                 if (status == "Success")
@@ -906,6 +983,16 @@ namespace onlineLegalWF.frmInsurance
                     data.awcposition1 = "Insurance Specialist";
                     data.awcdate1 = "";
 
+                    data.sign_awcname1_2 = "";
+                    data.awcname1_2 = "";
+                    data.awcposition1_2 = "";
+                    data.awcdate1_2 = "";
+
+                    data.sign_awcname1_3 = "";
+                    data.awcname1_3 = "";
+                    data.awcposition1_3 = "";
+                    data.awcdate1_3 = "";
+
                     data.sign_awcname2 = "";
                     data.awcname2 = "คุณวารินทร์ เกลียวไพศาล";
                     data.awcposition2 = "Head of Compliance";
@@ -922,6 +1009,16 @@ namespace onlineLegalWF.frmInsurance
                     data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
                     data.awcposition1 = "Insurance Specialist";
                     data.awcdate1 = "";
+
+                    data.sign_awcname1_2 = "";
+                    data.awcname1_2 = "";
+                    data.awcposition1_2 = "";
+                    data.awcdate1_2 = "";
+
+                    data.sign_awcname1_3 = "";
+                    data.awcname1_3 = "";
+                    data.awcposition1_3 = "";
+                    data.awcdate1_3 = "";
 
                     data.sign_awcname2 = "";
                     data.awcname2 = "คุณวารินทร์ เกลียวไพศาล";
@@ -940,6 +1037,16 @@ namespace onlineLegalWF.frmInsurance
                     data.awcposition1 = "Insurance Specialist";
                     data.awcdate1 = "";
 
+                    data.sign_awcname1_2 = "";
+                    data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
+                    data.awcposition1_2 = "/Head of Compliance";
+                    data.awcdate1_2 = "";
+
+                    data.sign_awcname1_3 = "";
+                    data.awcname1_3 = "";
+                    data.awcposition1_3 = "";
+                    data.awcdate1_3 = "";
+
                     data.sign_awcname2 = "";
                     data.awcname2 = "คุณชโลทร ศรีสมวงษ์";
                     data.awcposition2 = "Head of Legal";
@@ -957,6 +1064,16 @@ namespace onlineLegalWF.frmInsurance
                     data.awcposition1 = "Insurance Specialist";
                     data.awcdate1 = "";
 
+                    data.sign_awcname1_2 = "";
+                    data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
+                    data.awcposition1_2 = "/Head of Compliance";
+                    data.awcdate1_2 = "";
+
+                    data.sign_awcname1_3 = "";
+                    data.awcname1_3 = "";
+                    data.awcposition1_3 = "";
+                    data.awcdate1_3 = "";
+
                     data.sign_awcname2 = "";
                     data.awcname2 = "คุณชโลทร ศรีสมวงษ์";
                     data.awcposition2 = "Head of Legal";
@@ -969,10 +1086,25 @@ namespace onlineLegalWF.frmInsurance
                 }
                 else if (int_iar_uatc > 1000000 && deviation > 0.2)
                 {
+                    //data.sign_awcname1 = "";
+                    //data.awcname1 = "คุณชโลทร ศรีสมวงษ์";
+                    //data.awcposition1 = "Head of Legal";
+                    //data.awcdate1 = "";
+
                     data.sign_awcname1 = "";
-                    data.awcname1 = "คุณชโลทร ศรีสมวงษ์";
-                    data.awcposition1 = "Head of Legal";
+                    data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
+                    data.awcposition1 = "Insurance Specialist";
                     data.awcdate1 = "";
+
+                    data.sign_awcname1_2 = "";
+                    data.awcname1_2 = "คุณวารินทร์ เกลียวไพศาล";
+                    data.awcposition1_2 = "/Head of Compliance";
+                    data.awcdate1_2 = "";
+
+                    data.sign_awcname1_3 = "";
+                    data.awcname1_3 = "คุณชโลทร ศรีสมวงษ์";
+                    data.awcposition1_3 = "/Head of Legal";
+                    data.awcdate1_3 = "";
 
                     data.sign_awcname2 = "";
                     data.awcname2 = "ดร.สิเวศ โรจนสุนทร";
