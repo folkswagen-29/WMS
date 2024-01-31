@@ -17,7 +17,7 @@
                         <LayoutTemplate>
                             <table id="itemPlaceholderContainer" runat="server" class="table">
                                 <tr class="gv_header_blue" style="height: 30px;">
-                                    <th></th>
+                                    <th><asp:CheckBox ID="chkHeader" runat="server" AutoPostBack="true" OnCheckedChanged="CheckAll" /></th>
                                     <th>No.</th>
                                     <th>Bussiness Group/BU</th>
                                     <th>Status</th>

@@ -132,5 +132,26 @@ namespace onlineLegalWF.frmInsurance
             //string sql = "select * from li_insurance_request where req_no in ("+reslistreq_no+")";
             //var reqres = zdb.ExecSql_DataTable(sql, zconnstr);
         }
+
+        protected void CheckAll(object sender, EventArgs e)
+        {
+            CheckBox btnComplain = sender as CheckBox;
+            if (btnComplain.Checked == true)
+            {
+                foreach (ListViewDataItem row in ListView1.Items)
+                {
+                    CheckBox chb = (CheckBox)row.FindControl("CheckBox1");
+                    chb.Checked = true;
+                }
+            }
+            else
+            {
+                foreach (ListViewDataItem row in ListView1.Items)
+                {
+                    CheckBox chb = (CheckBox)row.FindControl("CheckBox1");
+                    chb.Checked = false;
+                }
+            }
+        }
     }
 }
