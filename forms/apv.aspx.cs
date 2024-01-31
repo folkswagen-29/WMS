@@ -691,9 +691,9 @@ namespace onlineLegalWF.forms
                                         //get file eform and attach first attachfile
                                         string[] pdfFilesIndara = new string[] { resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf"), resattachfile.Rows[0]["attached_filepath"].ToString() };
                                         string filepathIndara = zmergepdf.mergefilePDF(pdfFilesIndara, outputdirectory);
-                                        //email = "teerapat.w@tgh.co.th; phakorn.s@tgh.co.th";
-                                        email = "worawut.m@assetworldcorp-th.com; manit.ch@assetworldcorp-th.com";
-                                        _ = zsendmail.sendEmail(subject + " Mail To indara", email, body, filepathIndara);
+                                        //string[] emailIndara = new string[] { "teerapat.w@tgh.co.th", "phakorn.s@tgh.co.th" };
+                                        string[] emailIndara = new string[] { "worawut.m@assetworldcorp-th.com", "manit.ch@assetworldcorp-th.com" };
+                                        _ = zsendmail.sendEmails(subject + " Mail To indara", emailIndara, body, filepathIndara);
 
                                     }
 
