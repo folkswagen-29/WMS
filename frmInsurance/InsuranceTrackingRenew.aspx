@@ -28,7 +28,7 @@
                                     <th>PV</th>
                                     <th>LPG</th>
                                     <th>D&O</th>
-                                    <th></th>
+                                    <%--<th></th>--%>
                                 </tr>
                                 <tr id="itemPlaceholder" runat="server">
                                 </tr>
@@ -38,7 +38,6 @@
                             <tr>
                                 <td>
                                     <asp:CheckBox ID="CheckBox1" runat="server" />
-                                    <%--<asp:HiddenField ID="req_date" runat="server" />--%>
                                     <asp:HiddenField ID="req_no" Value='<%# Eval("RequestNo") %>' runat="server" />
                                 </td>
                                 <td>
@@ -71,7 +70,7 @@
                                 <td>
                                     <asp:Label runat="server" Text='<%# Eval("DOSumInsured") %>' />
                                 </td>
-                                <td>
+                                <%--<td>
                                     <table style="color: #333333; border-collapse: collapse;">
                                         <tr>
                                             <td style="border: 0px !important;">
@@ -85,14 +84,14 @@
                                             </td>
                                         </tr>
                                     </table>
-                                </td>
+                                </td>--%>
                             </tr>
                         </ItemTemplate>
                     </asp:ListView>
                     <br />
                     <div>
                         <asp:Button runat="server" CssClass="btn_normal_blue pointer" Text="GenMemo" OnClick="Approve_Click" />
-                        <asp:Button runat="server" CssClass="btn_normal_silver pointer" Text="Preview" />
+                        <%--<asp:Button runat="server" CssClass="btn_normal_silver pointer" Text="Preview" />--%>
                     </div>
                 </div>
             </td>

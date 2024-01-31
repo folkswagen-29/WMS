@@ -136,9 +136,9 @@
                                                 <columns>
                                                     <asp:TemplateField HeaderText="No">
                                                         <itemtemplate>
-                                                            <asp:TextBox ID="gv1txtNo" Text='<%# Bind("No") %>' runat="server" CssClass="Text_60"></asp:TextBox>
+                                                            <asp:TextBox ID="gv1txtNo" Text='<%# Bind("No") %>' runat="server" CssClass="Text_20"></asp:TextBox>
                                                         </itemtemplate>
-                                                        <itemstyle width="60px" />
+                                                        <itemstyle width="20px" />
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Property Insured">
                                                         <itemtemplate>
@@ -147,9 +147,15 @@
                                                         </itemtemplate>
                                                         <itemstyle width="100px" />
                                                     </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="GOP">
+                                                        <ItemTemplate>
+                                                            <asp:TextBox ID="gv1txtGop" Text='<%# Bind("GOP") %>' runat="server" CssClass="Text_sm" OnTextChanged="GopChanged" AutoPostBack="true"></asp:TextBox>
+                                                        </ItemTemplate>
+                                                        <ItemStyle Width="100px" />
+                                                    </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Indemnity Period">
                                                         <itemtemplate>
-                                                            <asp:TextBox ID="gv1txtIndemnityPeriod" Text='<%# Bind("IndemnityPeriod") %>' runat="server" CssClass="Text_sm"></asp:TextBox>
+                                                            <asp:TextBox ID="gv1txtIndemnityPeriod" Text='<%# Bind("IndemnityPeriod") %>' runat="server" CssClass="Text_sm" OnTextChanged="IndemnityPeriodChanged" AutoPostBack="true"></asp:TextBox>
                                                         </itemtemplate>
                                                         <itemstyle width="100px" />
                                                     </asp:TemplateField>

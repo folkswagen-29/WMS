@@ -17,7 +17,7 @@
                         <LayoutTemplate>
                             <table id="itemPlaceholderContainer" runat="server" class="table">
                                 <tr class="gv_header_blue" style="height: 30px;">
-                                    <th></th>
+                                    <%--<th></th>--%>
                                     <th>No.</th>
                                     <th>Bussiness Group/BU</th>
                                     <th>Status</th>
@@ -28,7 +28,7 @@
                                     <th>PV</th>
                                     <th>LPG</th>
                                     <th>D&O</th>
-                                    <th></th>
+                                    <%--<th></th>--%>
                                 </tr>
                                 <tr id="itemPlaceholder" runat="server">
                                 </tr>
@@ -36,11 +36,10 @@
                         </LayoutTemplate>
                         <ItemTemplate>
                             <tr>
-                                <td>
+                                <%--<td>
                                     <asp:CheckBox ID="CheckBox1" runat="server" />
-                                    <%--<asp:HiddenField ID="req_date" runat="server" />--%>
                                     <asp:HiddenField ID="req_no" Value='<%# Eval("RequestNo") %>' runat="server" />
-                                </td>
+                                </td>--%>
                                 <td>
                                     <asp:Label runat="server" Text='<%# Eval("ProcressID") %>' />
                                 </td>
@@ -71,7 +70,7 @@
                                 <td>
                                     <asp:Label runat="server" Text='<%# Eval("DOSumInsured") %>' />
                                 </td>
-                                <td>
+                                <%--<td>
                                     <table style="color: #333333; border-collapse: collapse;">
                                         <tr>
                                             <td style="border: 0px !important;">
@@ -85,15 +84,15 @@
                                             </td>
                                         </tr>
                                     </table>
-                                </td>
+                                </td>--%>
                             </tr>
                         </ItemTemplate>
                     </asp:ListView>
-                    <br />
+                    <%--<br />
                     <div>
                         <asp:Button runat="server" CssClass="btn_normal_blue pointer" Text="Approve" OnClick="Approve_Click" />
                         <asp:Button runat="server" CssClass="btn_normal_silver pointer" Text="Preview" />
-                    </div>
+                    </div>--%>
                 </div>
             </td>
         </tr>

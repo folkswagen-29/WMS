@@ -815,6 +815,18 @@ button.close {
     border-radius: 2px;
 }
 
+.Text_20 {
+    margin-top: 2px;
+    margin-left: 2px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: rgb(35, 34, 34);
+    width: 20px;
+    background-color: white;
+    border-color: silver;
+    border-radius: 2px;
+}
+
 .Text_60 {
     margin-top: 2px;
     margin-left: 2px;

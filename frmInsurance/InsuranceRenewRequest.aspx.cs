@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Web;
 using System.Web.DynamicData;
 using System.Web.UI;
@@ -61,6 +62,25 @@ namespace onlineLegalWF.frmInsurance
             ddl_bu.DataTextField = "bu_desc";
             ddl_bu.DataValueField = "bu_code";
             ddl_bu.DataBind();
+
+            //check data and disable filed
+            foreach (GridViewRow row in gv1.Rows)
+            {
+                string top_ins_code = (row.FindControl("gv1txttop_ins_code") as HiddenField).Value;
+                (row.FindControl("gv1txtNo") as TextBox).Enabled = false;
+                (row.FindControl("gv1txtPropertyInsured") as TextBox).Enabled = false;
+                if (top_ins_code == "02")
+                {
+                    (row.FindControl("gv1txtIndemnityPeriod") as TextBox).Enabled = true;
+                    (row.FindControl("gv1txtGop") as TextBox).Enabled = true;
+                }
+                else 
+                {
+                    (row.FindControl("gv1txtIndemnityPeriod") as TextBox).Enabled = false;
+                    (row.FindControl("gv1txtGop") as TextBox).Enabled = false;
+                }
+
+            }
         }
         public DataTable iniDataTable()
         {
@@ -80,6 +100,7 @@ namespace onlineLegalWF.frmInsurance
                     dr["No"] = (no+1);
                     dr["PropertyInsured"] = dr_ins["top_ins_desc"].ToString();
                     dr["IndemnityPeriod"] = "";
+                    dr["GOP"] = "";
                     dr["SumInsured"] = "";
                     dr["StartDate"] = "";
                     dr["EndDate"] = "";
@@ -151,6 +172,7 @@ namespace onlineLegalWF.frmInsurance
             DataTable dt = new DataTable();
             dt.Columns.Add("No", typeof(string));
             dt.Columns.Add("PropertyInsured", typeof(string));
+            dt.Columns.Add("GOP", typeof(string));
             dt.Columns.Add("IndemnityPeriod", typeof(string));
             dt.Columns.Add("SumInsured", typeof(string));
             dt.Columns.Add("StartDate", typeof(string));
@@ -656,12 +678,13 @@ namespace onlineLegalWF.frmInsurance
                 InsurancePropData data = new InsurancePropData();
                 data.TypeOfPropertyInsured = (row.FindControl("gv1txttop_ins_code") as HiddenField).Value;
                 data.PropertyInsured = (row.FindControl("gv1txtPropertyInsured") as TextBox).Text;
+                data.GOP = (row.FindControl("gv1txtGop") as TextBox).Text;
                 data.IndemnityPeriod = (row.FindControl("gv1txtIndemnityPeriod") as TextBox).Text;
                 data.SumInsured = (row.FindControl("gv1txtSumInsured") as TextBox).Text;
                 data.StartDate = (row.FindControl("gv1txtSdate") as TextBox).Text;
                 data.EndDate = (row.FindControl("gv1txtEdate") as TextBox).Text;
 
-                if (!string.IsNullOrEmpty(data.IndemnityPeriod) && !string.IsNullOrEmpty(data.SumInsured) && !string.IsNullOrEmpty(data.StartDate) && !string.IsNullOrEmpty(data.EndDate)) 
+                if (!string.IsNullOrEmpty(data.SumInsured) && !string.IsNullOrEmpty(data.StartDate) && !string.IsNullOrEmpty(data.EndDate)) 
                 {
                     listInsurancePropData.Add(data);
                 }
@@ -694,10 +717,11 @@ namespace onlineLegalWF.frmInsurance
                     foreach (var item in listInsurancePropData)
                     {
                         string sqlInsertPropIns = @"INSERT INTO [dbo].[li_insurance_req_property_insured]
-                                                   ([req_no],[top_ins_code],[indemnityperiod],[suminsured],[startdate],[enddate],[created_datetime])
+                                                   ([req_no],[top_ins_code],[gop_fc],[indemnityperiod],[suminsured],[startdate],[enddate],[created_datetime])
                                              VALUES
                                                    ('" + xreq_no + @"'
                                                    ,'" + item.TypeOfPropertyInsured + @"'
+                                                   ,'" + item.GOP + @"'
                                                    ,'" + item.IndemnityPeriod + @"'
                                                    ,'" + item.SumInsured + @"'
                                                    ,'" + item.StartDate + @"'
@@ -717,6 +741,7 @@ namespace onlineLegalWF.frmInsurance
         {
             public string TypeOfPropertyInsured { get; set; } 
             public string PropertyInsured { get; set; } 
+            public string GOP { get; set; } 
             public string IndemnityPeriod { get; set; }  
             public string SumInsured { get; set; }  
             public string StartDate { get; set; }  
@@ -1232,6 +1257,78 @@ namespace onlineLegalWF.frmInsurance
 
 
 
+        }
+
+        protected void IndemnityPeriodChanged(object sender, EventArgs e)
+        {
+            int indem = 0;
+            int gb = 0;
+            GridViewRow row = ((GridViewRow)((TextBox)sender).NamingContainer);
+            //NamingContainer return the container that the control sits in
+
+            //get data textbox indemnity
+            TextBox indemnitytb = (TextBox)row.FindControl("gv1txtIndemnityPeriod");
+            //get data textbox gop
+            TextBox goptb = (TextBox)row.FindControl("gv1txtGop");
+            if (!string.IsNullOrEmpty(indemnitytb.Text)) 
+            {
+                indem = Int32.Parse(indemnitytb.Text);
+                if (!string.IsNullOrEmpty(goptb.Text))
+                {
+                    gb = Int32.Parse(goptb.Text);
+
+                    //get data textbox suminsured
+                    TextBox suminsuredtb = (TextBox)row.FindControl("gv1txtSumInsured");
+
+                    //set suminsured value
+                    suminsuredtb.Text = (gb * (indem/12)).ToString();
+                    suminsuredtb.Focus();
+                }
+                else
+                {
+                    indemnitytb.Focus();
+                }
+            }
+            else
+            {
+                indemnitytb.Focus();
+            }
+        }
+
+        protected void GopChanged(object sender, EventArgs e)
+        {
+            int indem = 0;
+            int gb = 0;
+            GridViewRow row = ((GridViewRow)((TextBox)sender).NamingContainer);
+            //NamingContainer return the container that the control sits in
+
+            //get data textbox indemnity
+            TextBox indemnitytb = (TextBox)row.FindControl("gv1txtIndemnityPeriod");
+            //get data textbox gop
+            TextBox goptb = (TextBox)row.FindControl("gv1txtGop");
+            if (!string.IsNullOrEmpty(indemnitytb.Text))
+            {
+                indem = Int32.Parse(indemnitytb.Text);
+                if (!string.IsNullOrEmpty(goptb.Text))
+                {
+                    gb = Int32.Parse(goptb.Text);
+
+                    //get data textbox suminsured
+                    TextBox suminsuredtb = (TextBox)row.FindControl("gv1txtSumInsured");
+
+                    //set suminsured value
+                    suminsuredtb.Text = (gb * (indem / 12)).ToString();
+                    suminsuredtb.Focus();
+                }
+                else
+                {
+                    goptb.Focus();
+                }
+            }
+            else 
+            {
+                goptb.Focus();
+            }
         }
     }
 }
