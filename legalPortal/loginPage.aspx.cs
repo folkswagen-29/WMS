@@ -15,8 +15,10 @@ namespace onlineLegalWF.legalPortal
         {
             if (!IsPostBack) 
             {
-                
-            
+                if (Session["user_login"] != null)
+                {
+                    Response.Redirect("legalportal.aspx?m=myrequest");
+                }
             }
         }
 
@@ -24,12 +26,20 @@ namespace onlineLegalWF.legalPortal
         {
             // Check Authen
             var token = "xxxx";//getAuthen(txtLoginName.Text.Trim(), txtPassword.Text.Trim());
-            if (!String.IsNullOrEmpty(token))
+            if (!string.IsNullOrEmpty(txtPassword.Text.Trim()) && txtPassword.Text.Trim() == "1234")
             {
-                // clear session 
-                addSession(txtLoginName.Text);
-                Response.Redirect("legalportal.aspx?m=myrequest"); 
+                if (!String.IsNullOrEmpty(token))
+                {
+                    // clear session 
+                    addSession(txtLoginName.Text);
+                    Response.Redirect("legalportal.aspx?m=myrequest");
+                }
             }
+            else 
+            {
+                Response.Write("<script>alert('Error !!! Password incorrect');</script>");
+            }
+            
         }
         public void checkAuthen(string xusername, string xpassword) 
         { 
