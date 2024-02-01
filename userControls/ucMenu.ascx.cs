@@ -16,22 +16,22 @@ namespace onlineLegalWF.userControls
 
         protected void lbtn5_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmInsurance/InsuranceRequest.aspx");
+            Response.Redirect("frmInsurance/InsuranceRequest.aspx");
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmInsurance/InsuranceRenewRequest.aspx");
+            Response.Redirect("frmInsurance/InsuranceRenewRequest.aspx");
         }
 
         protected void lbtn6_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmInsurance/InsuranceClaim.aspx");
+            Response.Redirect("frmInsurance/InsuranceClaim.aspx");
         }
 
         protected void lbtn17_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmInsurance/InsuranceTrackingRenew.aspx");
+            Response.Redirect("frmInsurance/InsuranceTrackingRenew.aspx");
         }
 
         protected void lbtn1_Click(object sender, EventArgs e)
@@ -41,52 +41,52 @@ namespace onlineLegalWF.userControls
 
         protected void LinkButton2_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmInsurance/InsuranceRenewRequestList.aspx");
+            Response.Redirect("frmInsurance/InsuranceRenewRequestList.aspx");
         }
 
         protected void LinkButton3_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmInsurance/InsuranceClaimList.aspx");
+            Response.Redirect("frmInsurance/InsuranceClaimList.aspx");
         }
 
         protected void lbtn9_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmCommregis/CommRegisRequest.aspx");
+            Response.Redirect("frmCommregis/CommRegisRequest.aspx");
         }
 
         protected void lbtn10_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmCommregis/CommRegisWorkAssign.aspx");
+            Response.Redirect("frmCommregis/CommRegisWorkAssign.aspx");
         }
 
         protected void lbtn13_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmPermit/PermitLicense.aspx");
+            Response.Redirect("frmPermit/PermitLicense.aspx");
         }
 
         protected void LinkButton7_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmPermit/PermitSignageTax.aspx");
+            Response.Redirect("frmPermit/PermitSignageTax.aspx");
         }
 
         protected void LinkButton8_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmPermit/PermitLandTax.aspx");
+            Response.Redirect("frmPermit/PermitLandTax.aspx");
         }
 
         protected void LinkButton9_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmPermit/PermitTrademark.aspx");
+            Response.Redirect("frmPermit/PermitTrademark.aspx");
         }
 
         protected void lbtn14_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmPermit/PermitWorkAssign.aspx");
+            Response.Redirect("frmPermit/PermitWorkAssign.aspx");
         }
 
         protected void LinkButton4_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/frmLitigation/LitigationRequest.aspx");
+            Response.Redirect("frmLitigation/LitigationRequest.aspx");
         }
     }
 }

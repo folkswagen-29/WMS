@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -17,7 +18,8 @@ namespace onlineLegalWF.legalPortal
             {
                 if (Session["user_login"] != null)
                 {
-                    Response.Redirect("legalportal.aspx?m=myrequest");
+                    var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                    Response.Redirect(host_url + "legalportal.aspx?m=myrequest");
                 }
             }
         }
@@ -32,7 +34,8 @@ namespace onlineLegalWF.legalPortal
                 {
                     // clear session 
                     addSession(txtLoginName.Text);
-                    Response.Redirect("legalportal.aspx?m=myrequest");
+                    var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                    Response.Redirect(host_url + "legalportal.aspx?m=myrequest");
                 }
             }
             else 

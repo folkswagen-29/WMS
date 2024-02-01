@@ -148,7 +148,7 @@ namespace onlineLegalWF.forms
 
         //            if (status == "Success")
         //            {
-        //                Response.Redirect("/legalportal/legalportal.aspx?m=myworklist");
+        //                Response.Redirect("legalportal/legalportal.aspx?m=myworklist");
         //            }
 
         //        }

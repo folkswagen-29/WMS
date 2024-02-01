@@ -153,7 +153,7 @@ namespace onlineLegalWF.frmInsurance
             if (res > 0)
             {
                 Response.Write("<script>alert('Successfully Edited');</script>");
-                //Response.Redirect("/frmInsurance/InsuranceRenewAWCEdit.aspx?id=" + lblPID.Text.Trim());
+                //Response.Redirect("frmInsurance/InsuranceRenewAWCEdit.aspx?id=" + lblPID.Text.Trim());
             }
             else
             {
@@ -1083,7 +1083,8 @@ namespace onlineLegalWF.frmInsurance
                         }
 
                     }
-                    Response.Redirect("/legalportal/legalportal.aspx?m=myworklist", false);
+                    var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                    Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
                 }
 
             }

@@ -1,6 +1,7 @@
 ﻿using onlineLegalWF.Class;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -34,15 +35,17 @@ namespace onlineLegalWF
             }
             else 
             {
-                Response.Redirect("/legalPortal/loginPage.aspx");
+                var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                Response.Redirect(host_url +"legalportal/loginpage.aspx");
             }
             
         }
 
         protected void btn_logout_Click(object sender, EventArgs e)
         {
+            var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
             Session.Clear();
-            Response.Redirect("/legalPortal/loginPage.aspx");
+            Response.Redirect(host_url + "legalportal/loginpage.aspx");
         }
     }
 }

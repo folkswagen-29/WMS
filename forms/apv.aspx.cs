@@ -867,8 +867,8 @@ namespace onlineLegalWF.forms
 
                             }
                         }
-
-                        Response.Redirect("/legalportal/legalportal.aspx?m=myworklist",false);
+                        var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                        Response.Redirect(host_url+"legalportal/legalportal.aspx?m=myworklist",false);
                     }
 
                 }
@@ -2332,7 +2332,8 @@ namespace onlineLegalWF.forms
 
                     if (status == "Success")
                     {
-                        Response.Redirect("/legalportal/legalportal.aspx?m=myworklist", false);
+                        var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                        Response.Redirect(host_url+"legalportal/legalportal.aspx?m=myworklist", false);
                     }
 
                 }

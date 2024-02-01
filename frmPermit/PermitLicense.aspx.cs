@@ -61,7 +61,7 @@ namespace onlineLegalWF.frmPermit
             if (res > 0)
             {
                 Response.Write("<script>alert('Successfully added');</script>");
-                //Response.Redirect("/frmInsurance/InsuranceRequestList");
+                //Response.Redirect("frmInsurance/InsuranceRequestList");
             }
             else
             {

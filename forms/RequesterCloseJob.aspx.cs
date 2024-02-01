@@ -155,7 +155,8 @@ namespace onlineLegalWF.forms
                             string sqlupdate = @"update li_insurance_request set status='approved',updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where process_id = '" + wfAttr.process_id + "'";
                             zdb.ExecNonQuery(sqlupdate, zconnstr);
                         }
-                        Response.Redirect("/legalportal/legalportal.aspx?m=completelist");
+                        var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                        Response.Redirect(host_url+"legalportal/legalportal.aspx?m=completelist");
                     }
 
                 }

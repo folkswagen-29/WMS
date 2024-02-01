@@ -696,8 +696,9 @@ namespace onlineLegalWF.frmInsurance
 
                     }
                     showAlertSuccess("alertSuccess", "Insert success");
-                    Response.Redirect("/frmInsurance/InsuranceRequestEdit.aspx?id=" + req_no.Text.Trim());
-                    //Response.Redirect("/legalportal/legalportal.aspx?m=myrequest");
+                    var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                    Response.Redirect(host_url+"frmInsurance/InsuranceRequestEdit.aspx?id=" + req_no.Text.Trim());
+                    //Response.Redirect("legalportal/legalportal.aspx?m=myrequest");
                 }
                 else
                 {
@@ -939,7 +940,8 @@ namespace onlineLegalWF.frmInsurance
 
                     }
 
-                    Response.Redirect("/legalportal/legalportal.aspx?m=myworklist", false);
+                    var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                    Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
                 }
 
             }

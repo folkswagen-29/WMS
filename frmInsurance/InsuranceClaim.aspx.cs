@@ -140,9 +140,10 @@ namespace onlineLegalWF.frmInsurance
                     var wfA_NextStep = zwf.updateProcess(wfAttr);
 
                 }
+                var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
                 Response.Write("<script>alert('Successfully added');</script>");
-                //Response.Redirect("/frmInsurance/InsuranceClaimList");
-                Response.Redirect("/frmInsurance/InsuranceClaimEdit.aspx?id=" + claim_no.Value.Trim());
+                //Response.Redirect("frmInsurance/InsuranceClaimList");
+                Response.Redirect(host_url+"frmInsurance/InsuranceClaimEdit.aspx?id=" + claim_no.Value.Trim());
             }
             else
             {
@@ -875,7 +876,8 @@ namespace onlineLegalWF.frmInsurance
                         }
 
                     }
-                    Response.Redirect("/legalportal/legalportal.aspx?m=myworklist", false);
+                    var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                    Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
                 }
 
             }

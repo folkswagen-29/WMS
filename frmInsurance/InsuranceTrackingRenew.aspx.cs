@@ -128,7 +128,8 @@ namespace onlineLegalWF.frmInsurance
 
             string reslistreq_no = (listreq_no.Count > 1 ? string.Join(", ", listreq_no) : listreq_no[0]);
 
-            Response.Redirect("/frmInsurance/InsuranceRenewAWC.aspx?id=" + reslistreq_no);
+            var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+            Response.Redirect(host_url + "frmInsurance/InsuranceRenewAWC.aspx?id=" + reslistreq_no);
             //string sql = "select * from li_insurance_request where req_no in ("+reslistreq_no+")";
             //var reqres = zdb.ExecSql_DataTable(sql, zconnstr);
         }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,7 +13,8 @@ namespace onlineLegalWF
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("/legalportal/loginpage.aspx");
+            var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+            Response.Redirect(host_url + "legalportal/loginpage.aspx");
         }
     }
 }
