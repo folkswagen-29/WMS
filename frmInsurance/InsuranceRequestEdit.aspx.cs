@@ -249,8 +249,9 @@ namespace onlineLegalWF.frmInsurance
             var xend_date = end_date.Text.Trim();
             var xapprove_des = approve_des.Text.Trim();
 
-            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateRequest.docx";
-            string outputfolder = @"C:\WordTemplate\Insurance\Output";
+            var path_template = ConfigurationManager.AppSettings["WT_Template_insurance"].ToString();
+            string templatefile = path_template + @"\InsuranceTemplateRequest.docx";
+            string outputfolder = path_template + @"\Output";
             string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();
@@ -927,8 +928,9 @@ namespace onlineLegalWF.frmInsurance
         private void GenDocumnetInsNew(string pid)
         {
             string xreq_no = "";
-            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateRequest.docx";
-            string outputfolder = @"C:\WordTemplate\Insurance\Output";
+            var path_template = ConfigurationManager.AppSettings["WT_Template_insurance"].ToString();
+            string templatefile = path_template + @"\InsuranceTemplateRequest.docx";
+            string outputfolder = path_template + @"\Output";
             string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();

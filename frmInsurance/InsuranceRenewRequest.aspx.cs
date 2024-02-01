@@ -207,8 +207,9 @@ namespace onlineLegalWF.frmInsurance
             var xbackground = background.Text.Trim();
             var xapprove_des = "We, therefore, request for your approval to renew mentioned insurance policy.";
 
-            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateRenew.docx";
-            string outputfolder = @"C:\WordTemplate\Insurance\Output";
+            var path_template = ConfigurationManager.AppSettings["WT_Template_insurance"].ToString();
+            string templatefile = path_template + @"\InsuranceTemplateRenew.docx";
+            string outputfolder = path_template + @"\Output";
             string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();
@@ -880,8 +881,9 @@ namespace onlineLegalWF.frmInsurance
             var xreq_no = "";
             var xapprove_des = "We, therefore, request for your approval to renew mentioned insurance policy.";
 
-            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateRenew.docx";
-            string outputfolder = @"C:\WordTemplate\Insurance\Output";
+            var path_template = ConfigurationManager.AppSettings["WT_Template_insurance"].ToString();
+            string templatefile = path_template + @"\InsuranceTemplateRenew.docx";
+            string outputfolder = path_template + @"\Output";
             string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();

@@ -285,8 +285,9 @@ namespace onlineLegalWF.frmInsurance
             var xremark = (!string.IsNullOrEmpty(remark.Text.Trim()) ? remark.Text.Trim() : null);
             var xdocref = GetListDoc(lblPID.Text);
 
-            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateClaim.docx";
-            string outputfolder = @"C:\WordTemplate\Insurance\Output";
+            var path_template = ConfigurationManager.AppSettings["WT_Template_insurance"].ToString();
+            string templatefile = path_template + @"\InsuranceTemplateClaim.docx";
+            string outputfolder = path_template + @"\Output";
             string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();
@@ -891,8 +892,10 @@ namespace onlineLegalWF.frmInsurance
             var xiar_pfc = "";
             var xiar_uatc = "";
 
-            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateClaim.docx";
-            string outputfolder = @"C:\WordTemplate\Insurance\Output";
+            var path_template = ConfigurationManager.AppSettings["WT_Template_insurance"].ToString();
+
+            string templatefile = path_template + @"\InsuranceTemplateClaim.docx";
+            string outputfolder = path_template + @"\Output";
             string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();

@@ -881,8 +881,9 @@ namespace onlineLegalWF.forms
         private void GenDocumnetInsNew(string pid)
         {
             string xreq_no = "";
-            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateRequest.docx";
-            string outputfolder = @"C:\WordTemplate\Insurance\Output";
+            var path_template = ConfigurationManager.AppSettings["WT_Template_insurance"].ToString();
+            string templatefile = path_template + @"\InsuranceTemplateRequest.docx";
+            string outputfolder = path_template + @"\Output";
             string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();
@@ -1170,8 +1171,10 @@ namespace onlineLegalWF.forms
             var xiar_pfc = "";
             var xiar_uatc = "";
 
-            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateClaim.docx";
-            string outputfolder = @"C:\WordTemplate\Insurance\Output";
+            var path_template = ConfigurationManager.AppSettings["WT_Template_insurance"].ToString();
+
+            string templatefile = path_template + @"\InsuranceTemplateClaim.docx";
+            string outputfolder = path_template + @"\Output";
             string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();
@@ -1626,8 +1629,10 @@ namespace onlineLegalWF.forms
             var xreq_no = "";
             var xapprove_des = "We, therefore, request for your approval to renew mentioned insurance policy.";
 
-            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateRenew.docx";
-            string outputfolder = @"C:\WordTemplate\Insurance\Output";
+            var path_template = ConfigurationManager.AppSettings["WT_Template_insurance"].ToString();
+
+            string templatefile = path_template + @"\InsuranceTemplateRenew.docx";
+            string outputfolder = path_template + @"\Output";
             string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();
@@ -1962,8 +1967,10 @@ namespace onlineLegalWF.forms
             // Replace Doc
             string xreq_no = "";
 
-            string templatefile = @"C:\WordTemplate\Insurance\InsuranceTemplateRenewAWC.docx";
-            string outputfolder = @"C:\WordTemplate\Insurance\Output";
+            var path_template = ConfigurationManager.AppSettings["WT_Template_insurance"].ToString();
+
+            string templatefile = path_template + @"\InsuranceTemplateRenewAWC.docx";
+            string outputfolder = path_template + @"\Output";
             string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();
