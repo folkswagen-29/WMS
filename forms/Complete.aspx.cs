@@ -89,7 +89,8 @@ namespace onlineLegalWF.forms
             if (resfile.Rows.Count > 0)
             {
                 string pathfile = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
-                pdf_render.Attributes["src"] = "/render/pdf?id=" + pathfile;
+                var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                pdf_render.Attributes["src"] = host_url+"render/pdf?id=" + pathfile;
             }
         }
 

@@ -674,7 +674,8 @@ namespace onlineLegalWF.frmInsurance
             //Response.End();
             string filePath = outputfn.Replace(".docx", ".pdf");
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalDoc();", true);
-            pdf_render.Attributes["src"] = "/render/pdf?id=" + filePath;
+            var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+            pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filePath;
         }
 
         protected void btn_submit_Click(object sender, EventArgs e)
