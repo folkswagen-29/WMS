@@ -775,7 +775,7 @@ namespace onlineLegalWF.forms
                                     _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
 
                                     //send mait to Procurement
-                                    _ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
+                                    //_ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
 
                                     //send mail to jaroonsak.n
                                     _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
@@ -826,10 +826,49 @@ namespace onlineLegalWF.forms
                                     //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
                                     string[] pdfFiles = listpdf.ToArray();
 
-                                    ////get req_no by process_id from li_insurance_renew_awc_memo_req from db loop for send mail
-                                    //string sqlmemo = "select * from li_insurance_renew_awc_memo_req where process_id = '" + wfAttr.process_id + "'";
-                                    //System.Data.DataTable dtmemo = zdb.ExecSql_DataTable(sqlmemo, zconnstr);
-                                    //string email = "";
+                                    //get req_no by process_id from li_insurance_renew_awc_memo_req from db loop for send mail
+                                    string sqlmemo = "select * from li_insurance_renew_awc_memo_req where process_id = '" + wfAttr.process_id + "'";
+                                    System.Data.DataTable dtmemo = zdb.ExecSql_DataTable(sqlmemo, zconnstr);
+
+                                    List<string> listEmails = new List<string>();
+                                    if (dtmemo.Rows.Count > 0) 
+                                    {
+                                        foreach (DataRow row in dtmemo.Rows) 
+                                        {
+                                            var req_id = row["req_no"].ToString();
+
+                                            string sql_login = @"select top 1 submit_by from wf_routing where process_id in (select process_id from li_insurance_request where req_no ='"+req_id+"')";
+                                            System.Data.DataTable dt_login = zdb.ExecSql_DataTable(sql_login, zconnstr);
+
+                                            if (dt_login.Rows.Count > 0) 
+                                            {
+                                                var submitby = dt_login.Rows[0]["submit_by"].ToString();
+                                                string sqlbpm = "select * from li_user where user_login = '" + submitby + "' ";
+                                                System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                                if (dtbpm.Rows.Count > 0)
+                                                {
+                                                    listEmails.Add(dtbpm.Rows[0]["email"].ToString());
+                                                    //email = dtbpm.Rows[0]["email"].ToString();
+
+                                                }
+                                                else
+                                                {
+                                                    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + submitby + "' ";
+                                                    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                                    if (dtrpa.Rows.Count > 0)
+                                                    {
+                                                        listEmails.Add(dtbpm.Rows[0]["Email"].ToString());
+                                                        //email = dtrpa.Rows[0]["Email"].ToString();
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    string[] emails = listEmails.ToArray();
                                     //string sqlbpm = "select * from li_user where user_login = '" + wfAttr.submit_by + "' ";
                                     //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
 
@@ -852,9 +891,10 @@ namespace onlineLegalWF.forms
 
                                     string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
 
-                                    //send mail to requester
+                                    //send mail to requester loop for all bu or prop
+                                    //_ = zsendmail.sendEmails(subject + "Mail To Requester", emails, body, filepath);
 
-                                    ////fix mail test loop for all bu or prop
+                                    ////fix mail test 
                                     string email = "worawut.m@assetworldcorp-th.com";
                                     _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
 
