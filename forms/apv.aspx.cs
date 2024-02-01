@@ -854,7 +854,7 @@ namespace onlineLegalWF.forms
 
                                     //send mail to requester
 
-                                    ////fix mail test
+                                    ////fix mail test loop for all bu or prop
                                     string email = "worawut.m@assetworldcorp-th.com";
                                     _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
 

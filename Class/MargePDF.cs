@@ -48,7 +48,7 @@ namespace onlineLegalWF
             Document doc = new Document();
             //string basePath = @"D:\Users\worawut.m\Downloads\";
             string basePath = output_directory;
-            string outputfn = basePath + @"\mergePdf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
+            string outputfn = basePath + @"\mergePdf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss_fff") + ".pdf";
             PdfCopy copy = new PdfCopy(doc, new FileStream(outputfn, FileMode.Create));
             doc.Open();
             //string[] pdfFiles = { @"C__WordTemplate_Insurance_Output_inreq_20240114_204952.pdf", @"C__WordTemplate_Insurance_Output_inreq_20240112_165348.pdf" };
