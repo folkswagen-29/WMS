@@ -380,7 +380,7 @@ namespace onlineLegalWF.Class
                     }
                     else
                     {
-                        next_step = 4;
+                        next_step = 5;
                     }
                 }
                 else
@@ -398,7 +398,7 @@ namespace onlineLegalWF.Class
                     }
                     else
                     {
-                        next_step = 4;
+                        next_step = 5;
                     }
                 }
                 else 
@@ -417,7 +417,7 @@ namespace onlineLegalWF.Class
                     }
                     else
                     {
-                        next_step = 4;
+                        next_step = 5;
                     }
                 }
                 else
@@ -435,7 +435,7 @@ namespace onlineLegalWF.Class
                     }
                     else
                     {
-                        next_step = 4;
+                        next_step = 5;
                     }
                 }
                 else
@@ -453,7 +453,7 @@ namespace onlineLegalWF.Class
                     }
                     else
                     {
-                        next_step = 4;
+                        next_step = 5;
                     }
                 }
                 else
@@ -608,6 +608,7 @@ namespace onlineLegalWF.Class
             string gm_login = "";
             string head_am_login = "";
             string c_level_login = "";
+            string am_login = "";
 
             ////get gm heam_am c_level
             if (!string.IsNullOrEmpty(xbu_code)) 
@@ -620,6 +621,7 @@ namespace onlineLegalWF.Class
                 {
                     DataRow dr = res.Rows[0];
                     gm_login = dr["gm"].ToString();
+                    am_login = dr["am"].ToString();
                     head_am_login = dr["head_am"].ToString();
                     c_level_login = dr["c_level"].ToString();
                 }
@@ -636,6 +638,10 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "GM Approve")
                 {
                     xname = gm_login; //GM Login
+                }
+                else if (next_step_name == "AM Approve")
+                {
+                    xname = am_login; //AM Approve Login
                 }
                 else if (next_step_name == "Head AM Approve")
                 {
@@ -667,6 +673,10 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "GM Approve")
                 {
                     xname = gm_login; //GM Login
+                }
+                else if (next_step_name == "AM Approve")
+                {
+                    xname = am_login; //AM Approve Login
                 }
                 else if (next_step_name == "Head AM Approve")
                 {
@@ -772,6 +782,10 @@ namespace onlineLegalWF.Class
                 {
                     xname = gm_login; //GM Login
                 }
+                else if (next_step_name == "AM Approve")
+                {
+                    xname = am_login; //AM Approve Login
+                }
                 else if (next_step_name == "Head AM Approve")
                 {
                     xname = head_am_login; //Head AM Approve Login
@@ -872,6 +886,10 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "GM Approve")
                 {
                     xname = gm_login; //GM Login
+                }
+                else if (next_step_name == "AM Approve")
+                {
+                    xname = am_login; //AM Approve Login
                 }
                 else if (next_step_name == "Head AM Approve")
                 {
@@ -977,6 +995,10 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "GM Approve")
                 {
                     xname = gm_login; //GM Login
+                }
+                else if (next_step_name == "AM Approve")
+                {
+                    xname = am_login; //AM Approve Login
                 }
                 else if (next_step_name == "Head AM Approve")
                 {
