@@ -131,8 +131,8 @@ namespace onlineLegalWF.test
             var xsign_upload = sign_upload;
 
             //var path_template = ConfigurationManager.AppSettings["WT_Template_insurance"].ToString();
-            string templatefile = @"D:\WordTemplate\test\test1.docx";
-            string outputfolder = @"D:\WordTemplate\test\Output";
+            string templatefile = @"C:\WordTemplate\test\test1.docx";
+            string outputfolder = @"C:\WordTemplate\test\Output";
             string outputfn = outputfolder + @"\inreq_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();

@@ -614,9 +614,7 @@ namespace onlineLegalWF.Class
             if (!string.IsNullOrEmpty(xbu_code)) 
             {
                 string sqlbu = @"select * from li_business_unit where bu_code = '" + xbu_code + "'";
-
                 var res = zdb.ExecSql_DataTable(sqlbu, zconnstr);
-
                 if (res.Rows.Count > 0) 
                 {
                     DataRow dr = res.Rows[0];
