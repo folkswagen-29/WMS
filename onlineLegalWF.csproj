@@ -53,9 +53,8 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.Office.Interop.Word.15.0.4797.1004\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>..\onlineLegal\bin\Microsoft.Office.Interop.Word.dll</HintPath>
     </Reference>
     <Reference Include="Spire.Doc">
       <HintPath>..\onlineLegal\bin\Spire.Doc.dll</HintPath>
