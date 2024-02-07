@@ -9,12 +9,12 @@ using System.Configuration;
 using static ReplaceDocx.Class.ReplaceDocx;
 using onlineLegalWF.Class;
 using System.Globalization;
-//using Spire.Doc;
-//using Spire.Pdf;
-using iTextSharp.text.pdf;
+using Spire.Doc;
+using Spire.Pdf;
+//using iTextSharp.text.pdf;
 using System.IO;
-using iTextSharp.text;
-
+//using iTextSharp.text;
+using DocumentFormat.OpenXml.Packaging;
 
 namespace onlineLegalWF.test
 {
@@ -120,6 +120,22 @@ namespace onlineLegalWF.test
             //    }
 
             //}
+
+            //byte[] byteArray = File.ReadAllBytes(@"D:\Users\worawut.m\Downloads\C__WordTemplate_test_Output_inreq_20240207_113012.docx");
+            //using (MemoryStream stream = new MemoryStream())
+            //{
+            //    stream.Write(byteArray, 0, (int)byteArray.Length);
+            //    using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(stream, true))
+            //    {
+            //        // Do work here
+            //    }
+            //    // Save the file with the new name
+            //    File.WriteAllBytes(@"D:\Users\worawut.m\Downloads\C__WordTemplate_test_Output_inreq_20240207_113012_new.docx", stream.ToArray());
+            //}
+
+            //Document document = new Document();
+            //document.LoadFromFile(@"D:\Users\worawut.m\Downloads\C__WordTemplate_test_Output_inreq_20240207_113012.docx", Spire.Doc.FileFormat.Docx);
+            //document.SaveToFile(@"D:\Users\worawut.m\Downloads\C__WordTemplate_test_Output_inreq_20240207_113012.pdf", Spire.Doc.FileFormat.PDF);
         }
         protected void btnTestRun_Click(object sender, EventArgs e)
         {
@@ -554,7 +570,8 @@ namespace onlineLegalWF.test
             //var outputbyte = rdoc.ReplaceData(listTagData, templatefile, outputfolder, outputfn, false);
 
             //ReplaceDocx.Class.ReplaceDocx repl = new ReplaceDocx.Class.ReplaceDocx();
-            repl.convertDOCtoPDF(outputfn, outputfn.Replace(".docx", ".pdf"), false);
+            //repl.convertDOCtoPDF(outputfn, outputfn.Replace(".docx", ".pdf"), false);
+            repl.convertDOCtoPDFSpite(outputfn, outputfn.Replace(".docx", ".pdf"), false);
             // Dowload Word 
             Response.Clear();
             Response.ContentType = "text/xml";

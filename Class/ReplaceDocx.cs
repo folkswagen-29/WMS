@@ -646,6 +646,28 @@ namespace ReplaceDocx.Class
             }
             return content;
         }
+
+        public byte[] convertDOCtoPDFSpite(string xpath_doc_filename, string xpath_pdf_filename, bool delete_output)
+        {
+
+            String PATH_APP_PDF = xpath_pdf_filename;
+            var inputFile = xpath_doc_filename;
+
+            Document document = new Document();
+            document.LoadFromFile(inputFile, Spire.Doc.FileFormat.Docx);
+            document.SaveToFile(PATH_APP_PDF, Spire.Doc.FileFormat.PDF);
+
+            byte[] content = new byte[0];
+            if (File.Exists(PATH_APP_PDF) == true)
+            {
+                content = File.ReadAllBytes(PATH_APP_PDF);
+                if (delete_output == true)
+                {
+                    File.Delete(PATH_APP_PDF);
+                }
+            }
+            return content;
+        }
         private void ReleaseObject(object obj)
         {
             try
