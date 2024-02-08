@@ -60,7 +60,7 @@
 
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="DeleteLink" runat="server" Text="Delete" OnClick="DeleteData" CommandArgument=' <%# Eval("attached_filepath") %>'><img src="/Images/icon_delete.png" height="20" /></asp:LinkButton>
+                                        <asp:LinkButton ID="DeleteLink" runat="server" Text="Delete" OnClick="DeleteData" CommandArgument=' <%# Eval("attached_filepath") %>'><img src="../Images/icon_delete.png" height="20" /></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
