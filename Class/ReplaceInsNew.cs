@@ -233,7 +233,7 @@ namespace onlineLegalWF.Class
                         res.date1 = data.date1;
                         if (dr["wf_status"].ToString() != "")
                         {
-                            res.sign_name1 = "อนุมัติผ่านระบบ";
+                            res.sign_name1 = "Approved by system";
                             res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
@@ -244,7 +244,7 @@ namespace onlineLegalWF.Class
                         res.date1 = data.date1;
                         if (dr["wf_status"].ToString() != "")
                         {
-                            res.sign_name1 = "อนุมัติผ่านระบบ";
+                            res.sign_name1 = "Approved by system";
                             res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
@@ -252,7 +252,7 @@ namespace onlineLegalWF.Class
                     {
                         if (dr["wf_status"].ToString() != "")
                         {
-                            res.sign_name2 = "อนุมัติผ่านระบบ";
+                            res.sign_name2 = "Approved by system";
                             res.date2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
@@ -261,7 +261,7 @@ namespace onlineLegalWF.Class
                         
                         if (dr["wf_status"].ToString() != "")
                         {
-                            res.sign_name22 = "อนุมัติผ่านระบบ";
+                            res.sign_name22 = "Approved by system";
                             res.date22 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
@@ -270,7 +270,7 @@ namespace onlineLegalWF.Class
                         
                         if (dr["wf_status"].ToString() != "")
                         {
-                            res.sign_name3 = "อนุมัติผ่านระบบ";
+                            res.sign_name3 = "Approved by system";
                             res.date3 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
@@ -278,7 +278,7 @@ namespace onlineLegalWF.Class
                     {
                         if (dr["wf_status"].ToString() != "")
                         {
-                            res.sign_name4 = "อนุมัติผ่านระบบ";
+                            res.sign_name4 = "Approved by system";
                             res.date4 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
@@ -287,7 +287,7 @@ namespace onlineLegalWF.Class
                         if (dr["wf_status"].ToString() != "")
                         {
                             res.cb1 = "X";
-                            res.sign_name5 = "อนุมัติผ่านระบบ";
+                            res.sign_name5 = "Approved by system";
                             res.date5 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }

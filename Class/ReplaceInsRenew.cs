@@ -187,7 +187,7 @@ namespace onlineLegalWF.Class
                         res.date1 = data.date1;
                         if (dr["wf_status"].ToString() != "")
                         {
-                            res.sign_name1 = "อนุมัติผ่านระบบ";
+                            res.sign_name1 = "Approved by system";
                             res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
@@ -198,7 +198,7 @@ namespace onlineLegalWF.Class
                         res.date1 = data.date1;
                         if (dr["wf_status"].ToString() != "")
                         {
-                            res.sign_name1 = "อนุมัติผ่านระบบ";
+                            res.sign_name1 = "Approved by system";
                             res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
@@ -209,7 +209,7 @@ namespace onlineLegalWF.Class
                         res.date2 = data.date2;
                         if (dr["wf_status"].ToString() != "")
                         {
-                            res.sign_name2 = "อนุมัติผ่านระบบ";
+                            res.sign_name2 = "Approved by system";
                             res.date2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
@@ -220,7 +220,7 @@ namespace onlineLegalWF.Class
                         res.date3 = data.date3;
                         if (dr["wf_status"].ToString() != "")
                         {
-                            res.sign_name3 = "อนุมัติผ่านระบบ";
+                            res.sign_name3 = "Approved by system";
                             res.date3 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
@@ -231,7 +231,7 @@ namespace onlineLegalWF.Class
                         res.date4 = data.date4;
                         if (dr["wf_status"].ToString() != "")
                         {
-                            res.sign_name4 = "อนุมัติผ่านระบบ";
+                            res.sign_name4 = "Approved by system";
                             res.date4 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
