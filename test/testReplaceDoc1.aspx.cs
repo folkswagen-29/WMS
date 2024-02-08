@@ -15,6 +15,7 @@ using Spire.Pdf;
 using System.IO;
 //using iTextSharp.text;
 using DocumentFormat.OpenXml.Packaging;
+using iTextSharp.text.pdf;
 
 namespace onlineLegalWF.test
 {
@@ -128,10 +129,19 @@ namespace onlineLegalWF.test
             //    using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(stream, true))
             //    {
             //        // Do work here
+
             //    }
             //    // Save the file with the new name
             //    File.WriteAllBytes(@"D:\Users\worawut.m\Downloads\C__WordTemplate_test_Output_inreq_20240207_113012_new.docx", stream.ToArray());
             //}
+
+            //StreamReader str = new StreamReader(@"D:\Users\worawut.m\Downloads\C__WordTemplate_test_Output_inreq_20240207_113012.docx");
+            //Document doc = new Document();
+            //PdfWriter.GetInstance(doc, new FileStream(@"D:\Users\worawut.m\Downloads\C__WordTemplate_test_Output_inreq_20240207_113012.pdf", FileMode.Create));
+            //doc.Open();
+            //doc.Add(new Paragraph(str.ReadToEnd()));
+            //doc.Close();
+
 
             //Document document = new Document();
             //document.LoadFromFile(@"D:\Users\worawut.m\Downloads\C__WordTemplate_test_Output_inreq_20240207_113012.docx", Spire.Doc.FileFormat.Docx);
@@ -917,5 +927,7 @@ namespace onlineLegalWF.test
             dt.Columns.Add("EndDate", typeof(string));
             return dt;
         }
+
+
     } 
 }

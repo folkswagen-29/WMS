@@ -668,6 +668,8 @@ namespace ReplaceDocx.Class
             }
             return content;
         }
+
+
         private void ReleaseObject(object obj)
         {
             try
