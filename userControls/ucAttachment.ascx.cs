@@ -179,7 +179,7 @@ namespace onlineLegalWF.userControls
 
             if (extension == ".pdf")
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalAttach();", true);
                 var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
                 pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filePath;
             }

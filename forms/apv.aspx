@@ -100,7 +100,7 @@
     </div>
 
     <script type="text/javascript">
-        function showModal() {
+        function showModalReject() {
             $("#modalreject").modal('show');
         }
     </script>

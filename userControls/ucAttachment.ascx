@@ -110,7 +110,7 @@
 </div>
 
 <script type="text/javascript">
-        function showModal() {
+        function showModalAttach() {
             $("#modalattach").modal('show');
         }
 </script>

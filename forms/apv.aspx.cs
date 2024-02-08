@@ -2296,7 +2296,7 @@ namespace onlineLegalWF.forms
 
         protected void btn_Reject_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalReject();", true);
         }
         protected void btn_reject_submit_Click(object sender, EventArgs e)
         {
