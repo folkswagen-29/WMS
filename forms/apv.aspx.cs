@@ -1301,7 +1301,7 @@ namespace onlineLegalWF.forms
                 float cal_iar_pfc = float.Parse(int.Parse(xiar_pfc, NumberStyles.AllowThousands).ToString());
                 int int_iar_uatc = int.Parse(xiar_uatc, NumberStyles.AllowThousands);
                 deviation = cal_iar_uatc / cal_iar_pfc;
-                if (int_iar_uatc < 100000)
+                if (int_iar_uatc <= 100000)
                 {
                     data.sign_awcname1 = "";
                     data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
