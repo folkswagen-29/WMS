@@ -280,7 +280,7 @@ namespace onlineLegalWF.forms
 
                                         //send mail to next_approve
                                         ////fix mail test
-                                        string email = "worawut.m@assetworldcorp-th.com";
+                                        string email = "legalwfuat2024@gmail.com";
                                         _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
 
                                     }
@@ -360,7 +360,7 @@ namespace onlineLegalWF.forms
 
                                         //send mail to next_approve
                                         ////fix mail test
-                                        string email = "worawut.m@assetworldcorp-th.com";
+                                        string email = "legalwfuat2024@gmail.com";
                                         _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
 
                                     }
@@ -440,7 +440,7 @@ namespace onlineLegalWF.forms
 
                                         //send mail to next_approve
                                         ////fix mail test
-                                        string email = "worawut.m@assetworldcorp-th.com";
+                                        string email = "legalwfuat2024@gmail.com";
                                         _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
 
                                     }
@@ -520,7 +520,7 @@ namespace onlineLegalWF.forms
 
                                         //send mail to next_approve
                                         ////fix mail test
-                                        string email = "worawut.m@assetworldcorp-th.com";
+                                        string email = "legalwfuat2024@gmail.com";
                                         _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
 
                                     }
@@ -598,7 +598,7 @@ namespace onlineLegalWF.forms
                                     //send mail to requester
 
                                     ////fix mail test
-                                    string email = "worawut.m@assetworldcorp-th.com";
+                                    string email = "legalwfuat2024@gmail.com";
                                     _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
 
                                     //send mait to Procurement
@@ -682,7 +682,7 @@ namespace onlineLegalWF.forms
                                         //send mail to requester
 
                                         ////fix mail test
-                                        string email = "worawut.m@assetworldcorp-th.com";
+                                        string email = "legalwfuat2024@gmail.com";
                                         _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
 
                                         //send mait to Procurement
@@ -693,7 +693,7 @@ namespace onlineLegalWF.forms
                                         string[] pdfFilesIndara = new string[] { resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf"), resattachfile.Rows[0]["attached_filepath"].ToString() };
                                         string filepathIndara = zmergepdf.mergefilePDF(pdfFilesIndara, outputdirectory);
                                         //string[] emailIndara = new string[] { "teerapat.w@tgh.co.th", "phakorn.s@tgh.co.th" };
-                                        string[] emailIndara = new string[] { "worawut.m@assetworldcorp-th.com", "manit.ch@assetworldcorp-th.com" };
+                                        string[] emailIndara = new string[] { "legalwfuat2024@gmail.com", "manit.ch@assetworldcorp-th.com" };
                                         _ = zsendmail.sendEmails(subject + " Mail To indara", emailIndara, body, filepathIndara);
 
                                     }
@@ -771,7 +771,7 @@ namespace onlineLegalWF.forms
                                     //send mail to requester
 
                                     ////fix mail test
-                                    string email = "worawut.m@assetworldcorp-th.com";
+                                    string email = "legalwfuat2024@gmail.com";
                                     _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
 
                                     //send mait to Procurement
@@ -895,7 +895,7 @@ namespace onlineLegalWF.forms
                                     //_ = zsendmail.sendEmails(subject + "Mail To Requester", emails, body, filepath);
 
                                     ////fix mail test 
-                                    string email = "worawut.m@assetworldcorp-th.com";
+                                    string email = "legalwfuat2024@gmail.com";
                                     _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
 
                                     //send mait to Procurement

@@ -30,7 +30,7 @@ namespace onlineLegalWF.test
         {
             string filepath = @"D:\Users\worawut.m\Downloads\mergePdf_20240115_124616.pdf";
             string subject = "Test Send Mail to worawut";
-            string mailto = "worawut.m@assetworldcorp-th.com";
+            string mailto = "legalwfuat2024@gmail.com";
             string body = "Test attach file to worawut";
 
             _ = zsendmail.sendEmail(subject, mailto, body, filepath);

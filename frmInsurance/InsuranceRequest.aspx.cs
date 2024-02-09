@@ -935,7 +935,7 @@ namespace onlineLegalWF.frmInsurance
 
                             //send mail to next_approve
                             ////fix mail test
-                            string email = "worawut.m@assetworldcorp-th.com";
+                            string email = "legalwfuat2024@gmail.com";
                             _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
 
                         }
