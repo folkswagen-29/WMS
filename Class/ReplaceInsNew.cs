@@ -200,6 +200,9 @@ namespace onlineLegalWF.Class
                 res.reason = dr0["reason"].ToString();
                 res.approve = dr0["approved_desc"].ToString();
                 xexternal_domain = dr0["external_domain"].ToString();
+                res.name1 = data.name1;
+                res.position1 = data.position1;
+                res.date1 = data.date1;
                 res.name2 = data.name2;
                 res.position2 = data.position2;
                 res.date2 = data.date2;
