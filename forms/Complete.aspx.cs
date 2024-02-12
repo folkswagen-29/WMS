@@ -57,7 +57,7 @@ namespace onlineLegalWF.forms
                     getDocument(id);
                 }
             }
-            else if (process_code == "INR_CLAIM")
+            else if (process_code == "INR_CLAIM" || process_code == "INR_CLAIM_2" || process_code == "INR_CLAIM_3")
             {
                 string sqlinsclaim = "select * from li_insurance_claim where process_id='" + req + "'";
                 var resinsclaim = zdb.ExecSql_DataTable(sqlinsclaim, zconnstr);
