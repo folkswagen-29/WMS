@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -779,6 +780,13 @@ namespace onlineLegalWF.frmInsurance
             // check session_user
             if (Session["user_login"] != null)
             {
+                string sqlbu = @"select * from li_business_unit where bu_code = '" + xbu_code + "'";
+                var resbu = zdb.ExecSql_DataTable(sqlbu, zconnstr);
+                if (resbu.Rows.Count > 0)
+                {
+                    wfAttr.external_domain = resbu.Rows[0]["external_domain"].ToString();
+                }
+
                 var xlogin_name = Session["user_login"].ToString();
                 var empFunc = new EmpInfo();
 

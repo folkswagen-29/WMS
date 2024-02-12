@@ -721,6 +721,19 @@ namespace onlineLegalWF.frmInsurance
             // check session_user
             if (Session["user_login"] != null)
             {
+                //get check external domain
+                string sql = @"select [row_id],[process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective]
+                                  ,[reason],[approved_desc],[status],[updated_datetime], ins.[bu_code],bu.[external_domain],[property_insured_name] from li_insurance_request as ins
+                              INNER JOIN li_business_unit as bu on ins.bu_code = bu.bu_code
+                              where process_id = '" + wfAttr.process_id + "'";
+
+                var resex = zdb.ExecSql_DataTable(sql, zconnstr);
+
+                if (resex.Rows.Count > 0)
+                {
+                    wfAttr.external_domain = resex.Rows[0]["external_domain"].ToString();
+                }
+
                 var xlogin_name = Session["user_login"].ToString();
                 var empFunc = new EmpInfo();
 

@@ -70,6 +70,14 @@ namespace onlineLegalWF.forms
                     subject.Text = resinsreq.Rows[0]["subject"].ToString();
                     hid_bucode.Value = resinsreq.Rows[0]["bu_code"].ToString();
 
+                    string sqlbu = @"select * from li_business_unit where bu_code = '" + hid_bucode.Value + "'";
+                    var resbu = zdb.ExecSql_DataTable(sqlbu, zconnstr);
+                    if (resbu.Rows.Count > 0)
+                    {
+                        DataRow dr = resbu.Rows[0];
+                        hid_external_domain.Value = dr["external_domain"].ToString();
+                    }
+
                     //init data UcAttachAndCommentLogs
                     initDataAttachAndComment(resinsreq.Rows[0]["process_id"].ToString());
 
@@ -92,6 +100,14 @@ namespace onlineLegalWF.forms
                     subject.Text = resinsclaim.Rows[0]["incident"].ToString();
                     hid_bucode.Value = resinsclaim.Rows[0]["bu_code"].ToString();
 
+                    string sqlbu = @"select * from li_business_unit where bu_code = '" + hid_bucode.Value + "'";
+                    var resbu = zdb.ExecSql_DataTable(sqlbu, zconnstr);
+                    if (resbu.Rows.Count > 0)
+                    {
+                        DataRow dr = resbu.Rows[0];
+                        hid_external_domain.Value = dr["external_domain"].ToString();
+                    }
+
                     //init data UcAttachAndCommentLogs
                     initDataAttachAndComment(resinsclaim.Rows[0]["process_id"].ToString());
 
@@ -113,6 +129,14 @@ namespace onlineLegalWF.forms
                     doc_no.Text = resinsmemo.Rows[0]["document_no"].ToString();
                     subject.Text = resinsmemo.Rows[0]["subject"].ToString();
                     hid_bucode.Value = "";
+
+                    string sqlbu = @"select * from li_business_unit where bu_code = '" + hid_bucode.Value + "'";
+                    var resbu = zdb.ExecSql_DataTable(sqlbu, zconnstr);
+                    if (resbu.Rows.Count > 0)
+                    {
+                        DataRow dr = resbu.Rows[0];
+                        hid_external_domain.Value = dr["external_domain"].ToString();
+                    }
 
                     //init data UcAttachAndCommentLogs
                     initDataAttachAndComment(resinsmemo.Rows[0]["process_id"].ToString());
@@ -165,6 +189,7 @@ namespace onlineLegalWF.forms
                     var emp = empFunc.getEmpInfo(xlogin_name);
 
                     // set WF Attributes
+                    wfAttr.external_domain = hid_external_domain.Value;
                     wfAttr.subject = subject.Text.Trim();
                     wfAttr.assto_login = emp.next_line_mgr_login;
                     wfAttr.wf_status = wfAttr.step_name + " Approved";

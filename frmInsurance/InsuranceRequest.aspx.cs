@@ -835,6 +835,7 @@ namespace onlineLegalWF.frmInsurance
             // Sample Submit
             string process_code = "INR_NEW";
             int version_no = 1;
+            string xbu_code = ddl_bu.SelectedValue;
 
             // getCurrentStep
             var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
@@ -842,6 +843,19 @@ namespace onlineLegalWF.frmInsurance
             // check session_user
             if (Session["user_login"] != null)
             {
+                //get check external domain
+                string sql = @"select [row_id],[process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective]
+                                  ,[reason],[approved_desc],[status],[updated_datetime], ins.[bu_code],bu.[external_domain],[property_insured_name] from li_insurance_request as ins
+                              INNER JOIN li_business_unit as bu on ins.bu_code = bu.bu_code
+                              where process_id = '" + wfAttr.process_id + "'";
+
+                var resex = zdb.ExecSql_DataTable(sql, zconnstr);
+
+                if (resex.Rows.Count > 0)
+                {
+                    wfAttr.external_domain = resex.Rows[0]["external_domain"].ToString();
+                }
+
                 var xlogin_name = Session["user_login"].ToString();
                 var empFunc = new EmpInfo();
 
@@ -855,13 +869,13 @@ namespace onlineLegalWF.frmInsurance
                 wfAttr.submit_answer = "SUBMITTED";
                 //wfAttr.next_assto_login = emp.next_line_mgr_login;
                 wfAttr.submit_by = emp.user_login;
-                wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by);
+                wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by,lblPID.Text,xbu_code);
                 wfAttr.updated_by = emp.user_login;
                 
                 // wf.updateProcess
                 var wfA_NextStep = zwf.updateProcess(wfAttr);
                 //wfA_NextStep.next_assto_login = emp.next_line_mgr_login;
-                wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by);
+                wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by,lblPID.Text,xbu_code);
                 string status = zwf.Insert_NextStep(wfA_NextStep);
 
                 if (status == "Success")
