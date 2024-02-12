@@ -185,7 +185,7 @@ namespace onlineLegalWF.Class
                         res.name1 = data.name1;
                         res.position1 = data.position1;
                         res.date1 = data.date1;
-                        if (dr["wf_status"].ToString() != "")
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_name1 = "Approved by system";
                             res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
@@ -196,7 +196,7 @@ namespace onlineLegalWF.Class
                         res.name1 = data.name1;
                         res.position1 = data.position1;
                         res.date1 = data.date1;
-                        if (dr["wf_status"].ToString() != "")
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_name1 = "Approved by system";
                             res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
@@ -218,7 +218,7 @@ namespace onlineLegalWF.Class
                         res.name3 = data.name3;
                         res.position3 = data.position3;
                         res.date3 = data.date3;
-                        if (dr["wf_status"].ToString() != "")
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_name3 = "Approved by system";
                             res.date3 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
@@ -229,7 +229,7 @@ namespace onlineLegalWF.Class
                         res.name4 = data.name4;
                         res.position4 = data.position4;
                         res.date4 = data.date4;
-                        if (dr["wf_status"].ToString() != "")
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_name4 = "Approved by system";
                             res.date4 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");

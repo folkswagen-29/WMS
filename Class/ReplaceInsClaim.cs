@@ -282,7 +282,7 @@ namespace onlineLegalWF.Class
 
                     if (dr["step_name"].ToString() == "Start")
                     {
-                        if (dr["wf_status"].ToString() != "")
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_propname1 = "Approved by system";
                             res.propdate1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
@@ -290,7 +290,7 @@ namespace onlineLegalWF.Class
                     }
                     else if (dr["step_name"].ToString() == "Edit Request")
                     {
-                        if (dr["wf_status"].ToString() != "")
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_propname1 = "Approved by system";
                             res.propdate1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
@@ -298,7 +298,7 @@ namespace onlineLegalWF.Class
                     }
                     else if (dr["step_name"].ToString() == "GM Approve")
                     {
-                        if (dr["wf_status"].ToString() != "")
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_propname2 = "Approved by system";
                             res.propdate2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
@@ -306,7 +306,7 @@ namespace onlineLegalWF.Class
                     }
                     else if (dr["step_name"].ToString() == "Head AM Approve")
                     {
-                        if (dr["wf_status"].ToString() != "")
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_propname3 = "Approved by system";
                             res.propdate3 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
@@ -314,7 +314,7 @@ namespace onlineLegalWF.Class
                     }
                     else if (dr["step_name"].ToString() == "AWC Validate Approve")
                     {
-                        if (dr["wf_status"].ToString() != "")
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_awcname1 = "Approved by system";
                             res.awcdate1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
@@ -322,7 +322,7 @@ namespace onlineLegalWF.Class
                     }
                     else if (dr["step_name"].ToString() == "AWC Validate2 Approve")
                     {
-                        if (dr["wf_status"].ToString() != "")
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_awcname1_2 = "Approved by system";
                             res.awcdate1_2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
@@ -330,7 +330,7 @@ namespace onlineLegalWF.Class
                     }
                     else if (dr["step_name"].ToString() == "AWC Validate3 Approve")
                     {
-                        if (dr["wf_status"].ToString() != "")
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_awcname1_3 = "Approved by system";
                             res.awcdate1_3 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
@@ -338,7 +338,7 @@ namespace onlineLegalWF.Class
                     }
                     else if (dr["step_name"].ToString() == "AWC Reviewer Approve")
                     {
-                        if (dr["wf_status"].ToString() != "")
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_awcname2 = "Approved by system";
                             res.awcdate2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
@@ -346,7 +346,7 @@ namespace onlineLegalWF.Class
                     }
                     else if (dr["step_name"].ToString() == "AWC Approval Approve")
                     {
-                        if (dr["wf_status"].ToString() != "")
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_awcname3 = "Approved by system";
                             res.awcdate3 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
