@@ -43,11 +43,23 @@
                         </tr>
                         <tr>
                             <td class="cell_content_20PC_TR">
+                                <label class="Label_md">BU </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:DropDownList ID="ddl_bu" runat="server" CssClass="Text_200" OnSelectedIndexChanged="ddl_bu_Changed" AutoPostBack="true">
+                                    <asp:ListItem>-Please select-</asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
                                 <label class="Label_md">Company </label>
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:TextBox ID="company_name" runat="server" CssClass="Text_400"></asp:TextBox>
+                                <asp:TextBox ID="company_name" runat="server" CssClass="Text_600" Enabled="false"></asp:TextBox>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -58,18 +70,6 @@
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
                                 <asp:Label ID="doc_no" runat="server" CssClass="Label_md"></asp:Label>
-                            </td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="cell_content_20PC_TR">
-                                <label class="Label_md">BU </label>
-                            </td>
-                            <td>&nbsp;</td>
-                            <td class="cell_content_80PC_TL">
-                                <asp:DropDownList ID="ddl_bu" runat="server" CssClass="Text_200">
-                                    <asp:ListItem>-Please select-</asp:ListItem>
-                                </asp:DropDownList>
                             </td>
                             <td>&nbsp;</td>
                         </tr>

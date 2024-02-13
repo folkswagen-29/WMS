@@ -51,6 +51,15 @@ namespace onlineLegalWF.frmInsurance
         protected global::System.Web.UI.WebControls.DropDownList type_req;
 
         /// <summary>
+        /// ddl_bu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_bu;
+
+        /// <summary>
         /// company control.
         /// </summary>
         /// <remarks>
@@ -67,15 +76,6 @@ namespace onlineLegalWF.frmInsurance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label doc_no;
-
-        /// <summary>
-        /// ddl_bu control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_bu;
 
         /// <summary>
         /// subject control.

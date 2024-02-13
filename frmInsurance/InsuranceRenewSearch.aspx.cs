@@ -51,7 +51,7 @@ namespace onlineLegalWF.frmInsurance
         }
         public DataTable GetBusinessUnit()
         {
-            string sql = "select * from li_business_unit order by row_sort asc";
+            string sql = "select * from li_business_unit where isactive=1 order by row_sort asc";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }

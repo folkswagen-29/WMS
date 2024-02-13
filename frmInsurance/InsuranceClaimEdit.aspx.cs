@@ -98,9 +98,28 @@ namespace onlineLegalWF.frmInsurance
             }
         }
 
+        public string GetCompanyNameByBuCode(string xbu_code)
+        {
+            string company_name = "";
+
+            string sql = @"select * from li_business_unit where bu_code='" + xbu_code + "'";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                company_name = dt.Rows[0]["company_name"].ToString();
+
+            }
+
+            return company_name;
+        }
+        protected void ddl_bu_Changed(object sender, EventArgs e)
+        {
+            company_name.Text = GetCompanyNameByBuCode(ddl_bu.SelectedValue.ToString());
+        }
+
         public DataTable GetBusinessUnit()
         {
-            string sql = "select * from li_business_unit order by row_sort asc";
+            string sql = "select * from li_business_unit where isactive=1 order by row_sort asc";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
+using DocumentFormat.OpenXml.ExtendedProperties;
 using Newtonsoft.Json.Linq;
 using onlineLegalWF.Class;
 using onlineLegalWF.userControls;
@@ -36,7 +37,7 @@ namespace onlineLegalWF.frmInsurance
 
         public DataTable GetBusinessUnit()
         {
-            string sql = "select * from li_business_unit order by row_sort asc";
+            string sql = "select * from li_business_unit where isactive=1 order by row_sort asc";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }
@@ -65,6 +66,27 @@ namespace onlineLegalWF.frmInsurance
             hid_PID.Value = pid;
             ucAttachment1.ini_object(pid);
             ucCommentlog1.ini_object(pid);
+
+            company_name.Text = GetCompanyNameByBuCode(ddl_bu.SelectedValue.ToString());
+        }
+
+        public string GetCompanyNameByBuCode(string xbu_code)
+        {
+            string company_name = "";
+
+            string sql = @"select * from li_business_unit where bu_code='" + xbu_code + "'";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                company_name = dt.Rows[0]["company_name"].ToString();
+
+            }
+
+            return company_name;
+        }
+        protected void ddl_bu_Changed(object sender, EventArgs e)
+        {
+            company_name.Text = GetCompanyNameByBuCode(ddl_bu.SelectedValue.ToString());
         }
 
         protected void btn_save_Click(object sender, EventArgs e)

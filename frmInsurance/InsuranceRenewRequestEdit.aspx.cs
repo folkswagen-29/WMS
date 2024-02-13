@@ -70,6 +70,8 @@ namespace onlineLegalWF.frmInsurance
                 hid_PID.Value = res.Rows[0]["process_id"].ToString();
                 ucAttachment1.ini_object(hid_PID.Value = res.Rows[0]["process_id"].ToString());
                 ucCommentlog1.ini_object(hid_PID.Value = res.Rows[0]["process_id"].ToString());
+
+                //company_name.Text = GetCompanyNameByBuCode(ddl_bu.SelectedValue.ToString());
             }
 
             var dt = iniDataTable(id);
@@ -96,9 +98,27 @@ namespace onlineLegalWF.frmInsurance
             }
 
         }
+        public string GetCompanyNameByBuCode(string xbu_code)
+        {
+            string company_name = "";
+
+            string sql = @"select * from li_business_unit where bu_code='" + xbu_code + "'";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                company_name = dt.Rows[0]["company_name"].ToString();
+
+            }
+
+            return company_name;
+        }
+        protected void ddl_bu_Changed(object sender, EventArgs e)
+        {
+            company_name.Text = GetCompanyNameByBuCode(ddl_bu.SelectedValue.ToString());
+        }
         public DataTable GetBusinessUnit()
         {
-            string sql = "select * from li_business_unit order by row_sort asc";
+            string sql = "select * from li_business_unit where isactive=1 order by row_sort asc";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }
@@ -215,7 +235,7 @@ namespace onlineLegalWF.frmInsurance
             var xreq_no = req_no.Text.Trim();
             var xtype_req = type_req.SelectedValue.ToString();
             var xbu_code = ddl_bu.SelectedValue.ToString();
-            var xcompany_name = ddl_bu.SelectedItem.Text.ToString();
+            var xcompany_name = company_name.Text.ToString();
             var xdoc_no = doc_no.Text.Trim();
             var xsubject = subject.Text.Trim();
             var xto = to.Text.Trim();
@@ -316,7 +336,7 @@ namespace onlineLegalWF.frmInsurance
             var xreq_date = Utillity.ConvertStringToDate(req_date.Value);
             var xreq_no = req_no.Text.Trim();
             var xbu_code = ddl_bu.SelectedValue.ToString();
-            var xcompany_name = ddl_bu.SelectedItem.Text.ToString();
+            var xcompany_name = company_name.Text.ToString();
             var xdoc_no = doc_no.Text.Trim();
             var xsubject = subject.Text.Trim();
             var xto = to.Text.Trim();
