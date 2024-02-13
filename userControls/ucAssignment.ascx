@@ -55,11 +55,11 @@
         </tr>
         <tr>
             <td class="auto-style3">
-                <asp:Label ID="Label3" runat="server" CssClass="Label_sm" Text="Task Description" Width="200px"></asp:Label>
+                <asp:Label ID="Label3" runat="server" CssClass="Label_sm" Text="Detail" Width="200px"></asp:Label>
             </td>
             <td class="auto-style3">&nbsp;</td>
             <td class="auto-style3">
-                <asp:TextBox ID="txtTaskDesc" runat="server" Height="100px" TextMode="MultiLine" Width="582px" CssClass="Label_sm"></asp:TextBox>
+                <asp:TextBox ID="txtTaskDesc" runat="server" Height="60px" TextMode="MultiLine" Width="600px" CssClass="Label_sm"></asp:TextBox>
             </td>
             <td class="auto-style5">&nbsp;</td>
             <td class="auto-style3">&nbsp;</td>
@@ -112,8 +112,64 @@
     </table>
 </asp:Panel>
 
-<asp:Panel ID="pTaskList" runat="server" Height="400px">
+<asp:Panel ID="pTaskList" runat="server">
     <asp:Label ID="Label5" runat="server" Text="Historical Data" CssClass="Text_500" Width="800px"></asp:Label>
+    <asp:GridView ID="gv1" runat="server" AutoGenerateColumns="False" Font-Names="Tahoma" Font-Size="10pt" ForeColor="#990033" ShowHeaderWhenEmpty="True" Width="1238px">
+        <Columns>
+            <asp:TemplateField HeaderText="No.">
+                <ItemTemplate>
+                    <asp:Label ID="gvNo" runat="server" Text='<%# Eval("no") %>' Font-Names="Tahoma" Font-Size="9pt"></asp:Label>
+                </ItemTemplate>
+                <ItemStyle Width="65px" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Assign To">
+                <ItemTemplate>
+                    <asp:Label ID="gvAssignTo" runat="server" Text='<%# Eval("assignto") %>' Font-Names="Tahoma" Font-Size="9pt"></asp:Label>
+                </ItemTemplate>
+                <ItemStyle Width="150px" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Detail">
+                <ItemTemplate>
+                    <asp:Label ID="gvDetail" runat="server" Text='<%# Eval("detail") %>' Font-Names="Tahoma" Font-Size="9pt"></asp:Label>
+                </ItemTemplate>
+                <ItemStyle Width="200px" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Task Status">
+                <ItemTemplate>
+                    <asp:Label ID="gvTaskStatus" runat="server" Text='<%# Eval("taskstatus") %>' Font-Names="Tahoma" Font-Size="9pt"></asp:Label>
+                </ItemTemplate>
+                <ItemStyle Width="90px" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Remark">
+                <ItemTemplate>
+                    <asp:Label ID="gvRemark" runat="server" Text='<%# Eval("remark") %>' Font-Names="Tahoma" Font-Size="9pt"></asp:Label>
+                </ItemTemplate>
+                <ItemStyle Width="200px" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Attachments">
+                <ItemTemplate>
+                    <asp:Panel ID="gvpAttachment" runat="server" Height="60px" ScrollBars="Vertical" Width="350px">
+                    </asp:Panel>
+                </ItemTemplate>
+                <ItemStyle Width="300px" />
+            </asp:TemplateField>
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <asp:ImageButton ID="gvIbtnEdit" runat="server" Height="20px" ImageUrl="~/images/icon_edit.png" />
+                    &nbsp;&nbsp;
+                    <asp:ImageButton ID="gvIbtnDelete" runat="server" Height="20px" ImageUrl="~/images/icon_delete.png" />
+                </ItemTemplate>
+                <ItemStyle Width="200px" />
+            </asp:TemplateField>
+        </Columns>
+        <HeaderStyle BackColor="#CCCCCC" Font-Bold="False" Font-Names="Tahoma" Font-Size="10pt" />
+    </asp:GridView>
+    <asp:HiddenField ID="hidPID" runat="server" />
 </asp:Panel>
+
+
+<p>
+    &nbsp;</p>
+
 
 
