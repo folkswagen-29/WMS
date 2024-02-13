@@ -535,7 +535,7 @@ namespace onlineLegalWF.frmInsurance
                 data.awcdate2 = "";
 
                 data.sign_awcname3 = "";
-                data.awcname3 = "วัลลภา ไตรโสรัส";
+                data.awcname3 = "คุณวัลลภา ไตรโสรัส";
                 data.awcposition3 = "CEO";
                 data.awcdate3 = "";
             }
@@ -1148,7 +1148,7 @@ namespace onlineLegalWF.frmInsurance
                     data.awcdate2 = "";
 
                     data.sign_awcname3 = "";
-                    data.awcname3 = "วัลลภา ไตรโสรัส";
+                    data.awcname3 = "คุณวัลลภา ไตรโสรัส";
                     data.awcposition3 = "CEO";
                     data.awcdate3 = "";
                 }
