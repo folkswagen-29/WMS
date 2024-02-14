@@ -758,7 +758,7 @@ namespace onlineLegalWF.frmInsurance
             if (Session["user_login"] != null)
             {
                 //get check external domain
-                string sql = @"SELECT [row_id],[process_id],[company_name],[claim_no],[claim_date],[document_no],claim.[bu_code],[incident],[occurred_date]
+                string sql = @"SELECT [row_id],[process_id],claim.[company_name],[claim_no],[claim_date],[document_no],claim.[bu_code],[incident],[occurred_date]
                                   ,[submission_date],[incident_summary],[surveyor_name],[surveyor_company],[settlement_date],[settlement_day],[iar_atc],[iar_ded]
                                   ,[iar_pfc],[iar_uatc],[bi_atc],[bi_ded],[bi_pfc],[bi_uatc],[pl_cgl_atc],[pl_cgl_ded],[pl_cgl_pfc],[pl_cgl_uatc],[pv_atc]
                                   ,[pv_ded],[pv_pfc],[pv_uatc],[ttl_atc],[ttl_ded],[ttl_pfc],[ttl_uatc],[remark] ,[status],[updated_datetime],bu.[external_domain],bu.[bu_desc]
