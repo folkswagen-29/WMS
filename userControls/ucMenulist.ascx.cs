@@ -20,7 +20,7 @@ namespace onlineLegalWF.userControls
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) 
+            if (!IsPostBack)
             {
                 bind_menu("");
 
@@ -34,25 +34,25 @@ namespace onlineLegalWF.userControls
         {
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
             string sql = @"select * from (
-                            select distinct menu_code, menu_group_name, ( '"+host_url+@"' + menu_icon_filename) as menu_icon_filename , row_sort
+                            select distinct menu_code, menu_group_name, ( '" + host_url + @"' + menu_icon_filename) as menu_icon_filename , row_sort
 
             from m_portal_menu where menu_url = '' ) as t1 
 							order by t1.row_sort
 
             ";
-           
+
             var ds = zdb.ExecSql_DataSet(sql, zconnstr);
             gv.DataSource = ds.Tables[0];
-            gv.DataBind(); 
+            gv.DataBind();
 
         }
 
         protected void gv_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-            if (e.CommandName == "expandmenu") 
+            if (e.CommandName == "expandmenu")
             {
-                
+
                 int i = System.Convert.ToInt32(e.CommandArgument);
                 //gv.Rows[i].FindControl("gvlbtnMenu").Focus();
                 Session["group_menu_index"] = i;
@@ -66,10 +66,21 @@ namespace onlineLegalWF.userControls
             order by row_sort";
                 var ds = zdb.ExecSql_DataSet(sql, zconnstr);
                 gvA.DataSource = ds.Tables[0];
-                gvA.DataBind(); 
+                gvA.DataBind();
+
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+
+                    if (!string.IsNullOrEmpty(xlogin_name))
+                    {
+                        setNotificationInbox(xlogin_name);
+                    }
+
+                }
             }
         }
-        private void bind_gvA_menu(string menu_group_name,string index)
+        private void bind_gvA_menu(string menu_group_name, string index)
         {
             int length = System.Convert.ToInt32(index);
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
@@ -83,6 +94,19 @@ namespace onlineLegalWF.userControls
             var ds = zdb.ExecSql_DataSet(sql, zconnstr);
             gvA.DataSource = ds.Tables[0];
             gvA.DataBind();
+
+            if (Session["user_login"] != null)
+            {
+                var xlogin_name = Session["user_login"].ToString();
+
+                if (!string.IsNullOrEmpty(xlogin_name))
+                {
+                    setNotificationInbox(xlogin_name);
+                }
+
+            }
+
+
         }
         //gvA_RowCommand
         protected void gvA_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -102,5 +126,21 @@ namespace onlineLegalWF.userControls
 
             }
         }
+
+        public void setNotificationInbox(string login_name) 
+        {
+            string numnotify = "0";
+            string sql = "Select count(submit_by) as total from wf_routing where process_id in (Select process_id from wf_routing where assto_login like '"+ login_name + "' and submit_answer = '') and submit_answer = ''";
+            System.Data.DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0) 
+            {
+                numnotify = dt.Rows[0]["total"].ToString();
+            }
+            string js = "$('#inbox_notify').html('" + numnotify+ "');";
+
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "SetNotify", js, true);
+        }
+
+        
     }
 }

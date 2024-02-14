@@ -42,15 +42,10 @@
                                                     <tr>
                                                         <td>
                                                             <asp:LinkButton ID="gvAlbtnMenu" runat="server"  CommandArgument="<%# Container.DataItemIndex %>" CommandName="openprogram" Font-Names="tahoma" Font-Size="10pt" ForeColor="#333333" Text='<%# Bind("menu_name") %>'></asp:LinkButton>
+                                                            <%# Eval("menu_name").ToString() == "Inbox" ? "<span id='inbox_notify' class='badge-notify'>0</span>" : "" %>
                                                             <asp:Label ID="gvAlblMenuCode" runat="server" Text='<%# Bind("menu_code") %>' Visible="False">  </asp:Label>
                                                             <asp:Label ID="gvAlblMenuUrl" runat="server" Text='<%# Bind("menu_url") %>' Visible="False">  </asp:Label>
                                                             <asp:Label ID="gvAlblMenuGroupName" runat="server" Text='<%# Bind("menu_group_name") %>' Visible="False">  </asp:Label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                        <%--    <asp:GridView ID="gvA" runat="server">
-                                                            </asp:GridView>--%>
                                                         </td>
                                                     </tr>
                                                 </table>
