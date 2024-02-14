@@ -258,6 +258,7 @@ namespace onlineLegalWF.frmInsurance
             var gmname = "";
             var gmpos = "GM";
             var amname = "";
+            var headamname = "";
             var clevelname = "";
             if (res.Rows.Count > 0)
             {
@@ -267,28 +268,29 @@ namespace onlineLegalWF.frmInsurance
                     var xlogin_name = Session["user_login"].ToString();
                     var emp = empFunc.getEmpInfo(xlogin_name);
                     string sqlwf = "select * from wf_routing where process_id = '" + lblPID.Text + "' and step_name = 'Start'";
-                    var dtwf = zdb.ExecSql_DataTable(sqlwf, zconnstr) ;
+                    var dtwf = zdb.ExecSql_DataTable(sqlwf, zconnstr);
                     if (dtwf.Rows.Count > 0)
                     {
                         DataRow drwf = dtwf.Rows[0];
                         var emprequester = empFunc.getEmpInfo(drwf["submit_by"].ToString());
-                        if (emprequester != null) 
+                        if (emprequester != null)
                         {
                             requestor = emprequester.full_name_en;
                             requestorpos = emprequester.position_en;
                         }
-                        
+
                     }
-                    else 
+                    else
                     {
                         requestor = emp.full_name_en;
                         requestorpos = emp.position_en;
                     }
 
-                        
+
                 }
                 string xgm = res.Rows[0]["gm"].ToString();
-                string xam = res.Rows[0]["head_am"].ToString();
+                string xam = res.Rows[0]["am"].ToString();
+                string xhead_am = res.Rows[0]["head_am"].ToString();
                 string xclevel = res.Rows[0]["c_level"].ToString();
                 string xexternal_domain = res.Rows[0]["external_domain"].ToString();
                 //get data am user
@@ -300,6 +302,15 @@ namespace onlineLegalWF.frmInsurance
                         amname = empam.full_name_en;
                     }
                 }
+                //get data head am user
+                if (!string.IsNullOrEmpty(xhead_am))
+                {
+                    var empheadam = empFunc.getEmpInfo(xhead_am);
+                    if (empheadam.user_login != null)
+                    {
+                        headamname = empheadam.full_name_en;
+                    }
+                }
                 //get data gm user
                 if (!string.IsNullOrEmpty(xgm))
                 {
@@ -307,7 +318,7 @@ namespace onlineLegalWF.frmInsurance
                     if (empgm.user_login != null)
                     {
                         gmname = empgm.full_name_en;
-                        if (xexternal_domain == "Y") 
+                        if (xexternal_domain == "Y")
                         {
                             gmpos = empgm.position_en;
                         }
@@ -328,14 +339,18 @@ namespace onlineLegalWF.frmInsurance
             var apv1pos = gmpos;
             var apv1date = "";
             var apv2 = amname;
-            var apv2pos = "Head AM";
+            var apv2pos = "AM";
             var apv2date = "";
+            var apv2_1 = headamname;
+            var apv2pos_1 = "/ Head AM";
+            var apv2date_1 = "";
             var apv3 = clevelname;
             var apv3pos = "C-Level";
             var apv3date = "";
             var signname1 = "";
             var signname2 = "";
             var signname3 = "";
+            var signname3_1 = "";
             var signname4 = "";
 
             data.sign_name1 = signname1;
@@ -352,6 +367,11 @@ namespace onlineLegalWF.frmInsurance
             data.name3 = apv2.Replace(",", "!comma");
             data.position3 = apv2pos.Replace(",", "!comma");
             data.date3 = apv2date.Replace(",", "!comma");
+
+            data.sign_name3_1 = signname3_1;
+            data.name3_1 = apv2_1.Replace(",", "!comma");
+            data.position3_1 = apv2pos_1.Replace(",", "!comma");
+            data.date3_1 = apv2date_1.Replace(",", "!comma");
 
             data.sign_name4 = signname4;
             data.name4 = apv3.Replace(",", "!comma");
@@ -945,6 +965,7 @@ namespace onlineLegalWF.frmInsurance
                 var gmname = "";
                 var gmpos = "GM";
                 var amname = "";
+                var headamname = "";
                 var clevelname = "";
                 if (res.Rows.Count > 0)
                 {
@@ -953,7 +974,7 @@ namespace onlineLegalWF.frmInsurance
                     {
                         var xlogin_name = Session["user_login"].ToString();
                         var emp = empFunc.getEmpInfo(xlogin_name);
-                        string sqlwf = "select * from wf_routing where process_id = '" + pid + "' and step_name = 'Start'";
+                        string sqlwf = "select * from wf_routing where process_id = '" + lblPID.Text + "' and step_name = 'Start'";
                         var dtwf = zdb.ExecSql_DataTable(sqlwf, zconnstr);
                         if (dtwf.Rows.Count > 0)
                         {
@@ -975,7 +996,8 @@ namespace onlineLegalWF.frmInsurance
 
                     }
                     string xgm = res.Rows[0]["gm"].ToString();
-                    string xam = res.Rows[0]["head_am"].ToString();
+                    string xam = res.Rows[0]["am"].ToString();
+                    string xhead_am = res.Rows[0]["head_am"].ToString();
                     string xclevel = res.Rows[0]["c_level"].ToString();
                     string xexternal_domain = res.Rows[0]["external_domain"].ToString();
                     //get data am user
@@ -985,6 +1007,15 @@ namespace onlineLegalWF.frmInsurance
                         if (empam.user_login != null)
                         {
                             amname = empam.full_name_en;
+                        }
+                    }
+                    //get data head am user
+                    if (!string.IsNullOrEmpty(xhead_am))
+                    {
+                        var empheadam = empFunc.getEmpInfo(xhead_am);
+                        if (empheadam.user_login != null)
+                        {
+                            headamname = empheadam.full_name_en;
                         }
                     }
                     //get data gm user
@@ -1015,14 +1046,18 @@ namespace onlineLegalWF.frmInsurance
                 var apv1pos = gmpos;
                 var apv1date = "";
                 var apv2 = amname;
-                var apv2pos = "Head AM";
+                var apv2pos = "AM";
                 var apv2date = "";
+                var apv2_1 = headamname;
+                var apv2pos_1 = "/ Head AM";
+                var apv2date_1 = "";
                 var apv3 = clevelname;
                 var apv3pos = "C-Level";
                 var apv3date = "";
                 var signname1 = "";
                 var signname2 = "";
                 var signname3 = "";
+                var signname3_1 = "";
                 var signname4 = "";
 
                 data.sign_name1 = signname1;
@@ -1039,6 +1074,11 @@ namespace onlineLegalWF.frmInsurance
                 data.name3 = apv2.Replace(",", "!comma");
                 data.position3 = apv2pos.Replace(",", "!comma");
                 data.date3 = apv2date.Replace(",", "!comma");
+
+                data.sign_name3_1 = signname3_1;
+                data.name3_1 = apv2_1.Replace(",", "!comma");
+                data.position3_1 = apv2pos_1.Replace(",", "!comma");
+                data.date3_1 = apv2date_1.Replace(",", "!comma");
 
                 data.sign_name4 = signname4;
                 data.name4 = apv3.Replace(",", "!comma");

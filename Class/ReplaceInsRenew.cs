@@ -111,6 +111,23 @@ namespace onlineLegalWF.Class
             dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_name3) ? data.sign_name3.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
 
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#name3_1#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.name3) ? data.name3.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#position3_1#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.position3) ? data.position3.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#date3_1#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.date3) ? data.date3.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#sign_name3_1#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_name3) ? data.sign_name3.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+
 
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name4#";
@@ -167,6 +184,9 @@ namespace onlineLegalWF.Class
                 res.name3 = data.name3;
                 res.position3 = data.position3;
                 res.date3 = data.date3;
+                res.name3_1 = data.name3_1;
+                res.position3_1 = data.position3_1;
+                res.date3_1 = data.date3_1;
                 res.name4 = data.name4;
                 res.position4 = data.position4;
                 res.date4 = data.date4;
@@ -213,7 +233,7 @@ namespace onlineLegalWF.Class
                             res.date2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
-                    else if (dr["step_name"].ToString() == "Head AM Approve")
+                    else if (dr["step_name"].ToString() == "AM Approve")
                     {
                         res.name3 = data.name3;
                         res.position3 = data.position3;
@@ -222,6 +242,17 @@ namespace onlineLegalWF.Class
                         {
                             res.sign_name3 = "Approved by system";
                             res.date3 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    else if (dr["step_name"].ToString() == "Head AM Approve")
+                    {
+                        res.name3_1 = data.name3_1;
+                        res.position3_1 = data.position3_1;
+                        res.date3_1 = data.date3_1;
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.sign_name3_1 = "Approved by system";
+                            res.date3_1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
                     else if (dr["step_name"].ToString() == "BU Approve")
@@ -324,6 +355,11 @@ namespace onlineLegalWF.Class
             public string name3 { get; set; }
             public string position3 { get; set; }
             public string date3 { get; set; }
+
+            public string sign_name3_1 { get; set; }
+            public string name3_1 { get; set; }
+            public string position3_1 { get; set; }
+            public string date3_1 { get; set; }
 
             public string sign_name4 { get; set; }
             public string name4 { get; set; }
