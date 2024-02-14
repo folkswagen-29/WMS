@@ -758,19 +758,11 @@ namespace onlineLegalWF.frmInsurance
             if (Session["user_login"] != null)
             {
                 //get check external domain
-                string sql = @"SELECT [row_id],[process_id],claim.[company_name],[claim_no],[claim_date],[document_no],claim.[bu_code],[incident],[occurred_date]
-                                  ,[submission_date],[incident_summary],[surveyor_name],[surveyor_company],[settlement_date],[settlement_day],[iar_atc],[iar_ded]
-                                  ,[iar_pfc],[iar_uatc],[bi_atc],[bi_ded],[bi_pfc],[bi_uatc],[pl_cgl_atc],[pl_cgl_ded],[pl_cgl_pfc],[pl_cgl_uatc],[pv_atc]
-                                  ,[pv_ded],[pv_pfc],[pv_uatc],[ttl_atc],[ttl_ded],[ttl_pfc],[ttl_uatc],[remark] ,[status],[updated_datetime],bu.[external_domain],bu.[bu_desc]
-                              FROM li_insurance_claim as claim
-                              INNER JOIN li_business_unit as bu on claim.bu_code = bu.bu_code
-                              where process_id = '" + wfAttr.process_id + "'";
-
-                var res = zdb.ExecSql_DataTable(sql, zconnstr);
-
-                if (res.Rows.Count > 0)
+                string sqlbu = @"select * from li_business_unit where bu_code = '" + xbu_code + "'";
+                var resbu = zdb.ExecSql_DataTable(sqlbu, zconnstr);
+                if (resbu.Rows.Count > 0)
                 {
-                    wfAttr.external_domain = res.Rows[0]["external_domain"].ToString();
+                    wfAttr.external_domain = resbu.Rows[0]["external_domain"].ToString();
                 }
 
                 var xlogin_name = Session["user_login"].ToString();
