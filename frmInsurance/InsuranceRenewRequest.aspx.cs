@@ -534,7 +534,7 @@ namespace onlineLegalWF.frmInsurance
                 datasum.StartDate = (row.FindControl("gv1txtSdate") as TextBox).Text;
                 datasum.EndDate = (row.FindControl("gv1txtEdate") as TextBox).Text;
 
-                if (!string.IsNullOrEmpty(datasum.IndemnityPeriod) && !string.IsNullOrEmpty(datasum.SumInsured) && !string.IsNullOrEmpty(datasum.StartDate) && !string.IsNullOrEmpty(datasum.EndDate))
+                if (!string.IsNullOrEmpty(datasum.SumInsured) && !string.IsNullOrEmpty(datasum.StartDate) && !string.IsNullOrEmpty(datasum.EndDate))
                 {
                     listInsurancePropData.Add(datasum);
                 }
