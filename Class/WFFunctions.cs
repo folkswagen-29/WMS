@@ -801,6 +801,10 @@ namespace onlineLegalWF.Class
                 {
                     xname = xawcname3; //AWC Approval Approved
                 }
+                else if (next_step_name == "Insurance Specialist Confirm Approve")
+                {
+                    xname = "jaroonsak.n"; //Insurance Specialist Confirm Approve
+                }
                 else if (next_step_name == "Requester Receive Approval")
                 {
                     xname = submit_by; //Requester Receive Approval
@@ -909,6 +913,10 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "AWC Approval Approve")
                 {
                     xname = xawcname3; //AWC Approval Approved
+                }
+                else if (next_step_name == "Insurance Specialist Confirm Approve")
+                {
+                    xname = "jaroonsak.n"; //Insurance Specialist Confirm Approve
                 }
                 else if (next_step_name == "Requester Receive Approval")
                 {
@@ -1022,6 +1030,10 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "AWC Approval Approve")
                 {
                     xname = xawcname3; //AWC Approval Approved
+                }
+                else if (next_step_name == "Insurance Specialist Confirm Approve")
+                {
+                    xname = "jaroonsak.n"; //Insurance Specialist Confirm Approve
                 }
                 else if (next_step_name == "Requester Receive Approval")
                 {

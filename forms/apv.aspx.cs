@@ -317,7 +317,7 @@ namespace onlineLegalWF.forms
                         {
                             GenDocumnetInsClaim(lblPID.Text);
                             //check step not in step_name awc approval approve and end send email notification user assign_to approve or review
-                            if (wfAttr.step_name != "End" && wfAttr.step_name != "AWC Approval Approve")
+                            if (wfAttr.step_name != "End" && wfAttr.step_name != "Insurance Specialist Confirm Approve")
                             {
                                 string subject = "";
                                 string body = "";
@@ -639,7 +639,7 @@ namespace onlineLegalWF.forms
 
                             }
                         }
-                        else if (wfAttr.step_name == "AWC Approval Approve")
+                        else if (wfAttr.step_name == "Insurance Specialist Confirm Approve")
                         {
                             if (wfAttr.process_code == "INR_CLAIM" || wfAttr.process_code == "INR_CLAIM_2" || wfAttr.process_code == "INR_CLAIM_3") 
                             {
