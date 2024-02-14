@@ -206,7 +206,7 @@ namespace onlineLegalWF.forms
                         string sqlupdate = @"update li_insurance_request set status='approve',updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where process_id = '" + wfAttr.process_id + "'";
                         zdb.ExecNonQuery(sqlupdate, zconnstr);
                     }
-                    else if (wfAttr.step_name == "AWC Approval Approve")
+                    else if (wfAttr.step_name == "Insurance Specialist Confirm Approve")
                     {
                         if (wfAttr.process_code == "INR_CLAIM" || wfAttr.process_code == "INR_CLAIM_2" || wfAttr.process_code == "INR_CLAIM_3") 
                         {
