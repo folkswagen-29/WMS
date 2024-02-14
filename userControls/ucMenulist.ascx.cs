@@ -65,7 +65,7 @@ namespace onlineLegalWF.userControls
             where menu_group_name = '" + xmenu_group_name + @"' and menu_url <> '' 
             order by row_sort";
                 var ds = zdb.ExecSql_DataSet(sql, zconnstr);
-                gvA.DataSource = ds;
+                gvA.DataSource = ds.Tables[0];
                 gvA.DataBind(); 
             }
         }
@@ -81,7 +81,7 @@ namespace onlineLegalWF.userControls
              where menu_group_name = '" + menu_group_name + @"' and menu_url <> '' 
              order by row_sort";
             var ds = zdb.ExecSql_DataSet(sql, zconnstr);
-            gvA.DataSource = ds;
+            gvA.DataSource = ds.Tables[0];
             gvA.DataBind();
         }
         //gvA_RowCommand

@@ -629,8 +629,11 @@ namespace onlineLegalWF.forms
                                     //send mait to Procurement
                                     _ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
 
-                                    //send mail to jaroonsak.n
+                                    ////send mail to Insurance
+                                    //string[] emailInsurance = new string[] { "jaroonsak.n@assetworldcorp-th.com", "warin.k@assetworldcorp-th.com" };
+                                    //_ = zsendmail.sendEmails(subject + " Mail To Insurance", emailInsurance, body, filepath);
                                     _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
+                                    _ = zsendmail.sendEmail(subject + " Mail To Warin.k", email, body, filepath);
 
                                 }
 
@@ -710,8 +713,11 @@ namespace onlineLegalWF.forms
                                         string email = "legalwfuat2024@gmail.com";
                                         _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
 
-                                        //send mait to Procurement
-                                        //_ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
+                                        ////send mail to Insurance
+                                        //string[] emailInsurance = new string[] { "jaroonsak.n@assetworldcorp-th.com", "warin.k@assetworldcorp-th.com" };
+                                        //_ = zsendmail.sendEmails(subject + " Mail To Insurance", emailInsurance, body, filepath);
+                                        _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
+                                        _ = zsendmail.sendEmail(subject + " Mail To Warin.k", email, body, filepath);
 
                                         //send mail to indara
                                         //get file eform and attach first attachfile
@@ -802,8 +808,11 @@ namespace onlineLegalWF.forms
                                     //send mait to Procurement
                                     //_ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
 
-                                    //send mail to jaroonsak.n
+                                    ////send mail to Insurance
+                                    //string[] emailInsurance = new string[] { "jaroonsak.n@assetworldcorp-th.com", "warin.k@assetworldcorp-th.com" };
+                                    //_ = zsendmail.sendEmails(subject + " Mail To Insurance", emailInsurance, body, filepath);
                                     _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
+                                    _ = zsendmail.sendEmail(subject + " Mail To Warin.k", email, body, filepath);
 
                                 }
 
@@ -926,8 +935,11 @@ namespace onlineLegalWF.forms
                                     //send mait to Procurement
                                     _ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
 
-                                    //send mail to jaroonsak.n
+                                    ////send mail to Insurance
+                                    //string[] emailInsurance = new string[] { "jaroonsak.n@assetworldcorp-th.com", "warin.k@assetworldcorp-th.com" };
+                                    //_ = zsendmail.sendEmails(subject + " Mail To Insurance", emailInsurance, body, filepath);
                                     _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
+                                    _ = zsendmail.sendEmail(subject + " Mail To Warin.k", email, body, filepath);
 
                                 }
 

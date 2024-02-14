@@ -24,8 +24,6 @@
                         </tr>
                         <tr>
                             <td>
-                            <%--    <asp:GridView ID="gvA" runat="server">
-                                </asp:GridView>--%>
                                  <asp:GridView ID="gvA" runat="server" AutoGenerateColumns="False" 
                                     Font-Names="tahoma" Font-Size="10pt" BorderStyle="None" BorderWidth="0px" 
                                     GridLines="None" ShowHeader="False"
@@ -61,7 +59,6 @@
                                         </asp:TemplateField>
                                     </Columns>
                                 </asp:GridView>
-                               <%-- ///xxxx--%>
                             </td>
                         </tr>
                     </table>
