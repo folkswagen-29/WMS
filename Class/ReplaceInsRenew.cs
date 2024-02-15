@@ -158,7 +158,7 @@ namespace onlineLegalWF.Class
             ReplaceInsReNew_TagData res = new ReplaceInsReNew_TagData();
 
             //string xexternal_domain = "";
-            string sql0 = @"select [row_id],[process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective]
+            string sql0 = @"select [row_id],[process_id],[req_no],[req_date],[toreq_code],ins.[company_name],[document_no],[subject],[dear],[objective]
                                   ,[reason],[approved_desc],[status],[updated_datetime], ins.[bu_code],bu.[external_domain],[property_insured_name] from li_insurance_request as ins
                               INNER JOIN li_business_unit as bu on ins.bu_code = bu.bu_code
                               where process_id = '" + xprocess_id + "'";
