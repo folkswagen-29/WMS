@@ -204,6 +204,15 @@ namespace onlineLegalWF.frmInsurance
         protected global::System.Web.UI.WebControls.Button btn_gendocumnt;
 
         /// <summary>
+        /// btn_sendreview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_sendreview;
+
+        /// <summary>
         /// Panel3 control.
         /// </summary>
         /// <remarks>

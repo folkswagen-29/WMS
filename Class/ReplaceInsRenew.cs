@@ -113,19 +113,19 @@ namespace onlineLegalWF.Class
 
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name3_1#";
-            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.name3) ? data.name3.Replace(",", "!comma") : "");
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.name3_1) ? data.name3_1.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#position3_1#";
-            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.position3) ? data.position3.Replace(",", "!comma") : "");
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.position3_1) ? data.position3_1.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#date3_1#";
-            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.date3) ? data.date3.Replace(",", "!comma") : "");
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.date3_1) ? data.date3_1.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#sign_name3_1#";
-            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_name3) ? data.sign_name3.Replace(",", "!comma") : "");
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_name3_1) ? data.sign_name3_1.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
 
 

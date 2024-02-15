@@ -457,7 +457,7 @@ namespace onlineLegalWF.frmInsurance
             var apv2pos = "AM";
             var apv2date = "";
             var apv2_1 = headamname;
-            var apv2pos_1 = "/ Head AM";
+            var apv2pos_1 = "Head AM";
             var apv2date_1 = "";
             var apv3 = clevelname;
             var apv3pos = "C-Level";
@@ -1000,7 +1000,7 @@ namespace onlineLegalWF.frmInsurance
                 var apv2pos = "AM";
                 var apv2date = "";
                 var apv2_1 = headamname;
-                var apv2pos_1 = "/ Head AM";
+                var apv2pos_1 = "Head AM";
                 var apv2date_1 = "";
                 var apv3 = clevelname;
                 var apv3pos = "C-Level";
@@ -1359,6 +1359,88 @@ namespace onlineLegalWF.frmInsurance
             else
             {
                 goptb.Focus();
+            }
+        }
+
+        protected void btn_sendreview_Click(object sender, EventArgs e)
+        {
+            GenDocumnetInsRenew(lblPID.Text);
+
+            string subject = "";
+            string body = "";
+            string sql = @"select * from li_insurance_request where process_id = '" + lblPID.Text + "'";
+            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                var dr = dt.Rows[0];
+                string id = dr["req_no"].ToString();
+                subject = dr["subject"].ToString();
+                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='https://dev-awc-api.assetworldcorp-th.com:8085/onlinelegalwf/legalportal/legalportal?m=myworklist'>Click</a>";
+
+                string pathfileins = "";
+                string outputdirectory = "";
+
+                string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                if (resfile.Rows.Count > 0)
+                {
+                    pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+                    outputdirectory = resfile.Rows[0]["output_directory"].ToString();
+
+                    List<string> listpdf = new List<string>();
+                    listpdf.Add(pathfileins);
+
+                    string sqlattachfile = "select * from wf_attachment where pid = '" + lblPID.Text + "' and e_form IS NULL";
+
+                    var resattachfile = zdb.ExecSql_DataTable(sqlattachfile, zconnstr);
+
+                    if (resattachfile.Rows.Count > 0)
+                    {
+                        foreach (DataRow item in resattachfile.Rows)
+                        {
+                            listpdf.Add(item["attached_filepath"].ToString());
+                        }
+                    }
+                    //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
+                    string[] pdfFiles = listpdf.ToArray();
+
+                    ////get mail from db
+                    //string email = "";
+                    //string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                    //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                    //if (dtbpm.Rows.Count > 0)
+                    //{
+                    //    email = dtbpm.Rows[0]["email"].ToString();
+
+                    //}
+                    //else
+                    //{
+                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                    //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                    //    if (dtrpa.Rows.Count > 0)
+                    //    {
+                    //        email = dtrpa.Rows[0]["Email"].ToString();
+                    //    }
+
+                    //}
+
+                    string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
+
+                    //send mail to Jaroonsak review
+                    ////fix mail test
+                    string email = "legalwfuat2024@gmail.com";
+                    _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n Review", email, body, filepath);
+
+                    Response.Write("<script>alert('SendEmail Successfully');</script>");
+                }
+            }
+            else
+            {
+                Response.Write("<script>alert('Error !!!');</script>");
             }
         }
     }

@@ -1820,7 +1820,7 @@ namespace onlineLegalWF.forms
                 var apv2pos = "AM";
                 var apv2date = "";
                 var apv2_1 = headamname;
-                var apv2pos_1 = "/ Head AM";
+                var apv2pos_1 = "Head AM";
                 var apv2date_1 = "";
                 var apv3 = clevelname;
                 var apv3pos = "C-Level";
