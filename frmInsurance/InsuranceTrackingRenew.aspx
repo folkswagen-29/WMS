@@ -18,13 +18,14 @@
                             <table id="itemPlaceholderContainer" runat="server" class="table">
                                 <tr class="gv_header_blue" style="height: 30px;">
                                     <th><asp:CheckBox ID="chkHeader" runat="server" AutoPostBack="true" OnCheckedChanged="CheckAll" /></th>
-                                    <th>No.</th>
+                                    <th>Type</th>
                                     <th>Bussiness Group/BU</th>
                                     <th>Status</th>
                                     <th>Submitted Date</th>
                                     <th>IAR</th>
                                     <th>BI</th>
-                                    <th>CGL/PL</th>
+                                    <th>CGL($)</th>
+                                    <th>PL</th>
                                     <th>PV</th>
                                     <th>LPG</th>
                                     <th>D&O</th>
@@ -41,7 +42,7 @@
                                     <asp:HiddenField ID="req_no" Value='<%# Eval("RequestNo") %>' runat="server" />
                                 </td>
                                 <td>
-                                    <asp:Label runat="server" Text='<%# Eval("ProcressID") %>' />
+                                    <asp:Label runat="server" Text='<%# Eval("Type") %>' />
                                 </td>
                                 <td>
                                     <asp:Label runat="server" Text='<%# Eval("BuName") %>' />
@@ -59,7 +60,10 @@
                                     <asp:Label runat="server" Text='<%# Eval("BISumInsured") %>' />
                                 </td>
                                 <td>
-                                    <asp:Label runat="server" Text='<%# Eval("CGLPLSumInsured") %>' />
+                                    <asp:Label runat="server" Text='<%# Eval("CGLSumInsured") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" Text='<%# Eval("PLSumInsured") %>' />
                                 </td>
                                 <td>
                                     <asp:Label runat="server" Text='<%# Eval("PVSumInsured") %>' />

@@ -78,7 +78,8 @@ namespace onlineLegalWF.frmInsurance
                     dr["TYPE_PROP"] = dr_sum["TYPE_PROP"].ToString();
                     dr["IAR"] = dr_sum["IAR"].ToString();
                     dr["BI"] = dr_sum["BI"].ToString();
-                    dr["CGL_PL"] = dr_sum["CGL_PL"].ToString();
+                    dr["CGL"] = dr_sum["CGL"].ToString();
+                    dr["PL"] = dr_sum["PL"].ToString();
                     dr["PV"] = dr_sum["PV"].ToString();
                     dr["LPG"] = dr_sum["LPG"].ToString();
                     dr["D_O"] = dr_sum["D_O"].ToString();
@@ -95,7 +96,8 @@ namespace onlineLegalWF.frmInsurance
             dt.Columns.Add("TYPE_PROP", typeof(string));
             dt.Columns.Add("IAR", typeof(string));
             dt.Columns.Add("BI", typeof(string));
-            dt.Columns.Add("CGL_PL", typeof(string));
+            dt.Columns.Add("CGL", typeof(string));
+            dt.Columns.Add("PL", typeof(string));
             dt.Columns.Add("PV", typeof(string));
             dt.Columns.Add("LPG", typeof(string));
             dt.Columns.Add("D_O", typeof(string));
@@ -106,37 +108,41 @@ namespace onlineLegalWF.frmInsurance
         public DataTable GetSumInsurance(string id)
         {
             string sql = @"SELECT * FROM 
-                            (
-                            VALUES ('Commercial',
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as IAR from li_insurance_req_property_insured where top_ins_code = '01' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '01' and '06' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as BI from li_insurance_req_property_insured where top_ins_code = '02' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '01' and '06' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as CGL_PL from li_insurance_req_property_insured where top_ins_code = '03' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '01' and '06' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as PV from li_insurance_req_property_insured where top_ins_code = '04' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '01' and '06' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as LPG from li_insurance_req_property_insured where top_ins_code = '05' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '01' and '06' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as D_O from li_insurance_req_property_insured where top_ins_code = '06' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '01' and '06' and req_no in (" + id+ @"))),'01'
-	                               ),('Retail&Wholesale',
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as IAR from li_insurance_req_property_insured where top_ins_code = '01' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '07' and '14' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as BI from li_insurance_req_property_insured where top_ins_code = '02' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '07' and '14' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as CGL_PL from li_insurance_req_property_insured where top_ins_code = '03' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '07' and '14' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as PV from li_insurance_req_property_insured where top_ins_code = '04' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '07' and '14' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as LPG from li_insurance_req_property_insured where top_ins_code = '05' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '07' and '14' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as D_O from li_insurance_req_property_insured where top_ins_code = '06' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '07' and '14' and req_no in (" + id+ @"))),'02'
-	                               ),('Hospitality',
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as IAR from li_insurance_req_property_insured where top_ins_code = '01' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '15' and '46' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as BI from li_insurance_req_property_insured where top_ins_code = '02' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '15' and '46' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as CGL_PL from li_insurance_req_property_insured where top_ins_code = '03' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '15' and '46' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as PV from li_insurance_req_property_insured where top_ins_code = '04' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '15' and '46' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as LPG from li_insurance_req_property_insured where top_ins_code = '05' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '15' and '46' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as D_O from li_insurance_req_property_insured where top_ins_code = '06' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '15' and '46' and req_no in (" + id+ @"))),'03'
-	                               ),('AWC',
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as IAR from li_insurance_req_property_insured where top_ins_code = '01' and req_no in (select req_no from li_insurance_request where toreq_code='07' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as BI from li_insurance_req_property_insured where top_ins_code = '02' and req_no in (select req_no from li_insurance_request where toreq_code='07' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as CGL_PL from li_insurance_req_property_insured where top_ins_code = '03' and req_no in (select req_no from li_insurance_request where toreq_code='07' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as PV from li_insurance_req_property_insured where top_ins_code = '04' and req_no in (select req_no from li_insurance_request where toreq_code='07' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as LPG from li_insurance_req_property_insured where top_ins_code = '05' and req_no in (select req_no from li_insurance_request where toreq_code='07' and req_no in (" + id+ @"))),
-		                            (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as D_O from li_insurance_req_property_insured where top_ins_code = '06' and req_no in (select req_no from li_insurance_request where toreq_code='07' and req_no in (" + id+@"))),'04'
-	                               )
-                            )sum_renew_Insurance(TYPE_PROP,IAR,BI,CGL_PL,PV,LPG,D_O,Row_Sort)";
+                                (
+                                VALUES ('Commercial',
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as IAR from li_insurance_req_property_insured where top_ins_code = '01' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '01' and '06' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as BI from li_insurance_req_property_insured where top_ins_code = '02' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '01' and '06' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as CGL from li_insurance_req_property_insured where top_ins_code = '03' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '01' and '06' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as PL from li_insurance_req_property_insured where top_ins_code = '04' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '01' and '06' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as PV from li_insurance_req_property_insured where top_ins_code = '05' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '01' and '06' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as LPG from li_insurance_req_property_insured where top_ins_code = '06' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '01' and '06' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as D_O from li_insurance_req_property_insured where top_ins_code = '07' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '01' and '06' and req_no in (" + id + @"))),'01'
+	                                    ),('Retail&Wholesale',
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as IAR from li_insurance_req_property_insured where top_ins_code = '01' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '07' and '14' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as BI from li_insurance_req_property_insured where top_ins_code = '02' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '07' and '14' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as CGL from li_insurance_req_property_insured where top_ins_code = '03' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '07' and '14' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as PL from li_insurance_req_property_insured where top_ins_code = '04' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '07' and '14' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as PV from li_insurance_req_property_insured where top_ins_code = '05' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '07' and '14' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as LPG from li_insurance_req_property_insured where top_ins_code = '06' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '07' and '14' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as D_O from li_insurance_req_property_insured where top_ins_code = '07' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '07' and '14' and req_no in (" + id + @"))),'02'
+	                                    ),('Hospitality',
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as IAR from li_insurance_req_property_insured where top_ins_code = '01' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '15' and '46' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as BI from li_insurance_req_property_insured where top_ins_code = '02' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '15' and '46' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as CGL from li_insurance_req_property_insured where top_ins_code = '03' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '15' and '46' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as PL from li_insurance_req_property_insured where top_ins_code = '04' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '15' and '46' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as PV from li_insurance_req_property_insured where top_ins_code = '05' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '15' and '46' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as LPG from li_insurance_req_property_insured where top_ins_code = '06' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '15' and '46' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as D_O from li_insurance_req_property_insured where top_ins_code = '07' and req_no in (select req_no from li_insurance_request where toreq_code='07' and bu_code between '15' and '46' and req_no in (" + id + @"))),'03'
+	                                    ),('AWC',
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as IAR from li_insurance_req_property_insured where top_ins_code = '01' and req_no in (select req_no from li_insurance_request where toreq_code='07' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as BI from li_insurance_req_property_insured where top_ins_code = '02' and req_no in (select req_no from li_insurance_request where toreq_code='07' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as CGL from li_insurance_req_property_insured where top_ins_code = '03' and req_no in (select req_no from li_insurance_request where toreq_code='07' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as PL from li_insurance_req_property_insured where top_ins_code = '04' and req_no in (select req_no from li_insurance_request where toreq_code='07' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as PV from li_insurance_req_property_insured where top_ins_code = '05' and req_no in (select req_no from li_insurance_request where toreq_code='07' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as LPG from li_insurance_req_property_insured where top_ins_code = '06' and req_no in (select req_no from li_insurance_request where toreq_code='07' and req_no in (" + id + @"))),
+		                                (select format(isnull(sum(cast(suminsured as int)),0), '##,##0') as D_O from li_insurance_req_property_insured where top_ins_code = '07' and req_no in (select req_no from li_insurance_request where toreq_code='07' and req_no in (" + id + @"))),'04'
+	                                    )
+                                )sum_renew_Insurance(TYPE_PROP,IAR,BI,CGL,PL,PV,LPG,D_O,Row_Sort)";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }
@@ -213,7 +219,8 @@ namespace onlineLegalWF.frmInsurance
                 data.TYPE_PROP = (row.FindControl("gv1txtTYPE_PROP") as TextBox).Text;
                 data.IAR = (row.FindControl("gv1txtIAR") as TextBox).Text;
                 data.BI = (row.FindControl("gv1txtBI") as TextBox).Text;
-                data.CGL_PL = (row.FindControl("gv1txtCGL_PL") as TextBox).Text;
+                data.CGL = (row.FindControl("gv1txtCGL") as TextBox).Text;
+                data.PL = (row.FindControl("gv1txtPL") as TextBox).Text;
                 data.PV = (row.FindControl("gv1txtPV") as TextBox).Text;
                 data.LPG = (row.FindControl("gv1txtLPG") as TextBox).Text;
                 data.D_O = (row.FindControl("gv1txtD_O") as TextBox).Text;
@@ -244,14 +251,15 @@ namespace onlineLegalWF.frmInsurance
                     foreach (var item in listInsuranceSumData)
                     {
                         string sqlsum = @"INSERT INTO [dbo].[li_insurance_renew_awc_memo_sumins]
-                                           ([process_id],[row_sort],[type_prop],[sum_iar],[sum_bi],[sum_cgl_pv],[sum_pv],[sum_lpg],[sum_d_o])
+                                           ([process_id],[row_sort],[type_prop],[sum_iar],[sum_bi],[sum_cgl],[sum_pl],[sum_pv],[sum_lpg],[sum_d_o])
                                      VALUES
-                                           ('" +xprocess_id+ @"'
+                                           ('" + xprocess_id+ @"'
                                            ,'" +item.Row_Sort+ @"'
                                            ,'" +item.TYPE_PROP+ @"'
                                            ,'" + int.Parse(item.IAR, NumberStyles.AllowThousands) + @"'
                                            ,'" + int.Parse(item.BI, NumberStyles.AllowThousands) + @"'
-                                           ,'" + int.Parse(item.CGL_PL, NumberStyles.AllowThousands) + @"'
+                                           ,'" + int.Parse(item.CGL, NumberStyles.AllowThousands) + @"'
+                                           ,'" + int.Parse(item.PL, NumberStyles.AllowThousands) + @"'
                                            ,'" + int.Parse(item.PV, NumberStyles.AllowThousands) + @"'
                                            ,'" + int.Parse(item.LPG, NumberStyles.AllowThousands) + @"'
                                            ,'" + int.Parse(item.D_O, NumberStyles.AllowThousands) + "')";
@@ -326,17 +334,21 @@ namespace onlineLegalWF.frmInsurance
                             }
                             else if (topInsCode == "03")
                             {
-                                requestResponse.CGLPLSumInsured = drReqIns["suminsured"].ToString();
+                                requestResponse.CGLSumInsured = drReqIns["suminsured"].ToString();
                             }
                             else if (topInsCode == "04")
                             {
-                                requestResponse.PVSumInsured = drReqIns["suminsured"].ToString();
+                                requestResponse.PLSumInsured = drReqIns["suminsured"].ToString();
                             }
                             else if (topInsCode == "05")
                             {
-                                requestResponse.LPGSumInsured = drReqIns["suminsured"].ToString();
+                                requestResponse.PVSumInsured = drReqIns["suminsured"].ToString();
                             }
                             else if (topInsCode == "06")
+                            {
+                                requestResponse.LPGSumInsured = drReqIns["suminsured"].ToString();
+                            }
+                            else if (topInsCode == "07")
                             {
                                 requestResponse.DOSumInsured = drReqIns["suminsured"].ToString();
                             }
@@ -519,7 +531,28 @@ namespace onlineLegalWF.frmInsurance
 
             dr = dtProperties1.NewRow();
             dr["tagname"] = "#tablesum#";
-            dr["col_name"] = "CGL/PL";
+            dr["col_name"] = "CGL($)";
+            dr["col_width"] = "200";
+            dr["col_align"] = "Center";
+            dr["col_valign"] = "top";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tablesum#";
+            dr["col_name"] = "PL";
             dr["col_width"] = "200";
             dr["col_align"] = "Center";
             dr["col_valign"] = "top";
@@ -607,7 +640,8 @@ namespace onlineLegalWF.frmInsurance
             dt.Columns.Add("TYPE_PROP", typeof(string));
             dt.Columns.Add("IAR", typeof(string));
             dt.Columns.Add("BI", typeof(string));
-            dt.Columns.Add("CGL_PL", typeof(string));
+            dt.Columns.Add("CGL", typeof(string));
+            dt.Columns.Add("PL", typeof(string));
             dt.Columns.Add("PV", typeof(string));
             dt.Columns.Add("LPG", typeof(string));
             dt.Columns.Add("D_O", typeof(string));
@@ -622,7 +656,8 @@ namespace onlineLegalWF.frmInsurance
                 datasum.TYPE_PROP = (row.FindControl("gv1txtTYPE_PROP") as TextBox).Text;
                 datasum.IAR = (row.FindControl("gv1txtIAR") as TextBox).Text;
                 datasum.BI = (row.FindControl("gv1txtBI") as TextBox).Text;
-                datasum.CGL_PL = (row.FindControl("gv1txtCGL_PL") as TextBox).Text;
+                datasum.CGL = (row.FindControl("gv1txtCGL") as TextBox).Text;
+                datasum.PL = (row.FindControl("gv1txtPL") as TextBox).Text;
                 datasum.PV = (row.FindControl("gv1txtPV") as TextBox).Text;
                 datasum.LPG = (row.FindControl("gv1txtLPG") as TextBox).Text;
                 datasum.D_O = (row.FindControl("gv1txtD_O") as TextBox).Text;
@@ -643,7 +678,8 @@ namespace onlineLegalWF.frmInsurance
                     drGV["TYPE_PROP"] = item.TYPE_PROP.Replace(",", "!comma");
                     drGV["IAR"] = item.IAR.Replace(",", "!comma");
                     drGV["BI"] = item.BI.Replace(",", "!comma");
-                    drGV["CGL_PL"] = item.CGL_PL.Replace(",", "!comma");
+                    drGV["CGL"] = item.CGL.Replace(",", "!comma");
+                    drGV["PL"] = item.PL.Replace(",", "!comma");
                     drGV["PV"] = item.PV.Replace(",", "!comma");
                     drGV["LPG"] = item.LPG.Replace(",", "!comma");
                     drGV["D_O"] = item.LPG.Replace(",", "!comma");
@@ -706,7 +742,8 @@ namespace onlineLegalWF.frmInsurance
             public string PropertyInsured { get; set; }
             public string IARSumInsured { get; set; }
             public string BISumInsured { get; set; }
-            public string CGLPLSumInsured { get; set; }
+            public string CGLSumInsured { get; set; }
+            public string PLSumInsured { get; set; }
             public string PVSumInsured { get; set; }
             public string LPGSumInsured { get; set; }
             public string DOSumInsured { get; set; }
@@ -717,7 +754,8 @@ namespace onlineLegalWF.frmInsurance
             public string TYPE_PROP { get; set; }
             public string IAR { get; set; }
             public string BI { get; set; }
-            public string CGL_PL { get; set; }
+            public string CGL { get; set; }
+            public string PL { get; set; }
             public string PV { get; set; }
             public string LPG { get; set; }
             public string D_O { get; set; }
@@ -1025,7 +1063,28 @@ namespace onlineLegalWF.frmInsurance
 
             dr = dtProperties1.NewRow();
             dr["tagname"] = "#tablesum#";
-            dr["col_name"] = "CGL/PL";
+            dr["col_name"] = "CGL($)";
+            dr["col_width"] = "200";
+            dr["col_align"] = "Center";
+            dr["col_valign"] = "top";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tablesum#";
+            dr["col_name"] = "PL";
             dr["col_width"] = "200";
             dr["col_align"] = "Center";
             dr["col_valign"] = "top";

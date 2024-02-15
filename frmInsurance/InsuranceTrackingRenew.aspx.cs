@@ -28,7 +28,7 @@ namespace onlineLegalWF.frmInsurance
         public void setDataTrackingRenew() 
         {
             ucHeader1.setHeader("Tracking Renew");
-            string sqlreqres = "select req.process_id,req.req_no,req.req_date,req.[status],bu.bu_desc from li_insurance_request as req inner join li_business_unit as bu on bu.bu_code = req.bu_code where req.toreq_code='07' and status ='approve'";
+            string sqlreqres = "select req.process_id,bu.bu_type,req.req_no,req.req_date,req.[status],bu.bu_desc from li_insurance_request as req inner join li_business_unit as bu on bu.bu_code = req.bu_code where req.toreq_code='07' and status ='approve' order by bu.bu_code desc";
 
             var reqres = zdb.ExecSql_DataTable(sqlreqres, zconnstr);
 
@@ -40,6 +40,7 @@ namespace onlineLegalWF.frmInsurance
                 {
                     InsuranceRequestResponse requestResponse = new InsuranceRequestResponse();
                     requestResponse.ProcressID = drReq["process_id"].ToString();
+                    requestResponse.Type = drReq["bu_type"].ToString();
                     requestResponse.RequestNo = drReq["req_no"].ToString();
                     requestResponse.BuName = drReq["bu_desc"].ToString();
                     requestResponse.Status = drReq["status"].ToString();
@@ -64,17 +65,21 @@ namespace onlineLegalWF.frmInsurance
                             }
                             else if (topInsCode == "03")
                             {
-                                requestResponse.CGLPLSumInsured = drReqIns["suminsured"].ToString();
+                                requestResponse.CGLSumInsured = drReqIns["suminsured"].ToString();
                             }
                             else if (topInsCode == "04")
                             {
-                                requestResponse.PVSumInsured = drReqIns["suminsured"].ToString();
+                                requestResponse.PLSumInsured = drReqIns["suminsured"].ToString();
                             }
                             else if (topInsCode == "05")
                             {
-                                requestResponse.LPGSumInsured = drReqIns["suminsured"].ToString();
+                                requestResponse.PVSumInsured = drReqIns["suminsured"].ToString();
                             }
                             else if (topInsCode == "06")
+                            {
+                                requestResponse.LPGSumInsured = drReqIns["suminsured"].ToString();
+                            }
+                            else if (topInsCode == "07")
                             {
                                 requestResponse.DOSumInsured = drReqIns["suminsured"].ToString();
                             }
@@ -94,13 +99,15 @@ namespace onlineLegalWF.frmInsurance
         public class InsuranceRequestResponse
         {
             public string ProcressID { get; set; }
+            public string Type { get; set; }
             public string RequestNo { get; set; }
             public string BuName { get; set; }
             public string Status { get; set; }
             public string RequestDate { get; set; }
             public string IARSumInsured { get; set; }
             public string BISumInsured { get; set; }
-            public string CGLPLSumInsured { get; set; }
+            public string CGLSumInsured { get; set; }
+            public string PLSumInsured { get; set; }
             public string PVSumInsured { get; set; }
             public string LPGSumInsured { get; set; }
             public string DOSumInsured { get; set; }

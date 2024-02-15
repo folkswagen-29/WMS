@@ -2221,7 +2221,28 @@ namespace onlineLegalWF.forms
 
             dr = dtProperties1.NewRow();
             dr["tagname"] = "#tablesum#";
-            dr["col_name"] = "CGL/PL";
+            dr["col_name"] = "CGL($)";
+            dr["col_width"] = "200";
+            dr["col_align"] = "Center";
+            dr["col_valign"] = "top";
+            dr["col_font"] = "Tahoma";
+            dr["col_fontsize"] = "9";
+            dr["col_fontcolor"] = "Black";
+            dr["col_color"] = "Transparent";
+            dr["header_height"] = "20";
+            dr["header_color"] = "Gray";
+            dr["header_font"] = "Tahoma";
+            dr["header_fontsize"] = "9";
+            dr["header_fontbold"] = "true";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
+            dr["header_fontcolor"] = "White";
+            dr["row_height"] = "16";
+            dtProperties1.Rows.Add(dr);
+
+            dr = dtProperties1.NewRow();
+            dr["tagname"] = "#tablesum#";
+            dr["col_name"] = "PL";
             dr["col_width"] = "200";
             dr["col_align"] = "Center";
             dr["col_valign"] = "top";

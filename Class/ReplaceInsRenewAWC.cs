@@ -275,7 +275,8 @@ namespace onlineLegalWF.Class
             dt.Columns.Add("TYPE_PROP", typeof(string));
             dt.Columns.Add("IAR", typeof(string));
             dt.Columns.Add("BI", typeof(string));
-            dt.Columns.Add("CGL_PL", typeof(string));
+            dt.Columns.Add("CGL", typeof(string));
+            dt.Columns.Add("PL", typeof(string));
             dt.Columns.Add("PV", typeof(string));
             dt.Columns.Add("LPG", typeof(string));
             dt.Columns.Add("D_O", typeof(string));
@@ -285,7 +286,8 @@ namespace onlineLegalWF.Class
             string sqlinssum = @"select row_sort,type_prop
                                   ,format(isnull(cast(sum_iar as int),0), '##,##0') as sum_iar
                                   ,format(isnull(cast(sum_bi as int),0), '##,##0') as sum_bi
-                                  ,format(isnull(cast(sum_cgl_pv as int),0), '##,##0') as sum_cgl_pv
+                                  ,format(isnull(cast(sum_cgl as int),0), '##,##0') as sum_cgl
+                                  ,format(isnull(cast(sum_pl as int),0), '##,##0') as sum_pl
                                   ,format(isnull(cast(sum_pv as int),0), '##,##0') as sum_pv
                                   ,format(isnull(cast(sum_lpg as int),0), '##,##0') as sum_lpg
                                   ,format(isnull(cast(sum_d_o as int),0), '##,##0') as sum_d_o
@@ -303,7 +305,8 @@ namespace onlineLegalWF.Class
                     drGV["TYPE_PROP"] = dritem["type_prop"].ToString().Replace(",", "!comma");
                     drGV["IAR"] = dritem["sum_iar"].ToString().Replace(",", "!comma");
                     drGV["BI"] = dritem["sum_bi"].ToString().Replace(",", "!comma");
-                    drGV["CGL_PL"] = dritem["sum_cgl_pv"].ToString().Replace(",", "!comma");
+                    drGV["CGL"] = dritem["sum_cgl"].ToString().Replace(",", "!comma");
+                    drGV["PL"] = dritem["sum_pl"].ToString().Replace(",", "!comma");
                     drGV["PV"] = dritem["sum_pv"].ToString().Replace(",", "!comma");
                     drGV["LPG"] = dritem["sum_lpg"].ToString().Replace(",", "!comma");
                     drGV["D_O"] = dritem["sum_d_o"].ToString().Replace(",", "!comma");
