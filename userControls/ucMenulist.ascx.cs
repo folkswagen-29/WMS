@@ -29,6 +29,19 @@ namespace onlineLegalWF.userControls
                     bind_gvA_menu(Session["group_menu"].ToString(), Session["group_menu_index"].ToString());
                 }
             }
+            else 
+            {
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+
+                    if (!string.IsNullOrEmpty(xlogin_name))
+                    {
+                        setNotificationInbox(xlogin_name);
+                    }
+
+                }
+            }
         }
         public void bind_menu(string userrole)
         {

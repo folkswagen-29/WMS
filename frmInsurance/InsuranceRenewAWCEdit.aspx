@@ -105,7 +105,7 @@
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="CGL($)">
                                                         <ItemTemplate>
-                                                            <asp:Label ID="gvList_txt5" Text='<%# Bind("CGLPLSumInsured") %>' runat="server" CssClass="Text_sm"></asp:Label>
+                                                            <asp:Label ID="gvList_txt5" Text='<%# Bind("CGLSumInsured") %>' runat="server" CssClass="Text_sm"></asp:Label>
                                                         </ItemTemplate>
                                                         <ItemStyle Width="130px" />
                                                     </asp:TemplateField>
@@ -127,7 +127,7 @@
                                                         </ItemTemplate>
                                                         <ItemStyle Width="100px" />
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="D_O">
+                                                    <asp:TemplateField HeaderText="D&O">
                                                         <ItemTemplate>
                                                             <asp:Label ID="gvList_txt9" Text='<%# Bind("DOSumInsured") %>' runat="server" CssClass="Text_sm"></asp:Label>
                                                         </ItemTemplate>
@@ -182,7 +182,7 @@
                                                         </itemtemplate>
                                                         <itemstyle width="100px" />
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="CGL">
+                                                    <asp:TemplateField HeaderText="CGL($)">
                                                         <itemtemplate>
                                                             <asp:TextBox ID="gv1txtCGL" Text='<%# Bind("CGL") %>' runat="server" CssClass="Text_sm"></asp:TextBox>
                                                         </itemtemplate>
@@ -206,7 +206,7 @@
                                                         </itemtemplate>
                                                         <itemstyle width="100px" />
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="D_O">
+                                                    <asp:TemplateField HeaderText="D&O">
                                                         <ItemTemplate>
                                                             <asp:TextBox ID="gv1txtD_O" Text='<%# Bind("D_O") %>' runat="server" CssClass="Text_sm"></asp:TextBox>
                                                         </ItemTemplate>

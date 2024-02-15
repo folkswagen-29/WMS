@@ -892,11 +892,17 @@ namespace onlineLegalWF.frmInsurance
                             string email = "legalwfuat2024@gmail.com";
                             _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
 
+                            var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                            Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+
                         }
 
                     }
-                    var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                    Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                    else 
+                    {
+                        Response.Write("<script>alert('Error !!!');</script>");
+                    }
+                    
                 }
 
             }
