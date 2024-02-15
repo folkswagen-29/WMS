@@ -1087,8 +1087,8 @@ namespace onlineLegalWF.forms
             dr["header_font"] = "Tahoma";
             dr["header_fontsize"] = "9";
             dr["header_fontbold"] = "true";
-            dr["header_align"] = "Middle";
-            dr["header_valign"] = "Center";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
             dr["header_fontcolor"] = "White";
             dr["row_height"] = "16";
             dtProperties1.Rows.Add(dr);
@@ -1118,7 +1118,7 @@ namespace onlineLegalWF.forms
             dr["tagname"] = "#table1#";
             dr["col_name"] = "Indemnity Period";
             dr["col_width"] = "200";
-            dr["col_align"] = "Left";
+            dr["col_align"] = "Center";
             dr["col_valign"] = "Top";
             dr["col_font"] = "Tahoma";
             dr["col_fontsize"] = "9";
@@ -1139,7 +1139,7 @@ namespace onlineLegalWF.forms
             dr["tagname"] = "#table1#";
             dr["col_name"] = "Sum Insured";
             dr["col_width"] = "200";
-            dr["col_align"] = "left";
+            dr["col_align"] = "Center";
             dr["col_valign"] = "top";
             dr["col_font"] = "Tahoma";
             dr["col_fontsize"] = "9";

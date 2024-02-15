@@ -304,6 +304,51 @@ namespace onlineLegalWF.Class
 
         public DataTable genTagTableData(string xprocess_id) 
         {
+            //#region Sample ReplaceTable
+
+            //DataTable dt = new DataTable();
+            //dt.Columns.Add("tagname", typeof(string));
+            //dt.Columns.Add("No", typeof(string));
+            //dt.Columns.Add("Property Insured", typeof(string));
+            //dt.Columns.Add("Indemnity Period", typeof(string));
+            //dt.Columns.Add("Sum Insured", typeof(string));
+            //dt.Columns.Add("Start Date", typeof(string));
+            //dt.Columns.Add("End Date", typeof(string));
+
+            ////DataTable for #table1#
+            //string sqlins = @"select * from li_insurance_request
+            //                  where process_id = '" + xprocess_id + "'";
+            //var dtins = zdb.ExecSql_DataTable(sqlins, zconnstr);
+            //if (dtins.Rows.Count > 0) 
+            //{
+            //    var drins = dtins.Rows[0];
+            //    string id = drins["req_no"].ToString();
+
+            //    string sqlinsprop = @"SELECT [row_id],[req_no],tb1.[top_ins_code],[indemnityperiod],[suminsured],[startdate]
+            //                      ,[enddate] ,[created_datetime],[updated_datetime],tb2.[top_ins_desc]
+            //                  FROM [li_insurance_req_property_insured] as tb1
+            //                  INNER JOIN [li_type_of_property_insured] as tb2 on tb1.top_ins_code = tb2.top_ins_code
+            //                  where req_no = '" + id + "'";
+            //    var dtlinsprop = zdb.ExecSql_DataTable(sqlinsprop, zconnstr);
+
+            //    if(dtlinsprop.Rows.Count > 0) 
+            //    {
+            //        var drlinsprop = dtlinsprop.Rows[0];
+            //        //Assign DataTable for #table#
+            //        DataRow dr1 = dt.NewRow();
+            //        dr1["tagname"] = "#table1#";
+            //        dr1["No"] = "1";
+            //        dr1["Property Insured"] = drlinsprop["top_ins_desc"].ToString().Replace(",", "!comma");  // "xxxxx";//.Text.Replace(",", "!comma");
+            //        dr1["Indemnity Period"] = drlinsprop["indemnityperiod"].ToString().Replace(",", "!comma"); // "1,000,000".Replace(",", "!comma"); ;
+            //        dr1["Sum Insured"] = drlinsprop["suminsured"].ToString().Replace(",", "!comma");  // "15,000".Replace(",", "!comma"); ;
+            //        dr1["Start Date"] = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(drlinsprop["startdate"]), "en");
+            //        dr1["End Date"] = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(drlinsprop["enddate"]), "en");
+            //        dt.Rows.Add(dr1);
+            //    }
+            //}
+
+            //#endregion
+
             #region Sample ReplaceTable
 
             DataTable dt = new DataTable();
@@ -319,7 +364,7 @@ namespace onlineLegalWF.Class
             string sqlins = @"select * from li_insurance_request
                               where process_id = '" + xprocess_id + "'";
             var dtins = zdb.ExecSql_DataTable(sqlins, zconnstr);
-            if (dtins.Rows.Count > 0) 
+            if (dtins.Rows.Count > 0)
             {
                 var drins = dtins.Rows[0];
                 string id = drins["req_no"].ToString();
@@ -331,22 +376,28 @@ namespace onlineLegalWF.Class
                               where req_no = '" + id + "'";
                 var dtlinsprop = zdb.ExecSql_DataTable(sqlinsprop, zconnstr);
 
-                if(dtlinsprop.Rows.Count > 0) 
+                if (dtlinsprop.Rows.Count > 0)
                 {
-                    var drlinsprop = dtlinsprop.Rows[0];
-                    //Assign DataTable for #table#
-                    DataRow dr1 = dt.NewRow();
-                    dr1["tagname"] = "#table1#";
-                    dr1["No"] = "1";
-                    dr1["Property Insured"] = drlinsprop["top_ins_desc"].ToString().Replace(",", "!comma");  // "xxxxx";//.Text.Replace(",", "!comma");
-                    dr1["Indemnity Period"] = drlinsprop["indemnityperiod"].ToString().Replace(",", "!comma"); // "1,000,000".Replace(",", "!comma"); ;
-                    dr1["Sum Insured"] = drlinsprop["suminsured"].ToString().Replace(",", "!comma");  // "15,000".Replace(",", "!comma"); ;
-                    dr1["Start Date"] = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(drlinsprop["startdate"]), "en");
-                    dr1["End Date"] = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(drlinsprop["enddate"]), "en");
-                    dt.Rows.Add(dr1);
+                    //Assign Data From gv1
+                    var drGV = dt.NewRow();
+                    int no = 0;
+                    foreach (DataRow item in dtlinsprop.Rows)
+                    {
+                        drGV = dt.NewRow();
+                        drGV["tagname"] = "#table1#";
+                        drGV["No"] = (no + 1);
+                        drGV["Property Insured"] = item["top_ins_desc"].ToString().Replace(",", "!comma");
+                        drGV["Indemnity Period"] = item["indemnityperiod"].ToString().Replace(",", "!comma");
+                        drGV["Sum Insured"] = item["suminsured"].ToString().Replace(",", "!comma");
+                        drGV["Start Date"] = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(item["startdate"]), "en");
+                        drGV["End Date"] = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(item["enddate"]), "en");
+                        dt.Rows.Add(drGV);
+
+                        no++;
+                    }
                 }
             }
-            
+
             #endregion
 
             return dt;

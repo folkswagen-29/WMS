@@ -51,12 +51,6 @@ namespace onlineLegalWF.frmInsurance
             type_req.DataValueField = "toreq_code";
             type_req.DataBind();
 
-            type_pi.DataSource = GetTypeOfPropertyInsured();
-            type_pi.DataBind();
-            type_pi.DataTextField = "top_ins_desc";
-            type_pi.DataValueField = "top_ins_code";
-            type_pi.DataBind();
-
             ddl_bu.DataSource = GetBusinessUnit();
             ddl_bu.DataBind();
             ddl_bu.DataTextField = "bu_desc";
@@ -92,17 +86,27 @@ namespace onlineLegalWF.frmInsurance
                 //company.Text = GetCompanyNameByBuCode(ddl_bu.SelectedValue.ToString());
             }
 
-            string sqlPropIns = "select  top 1 * from li_insurance_req_property_insured where req_no='"+ id + "'";
+            var dt = iniDataTable(id);
+            gv1.DataSource = dt;
+            gv1.DataBind();
 
-            var resPropIns = zdb.ExecSql_DataTable(sqlPropIns, zconnstr);
-
-            if (resPropIns.Rows.Count > 0)
+            //check data and disable filed
+            foreach (GridViewRow row in gv1.Rows)
             {
-                type_pi.SelectedValue = resPropIns.Rows[0]["top_ins_code"].ToString();
-                indemnity_period.Text = resPropIns.Rows[0]["indemnityperiod"].ToString();
-                sum_insured.Text = resPropIns.Rows[0]["suminsured"].ToString();
-                start_date.Text = Convert.ToDateTime(resPropIns.Rows[0]["startdate"]).ToString("yyyy-MM-dd");
-                end_date.Text = Convert.ToDateTime(resPropIns.Rows[0]["enddate"]).ToString("yyyy-MM-dd");
+                string top_ins_code = (row.FindControl("gv1txttop_ins_code") as HiddenField).Value;
+                (row.FindControl("gv1txtNo") as TextBox).Enabled = false;
+                (row.FindControl("gv1txtPropertyInsured") as TextBox).Enabled = false;
+                if (top_ins_code == "02")
+                {
+                    (row.FindControl("gv1txtIndemnityPeriod") as TextBox).Enabled = true;
+                    (row.FindControl("gv1txtGop") as TextBox).Enabled = true;
+                }
+                else
+                {
+                    (row.FindControl("gv1txtIndemnityPeriod") as TextBox).Enabled = false;
+                    (row.FindControl("gv1txtGop") as TextBox).Enabled = false;
+                }
+
             }
         }
 
@@ -139,10 +143,89 @@ namespace onlineLegalWF.frmInsurance
             return dt;
         }
 
+        public DataTable iniDataTable(string id)
+        {
+            //getData
+            var dt = iniDTStructure();
+            var dr = dt.NewRow();
+
+            var dt_top_ins = GetTypeOfPropertyInsured();
+            var dt_prop_ins = GetDataPropertyInsuredByReqNo(id);
+
+            if (dt_top_ins.Rows.Count > 0)
+            {
+                int no = 0;
+
+                foreach (DataRow dr_ins in dt_top_ins.Rows)
+                {
+                    //init Data PropertyInsured
+                    dr = dt.NewRow();
+                    dr["No"] = (no + 1);
+                    dr["PropertyInsured"] = dr_ins["top_ins_desc"].ToString();
+
+                    //check Data from Db
+                    if (dt_prop_ins.Rows.Count > 0)
+                    {
+                        foreach (DataRow item in dt_prop_ins.Rows)
+                        {
+                            //check data ins_code tb master == ins_code detail assign value
+                            if (item["top_ins_code"].ToString() == dr_ins["top_ins_code"].ToString())
+                            {
+
+                                dr["GOP"] = item["gop_fc"].ToString();
+                                dr["IndemnityPeriod"] = item["indemnityperiod"].ToString();
+                                dr["SumInsured"] = item["suminsured"].ToString();
+                                dr["StartDate"] = Convert.ToDateTime(item["startdate"]).ToString("yyyy-MM-dd");
+                                dr["EndDate"] = Convert.ToDateTime(item["enddate"]).ToString("yyyy-MM-dd");
+
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        dr["GOP"] = "";
+                        dr["IndemnityPeriod"] = "";
+                        dr["SumInsured"] = "";
+                        dr["StartDate"] = "";
+                        dr["EndDate"] = "";
+                    }
+
+                    dr["Top_Ins_Code"] = dr_ins["top_ins_code"].ToString();
+                    dt.Rows.Add(dr);
+
+
+
+                    no++;
+                }
+            }
+
+            return dt;
+        }
+        public DataTable iniDTStructure()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("No", typeof(string));
+            dt.Columns.Add("PropertyInsured", typeof(string));
+            dt.Columns.Add("GOP", typeof(string));
+            dt.Columns.Add("IndemnityPeriod", typeof(string));
+            dt.Columns.Add("SumInsured", typeof(string));
+            dt.Columns.Add("StartDate", typeof(string));
+            dt.Columns.Add("EndDate", typeof(string));
+            dt.Columns.Add("Top_Ins_Code", typeof(string));
+            return dt;
+        }
         public DataTable GetTypeOfPropertyInsured()
         {
             string sql = "select * from li_type_of_property_insured order by row_sort asc";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
+        public DataTable GetDataPropertyInsuredByReqNo(string id)
+        {
+            string sqlPropIns = "select * from li_insurance_req_property_insured where req_no='" + id + "'";
+            DataTable dt = zdb.ExecSql_DataTable(sqlPropIns, zconnstr);
+
             return dt;
         }
 
@@ -203,15 +286,30 @@ namespace onlineLegalWF.frmInsurance
             var xto = to.Text.Trim();
             var xpurpose = purpose.Text.Trim();
             var xbackground = background.Text.Trim();
-            var xtype_pi = type_pi.SelectedValue.ToString();
-            var xindemnity_period = indemnity_period.Text.Trim();
-            var xsum_insured = sum_insured.Text.Trim();
-            var xstart_date = start_date.Text.Trim();
-            var xend_date = end_date.Text.Trim();
             var xapprove_des = approve_des.Text.Trim();
             var xupdate_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
             var xbu_code = ddl_bu.SelectedValue.ToString();
             var xprop_ins_name = prop_ins_name.Text.Trim();
+
+            //Get Data from gv1 Insurance Detail
+            List<InsurancePropData> listInsurancePropData = new List<InsurancePropData>();
+            foreach (GridViewRow row in gv1.Rows)
+            {
+                InsurancePropData data = new InsurancePropData();
+                data.TypeOfPropertyInsured = (row.FindControl("gv1txttop_ins_code") as HiddenField).Value;
+                data.PropertyInsured = (row.FindControl("gv1txtPropertyInsured") as TextBox).Text;
+                data.GOP = (row.FindControl("gv1txtGop") as TextBox).Text;
+                data.IndemnityPeriod = (row.FindControl("gv1txtIndemnityPeriod") as TextBox).Text;
+                data.SumInsured = (row.FindControl("gv1txtSumInsured") as TextBox).Text;
+                data.StartDate = (row.FindControl("gv1txtSdate") as TextBox).Text;
+                data.EndDate = (row.FindControl("gv1txtEdate") as TextBox).Text;
+
+                if (!string.IsNullOrEmpty(data.SumInsured) && !string.IsNullOrEmpty(data.StartDate) && !string.IsNullOrEmpty(data.EndDate))
+                {
+                    listInsurancePropData.Add(data);
+                }
+
+            }
 
             string sql = @"UPDATE [dbo].[li_insurance_request]
                            SET [toreq_code] = '"+ xtype_req + @"'
@@ -231,17 +329,34 @@ namespace onlineLegalWF.frmInsurance
 
             if (ret > 0)
             {
-                
-                string sqlUpdaePropIns = @"UPDATE [dbo].[li_insurance_req_property_insured]
-                                               SET [top_ins_code] = '" + xtype_pi + @"'
-                                                  ,[indemnityperiod] = '" + xindemnity_period + @"'
-                                                  ,[suminsured] = '" + xsum_insured + @"'
-                                                  ,[startdate] = '" + xstart_date + @"'
-                                                  ,[enddate] = '" + xend_date + @"'
-                                                  ,[updated_datetime] = '" + xupdate_date + @"'
-                                             WHERE [req_no] = '" + xreq_no + "'";
+                if (listInsurancePropData.Count > 0)
+                {
+                    string sqlDeletePropIns = @"DELETE FROM [li_insurance_req_property_insured] WHERE req_no='" + xreq_no + "'";
 
-                ret = zdb.ExecNonQueryReturnID(sqlUpdaePropIns, zconnstr);
+                    ret = zdb.ExecNonQueryReturnID(sqlDeletePropIns, zconnstr);
+
+                    if (ret > 0)
+                    {
+                        foreach (var item in listInsurancePropData)
+                        {
+                            string sqlInsertPropIns = @"INSERT INTO [dbo].[li_insurance_req_property_insured]
+                                                   ([req_no],[top_ins_code],[gop_fc],[indemnityperiod],[suminsured],[startdate],[enddate],[created_datetime],[updated_datetime])
+                                             VALUES
+                                                   ('" + xreq_no + @"'
+                                                   ,'" + item.TypeOfPropertyInsured + @"'
+                                                   ,'" + item.GOP + @"'
+                                                   ,'" + item.IndemnityPeriod + @"'
+                                                   ,'" + item.SumInsured + @"'
+                                                   ,'" + item.StartDate + @"'
+                                                   ,'" + item.EndDate + @"'
+                                                   ,'" + xupdate_date + @"'
+                                                   ,'" + xupdate_date + @"')";
+
+                            ret = zdb.ExecNonQueryReturnID(sqlInsertPropIns, zconnstr);
+                        }
+                    }
+
+                }
             }
 
             return ret;
@@ -263,11 +378,6 @@ namespace onlineLegalWF.frmInsurance
             var xto = to.Text.Trim();
             var xpurpose = purpose.Text.Trim();
             var xbackground = background.Text.Trim();
-            var xtype_pi = type_pi.SelectedItem.Text.ToString();
-            var xindemnity_period = indemnity_period.Text.Trim();
-            var xsum_insured = sum_insured.Text.Trim();
-            var xstart_date = start_date.Text.Trim();
-            var xend_date = end_date.Text.Trim();
             var xapprove_des = approve_des.Text.Trim();
 
             var path_template = ConfigurationManager.AppSettings["WT_Template_insurance"].ToString();
@@ -369,221 +479,6 @@ namespace onlineLegalWF.frmInsurance
 
             #endregion
 
-            //#region prepare data
-            ////Replace TAG STRING
-            //DataTable dtStr = new DataTable();
-            //dtStr.Columns.Add("tagname", typeof(string));
-            //dtStr.Columns.Add("tagvalue", typeof(string));
-
-            //DataRow dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#docno#";
-            //dr0["tagvalue"] = xdoc_no.Replace(",", "!comma");
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#company#";
-            //dr0["tagvalue"] = xcompany.Replace(",", "!comma");
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#to#";
-            //dr0["tagvalue"] = xto.Replace(",", "!comma");
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#subject#";
-            //dr0["tagvalue"] = xsubject.Replace(",", "!comma");
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#reqdate#";
-            //dr0["tagvalue"] = Utillity.ConvertDateToLongDateTime(xreq_date, "en");
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#objective#";
-            //dr0["tagvalue"] = xpurpose.Replace(",", "!comma");
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#reason#";
-            //dr0["tagvalue"] = xbackground.Replace(",", "!comma");
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#approve#";
-            //dr0["tagvalue"] = xapprove_des.Replace(",", "!comma");
-            //dtStr.Rows.Add(dr0);
-            //#endregion
-
-            ////DOA
-            //#region DOA 
-            //////get gm or am check external domain
-            //string xbu_code = ddl_bu.SelectedValue.ToString();
-            //string sqlbu = @"select * from li_business_unit where bu_code = '" + xbu_code + "'";
-
-            //var res = zdb.ExecSql_DataTable(sqlbu, zconnstr);
-
-            //var requestor = "";
-            //var requestorpos = "";
-            //var requestordate = "";
-            //var signname1 = "";
-            //var signname2 = "";
-            //var signname22 = "";
-            //var signname3 = "";
-            //var signname4 = "";
-            //var signname5 = "";
-            //if (res.Rows.Count > 0)
-            //{
-            //    string xexternal_domain = res.Rows[0]["external_domain"].ToString();
-            //    string xgm = res.Rows[0]["gm"].ToString();
-            //    string xam = res.Rows[0]["head_am"].ToString();
-            //    var empFunc = new EmpInfo();
-
-            //    if (xexternal_domain == "Y")
-            //    {
-            //        //get data user
-            //        var emp = empFunc.getEmpInfo(xam);
-            //        requestor = emp.full_name_en;
-            //        requestorpos = emp.position_en;
-            //    }
-            //    else
-            //    {
-            //        //get data user
-            //        var emp = empFunc.getEmpInfo(xgm);
-            //        requestor = emp.full_name_en;
-            //        requestorpos = emp.position_en;
-            //    }
-
-
-            //}
-
-            //var apv1 = "คุณจรูณศักดิ์ นามะฮง";
-            //var apv1pos = "Insurance Specialist";
-            //var apv1date = "";
-            //var apv1_2 = "คุณวารินทร์ เกลียวไพศาล";
-            //var apv1_2date = "";
-            //var apv2 = "คุณชโลทร ศรีสมวงษ์";
-            //var apv2pos = "Head of Legal";
-            //var apv2date = "";
-            //var apv3 = "คุณชยุต อมตวนิช";
-            //var apv3pos = "Head of Risk Management";
-            //var apv3date = "";
-
-            //var apv4 = "ดร.สิเวศ โรจนสุนทร";
-            //var apv4pos = "CCO";
-            //var apv4date = "";
-            //var apv4cb1 = "";
-            //var apv4cb2 = "";
-            //var apv4remark = "";
-
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#name1#";
-            //dr0["tagvalue"] = requestor;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#position1#";
-            //dr0["tagvalue"] = requestorpos;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#date1#";
-            //dr0["tagvalue"] = requestordate;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#sign_name1#";
-            //dr0["tagvalue"] = signname1;
-            //dtStr.Rows.Add(dr0);
-
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#name2#";
-            //dr0["tagvalue"] = apv1;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#position2#";
-            //dr0["tagvalue"] = apv1pos;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#date2#";
-            //dr0["tagvalue"] = apv1date;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#sign_name2#";
-            //dr0["tagvalue"] = signname2;
-            //dtStr.Rows.Add(dr0);
-
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#name22#";
-            //dr0["tagvalue"] = apv1_2;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#date22#";
-            //dr0["tagvalue"] = apv1_2date;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#sign_name22#";
-            //dr0["tagvalue"] = signname22;
-            //dtStr.Rows.Add(dr0);
-
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#name3#";
-            //dr0["tagvalue"] = apv2;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#position3#";
-            //dr0["tagvalue"] = apv2pos;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#date3#";
-            //dr0["tagvalue"] = apv2date;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#sign_name3#";
-            //dr0["tagvalue"] = signname3;
-            //dtStr.Rows.Add(dr0);
-
-
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#name4#";
-            //dr0["tagvalue"] = apv3;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#position4#";
-            //dr0["tagvalue"] = apv3pos;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#date4#";
-            //dr0["tagvalue"] = apv3date;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#sign_name4#";
-            //dr0["tagvalue"] = signname4;
-            //dtStr.Rows.Add(dr0);
-
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#name5#";
-            //dr0["tagvalue"] = apv4;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#position5#";
-            //dr0["tagvalue"] = apv4pos;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#date5#";
-            //dr0["tagvalue"] = apv4date;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#sign_name5#";
-            //dr0["tagvalue"] = signname5;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#cb1#";
-            //dr0["tagvalue"] = apv4cb1;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#cb2#";
-            //dr0["tagvalue"] = apv4cb2;
-            //dtStr.Rows.Add(dr0);
-            //dr0 = dtStr.NewRow();
-            //dr0["tagname"] = "#remark5#";
-            //dr0["tagvalue"] = apv4remark;
-            //dtStr.Rows.Add(dr0);
-            //#endregion 
-
-
             #region Sample ReplaceTable
 
             //DataTable Column Properties
@@ -623,8 +518,8 @@ namespace onlineLegalWF.frmInsurance
             dr["header_font"] = "Tahoma";
             dr["header_fontsize"] = "9";
             dr["header_fontbold"] = "true";
-            dr["header_align"] = "Middle";
-            dr["header_valign"] = "Center";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
             dr["header_fontcolor"] = "White";
             dr["row_height"] = "16";
             dtProperties1.Rows.Add(dr);
@@ -654,7 +549,7 @@ namespace onlineLegalWF.frmInsurance
             dr["tagname"] = "#table1#";
             dr["col_name"] = "Indemnity Period";
             dr["col_width"] = "200";
-            dr["col_align"] = "Left";
+            dr["col_align"] = "Center";
             dr["col_valign"] = "Top";
             dr["col_font"] = "Tahoma";
             dr["col_fontsize"] = "9";
@@ -675,7 +570,7 @@ namespace onlineLegalWF.frmInsurance
             dr["tagname"] = "#table1#";
             dr["col_name"] = "Sum Insured";
             dr["col_width"] = "200";
-            dr["col_align"] = "left";
+            dr["col_align"] = "Center";
             dr["col_valign"] = "top";
             dr["col_font"] = "Tahoma";
             dr["col_fontsize"] = "9";
@@ -735,25 +630,7 @@ namespace onlineLegalWF.frmInsurance
             dtProperties1.Rows.Add(dr);
 
             DataTable dt = zreplaceinsnew.genTagTableData(lblPID.Text);
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("tagname", typeof(string));
-            //dt.Columns.Add("No", typeof(string));
-            //dt.Columns.Add("Property Insured", typeof(string));
-            //dt.Columns.Add("Indemnity Period", typeof(string));
-            //dt.Columns.Add("Sum Insured", typeof(string));
-            //dt.Columns.Add("Start Date", typeof(string));
-            //dt.Columns.Add("End Date", typeof(string));
 
-            //Assign DataTable for #table#
-            //DataRow dr1 = dt.NewRow();
-            //dr1["tagname"] = "#table1#";
-            //dr1["No"] = "1";
-            //dr1["Property Insured"] = xtype_pi.Replace(",", "!comma");  // "xxxxx";//.Text.Replace(",", "!comma");
-            //dr1["Indemnity Period"] = xindemnity_period.Replace(",", "!comma"); // "1,000,000".Replace(",", "!comma"); ;
-            //dr1["Sum Insured"] = xsum_insured.Replace(",", "!comma");  // "15,000".Replace(",", "!comma"); ;
-            //dr1["Start Date"] = Utillity.ConvertDateToLongDateTime(Utillity.ConvertStringToDate(xstart_date), "en");
-            //dr1["End Date"] = Utillity.ConvertDateToLongDateTime(Utillity.ConvertStringToDate(xend_date), "en");
-            //dt.Rows.Add(dr1);
             #endregion
 
             // Convert to JSONString
@@ -1078,8 +955,8 @@ namespace onlineLegalWF.frmInsurance
             dr["header_font"] = "Tahoma";
             dr["header_fontsize"] = "9";
             dr["header_fontbold"] = "true";
-            dr["header_align"] = "Middle";
-            dr["header_valign"] = "Center";
+            dr["header_align"] = "Center";
+            dr["header_valign"] = "Middle";
             dr["header_fontcolor"] = "White";
             dr["row_height"] = "16";
             dtProperties1.Rows.Add(dr);
@@ -1109,7 +986,7 @@ namespace onlineLegalWF.frmInsurance
             dr["tagname"] = "#table1#";
             dr["col_name"] = "Indemnity Period";
             dr["col_width"] = "200";
-            dr["col_align"] = "Left";
+            dr["col_align"] = "Center";
             dr["col_valign"] = "Top";
             dr["col_font"] = "Tahoma";
             dr["col_fontsize"] = "9";
@@ -1130,7 +1007,7 @@ namespace onlineLegalWF.frmInsurance
             dr["tagname"] = "#table1#";
             dr["col_name"] = "Sum Insured";
             dr["col_width"] = "200";
-            dr["col_align"] = "left";
+            dr["col_align"] = "Center";
             dr["col_valign"] = "top";
             dr["col_font"] = "Tahoma";
             dr["col_fontsize"] = "9";
@@ -1313,6 +1190,89 @@ namespace onlineLegalWF.frmInsurance
             else 
             {
                 Response.Write("<script>alert('Error !!!');</script>");
+            }
+        }
+
+        public class InsurancePropData
+        {
+            public string TypeOfPropertyInsured { get; set; }
+            public string PropertyInsured { get; set; }
+            public string GOP { get; set; }
+            public string IndemnityPeriod { get; set; }
+            public string SumInsured { get; set; }
+            public string StartDate { get; set; }
+            public string EndDate { get; set; }
+        }
+
+        protected void IndemnityPeriodChanged(object sender, EventArgs e)
+        {
+            int indem = 0;
+            int gb = 0;
+            GridViewRow row = ((GridViewRow)((TextBox)sender).NamingContainer);
+            //NamingContainer return the container that the control sits in
+
+            //get data textbox indemnity
+            TextBox indemnitytb = (TextBox)row.FindControl("gv1txtIndemnityPeriod");
+            //get data textbox gop
+            TextBox goptb = (TextBox)row.FindControl("gv1txtGop");
+            if (!string.IsNullOrEmpty(indemnitytb.Text))
+            {
+                indem = Int32.Parse(indemnitytb.Text);
+                if (!string.IsNullOrEmpty(goptb.Text))
+                {
+                    gb = Int32.Parse(goptb.Text);
+
+                    //get data textbox suminsured
+                    TextBox suminsuredtb = (TextBox)row.FindControl("gv1txtSumInsured");
+
+                    //set suminsured value
+                    suminsuredtb.Text = (gb * (indem / 12)).ToString();
+                    suminsuredtb.Focus();
+                }
+                else
+                {
+                    indemnitytb.Focus();
+                }
+            }
+            else
+            {
+                indemnitytb.Focus();
+            }
+        }
+
+        protected void GopChanged(object sender, EventArgs e)
+        {
+            int indem = 0;
+            int gb = 0;
+            GridViewRow row = ((GridViewRow)((TextBox)sender).NamingContainer);
+            //NamingContainer return the container that the control sits in
+
+            //get data textbox indemnity
+            TextBox indemnitytb = (TextBox)row.FindControl("gv1txtIndemnityPeriod");
+            //get data textbox gop
+            TextBox goptb = (TextBox)row.FindControl("gv1txtGop");
+            if (!string.IsNullOrEmpty(indemnitytb.Text))
+            {
+                indem = Int32.Parse(indemnitytb.Text);
+                if (!string.IsNullOrEmpty(goptb.Text))
+                {
+                    gb = Int32.Parse(goptb.Text);
+
+                    //get data textbox suminsured
+                    TextBox suminsuredtb = (TextBox)row.FindControl("gv1txtSumInsured");
+
+                    //set suminsured value
+                    suminsuredtb.Text = (gb * (indem / 12)).ToString();
+                    suminsuredtb.Focus();
+                }
+                else
+                {
+                    goptb.Focus();
+                }
+            }
+            else
+            {
+                goptb.Focus();
             }
         }
     }

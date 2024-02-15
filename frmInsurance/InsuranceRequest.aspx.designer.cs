@@ -123,49 +123,13 @@ namespace onlineLegalWF.frmInsurance
         protected global::System.Web.UI.WebControls.TextBox prop_ins_name;
 
         /// <summary>
-        /// type_pi control.
+        /// gv1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList type_pi;
-
-        /// <summary>
-        /// indemnity_period control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox indemnity_period;
-
-        /// <summary>
-        /// sum_insured control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sum_insured;
-
-        /// <summary>
-        /// start_date control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox start_date;
-
-        /// <summary>
-        /// end_date control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox end_date;
+        protected global::System.Web.UI.WebControls.GridView gv1;
 
         /// <summary>
         /// approve_des control.

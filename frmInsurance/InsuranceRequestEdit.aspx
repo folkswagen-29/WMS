@@ -125,7 +125,7 @@
                             </td>
                             <td>&nbsp;</td>
                         </tr>
-                        <tr>
+                        <%--<tr>
                             <td class="cell_content_20PC_TR">
                                 <label class="Label_md">Type of Property Insured </label>
                             </td>
@@ -142,7 +142,6 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <%--<asp:TextBox ID="indemnity_period" runat="server" CssClass="Text_200"></asp:TextBox>--%>
                                 <table>
                                     <tr>
                                         <td class="cell_content_40PC_TL">
@@ -180,6 +179,79 @@
                                             <asp:TextBox ID="end_date" TextMode="Date" runat="server" CssClass="Text_200"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>--%>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">List Insured </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <table>
+                                    <tr class="text_center">
+                                        <td colspan="6">
+                                            <asp:GridView ID="gv1" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="9pt" ForeColor="#333333" GridLines="None">
+                                                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="No">
+                                                        <ItemTemplate>
+                                                            <asp:TextBox ID="gv1txtNo" Text='<%# Bind("No") %>' runat="server" CssClass="Text_20"></asp:TextBox>
+                                                        </ItemTemplate>
+                                                        <ItemStyle Width="20px" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Property Insured">
+                                                        <ItemTemplate>
+                                                            <asp:HiddenField ID="gv1txttop_ins_code" Value='<%# Bind("Top_Ins_Code") %>' runat="server" />
+                                                            <asp:TextBox ID="gv1txtPropertyInsured" Text='<%# Bind("PropertyInsured") %>' runat="server" CssClass="Text_sm"></asp:TextBox>
+                                                        </ItemTemplate>
+                                                        <ItemStyle Width="100px" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="GOP">
+                                                        <ItemTemplate>
+                                                            <asp:TextBox ID="gv1txtGop" Text='<%# Bind("GOP") %>' runat="server" CssClass="Text_sm" OnTextChanged="GopChanged" AutoPostBack="true"></asp:TextBox>
+                                                        </ItemTemplate>
+                                                        <ItemStyle Width="100px" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Indemnity Period">
+                                                        <ItemTemplate>
+                                                            <asp:TextBox ID="gv1txtIndemnityPeriod" Text='<%# Bind("IndemnityPeriod") %>' runat="server" CssClass="Text_sm" OnTextChanged="IndemnityPeriodChanged" AutoPostBack="true"></asp:TextBox>
+                                                        </ItemTemplate>
+                                                        <ItemStyle Width="100px" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Sum Insured">
+                                                        <ItemTemplate>
+                                                            <asp:TextBox ID="gv1txtSumInsured" Text='<%# Bind("SumInsured") %>' runat="server" CssClass="Text_sm"></asp:TextBox>
+                                                        </ItemTemplate>
+                                                        <ItemStyle Width="130px" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Start Date">
+                                                        <ItemTemplate>
+                                                            <asp:TextBox ID="gv1txtSdate" Text='<%# Bind("StartDate") %>' TextMode="Date" runat="server" CssClass="Text_sm"></asp:TextBox>
+                                                        </ItemTemplate>
+                                                        <ItemStyle Width="100px" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="End Date">
+                                                        <ItemTemplate>
+                                                            <asp:TextBox ID="gv1txtEdate" Text='<%# Bind("EndDate") %>' TextMode="Date" runat="server" CssClass="Text_sm"></asp:TextBox>
+                                                        </ItemTemplate>
+                                                        <ItemStyle Width="100px" />
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                                <EditRowStyle BackColor="#999999" />
+                                                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                                                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                                                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                                                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                                                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                                                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                                                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                                            </asp:GridView>
+                                        </td>
                                     </tr>
                                 </table>
                             </td>

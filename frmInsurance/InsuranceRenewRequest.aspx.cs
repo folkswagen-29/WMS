@@ -133,60 +133,6 @@ namespace onlineLegalWF.frmInsurance
                 }
             }
 
-            //var dr = dt.NewRow();
-            //dr["No"] = "1";
-            //dr["PropertyInsured"] = "IAR";
-            //dr["IndemnityPeriod"] = "";
-            //dr["SumInsured"] = "";
-            //dr["StartDate"] = "";
-            //dr["EndDate"] = "";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr["No"] = "2";
-            //dr["PropertyInsured"] = "BI";
-            //dr["IndemnityPeriod"] = "";
-            //dr["SumInsured"] = "";
-            //dr["StartDate"] = "";
-            //dr["EndDate"] = "";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr["No"] = "3";
-            //dr["PropertyInsured"] = "CGL/PL";
-            //dr["IndemnityPeriod"] = "";
-            //dr["SumInsured"] = "";
-            //dr["StartDate"] = "";
-            //dr["EndDate"] = "";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr["No"] = "4";
-            //dr["PropertyInsured"] = "PV";
-            //dr["IndemnityPeriod"] = "";
-            //dr["SumInsured"] = "";
-            //dr["StartDate"] = "";
-            //dr["EndDate"] = "";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr["No"] = "5";
-            //dr["PropertyInsured"] = "LPG";
-            //dr["IndemnityPeriod"] = "";
-            //dr["SumInsured"] = "";
-            //dr["StartDate"] = "";
-            //dr["EndDate"] = "";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr["No"] = "6";
-            //dr["PropertyInsured"] = "D&O";
-            //dr["IndemnityPeriod"] = "";
-            //dr["SumInsured"] = "";
-            //dr["StartDate"] = "";
-            //dr["EndDate"] = "";
-            //dt.Rows.Add(dr);
-
             return dt;
         }
         public DataTable iniDTStructure()
