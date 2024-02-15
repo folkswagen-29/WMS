@@ -710,7 +710,7 @@ namespace onlineLegalWF.frmInsurance
             if (Session["user_login"] != null)
             {
                 //get check external domain
-                string sql = @"select [row_id],[process_id],[req_no],[req_date],[toreq_code],[company_name],[document_no],[subject],[dear],[objective]
+                string sql = @"select [row_id],[process_id],[req_no],[req_date],[toreq_code],ins.[company_name],[document_no],[subject],[dear],[objective]
                                   ,[reason],[approved_desc],[status],[updated_datetime], ins.[bu_code],bu.[external_domain],[property_insured_name] from li_insurance_request as ins
                               INNER JOIN li_business_unit as bu on ins.bu_code = bu.bu_code
                               where process_id = '" + wfAttr.process_id + "'";
