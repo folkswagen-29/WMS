@@ -152,6 +152,14 @@
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
+                            <td class="cell_content_20PC_TR"></td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:Button ID="btn_export_doc" runat="server" Text="Export Doc" CssClass="btn_normal_silver" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_export_doc_Click" />
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
                             <td class="cell_content_20PC_TR">
                                 <label class="Label_md">Summary Insured </label>
                             </td>

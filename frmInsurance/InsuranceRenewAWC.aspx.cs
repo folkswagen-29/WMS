@@ -1,4 +1,5 @@
-﻿using onlineLegalWF.Class;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using onlineLegalWF.Class;
 using Spire.Doc;
 using System;
 using System.Collections.Generic;
@@ -1218,6 +1219,64 @@ namespace onlineLegalWF.frmInsurance
 
 
             #endregion
+        }
+
+        protected void btn_export_doc_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+
+            if (!string.IsNullOrEmpty(id))
+            {
+                string sql = "select * from li_insurance_request where req_no in (" + id + ")";
+                DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+
+                if (dt.Rows.Count > 0) 
+                {
+                    List<string> listpdf = new List<string>();
+                    string[] pdfFiles = new string[] { };
+                    string pathfileins = "";
+                    string outputdirectory = "";
+
+                    foreach (DataRow dr in dt.Rows) 
+                    {
+                        
+
+                        string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + dr["req_no"].ToString() + "' order by row_id desc";
+
+                        var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                        if (resfile.Rows.Count > 0)
+                        {
+                            pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+                            outputdirectory = resfile.Rows[0]["output_directory"].ToString();
+
+                            
+                            listpdf.Add(pathfileins);
+
+                            string sqlattachfile = "select * from wf_attachment where pid = '" + dr["process_id"].ToString() + "' and e_form IS NULL";
+
+                            var resattachfile = zdb.ExecSql_DataTable(sqlattachfile, zconnstr);
+
+                            if (resattachfile.Rows.Count > 0)
+                            {
+                                foreach (DataRow item in resattachfile.Rows)
+                                {
+                                    listpdf.Add(item["attached_filepath"].ToString());
+                                }
+                            }
+                            //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
+                            pdfFiles = listpdf.ToArray();
+                        }
+                    }
+
+                    //
+                    string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
+
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalDoc();", true);
+                    var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                    pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filepath;
+                }
+            }
         }
     }
 }
