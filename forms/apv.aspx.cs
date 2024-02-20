@@ -320,7 +320,18 @@ namespace onlineLegalWF.forms
 
                                         if (!string.IsNullOrEmpty(email)) 
                                         {
-                                            _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                                            //_ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+
+                                            //check send email cco cc to khun ruangsuk.k@assetworldcorp-th.com
+                                            if (wfA_NextStep.step_name == "CCO Approve")
+                                            {
+                                                string ccemail = "ruangsuk.k@assetworldcorp-th.com";
+                                                _ = zsendmail.sendEmailCC(subject + " Mail To Next Appove", email, ccemail, body, filepath);
+                                            }
+                                            else 
+                                            {
+                                                _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                                            }
                                         }
                                     }
 
@@ -603,7 +614,18 @@ namespace onlineLegalWF.forms
 
                                         if (!string.IsNullOrEmpty(email))
                                         {
-                                            _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                                            //_ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+
+                                            //check send email to cco cc khun ruangsuk.k@assetworldcorp-th.com
+                                            if (wfA_NextStep.step_name == "CCO Approve")
+                                            {
+                                                string ccemail = "ruangsuk.k@assetworldcorp-th.com";
+                                                _ = zsendmail.sendEmailCC(subject + " Mail To Next Appove", email, ccemail, body, filepath);
+                                            }
+                                            else
+                                            {
+                                                _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                                            }
                                         }
                                     }
 

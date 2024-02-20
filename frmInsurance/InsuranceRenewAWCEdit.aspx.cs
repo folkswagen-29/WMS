@@ -259,7 +259,7 @@ namespace onlineLegalWF.frmInsurance
 
         public void bindDataListPropTable(string id)
         {
-            string sqlreqres = "select req.property_insured_name,req.req_no,req.req_date,req.[status],bu.bu_desc from li_insurance_request as req inner join li_business_unit as bu on bu.bu_code = req.bu_code where req.toreq_code='07' and req_no in (" + id + ")";
+            string sqlreqres = "select req.property_insured_name,req.req_no,req.req_date,req.[status],bu.bu_desc from li_insurance_request as req inner join li_business_unit as bu on bu.bu_code = req.bu_code where req.toreq_code='07' and req_no in (" + id + ") order by req.bu_code desc";
 
             var reqres = zdb.ExecSql_DataTable(sqlreqres, zconnstr);
 

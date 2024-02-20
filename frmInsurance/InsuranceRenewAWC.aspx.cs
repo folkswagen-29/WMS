@@ -302,7 +302,7 @@ namespace onlineLegalWF.frmInsurance
 
         public void bindDataListPropTable(string id) 
         {
-            string sqlreqres = "select req.property_insured_name,req.req_no,req.req_date,req.[status],bu.bu_desc from li_insurance_request as req inner join li_business_unit as bu on bu.bu_code = req.bu_code where req.toreq_code='07' and req_no in (" + id+")";
+            string sqlreqres = "select req.property_insured_name,req.req_no,req.req_date,req.[status],bu.bu_desc from li_insurance_request as req inner join li_business_unit as bu on bu.bu_code = req.bu_code where req.toreq_code='07' and req_no in (" + id+ ") order by req.bu_code desc";
 
             var reqres = zdb.ExecSql_DataTable(sqlreqres, zconnstr);
 
@@ -1243,7 +1243,7 @@ namespace onlineLegalWF.frmInsurance
 
             if (!string.IsNullOrEmpty(id))
             {
-                string sql = "select * from li_insurance_request where req_no in (" + id + ")";
+                string sql = "select * from li_insurance_request where req_no in (" + id + ") order by bu_code desc";
                 DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
 
                 if (dt.Rows.Count > 0) 
@@ -1255,8 +1255,6 @@ namespace onlineLegalWF.frmInsurance
 
                     foreach (DataRow dr in dt.Rows) 
                     {
-                        
-
                         string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + dr["req_no"].ToString() + "' order by row_id desc";
 
                         var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
