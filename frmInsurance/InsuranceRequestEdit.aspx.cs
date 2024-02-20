@@ -790,7 +790,7 @@ namespace onlineLegalWF.frmInsurance
                             var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
                             ////get mail from db
                             /////send mail to next_approve
-                            if (isdev == "true")
+                            if (isdev != "true")
                             {
                                 string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
                                 System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
