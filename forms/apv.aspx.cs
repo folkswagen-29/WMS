@@ -279,35 +279,49 @@ namespace onlineLegalWF.forms
                                         //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
                                         string[] pdfFiles = listpdf.ToArray();
 
-                                        ////get mail from db
-                                        //string email = "";
-                                        //string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
-                                        //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
-
-                                        //if (dtbpm.Rows.Count > 0)
-                                        //{
-                                        //    email = dtbpm.Rows[0]["email"].ToString();
-
-                                        //}
-                                        //else
-                                        //{
-                                        //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
-                                        //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
-
-                                        //    if (dtrpa.Rows.Count > 0)
-                                        //    {
-                                        //        email = dtrpa.Rows[0]["Email"].ToString();
-                                        //    }
-
-                                        //}
-
                                         string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
 
-                                        //send mail to next_approve
-                                        ////fix mail test
-                                        string email = "legalwfuat2024@gmail.com";
-                                        _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                                        string email = "";
 
+                                        var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                        ////get mail from db
+                                        /////send mail to next_approve
+                                        if (isdev == "true")
+                                        {
+                                            string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                            System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                            if (dtbpm.Rows.Count > 0)
+                                            {
+                                                email = dtbpm.Rows[0]["email"].ToString();
+
+                                            }
+                                            else
+                                            {
+                                                string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                                System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                                if (dtrpa.Rows.Count > 0)
+                                                {
+                                                    email = dtrpa.Rows[0]["Email"].ToString();
+                                                }
+                                                else 
+                                                {
+                                                    email = "";
+                                                }
+
+                                            }
+                                        }
+                                        else 
+                                        {
+                                            ////fix mail test
+                                            email = "legalwfuat2024@gmail.com";
+                                        }
+
+                                        if (!string.IsNullOrEmpty(email)) 
+                                        {
+                                            _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                                        }
                                     }
 
                                 }
@@ -359,34 +373,49 @@ namespace onlineLegalWF.forms
                                         //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
                                         string[] pdfFiles = listpdf.ToArray();
 
-                                        ////get mail from db
-                                        //string email = "";
-                                        //string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
-                                        //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
-
-                                        //if (dtbpm.Rows.Count > 0)
-                                        //{
-                                        //    email = dtbpm.Rows[0]["email"].ToString();
-
-                                        //}
-                                        //else
-                                        //{
-                                        //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
-                                        //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
-
-                                        //    if (dtrpa.Rows.Count > 0)
-                                        //    {
-                                        //        email = dtrpa.Rows[0]["Email"].ToString();
-                                        //    }
-
-                                        //}
-
                                         string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
 
-                                        //send mail to next_approve
-                                        ////fix mail test
-                                        string email = "legalwfuat2024@gmail.com";
-                                        _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                                        string email = "";
+
+                                        var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                        ////get mail from db
+                                        /////send mail to next_approve
+                                        if (isdev == "true")
+                                        {
+                                            string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                            System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                            if (dtbpm.Rows.Count > 0)
+                                            {
+                                                email = dtbpm.Rows[0]["email"].ToString();
+
+                                            }
+                                            else
+                                            {
+                                                string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                                System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                                if (dtrpa.Rows.Count > 0)
+                                                {
+                                                    email = dtrpa.Rows[0]["Email"].ToString();
+                                                }
+                                                else
+                                                {
+                                                    email = "";
+                                                }
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            ////fix mail test
+                                            email = "legalwfuat2024@gmail.com";
+                                        }
+
+                                        if (!string.IsNullOrEmpty(email))
+                                        {
+                                            _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                                        }
 
                                     }
 
@@ -439,35 +468,49 @@ namespace onlineLegalWF.forms
                                         //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
                                         string[] pdfFiles = listpdf.ToArray();
 
-                                        ////get mail from db
-                                        //string email = "";
-                                        //string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
-                                        //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
-
-                                        //if (dtbpm.Rows.Count > 0)
-                                        //{
-                                        //    email = dtbpm.Rows[0]["email"].ToString();
-
-                                        //}
-                                        //else
-                                        //{
-                                        //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
-                                        //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
-
-                                        //    if (dtrpa.Rows.Count > 0)
-                                        //    {
-                                        //        email = dtrpa.Rows[0]["Email"].ToString();
-                                        //    }
-
-                                        //}
-
                                         string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
 
-                                        //send mail to next_approve
-                                        ////fix mail test
-                                        string email = "legalwfuat2024@gmail.com";
-                                        _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                                        string email = "";
 
+                                        var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                        ////get mail from db
+                                        /////send mail to next_approve
+                                        if (isdev == "true")
+                                        {
+                                            string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                            System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                            if (dtbpm.Rows.Count > 0)
+                                            {
+                                                email = dtbpm.Rows[0]["email"].ToString();
+
+                                            }
+                                            else
+                                            {
+                                                string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                                System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                                if (dtrpa.Rows.Count > 0)
+                                                {
+                                                    email = dtrpa.Rows[0]["Email"].ToString();
+                                                }
+                                                else
+                                                {
+                                                    email = "";
+                                                }
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            ////fix mail test
+                                            email = "legalwfuat2024@gmail.com";
+                                        }
+
+                                        if (!string.IsNullOrEmpty(email))
+                                        {
+                                            _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                                        }
                                     }
 
                                 }
@@ -519,35 +562,49 @@ namespace onlineLegalWF.forms
                                         //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
                                         string[] pdfFiles = listpdf.ToArray();
 
-                                        ////get mail from db
-                                        //string email = "";
-                                        //string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
-                                        //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
-
-                                        //if (dtbpm.Rows.Count > 0)
-                                        //{
-                                        //    email = dtbpm.Rows[0]["email"].ToString();
-
-                                        //}
-                                        //else
-                                        //{
-                                        //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
-                                        //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
-
-                                        //    if (dtrpa.Rows.Count > 0)
-                                        //    {
-                                        //        email = dtrpa.Rows[0]["Email"].ToString();
-                                        //    }
-
-                                        //}
-
                                         string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
 
-                                        //send mail to next_approve
-                                        ////fix mail test
-                                        string email = "legalwfuat2024@gmail.com";
-                                        _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                                        string email = "";
 
+                                        var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                        ////get mail from db
+                                        /////send mail to next_approve
+                                        if (isdev == "true")
+                                        {
+                                            string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                            System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                            if (dtbpm.Rows.Count > 0)
+                                            {
+                                                email = dtbpm.Rows[0]["email"].ToString();
+
+                                            }
+                                            else
+                                            {
+                                                string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                                System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                                if (dtrpa.Rows.Count > 0)
+                                                {
+                                                    email = dtrpa.Rows[0]["Email"].ToString();
+                                                }
+                                                else
+                                                {
+                                                    email = "";
+                                                }
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            ////fix mail test
+                                            email = "legalwfuat2024@gmail.com";
+                                        }
+
+                                        if (!string.IsNullOrEmpty(email))
+                                        {
+                                            _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                                        }
                                     }
 
                                 }
@@ -596,44 +653,60 @@ namespace onlineLegalWF.forms
                                     //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
                                     string[] pdfFiles = listpdf.ToArray();
 
-                                    ////get mail from db
-                                    //string email = "";
-                                    //string sqlbpm = "select * from li_user where user_login = '" + wfAttr.submit_by + "' ";
-                                    //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
-
-                                    //if (dtbpm.Rows.Count > 0)
-                                    //{
-                                    //    email = dtbpm.Rows[0]["email"].ToString();
-
-                                    //}
-                                    //else
-                                    //{
-                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfAttr.submit_by + "' ";
-                                    //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
-
-                                    //    if (dtrpa.Rows.Count > 0)
-                                    //    {
-                                    //        email = dtrpa.Rows[0]["Email"].ToString();
-                                    //    }
-
-                                    //}
-
                                     string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
 
-                                    //send mail to requester
+                                    string email = "";
 
-                                    ////fix mail test
-                                    string email = "legalwfuat2024@gmail.com";
-                                    _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
+                                    var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                    ////get mail from db
+                                    /////send mail to next_approve
+                                    if (isdev == "true")
+                                    {
+                                        string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                        System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
 
-                                    //send mait to Procurement
-                                    _ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
+                                        if (dtbpm.Rows.Count > 0)
+                                        {
+                                            email = dtbpm.Rows[0]["email"].ToString();
 
-                                    ////send mail to Insurance
-                                    //string[] emailInsurance = new string[] { "jaroonsak.n@assetworldcorp-th.com", "warin.k@assetworldcorp-th.com" };
-                                    //_ = zsendmail.sendEmails(subject + " Mail To Insurance", emailInsurance, body, filepath);
-                                    _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
-                                    _ = zsendmail.sendEmail(subject + " Mail To Warin.k", email, body, filepath);
+                                        }
+                                        else
+                                        {
+                                            string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                            System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                            if (dtrpa.Rows.Count > 0)
+                                            {
+                                                email = dtrpa.Rows[0]["Email"].ToString();
+                                            }
+                                            else
+                                            {
+                                                email = "";
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ////fix mail test
+                                        email = "legalwfuat2024@gmail.com";
+                                    }
+
+                                    if (!string.IsNullOrEmpty(email))
+                                    {
+                                        //send mail to requester
+                                        _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
+
+                                        //send mait to Procurement
+                                        _ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
+
+
+                                        ////send mail to Insurance
+                                        //string[] emailInsurance = new string[] { "jaroonsak.n@assetworldcorp-th.com", "warin.k@assetworldcorp-th.com" };
+                                        //_ = zsendmail.sendEmails(subject + " Mail To Insurance", emailInsurance, body, filepath);
+                                        _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
+                                        _ = zsendmail.sendEmail(subject + " Mail To Warin.k", email, body, filepath);
+                                    }
 
                                 }
 
@@ -683,49 +756,68 @@ namespace onlineLegalWF.forms
                                         //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
                                         string[] pdfFiles = listpdf.ToArray();
 
-                                        ////get mail from db
-                                        //string email = "";
-                                        //string sqlbpm = "select * from li_user where user_login = '" + wfAttr.submit_by + "' ";
-                                        //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
-
-                                        //if (dtbpm.Rows.Count > 0)
-                                        //{
-                                        //    email = dtbpm.Rows[0]["email"].ToString();
-
-                                        //}
-                                        //else
-                                        //{
-                                        //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfAttr.submit_by + "' ";
-                                        //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
-
-                                        //    if (dtrpa.Rows.Count > 0)
-                                        //    {
-                                        //        email = dtrpa.Rows[0]["Email"].ToString();
-                                        //    }
-
-                                        //}
-
                                         string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
 
-                                        //send mail to requester
+                                        string email = "";
 
-                                        ////fix mail test
-                                        string email = "legalwfuat2024@gmail.com";
-                                        _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
+                                        var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                        ////get mail from db
+                                        /////send mail to next_approve
+                                        if (isdev == "true")
+                                        {
+                                            string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                            System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
 
-                                        ////send mail to Insurance
-                                        //string[] emailInsurance = new string[] { "jaroonsak.n@assetworldcorp-th.com", "warin.k@assetworldcorp-th.com" };
-                                        //_ = zsendmail.sendEmails(subject + " Mail To Insurance", emailInsurance, body, filepath);
-                                        _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
-                                        _ = zsendmail.sendEmail(subject + " Mail To Warin.k", email, body, filepath);
+                                            if (dtbpm.Rows.Count > 0)
+                                            {
+                                                email = dtbpm.Rows[0]["email"].ToString();
 
-                                        //send mail to indara
-                                        //get file eform and attach first attachfile
-                                        string[] pdfFilesIndara = new string[] { resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf"), resattachfile.Rows[0]["attached_filepath"].ToString() };
-                                        string filepathIndara = zmergepdf.mergefilePDF(pdfFilesIndara, outputdirectory);
-                                        //string[] emailIndara = new string[] { "teerapat.w@tgh.co.th", "phakorn.s@tgh.co.th" };
-                                        string[] emailIndara = new string[] { "legalwfuat2024@gmail.com", "manit.ch@assetworldcorp-th.com" };
-                                        _ = zsendmail.sendEmails(subject + " Mail To indara", emailIndara, body, filepathIndara);
+                                            }
+                                            else
+                                            {
+                                                string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                                System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                                if (dtrpa.Rows.Count > 0)
+                                                {
+                                                    email = dtrpa.Rows[0]["Email"].ToString();
+                                                }
+                                                else
+                                                {
+                                                    email = "";
+                                                }
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            ////fix mail test
+                                            email = "legalwfuat2024@gmail.com";
+                                        }
+
+                                        if (!string.IsNullOrEmpty(email))
+                                        {
+                                            //send mail to requester
+                                            _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
+
+                                            //send mait to Procurement
+                                            _ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
+
+
+                                            ////send mail to Insurance
+                                            //string[] emailInsurance = new string[] { "jaroonsak.n@assetworldcorp-th.com", "warin.k@assetworldcorp-th.com" };
+                                            //_ = zsendmail.sendEmails(subject + " Mail To Insurance", emailInsurance, body, filepath);
+                                            _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
+                                            _ = zsendmail.sendEmail(subject + " Mail To Warin.k", email, body, filepath);
+
+                                            //send mail to indara
+                                            //get file eform and attach first attachfile
+                                            string[] pdfFilesIndara = new string[] { resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf"), resattachfile.Rows[0]["attached_filepath"].ToString() };
+                                            string filepathIndara = zmergepdf.mergefilePDF(pdfFilesIndara, outputdirectory);
+                                            //string[] emailIndara = new string[] { "teerapat.w@tgh.co.th", "phakorn.s@tgh.co.th" };
+                                            string[] emailIndara = new string[] { "legalwfuat2024@gmail.com", "manit.ch@assetworldcorp-th.com" };
+                                            _ = zsendmail.sendEmails(subject + " Mail To indara", emailIndara, body, filepathIndara);
+                                        }
 
                                     }
 
@@ -775,44 +867,60 @@ namespace onlineLegalWF.forms
                                     //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
                                     string[] pdfFiles = listpdf.ToArray();
 
-                                    ////get mail from db
-                                    //string email = "";
-                                    //string sqlbpm = "select * from li_user where user_login = '" + wfAttr.submit_by + "' ";
-                                    //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
-
-                                    //if (dtbpm.Rows.Count > 0)
-                                    //{
-                                    //    email = dtbpm.Rows[0]["email"].ToString();
-
-                                    //}
-                                    //else
-                                    //{
-                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfAttr.submit_by + "' ";
-                                    //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
-
-                                    //    if (dtrpa.Rows.Count > 0)
-                                    //    {
-                                    //        email = dtrpa.Rows[0]["Email"].ToString();
-                                    //    }
-
-                                    //}
-
                                     string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
 
-                                    //send mail to requester
+                                    string email = "";
 
-                                    ////fix mail test
-                                    string email = "legalwfuat2024@gmail.com";
-                                    _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
+                                    var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                    ////get mail from db
+                                    /////send mail to next_approve
+                                    if (isdev == "true")
+                                    {
+                                        string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                        System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
 
-                                    //send mait to Procurement
-                                    //_ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
+                                        if (dtbpm.Rows.Count > 0)
+                                        {
+                                            email = dtbpm.Rows[0]["email"].ToString();
 
-                                    ////send mail to Insurance
-                                    //string[] emailInsurance = new string[] { "jaroonsak.n@assetworldcorp-th.com", "warin.k@assetworldcorp-th.com" };
-                                    //_ = zsendmail.sendEmails(subject + " Mail To Insurance", emailInsurance, body, filepath);
-                                    _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
-                                    _ = zsendmail.sendEmail(subject + " Mail To Warin.k", email, body, filepath);
+                                        }
+                                        else
+                                        {
+                                            string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                            System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                            if (dtrpa.Rows.Count > 0)
+                                            {
+                                                email = dtrpa.Rows[0]["Email"].ToString();
+                                            }
+                                            else
+                                            {
+                                                email = "";
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ////fix mail test
+                                        email = "legalwfuat2024@gmail.com";
+                                    }
+
+                                    if (!string.IsNullOrEmpty(email))
+                                    {
+                                        //send mail to requester
+                                        _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
+
+                                        //send mait to Procurement
+                                        //_ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
+
+                                        ////send mail to Insurance
+                                        //string[] emailInsurance = new string[] { "jaroonsak.n@assetworldcorp-th.com", "warin.k@assetworldcorp-th.com" };
+                                        //_ = zsendmail.sendEmails(subject + " Mail To Insurance", emailInsurance, body, filepath);
+                                        _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
+                                        _ = zsendmail.sendEmail(subject + " Mail To Warin.k", email, body, filepath);
+                                    }
+                                    
 
                                 }
 
@@ -860,87 +968,86 @@ namespace onlineLegalWF.forms
                                     //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
                                     string[] pdfFiles = listpdf.ToArray();
 
-                                    //get req_no by process_id from li_insurance_renew_awc_memo_req from db loop for send mail
-                                    string sqlmemo = "select * from li_insurance_renew_awc_memo_req where process_id = '" + wfAttr.process_id + "'";
-                                    System.Data.DataTable dtmemo = zdb.ExecSql_DataTable(sqlmemo, zconnstr);
+                                    string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
 
-                                    List<string> listEmails = new List<string>();
-                                    if (dtmemo.Rows.Count > 0) 
+                                    string email = "";
+
+                                    var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                    ////get mail from db
+                                    /////send mail to next_approve
+                                    if (isdev == "true")
                                     {
-                                        foreach (DataRow row in dtmemo.Rows) 
+                                        ////fix mail test 
+                                        email = "legalwfuat2024@gmail.com";
+                                        _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
+
+                                        //send mait to Procurement
+                                        _ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
+
+                                        ////send mail to Insurance
+                                        //string[] emailInsurance = new string[] { "jaroonsak.n@assetworldcorp-th.com", "warin.k@assetworldcorp-th.com" };
+                                        //_ = zsendmail.sendEmails(subject + " Mail To Insurance", emailInsurance, body, filepath);
+                                        _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
+                                        _ = zsendmail.sendEmail(subject + " Mail To Warin.k", email, body, filepath);
+
+                                    }
+                                    else 
+                                    {
+                                        //get req_no by process_id from li_insurance_renew_awc_memo_req from db loop for send mail
+                                        string sqlmemo = "select * from li_insurance_renew_awc_memo_req where process_id = '" + wfAttr.process_id + "'";
+                                        System.Data.DataTable dtmemo = zdb.ExecSql_DataTable(sqlmemo, zconnstr);
+
+                                        List<string> listEmails = new List<string>();
+                                        if (dtmemo.Rows.Count > 0)
                                         {
-                                            var req_id = row["req_no"].ToString();
-
-                                            string sql_login = @"select top 1 submit_by from wf_routing where process_id in (select process_id from li_insurance_request where req_no ='"+req_id+"')";
-                                            System.Data.DataTable dt_login = zdb.ExecSql_DataTable(sql_login, zconnstr);
-
-                                            if (dt_login.Rows.Count > 0) 
+                                            foreach (DataRow row in dtmemo.Rows)
                                             {
-                                                var submitby = dt_login.Rows[0]["submit_by"].ToString();
-                                                string sqlbpm = "select * from li_user where user_login = '" + submitby + "' ";
-                                                System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+                                                var req_id = row["req_no"].ToString();
 
-                                                if (dtbpm.Rows.Count > 0)
+                                                string sql_login = @"select top 1 submit_by from wf_routing where process_id in (select process_id from li_insurance_request where req_no ='" + req_id + "')";
+                                                System.Data.DataTable dt_login = zdb.ExecSql_DataTable(sql_login, zconnstr);
+
+                                                if (dt_login.Rows.Count > 0)
                                                 {
-                                                    listEmails.Add(dtbpm.Rows[0]["email"].ToString());
-                                                    //email = dtbpm.Rows[0]["email"].ToString();
+                                                    var submitby = dt_login.Rows[0]["submit_by"].ToString();
+                                                    string sqlbpm = "select * from li_user where user_login = '" + submitby + "' ";
+                                                    System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
 
-                                                }
-                                                else
-                                                {
-                                                    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + submitby + "' ";
-                                                    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
-
-                                                    if (dtrpa.Rows.Count > 0)
+                                                    if (dtbpm.Rows.Count > 0)
                                                     {
-                                                        listEmails.Add(dtbpm.Rows[0]["Email"].ToString());
-                                                        //email = dtrpa.Rows[0]["Email"].ToString();
-                                                    }
+                                                        listEmails.Add(dtbpm.Rows[0]["email"].ToString());
+                                                        //email = dtbpm.Rows[0]["email"].ToString();
 
+                                                    }
+                                                    else
+                                                    {
+                                                        string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + submitby + "' ";
+                                                        System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                                        if (dtrpa.Rows.Count > 0)
+                                                        {
+                                                            listEmails.Add(dtbpm.Rows[0]["Email"].ToString());
+                                                            //email = dtrpa.Rows[0]["Email"].ToString();
+                                                        }
+
+                                                    }
                                                 }
                                             }
                                         }
+
+                                        string[] emails = listEmails.ToArray();
+                                        //send mail to requester loop for all bu or prop
+                                        _ = zsendmail.sendEmails(subject + "Mail To Requester", emails, body, filepath);
+
+                                        //send mait to Procurement
+                                        ////fix mail test 
+                                        email = "legalwfuat2024@gmail.com";
+                                        _ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
+
+                                        ////send mail to Insurance
+                                        string[] emailInsurance = new string[] { "jaroonsak.n@assetworldcorp-th.com", "warin.k@assetworldcorp-th.com" };
+                                        _ = zsendmail.sendEmails(subject + " Mail To Insurance", emailInsurance, body, filepath);
                                     }
-
-                                    string[] emails = listEmails.ToArray();
-                                    //string sqlbpm = "select * from li_user where user_login = '" + wfAttr.submit_by + "' ";
-                                    //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
-
-                                    //if (dtbpm.Rows.Count > 0)
-                                    //{
-                                    //    email = dtbpm.Rows[0]["email"].ToString();
-
-                                    //}
-                                    //else
-                                    //{
-                                    //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfAttr.submit_by + "' ";
-                                    //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
-
-                                    //    if (dtrpa.Rows.Count > 0)
-                                    //    {
-                                    //        email = dtrpa.Rows[0]["Email"].ToString();
-                                    //    }
-
-                                    //}
-
-                                    string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
-
-                                    //send mail to requester loop for all bu or prop
-                                    //_ = zsendmail.sendEmails(subject + "Mail To Requester", emails, body, filepath);
-
-                                    ////fix mail test 
-                                    string email = "legalwfuat2024@gmail.com";
-                                    _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, filepath);
-
-                                    //send mait to Procurement
-                                    _ = zsendmail.sendEmail(subject + " Mail To Procurement", email, body, filepath);
-
-                                    ////send mail to Insurance
-                                    //string[] emailInsurance = new string[] { "jaroonsak.n@assetworldcorp-th.com", "warin.k@assetworldcorp-th.com" };
-                                    //_ = zsendmail.sendEmails(subject + " Mail To Insurance", emailInsurance, body, filepath);
-                                    _ = zsendmail.sendEmail(subject + " Mail To Jaroonsak.n", email, body, filepath);
-                                    _ = zsendmail.sendEmail(subject + " Mail To Warin.k", email, body, filepath);
-
                                 }
 
                             }

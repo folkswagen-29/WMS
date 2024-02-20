@@ -20,6 +20,7 @@ namespace onlineLegalWF.frmInsurance
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
+        public string zconnstrrpa = ConfigurationManager.AppSettings["RPADB"].ToString();
         public WFFunctions zwf = new WFFunctions();
         public ReplaceInsClaim zreplaceinsclaim = new ReplaceInsClaim();
         public MargePDF zmergepdf = new MargePDF();
@@ -829,35 +830,49 @@ namespace onlineLegalWF.frmInsurance
                             //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
                             string[] pdfFiles = listpdf.ToArray();
 
-                            ////get mail from db
-                            //string email = "";
-                            //string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
-                            //System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
-
-                            //if (dtbpm.Rows.Count > 0)
-                            //{
-                            //    email = dtbpm.Rows[0]["email"].ToString();
-
-                            //}
-                            //else
-                            //{
-                            //    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
-                            //    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
-
-                            //    if (dtrpa.Rows.Count > 0)
-                            //    {
-                            //        email = dtrpa.Rows[0]["Email"].ToString();
-                            //    }
-
-                            //}
-
                             string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
 
-                            //send mail to next_approve
-                            ////fix mail test
-                            string email = "legalwfuat2024@gmail.com";
-                            _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                            string email = "";
 
+                            var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                            ////get mail from db
+                            /////send mail to next_approve
+                            if (isdev == "true")
+                            {
+                                string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                if (dtbpm.Rows.Count > 0)
+                                {
+                                    email = dtbpm.Rows[0]["email"].ToString();
+
+                                }
+                                else
+                                {
+                                    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                    if (dtrpa.Rows.Count > 0)
+                                    {
+                                        email = dtrpa.Rows[0]["Email"].ToString();
+                                    }
+                                    else
+                                    {
+                                        email = "";
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                ////fix mail test
+                                email = "legalwfuat2024@gmail.com";
+                            }
+
+                            if (!string.IsNullOrEmpty(email))
+                            {
+                                _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, filepath);
+                            }
                         }
 
                     }
