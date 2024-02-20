@@ -325,7 +325,8 @@ namespace onlineLegalWF.forms
                                             //check send email cco cc to khun ruangsuk.k@assetworldcorp-th.com
                                             if (wfA_NextStep.step_name == "CCO Approve")
                                             {
-                                                string ccemail = "ruangsuk.k@assetworldcorp-th.com";
+                                                //string ccemail = "ruangsuk.k@assetworldcorp-th.com";
+                                                string ccemail = "legalwfuat2024@gmail.com";
                                                 _ = zsendmail.sendEmailCC(subject + " Mail To Next Appove", email, ccemail, body, filepath);
                                             }
                                             else 
@@ -619,7 +620,8 @@ namespace onlineLegalWF.forms
                                             //check send email to cco cc khun ruangsuk.k@assetworldcorp-th.com
                                             if (wfA_NextStep.step_name == "CCO Approve")
                                             {
-                                                string ccemail = "ruangsuk.k@assetworldcorp-th.com";
+                                                //string ccemail = "ruangsuk.k@assetworldcorp-th.com";
+                                                string ccemail = "legalwfuat2024@gmail.com";
                                                 _ = zsendmail.sendEmailCC(subject + " Mail To Next Appove", email, ccemail, body, filepath);
                                             }
                                             else
