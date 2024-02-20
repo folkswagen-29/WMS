@@ -1443,9 +1443,9 @@ namespace onlineLegalWF.forms
                 float deviation = 0;
                 float cal_iar_uatc = float.Parse(int.Parse(xiar_uatc, NumberStyles.AllowThousands).ToString());
                 float cal_iar_pfc = float.Parse(int.Parse(xiar_pfc, NumberStyles.AllowThousands).ToString());
-                int int_iar_uatc = int.Parse(xiar_uatc, NumberStyles.AllowThousands);
+                int int_iar_pfc = int.Parse(xiar_pfc, NumberStyles.AllowThousands);
                 deviation = cal_iar_uatc / cal_iar_pfc;
-                if (int_iar_uatc <= 100000)
+                if (int_iar_pfc <= 100000)
                 {
                     data.sign_awcname1 = "";
                     data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
@@ -1472,7 +1472,7 @@ namespace onlineLegalWF.forms
                     data.awcposition3 = "Head of Legal";
                     data.awcdate3 = "";
                 }
-                else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation <= 0.1)
+                else if (int_iar_pfc > 100000 && int_iar_pfc <= 1000000 && deviation <= 0.1)
                 {
                     data.sign_awcname1 = "";
                     data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
@@ -1499,7 +1499,7 @@ namespace onlineLegalWF.forms
                     data.awcposition3 = "Head of Legal";
                     data.awcdate3 = "";
                 }
-                else if (int_iar_uatc > 100000 && int_iar_uatc <= 1000000 && deviation > 0.1)
+                else if (int_iar_pfc > 100000 && int_iar_pfc <= 1000000 && deviation > 0.1)
                 {
                     data.sign_awcname1 = "";
                     data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
@@ -1526,7 +1526,7 @@ namespace onlineLegalWF.forms
                     data.awcposition3 = "CCO";
                     data.awcdate3 = "";
                 }
-                else if (int_iar_uatc > 1000000 && deviation <= 0.2)
+                else if (int_iar_pfc > 1000000 && deviation <= 0.2)
                 {
                     data.sign_awcname1 = "";
                     data.awcname1 = "คุณจรูณศักดิ์ นามะฮง";
@@ -1553,7 +1553,7 @@ namespace onlineLegalWF.forms
                     data.awcposition3 = "CCO";
                     data.awcdate3 = "";
                 }
-                else if (int_iar_uatc > 1000000 && deviation > 0.2)
+                else if (int_iar_pfc > 1000000 && deviation > 0.2)
                 {
                     //data.sign_awcname1 = "";
                     //data.awcname1 = "คุณชโลทร ศรีสมวงษ์";
