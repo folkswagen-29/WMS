@@ -1387,5 +1387,54 @@ namespace onlineLegalWF.frmInsurance
 
             return res;
         }
+
+        protected void AtcCalculate(object sender, EventArgs e)
+        {
+            int iar = (!string.IsNullOrEmpty(iar_atc.Text) ? Int32.Parse(iar_atc.Text) : 0);
+            int bi = (!string.IsNullOrEmpty(bi_atc.Text) ? Int32.Parse(bi_atc.Text) : 0);
+            int pl = (!string.IsNullOrEmpty(pl_cgl_atc.Text) ? Int32.Parse(pl_cgl_atc.Text) : 0);
+            int pv = (!string.IsNullOrEmpty(pv_atc.Text) ? Int32.Parse(pv_atc.Text) : 0);
+
+            int total = iar + bi + pl + pv;
+
+            ttl_atc.Text = total.ToString();
+            ttl_atc.Focus();
+        }
+        protected void DedCalculate(object sender, EventArgs e)
+        {
+            int iar = (!string.IsNullOrEmpty(iar_ded.Text) ? Int32.Parse(iar_ded.Text) : 0);
+            int bi = (!string.IsNullOrEmpty(bi_ded.Text) ? Int32.Parse(bi_ded.Text) : 0);
+            int pl = (!string.IsNullOrEmpty(pl_cgl_ded.Text) ? Int32.Parse(pl_cgl_ded.Text) : 0);
+            int pv = (!string.IsNullOrEmpty(pv_ded.Text) ? Int32.Parse(pv_ded.Text) : 0);
+
+            int total = iar + bi + pl + pv;
+
+            ttl_ded.Text = total.ToString();
+            ttl_ded.Focus();
+        }
+        protected void PfcCalculate(object sender, EventArgs e)
+        {
+            int iar = (!string.IsNullOrEmpty(iar_pfc.Text) ? Int32.Parse(iar_pfc.Text) : 0);
+            int bi = (!string.IsNullOrEmpty(bi_pfc.Text) ? Int32.Parse(bi_pfc.Text) : 0);
+            int pl = (!string.IsNullOrEmpty(pl_cgl_pfc.Text) ? Int32.Parse(pl_cgl_pfc.Text) : 0);
+            int pv = (!string.IsNullOrEmpty(pv_pfc.Text) ? Int32.Parse(pv_pfc.Text) : 0);
+
+            int total = iar + bi + pl + pv;
+
+            ttl_pfc.Text = total.ToString();
+            ttl_pfc.Focus();
+        }
+        protected void UatcCalculate(object sender, EventArgs e)
+        {
+            int iar = (!string.IsNullOrEmpty(iar_uatc.Text) ? Int32.Parse(iar_uatc.Text) : 0);
+            int bi = (!string.IsNullOrEmpty(bi_uatc.Text) ? Int32.Parse(bi_uatc.Text) : 0);
+            int pl = (!string.IsNullOrEmpty(pl_cgl_uatc.Text) ? Int32.Parse(pl_cgl_uatc.Text) : 0);
+            int pv = (!string.IsNullOrEmpty(pv_uatc.Text) ? Int32.Parse(pv_uatc.Text) : 0);
+
+            int total = iar + bi + pl + pv;
+
+            ttl_uatc.Text = total.ToString();
+            ttl_uatc.Focus();
+        }
     }
 }

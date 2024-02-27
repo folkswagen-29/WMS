@@ -184,16 +184,16 @@
                                             <label>Amount to claim มูลค่าเรียกร้อง (a)</label>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="iar_atc" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="iar_atc" runat="server" CssClass="Text_150" OnTextChanged="AtcCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="bi_atc" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="bi_atc" runat="server" CssClass="Text_150" OnTextChanged="AtcCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="pl_cgl_atc" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="pl_cgl_atc" runat="server" CssClass="Text_150" OnTextChanged="AtcCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="pv_atc" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="pv_atc" runat="server" CssClass="Text_150" OnTextChanged="AtcCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
                                             <asp:TextBox ID="ttl_atc" runat="server" CssClass="Text_150"></asp:TextBox>
@@ -204,16 +204,16 @@
                                             <label>Deductible ค่ารับผิดส่วนแรก (b)</label>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="iar_ded" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="iar_ded" runat="server" CssClass="Text_150" OnTextChanged="DedCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="bi_ded" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="bi_ded" runat="server" CssClass="Text_150" OnTextChanged="DedCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="pl_cgl_ded" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="pl_cgl_ded" runat="server" CssClass="Text_150" OnTextChanged="DedCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="pv_ded" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="pv_ded" runat="server" CssClass="Text_150" OnTextChanged="DedCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
                                             <asp:TextBox ID="ttl_ded" runat="server" CssClass="Text_150"></asp:TextBox>
@@ -224,16 +224,16 @@
                                             <label>Proceeds from claim มูลค่าสินไหม (C)</label>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="iar_pfc" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="iar_pfc" runat="server" CssClass="Text_150" OnTextChanged="PfcCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="bi_pfc" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="bi_pfc" runat="server" CssClass="Text_150" OnTextChanged="PfcCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="pl_cgl_pfc" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="pl_cgl_pfc" runat="server" CssClass="Text_150" OnTextChanged="PfcCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="pv_pfc" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="pv_pfc" runat="server" CssClass="Text_150" OnTextChanged="PfcCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
                                             <asp:TextBox ID="ttl_pfc" runat="server" CssClass="Text_150"></asp:TextBox>
@@ -244,16 +244,16 @@
                                             <label>Under amount to claim ส่วนต่างมูลค่าการเคลม (a-b-c)</label>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="iar_uatc" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="iar_uatc" runat="server" CssClass="Text_150" OnTextChanged="UatcCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="bi_uatc" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="bi_uatc" runat="server" CssClass="Text_150" OnTextChanged="UatcCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="pl_cgl_uatc" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="pl_cgl_uatc" runat="server" CssClass="Text_150" OnTextChanged="UatcCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="pv_uatc" runat="server" CssClass="Text_150"></asp:TextBox>
+                                            <asp:TextBox ID="pv_uatc" runat="server" CssClass="Text_150" OnTextChanged="UatcCalculate" AutoPostBack="true"></asp:TextBox>
                                         </td>
                                         <td>
                                             <asp:TextBox ID="ttl_uatc" runat="server" CssClass="Text_150"></asp:TextBox>
