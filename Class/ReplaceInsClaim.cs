@@ -109,6 +109,7 @@ namespace onlineLegalWF.Class
             dr0["tagname"] = "#propdate2#";
             dr0["tagvalue"] = (!string.IsNullOrEmpty(data.propdate2) ? data.propdate2.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
+
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#sign_propname3#";
             dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_propname3) ? data.sign_propname3.Replace(",", "!comma") : "");
@@ -125,6 +126,24 @@ namespace onlineLegalWF.Class
             dr0["tagname"] = "#propdate3#";
             dr0["tagvalue"] = (!string.IsNullOrEmpty(data.propdate3) ? data.propdate3.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
+
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#sign_propname3_1#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_propname3_1) ? data.sign_propname3_1.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#propname3_1#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.propname3_1) ? data.propname3_1.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#propposition3_1#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.propposition3_1) ? data.propposition3_1.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#propdate3_1#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.propdate3_1) ? data.propdate3_1.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#sign_awcname1#";
             dr0["tagvalue"] = (!string.IsNullOrEmpty(data.sign_awcname1) ? data.sign_awcname1.Replace(",", "!comma") : "");
@@ -254,6 +273,9 @@ namespace onlineLegalWF.Class
                 res.propname3 = data.propname3;
                 res.propposition3 = data.propposition3;
                 res.propdate3 = data.propdate3;
+                res.propname3_1 = data.propname3_1;
+                res.propposition3_1 = data.propposition3_1;
+                res.propdate3_1 = data.propdate3_1;
                 res.awcname1 = data.awcname1;
                 res.awcposition1 = data.awcposition1;
                 res.awcdate1 = data.awcdate1;
@@ -304,12 +326,20 @@ namespace onlineLegalWF.Class
                             res.propdate2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
-                    else if (dr["step_name"].ToString() == "Head AM Approve")
+                    else if (dr["step_name"].ToString() == "AM Approve")
                     {
                         if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_propname3 = "Approved by system";
                             res.propdate3 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    else if (dr["step_name"].ToString() == "Head AM Approve")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.sign_propname3_1 = "Approved by system";
+                            res.propdate3_1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
                     else if (dr["step_name"].ToString() == "AWC Validate Approve")
@@ -456,6 +486,11 @@ namespace onlineLegalWF.Class
             public string propname3 { get; set; }
             public string propposition3 { get; set; }
             public string propdate3 { get; set; }
+
+            public string sign_propname3_1 { get; set; }
+            public string propname3_1 { get; set; }
+            public string propposition3_1 { get; set; }
+            public string propdate3_1 { get; set; }
 
             public string sign_awcname1 { get; set; }
             public string awcname1 { get; set; }

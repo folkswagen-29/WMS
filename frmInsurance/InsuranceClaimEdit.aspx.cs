@@ -299,6 +299,8 @@ namespace onlineLegalWF.frmInsurance
             var gmpos = "";
             var amname = "";
             var ampos = "";
+            var headamname = "";
+            var headampos = "";
             if (res.Rows.Count > 0)
             {
                 var empFunc = new EmpInfo();
@@ -311,7 +313,8 @@ namespace onlineLegalWF.frmInsurance
                 }
                 string xexternal_domain = res.Rows[0]["external_domain"].ToString();
                 string xgm = res.Rows[0]["gm"].ToString();
-                string xam = res.Rows[0]["head_am"].ToString();
+                string xam = res.Rows[0]["am"].ToString();
+                string xhead_am = res.Rows[0]["head_am"].ToString();
                 //get data am user
                 if (!string.IsNullOrEmpty(xam))
                 {
@@ -319,7 +322,17 @@ namespace onlineLegalWF.frmInsurance
                     if (empam.user_login != null)
                     {
                         amname = empam.full_name_en;
-                        ampos = empam.position_en;
+                        ampos = "AM";
+                    }
+                }
+                //get data head am user
+                if (!string.IsNullOrEmpty(xhead_am))
+                {
+                    var empheadam = empFunc.getEmpInfo(xhead_am);
+                    if (empheadam.user_login != null)
+                    {
+                        headamname = empheadam.full_name_en;
+                        headampos = "/ Head AM";
                     }
                 }
                 //get data gm user
@@ -347,6 +360,11 @@ namespace onlineLegalWF.frmInsurance
             data.propname3 = amname;
             data.propposition3 = ampos;
             data.propdate3 = "";
+
+            data.sign_propname3_1 = "";
+            data.propname3_1 = headamname;
+            data.propposition3_1 = headampos;
+            data.propdate3_1 = "";
 
             //check corditon deviation claim
             float deviation = 0;
@@ -923,6 +941,8 @@ namespace onlineLegalWF.frmInsurance
                 var gmpos = "";
                 var amname = "";
                 var ampos = "";
+                var headamname = "";
+                var headampos = "";
                 if (res.Rows.Count > 0)
                 {
                     var empFunc = new EmpInfo();
@@ -935,7 +955,8 @@ namespace onlineLegalWF.frmInsurance
                     }
                     string xexternal_domain = res.Rows[0]["external_domain"].ToString();
                     string xgm = res.Rows[0]["gm"].ToString();
-                    string xam = res.Rows[0]["head_am"].ToString();
+                    string xam = res.Rows[0]["am"].ToString();
+                    string xhead_am = res.Rows[0]["head_am"].ToString();
                     //get data am user
                     if (!string.IsNullOrEmpty(xam))
                     {
@@ -943,7 +964,17 @@ namespace onlineLegalWF.frmInsurance
                         if (empam.user_login != null)
                         {
                             amname = empam.full_name_en;
-                            ampos = empam.position_en;
+                            ampos = "AM";
+                        }
+                    }
+                    //get data head am user
+                    if (!string.IsNullOrEmpty(xhead_am))
+                    {
+                        var empheadam = empFunc.getEmpInfo(xhead_am);
+                        if (empheadam.user_login != null)
+                        {
+                            headamname = empheadam.full_name_en;
+                            headampos = "/ Head AM";
                         }
                     }
                     //get data gm user
@@ -971,6 +1002,11 @@ namespace onlineLegalWF.frmInsurance
                 data.propname3 = amname;
                 data.propposition3 = ampos;
                 data.propdate3 = "";
+
+                data.sign_propname3_1 = "";
+                data.propname3_1 = headamname;
+                data.propposition3_1 = headampos;
+                data.propdate3_1 = "";
 
                 //check corditon deviation claim
                 float deviation = 0;
