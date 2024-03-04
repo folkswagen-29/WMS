@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -15,7 +16,10 @@ namespace onlineLegalWF.legalPortal
 {
     public partial class loginPage : System.Web.UI.Page
     {
-        
+        #region Public
+        public DbControllerBase zdb = new DbControllerBase();
+        public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
+        #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) 
@@ -95,10 +99,31 @@ namespace onlineLegalWF.legalPortal
             {
                 //Check Username and Password From li_user if Correct Data set Token Ispass
                 //if (!string.IsNullOrEmpty(xusername.Trim()) && !string.IsNullOrEmpty(xpassword.Trim()))
-                if (!string.IsNullOrEmpty(xusername.Trim()) && xpassword.Trim() == "1234") 
+                var Isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                if (Isdev == "true") 
                 {
-                    token = "IsPass";
+                    if (!string.IsNullOrEmpty(xusername.Trim()) && xpassword.Trim() == "1234")
+                    {
+                        token = "IsPass";
+                    }
                 }
+                else 
+                {
+                    if (!string.IsNullOrEmpty(xusername.Trim()) && !string.IsNullOrEmpty(xpassword.Trim()))
+                    {
+                        var key = "iJLTaWhyqexThL3Qmj63qA==";
+                        string hashpassword = EmpInfo.DecryptString(key, xpassword.Trim());
+                        string sqlbpm = "select * from li_user where user_login = '" + xusername.Trim() + "' and passwordhash = '"+ hashpassword + "' ";
+                        DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                        if (dtbpm.Rows.Count > 0) 
+                        {
+                            token = "IsPass";
+                        }
+                    }
+                }
+
+                
             }
 
             return token;
@@ -209,12 +234,21 @@ namespace onlineLegalWF.legalPortal
                     // Send the GET request and get the response
                     //HttpResponseMessage response = await httpClient.PostAsync(httpClient.BaseAddress, content);
                     HttpResponseMessage response = httpClient.PostAsync(httpClient.BaseAddress, content).Result;
-                    response.EnsureSuccessStatusCode();
 
-                    // Read and display the response content as a string
-                    //string responseContent = await response.Content.ReadAsStringAsync();
-                    string responseContent = response.Content.ReadAsStringAsync().Result;
-                    res = JsonConvert.DeserializeObject<UserIdntityResponse>(responseContent);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        response.EnsureSuccessStatusCode();
+
+                        // Read and display the response content as a string
+                        //string responseContent = await response.Content.ReadAsStringAsync();
+                        string responseContent = response.Content.ReadAsStringAsync().Result;
+                        res = JsonConvert.DeserializeObject<UserIdntityResponse>(responseContent);
+                    }
+                    else 
+                    {
+                        res = null;
+                    }
+                    
                 }
 
             }

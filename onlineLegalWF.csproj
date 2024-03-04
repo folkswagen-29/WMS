@@ -266,6 +266,7 @@
     <Content Include="StyleSheet\CustomStyle.css" />
     <Content Include="test\test02.aspx" />
     <Content Include="test\testCSS1.aspx" />
+    <Content Include="test\TestPasswordHash.aspx" />
     <Content Include="test\testReplaceDoc1.aspx" />
     <Content Include="test\testReplaceDoc2.aspx" />
     <Content Include="test\testsendmail.aspx" />
@@ -602,6 +603,13 @@
     </Compile>
     <Compile Include="test\testCSS1.aspx.designer.cs">
       <DependentUpon>testCSS1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="test\TestPasswordHash.aspx.cs">
+      <DependentUpon>TestPasswordHash.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test\TestPasswordHash.aspx.designer.cs">
+      <DependentUpon>TestPasswordHash.aspx</DependentUpon>
     </Compile>
     <Compile Include="test\testReplaceDoc1.aspx.cs">
       <DependentUpon>testReplaceDoc1.aspx</DependentUpon>
