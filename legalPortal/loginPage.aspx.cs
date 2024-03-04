@@ -99,31 +99,44 @@ namespace onlineLegalWF.legalPortal
             {
                 //Check Username and Password From li_user if Correct Data set Token Ispass
                 //if (!string.IsNullOrEmpty(xusername.Trim()) && !string.IsNullOrEmpty(xpassword.Trim()))
-                var Isdev = ConfigurationManager.AppSettings["isDev"].ToString();
-                if (Isdev == "true") 
+                //var Isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                //if (Isdev == "true") 
+                //{
+                //    if (!string.IsNullOrEmpty(xusername.Trim()) && xpassword.Trim() == "1234")
+                //    {
+                //        token = "IsPass";
+                //    }
+                //}
+                //else 
+                //{
+                //    if (!string.IsNullOrEmpty(xusername.Trim()) && !string.IsNullOrEmpty(xpassword.Trim()))
+                //    {
+                //        var key = "iJLTaWhyqexThL3Qmj63qA==";
+                //        string hashpassword = EmpInfo.DecryptString(key, xpassword.Trim());
+                //        string sqlbpm = "select * from li_user where user_login = '" + xusername.Trim() + "' and passwordhash = '"+ hashpassword + "' ";
+                //        DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                //        if (dtbpm.Rows.Count > 0) 
+                //        {
+                //            token = "IsPass";
+                //        }
+                //    }
+                //}
+
+                if (!string.IsNullOrEmpty(xusername.Trim()) && !string.IsNullOrEmpty(xpassword.Trim()))
                 {
-                    if (!string.IsNullOrEmpty(xusername.Trim()) && xpassword.Trim() == "1234")
+                    var key = "iJLTaWhyqexThL3Qmj63qA==";
+                    string hashpassword = EmpInfo.DecryptString(key, xpassword.Trim());
+                    string sqlbpm = "select * from li_user where user_login = '" + xusername.Trim() + "' and passwordhash = '" + hashpassword + "' ";
+                    DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                    if (dtbpm.Rows.Count > 0)
                     {
                         token = "IsPass";
                     }
                 }
-                else 
-                {
-                    if (!string.IsNullOrEmpty(xusername.Trim()) && !string.IsNullOrEmpty(xpassword.Trim()))
-                    {
-                        var key = "iJLTaWhyqexThL3Qmj63qA==";
-                        string hashpassword = EmpInfo.DecryptString(key, xpassword.Trim());
-                        string sqlbpm = "select * from li_user where user_login = '" + xusername.Trim() + "' and passwordhash = '"+ hashpassword + "' ";
-                        DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
 
-                        if (dtbpm.Rows.Count > 0) 
-                        {
-                            token = "IsPass";
-                        }
-                    }
-                }
 
-                
             }
 
             return token;
