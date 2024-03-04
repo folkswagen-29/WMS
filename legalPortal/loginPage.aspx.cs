@@ -126,7 +126,7 @@ namespace onlineLegalWF.legalPortal
                 if (!string.IsNullOrEmpty(xusername.Trim()) && !string.IsNullOrEmpty(xpassword.Trim()))
                 {
                     var key = "iJLTaWhyqexThL3Qmj63qA==";
-                    string hashpassword = EmpInfo.DecryptString(key, xpassword.Trim());
+                    string hashpassword = EmpInfo.EncryptString(key, xpassword);
                     string sqlbpm = "select * from li_user where user_login = '" + xusername.Trim() + "' and passwordhash = '" + hashpassword + "' ";
                     DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
 
