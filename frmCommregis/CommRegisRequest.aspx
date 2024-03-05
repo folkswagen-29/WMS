@@ -88,7 +88,7 @@
                             </td>
                             <td>&nbsp;</td>
                         </tr>
-                        <tr class="company" style="display: none;">
+                        <tr class="company">
                             <td class="cell_content_20PC_TR">
                                 <label class="Label_md">ชื่อบริษัท ภาษาไทย </label>
                             </td>
@@ -98,7 +98,7 @@
                             </td>
                             <td>&nbsp;</td>
                         </tr>
-                        <tr class="company" style="display: none;">
+                        <tr class="company">
                             <td class="cell_content_20PC_TR">
                                 <label class="Label_md">ชื่อบริษัท ภาษาอังกฤษ </label>
                             </td>
@@ -542,12 +542,12 @@
                 }
             });
 
-            $('#ContentPlaceHolder1_sec7_cb_rd').change(function () {
+            $('#ContentPlaceHolder1_sec8_cb_rd').change(function () {
                 if ($(this).is(':checked') == true) {
-                    $('#rdregis7').show();
+                    $('#rdregis8').show();
                 }
                 else {
-                    $('#rdregis7').hide();
+                    $('#rdregis8').hide();
                 }
             });
 
@@ -781,4 +781,21 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <asp:Label ID="lblPID" runat="server" CssClass="Label_sm"></asp:Label>
+    <div class="modal fade" id="modaldocument" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="border: 0;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="pdf_render" runat="server" width="865" height="600" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    function showModalDoc() {
+        $("#modaldocument").modal('show');
+    }
+</script>
 </asp:Content>

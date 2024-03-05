@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.ExtendedProperties;
+using iTextSharp.text.pdf;
 using onlineLegalWF.Class;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static onlineLegalWF.Class.ReplaceCommRegis;
 
 namespace onlineLegalWF.frmCommregis
 {
@@ -18,6 +20,7 @@ namespace onlineLegalWF.frmCommregis
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
         public WFFunctions zwf = new WFFunctions();
+        public ReplaceCommRegis zreplacecommregis = new ReplaceCommRegis();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -249,6 +252,155 @@ namespace onlineLegalWF.frmCommregis
 
 
             return ret;
+        }
+
+        protected void btn_gendocumnt_Click(object sender, EventArgs e)
+        {
+            GenDocumnet();
+        }
+
+        private void GenDocumnet()
+        {
+            // Replace Doc
+            var xtype_comm_regis = type_comm_regis.SelectedValue;
+            var xtype_comm_regis_text = type_comm_regis.SelectedItem.Text;
+            var xdoc_no = doc_no.Text.Trim();
+            var xprocess_id = hid_PID.Value.ToString();
+            var xreq_date = Utillity.ConvertStringToDate(req_date.Value);
+            var xmt_res_desc = mt_res_desc.Text.Trim();
+            var xmt_res_no = mt_res_no.Text.Trim();
+            var xmt_res_date = mt_res_date.Text.Trim();
+            var xcompany_name_th = "";
+            var xcompany_name_en = "";
+            var xddl_subsidiary = ddl_subsidiary.SelectedValue;
+
+            if (xtype_comm_regis == "01" || xtype_comm_regis == "02")
+            {
+                xcompany_name_th = company_name_th.Text.Trim();
+                xcompany_name_en = company_name_en.Text.Trim();
+            }
+            else
+            {
+                string sql_commsub = "SELECT * FROM [BPM].[dbo].[li_comm_regis_subsidiary] where subsidiary_code = '" + xddl_subsidiary + "'";
+                var rescommsub = zdb.ExecSql_DataTable(sql_commsub, zconnstr);
+
+                if (rescommsub.Rows.Count > 0)
+                {
+                    xcompany_name_th = rescommsub.Rows[0]["subsidiary_name_th"].ToString();
+                    xcompany_name_en = rescommsub.Rows[0]["subsidiary_name_en"].ToString();
+                }
+            }
+
+            var path_template = ConfigurationManager.AppSettings["WT_Template_commregistration"].ToString();
+            string templatefile = "";
+            if (xtype_comm_regis == "12" || xtype_comm_regis == "13" || xtype_comm_regis == "14")
+            {
+                templatefile = path_template + @"\InsuranceComregis2.docx";
+            }
+            else
+            {
+                templatefile = path_template + @"\InsuranceComregis.docx";
+            }
+            string outputfolder = path_template + @"\Output";
+            string outputfn = outputfolder + @"\commregis_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+            var rdoc = new ReplaceDocx.Class.ReplaceDocx();
+
+            #region gentagstr data form
+            ReplaceCommRegis_TagData data = new ReplaceCommRegis_TagData();
+
+            data.docno = xdoc_no.Replace(",", "!comma");
+            data.subject = xtype_comm_regis_text.Replace(",", "!comma");
+            data.companyname_th = xcompany_name_th.Replace(",", "!comma");
+            data.companyname_en = xcompany_name_en.Replace(",", "!comma");
+            data.reqdate = Utillity.ConvertDateToLongDateTime(xreq_date, "th");
+            data.mt_res_desc = xmt_res_desc.Replace(",", "!comma");
+            data.mt_res_no = xmt_res_no.Replace(",", "!comma");
+            data.mt_res_date = Utillity.ConvertDateToLongDateTime(Utillity.ConvertStringToDate(xmt_res_date), "th").Replace(",", "!comma");
+
+            var requestor = "";
+            var requestorpos = "";
+            var supervisor = "";
+            var supervisorpos = "";
+
+            // check session_user
+            if (Session["user_login"] != null)
+            {
+                var xlogin_name = Session["user_login"].ToString();
+                var empFunc = new EmpInfo();
+
+                //get data user
+                var emp = empFunc.getEmpInfo(xlogin_name);
+                if (!string.IsNullOrEmpty(emp.full_name_en))
+                {
+                    requestor = emp.full_name_en;
+                    requestorpos = emp.position_en;
+                }
+
+                //get supervisor data
+                var empSupervisor = empFunc.getEmpInfo(emp.next_line_mgr_login);
+                if (!string.IsNullOrEmpty(empSupervisor.full_name_en))
+                {
+                    supervisor = empSupervisor.full_name_en;
+                    supervisorpos = empSupervisor.position_en;
+                }
+
+            }
+
+            data.sign_name1 = "";
+            data.name1 = requestor;
+            data.position1 = requestorpos;
+            data.date1 = "";
+
+            data.sign_name2 = "";
+            data.name2 = supervisor;
+            data.position2 = supervisorpos;
+            data.date2 = "";
+
+
+            DataTable dtStr = zreplacecommregis.genTagData(data);
+            #endregion
+
+
+            // Convert to JSONString
+            //DataTable dtTagPropsTable = new DataTable();
+            //dtTagPropsTable.Columns.Add("tagname", typeof(string));
+            //dtTagPropsTable.Columns.Add("jsonstring", typeof(string));
+
+            //DataTable dtTagDataTable = new DataTable();
+            //dtTagDataTable.Columns.Add("tagname", typeof(string));
+            //dtTagDataTable.Columns.Add("jsonstring", typeof(string));
+            ReplaceDocx.Class.ReplaceDocx repl = new ReplaceDocx.Class.ReplaceDocx();
+            var jsonDTStr = repl.DataTableToJSONWithStringBuilder(dtStr);
+            //var jsonDTProperties1 = repl.DataTableToJSONWithStringBuilder(dtProperties1);
+            //var jsonDTdata = repl.DataTableToJSONWithStringBuilder(dt);
+            var jsonDTProperties1 = "";
+            var jsonDTdata = "";
+            //end prepare data
+
+            // Save to Database z_replacedocx_log
+            string xreq_no = req_no.Text.Trim();
+            string sql = @"insert into z_replacedocx_log (replacedocx_reqno,jsonTagString, jsonTableProp, jsonTableData,template_filepath , output_directory,output_filepath, delete_output ) 
+                        values('" + xreq_no + @"',
+                               '" + jsonDTStr + @"', 
+                                '" + jsonDTProperties1 + @"', 
+                                '" + jsonDTdata + @"', 
+                                '" + templatefile + @"', 
+                                '" + outputfolder + @"', 
+                                '" + outputfn + @"',  
+                                '" + "0" + @"'
+                            ) ";
+
+            zdb.ExecNonQuery(sql, zconnstr);
+
+            var outputbyte = rdoc.ReplaceData2(jsonDTStr, jsonDTProperties1, jsonDTdata, templatefile, outputfolder, outputfn, false);
+
+            repl.convertDOCtoPDF(outputfn, outputfn.Replace(".docx", ".pdf"), false);
+
+            string filePath = outputfn.Replace(".docx", ".pdf");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalDoc();", true);
+            var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+            pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filePath;
         }
     }
 }

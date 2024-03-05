@@ -507,7 +507,7 @@
             <td colspan="2" class="cell_content_100PC">
                 <asp:Button ID="btn_save" runat="server" CssClass="btn_normal_silver" Text="Save" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_save_Click" />
                 <asp:Button ID="btn_submit" runat="server" CssClass="btn_normal_silver" Text="Submit" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
-                <asp:Button ID="btn_gendocumnt" runat="server" CssClass="btn_normal_silver" Text="Preview" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
+                <asp:Button ID="btn_gendocumnt" runat="server" CssClass="btn_normal_silver" Text="Preview" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_gendocumnt_Click" />
             </td>
 
         </tr>
@@ -526,8 +526,7 @@
                 if ($(this).is(':checked') == true) {
                     $('#rdregis1').show();
                 }
-                else
-                {
+                else {
                     $('#rdregis1').hide();
                 }
             });
@@ -541,12 +540,12 @@
                 }
             });
 
-            $('#ContentPlaceHolder1_sec7_cb_rd').change(function () {
+            $('#ContentPlaceHolder1_sec8_cb_rd').change(function () {
                 if ($(this).is(':checked') == true) {
-                    $('#rdregis7').show();
+                    $('#rdregis8').show();
                 }
                 else {
-                    $('#rdregis7').hide();
+                    $('#rdregis8').hide();
                 }
             });
 
@@ -566,7 +565,7 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('.subsidiary').hide();
-                    $('.company').hide();
+                    $('.company').show();
                 }
                 else if ($(this).val() == "02") {
                     $('#section1').hide();
@@ -780,5 +779,22 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <asp:Label ID="lblPID" runat="server" CssClass="Label_sm"></asp:Label>
+    <div class="modal fade" id="modaldocument" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="border: 0;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="pdf_render" runat="server" width="865" height="600" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    function showModalDoc() {
+        $("#modaldocument").modal('show');
+    }
+</script>
 </asp:Content>
 
