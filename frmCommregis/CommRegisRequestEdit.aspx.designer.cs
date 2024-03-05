@@ -11,7 +11,7 @@ namespace onlineLegalWF.frmCommregis
 {
 
 
-    public partial class CommRegisRequest
+    public partial class CommRegisRequestEdit
     {
 
         /// <summary>
@@ -186,15 +186,6 @@ namespace onlineLegalWF.frmCommregis
         protected global::System.Web.UI.WebControls.Button btn_gendocumnt;
 
         /// <summary>
-        /// btn_cancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_cancel;
-
-        /// <summary>
         /// ucCommentlog1 control.
         /// </summary>
         /// <remarks>
@@ -211,6 +202,15 @@ namespace onlineLegalWF.frmCommregis
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_PID;
+
+        /// <summary>
+        /// req_date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField req_date;
 
         /// <summary>
         /// lblPID control.

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Commercial Registration Request" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="CommRegisRequest.aspx.cs" Inherits="onlineLegalWF.frmCommregis.CommRegisRequest" %>
+﻿<%@ Page Title="Commercial Registration RequestEdit" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="CommRegisRequestEdit.aspx.cs" Inherits="onlineLegalWF.frmCommregis.CommRegisRequestEdit" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc2" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
@@ -505,10 +505,9 @@
 
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
-                <asp:Button ID="btn_save" runat="server" CssClass="btn_normal_silver" Text="Save" OnClick="btn_save_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
+                <asp:Button ID="btn_save" runat="server" CssClass="btn_normal_silver" Text="Save" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_save_Click" />
                 <asp:Button ID="btn_submit" runat="server" CssClass="btn_normal_silver" Text="Submit" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
-                <asp:Button ID="btn_gendocumnt" runat="server" CssClass="btn_normal_silver" Text="Preview" OnClick="btn_gendocumnt_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
-                <asp:Button ID="btn_cancel" runat="server" CssClass="btn_normal_silver" Text="Cancel" OnClientClick="JavaScript:window.history.back(1); return false;" />
+                <asp:Button ID="btn_gendocumnt" runat="server" CssClass="btn_normal_silver" Text="Preview" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
             </td>
 
         </tr>
@@ -567,7 +566,7 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('.subsidiary').hide();
-                    $('.company').show();
+                    $('.company').hide();
                 }
                 else if ($(this).val() == "02") {
                     $('#section1').hide();
@@ -773,12 +772,13 @@
                     $('.company').hide();
                 }
             });
-            
         });
     </script>
     <asp:HiddenField ID="hid_PID" runat="server" />
+    <asp:HiddenField ID="req_date" runat="server" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <asp:Label ID="lblPID" runat="server" CssClass="Label_sm"></asp:Label>
 </asp:Content>
+
