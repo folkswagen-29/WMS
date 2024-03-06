@@ -345,6 +345,18 @@ namespace onlineLegalWF.Class
                         xurl = "/frminsurance/insuranceclaimedit.aspx?id=" + id + "&st=" + wfA.step_name;
                     }
                 }
+                else if (wfA.process_code == "CCR")
+                {
+                    string sqlreq = @"select * from li_comm_regis_request where process_id = '" + wfA.process_id + "'";
+                    var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                    if (dtreq.Rows.Count > 0)
+                    {
+                        var drreq = dtreq.Rows[0];
+                        string id = drreq["req_no"].ToString();
+
+                        xurl = "/frmcommregis/commregisrequestedit.aspx?id=" + id;
+                    }
+                }
                 string sqlins = @" insert into wf_routing (process_id, process_code, version_no, subject,
                                 step_no, step_name,link_url_format,
                                 wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer, submit_by,updated_datetime,updated_by) 
@@ -491,103 +503,111 @@ namespace onlineLegalWF.Class
             {
                 //if (!isExistingWFStep(wfDefault_step.process_id, wfDefault_step.process_code, wfDefault_step.version_no,wfDefault_step.step_no)) // Check used to add New Step already or not?
                 //{
-                    string xurl = "";
-                    if (wfDefault_step.step_name == "Legal Insurance")
-                    {
-                        xurl = "/forms/legalassign.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
-                    }
-                    //else if (wfDefault_step.step_name == "GM Review" && wfDefault_step.process_code == "INR_NEW") 
-                    //{
-                    //    string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
-                    //    var dt = zdb.ExecSql_DataTable(sql, zconnstr);
-                    //    if (dt.Rows.Count > 0)
-                    //    {
-                    //        var dr = dt.Rows[0];
-                    //        string id = dr["req_no"].ToString();
-
-                    //        xurl = "/frminsurance/insurancerequestedit.aspx?id=" + id + "&st=" + wfDefault_step.step_name;
-                    //    }
-                    //}
-                    else if (wfDefault_step.step_name == "Requester Receive Approval")
-                    {
-                        xurl = "/forms/requesterclosejob.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
-                    }
-                    else if (wfDefault_step.step_name == "End")
-                    {
-                        xurl = "/forms/complete.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
-                    }
-                    else if (wfDefault_step.step_name == "Edit Request")
-                    {
-                        if (wfDefault_step.process_code == "INR_NEW") 
+                string xurl = "";
+                if (wfDefault_step.step_name == "Requester Receive Approval")
+                {
+                    xurl = "/forms/requesterclosejob.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
+                }
+                else if (wfDefault_step.step_name == "End")
+                {
+                    if (wfDefault_step.process_code == "CCR")
                         {
-                            string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
-                            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
-                            if (dt.Rows.Count > 0)
-                            {
-                                var dr = dt.Rows[0];
-                                string id = dr["req_no"].ToString();
-
-                                xurl = "/frminsurance/insurancerequestedit.aspx?id=" + id;
-                            }
-                        }
-                        else if (wfDefault_step.process_code == "INR_RENEW")
-                        {
-                            string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
-                            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
-                            if (dt.Rows.Count > 0)
-                            {
-                                var dr = dt.Rows[0];
-                                string id = dr["req_no"].ToString();
-
-                                xurl = "/frminsurance/insurancerenewrequestedit.aspx?id=" + id;
-                            }
-                        }
-                        else if (wfDefault_step.process_code == "INR_CLAIM" || wfDefault_step.process_code == "INR_CLAIM_2" || wfDefault_step.process_code == "INR_CLAIM_3")
-                        {
-                            string sql = @"select * from li_insurance_claim where process_id = '" + wfDefault_step.process_id + "'";
-                            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
-                            if (dt.Rows.Count > 0)
-                            {
-                                var dr = dt.Rows[0];
-                                string id = dr["claim_no"].ToString();
-
-                                xurl = "/frminsurance/insuranceclaimedit.aspx?id=" + id;
-                            }
-                        }
-                        else if (wfDefault_step.process_code == "INR_AWC_RENEW")
-                        {
-                            xurl = "/frminsurance/insurancerenewawcedit.aspx?id=" + wfDefault_step.process_id;
-                        }
-
+                        xurl = "/forms/ccrcomplete.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                     }
                     else
                     {
-                        xurl = "/forms/apv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
+                        xurl = "/forms/complete.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                     }
-                    string sqlins = @" insert into wf_routing (process_id, process_code, version_no, subject,
-                                    step_no, step_name, assto_login,link_url_format,
-                                    wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer, submit_by,updated_by,updated_datetime) 
-                                    values (
-                                        '" + wfDefault_step.process_id + @"', 
-                                        '" + wfDefault_step.process_code + @"', 
-                                        " + wfDefault_step.version_no.ToString() + @", 
-                                        '" + wfDefault_step.subject + @"', 
-                                        " + wfDefault_step.step_no.ToString() + @", 
-                                        '" + wfDefault_step.step_name + @"', 
-                                         '" + wfDefault_step.next_assto_login + @"', 
-                                        '"+ xurl + @"', 
-                                        '"+ wfDefault_step.wf_status + @"', 
-                                        '" + wfDefault_step.attr_apv_value + @"', 
-                                        " + wfDefault_step.istrue_nextstep.ToString() + @", 
-                                        " + wfDefault_step.isfalse_nextstep.ToString() + @", 
-                                        '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + @"',
-                                        '',
-                                        '" + wfDefault_step.submit_by + @"',
-                                        '" + wfDefault_step.updated_by + @"',
-                                        '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + @"'
-                                        ) ";
-                    zdb.ExecNonQuery(sqlins, zconnstr);
-                //}
+                    
+                }
+                else if (wfDefault_step.step_name == "Edit Request")
+                {
+                    if (wfDefault_step.process_code == "INR_NEW") 
+                    {
+                        string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
+                        var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                        if (dt.Rows.Count > 0)
+                        {
+                            var dr = dt.Rows[0];
+                            string id = dr["req_no"].ToString();
+
+                            xurl = "/frminsurance/insurancerequestedit.aspx?id=" + id;
+                        }
+                    }
+                    else if (wfDefault_step.process_code == "INR_RENEW")
+                    {
+                        string sql = @"select * from li_insurance_request where process_id = '" + wfDefault_step.process_id + "'";
+                        var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                        if (dt.Rows.Count > 0)
+                        {
+                            var dr = dt.Rows[0];
+                            string id = dr["req_no"].ToString();
+
+                            xurl = "/frminsurance/insurancerenewrequestedit.aspx?id=" + id;
+                        }
+                    }
+                    else if (wfDefault_step.process_code == "INR_CLAIM" || wfDefault_step.process_code == "INR_CLAIM_2" || wfDefault_step.process_code == "INR_CLAIM_3")
+                    {
+                        string sql = @"select * from li_insurance_claim where process_id = '" + wfDefault_step.process_id + "'";
+                        var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                        if (dt.Rows.Count > 0)
+                        {
+                            var dr = dt.Rows[0];
+                            string id = dr["claim_no"].ToString();
+
+                            xurl = "/frminsurance/insuranceclaimedit.aspx?id=" + id;
+                        }
+                    }
+                    else if (wfDefault_step.process_code == "INR_AWC_RENEW")
+                    {
+                        xurl = "/frminsurance/insurancerenewawcedit.aspx?id=" + wfDefault_step.process_id;
+                    }
+                    else if (wfDefault_step.process_code == "CCR")
+                    {
+                        string sqlreq = @"select * from li_comm_regis_request where process_id = '" + wfDefault_step.process_id + "'";
+                        var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                        if (dtreq.Rows.Count > 0)
+                        {
+                            var drreq = dtreq.Rows[0];
+                            string id = drreq["req_no"].ToString();
+
+                            xurl = "/frmcommregis/commregisrequestedit.aspx?id=" + id;
+                        }
+                    }
+
+                }
+                else if (wfDefault_step.step_name == "Supervisor Approve" || wfDefault_step.step_name == "Registration Receive" || wfDefault_step.step_name == "Registration Update" && wfDefault_step.process_code == "CCR")
+                {
+                    xurl = "/forms/ccrapv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + "&st=" + wfDefault_step.step_name;
+                }
+                else
+                {
+                    xurl = "/forms/apv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
+                }
+                string sqlins = @" insert into wf_routing (process_id, process_code, version_no, subject,
+                                step_no, step_name, assto_login,link_url_format,
+                                wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer, submit_by,updated_by,updated_datetime) 
+                                values (
+                                    '" + wfDefault_step.process_id + @"', 
+                                    '" + wfDefault_step.process_code + @"', 
+                                    " + wfDefault_step.version_no.ToString() + @", 
+                                    '" + wfDefault_step.subject + @"', 
+                                    " + wfDefault_step.step_no.ToString() + @", 
+                                    '" + wfDefault_step.step_name + @"', 
+                                        '" + wfDefault_step.next_assto_login + @"', 
+                                    '"+ xurl + @"', 
+                                    '"+ wfDefault_step.wf_status + @"', 
+                                    '" + wfDefault_step.attr_apv_value + @"', 
+                                    " + wfDefault_step.istrue_nextstep.ToString() + @", 
+                                    " + wfDefault_step.isfalse_nextstep.ToString() + @", 
+                                    '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + @"',
+                                    '',
+                                    '" + wfDefault_step.submit_by + @"',
+                                    '" + wfDefault_step.updated_by + @"',
+                                    '" + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + @"'
+                                    ) ";
+                zdb.ExecNonQuery(sqlins, zconnstr);
+            //}
                
 
             }
@@ -1073,6 +1093,33 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "CCO Approve")
                 {
                     xname = "siwate.r"; //CCO Approve
+                }
+                else if (next_step_name == "End")
+                {
+                    xname = ""; //End
+                }
+                else if (next_step_name == "Edit Request")
+                {
+                    xname = submit_by; //Requester Edit Request
+                }
+            }
+            else if (process_code == "CCR")
+            {
+                if (next_step_name == "Start")
+                {
+                    xname = emp.user_login; //Requestor = Login account
+                }
+                else if (next_step_name == "Supervisor Approve")
+                {
+                    xname = emp.next_line_mgr_login; //Supervisor Approve account
+                }
+                else if (next_step_name == "Registration Receive")
+                {
+                    xname = "apicha.w, thunchanok.i"; //Registration Receive 
+                }
+                else if (next_step_name == "Registration Update")
+                {
+                    xname = emp.user_login; //Registration Update = user click receive
                 }
                 else if (next_step_name == "End")
                 {

@@ -179,6 +179,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="forms\apv.aspx" />
+    <Content Include="forms\ccrapv.aspx" />
+    <Content Include="forms\ccrcomplete.aspx" />
     <Content Include="forms\Complete.aspx" />
     <Content Include="forms\LegalAssign.aspx" />
     <Content Include="forms\RequesterCloseJob.aspx" />
@@ -335,6 +337,20 @@
     </Compile>
     <Compile Include="forms\apv.aspx.designer.cs">
       <DependentUpon>apv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\ccrapv.aspx.cs">
+      <DependentUpon>ccrapv.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\ccrapv.aspx.designer.cs">
+      <DependentUpon>ccrapv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\ccrcomplete.aspx.cs">
+      <DependentUpon>ccrcomplete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\ccrcomplete.aspx.designer.cs">
+      <DependentUpon>ccrcomplete.aspx</DependentUpon>
     </Compile>
     <Compile Include="forms\Complete.aspx.cs">
       <DependentUpon>Complete.aspx</DependentUpon>

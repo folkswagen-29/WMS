@@ -35,7 +35,7 @@ namespace onlineLegalWF.forms
         {
             string id = "";
 
-            ucHeader1.setHeader(process_code + " Approve");
+            ucHeader1.setHeader(process_code + " Complete");
             if (process_code == "INR_NEW" || process_code == "INR_RENEW")
             {
                 string sqlinsreq = "select * from li_insurance_request where process_id='" + req + "'";

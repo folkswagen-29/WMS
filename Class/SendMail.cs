@@ -24,14 +24,15 @@ namespace onlineLegalWF.Class
                     Credentials = new NetworkCredential("no_reply@assetworldcorp-th.com", "Awc@2019")
                 };
 
-                var attachment = new System.Net.Mail.Attachment(attachfile);
+                
                 var mailMessage = new MailMessage { From = new MailAddress("no_reply@assetworldcorp-th.com") };
                 mailMessage.To.Add(mailto);
                 mailMessage.Body = body;
                 mailMessage.Subject = subject;
                 mailMessage.IsBodyHtml = true;
-                if (attachment != null) 
+                if (!string.IsNullOrEmpty(attachfile)) 
                 {
+                    var attachment = new System.Net.Mail.Attachment(attachfile);
                     mailMessage.Attachments.Add(attachment);
                 }
                 
@@ -60,7 +61,7 @@ namespace onlineLegalWF.Class
                     Credentials = new NetworkCredential("no_reply@assetworldcorp-th.com", "Awc@2019")
                 };
 
-                var attachment = new System.Net.Mail.Attachment(attachfile);
+                //var attachment = new System.Net.Mail.Attachment(attachfile);
                 var mailMessage = new MailMessage { From = new MailAddress("no_reply@assetworldcorp-th.com") };
                 if (mailto.Length > 0) 
                 {
@@ -72,8 +73,10 @@ namespace onlineLegalWF.Class
                 mailMessage.Body = body;
                 mailMessage.Subject = subject;
                 mailMessage.IsBodyHtml = true;
-                if (attachment != null)
+                //if (attachment != null)
+                if (!string.IsNullOrEmpty(attachfile))
                 {
+                    var attachment = new System.Net.Mail.Attachment(attachfile);
                     mailMessage.Attachments.Add(attachment);
                 }
 
@@ -103,15 +106,17 @@ namespace onlineLegalWF.Class
                     Credentials = new NetworkCredential("no_reply@assetworldcorp-th.com", "Awc@2019")
                 };
 
-                var attachment = new System.Net.Mail.Attachment(attachfile);
+                //var attachment = new System.Net.Mail.Attachment(attachfile);
                 var mailMessage = new MailMessage { From = new MailAddress("no_reply@assetworldcorp-th.com") };
                 mailMessage.To.Add(mailto);
                 mailMessage.CC.Add(mailcc);
                 mailMessage.Body = body;
                 mailMessage.Subject = subject;
                 mailMessage.IsBodyHtml = true;
-                if (attachment != null)
+                //if (attachment != null)
+                if (!string.IsNullOrEmpty(attachfile))
                 {
+                    var attachment = new System.Net.Mail.Attachment(attachfile);
                     mailMessage.Attachments.Add(attachment);
                 }
 

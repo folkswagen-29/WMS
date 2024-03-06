@@ -143,7 +143,7 @@ namespace onlineLegalWF.userControls
         public void setNotificationInbox(string login_name) 
         {
             string numnotify = "0";
-            string sql = "Select count(submit_by) as total from wf_routing where process_id in (Select process_id from wf_routing where assto_login like '"+ login_name + "' and submit_answer = '') and submit_answer = ''";
+            string sql = "Select count(submit_by) as total from wf_routing where process_id in (Select process_id from wf_routing where assto_login like '%" + login_name + "%' and submit_answer = '') and submit_answer = ''";
             System.Data.DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             if (dt.Rows.Count > 0) 
             {

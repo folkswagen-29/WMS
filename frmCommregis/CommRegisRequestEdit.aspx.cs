@@ -19,8 +19,10 @@ namespace onlineLegalWF.frmCommregis
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
+        public string zconnstrrpa = ConfigurationManager.AppSettings["RPADB"].ToString();
         public WFFunctions zwf = new WFFunctions();
         public ReplaceCommRegis zreplacecommregis = new ReplaceCommRegis();
+        public SendMail zsendmail = new SendMail();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -405,6 +407,241 @@ namespace onlineLegalWF.frmCommregis
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalDoc();", true);
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
             pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filePath;
+        }
+
+        protected void btn_submit_Click(object sender, EventArgs e)
+        {
+            // Sample Submit
+            string process_code = "CCR";
+            int version_no = 1;
+
+            // getCurrentStep
+            var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+
+            // check session_user
+            if (Session["user_login"] != null)
+            {
+                var xlogin_name = Session["user_login"].ToString();
+                var empFunc = new EmpInfo();
+
+                //get data user
+                var emp = empFunc.getEmpInfo(xlogin_name);
+
+                // set WF Attributes
+                wfAttr.subject = type_comm_regis.SelectedItem.Text + ddl_subsidiary.SelectedItem.Text;
+                wfAttr.assto_login = emp.next_line_mgr_login;
+                wfAttr.wf_status = "SUBMITTED";
+                wfAttr.submit_answer = "SUBMITTED";
+                wfAttr.submit_by = emp.user_login;
+
+                wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, "");
+                wfAttr.updated_by = emp.user_login;
+
+                // wf.updateProcess
+                var wfA_NextStep = zwf.updateProcess(wfAttr);
+                //wfA_NextStep.next_assto_login = emp.next_line_mgr_login;
+                wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, "");
+                string status = zwf.Insert_NextStep(wfA_NextStep);
+
+                if (status == "Success")
+                {
+                    GenDocumnetCCRRegis(lblPID.Text);
+                    //send mail
+                    string subject = "";
+                    string body = "";
+                    string sqlmail = @"SELECT [process_id],[req_no],[req_date],commreg.[toc_regis_code],toc.[toc_regis_desc],commreg.[subsidiary_code],[document_no],[mt_res_desc],[mt_res_no],[mt_res_date],
+                                        CASE
+                                        WHEN commreg.subsidiary_code IS NULL THEN commreg.company_name_th
+                                        ELSE comsub.subsidiary_name_th
+                                        END AS company_name_th,
+                                        CASE
+                                        WHEN commreg.subsidiary_code IS NULL THEN commreg.company_name_en
+                                        ELSE comsub.subsidiary_name_en
+                                        END AS company_name_en,
+                                        [isrdregister],[status],[updated_datetime]
+                                        FROM li_comm_regis_request AS commreg
+                                        LEFT OUTER JOIN li_comm_regis_subsidiary AS comsub ON commreg.subsidiary_code = comsub.subsidiary_code
+                                        INNER JOIN li_type_of_comm_regis AS toc ON commreg.toc_regis_code = toc.toc_regis_code
+                                        where process_id = '" + wfAttr.process_id + "'";
+                    var dt = zdb.ExecSql_DataTable(sqlmail, zconnstr);
+                    if (dt.Rows.Count > 0)
+                    {
+                        var dr = dt.Rows[0];
+                        string id = dr["req_no"].ToString();
+                        subject = dr["toc_regis_desc"].ToString() + dr["company_name_th"].ToString();
+                        body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='https://dev-awc-api.assetworldcorp-th.com:8085/onlinelegalwf/legalportal/legalportal?m=myworklist'>Click</a>";
+
+
+
+                        string pathfileins = "";
+
+                        string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                        var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                        if (resfile.Rows.Count > 0)
+                        {
+                            pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+
+                            string email = "";
+
+                            var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                            ////get mail from db
+                            /////send mail to next_approve
+                            if (isdev != "true")
+                            {
+                                string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                if (dtbpm.Rows.Count > 0)
+                                {
+                                    email = dtbpm.Rows[0]["email"].ToString();
+
+                                }
+                                else
+                                {
+                                    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                    if (dtrpa.Rows.Count > 0)
+                                    {
+                                        email = dtrpa.Rows[0]["Email"].ToString();
+                                    }
+                                    else
+                                    {
+                                        email = "";
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                ////fix mail test
+                                email = "legalwfuat2024@gmail.com";
+                            }
+
+                            if (!string.IsNullOrEmpty(email))
+                            {
+                                _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, pathfileins);
+                            }
+
+                        }
+
+                    }
+                    var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                    Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                }
+
+            }
+        }
+
+        private void GenDocumnetCCRRegis(string pid)
+        {
+            var path_template = ConfigurationManager.AppSettings["WT_Template_commregistration"].ToString();
+            string templatefile = "";
+
+            string sqlcommregis = "select * from li_comm_regis_request where process_id='" + pid + "'";
+            var rescommregis = zdb.ExecSql_DataTable(sqlcommregis, zconnstr);
+
+            if (rescommregis.Rows.Count > 0) 
+            {
+                if (rescommregis.Rows[0]["toc_regis_code"].ToString() == "12" || rescommregis.Rows[0]["toc_regis_code"].ToString() == "13" || rescommregis.Rows[0]["toc_regis_code"].ToString() == "14")
+                {
+                    templatefile = path_template + @"\InsuranceComregis2.docx";
+                }
+                else
+                {
+                    templatefile = path_template + @"\InsuranceComregis.docx";
+                }
+            }
+            
+            string outputfolder = path_template + @"\Output";
+            string outputfn = outputfolder + @"\commregis_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+            var rdoc = new ReplaceDocx.Class.ReplaceDocx();
+
+            #region gentagstr data form
+            ReplaceCommRegis_TagData data = new ReplaceCommRegis_TagData();
+
+            var requestor = "";
+            var requestorpos = "";
+            var supervisor = "";
+            var supervisorpos = "";
+
+            // check session_user
+            if (Session["user_login"] != null)
+            {
+                var xlogin_name = Session["user_login"].ToString();
+                var empFunc = new EmpInfo();
+
+                //get data user
+                var emp = empFunc.getEmpInfo(xlogin_name);
+                if (!string.IsNullOrEmpty(emp.full_name_en))
+                {
+                    requestor = emp.full_name_en;
+                    requestorpos = emp.position_en;
+                }
+
+                //get supervisor data
+                var empSupervisor = empFunc.getEmpInfo(emp.next_line_mgr_login);
+                if (!string.IsNullOrEmpty(empSupervisor.full_name_en))
+                {
+                    supervisor = empSupervisor.full_name_en;
+                    supervisorpos = empSupervisor.position_en;
+                }
+
+            }
+
+            data.sign_name1 = "";
+            data.name1 = requestor;
+            data.position1 = requestorpos;
+            data.date1 = "";
+
+            data.sign_name2 = "";
+            data.name2 = supervisor;
+            data.position2 = supervisorpos;
+            data.date2 = "";
+
+
+            DataTable dtStr = zreplacecommregis.BindTagData(pid,data);
+            #endregion
+
+
+            // Convert to JSONString
+            //DataTable dtTagPropsTable = new DataTable();
+            //dtTagPropsTable.Columns.Add("tagname", typeof(string));
+            //dtTagPropsTable.Columns.Add("jsonstring", typeof(string));
+
+            //DataTable dtTagDataTable = new DataTable();
+            //dtTagDataTable.Columns.Add("tagname", typeof(string));
+            //dtTagDataTable.Columns.Add("jsonstring", typeof(string));
+            ReplaceDocx.Class.ReplaceDocx repl = new ReplaceDocx.Class.ReplaceDocx();
+            var jsonDTStr = repl.DataTableToJSONWithStringBuilder(dtStr);
+            //var jsonDTProperties1 = repl.DataTableToJSONWithStringBuilder(dtProperties1);
+            //var jsonDTdata = repl.DataTableToJSONWithStringBuilder(dt);
+            var jsonDTProperties1 = "";
+            var jsonDTdata = "";
+            //end prepare data
+
+            // Save to Database z_replacedocx_log
+            string xreq_no = req_no.Text.Trim();
+            string sql = @"insert into z_replacedocx_log (replacedocx_reqno,jsonTagString, jsonTableProp, jsonTableData,template_filepath , output_directory,output_filepath, delete_output ) 
+                        values('" + xreq_no + @"',
+                               '" + jsonDTStr + @"', 
+                                '" + jsonDTProperties1 + @"', 
+                                '" + jsonDTdata + @"', 
+                                '" + templatefile + @"', 
+                                '" + outputfolder + @"', 
+                                '" + outputfn + @"',  
+                                '" + "0" + @"'
+                            ) ";
+
+            zdb.ExecNonQuery(sql, zconnstr);
+
+            var outputbyte = rdoc.ReplaceData2(jsonDTStr, jsonDTProperties1, jsonDTdata, templatefile, outputfolder, outputfn, false);
+
+            repl.convertDOCtoPDF(outputfn, outputfn.Replace(".docx", ".pdf"), false);
+
         }
     }
 }

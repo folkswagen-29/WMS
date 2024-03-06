@@ -117,10 +117,10 @@ namespace onlineLegalWF.Class
                 res.subject = dr0["toc_regis_desc"].ToString();
                 res.companyname_th = dr0["company_name_th"].ToString();
                 res.companyname_en = dr0["company_name_en"].ToString();
-                res.reqdate = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["req_date"]), "en");
+                res.reqdate = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["req_date"]), "th");
                 res.mt_res_desc = dr0["mt_res_desc"].ToString();
                 res.mt_res_no = dr0["mt_res_no"].ToString();
-                res.mt_res_date = dr0["mt_res_date"].ToString();
+                res.mt_res_date = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["mt_res_date"]), "th");
                 res.name1 = data.name1;
                 res.position1 = data.position1;
                 res.date1 = data.date1;
@@ -137,71 +137,22 @@ namespace onlineLegalWF.Class
                 {
                     var dr = dt1.Rows[i];
 
-                    //if (dr["step_name"].ToString() == "GM Approve" && xexternal_domain == "N")
-                    //{
-                    //    res.name1 = data.name1;
-                    //    res.position1 = data.position1;
-                    //    res.date1 = data.date1;
-                    //    if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
-                    //    {
-                    //        res.sign_name1 = "Approved by system";
-                    //        res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
-                    //    }
-                    //}
-                    //else if (dr["step_name"].ToString() == "Head AM Approve")
-                    //{
-                    //    res.name1 = data.name1;
-                    //    res.position1 = data.position1;
-                    //    res.date1 = data.date1;
-                    //    if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
-                    //    {
-                    //        res.sign_name1 = "Approved by system";
-                    //        res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
-                    //    }
-                    //}
-                    //else if (dr["step_name"].ToString() == "Insurance Specialist Approve")
-                    //{
-                    //    if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
-                    //    {
-                    //        res.sign_name2 = "Approved by system";
-                    //        res.date2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
-                    //    }
-                    //}
-                    //else if (dr["step_name"].ToString() == "Head of Compliance and Insurance Approve")
-                    //{
-
-                    //    if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
-                    //    {
-                    //        res.sign_name22 = "Approved by system";
-                    //        res.date22 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
-                    //    }
-                    //}
-                    //else if (dr["step_name"].ToString() == "Head of Legal Approve")
-                    //{
-
-                    //    if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
-                    //    {
-                    //        res.sign_name3 = "Approved by system";
-                    //        res.date3 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
-                    //    }
-                    //}
-                    //else if (dr["step_name"].ToString() == "Head of Risk Management Approve")
-                    //{
-                    //    if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
-                    //    {
-                    //        res.sign_name4 = "Approved by system";
-                    //        res.date4 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
-                    //    }
-                    //}
-                    //else if (dr["step_name"].ToString() == "CCO Approve")
-                    //{
-                    //    if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
-                    //    {
-                    //        res.cb1 = "X";
-                    //        res.sign_name5 = "Approved by system";
-                    //        res.date5 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
-                    //    }
-                    //}
+                    if (dr["step_name"].ToString() == "Start")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.sign_name1 = "Approved by system";
+                            res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    else if (dr["step_name"].ToString() == "Supervisor Approve")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.sign_name2 = "Approved by system";
+                            res.date2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
 
                 }
             }
