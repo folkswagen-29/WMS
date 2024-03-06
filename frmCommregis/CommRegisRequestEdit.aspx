@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Commercial Registration RequestEdit" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="CommRegisRequestEdit.aspx.cs" Inherits="onlineLegalWF.frmCommregis.CommRegisRequestEdit" %>
+﻿<%@ Page Title="Commercial Registration RequestEdit" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="CommRegisRequestEdit.aspx.cs" Inherits="onlineLegalWF.frmCommregis.CommRegisRequestEdit" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc2" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
@@ -489,6 +489,40 @@
                             <td>&nbsp;</td>
                         </tr>
                     </table>
+                    <table id="section14" style="display: none;">
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">เอกสารที่ใช้ในการจดทะเบียนพานิชย์ </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <ol style="font-family: Tahoma; font-size: 10pt;">
+                                    <li>สำเนาบัตรประจำบัตรประจำตัวประชาชนเจ้าของกิจการ </li>
+                                    <li>สำเนาทะเบียนบ้านเจ้าของกิจการ</li>
+                                    <li>แผนที่ สถานที่ในการประกอบพณิชยกิจ</li>
+                                    <li>หนังสือมอบอำนาจพร้อมติดอาการแสตมป์ 10 บาท (ถ้ามี)</li>
+                                    <li>สำเนาบัตรประจำตัวประชาชนผู้รับมอบอำนาจ (ถ้ามี)</li>
+                                    <li>สำเนาบัตรประจำตัวประชาชนผู้รับมอบอำนาจ (ถ้ามี) กรณีเจ้าของกิจการมิได้เป็นเจ้าบ้าน ณ สถานประกอบการนั้น (เพิ่มเติม)</li>
+                                    <li>สำเนาบัตรประชาชน ของผู้จัดการแพตฟอร์ม (ผู้รับผิดชอบ แพตฟอร์ม)</li>
+                                </ol>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">กรณีเช่ามีสถานะเป็นบริษัท </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <ol style="font-family: Tahoma; font-size: 10pt;">
+                                    <li>สำเนาสัญญาเช่าพร้อมรับรองสำเนาถูกต้อง</li>
+                                    <li>หนังสือรับรองบริษัท พร้อมลงนามลามมือชื่อของผู้มีอำนาจกระทำการแทนบริษัท</li>
+                                    <li>สำเนาบัตรประจำตัวประชาชนผู้มีอำนาจกระทำการแทนบริษัท</li>
+                                </ol>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
                 </asp:Panel>
                 <br />
             </td>
@@ -564,6 +598,7 @@
                     $('#section11').hide();
                     $('#section12').hide();
                     $('#section13').hide();
+                    $('#section14').hide();
                     $('.subsidiary').hide();
                     $('.company').show();
                 }
@@ -581,6 +616,7 @@
                     $('#section11').hide();
                     $('#section12').hide();
                     $('#section13').hide();
+                    $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').show();
                 }
@@ -598,6 +634,7 @@
                     $('#section11').hide();
                     $('#section12').hide();
                     $('#section13').hide();
+                    $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                 }
@@ -615,6 +652,7 @@
                     $('#section11').hide();
                     $('#section12').hide();
                     $('#section13').hide();
+                    $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                 }
@@ -632,6 +670,7 @@
                     $('#section11').hide();
                     $('#section12').hide();
                     $('#section13').hide();
+                    $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                 }
@@ -648,6 +687,7 @@
                     $('#section11').hide();
                     $('#section12').hide();
                     $('#section13').hide();
+                    $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                 }
@@ -665,6 +705,7 @@
                     $('#section11').hide();
                     $('#section12').hide();
                     $('#section13').hide();
+                    $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                 }
@@ -682,6 +723,7 @@
                     $('#section11').hide();
                     $('#section12').hide();
                     $('#section13').hide();
+                    $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                 }
@@ -699,6 +741,7 @@
                     $('#section11').hide();
                     $('#section12').hide();
                     $('#section13').hide();
+                    $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                 }
@@ -716,6 +759,7 @@
                     $('#section11').hide();
                     $('#section12').hide();
                     $('#section13').hide();
+                    $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                 }
@@ -733,6 +777,7 @@
                     $('#section11').show();
                     $('#section12').hide();
                     $('#section13').hide();
+                    $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                 }
@@ -750,6 +795,7 @@
                     $('#section11').hide();
                     $('#section12').show();
                     $('#section13').hide();
+                    $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                 }
@@ -767,6 +813,25 @@
                     $('#section11').hide();
                     $('#section12').hide();
                     $('#section13').show();
+                    $('#section14').hide();
+                    $('.subsidiary').show();
+                    $('.company').hide();
+                }
+                else if ($(this).val() == "14") {
+                    $('#section1').hide();
+                    $('#section2').hide();
+                    $('#section3').hide();
+                    $('#section4').hide();
+                    $('#section5').hide();
+                    $('#section6').hide();
+                    $('#section7').hide();
+                    $('#section8').hide();
+                    $('#section9').hide();
+                    $('#section10').hide();
+                    $('#section11').hide();
+                    $('#section12').hide();
+                    $('#section13').hide();
+                    $('#section14').show();
                     $('.subsidiary').show();
                     $('.company').hide();
                 }

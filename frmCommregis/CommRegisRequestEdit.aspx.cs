@@ -160,6 +160,10 @@ namespace onlineLegalWF.frmCommregis
                 {
                     js += "$('#section13').show();$('.subsidiary').show();$('.company').hide();";
                 }
+                else if (type_comm_regis.SelectedValue == "14")
+                {
+                    js += "$('#section14').show();$('.subsidiary').show();$('.company').hide();";
+                }
 
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "changeType", js, true);
             }
