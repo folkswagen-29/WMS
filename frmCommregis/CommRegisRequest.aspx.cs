@@ -51,6 +51,12 @@ namespace onlineLegalWF.frmCommregis
             ddl_subsidiary.DataValueField = "subsidiary_code";
             ddl_subsidiary.DataBind();
 
+            cb_subsidiary_multi.DataSource = GetSubsidiary();
+            cb_subsidiary_multi.DataBind();
+            cb_subsidiary_multi.DataTextField = "subsidiary_name_th";
+            cb_subsidiary_multi.DataValueField = "subsidiary_code";
+            cb_subsidiary_multi.DataBind();
+
             string pid = zwf.iniPID("LEGALWF");
             lblPID.Text = pid;
             hid_PID.Value = pid;
@@ -77,6 +83,18 @@ namespace onlineLegalWF.frmCommregis
         {
             int ret = 0;
             string xtype_comm_regis = type_comm_regis.SelectedValue;
+
+            //check is cbmore loop subsidiary_code
+            var xiscb_more = cb_more.Checked;
+            List<string> selected = new List<string>();
+            foreach (ListItem item in cb_subsidiary_multi.Items) 
+            {
+                if (item.Selected) 
+                {
+                    selected.Add(item.Value);
+                } 
+            }
+                
 
             if (doc_no.Text.Trim() == "")
             {
@@ -118,15 +136,15 @@ namespace onlineLegalWF.frmCommregis
 
                 ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
 
-                if (ret > 0) 
-                {
-                    string sqlupdate = @"UPDATE [dbo].[li_comm_regis_subsidiary]
-                                           SET [subsidiary_name_th] = '"+ xcompany_name_th + @"'
-                                              ,[subsidiary_name_en] = '"+ xcompany_name_en + @"'
-                                         WHERE subsidiary_code = '"+ xddl_subsidiary +"'";
+                //if (ret > 0) 
+                //{
+                //    string sqlupdate = @"UPDATE [dbo].[li_comm_regis_subsidiary]
+                //                           SET [subsidiary_name_th] = '"+ xcompany_name_th + @"'
+                //                              ,[subsidiary_name_en] = '"+ xcompany_name_en + @"'
+                //                         WHERE subsidiary_code = '"+ xddl_subsidiary +"'";
 
-                    zdb.ExecNonQuery(sqlupdate, zconnstr);
-                }
+                //    zdb.ExecNonQuery(sqlupdate, zconnstr);
+                //}
             }
             else 
             {

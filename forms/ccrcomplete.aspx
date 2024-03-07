@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Complete" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="ccrcomplete.aspx.cs" Inherits="onlineLegalWF.forms.ccrcomplete" %>
+﻿<%@ Page Title="Complete" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="ccrcomplete.aspx.cs" Inherits="onlineLegalWF.forms.ccrcomplete" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachmentdata.ascx" TagPrefix="uc3" TagName="ucAttachmentdata" %>
 <%@ Register Src="~/userControls/ucCommentlogdata.ascx" TagPrefix="uc4" TagName="ucCommentlogdata" %>

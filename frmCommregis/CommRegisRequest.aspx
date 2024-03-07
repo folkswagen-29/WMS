@@ -108,6 +108,18 @@
                             </td>
                             <td>&nbsp;</td>
                         </tr>
+                        <tr class="moresubsidiary" style="display: none;">
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">ขอมากกว่า 1 บริษัท</label>
+                                &nbsp;
+                                <asp:CheckBox ID="cb_more" CssClass="cb_more" runat="server" />
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL more_cb_sub" style="display: none;">
+                                <asp:CheckBoxList ID="cb_subsidiary_multi" runat="server" CssClass="Text_400"></asp:CheckBoxList>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
                     </table>
 
                     <table id="section1">
@@ -557,6 +569,15 @@
 
     <script type="text/javascript">
         $(function () {
+            $('#ContentPlaceHolder1_cb_more').change(function () {
+                if ($(this).is(':checked') == true) {
+                    $('.more_cb_sub').show();
+                }
+                else {
+                    $('.more_cb_sub').hide();
+                }
+            });
+
             $('#ContentPlaceHolder1_sec1_cb_rd').change(function () {
                 if ($(this).is(':checked') == true) {
                     $('#rdregis1').show();
@@ -603,6 +624,7 @@
                     $('#section14').hide();
                     $('.subsidiary').hide();
                     $('.company').show();
+                    $('.moresubsidiary').hide();
                 }
                 else if ($(this).val() == "02") {
                     $('#section1').hide();
@@ -621,6 +643,7 @@
                     $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').show();
+                    $('.moresubsidiary').hide();
                 }
                 else if ($(this).val() == "03") {
                     $('#section1').hide();
@@ -639,6 +662,7 @@
                     $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
+                    $('.moresubsidiary').show();
                 }
                 else if ($(this).val() == "04") {
                     $('#section1').hide();
@@ -657,6 +681,7 @@
                     $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
+                    $('.moresubsidiary').show();
                 }
                 else if ($(this).val() == "05") {
                     $('#section1').hide();
@@ -675,6 +700,7 @@
                     $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
+                    $('.moresubsidiary').show();
                 }
                 else if ($(this).val() == "06") {
                     $('#section1').hide();
@@ -692,6 +718,7 @@
                     $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
+                    $('.moresubsidiary').show();
                 }
                 else if ($(this).val() == "07") {
                     $('#section1').hide();
@@ -710,6 +737,7 @@
                     $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
+                    $('.moresubsidiary').show();
                 }
                 else if ($(this).val() == "08") {
                     $('#section1').hide();
@@ -728,6 +756,7 @@
                     $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
+                    $('.moresubsidiary').show();
                 }
                 else if ($(this).val() == "09") {
                     $('#section1').hide();
@@ -746,6 +775,7 @@
                     $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
+                    $('.moresubsidiary').show();
                 }
                 else if ($(this).val() == "10") {
                     $('#section1').hide();
@@ -764,6 +794,7 @@
                     $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
+                    $('.moresubsidiary').show();
                 }
                 else if ($(this).val() == "11") {
                     $('#section1').hide();
@@ -782,6 +813,7 @@
                     $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
+                    $('.moresubsidiary').show();
                 }
                 else if ($(this).val() == "12") {
                     $('#section1').hide();
@@ -800,6 +832,7 @@
                     $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
+                    $('.moresubsidiary').show();
                 }
                 else if ($(this).val() == "13") {
                     $('#section1').hide();
@@ -818,6 +851,7 @@
                     $('#section14').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
+                    $('.moresubsidiary').show();
                 }
                 else if ($(this).val() == "14") {
                     $('#section1').hide();
@@ -836,6 +870,7 @@
                     $('#section14').show();
                     $('.subsidiary').show();
                     $('.company').hide();
+                    $('.moresubsidiary').show();
                 }
             });
             

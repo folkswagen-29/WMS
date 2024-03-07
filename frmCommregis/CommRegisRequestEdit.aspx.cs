@@ -55,6 +55,12 @@ namespace onlineLegalWF.frmCommregis
             ddl_subsidiary.DataTextField = "subsidiary_name_th";
             ddl_subsidiary.DataValueField = "subsidiary_code";
             ddl_subsidiary.DataBind();
+
+            cb_subsidiary_multi.DataSource = GetSubsidiary();
+            cb_subsidiary_multi.DataBind();
+            cb_subsidiary_multi.DataTextField = "subsidiary_name_th";
+            cb_subsidiary_multi.DataValueField = "subsidiary_code";
+            cb_subsidiary_multi.DataBind();
         }
 
         public DataTable GetTypeOfRequest()
@@ -173,7 +179,16 @@ namespace onlineLegalWF.frmCommregis
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
+            int res = UpdateRequest();
 
+            if (res > 0)
+            {
+                Response.Write("<script>alert('Successfully Updated');</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('Error !!!');</script>");
+            }
         }
 
         private int UpdateRequest()
@@ -187,6 +202,17 @@ namespace onlineLegalWF.frmCommregis
             var xmt_res_no = mt_res_no.Text.Trim();
             var xmt_res_date = mt_res_date.Text.Trim();
             var xddl_subsidiary = ddl_subsidiary.SelectedValue;
+
+            //check is cbmore loop subsidiary_code
+            var xiscb_more = cb_more.Checked;
+            List<string> selected = new List<string>();
+            foreach (ListItem item in cb_subsidiary_multi.Items)
+            {
+                if (item.Selected)
+                {
+                    selected.Add(item.Value);
+                }
+            }
 
             string sql = "";
 

@@ -114,6 +114,24 @@ namespace onlineLegalWF.frmCommregis
         protected global::System.Web.UI.WebControls.TextBox company_name_en;
 
         /// <summary>
+        /// cb_more control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cb_more;
+
+        /// <summary>
+        /// cb_subsidiary_multi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cb_subsidiary_multi;
+
+        /// <summary>
         /// sec1_cb_rd control.
         /// </summary>
         /// <remarks>
