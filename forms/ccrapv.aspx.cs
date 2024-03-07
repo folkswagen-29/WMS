@@ -402,7 +402,7 @@ namespace onlineLegalWF.forms
                                 {
                                     var dr = dt.Rows[0];
                                     string id = dr["req_no"].ToString();
-                                    subject = dr["toc_regis_desc"].ToString() + dr["company_name_th"].ToString();
+                                    subject = "เรื่อง "+ dr["toc_regis_desc"].ToString() + dr["company_name_th"].ToString();
                                     body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='https://dev-awc-api.assetworldcorp-th.com:8085/onlinelegalwf/legalportal/legalportal?m=myworklist'>Click</a>";
 
                                     string pathfilecommregis = "";
@@ -554,7 +554,7 @@ namespace onlineLegalWF.forms
                         {
                             var dr = dt.Rows[0];
                             string id = dr["req_no"].ToString();
-                            subject = dr["toc_regis_desc"].ToString() + dr["company_name_th"].ToString();
+                            subject = "เรื่อง "+ dr["toc_regis_desc"].ToString() + dr["company_name_th"].ToString();
                             body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการดำเนินการเสร็จสิ้นแล้ว";
 
                             string pathfileCommregis = "";
