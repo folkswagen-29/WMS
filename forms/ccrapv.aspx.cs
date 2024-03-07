@@ -347,6 +347,33 @@ namespace onlineLegalWF.forms
 
                     if (status == "Success")
                     {
+                        //check li_type_of_comm_regis == 01 Insert li_comm_regis_subsidiary and //check li_type_of_comm_regis == 02 update li_comm_regis_subsidiary
+                        string sqlcommregis = "select * from li_type_of_comm_regis where process_id = '" + wfAttr.process_id + "'";
+                        var rescommregis = zdb.ExecSql_DataTable(sqlcommregis, zconnstr);
+
+                        if (rescommregis.Rows.Count > 0)
+                        {
+                            string xtoc_regis_code = rescommregis.Rows[0]["toc_regis_code"].ToString();
+                            string xcompany_name_th = rescommregis.Rows[0]["company_name_th"].ToString();
+                            string xcompany_name_en = rescommregis.Rows[0]["xcompany_name_en"].ToString();
+                            var xsubcode = (GetMaxSubsidiaryCode() + 1).ToString();
+                            if (xtoc_regis_code == "01")
+                            {
+                                string sqlnew = @"INSERT INTO [dbo].[li_comm_regis_subsidiary] 
+                                                    ([subsidiary_code],[subsidiary_name_th],[subsidiary_name_en],[row_sort])
+                                                    VALUES ('" + xsubcode + "','" + xcompany_name_th + "','" + xcompany_name_en + "','" + xsubcode + "')";
+                                zdb.ExecNonQuery(sqlnew, zconnstr);
+                            }
+                            else if (xtoc_regis_code == "02") 
+                            {
+                                string sqlupdate = @"UPDATE [dbo].[li_comm_regis_subsidiary]
+                                                       SET [subsidiary_name_th] = '"+ xcompany_name_th +@"'
+                                                          ,[subsidiary_name_en] = '"+ xcompany_name_en +@"'
+                                                     WHERE subsidiary_code = '"+ xtoc_regis_code +"'";
+                                zdb.ExecNonQuery(sqlupdate, zconnstr);
+                            }
+                        }
+
                         // check processcode loop gendocument
                         if (process_code == "CCR")
                         {
@@ -456,6 +483,7 @@ namespace onlineLegalWF.forms
 
                     if (status == "Success")
                     {
+                        //update status li_comm_regis_request
                         string sqlupdate = @"update li_comm_regis_request set status='inprogress',updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where process_id = '" + wfAttr.process_id + "'";
                         zdb.ExecNonQuery(sqlupdate, zconnstr);
 
@@ -591,6 +619,13 @@ namespace onlineLegalWF.forms
 
                 }
             }
+        }
+
+        public int GetMaxSubsidiaryCode()
+        {
+            string sql = "select isnull(max(subsidiary_code),0) as id from li_comm_regis_subsidiary";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return Convert.ToInt32(dt.Rows[0][0]);
         }
     }
 }
