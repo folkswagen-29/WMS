@@ -38,6 +38,14 @@
                                 <asp:Label ID="companyname_en" runat="server" CssClass="Label_md"></asp:Label>
                             </td>
                         </tr>
+                        <tr class="moresubsidiary" style="display:none;">
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">รายชื่อบริษัทที่ขอดำเนินการ : </label>
+                            </td>
+                            <td class="cell_content_80PC_TL">
+
+                            </td>
+                        </tr>
                         <tr>
                             <td colspan="6">
                                 <table style="margin-left: auto; margin-right: auto;">

@@ -71,6 +71,17 @@ namespace onlineLegalWF.forms
                 companyname_th.Text = rescommregis.Rows[0]["company_name_th"].ToString();
                 companyname_en.Text = rescommregis.Rows[0]["company_name_en"].ToString();
 
+                if (Convert.ToBoolean(rescommregis.Rows[0]["ismoresubsidiary"].ToString())) 
+                {
+                    string sqladditional = "select * from li_comm_regis_request_additional where req_no='" + id + "'";
+                    var resadditional = zdb.ExecSql_DataTable(sqladditional, zconnstr);
+
+                    if (resadditional.Rows.Count > 0)
+                    {
+
+                    }
+                }
+
                 //init data UcAttachAndCommentLogs
                 initDataAttachAndComment(rescommregis.Rows[0]["process_id"].ToString());
 
@@ -327,7 +338,7 @@ namespace onlineLegalWF.forms
                     var emp = empFunc.getEmpInfo(xlogin_name);
 
                     // set WF Attributes
-                    wfAttr.subject = subject.Text.Trim() + companyname_th.Text.Trim();
+                    wfAttr.subject = "เรื่อง "+ subject.Text.Trim() + companyname_th.Text.Trim();
                     wfAttr.assto_login = emp.next_line_mgr_login;
                     wfAttr.wf_status = wfAttr.step_name + " Approved";
                     wfAttr.submit_answer = "APPROVED";
@@ -348,14 +359,14 @@ namespace onlineLegalWF.forms
                     if (status == "Success")
                     {
                         //check li_type_of_comm_regis == 01 Insert li_comm_regis_subsidiary and //check li_type_of_comm_regis == 02 update li_comm_regis_subsidiary
-                        string sqlcommregis = "select * from li_type_of_comm_regis where process_id = '" + wfAttr.process_id + "'";
+                        string sqlcommregis = "select * from li_comm_regis_request where process_id = '" + wfAttr.process_id + "'";
                         var rescommregis = zdb.ExecSql_DataTable(sqlcommregis, zconnstr);
 
                         if (rescommregis.Rows.Count > 0)
                         {
                             string xtoc_regis_code = rescommregis.Rows[0]["toc_regis_code"].ToString();
                             string xcompany_name_th = rescommregis.Rows[0]["company_name_th"].ToString();
-                            string xcompany_name_en = rescommregis.Rows[0]["xcompany_name_en"].ToString();
+                            string xcompany_name_en = rescommregis.Rows[0]["company_name_en"].ToString();
                             var xsubcode = (GetMaxSubsidiaryCode() + 1).ToString();
                             if (xtoc_regis_code == "01")
                             {
@@ -402,7 +413,7 @@ namespace onlineLegalWF.forms
                                 {
                                     var dr = dt.Rows[0];
                                     string id = dr["req_no"].ToString();
-                                    subject = "เรื่อง "+ dr["toc_regis_desc"].ToString() + dr["company_name_th"].ToString();
+                                    subject = wfAttr.subject;
                                     body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='https://dev-awc-api.assetworldcorp-th.com:8085/onlinelegalwf/legalportal/legalportal?m=myworklist'>Click</a>";
 
                                     string pathfilecommregis = "";
@@ -467,7 +478,7 @@ namespace onlineLegalWF.forms
                     var emp = empFunc.getEmpInfo(xlogin_name);
 
                     // set WF Attributes
-                    wfAttr.subject = subject.Text.Trim() + companyname_th.Text.Trim();
+                    wfAttr.subject = "เรื่อง " + subject.Text.Trim() + companyname_th.Text.Trim();
                     wfAttr.assto_login = emp.next_line_mgr_login;
                     wfAttr.wf_status = "RECEIVED";
                     wfAttr.submit_answer = "RECEIVED";
@@ -515,7 +526,7 @@ namespace onlineLegalWF.forms
                     var emp = empFunc.getEmpInfo(xlogin_name);
 
                     // set WF Attributes
-                    wfAttr.subject = subject.Text.Trim() + companyname_th.Text.Trim();
+                    wfAttr.subject = "เรื่อง " + subject.Text.Trim() + companyname_th.Text.Trim();
                     wfAttr.assto_login = emp.next_line_mgr_login;
                     wfAttr.wf_status = "COMPLETED";
                     wfAttr.submit_answer = "COMPLETED";
@@ -554,7 +565,7 @@ namespace onlineLegalWF.forms
                         {
                             var dr = dt.Rows[0];
                             string id = dr["req_no"].ToString();
-                            subject = "เรื่อง "+ dr["toc_regis_desc"].ToString() + dr["company_name_th"].ToString();
+                            subject = wfAttr.subject;
                             body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการดำเนินการเสร็จสิ้นแล้ว";
 
                             string pathfileCommregis = "";

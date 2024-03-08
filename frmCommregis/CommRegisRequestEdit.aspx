@@ -567,8 +567,8 @@
     </table>
 
     <script type="text/javascript">
-        $(function () {
-            $('#ContentPlaceHolder1_cb_more').change(function () {
+        function BindControlEvents() {
+            $('#ContentPlaceHolder1_cb_more').on('change', function () {
                 if ($(this).is(':checked') == true) {
                     $('.more_cb_sub').show();
                 }
@@ -577,7 +577,7 @@
                 }
             });
 
-            $('#ContentPlaceHolder1_sec1_cb_rd').change(function () {
+            $('#ContentPlaceHolder1_sec1_cb_rd').on('change', function () {
                 if ($(this).is(':checked') == true) {
                     $('#rdregis1').show();
                 }
@@ -586,7 +586,7 @@
                 }
             });
 
-            $('#ContentPlaceHolder1_sec6_cb_rd').change(function () {
+            $('#ContentPlaceHolder1_sec6_cb_rd').on('change', function () {
                 if ($(this).is(':checked') == true) {
                     $('#rdregis6').show();
                 }
@@ -595,7 +595,7 @@
                 }
             });
 
-            $('#ContentPlaceHolder1_sec8_cb_rd').change(function () {
+            $('#ContentPlaceHolder1_sec8_cb_rd').on('change', function () {
                 if ($(this).is(':checked') == true) {
                     $('#rdregis8').show();
                 }
@@ -604,7 +604,7 @@
                 }
             });
 
-            $('#ContentPlaceHolder1_type_comm_regis').change(function (event) {
+            $('#ContentPlaceHolder1_type_comm_regis').on('change', function (event) {
                 if ($(this).val() == "01") {
                     $('#section1').show();
                     $('#section2').hide();
@@ -871,6 +871,11 @@
                     $('.moresubsidiary').show();
                 }
             });
+        }
+
+        $(document).ready(function () {
+            // bind your jQuery events here initially
+            BindControlEvents();
         });
     </script>
     <asp:HiddenField ID="hid_PID" runat="server" />

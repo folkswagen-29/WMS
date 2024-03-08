@@ -31,6 +31,66 @@ namespace onlineLegalWF.frmCommregis
             {
                 setData();
             }
+
+            string js = "$('#section1').hide();";
+            if (type_comm_regis.SelectedValue == "01")
+            {
+                js += "$('#section1').show();$('.subsidiary').hide();$('.company').show();$('.moresubsidiary').hide();";
+            }
+            else if (type_comm_regis.SelectedValue == "02")
+            {
+                js += "$('#section2').show();$('.subsidiary').show();$('.company').show();$('.moresubsidiary').hide();";
+            }
+            else if (type_comm_regis.SelectedValue == "03")
+            {
+                js += "$('#section3').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "04")
+            {
+                js += "$('#section4').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "05")
+            {
+                js += "$('#section5').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "06")
+            {
+                js += "$('#section6').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "07")
+            {
+                js += "$('#section7').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "08")
+            {
+                js += "$('#section8').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "09")
+            {
+                js += "$('#section9').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "10")
+            {
+                js += "$('#section10').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "11")
+            {
+                js += "$('#section11').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "12")
+            {
+                js += "$('#section12').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "13")
+            {
+                js += "$('#section13').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "14")
+            {
+                js += "$('#section14').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "changeType", js, true);
         }
 
         private void setData()
@@ -187,7 +247,7 @@ namespace onlineLegalWF.frmCommregis
                     }
 
                     sql = @"INSERT INTO [dbo].[li_comm_regis_request]
-                               ([process_id],[req_no],[req_date],[toc_regis_code],[subsidiary_code],[document_no],[mt_res_desc],[mt_res_no],[mt_res_date],[company_name_th],[company_name_en],[isrdregister],[status])
+                               ([process_id],[req_no],[req_date],[toc_regis_code],[subsidiary_code],[document_no],[mt_res_desc],[mt_res_no],[mt_res_date],[isrdregister],[ismoresubsidiary],[status])
                          VALUES
                                ('" + xprocess_id + @"'
                                ,'" + xreq_no + @"'
@@ -199,14 +259,70 @@ namespace onlineLegalWF.frmCommregis
                                ,'" + xmt_res_no + @"'
                                ,'" + xmt_res_date + @"'
                                ,'" + xisrdregister + @"'
+                               ,'" + xiscb_more + @"'
                                ,'" + xstatus + @"')";
 
                     ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
+
+                    
+                    if (ret > 0) 
+                    {
+                        //check cb_more == true and cb_subsidiary_multi > 0 insert tb li_comm_regis_request_additional
+                        if (xiscb_more && selected.Count > 0) 
+                        {
+                            string xassign = "";
+                            string xadditionalstatus = "wait assign";
+                            foreach (var item in selected) 
+                            {
+                                string sqladditional = @"INSERT INTO [dbo].[li_comm_regis_request_additional]
+                                                       ([req_no]
+                                                       ,[subsidiary_code]
+                                                       ,[assto_login]
+                                                       ,[status]
+                                                       ,[created_datetime])
+                                                 VALUES
+                                                       ('"+ xreq_no + @"'
+                                                       ,'"+ item + @"'
+                                                       ,'"+ xassign +@"'
+                                                       ,'"+ xadditionalstatus + @"'
+                                                       ,'"+ xreq_date +"')";
+                                ret = zdb.ExecNonQueryReturnID(sqladditional, zconnstr);
+                            }
+                        }
+                    }
                 }
             }
 
             if (ret > 0)
             {
+                // wf save draft
+                string process_code = "CCR";
+                int version_no = 1;
+
+                // getCurrentStep
+                var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+
+                // check session_user
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+                    var empFunc = new EmpInfo();
+
+                    //get data user
+                    var emp = empFunc.getEmpInfo(xlogin_name);
+
+                    // set WF Attributes
+                    wfAttr.subject = "เรื่อง "+ type_comm_regis.SelectedItem.Text +" "+ ddl_subsidiary.SelectedItem.Text;
+                    wfAttr.wf_status = "SAVE";
+                    wfAttr.submit_answer = "SAVE";
+                    wfAttr.submit_by = emp.user_login;
+                    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, emp.user_login, lblPID.Text, "");
+                    // wf.updateProcess
+                    var wfA_NextStep = zwf.updateProcess(wfAttr);
+
+                }
+
+
                 Response.Write("<script>alert('Successfully Insert');</script>");
                 var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
                 Response.Redirect(host_url + "frmCommregis/CommRegisRequestEdit.aspx?id=" + req_no.Text.Trim());
@@ -364,6 +480,85 @@ namespace onlineLegalWF.frmCommregis
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalDoc();", true);
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
             pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filePath;
+        }
+
+        protected void CheckAll(object sender, EventArgs e)
+        {
+            CheckBox btnCheckAll = sender as CheckBox;
+            if (btnCheckAll.Checked == true)
+            {
+                foreach (ListItem checkbox in cb_subsidiary_multi.Items)
+                {
+                    checkbox.Selected = true;
+                }
+            }
+            else
+            {
+                foreach (ListItem checkbox in cb_subsidiary_multi.Items)
+                {
+                    checkbox.Selected = false;
+                }
+            }
+
+            string js = "$('#section1').hide();";
+            if (type_comm_regis.SelectedValue == "01")
+            {
+                js += "$('#section1').show();$('.subsidiary').hide();$('.company').show();$('.moresubsidiary').hide();";
+            }
+            else if (type_comm_regis.SelectedValue == "02")
+            {
+                js += "$('#section2').show();$('.subsidiary').show();$('.company').show();$('.moresubsidiary').hide();";
+            }
+            else if (type_comm_regis.SelectedValue == "03")
+            {
+                js += "$('#section3').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "04")
+            {
+                js += "$('#section4').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "05")
+            {
+                js += "$('#section5').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "06")
+            {
+                js += "$('#section6').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "07")
+            {
+                js += "$('#section7').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "08")
+            {
+                js += "$('#section8').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "09")
+            {
+                js += "$('#section9').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "10")
+            {
+                js += "$('#section10').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "11")
+            {
+                js += "$('#section11').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "12")
+            {
+                js += "$('#section12').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "13")
+            {
+                js += "$('#section13').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+            else if (type_comm_regis.SelectedValue == "14")
+            {
+                js += "$('#section14').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+            }
+
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "changeType", js, true);
         }
 
     }
