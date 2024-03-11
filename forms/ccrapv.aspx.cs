@@ -53,7 +53,7 @@ namespace onlineLegalWF.forms
                                         WHEN commreg.subsidiary_code IS NULL THEN commreg.company_name_en
                                         ELSE comsub.subsidiary_name_en
                                       END AS company_name_en,
-                                      [isrdregister],[status],[updated_datetime]
+                                      [isrdregister],[ismoresubsidiary],[status],[updated_datetime]
                                       FROM li_comm_regis_request AS commreg
                                       LEFT OUTER JOIN li_comm_regis_subsidiary AS comsub ON commreg.subsidiary_code = comsub.subsidiary_code
                                       INNER JOIN li_type_of_comm_regis AS toc ON commreg.toc_regis_code = toc.toc_regis_code
@@ -73,11 +73,40 @@ namespace onlineLegalWF.forms
 
                 if (Convert.ToBoolean(rescommregis.Rows[0]["ismoresubsidiary"].ToString())) 
                 {
-                    string sqladditional = "select * from li_comm_regis_request_additional where req_no='" + id + "'";
+                    string sqladditional = @"select [req_no],commaddi.[subsidiary_code],commsub.[subsidiary_name_th],[assto_login],[status],[created_datetime]
+                                                ,[updated_datetime] from li_comm_regis_request_additional as commaddi
+                                                inner join li_comm_regis_subsidiary as commsub on commaddi.subsidiary_code = commsub.subsidiary_code
+                                                where req_no='" + id + "'";
                     var resadditional = zdb.ExecSql_DataTable(sqladditional, zconnstr);
+
+
 
                     if (resadditional.Rows.Count > 0)
                     {
+                        string js = "$('.moresubsidiary').show();";
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "showSection", js, true);
+
+                        var dt = iniDTStructure();
+                        int no = 0;
+
+                        foreach (DataRow item in resadditional.Rows) 
+                        {
+                            var dr = dt.NewRow();
+                            dr = dt.NewRow();
+                            dr["No"] = (no + 1);
+                            dr["req_no"] = item["req_no"].ToString();
+                            dr["subsidiary_code"] = item["subsidiary_code"].ToString();
+                            dr["subsidiary_name_th"] = item["subsidiary_name_th"].ToString();
+                            dr["assto_login"] = item["assto_login"].ToString();
+                            dr["status"] = item["status"].ToString();
+                            dr["created_datetime"] = Convert.ToDateTime(item["created_datetime"]).ToString("yyyy-MM-dd");
+                            dr["updated_datetime"] = (!string.IsNullOrEmpty(item["updated_datetime"].ToString()) ? Convert.ToDateTime(item["updated_datetime"]).ToString("yyyy-MM-dd") : "");
+                            dt.Rows.Add(dr);
+                            no++;
+                        }
+
+                        gv1.DataSource = dt;
+                        gv1.DataBind();
 
                     }
                 }
@@ -95,6 +124,7 @@ namespace onlineLegalWF.forms
                 btn_Reject.Visible = true;
                 btn_Accept.Visible = false;
                 btn_Submit.Visible = false;
+                btn_Edit.Visible = false;
             }
             else if (st_name == "Registration Receive")
             {
@@ -102,6 +132,7 @@ namespace onlineLegalWF.forms
                 btn_Reject.Visible = false;
                 btn_Accept.Visible = true;
                 btn_Submit.Visible = false;
+                btn_Edit.Visible = false;
             }
             else if (st_name == "Registration Update")
             {
@@ -109,7 +140,22 @@ namespace onlineLegalWF.forms
                 btn_Reject.Visible = false;
                 btn_Accept.Visible = false;
                 btn_Submit.Visible = true;
+                btn_Edit.Visible = true;
             }
+        }
+
+        public DataTable iniDTStructure()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("no", typeof(string));
+            dt.Columns.Add("req_no", typeof(string));
+            dt.Columns.Add("subsidiary_code", typeof(string));
+            dt.Columns.Add("subsidiary_name_th", typeof(string));
+            dt.Columns.Add("assto_login", typeof(string));
+            dt.Columns.Add("status", typeof(string));
+            dt.Columns.Add("created_datetime", typeof(string));
+            dt.Columns.Add("updated_datetime", typeof(string));
+            return dt;
         }
 
         private void getDocument(string id)
@@ -414,7 +460,8 @@ namespace onlineLegalWF.forms
                                     var dr = dt.Rows[0];
                                     string id = dr["req_no"].ToString();
                                     subject = wfAttr.subject;
-                                    body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='https://dev-awc-api.assetworldcorp-th.com:8085/onlinelegalwf/legalportal/legalportal?m=myworklist'>Click</a>";
+                                    var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                                    body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='"+host_url_sendmail+"legalportal/legalportal?m=myworklist'>Click</a>";
 
                                     string pathfilecommregis = "";
 
@@ -637,6 +684,12 @@ namespace onlineLegalWF.forms
             string sql = "select isnull(max(subsidiary_code),0) as id from li_comm_regis_subsidiary";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return Convert.ToInt32(dt.Rows[0][0]);
+        }
+
+        protected void btn_Edit_Click(object sender, EventArgs e)
+        {
+            var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+            Response.Redirect(host_url + "frmCommregis/CommRegisRequestEditByAdmin.aspx?id=" + req_no.Value.Trim());
         }
     }
 }

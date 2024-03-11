@@ -43,7 +43,47 @@
                                 <label class="Label_md">รายชื่อบริษัทที่ขอดำเนินการ : </label>
                             </td>
                             <td class="cell_content_80PC_TL">
-
+                                <asp:GridView ID="gv1" runat="server" ShowHeader="false" AutoGenerateColumns="False" Font-Names="Tahoma" Font-Size="10pt" GridLines="None">
+                                    <Columns>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <%--<asp:HiddenField ID="gv1txtreq_no" Value='<%# Bind("req_no") %>' runat="server" />--%>
+                                                <asp:Label ID="gv1txtNo" Text='<%# Bind("no") %>' runat="server"></asp:Label>. 
+                                                <asp:Label ID="gv1txtsubsidiary_name_th" Text='<%# Bind("subsidiary_name_th") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <%--<asp:TemplateField HeaderText="ชื่อบริษัท">
+                                            <ItemTemplate>
+                                                <asp:HiddenField ID="gv1txtsubsidiary_code" Value='<%# Bind("subsidiary_code") %>' runat="server" />
+                                                <asp:Label ID="gv1txtsubsidiary_name_th" Text='<%# Bind("subsidiary_name_th") %>' runat="server" CssClass="Text_sm"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>--%>
+                                        <%--<asp:TemplateField HeaderText="ผู้รับผิดชอบ">
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="gv1txtassto_login" Text='<%# Bind("assto_login") %>' runat="server" CssClass="Text_sm"></asp:TextBox>
+                                            </ItemTemplate>
+                                            <ItemStyle Width="100px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="สถานะ">
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="gv1txtstatus" Text='<%# Bind("status") %>' runat="server" CssClass="Text_sm"></asp:TextBox>
+                                            </ItemTemplate>
+                                            <ItemStyle Width="100px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="วันที่ทำรายการ">
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="gv1txtcreated_datetime" Text='<%# Bind("created_datetime") %>' TextMode="Date" runat="server" CssClass="Text_sm"></asp:TextBox>
+                                            </ItemTemplate>
+                                            <ItemStyle Width="100px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="วันที่แก้ไขล่าสุด">
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="gv1txtupdated_datetime" Text='<%# Bind("updated_datetime") %>' TextMode="Date" runat="server" CssClass="Text_sm"></asp:TextBox>
+                                            </ItemTemplate>
+                                            <ItemStyle Width="100px" />
+                                        </asp:TemplateField>--%>
+                                    </Columns>
+                                </asp:GridView>
                             </td>
                         </tr>
                         <tr>
@@ -79,6 +119,7 @@
                 <asp:Button ID="btn_Reject" runat="server" CssClass="btn_normal_red" Text="Reject" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_Reject_Click" />
                 <asp:Button ID="btn_Accept" runat="server" CssClass="btn_normal_blue" Text="Accept" Visible="false" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_Accept_Click" />
                 <asp:Button ID="btn_Submit" runat="server" CssClass="btn_normal_blue" Text="Submit" Visible="false" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_Submit_Click" />
+                <asp:Button ID="btn_Edit" runat="server" CssClass="btn_normal_silver" Text="Edit" Visible="false" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_Edit_Click" />
             </td>
         </tr>
 

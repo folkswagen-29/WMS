@@ -421,8 +421,8 @@ namespace onlineLegalWF.frmCommregis
 
                 if (rescommsub.Rows.Count > 0)
                 {
-                    xcompany_name_th = rescommsub.Rows[0]["subsidiary_name_th"].ToString();
-                    xcompany_name_en = rescommsub.Rows[0]["subsidiary_name_en"].ToString();
+                    xcompany_name_th = rescommsub.Rows[0]["subsidiary_name_th"].ToString().Trim();
+                    xcompany_name_en = rescommsub.Rows[0]["subsidiary_name_en"].ToString().Trim();
                 }
             }
 
@@ -598,7 +598,8 @@ namespace onlineLegalWF.frmCommregis
                         var dr = dt.Rows[0];
                         string id = dr["req_no"].ToString();
                         subject = wfAttr.subject;
-                        body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='https://dev-awc-api.assetworldcorp-th.com:8085/onlinelegalwf/legalportal/legalportal?m=myworklist'>Click</a>";
+                        var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                        body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='"+host_url_sendmail+"legalportal/legalportal?m=myworklist'>Click</a>";
 
 
 

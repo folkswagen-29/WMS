@@ -113,14 +113,14 @@ namespace onlineLegalWF.Class
             if (dt0.Rows.Count > 0)
             {
                 var dr0 = dt0.Rows[0];
-                res.docno = dr0["document_no"].ToString();
-                res.subject = dr0["toc_regis_desc"].ToString();
-                res.companyname_th = dr0["company_name_th"].ToString();
-                res.companyname_en = dr0["company_name_en"].ToString();
-                res.reqdate = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["req_date"]), "th");
-                res.mt_res_desc = dr0["mt_res_desc"].ToString();
-                res.mt_res_no = dr0["mt_res_no"].ToString();
-                res.mt_res_date = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["mt_res_date"]), "th");
+                res.docno = dr0["document_no"].ToString().Trim();
+                res.subject = dr0["toc_regis_desc"].ToString().Trim();
+                res.companyname_th = dr0["company_name_th"].ToString().Trim();
+                res.companyname_en = dr0["company_name_en"].ToString().Trim();
+                res.reqdate = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["req_date"]), "th").Trim();
+                res.mt_res_desc = dr0["mt_res_desc"].ToString().Trim();
+                res.mt_res_no = dr0["mt_res_no"].ToString().Trim();
+                res.mt_res_date = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["mt_res_date"]), "th").Trim();
                 res.name1 = data.name1;
                 res.position1 = data.position1;
                 res.date1 = data.date1;

@@ -186,6 +186,7 @@
     <Content Include="forms\RequesterCloseJob.aspx" />
     <Content Include="frmCommregis\CommRegisRequest.aspx" />
     <Content Include="frmCommregis\CommRegisRequestEdit.aspx" />
+    <Content Include="frmCommregis\CommRegisRequestEditByAdmin.aspx" />
     <Content Include="frmCommregis\CommRegisWorkAssign.aspx" />
     <Content Include="frmInsurance\InsuranceApprove.aspx" />
     <Content Include="frmInsurance\InsuranceClaim.aspx" />
@@ -386,6 +387,13 @@
     </Compile>
     <Compile Include="frmCommregis\CommRegisRequestEdit.aspx.designer.cs">
       <DependentUpon>CommRegisRequestEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCommregis\CommRegisRequestEditByAdmin.aspx.cs">
+      <DependentUpon>CommRegisRequestEditByAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCommregis\CommRegisRequestEditByAdmin.aspx.designer.cs">
+      <DependentUpon>CommRegisRequestEditByAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmCommregis\CommRegisWorkAssign.aspx.cs">
       <DependentUpon>CommRegisWorkAssign.aspx</DependentUpon>

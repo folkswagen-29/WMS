@@ -248,7 +248,8 @@ namespace onlineLegalWF.forms
                                     var dr = dt.Rows[0];
                                     string id = dr["req_no"].ToString();
                                     subject = dr["subject"].ToString();
-                                    body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='https://dev-awc-api.assetworldcorp-th.com:8085/onlinelegalwf/legalportal/legalportal?m=myworklist'>Click</a>";
+                                    var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                                    body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='"+host_url_sendmail+"legalportal/legalportal?m=myworklist'>Click</a>";
 
                                     string pathfileins = "";
                                     string outputdirectory = "";
@@ -354,7 +355,8 @@ namespace onlineLegalWF.forms
                                     var dr = dt.Rows[0];
                                     string id = dr["claim_no"].ToString();
                                     subject = dr["incident"].ToString();
-                                    body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='https://dev-awc-api.assetworldcorp-th.com:8085/onlinelegalwf/legalportal/legalportal?m=myworklist'>Click</a>";
+                                    var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                                    body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='"+host_url_sendmail+"legalportal/legalportal?m=myworklist'>Click</a>";
 
                                     string pathfileins = "";
                                     string outputdirectory = "";
@@ -449,7 +451,8 @@ namespace onlineLegalWF.forms
                                     var dr = dt.Rows[0];
                                     string id = dr["req_no"].ToString();
                                     subject = dr["subject"].ToString();
-                                    body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='https://dev-awc-api.assetworldcorp-th.com:8085/onlinelegalwf/legalportal/legalportal?m=myworklist'>Click</a>";
+                                    var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                                    body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='"+host_url_sendmail+"legalportal/legalportal?m=myworklist'>Click</a>";
 
                                     string pathfileins = "";
                                     string outputdirectory = "";
@@ -543,7 +546,8 @@ namespace onlineLegalWF.forms
                                     var dr = dt.Rows[0];
                                     string id = dr["req_no"].ToString();
                                     subject = dr["subject"].ToString();
-                                    body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='https://dev-awc-api.assetworldcorp-th.com:8085/onlinelegalwf/legalportal/legalportal?m=myworklist'>Click</a>";
+                                    var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                                    body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='"+host_url_sendmail+"legalportal/legalportal?m=myworklist'>Click</a>";
 
                                     string pathfileins = "";
                                     string outputdirectory = "";
