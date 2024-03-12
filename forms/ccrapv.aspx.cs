@@ -387,7 +387,7 @@ namespace onlineLegalWF.forms
                     var emp = empFunc.getEmpInfo(xlogin_name);
 
                     // set WF Attributes
-                    wfAttr.subject = "เรื่อง "+ subject.Text.Trim() + companyname_th.Text.Trim();
+                    wfAttr.subject = "เรื่อง "+ subject.Text.Trim() +" "+ companyname_th.Text.Trim();
                     wfAttr.assto_login = emp.next_line_mgr_login;
                     wfAttr.wf_status = wfAttr.step_name + " Approved";
                     wfAttr.submit_answer = "APPROVED";
@@ -528,7 +528,7 @@ namespace onlineLegalWF.forms
                     var emp = empFunc.getEmpInfo(xlogin_name);
 
                     // set WF Attributes
-                    wfAttr.subject = "เรื่อง " + subject.Text.Trim() + companyname_th.Text.Trim();
+                    wfAttr.subject = "เรื่อง " + subject.Text.Trim() +" "+ companyname_th.Text.Trim();
                     wfAttr.assto_login = emp.next_line_mgr_login;
                     wfAttr.wf_status = "RECEIVED";
                     wfAttr.submit_answer = "RECEIVED";
@@ -576,7 +576,7 @@ namespace onlineLegalWF.forms
                     var emp = empFunc.getEmpInfo(xlogin_name);
 
                     // set WF Attributes
-                    wfAttr.subject = "เรื่อง " + subject.Text.Trim() + companyname_th.Text.Trim();
+                    wfAttr.subject = "เรื่อง " + subject.Text.Trim() +" "+ companyname_th.Text.Trim();
                     wfAttr.assto_login = emp.next_line_mgr_login;
                     wfAttr.wf_status = "COMPLETED";
                     wfAttr.submit_answer = "COMPLETED";
