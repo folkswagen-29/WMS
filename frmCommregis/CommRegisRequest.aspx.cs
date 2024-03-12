@@ -274,7 +274,6 @@ namespace onlineLegalWF.frmCommregis
                                ,'" + xstatus + @"'
                                ,'" + xtoc_regis_desc_other + @"')";
 
-                        //ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
                     }
                     else 
                     {
@@ -294,7 +293,6 @@ namespace onlineLegalWF.frmCommregis
                                ,'" + xiscb_more + @"'
                                ,'" + xstatus + @"')";
 
-                        //ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
                     }
 
                     ret = zdb.ExecNonQueryReturnID(sql, zconnstr);

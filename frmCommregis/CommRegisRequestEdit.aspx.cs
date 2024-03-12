@@ -177,7 +177,6 @@ namespace onlineLegalWF.frmCommregis
                 {
                     toc_regis_desc_other.Text = res.Rows[0]["toc_regis_desc_other"].ToString();
                 }
-
                 if (cb_more.Checked) 
                 {
                     string sqladditional = "select * from li_comm_regis_request_additional where req_no='" + id + "'";
