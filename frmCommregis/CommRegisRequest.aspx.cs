@@ -376,8 +376,8 @@ namespace onlineLegalWF.frmCommregis
 
                 if (rescommsub.Rows.Count > 0) 
                 {
-                    xcompany_name_th = rescommsub.Rows[0]["subsidiary_name_th"].ToString();
-                    xcompany_name_en = rescommsub.Rows[0]["subsidiary_name_en"].ToString();
+                    xcompany_name_th = rescommsub.Rows[0]["subsidiary_name_th"].ToString().Trim();
+                    xcompany_name_en = rescommsub.Rows[0]["subsidiary_name_en"].ToString().Trim();
                 }
             }
 
