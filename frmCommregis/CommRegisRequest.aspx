@@ -35,7 +35,18 @@
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
                                 <asp:DropDownList ID="type_comm_regis" runat="server" CssClass="Text_400">
-                                </asp:DropDownList>
+                                </asp:DropDownList><br />
+                                
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr class="other">
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Type of Request Other </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="toc_regis_desc_other" runat="server" CssClass="Text_400 other"></asp:TextBox>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -625,6 +636,7 @@
                     $('.subsidiary').hide();
                     $('.company').show();
                     $('.moresubsidiary').hide();
+                    $('.other').hide();
                 }
                 else if ($(this).val() == "02") {
                     $('#section1').hide();
@@ -644,6 +656,7 @@
                     $('.subsidiary').show();
                     $('.company').show();
                     $('.moresubsidiary').hide();
+                    $('.other').hide();
                 }
                 else if ($(this).val() == "03") {
                     $('#section1').hide();
@@ -663,6 +676,7 @@
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
+                    $('.other').hide();
                 }
                 else if ($(this).val() == "04") {
                     $('#section1').hide();
@@ -682,6 +696,7 @@
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
+                    $('.other').hide();
                 }
                 else if ($(this).val() == "05") {
                     $('#section1').hide();
@@ -701,6 +716,7 @@
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
+                    $('.other').hide();
                 }
                 else if ($(this).val() == "06") {
                     $('#section1').hide();
@@ -719,6 +735,7 @@
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
+                    $('.other').hide();
                 }
                 else if ($(this).val() == "07") {
                     $('#section1').hide();
@@ -738,6 +755,7 @@
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
+                    $('.other').hide();
                 }
                 else if ($(this).val() == "08") {
                     $('#section1').hide();
@@ -757,6 +775,7 @@
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
+                    $('.other').hide();
                 }
                 else if ($(this).val() == "09") {
                     $('#section1').hide();
@@ -776,6 +795,7 @@
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
+                    $('.other').hide();
                 }
                 else if ($(this).val() == "10") {
                     $('#section1').hide();
@@ -795,6 +815,7 @@
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
+                    $('.other').hide();
                 }
                 else if ($(this).val() == "11") {
                     $('#section1').hide();
@@ -814,6 +835,7 @@
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
+                    $('.other').hide();
                 }
                 else if ($(this).val() == "12") {
                     $('#section1').hide();
@@ -833,6 +855,7 @@
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
+                    $('.other').hide();
                 }
                 else if ($(this).val() == "13") {
                     $('#section1').hide();
@@ -852,6 +875,7 @@
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
+                    $('.other').hide();
                 }
                 else if ($(this).val() == "14") {
                     $('#section1').hide();
@@ -871,6 +895,47 @@
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
+                    $('.other').hide();
+                }
+                else if ($(this).val() == "15") {
+                    $('#section1').hide();
+                    $('#section2').hide();
+                    $('#section3').hide();
+                    $('#section4').hide();
+                    $('#section5').hide();
+                    $('#section6').hide();
+                    $('#section7').hide();
+                    $('#section8').hide();
+                    $('#section9').hide();
+                    $('#section10').hide();
+                    $('#section11').hide();
+                    $('#section12').hide();
+                    $('#section13').hide();
+                    $('#section14').hide();
+                    $('.subsidiary').show();
+                    $('.company').hide();
+                    $('.moresubsidiary').hide();
+                    $('.other').hide();
+                }
+                else if ($(this).val() == "99") {
+                    $('#section1').hide();
+                    $('#section2').hide();
+                    $('#section3').hide();
+                    $('#section4').hide();
+                    $('#section5').hide();
+                    $('#section6').hide();
+                    $('#section7').hide();
+                    $('#section8').hide();
+                    $('#section9').hide();
+                    $('#section10').hide();
+                    $('#section11').hide();
+                    $('#section12').hide();
+                    $('#section13').hide();
+                    $('#section14').hide();
+                    $('.subsidiary').show();
+                    $('.company').hide();
+                    $('.moresubsidiary').hide();
+                    $('.other').show();
                 }
             });
         }

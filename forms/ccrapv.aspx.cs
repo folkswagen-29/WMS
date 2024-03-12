@@ -231,7 +231,7 @@ namespace onlineLegalWF.forms
                     var emp = empFunc.getEmpInfo(xlogin_name);
 
                     // set WF Attributes
-                    wfAttr.subject = subject.Text.Trim();
+                    wfAttr.subject = "เรื่อง " + subject.Text.Trim() + " " + companyname_th.Text.Trim();
                     wfAttr.assto_login = emp.next_line_mgr_login;
                     wfAttr.wf_status = "REJECT";
                     wfAttr.submit_answer = "REJECT";
@@ -256,7 +256,7 @@ namespace onlineLegalWF.forms
 
         }
 
-        private void GenDocumnetCCRRegis(string pid)
+        private void GenDocumnetCCRRegis(string pid, string submit_by)
         {
             string xreq_no = "";
             var path_template = ConfigurationManager.AppSettings["WT_Template_commregistration"].ToString();
@@ -292,27 +292,44 @@ namespace onlineLegalWF.forms
             var supervisorpos = "";
 
             // check session_user
-            if (Session["user_login"] != null)
+            //if (Session["user_login"] != null)
+            //{
+            //    var xlogin_name = Session["user_login"].ToString();
+            //    var empFunc = new EmpInfo();
+
+            //    //get data user
+            //    var emp = empFunc.getEmpInfo(xlogin_name);
+            //    if (!string.IsNullOrEmpty(emp.full_name_en))
+            //    {
+            //        requestor = emp.full_name_en;
+            //        requestorpos = emp.position_en;
+            //    }
+
+            //    //get supervisor data
+            //    var empSupervisor = empFunc.getEmpInfo(emp.next_line_mgr_login);
+            //    if (!string.IsNullOrEmpty(empSupervisor.full_name_en))
+            //    {
+            //        supervisor = empSupervisor.full_name_en;
+            //        supervisorpos = empSupervisor.position_en;
+            //    }
+
+            //}
+            var empFunc = new EmpInfo();
+
+            //get data user
+            var emp = empFunc.getEmpInfo(submit_by);
+            if (!string.IsNullOrEmpty(emp.full_name_en))
             {
-                var xlogin_name = Session["user_login"].ToString();
-                var empFunc = new EmpInfo();
+                requestor = emp.full_name_en;
+                requestorpos = emp.position_en;
+            }
 
-                //get data user
-                var emp = empFunc.getEmpInfo(xlogin_name);
-                if (!string.IsNullOrEmpty(emp.full_name_en))
-                {
-                    requestor = emp.full_name_en;
-                    requestorpos = emp.position_en;
-                }
-
-                //get supervisor data
-                var empSupervisor = empFunc.getEmpInfo(emp.next_line_mgr_login);
-                if (!string.IsNullOrEmpty(empSupervisor.full_name_en))
-                {
-                    supervisor = empSupervisor.full_name_en;
-                    supervisorpos = empSupervisor.position_en;
-                }
-
+            //get supervisor data
+            var empSupervisor = empFunc.getEmpInfo(emp.next_line_mgr_login);
+            if (!string.IsNullOrEmpty(empSupervisor.full_name_en))
+            {
+                supervisor = empSupervisor.full_name_en;
+                supervisorpos = empSupervisor.position_en;
             }
 
             data.sign_name1 = "";
@@ -440,7 +457,7 @@ namespace onlineLegalWF.forms
                             //check step in step_name Supervisor Approve send email notification to Registration team
                             if (wfAttr.step_name == "Supervisor Approve")
                             {
-                                GenDocumnetCCRRegis(lblPID.Text);
+                                GenDocumnetCCRRegis(lblPID.Text, wfAttr.submit_by);
                                 string subject = "";
                                 string body = "";
                                 string sql = @"SELECT [process_id],[req_no],[req_date],commreg.[toc_regis_code],toc.[toc_regis_desc],commreg.[subsidiary_code],[document_no],[mt_res_desc],[mt_res_no],[mt_res_date],

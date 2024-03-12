@@ -51,6 +51,15 @@ namespace onlineLegalWF.frmCommregis
         protected global::System.Web.UI.WebControls.DropDownList type_comm_regis;
 
         /// <summary>
+        /// toc_regis_desc_other control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox toc_regis_desc_other;
+
+        /// <summary>
         /// ddl_subsidiary control.
         /// </summary>
         /// <remarks>
