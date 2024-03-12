@@ -308,11 +308,22 @@ namespace onlineLegalWF.frmCommregis
                     var xlogin_name = Session["user_login"].ToString();
                     var empFunc = new EmpInfo();
 
+                    string xsubject = "";
+
+                    if (type_comm_regis.SelectedValue == "01")
+                    {
+                        xsubject = "เรื่อง " + type_comm_regis.SelectedItem.Text.Trim() + " " + company_name_th.Text.Trim();
+                    }
+                    else 
+                    {
+                        xsubject = "เรื่อง " + type_comm_regis.SelectedItem.Text.Trim() + " " + ddl_subsidiary.SelectedItem.Text.Trim();
+                    }
+
                     //get data user
                     var emp = empFunc.getEmpInfo(xlogin_name);
 
                     // set WF Attributes
-                    wfAttr.subject = "เรื่อง "+ type_comm_regis.SelectedItem.Text +" "+ ddl_subsidiary.SelectedItem.Text;
+                    wfAttr.subject = xsubject;
                     wfAttr.wf_status = "SAVE";
                     wfAttr.submit_answer = "SAVE";
                     wfAttr.submit_by = emp.user_login;

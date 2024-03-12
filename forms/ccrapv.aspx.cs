@@ -73,6 +73,10 @@ namespace onlineLegalWF.forms
 
                 if (Convert.ToBoolean(rescommregis.Rows[0]["ismoresubsidiary"].ToString())) 
                 {
+                    if (st_name == "Registration Update")
+                    {
+                        btn_Edit.Visible = true;
+                    }
                     string sqladditional = @"select [req_no],commaddi.[subsidiary_code],commsub.[subsidiary_name_th],[assto_login],[status],[created_datetime]
                                                 ,[updated_datetime] from li_comm_regis_request_additional as commaddi
                                                 inner join li_comm_regis_subsidiary as commsub on commaddi.subsidiary_code = commsub.subsidiary_code
@@ -140,7 +144,6 @@ namespace onlineLegalWF.forms
                 btn_Reject.Visible = false;
                 btn_Accept.Visible = false;
                 btn_Submit.Visible = true;
-                btn_Edit.Visible = true;
             }
         }
 
@@ -672,7 +675,7 @@ namespace onlineLegalWF.forms
                         }
 
                         var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=completelist");
+                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
                     }
 
                 }

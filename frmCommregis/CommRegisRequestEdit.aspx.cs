@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 using static onlineLegalWF.Class.ReplaceCommRegis;
 
 namespace onlineLegalWF.frmCommregis
@@ -556,8 +557,18 @@ namespace onlineLegalWF.frmCommregis
                 //get data user
                 var emp = empFunc.getEmpInfo(xlogin_name);
 
+                string xsubject = "";
+                if (type_comm_regis.SelectedValue == "01")
+                {
+                    xsubject = "เรื่อง " + type_comm_regis.SelectedItem.Text.Trim() + " " + company_name_th.Text.Trim();
+                }
+                else
+                {
+                    xsubject = "เรื่อง " + type_comm_regis.SelectedItem.Text.Trim() + " " + ddl_subsidiary.SelectedItem.Text.Trim();
+                }
+
                 // set WF Attributes
-                wfAttr.subject = "เรื่อง " + type_comm_regis.SelectedItem.Text.Trim() + " " + ddl_subsidiary.SelectedItem.Text.Trim();
+                wfAttr.subject = xsubject;
                 wfAttr.assto_login = emp.next_line_mgr_login;
                 wfAttr.wf_status = "SUBMITTED";
                 wfAttr.submit_answer = "SUBMITTED";
