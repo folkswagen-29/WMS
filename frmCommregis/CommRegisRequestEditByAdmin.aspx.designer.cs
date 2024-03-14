@@ -132,6 +132,24 @@ namespace onlineLegalWF.frmCommregis
         protected global::System.Web.UI.WebControls.CheckBox cb_more;
 
         /// <summary>
+        /// chkAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkAll;
+
+        /// <summary>
+        /// btnEditAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnEditAll;
+
+        /// <summary>
         /// gv1 control.
         /// </summary>
         /// <remarks>
@@ -229,6 +247,24 @@ namespace onlineLegalWF.frmCommregis
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlNameList;
+
+        /// <summary>
+        /// btn_update_modal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_update_modal;
+
+        /// <summary>
+        /// btn_update_all_modal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_update_all_modal;
 
         /// <summary>
         /// hid_PID control.

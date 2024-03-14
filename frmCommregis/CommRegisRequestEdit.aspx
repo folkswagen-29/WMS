@@ -126,6 +126,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL more_cb_sub" style="display: none;">
+                                <asp:CheckBox ID="chkHeader" runat="server" AutoPostBack="true" OnCheckedChanged="CheckAll" /> <label class="Label_md"> เลือกทั้งหมด</label>
                                 <asp:CheckBoxList ID="cb_subsidiary_multi" runat="server" CssClass="Text_400"></asp:CheckBoxList>
                             </td>
                             <td>&nbsp;</td>

@@ -126,10 +126,16 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL more_cb_sub" style="display: none;">
-                                <%--<asp:CheckBoxList ID="cb_subsidiary_multi" runat="server" CssClass="Text_400"></asp:CheckBoxList>--%>
+                                <asp:CheckBox ID="chkAll" runat="server" AutoPostBack="true" OnCheckedChanged="CheckAll" /> <label class="Label_md"> เลือกแก้ไขทั้งหมด</label>
+                                <asp:ImageButton ID="btnEditAll" runat="server" Height="20px" ImageUrl="~/images/icon_edit.png" Visible="false" OnClick="btnEditAll_Click" />
                                 <asp:GridView ID="gv1" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="9pt" ForeColor="#333333" GridLines="None" OnRowCommand="gv_RowCommand">
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                     <Columns>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="CheckBox1" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="ลำดับ">
                                             <ItemTemplate>
                                                 <asp:HiddenField ID="gv1txtreq_no" Value='<%# Bind("req_no") %>' runat="server" />
@@ -670,7 +676,8 @@
                     </table>
                 </div>
                 <div class="modal-footer" style="text-align: left; border-top: 0;">
-                    <asp:Button runat="server" Text="Update" CssClass="btn_normal_blue" OnClick="Assign_Update_Click" />
+                    <asp:Button ID="btn_update_modal" runat="server" Text="Update" CssClass="btn_normal_blue" OnClick="Assign_Update_Click" />
+                    <asp:Button ID="btn_update_all_modal" runat="server" Text="Update" CssClass="btn_normal_blue" Visible="false" OnClick="Assign_UpdateAll_Click" />
                 </div>
             </div>
         </div>
