@@ -41,6 +41,12 @@ namespace onlineLegalWF.frmPermit
             ucAttachment1.ini_object(pid);
             ucCommentlog1.ini_object(pid);
 
+            type_requester.DataSource = GetTypeOfRequester();
+            type_requester.DataBind();
+            type_requester.DataTextField = "tof_requester_desc";
+            type_requester.DataValueField = "tof_requester_code";
+            type_requester.DataBind();
+
             type_project.DataSource = GetBusinessUnit();
             type_project.DataBind();
             type_project.DataTextField = "bu_desc";
@@ -159,6 +165,12 @@ namespace onlineLegalWF.frmPermit
         protected void btn_gendocumnt_Click(object sender, EventArgs e)
         {
 
+        }
+        public DataTable GetTypeOfRequester()
+        {
+            string sql = "select * from li_type_of_requester order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
         }
         public DataTable GetBusinessUnit()
         {

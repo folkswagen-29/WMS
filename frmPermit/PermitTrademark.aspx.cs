@@ -45,6 +45,12 @@ namespace onlineLegalWF.frmPermit
             type_project.DataTextField = "bu_desc";
             type_project.DataValueField = "bu_code";
             type_project.DataBind();
+
+            type_requester.DataSource = GetTypeOfRequester();
+            type_requester.DataBind();
+            type_requester.DataTextField = "tof_requester_desc";
+            type_requester.DataValueField = "tof_requester_code";
+            type_requester.DataBind();
         }
 
 
@@ -68,6 +74,12 @@ namespace onlineLegalWF.frmPermit
 
         }
 
+        public DataTable GetTypeOfRequester()
+        {
+            string sql = "select * from li_type_of_requester order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
         public DataTable GetBusinessUnit()
         {
             string sql = "select * from li_business_unit where isactive=1 order by row_sort asc";

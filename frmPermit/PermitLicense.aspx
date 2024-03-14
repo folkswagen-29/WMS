@@ -45,10 +45,6 @@
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
                                 <asp:DropDownList ID="type_requester" runat="server" CssClass="Text_400">
-                                    <asp:ListItem Value="01">Retail Group Officer / กลุ่มรีเทล</asp:ListItem>
-                                    <asp:ListItem Value="02">Commetcial Group Officer / กลุ่มคอมเมอร์เซียล</asp:ListItem>
-                                    <asp:ListItem Value="03">Hospitality Group  Officer / กลุ่มโรงแรม</asp:ListItem>
-                                    <asp:ListItem Value="04">Others / อื่นๆ</asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                             <td>&nbsp;</td>
@@ -71,8 +67,10 @@
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
                                 <asp:DropDownList ID="type_req_license" runat="server" CssClass="Text_400">
-                                    <asp:ListItem Value="01">Request  License  / ขอมีใบอนุญาต </asp:ListItem>
-                                    <asp:ListItem Value="02">Renew License / ขอต่ออายุใบอนุญาต  </asp:ListItem>
+                                    <asp:ListItem Value="01">Request License / ขอมีใบอนุญาต</asp:ListItem>
+                                    <asp:ListItem Value="02">Renew License / ขอต่ออายุใบอนุญาต</asp:ListItem>
+                                    <asp:ListItem Value="03">Amend - Adjust / แก้ไข - เปลี่ยนแปลง</asp:ListItem>
+                                    <asp:ListItem Value="04">Other / อื่น ๆ</asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                             <td>&nbsp;</td>
