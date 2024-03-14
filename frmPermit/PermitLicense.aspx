@@ -59,7 +59,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:DropDownList ID="type_project" runat="server" CssClass="Text_200">
+                                <asp:DropDownList ID="type_project" runat="server" CssClass="Text_400">
                                 </asp:DropDownList>
                             </td>
                             <td>&nbsp;</td>
@@ -83,8 +83,21 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:DropDownList ID="license_code" runat="server" CssClass="Text_400">
+                                <asp:DropDownList ID="license_code" runat="server" CssClass="Text_400" OnSelectedIndexChanged="ddl_license_Changed" AutoPostBack="true">
                                 </asp:DropDownList>
+                                <br />
+                                <asp:DropDownList ID="ddl_sublicense" runat="server" Visible="false" CssClass="Text_400" OnSelectedIndexChanged="ddl_sublicense_Changed" AutoPostBack="true">
+                                </asp:DropDownList>
+                                <br />
+                                <table>
+                                    <tr>
+                                        <td colspan="6">
+                                            <asp:Label ID="refdoc" runat="server" Text="เอกสารที่ต้องใช้" Visible="false" CssClass="Label_md"></asp:Label>
+                                            <asp:BulletedList ID="ddl_refdoc" runat="server" BulletStyle="Numbered" Visible="false" CssClass="Label_md">
+                                            </asp:BulletedList>
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -113,27 +126,11 @@
                 <br />
             </td>
         </tr>
+
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
-                <asp:Panel ID="Panel2" runat="server" CssClass="div_90" Height="200px">
-                    <table class="cell_content_100PC">
-                        <tr>
-                            <td>
-                                <asp:Label ID="Label7" runat="server" Text="รับผิดชอบโดย"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label ID="Label8" runat="server" Text="อนุมัติโดย"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <uc2:ucPersonSign runat="server" ID="ucPersonSign1" />
-                            </td>
-                            <td>
-                                <uc2:ucPersonSign runat="server" ID="ucPersonSign2" />
-                            </td>
-                        </tr>
-                    </table>
+                <asp:Panel ID="Panel3" runat="server" CssClass="div_90">
+                    <uc3:ucAttachment runat="server" ID="ucAttachment1" />
                 </asp:Panel>
                 <br />
             </td>
@@ -143,24 +140,15 @@
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
                 <asp:Button ID="btn_save" runat="server" CssClass="btn_normal_silver" Text="Save" OnClick="btn_save_Click" />
-                <asp:Button ID="btn_submit" runat="server" CssClass="btn_normal_silver" Text="Submit" />
                 <asp:Button ID="btn_gendocumnt" runat="server" CssClass="btn_normal_silver" Text="Preview" OnClick="btn_gendocumnt_Click" />
                 <asp:Button ID="btn_cancel" runat="server" CssClass="btn_normal_silver" Text="Cancel" />
             </td>
 
         </tr>
+        
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
                 <br />
-                <asp:Panel ID="Panel3" runat="server" CssClass="div_90">
-                    <uc3:ucAttachment runat="server" ID="ucAttachment1" />
-                </asp:Panel>
-                <br />
-            </td>
-
-        </tr>
-        <tr class="cell_content_100PC">
-            <td colspan="2" class="cell_content_100PC">
                 <uc4:ucCommentlog runat="server" ID="ucCommentlog1" />
             </td>
         </tr>

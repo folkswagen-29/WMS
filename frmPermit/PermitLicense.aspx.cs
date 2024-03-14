@@ -1,4 +1,5 @@
-﻿using onlineLegalWF.Class;
+﻿using DocumentFormat.OpenXml.ExtendedProperties;
+using onlineLegalWF.Class;
 using Spire.Doc;
 using System;
 using System.Collections.Generic;
@@ -40,10 +41,10 @@ namespace onlineLegalWF.frmPermit
             ucAttachment1.ini_object(pid);
             ucCommentlog1.ini_object(pid);
 
-            type_project.DataSource = GetTypeOfPermitProject();
+            type_project.DataSource = GetBusinessUnit();
             type_project.DataBind();
-            type_project.DataTextField = "project_desc";
-            type_project.DataValueField = "project_code";
+            type_project.DataTextField = "bu_desc";
+            type_project.DataValueField = "bu_code";
             type_project.DataBind();
 
             license_code.DataSource = GetTypeOfPermitLicense();
@@ -51,8 +52,94 @@ namespace onlineLegalWF.frmPermit
             license_code.DataTextField = "license_desc";
             license_code.DataValueField = "license_code";
             license_code.DataBind();
+
+            var dtSublicense = GetSubPermitLicense(license_code.SelectedValue);
+
+            if (dtSublicense.Rows.Count > 0) 
+            {
+                ddl_sublicense.Visible = true;
+                ddl_sublicense.DataSource = dtSublicense;
+                ddl_sublicense.DataBind();
+                ddl_sublicense.DataTextField = "sublicense_desc";
+                ddl_sublicense.DataValueField = "sublicense_code";
+                ddl_sublicense.DataBind();
+            }
+
+            var dtSublicenseRefdoc = GetSubPermitLicenseRefDoc(ddl_sublicense.SelectedValue);
+
+            if (dtSublicenseRefdoc.Rows.Count > 0)
+            {
+                refdoc.Visible = true;
+                ddl_refdoc.Visible = true;
+                ddl_refdoc.DataSource = dtSublicenseRefdoc;
+                ddl_refdoc.DataBind();
+                ddl_refdoc.DataTextField = "sublicense_refdoc_desc";
+                ddl_refdoc.DataValueField = "sublicense_code";
+                ddl_refdoc.DataBind();
+            }
+
+
         }
 
+        protected void ddl_license_Changed(object sender, EventArgs e)
+        {
+            var dtSublicense = GetSubPermitLicense(license_code.SelectedValue);
+
+            if (dtSublicense.Rows.Count > 0)
+            {
+                ddl_sublicense.Visible = true;
+                ddl_sublicense.DataSource = dtSublicense;
+                ddl_sublicense.DataBind();
+                ddl_sublicense.DataTextField = "sublicense_desc";
+                ddl_sublicense.DataValueField = "sublicense_code";
+                ddl_sublicense.DataBind();
+
+                var dtSublicenseRefdoc = GetSubPermitLicenseRefDoc(ddl_sublicense.SelectedValue);
+
+                if (dtSublicenseRefdoc.Rows.Count > 0)
+                {
+                    refdoc.Visible = true;
+                    ddl_refdoc.Visible = true;
+                    ddl_refdoc.DataSource = dtSublicenseRefdoc;
+                    ddl_refdoc.DataBind();
+                    ddl_refdoc.DataTextField = "sublicense_refdoc_desc";
+                    ddl_refdoc.DataValueField = "sublicense_code";
+                    ddl_refdoc.DataBind();
+                }
+                else
+                {
+                    refdoc.Visible = false;
+                    ddl_refdoc.Visible = false;
+                }
+            }
+            else 
+            {
+                ddl_sublicense.Visible = false;
+                refdoc.Visible = false;
+                ddl_refdoc.Visible = false;
+            }
+        }
+
+        protected void ddl_sublicense_Changed(object sender, EventArgs e)
+        {
+            var dtSublicenseRefdoc = GetSubPermitLicenseRefDoc(ddl_sublicense.SelectedValue);
+
+            if (dtSublicenseRefdoc.Rows.Count > 0)
+            {
+                refdoc.Visible = true;
+                ddl_refdoc.Visible = true;
+                ddl_refdoc.DataSource = dtSublicenseRefdoc;
+                ddl_refdoc.DataBind();
+                ddl_refdoc.DataTextField = "sublicense_refdoc_desc";
+                ddl_refdoc.DataValueField = "sublicense_code";
+                ddl_refdoc.DataBind();
+            }
+            else
+            {
+                refdoc.Visible = false;
+                ddl_refdoc.Visible = false;
+            }
+        }
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
@@ -73,9 +160,9 @@ namespace onlineLegalWF.frmPermit
         {
 
         }
-        public DataTable GetTypeOfPermitProject()
+        public DataTable GetBusinessUnit()
         {
-            string sql = "select * from li_permit_project order by row_sort asc";
+            string sql = "select * from li_business_unit where isactive=1 order by row_sort asc";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }
@@ -83,6 +170,26 @@ namespace onlineLegalWF.frmPermit
         public DataTable GetTypeOfPermitLicense()
         {
             string sql = "select * from li_permit_license order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
+
+        public DataTable GetSubPermitLicense(string xlicense_code)
+        {
+            string sql = @"select license.[license_code]
+                                  ,license.[sublicense_code]
+	                              ,sub.[sublicense_desc]
+                                  ,license.[row_sort]
+                              from [li_permit_group_license] as license
+                            inner join li_permit_sublicense as sub on sub.sublicense_code = license.sublicense_code
+                            where license.[license_code] = '"+xlicense_code+"' order by license.[row_sort] asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
+        public DataTable GetSubPermitLicenseRefDoc(string xsublicense_code)
+        {
+            string sql = @"select * from li_permit_sublicense_refdoc
+                            where sublicense_code = '" + xsublicense_code + "' order by row_sort asc";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }

@@ -40,10 +40,10 @@ namespace onlineLegalWF.frmPermit
             ucAttachment1.ini_object(pid);
             ucCommentlog1.ini_object(pid);
 
-            type_lt_project.DataSource = GetTypeOfLtProject();
+            type_lt_project.DataSource = GetBusinessUnit();
             type_lt_project.DataBind();
-            type_lt_project.DataTextField = "lt_project_desc";
-            type_lt_project.DataValueField = "lt_project_code";
+            type_lt_project.DataTextField = "bu_desc";
+            type_lt_project.DataValueField = "bu_code";
             type_lt_project.DataBind();
         }
 
@@ -68,9 +68,9 @@ namespace onlineLegalWF.frmPermit
 
         }
 
-        public DataTable GetTypeOfLtProject()
+        public DataTable GetBusinessUnit()
         {
-            string sql = "select * from li_permit_lt_project order by row_sort asc";
+            string sql = "select * from li_business_unit where isactive=1 order by row_sort asc";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }

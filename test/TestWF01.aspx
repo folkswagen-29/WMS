@@ -36,6 +36,9 @@
         <asp:Button ID="Button2" runat="server" Text="Submit" Width="169px" />
         <asp:Button ID="Button3" runat="server" Text="Approve" Width="169px" OnClick="Button3_Click" />
         <asp:Button ID="Button4" runat="server" Text="Reject" Width="169px" />
+        <asp:BulletedList ID="BulletedList1" runat="server" BulletStyle="Numbered">
+            <asp:ListItem>Test</asp:ListItem>
+        </asp:BulletedList>
     </form>
 </body>
 </html>

@@ -695,7 +695,7 @@ button.close {
     margin-left: 2px;
     font-family: Tahoma;
     font-size: 10pt;
-    width: 200px;
+    width: auto;
     background-color: transparent;
 }
 
