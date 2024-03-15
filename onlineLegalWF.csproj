@@ -316,6 +316,7 @@
     <Compile Include="Class\ReplaceInsNew.cs" />
     <Compile Include="Class\ReplaceInsRenew.cs" />
     <Compile Include="Class\ReplaceInsRenewAWC.cs" />
+    <Compile Include="Class\ReplacePermit.cs" />
     <Compile Include="Class\SendMail.cs" />
     <Compile Include="Class\Utillity.cs" />
     <Compile Include="Class\WFFunctions.cs" />
