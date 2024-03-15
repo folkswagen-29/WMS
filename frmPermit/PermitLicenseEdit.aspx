@@ -97,6 +97,26 @@
                         </tr>
                         <tr>
                             <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Subject </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="permit_subject" runat="server" CssClass="Text_400"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Description </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="permit_desc" runat="server" TextMode="MultiLine" CssClass="Text_600"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
                                 <label class="Label_md">License List</label>
                             </td>
                             <td>&nbsp;</td>
@@ -116,16 +136,6 @@
                                         </td>
                                     </tr>
                                 </table>
-                            </td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="cell_content_20PC_TR">
-                                <label class="Label_md">รายละเอียด </label>
-                            </td>
-                            <td>&nbsp;</td>
-                            <td class="cell_content_80PC_TL">
-                                <asp:TextBox ID="permit_desc" runat="server" TextMode="MultiLine" CssClass="Text_600"></asp:TextBox>
                             </td>
                             <td>&nbsp;</td>
                         </tr>

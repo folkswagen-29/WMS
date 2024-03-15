@@ -92,6 +92,7 @@ namespace onlineLegalWF.frmPermit
                 ucCommentlog1.ini_object(res.Rows[0]["process_id"].ToString());
                 req_no.Text = res.Rows[0]["permit_no"].ToString();
                 doc_no.Text = res.Rows[0]["document_no"].ToString();
+                permit_subject.Text = res.Rows[0]["permit_subject"].ToString();
                 permit_desc.Text = res.Rows[0]["permit_desc"].ToString();
                 type_requester.SelectedValue = res.Rows[0]["tof_requester_code"].ToString();
                 tof_requester_other_desc.Text = res.Rows[0]["tof_requester_other_desc"].ToString();
@@ -316,16 +317,18 @@ namespace onlineLegalWF.frmPermit
             var xtof_permitreq_other_desc = tof_permitreq_other_desc.Text.Trim();
             var xlicense_code = license_code.SelectedValue;
             var xsublicense_code = "";
-            if (license_code.SelectedValue == "11" || license_code.SelectedValue == "13") 
+            if (license_code.SelectedValue != "11" || license_code.SelectedValue != "13") 
             {
                 xsublicense_code = ddl_sublicense.SelectedValue;
             }
+            var xpermit_subject = permit_subject.Text.Trim();
             var xpermit_desc = permit_desc.Text.Trim();
             var xcontact_agency = contact_agency.Text.Trim();
             var xattorney_name = attorney_name.Text.Trim();
 
             string sql = @"UPDATE [dbo].[li_permit_request]
-                           SET [permit_desc] = '" +xpermit_desc+ @"'
+                           SET [permit_subject] = '" + xpermit_subject + @"'
+                              ,[permit_desc] = '" +xpermit_desc+ @"'
                               ,[tof_requester_code] = '"+xtof_requester_code+@"'
                               ,[tof_requester_other_desc] = '"+xtof_requester_other_desc+@"'
                               ,[tof_permitreq_code] = '"+xtof_permitreq_code+@"'

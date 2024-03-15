@@ -96,6 +96,24 @@ namespace onlineLegalWF.frmPermit
         protected global::System.Web.UI.WebControls.TextBox tof_permitreq_other_desc;
 
         /// <summary>
+        /// permit_subject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox permit_subject;
+
+        /// <summary>
+        /// permit_desc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox permit_desc;
+
+        /// <summary>
         /// license_code control.
         /// </summary>
         /// <remarks>
@@ -130,15 +148,6 @@ namespace onlineLegalWF.frmPermit
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.BulletedList ddl_refdoc;
-
-        /// <summary>
-        /// permit_desc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox permit_desc;
 
         /// <summary>
         /// contact_agency control.

@@ -260,6 +260,7 @@ namespace onlineLegalWF.frmPermit
             var xcontact_agency = contact_agency.Text.Trim();
             var xattorney_name = attorney_name.Text.Trim();
             var xstatus = "verify";
+            var xsubject = permit_subject.Text.Trim();
 
             string sql = "";
 
@@ -276,12 +277,13 @@ namespace onlineLegalWF.frmPermit
             if (license_code.SelectedValue == "11" || license_code.SelectedValue == "13")
             {
                 sql = @"INSERT INTO [dbo].[li_permit_request]
-                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[license_code],[contact_agency],[attorney_name],[status])
+                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_subject],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[license_code],[contact_agency],[attorney_name],[status])
                              VALUES
                                    ('" + xprocess_id + @"'
                                    ,'" + xpermit_no + @"'
                                    ,'" + xdoc_no + @"'
                                    ,'" + xpermit_date + @"'
+                                   ,'" + xsubject + @"'
                                    ,'" + xpermit_desc + @"'
                                    ,'" + xtof_requester_code + @"'
                                    ,'" + xtof_requester_other_desc + @"'
@@ -296,12 +298,13 @@ namespace onlineLegalWF.frmPermit
             else 
             {
                 sql = @"INSERT INTO [dbo].[li_permit_request]
-                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[license_code],[sublicense_code],[contact_agency],[attorney_name],[status])
+                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_subject],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[license_code],[sublicense_code],[contact_agency],[attorney_name],[status])
                              VALUES
                                    ('" + xprocess_id + @"'
                                    ,'" + xpermit_no + @"'
                                    ,'" + xdoc_no + @"'
                                    ,'" + xpermit_date + @"'
+                                   ,'" + xsubject + @"'
                                    ,'" + xpermit_desc + @"'
                                    ,'" + xtof_requester_code + @"'
                                    ,'" + xtof_requester_other_desc + @"'
