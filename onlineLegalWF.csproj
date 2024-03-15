@@ -210,6 +210,7 @@
     <Content Include="frmLitigation\LitigationRequestEdit.aspx" />
     <Content Include="frmPermit\PermitLandTax.aspx" />
     <Content Include="frmPermit\PermitLicense.aspx" />
+    <Content Include="frmPermit\PermitLicenseEdit.aspx" />
     <Content Include="frmPermit\PermitSignageTax.aspx" />
     <Content Include="frmPermit\PermitTrademark.aspx" />
     <Content Include="frmPermit\PermitWorkAssign.aspx" />
@@ -555,6 +556,13 @@
     </Compile>
     <Compile Include="frmPermit\PermitLicense.aspx.designer.cs">
       <DependentUpon>PermitLicense.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmPermit\PermitLicenseEdit.aspx.cs">
+      <DependentUpon>PermitLicenseEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmPermit\PermitLicenseEdit.aspx.designer.cs">
+      <DependentUpon>PermitLicenseEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmPermit\PermitSignageTax.aspx.cs">
       <DependentUpon>PermitSignageTax.aspx</DependentUpon>

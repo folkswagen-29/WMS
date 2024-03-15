@@ -1,4 +1,4 @@
-﻿<%@ Page Title="License Request" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitLicense.aspx.cs" Inherits="onlineLegalWF.frmPermit.PermitLicense" %>
+﻿<%@ Page Title="License Request Edit" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitLicenseEdit.aspx.cs" Inherits="onlineLegalWF.frmPermit.PermitLicenseEdit" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc2" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
@@ -182,6 +182,7 @@
         </tr>
     </table>
     <asp:HiddenField ID="hid_PID" runat="server" />
+    <asp:HiddenField ID="req_date" runat="server" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">

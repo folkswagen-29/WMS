@@ -1,6 +1,4 @@
-﻿using DocumentFormat.OpenXml.ExtendedProperties;
-using onlineLegalWF.Class;
-using Spire.Doc;
+﻿using onlineLegalWF.Class;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace onlineLegalWF.frmPermit
 {
-    public partial class PermitLicense : System.Web.UI.Page
+    public partial class PermitLicenseEdit : System.Web.UI.Page
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
@@ -24,21 +22,19 @@ namespace onlineLegalWF.frmPermit
         {
             if (!IsPostBack)
             {
-                setData();
+                string id = Request.QueryString["id"];
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    setData(id);
+                }
+                
             }
         }
 
-        private void setData()
+        private void setData(string id)
         {
-            ucHeader1.setHeader("License Request");
-            string xreq_no = System.DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
-            req_no.Text = xreq_no;
-
-            string pid = zwf.iniPID("LEGALWF");
-            lblPID.Text = pid;
-            hid_PID.Value = pid;
-            ucAttachment1.ini_object(pid);
-            ucCommentlog1.ini_object(pid);
+            ucHeader1.setHeader("License Request Edit");
 
             type_requester.DataSource = GetTypeOfRequester();
             type_requester.DataBind();
@@ -60,7 +56,7 @@ namespace onlineLegalWF.frmPermit
 
             var dtSublicense = GetSubPermitLicense(license_code.SelectedValue);
 
-            if (dtSublicense.Rows.Count > 0) 
+            if (dtSublicense.Rows.Count > 0)
             {
                 ddl_sublicense.Visible = true;
                 ddl_sublicense.DataSource = dtSublicense;
@@ -83,6 +79,78 @@ namespace onlineLegalWF.frmPermit
                 ddl_refdoc.DataBind();
             }
 
+            string sql = "select * from li_permit_request where permit_no='" + id + "'";
+
+            var res = zdb.ExecSql_DataTable(sql, zconnstr);
+
+            if (res.Rows.Count > 0) 
+            {
+                req_date.Value = Convert.ToDateTime(res.Rows[0]["permit_date"]).ToString("yyyy-MM-dd");
+                lblPID.Text = res.Rows[0]["process_id"].ToString();
+                hid_PID.Value = res.Rows[0]["process_id"].ToString();
+                ucAttachment1.ini_object(res.Rows[0]["process_id"].ToString());
+                ucCommentlog1.ini_object(res.Rows[0]["process_id"].ToString());
+                req_no.Text = res.Rows[0]["permit_no"].ToString();
+                doc_no.Text = res.Rows[0]["document_no"].ToString();
+                permit_desc.Text = res.Rows[0]["permit_desc"].ToString();
+                type_requester.SelectedValue = res.Rows[0]["tof_requester_code"].ToString();
+                tof_requester_other_desc.Text = res.Rows[0]["tof_requester_other_desc"].ToString();
+                if (res.Rows[0]["tof_requester_code"].ToString() == "03")
+                {
+                    tof_requester_other_desc.Enabled = true;
+                }
+                else 
+                {
+                    tof_requester_other_desc.Enabled = false;
+                }
+                type_project.SelectedValue = res.Rows[0]["bu_code"].ToString();
+                type_req_license.SelectedValue = res.Rows[0]["tof_permitreq_code"].ToString();
+                tof_permitreq_other_desc.Text = res.Rows[0]["tof_permitreq_other_desc"].ToString();
+                if (type_req_license.SelectedValue == "04" || type_req_license.SelectedValue == "03")
+                {
+                    tof_permitreq_other_desc.Enabled = true;
+                    license_code.Enabled = false;
+                    ddl_sublicense.Visible = false;
+                    refdoc.Visible = false;
+                    ddl_refdoc.Visible = false;
+                }
+                else
+                {
+                    license_code.Enabled = true;
+                    ddl_sublicense.Visible = true;
+                    refdoc.Visible = true;
+                    ddl_refdoc.Visible = true;
+                    tof_permitreq_other_desc.Enabled = false;
+                }
+                license_code.SelectedValue = res.Rows[0]["license_code"].ToString();
+                if (!string.IsNullOrEmpty(res.Rows[0]["sublicense_code"].ToString())) 
+                {
+                    ddl_sublicense.SelectedValue = res.Rows[0]["sublicense_code"].ToString();
+
+                    dtSublicense = GetSubPermitLicense(license_code.SelectedValue);
+
+                    if (dtSublicense.Rows.Count > 0)
+                    {
+                        ddl_sublicense.Visible = true;
+                    }
+
+                   dtSublicenseRefdoc = GetSubPermitLicenseRefDoc(ddl_sublicense.SelectedValue);
+
+                    if (dtSublicenseRefdoc.Rows.Count > 0)
+                    {
+                        refdoc.Visible = true;
+                        ddl_refdoc.Visible = true;
+                        ddl_refdoc.DataSource = dtSublicenseRefdoc;
+                        ddl_refdoc.DataBind();
+                        ddl_refdoc.DataTextField = "sublicense_refdoc_desc";
+                        ddl_refdoc.DataValueField = "sublicense_code";
+                        ddl_refdoc.DataBind();
+                    }
+                }
+                contact_agency.Text = res.Rows[0]["contact_agency"].ToString();
+                attorney_name.Text = res.Rows[0]["attorney_name"].ToString();
+            }
+
 
         }
 
@@ -92,7 +160,7 @@ namespace onlineLegalWF.frmPermit
             {
                 tof_requester_other_desc.Enabled = true;
             }
-            else 
+            else
             {
                 tof_requester_other_desc.Enabled = false;
             }
@@ -149,7 +217,7 @@ namespace onlineLegalWF.frmPermit
                     ddl_refdoc.Visible = false;
                 }
             }
-            else 
+            else
             {
                 ddl_sublicense.Visible = false;
                 refdoc.Visible = false;
@@ -180,13 +248,11 @@ namespace onlineLegalWF.frmPermit
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            int res = SaveRequest();
+            int res = UpdateRequest();
 
             if (res > 0)
             {
-                Response.Write("<script>alert('Successfully added');</script>");
-                var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                Response.Redirect(host_url + "frmPermit/PermitLicenseEdit.aspx?id=" + req_no.Text.Trim());
+                Response.Write("<script>alert('Successfully Udated');</script>");
             }
             else
             {
@@ -226,7 +292,7 @@ namespace onlineLegalWF.frmPermit
                                   ,license.[row_sort]
                               from [li_permit_group_license] as license
                             inner join li_permit_sublicense as sub on sub.sublicense_code = license.sublicense_code
-                            where license.[license_code] = '"+xlicense_code+"' order by license.[row_sort] asc";
+                            where license.[license_code] = '" + xlicense_code + "' order by license.[row_sort] asc";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }
@@ -237,85 +303,40 @@ namespace onlineLegalWF.frmPermit
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }
-        private int SaveRequest()
+        private int UpdateRequest()
         {
             int ret = 0;
 
-            if (doc_no.Text.Trim() == "")
-            {
-                doc_no.Text = zwf.genDocNo("PMT-" + System.DateTime.Now.ToString("yyyy", new CultureInfo("en-US")) + "-", 4);
-            }
             var xpermit_no = req_no.Text.Trim();
-            var xprocess_id = hid_PID.Value.ToString();
-            var xdoc_no = doc_no.Text.Trim();
             var xtof_requester_code = type_requester.SelectedValue;
-            var xtof_requester_other_desc = "";
-            var xpermit_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            var xtof_requester_other_desc = tof_requester_other_desc.Text.Trim();
+            var xpermit_updatedate = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
             var xproject_code = type_project.SelectedValue;
             var xtof_permitreq_code = type_req_license.SelectedValue;
-            var xtof_permitreq_other_desc = "";
+            var xtof_permitreq_other_desc = tof_permitreq_other_desc.Text.Trim();
             var xlicense_code = license_code.SelectedValue;
-            var xsublicense_code = ddl_sublicense.SelectedValue;
+            var xsublicense_code = "";
+            if (license_code.SelectedValue == "11" || license_code.SelectedValue == "13") 
+            {
+                xsublicense_code = ddl_sublicense.SelectedValue;
+            }
             var xpermit_desc = permit_desc.Text.Trim();
             var xcontact_agency = contact_agency.Text.Trim();
             var xattorney_name = attorney_name.Text.Trim();
-            var xstatus = "verify";
 
-            string sql = "";
-
-            if (type_requester.SelectedValue == "03") 
-            {
-                xtof_requester_other_desc = tof_requester_other_desc.Text.Trim();
-            }
-
-            if (type_req_license.SelectedValue == "04")
-            {
-                xtof_permitreq_other_desc = tof_permitreq_other_desc.Text.Trim();
-            }
-
-            if (license_code.SelectedValue == "11" || license_code.SelectedValue == "13")
-            {
-                sql = @"INSERT INTO [dbo].[li_permit_request]
-                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[license_code],[contact_agency],[attorney_name],[status])
-                             VALUES
-                                   ('" + xprocess_id + @"'
-                                   ,'" + xpermit_no + @"'
-                                   ,'" + xdoc_no + @"'
-                                   ,'" + xpermit_date + @"'
-                                   ,'" + xpermit_desc + @"'
-                                   ,'" + xtof_requester_code + @"'
-                                   ,'" + xtof_requester_other_desc + @"'
-                                   ,'" + xproject_code + @"'
-                                   ,'" + xtof_permitreq_code + @"'
-                                   ,'" + xtof_permitreq_other_desc + @"'
-                                   ,'" + xlicense_code + @"'
-                                   ,'" + xcontact_agency + @"'
-                                   ,'" + xattorney_name + @"'
-                                   ,'" + xstatus + @"')";
-            }
-            else 
-            {
-                sql = @"INSERT INTO [dbo].[li_permit_request]
-                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[license_code],[sublicense_code],[contact_agency],[attorney_name],[status])
-                             VALUES
-                                   ('" + xprocess_id + @"'
-                                   ,'" + xpermit_no + @"'
-                                   ,'" + xdoc_no + @"'
-                                   ,'" + xpermit_date + @"'
-                                   ,'" + xpermit_desc + @"'
-                                   ,'" + xtof_requester_code + @"'
-                                   ,'" + xtof_requester_other_desc + @"'
-                                   ,'" + xproject_code + @"'
-                                   ,'" + xtof_permitreq_code + @"'
-                                   ,'" + xtof_permitreq_other_desc + @"'
-                                   ,'" + xlicense_code + @"'
-                                   ,'" + xsublicense_code + @"'
-                                   ,'" + xcontact_agency + @"'
-                                   ,'" + xattorney_name + @"'
-                                   ,'" + xstatus + @"')";
-            }
-
-            
+            string sql = @"UPDATE [dbo].[li_permit_request]
+                           SET [permit_desc] = '" +xpermit_desc+ @"'
+                              ,[tof_requester_code] = '"+xtof_requester_code+@"'
+                              ,[tof_requester_other_desc] = '"+xtof_requester_other_desc+@"'
+                              ,[tof_permitreq_code] = '"+xtof_permitreq_code+@"'
+                              ,[tof_permitreq_other_desc] = '"+xtof_permitreq_other_desc+@"'
+                              ,[license_code] = '"+xlicense_code+@"'
+                              ,[sublicense_code] = '"+xsublicense_code+@"'
+                              ,[contact_agency] = '"+xcontact_agency+@"'
+                              ,[attorney_name] = '"+xattorney_name+@"'
+                              ,[bu_code] = '"+xproject_code+@"'
+                              ,[updated_datetime] = '"+xpermit_updatedate+@"'
+                         WHERE [permit_no] = '"+ xpermit_no + "'";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
 
