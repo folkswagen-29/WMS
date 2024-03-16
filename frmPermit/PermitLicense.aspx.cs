@@ -351,6 +351,7 @@ namespace onlineLegalWF.frmPermit
             data.docno = xdoc_no.Replace(",", "!comma");
             data.reqdate = Utillity.ConvertDateToLongDateTime(xreq_date, "th");
             var xrequester_code = type_requester.SelectedValue;
+            data.req_other = "";
             if (xrequester_code == "01")
             {
                 data.r1 = "☑";
@@ -368,8 +369,9 @@ namespace onlineLegalWF.frmPermit
                 data.r1 = "☐";
                 data.r2 = "☐";
                 data.r3 = "☑";
+                data.req_other = tof_requester_other_desc.Text.Trim();
             }
-            data.req_other = tof_requester_other_desc.Text.Trim();
+            
             var proceed_by = "";
             var approved_by = "";
             ///get gm am heam_am
@@ -432,6 +434,9 @@ namespace onlineLegalWF.frmPermit
 
             data.subject = permit_subject.Text.Trim();
             data.bu_name = type_project.SelectedItem.Text.Trim();
+            data.license_other = "";
+            data.tax_other = "";
+            data.trademarks_other = "";
 
             var xtof_permitreq_code = type_req_license.SelectedValue;
             if (xtof_permitreq_code == "01")
@@ -481,6 +486,7 @@ namespace onlineLegalWF.frmPermit
                 data.t7 = "☐";
                 data.t8 = "☐";
                 data.t9 = "☐";
+                data.license_other = tof_permitreq_other_desc.Text.Trim();
             }
             else if (xtof_permitreq_code == "05")
             {
@@ -517,6 +523,7 @@ namespace onlineLegalWF.frmPermit
                 data.t7 = "☑";
                 data.t8 = "☐";
                 data.t9 = "☐";
+                data.tax_other = tof_permitreq_other_desc.Text.Trim();
             }
             else if (xtof_permitreq_code == "08")
             {
@@ -541,6 +548,7 @@ namespace onlineLegalWF.frmPermit
                 data.t7 = "☐";
                 data.t8 = "☐";
                 data.t9 = "☑";
+                data.trademarks_other = tof_permitreq_other_desc.Text.Trim();
             }
 
             data.desc_req = permit_desc.Text.Trim();
@@ -554,17 +562,8 @@ namespace onlineLegalWF.frmPermit
 
 
             // Convert to JSONString
-            //DataTable dtTagPropsTable = new DataTable();
-            //dtTagPropsTable.Columns.Add("tagname", typeof(string));
-            //dtTagPropsTable.Columns.Add("jsonstring", typeof(string));
-
-            //DataTable dtTagDataTable = new DataTable();
-            //dtTagDataTable.Columns.Add("tagname", typeof(string));
-            //dtTagDataTable.Columns.Add("jsonstring", typeof(string));
             ReplaceDocx.Class.ReplaceDocx repl = new ReplaceDocx.Class.ReplaceDocx();
             var jsonDTStr = repl.DataTableToJSONWithStringBuilder(dtStr);
-            //var jsonDTProperties1 = repl.DataTableToJSONWithStringBuilder(dtProperties1);
-            //var jsonDTdata = repl.DataTableToJSONWithStringBuilder(dt);
             var jsonDTProperties1 = "";
             var jsonDTdata = "";
             //end prepare data

@@ -11,7 +11,7 @@ namespace onlineLegalWF.frmPermit
 {
 
 
-    public partial class PermitLandTax
+    public partial class PermitLandTaxEdit
     {
 
         /// <summary>
@@ -202,6 +202,15 @@ namespace onlineLegalWF.frmPermit
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_PID;
+
+        /// <summary>
+        /// req_date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField req_date;
 
         /// <summary>
         /// lblPID control.

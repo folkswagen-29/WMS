@@ -46,6 +46,18 @@ namespace onlineLegalWF.Class
             dr0["tagname"] = "#req_other#";
             dr0["tagvalue"] = (!string.IsNullOrEmpty(data.req_other) ? data.req_other.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#license_other#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.license_other) ? data.license_other.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#tax_other#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.tax_other) ? data.tax_other.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#trademarks_other#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.trademarks_other) ? data.trademarks_other.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
 
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name1#";
@@ -157,6 +169,7 @@ namespace onlineLegalWF.Class
                 res.docno = dr0["document_no"].ToString().Trim();
                 res.reqdate = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["permit_date"]), "th").Trim();
                 var xrequester_code = dr0["tof_requester_code"].ToString().Trim();
+                data.req_other = "";
                 if (xrequester_code == "01") 
                 {
                     res.r1 = "x";
@@ -168,12 +181,14 @@ namespace onlineLegalWF.Class
                     res.r1 = "";
                     res.r2 = "x";
                     res.r3 = "";
+                    
                 }
                 else if (xrequester_code == "03")
                 {
                     res.r1 = "";
                     res.r2 = "";
                     res.r3 = "x";
+                    data.req_other = dr0["tof_requester_other_desc"].ToString().Trim();
                 }
                 res.name1 = data.name1;
                 res.signdate1 = data.signdate1;
@@ -182,6 +197,9 @@ namespace onlineLegalWF.Class
 
                 res.subject = dr0["permit_subject"].ToString().Trim();
                 res.bu_name = dr0["bu_desc"].ToString().Trim();
+                res.license_other = "";
+                res.tax_other = "";
+                res.trademarks_other = "";
 
                 var xtof_permitreq_code = dr0["tof_permitreq_code"].ToString().Trim();
                 if (xtof_permitreq_code == "01") 
@@ -231,6 +249,7 @@ namespace onlineLegalWF.Class
                     res.t7 = "";
                     res.t8 = "";
                     res.t9 = "";
+                    res.license_other = dr0["tof_permitreq_other_desc"].ToString().Trim();
                 }
                 else if (xtof_permitreq_code == "05")
                 {
@@ -267,6 +286,7 @@ namespace onlineLegalWF.Class
                     res.t7 = "x";
                     res.t8 = "";
                     res.t9 = "";
+                    res.tax_other = dr0["tof_permitreq_other_desc"].ToString().Trim();
                 }
                 else if (xtof_permitreq_code == "08")
                 {
@@ -291,6 +311,7 @@ namespace onlineLegalWF.Class
                     res.t7 = "";
                     res.t8 = "";
                     res.t9 = "x";
+                    res.trademarks_other = dr0["tof_permitreq_other_desc"].ToString().Trim();
                 }
 
                 res.desc_req = dr0["permit_desc"].ToString().Trim();
@@ -340,6 +361,9 @@ namespace onlineLegalWF.Class
             public string r2 { get; set; }
             public string r3 { get; set; }
             public string req_other { get; set; }
+            public string license_other { get; set; }
+            public string tax_other { get; set; }
+            public string trademarks_other { get; set; }
             public string signname1 { get; set; }
             public string name1 { get; set; }
             public string signdate1 { get; set; }

@@ -1,5 +1,4 @@
 ﻿using onlineLegalWF.Class;
-using onlineLegalWF.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,12 +8,11 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml.Linq;
 using static onlineLegalWF.Class.ReplacePermit;
 
 namespace onlineLegalWF.frmPermit
 {
-    public partial class PermitLandTax : System.Web.UI.Page
+    public partial class PermitLandTaxEdit : System.Web.UI.Page
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
@@ -26,13 +24,19 @@ namespace onlineLegalWF.frmPermit
         {
             if (!IsPostBack)
             {
-                setData();
+                string id = Request.QueryString["id"];
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    setData(id);
+                }
+
             }
         }
 
-        private void setData()
+        private void setData(string id)
         {
-            ucHeader1.setHeader("Tax Request");
+            ucHeader1.setHeader("Tax Edit");
             string xreq_no = System.DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
             req_no.Text = xreq_no;
 
@@ -53,6 +57,48 @@ namespace onlineLegalWF.frmPermit
             type_requester.DataTextField = "tof_requester_desc";
             type_requester.DataValueField = "tof_requester_code";
             type_requester.DataBind();
+
+            string sql = "select * from li_permit_request where permit_no='" + id + "'";
+
+            var res = zdb.ExecSql_DataTable(sql, zconnstr);
+
+            if (res.Rows.Count > 0)
+            {
+                req_date.Value = Convert.ToDateTime(res.Rows[0]["permit_date"]).ToString("yyyy-MM-dd");
+                lblPID.Text = res.Rows[0]["process_id"].ToString();
+                hid_PID.Value = res.Rows[0]["process_id"].ToString();
+                ucAttachment1.ini_object(res.Rows[0]["process_id"].ToString());
+                ucCommentlog1.ini_object(res.Rows[0]["process_id"].ToString());
+                req_no.Text = res.Rows[0]["permit_no"].ToString();
+                doc_no.Text = res.Rows[0]["document_no"].ToString();
+                permit_subject.Text = res.Rows[0]["permit_subject"].ToString();
+                permit_desc.Text = res.Rows[0]["permit_desc"].ToString();
+                type_requester.SelectedValue = res.Rows[0]["tof_requester_code"].ToString();
+                tof_requester_other_desc.Text = res.Rows[0]["tof_requester_other_desc"].ToString();
+                if (res.Rows[0]["tof_requester_code"].ToString() == "03")
+                {
+                    tof_requester_other_desc.Enabled = true;
+                }
+                else
+                {
+                    tof_requester_other_desc.Enabled = false;
+                }
+                type_lt_project.SelectedValue = res.Rows[0]["bu_code"].ToString();
+                type_req_tax.SelectedValue = res.Rows[0]["tof_permitreq_code"].ToString();
+                tof_permitreq_other_desc.Text = res.Rows[0]["tof_permitreq_other_desc"].ToString();
+                if (type_req_tax.SelectedValue == "07")
+                {
+                    tof_permitreq_other_desc.Enabled = true;
+                }
+                else
+                {
+                    tof_permitreq_other_desc.Enabled = false;
+                }
+
+                contact_agency.Text = res.Rows[0]["contact_agency"].ToString();
+                attorney_name.Text = res.Rows[0]["attorney_name"].ToString();
+                email_accounting.Text = res.Rows[0]["email_accounting"].ToString();
+            }
         }
 
         protected void ddl_type_requester_Changed(object sender, EventArgs e)
@@ -84,13 +130,11 @@ namespace onlineLegalWF.frmPermit
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            int res = SaveRequest();
+            int res = EditRequest();
 
             if (res > 0)
             {
-                Response.Write("<script>alert('Successfully added');</script>");
-                var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                Response.Redirect(host_url + "frmPermit/PermitLandTaxEdit.aspx?id=" + req_no.Text.Trim());
+                Response.Write("<script>alert('Successfully Updated');</script>");
             }
             else
             {
@@ -115,7 +159,7 @@ namespace onlineLegalWF.frmPermit
             return dt;
         }
 
-        private int SaveRequest()
+        private int EditRequest()
         {
             int ret = 0;
 
@@ -124,11 +168,9 @@ namespace onlineLegalWF.frmPermit
                 doc_no.Text = zwf.genDocNo("PMT-" + System.DateTime.Now.ToString("yyyy", new CultureInfo("en-US")) + "-", 4);
             }
             var xpermit_no = req_no.Text.Trim();
-            var xprocess_id = hid_PID.Value.ToString();
-            var xdoc_no = doc_no.Text.Trim();
             var xtof_requester_code = type_requester.SelectedValue;
             var xtof_requester_other_desc = tof_requester_other_desc.Text.Trim();
-            var xpermit_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            var xpermit_updatedate = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
             var xlt_project_code = type_lt_project.SelectedValue;
             var xtof_permitreq_code = type_req_tax.SelectedValue;
             var xtof_permitreq_other_desc = tof_permitreq_other_desc.Text.Trim();
@@ -137,26 +179,20 @@ namespace onlineLegalWF.frmPermit
             var xcontact_agency = contact_agency.Text.Trim();
             var xattorney_name = attorney_name.Text.Trim();
             var xemail_accounting = email_accounting.Text.Trim();
-            var xstatus = "verify";
 
-            string sql = @"INSERT INTO [dbo].[li_permit_request]
-                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_subject],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[contact_agency],[attorney_name],[email_accounting],[status])
-                             VALUES
-                                   ('" + xprocess_id + @"'
-                                   ,'" + xpermit_no + @"'
-                                   ,'" + xdoc_no + @"'
-                                   ,'" + xpermit_date + @"'
-                                   ,'" + xpermit_subject + @"'
-                                   ,'" + xpermit_desc + @"'
-                                   ,'" + xtof_requester_code + @"'
-                                   ,'" + xtof_requester_other_desc + @"'
-                                   ,'" + xlt_project_code + @"'
-                                   ,'" + xtof_permitreq_code + @"'
-                                   ,'" + xtof_permitreq_other_desc + @"'
-                                   ,'" + xcontact_agency + @"'
-                                   ,'" + xattorney_name + @"'
-                                   ,'" + xemail_accounting + @"'
-                                   ,'" + xstatus + @"')";
+            string sql = @"UPDATE [dbo].[li_permit_request]
+                           SET [permit_subject] = '" + xpermit_subject + @"'
+                              ,[permit_desc] = '" + xpermit_desc + @"'
+                              ,[tof_requester_code] = '" + xtof_requester_code + @"'
+                              ,[tof_requester_other_desc] = '" + xtof_requester_other_desc + @"'
+                              ,[tof_permitreq_code] = '" + xtof_permitreq_code + @"'
+                              ,[tof_permitreq_other_desc] = '" + xtof_permitreq_other_desc + @"'
+                              ,[email_accounting] = '" + xemail_accounting + @"'
+                              ,[contact_agency] = '" + xcontact_agency + @"'
+                              ,[attorney_name] = '" + xattorney_name + @"'
+                              ,[bu_code] = '" + xlt_project_code + @"'
+                              ,[updated_datetime] = '" + xpermit_updatedate + @"'
+                         WHERE [permit_no] = '" + xpermit_no + "'";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
 
