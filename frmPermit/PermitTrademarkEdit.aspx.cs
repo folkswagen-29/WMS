@@ -51,9 +51,7 @@ namespace onlineLegalWF.frmPermit
             type_requester.DataBind();
 
             string sql = "select * from li_permit_request where permit_no='" + id + "'";
-
             var res = zdb.ExecSql_DataTable(sql, zconnstr);
-
             if (res.Rows.Count > 0)
             {
                 req_date.Value = Convert.ToDateTime(res.Rows[0]["permit_date"]).ToString("yyyy-MM-dd");
