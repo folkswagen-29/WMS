@@ -357,7 +357,7 @@ namespace onlineLegalWF.frmPermit
             // Replace Doc
             var xdoc_no = doc_no.Text.Trim();
             //var xprocess_id = hid_PID.Value.ToString();
-            var xreq_date = System.DateTime.Now;
+            var xreq_date = Utillity.ConvertStringToDate(req_date.Value);
 
             var path_template = ConfigurationManager.AppSettings["WT_Template_permit"].ToString();
             string templatefile = path_template + @"\PermitTemplate.docx";

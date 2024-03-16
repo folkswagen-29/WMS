@@ -158,7 +158,7 @@ namespace onlineLegalWF.Class
 
             string sql0 = @"SELECT permit.[row_id],permit.[process_id],permit.[permit_no],permit.[document_no],permit.[permit_date],permit.[permit_subject],permit.[permit_desc]
                                   ,permit.[tof_requester_code],permit.[tof_requester_other_desc],permit.[tof_permitreq_code],permit.[tof_permitreq_other_desc],permit.[license_code],permit.[sublicense_code]
-                                  ,permit.[contact_agency],permit.[attorney_name],permit.[email_accounting],permit.[trademarks_title],permit.[trademarks_desc],permit.[bu_code],bu.[bu_desc],permit.[status],permit.[updated_datetime]
+                                  ,permit.[contact_agency],permit.[attorney_name],permit.[email_accounting],permit.[bu_code],bu.[bu_desc],permit.[status],permit.[updated_datetime]
                               FROM [li_permit_request] as permit
                               INNER JOIN [li_business_unit] as bu on permit.bu_code = bu.bu_code
                               where process_id = '" + xprocess_id + "'";

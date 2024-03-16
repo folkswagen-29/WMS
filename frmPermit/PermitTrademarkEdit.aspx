@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Trademark Request" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitTrademark.aspx.cs" Inherits="onlineLegalWF.frmPermit.PermitTrademark" %>
+﻿<%@ Page Title="Trademark Edit" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitTrademarkEdit.aspx.cs" Inherits="onlineLegalWF.frmPermit.PermitTrademarkEdit" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc2" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
@@ -146,6 +146,7 @@
         </tr>
     </table>
     <asp:HiddenField ID="hid_PID" runat="server" />
+    <asp:HiddenField ID="req_date" runat="server" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
@@ -168,3 +169,4 @@
     }
 </script>
 </asp:Content>
+

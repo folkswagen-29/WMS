@@ -12,7 +12,7 @@ using static onlineLegalWF.Class.ReplacePermit;
 
 namespace onlineLegalWF.frmPermit
 {
-    public partial class PermitLandTaxEdit : System.Web.UI.Page
+    public partial class PermitTrademarkEdit : System.Web.UI.Page
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
@@ -36,13 +36,13 @@ namespace onlineLegalWF.frmPermit
 
         private void setData(string id)
         {
-            ucHeader1.setHeader("Tax Edit");
+            ucHeader1.setHeader("Tradmark Edit");
 
-            type_lt_project.DataSource = GetBusinessUnit();
-            type_lt_project.DataBind();
-            type_lt_project.DataTextField = "bu_desc";
-            type_lt_project.DataValueField = "bu_code";
-            type_lt_project.DataBind();
+            type_project.DataSource = GetBusinessUnit();
+            type_project.DataBind();
+            type_project.DataTextField = "bu_desc";
+            type_project.DataValueField = "bu_code";
+            type_project.DataBind();
 
             type_requester.DataSource = GetTypeOfRequester();
             type_requester.DataBind();
@@ -75,10 +75,10 @@ namespace onlineLegalWF.frmPermit
                 {
                     tof_requester_other_desc.Enabled = false;
                 }
-                type_lt_project.SelectedValue = res.Rows[0]["bu_code"].ToString();
-                type_req_tax.SelectedValue = res.Rows[0]["tof_permitreq_code"].ToString();
+                type_project.SelectedValue = res.Rows[0]["bu_code"].ToString();
+                type_req_trademarks.SelectedValue = res.Rows[0]["tof_permitreq_code"].ToString();
                 tof_permitreq_other_desc.Text = res.Rows[0]["tof_permitreq_other_desc"].ToString();
-                if (type_req_tax.SelectedValue == "07")
+                if (type_req_trademarks.SelectedValue == "09")
                 {
                     tof_permitreq_other_desc.Enabled = true;
                 }
@@ -86,10 +86,21 @@ namespace onlineLegalWF.frmPermit
                 {
                     tof_permitreq_other_desc.Enabled = false;
                 }
+            }
+        }
 
-                contact_agency.Text = res.Rows[0]["contact_agency"].ToString();
-                attorney_name.Text = res.Rows[0]["attorney_name"].ToString();
-                email_accounting.Text = res.Rows[0]["email_accounting"].ToString();
+
+        protected void btn_save_Click(object sender, EventArgs e)
+        {
+            int res = UpdateRequest();
+
+            if (res > 0)
+            {
+                Response.Write("<script>alert('Successfully Updated');</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('Error !!!');</script>");
             }
         }
 
@@ -106,12 +117,11 @@ namespace onlineLegalWF.frmPermit
             }
         }
 
-        protected void type_req_tax_Changed(object sender, EventArgs e)
+        protected void type_req_trademarks_Changed(object sender, EventArgs e)
         {
-            if (type_req_tax.SelectedValue == "07")
+            if (type_req_trademarks.SelectedValue == "09")
             {
                 tof_permitreq_other_desc.Enabled = true;
-
             }
             else
             {
@@ -120,24 +130,11 @@ namespace onlineLegalWF.frmPermit
             }
         }
 
-        protected void btn_save_Click(object sender, EventArgs e)
-        {
-            int res = EditRequest();
-
-            if (res > 0)
-            {
-                Response.Write("<script>alert('Successfully Updated');</script>");
-            }
-            else
-            {
-                Response.Write("<script>alert('Error !!!');</script>");
-            }
-        }
-
         protected void btn_gendocumnt_Click(object sender, EventArgs e)
         {
             GenDocumnet();
         }
+
         public DataTable GetTypeOfRequester()
         {
             string sql = "select * from li_type_of_requester order by row_sort asc";
@@ -151,21 +148,19 @@ namespace onlineLegalWF.frmPermit
             return dt;
         }
 
-        private int EditRequest()
+        private int UpdateRequest()
         {
             int ret = 0;
+
             var xpermit_no = req_no.Text.Trim();
             var xtof_requester_code = type_requester.SelectedValue;
             var xtof_requester_other_desc = tof_requester_other_desc.Text.Trim();
             var xpermit_updatedate = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            var xlt_project_code = type_lt_project.SelectedValue;
-            var xtof_permitreq_code = type_req_tax.SelectedValue;
+            var xproject_code = type_project.SelectedValue;
+            var xtof_permitreq_code = type_req_trademarks.SelectedValue;
             var xtof_permitreq_other_desc = tof_permitreq_other_desc.Text.Trim();
             var xpermit_subject = permit_subject.Text.Trim();
             var xpermit_desc = permit_desc.Text.Trim();
-            var xcontact_agency = contact_agency.Text.Trim();
-            var xattorney_name = attorney_name.Text.Trim();
-            var xemail_accounting = email_accounting.Text.Trim();
 
             string sql = @"UPDATE [dbo].[li_permit_request]
                            SET [permit_subject] = '" + xpermit_subject + @"'
@@ -174,10 +169,7 @@ namespace onlineLegalWF.frmPermit
                               ,[tof_requester_other_desc] = '" + xtof_requester_other_desc + @"'
                               ,[tof_permitreq_code] = '" + xtof_permitreq_code + @"'
                               ,[tof_permitreq_other_desc] = '" + xtof_permitreq_other_desc + @"'
-                              ,[email_accounting] = '" + xemail_accounting + @"'
-                              ,[contact_agency] = '" + xcontact_agency + @"'
-                              ,[attorney_name] = '" + xattorney_name + @"'
-                              ,[bu_code] = '" + xlt_project_code + @"'
+                              ,[bu_code] = '" + xproject_code + @"'
                               ,[updated_datetime] = '" + xpermit_updatedate + @"'
                          WHERE [permit_no] = '" + xpermit_no + "'";
 
@@ -231,7 +223,7 @@ namespace onlineLegalWF.frmPermit
             var proceed_by = "";
             var approved_by = "";
             ///get gm am heam_am
-            string sqlbu = @"select * from li_business_unit where bu_code = '" + type_lt_project.SelectedValue + "'";
+            string sqlbu = @"select * from li_business_unit where bu_code = '" + type_project.SelectedValue + "'";
             var resbu = zdb.ExecSql_DataTable(sqlbu, zconnstr);
             if (resbu.Rows.Count > 0)
             {
@@ -289,12 +281,12 @@ namespace onlineLegalWF.frmPermit
             data.signdate2 = "";
 
             data.subject = permit_subject.Text.Trim();
-            data.bu_name = type_lt_project.SelectedItem.Text.Trim();
+            data.bu_name = type_project.SelectedItem.Text.Trim();
             data.license_other = "";
             data.tax_other = "";
             data.trademarks_other = "";
 
-            var xtof_permitreq_code = type_req_tax.SelectedValue;
+            var xtof_permitreq_code = type_req_trademarks.SelectedValue;
             if (xtof_permitreq_code == "01")
             {
                 data.t1 = "☑";
@@ -408,8 +400,8 @@ namespace onlineLegalWF.frmPermit
             }
 
             data.desc_req = permit_desc.Text.Trim();
-            data.contact_agency = contact_agency.Text.Trim();
-            data.attorney_name = attorney_name.Text.Trim();
+            data.contact_agency = "";
+            data.attorney_name = "";
             data.list_doc_attach = "ตรวจสอบเอกสารแนบได้ที่ระบบ";
 
 
