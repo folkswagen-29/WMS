@@ -17,8 +17,10 @@ namespace onlineLegalWF.frmPermit
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
+        public string zconnstrrpa = ConfigurationManager.AppSettings["RPADB"].ToString();
         public WFFunctions zwf = new WFFunctions();
         public ReplacePermit zreplacepermit = new ReplacePermit();
+        public SendMail zsendmail = new SendMail();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -447,6 +449,228 @@ namespace onlineLegalWF.frmPermit
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalDoc();", true);
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
             pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filePath;
+        }
+
+        protected void btn_submit_Click(object sender, EventArgs e)
+        {
+            // Sample Submit
+            string process_code = "PMT_TAX";
+            int version_no = 1;
+            string xbu_code = type_lt_project.SelectedValue.Trim();
+
+            // getCurrentStep
+            var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+
+            // check session_user
+            if (Session["user_login"] != null)
+            {
+                var xlogin_name = Session["user_login"].ToString();
+                var empFunc = new EmpInfo();
+
+                //get data user
+                var emp = empFunc.getEmpInfo(xlogin_name);
+
+                // set WF Attributes
+                wfAttr.subject = "เรื่อง " + permit_subject.Text.Trim();
+                wfAttr.assto_login = emp.next_line_mgr_login;
+                wfAttr.wf_status = "SUBMITTED";
+                wfAttr.submit_answer = "SUBMITTED";
+                wfAttr.submit_by = emp.user_login;
+
+                wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, xbu_code);
+                wfAttr.updated_by = emp.user_login;
+
+                // wf.updateProcess
+                var wfA_NextStep = zwf.updateProcess(wfAttr);
+                //wfA_NextStep.next_assto_login = emp.next_line_mgr_login;
+                wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, xbu_code);
+                string status = zwf.Insert_NextStep(wfA_NextStep);
+
+                if (status == "Success")
+                {
+                    GenDocumnetPermit(lblPID.Text);
+                    //send mail
+                    string subject = "";
+                    string body = "";
+                    string sqlmail = @"select * from li_permit_request where process_id = '" + wfAttr.process_id + "'";
+                    var dt = zdb.ExecSql_DataTable(sqlmail, zconnstr);
+                    if (dt.Rows.Count > 0)
+                    {
+                        var dr = dt.Rows[0];
+                        string id = dr["permit_no"].ToString();
+                        subject = wfAttr.subject;
+                        var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                        body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+
+                        string pathfileins = "";
+
+                        string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                        var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                        if (resfile.Rows.Count > 0)
+                        {
+                            pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+
+                            string email = "";
+
+                            var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                            ////get mail from db
+                            /////send mail to next_approve
+                            if (isdev != "true")
+                            {
+                                string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                if (dtbpm.Rows.Count > 0)
+                                {
+                                    email = dtbpm.Rows[0]["email"].ToString();
+
+                                }
+                                else
+                                {
+                                    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                    if (dtrpa.Rows.Count > 0)
+                                    {
+                                        email = dtrpa.Rows[0]["Email"].ToString();
+                                    }
+                                    else
+                                    {
+                                        email = "";
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                ////fix mail test
+                                email = "legalwfuat2024@gmail.com";
+                            }
+
+                            if (!string.IsNullOrEmpty(email))
+                            {
+                                _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, pathfileins);
+                            }
+
+                        }
+
+                    }
+                    var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                    Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                }
+
+            }
+        }
+
+        private void GenDocumnetPermit(string pid)
+        {
+            string xreq_no = "";
+            var path_template = ConfigurationManager.AppSettings["WT_Template_permit"].ToString();
+            string templatefile = path_template + @"\PermitTemplate.docx";
+            string outputfolder = path_template + @"\Output";
+            string outputfn = outputfolder + @"\permit_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+            var rdoc = new ReplaceDocx.Class.ReplaceDocx();
+
+            string sqlpermit = "select * from li_permit_request where process_id='" + pid + "'";
+            var respermit = zdb.ExecSql_DataTable(sqlpermit, zconnstr);
+
+            #region gentagstr data form
+            ReplacePermit_TagData data = new ReplacePermit_TagData();
+
+            if (respermit.Rows.Count > 0)
+            {
+                xreq_no = respermit.Rows[0]["permit_no"].ToString();
+                string xbu_code = respermit.Rows[0]["bu_code"].ToString();
+                var proceed_by = "";
+                var approved_by = "";
+                ///get gm am heam_am
+                string sqlbu = @"select * from li_business_unit where bu_code = '" + xbu_code + "'";
+                var resbu = zdb.ExecSql_DataTable(sqlbu, zconnstr);
+                if (resbu.Rows.Count > 0)
+                {
+                    string xexternal_domain = resbu.Rows[0]["external_domain"].ToString();
+                    string xgm = resbu.Rows[0]["gm"].ToString();
+                    string xam = resbu.Rows[0]["am"].ToString();
+                    string xhead_am = resbu.Rows[0]["head_am"].ToString();
+
+                    if (Session["user_login"] != null)
+                    {
+                        var xlogin_name = Session["user_login"].ToString();
+                        var empFunc = new EmpInfo();
+
+                        //get data user
+                        if (xexternal_domain == "Y")
+                        {
+                            //Hotel get am
+                            var empam = empFunc.getEmpInfo(xam);
+                            if (!string.IsNullOrEmpty(empam.full_name_en))
+                            {
+                                proceed_by = empam.full_name_en;
+                            }
+
+                            //Hotel get head am
+                            var empheam_am = empFunc.getEmpInfo(xhead_am);
+                            if (!string.IsNullOrEmpty(empheam_am.full_name_en))
+                            {
+                                approved_by = empheam_am.full_name_en;
+                            }
+                        }
+                        else
+                        {
+                            //get requester
+                            var emp = empFunc.getEmpInfo(xlogin_name);
+                            if (!string.IsNullOrEmpty(emp.full_name_en))
+                            {
+                                proceed_by = emp.full_name_en;
+                            }
+
+                            //get gm
+                            var empgm = empFunc.getEmpInfo(xgm);
+                            if (!string.IsNullOrEmpty(empgm.full_name_en))
+                            {
+                                approved_by = empgm.full_name_en;
+                            }
+                        }
+
+                    }
+
+                }
+
+                data.name1 = proceed_by;
+                data.signdate1 = "";
+                data.name2 = approved_by;
+                data.signdate2 = "";
+            }
+
+            DataTable dtStr = zreplacepermit.BindTagData(pid, data);
+            #endregion
+
+            ReplaceDocx.Class.ReplaceDocx repl = new ReplaceDocx.Class.ReplaceDocx();
+            var jsonDTStr = repl.DataTableToJSONWithStringBuilder(dtStr);
+            var jsonDTProperties1 = "";
+            var jsonDTdata = "";
+
+            // Save to Database z_replacedocx_log
+            string sql = @"insert into z_replacedocx_log (replacedocx_reqno,jsonTagString, jsonTableProp, jsonTableData,template_filepath , output_directory,output_filepath, delete_output ) 
+                        values('" + xreq_no + @"',
+                               '" + jsonDTStr + @"', 
+                                '" + jsonDTProperties1 + @"', 
+                                '" + jsonDTdata + @"', 
+                                '" + templatefile + @"', 
+                                '" + outputfolder + @"', 
+                                '" + outputfn + @"',  
+                                '" + "0" + @"'
+                            ) ";
+
+            zdb.ExecNonQuery(sql, zconnstr);
+
+            var outputbyte = rdoc.ReplaceData2(jsonDTStr, jsonDTProperties1, jsonDTdata, templatefile, outputfolder, outputfn, false);
+
+            repl.convertDOCtoPDF(outputfn, outputfn.Replace(".docx", ".pdf"), false);
+
         }
     }
 }

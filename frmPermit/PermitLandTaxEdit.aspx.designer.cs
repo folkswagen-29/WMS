@@ -168,6 +168,15 @@ namespace onlineLegalWF.frmPermit
         protected global::System.Web.UI.WebControls.Button btn_save;
 
         /// <summary>
+        /// btn_submit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_submit;
+
+        /// <summary>
         /// btn_gendocumnt control.
         /// </summary>
         /// <remarks>
@@ -175,15 +184,6 @@ namespace onlineLegalWF.frmPermit
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_gendocumnt;
-
-        /// <summary>
-        /// btn_cancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_cancel;
 
         /// <summary>
         /// ucCommentlog1 control.

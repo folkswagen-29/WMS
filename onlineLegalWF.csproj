@@ -184,6 +184,7 @@
     <Content Include="forms\Complete.aspx" />
     <Content Include="forms\LegalAssign.aspx" />
     <Content Include="forms\permitapv.aspx" />
+    <Content Include="forms\permitcomplete.aspx" />
     <Content Include="forms\RequesterCloseJob.aspx" />
     <Content Include="frmCommregis\CommRegisRequest.aspx" />
     <Content Include="frmCommregis\CommRegisRequestEdit.aspx" />
@@ -378,6 +379,13 @@
     </Compile>
     <Compile Include="forms\permitapv.aspx.designer.cs">
       <DependentUpon>permitapv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\permitcomplete.aspx.cs">
+      <DependentUpon>permitcomplete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\permitcomplete.aspx.designer.cs">
+      <DependentUpon>permitcomplete.aspx</DependentUpon>
     </Compile>
     <Compile Include="forms\RequesterCloseJob.aspx.cs">
       <DependentUpon>RequesterCloseJob.aspx</DependentUpon>
