@@ -42,67 +42,67 @@ namespace onlineLegalWF.frmCommregis
             string js = "$('#section1').hide();";
             if (type_comm_regis.SelectedValue == "01")
             {
-                js += "$('#section1').show();$('.subsidiary').hide();$('.company').show();$('.moresubsidiary').hide();$('.other').hide();";
+                js += "$('.meeting').show();$('#section1').show();$('.subsidiary').hide();$('.company').show();$('.moresubsidiary').hide();$('.other').hide();";
             }
             else if (type_comm_regis.SelectedValue == "02")
             {
-                js += "$('#section2').show();$('.subsidiary').show();$('.company').show();$('.moresubsidiary').hide();$('.other').hide();";
+                js += "$('.meeting').show();$('#section2').show();$('.subsidiary').show();$('.company').show();$('.moresubsidiary').hide();$('.other').hide();";
             }
             else if (type_comm_regis.SelectedValue == "03")
             {
-                js += "$('#section3').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').show();$('#section3').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
             else if (type_comm_regis.SelectedValue == "04")
             {
-                js += "$('#section4').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').show();$('#section4').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
             else if (type_comm_regis.SelectedValue == "05")
             {
-                js += "$('#section5').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').show();$('#section5').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
             else if (type_comm_regis.SelectedValue == "06")
             {
-                js += "$('#section6').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').show();$('#section6').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
             else if (type_comm_regis.SelectedValue == "07")
             {
-                js += "$('#section7').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').show();$('#section7').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
             else if (type_comm_regis.SelectedValue == "08")
             {
-                js += "$('#section8').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').show();$('#section8').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
             else if (type_comm_regis.SelectedValue == "09")
             {
-                js += "$('#section9').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').show();$('#section9').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
             else if (type_comm_regis.SelectedValue == "10")
             {
-                js += "$('#section10').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').show();$('#section10').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
             else if (type_comm_regis.SelectedValue == "11")
             {
-                js += "$('#section11').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').show();$('#section11').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
             else if (type_comm_regis.SelectedValue == "12")
             {
-                js += "$('#section12').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').hide();$('#section12').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
             else if (type_comm_regis.SelectedValue == "13")
             {
-                js += "$('#section13').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').hide();$('#section13').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
             else if (type_comm_regis.SelectedValue == "14")
             {
-                js += "$('#section14').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').hide();$('#section14').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
             else if (type_comm_regis.SelectedValue == "15")
             {
-                js += "$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').hide();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
             else if (type_comm_regis.SelectedValue == "99")
             {
-                js += "$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').hide();$('.other').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                js += "$('.meeting').hide();$('#section99').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').hide();$('.other').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
             }
 
             ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "changeType", js, true);
@@ -175,7 +175,10 @@ namespace onlineLegalWF.frmCommregis
                 {
                     toc_regis_desc_other.Text = res.Rows[0]["toc_regis_desc_other"].ToString();
                 }
-
+                if (!string.IsNullOrEmpty(res.Rows[0]["other_desc"].ToString()))
+                {
+                    other_desc.Text = res.Rows[0]["other_desc"].ToString();
+                }
                 type_comm_regis.Enabled = false;
                 ddl_subsidiary.Enabled = false;
                 mt_res_desc.Enabled = false;
@@ -223,67 +226,67 @@ namespace onlineLegalWF.frmCommregis
                 string js = "$('#section1').hide();";
                 if (type_comm_regis.SelectedValue == "01")
                 {
-                    js += "$('#section1').show();$('.subsidiary').hide();$('.company').show();$('.moresubsidiary').hide();$('.other').hide();";
+                    js += "$('.meeting').show();$('#section1').show();$('.subsidiary').hide();$('.company').show();$('.moresubsidiary').hide();$('.other').hide();";
                 }
                 else if (type_comm_regis.SelectedValue == "02")
                 {
-                    js += "$('#section2').show();$('.subsidiary').show();$('.company').show();$('.moresubsidiary').hide();$('.other').hide();";
+                    js += "$('.meeting').show();$('#section2').show();$('.subsidiary').show();$('.company').show();$('.moresubsidiary').hide();$('.other').hide();";
                 }
                 else if (type_comm_regis.SelectedValue == "03")
                 {
-                    js += "$('#section3').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').show();$('#section3').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
                 else if (type_comm_regis.SelectedValue == "04")
                 {
-                    js += "$('#section4').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').show();$('#section4').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
                 else if (type_comm_regis.SelectedValue == "05")
                 {
-                    js += "$('#section5').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').show();$('#section5').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
                 else if (type_comm_regis.SelectedValue == "06")
                 {
-                    js += "$('#section6').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').show();$('#section6').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
                 else if (type_comm_regis.SelectedValue == "07")
                 {
-                    js += "$('#section7').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').show();$('#section7').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
                 else if (type_comm_regis.SelectedValue == "08")
                 {
-                    js += "$('#section8').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').show();$('#section8').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
                 else if (type_comm_regis.SelectedValue == "09")
                 {
-                    js += "$('#section9').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').show();$('#section9').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
                 else if (type_comm_regis.SelectedValue == "10")
                 {
-                    js += "$('#section10').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').show();$('#section10').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
                 else if (type_comm_regis.SelectedValue == "11")
                 {
-                    js += "$('#section11').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').show();$('#section11').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
                 else if (type_comm_regis.SelectedValue == "12")
                 {
-                    js += "$('#section12').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').hide();$('#section12').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
                 else if (type_comm_regis.SelectedValue == "13")
                 {
-                    js += "$('#section13').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').hide();$('#section13').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
                 else if (type_comm_regis.SelectedValue == "14")
                 {
-                    js += "$('#section14').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').hide();$('#section14').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
                 else if (type_comm_regis.SelectedValue == "15")
                 {
-                    js += "$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').hide();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').show();$('.other').hide();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
                 else if (type_comm_regis.SelectedValue == "99")
                 {
-                    js += "$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').hide();$('.other').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
+                    js += "$('.meeting').hide();$('#section99').show();$('.subsidiary').show();$('.company').hide();$('.moresubsidiary').hide();$('.other').show();if ($('#ContentPlaceHolder1_cb_more').is(':checked') == true) {$('.more_cb_sub').show();}else {$('.more_cb_sub').hide();}";
                 }
 
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "changeType", js, true);

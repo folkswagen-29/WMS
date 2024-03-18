@@ -70,7 +70,17 @@
                             </td>
                             <td>&nbsp;</td>
                         </tr>
-                        <tr>
+                        <tr class="other" style="display: none;">
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">รายละเอียด </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="other_desc" runat="server" TextMode="MultiLine" CssClass="Text_600"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr class="meeting">
                             <td class="cell_content_20PC_TR">
                                 <label class="Label_md">อ้างถึงมติที่ประชุม </label>
                             </td>
@@ -608,6 +618,20 @@
                             <td>&nbsp;</td>
                         </tr>
                     </table>
+                    <table id="section99" style="display: none;">
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">เอกสารที่ต้องใช้ </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <ol style="font-family: Tahoma; font-size: 10pt;">
+                                    <li>รายละเอียดเอกสารอื่นๆ ที่เกี่ยวข้อง</li>
+                                </ol>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
                 </asp:Panel>
                 <br />
             </td>
@@ -737,10 +761,12 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').hide();
                     $('.company').show();
                     $('.moresubsidiary').hide();
                     $('.other').hide();
+                    $('.meeting').show();
                 }
                 else if ($(this).val() == "02") {
                     $('#section1').hide();
@@ -757,10 +783,12 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').show();
                     $('.moresubsidiary').hide();
                     $('.other').hide();
+                    $('.meeting').show();
                 }
                 else if ($(this).val() == "03") {
                     $('#section1').hide();
@@ -777,10 +805,12 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
                     $('.other').hide();
+                    $('.meeting').show();
                 }
                 else if ($(this).val() == "04") {
                     $('#section1').hide();
@@ -797,10 +827,12 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
                     $('.other').hide();
+                    $('.meeting').show();
                 }
                 else if ($(this).val() == "05") {
                     $('#section1').hide();
@@ -817,10 +849,12 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
                     $('.other').hide();
+                    $('.meeting').show();
                 }
                 else if ($(this).val() == "06") {
                     $('#section1').hide();
@@ -836,10 +870,12 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
                     $('.other').hide();
+                    $('.meeting').show();
                 }
                 else if ($(this).val() == "07") {
                     $('#section1').hide();
@@ -856,10 +892,12 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
                     $('.other').hide();
+                    $('.meeting').show();
                 }
                 else if ($(this).val() == "08") {
                     $('#section1').hide();
@@ -876,10 +914,12 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
                     $('.other').hide();
+                    $('.meeting').show();
                 }
                 else if ($(this).val() == "09") {
                     $('#section1').hide();
@@ -896,10 +936,12 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
                     $('.other').hide();
+                    $('.meeting').show();
                 }
                 else if ($(this).val() == "10") {
                     $('#section1').hide();
@@ -916,10 +958,12 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
                     $('.other').hide();
+                    $('.meeting').show();
                 }
                 else if ($(this).val() == "11") {
                     $('#section1').hide();
@@ -936,10 +980,12 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
                     $('.other').hide();
+                    $('.meeting').show();
                 }
                 else if ($(this).val() == "12") {
                     $('#section1').hide();
@@ -956,10 +1002,12 @@
                     $('#section12').show();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
                     $('.other').hide();
+                    $('.meeting').hide();
                 }
                 else if ($(this).val() == "13") {
                     $('#section1').hide();
@@ -976,10 +1024,12 @@
                     $('#section12').hide();
                     $('#section13').show();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
                     $('.other').hide();
+                    $('.meeting').hide();
                 }
                 else if ($(this).val() == "14") {
                     $('#section1').hide();
@@ -996,10 +1046,12 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').show();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').show();
                     $('.other').hide();
+                    $('.meeting').hide();
                 }
                 else if ($(this).val() == "15") {
                     $('#section1').hide();
@@ -1016,10 +1068,13 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').hide();
                     $('.subsidiary').show();
                     $('.company').hide();
-                    $('.moresubsidiary').hide();
+                    $('.moresubsidiary').show();
                     $('.other').hide();
+                    $('.meeting').show();
+
                 }
                 else if ($(this).val() == "99") {
                     $('#section1').hide();
@@ -1036,10 +1091,12 @@
                     $('#section12').hide();
                     $('#section13').hide();
                     $('#section14').hide();
+                    $('#section99').show();
                     $('.subsidiary').show();
                     $('.company').hide();
                     $('.moresubsidiary').hide();
                     $('.other').show();
+                    $('.meeting').hide();
                 }
             });
         }

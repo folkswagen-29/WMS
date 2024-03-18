@@ -114,7 +114,7 @@ namespace onlineLegalWF.Class
             {
                 var dr0 = dt0.Rows[0];
                 res.docno = dr0["document_no"].ToString().Trim();
-                res.subject = dr0["toc_regis_desc"].ToString().Trim();
+                res.subject = dr0["toc_regis_desc"].ToString().Trim() + " "+ dr0["toc_regis_desc_other"].ToString().Trim();
                 res.companyname_th = dr0["company_name_th"].ToString().Trim();
                 res.companyname_en = dr0["company_name_en"].ToString().Trim();
                 res.reqdate = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["req_date"]), "th").Trim();

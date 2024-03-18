@@ -270,7 +270,7 @@ namespace onlineLegalWF.forms
             if (rescommregis.Rows.Count > 0)
             {
                 xreq_no = rescommregis.Rows[0]["req_no"].ToString();
-                if (rescommregis.Rows[0]["toc_regis_code"].ToString() == "12" || rescommregis.Rows[0]["toc_regis_code"].ToString() == "13" || rescommregis.Rows[0]["toc_regis_code"].ToString() == "14")
+                if (rescommregis.Rows[0]["toc_regis_code"].ToString() == "12" || rescommregis.Rows[0]["toc_regis_code"].ToString() == "13" || rescommregis.Rows[0]["toc_regis_code"].ToString() == "14" || rescommregis.Rows[0]["toc_regis_code"].ToString() == "99")
                 {
                     templatefile = path_template + @"\InsuranceComregis2.docx";
                 }
