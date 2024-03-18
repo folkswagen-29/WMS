@@ -132,6 +132,7 @@ namespace onlineLegalWF.forms
             }
             else if (st_name == "Registration Receive")
             {
+                ucHeader1.setHeader(process_code + " " + st_name);
                 btn_Approve.Visible = false;
                 btn_Reject.Visible = false;
                 btn_Accept.Visible = true;
@@ -140,6 +141,7 @@ namespace onlineLegalWF.forms
             }
             else if (st_name == "Registration Update")
             {
+                ucHeader1.setHeader(process_code + " " + st_name);
                 btn_Approve.Visible = false;
                 btn_Reject.Visible = false;
                 btn_Accept.Visible = false;

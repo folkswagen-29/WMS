@@ -156,9 +156,10 @@ namespace onlineLegalWF.Class
         {
             ReplacePermit_TagData res = new ReplacePermit_TagData();
 
+            string xexternal_domain = "";
             string sql0 = @"SELECT permit.[row_id],permit.[process_id],permit.[permit_no],permit.[document_no],permit.[permit_date],permit.[permit_subject],permit.[permit_desc]
                                   ,permit.[tof_requester_code],permit.[tof_requester_other_desc],permit.[tof_permitreq_code],permit.[tof_permitreq_other_desc],permit.[license_code],permit.[sublicense_code]
-                                  ,permit.[contact_agency],permit.[attorney_name],permit.[email_accounting],permit.[bu_code],bu.[bu_desc],permit.[status],permit.[updated_datetime]
+                                  ,permit.[contact_agency],permit.[attorney_name],permit.[email_accounting],permit.[bu_code],bu.[bu_desc],permit.[status],permit.[updated_datetime],bu.[external_domain]
                               FROM [li_permit_request] as permit
                               INNER JOIN [li_business_unit] as bu on permit.bu_code = bu.bu_code
                               where process_id = '" + xprocess_id + "'";
@@ -169,26 +170,26 @@ namespace onlineLegalWF.Class
                 res.docno = dr0["document_no"].ToString().Trim();
                 res.reqdate = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["permit_date"]), "th").Trim();
                 var xrequester_code = dr0["tof_requester_code"].ToString().Trim();
+                xexternal_domain = dr0["external_domain"].ToString();
                 data.req_other = "";
-                if (xrequester_code == "01") 
+                if (xrequester_code == "01")
                 {
-                    res.r1 = "x";
-                    res.r2 = "";
-                    res.r3 = "";
+                    res.r1 = "☑";
+                    res.r2 = "☐";
+                    res.r3 = "☐";
                 }
                 else if (xrequester_code == "02")
                 {
-                    res.r1 = "";
-                    res.r2 = "x";
-                    res.r3 = "";
-                    
+                    res.r1 = "☐";
+                    res.r2 = "☑";
+                    res.r3 = "☐";
                 }
                 else if (xrequester_code == "03")
                 {
-                    res.r1 = "";
-                    res.r2 = "";
-                    res.r3 = "x";
-                    data.req_other = dr0["tof_requester_other_desc"].ToString().Trim();
+                    res.r1 = "☐";
+                    res.r2 = "☐";
+                    res.r3 = "☑";
+                    res.req_other = dr0["tof_requester_other_desc"].ToString().Trim();
                 }
                 res.name1 = data.name1;
                 res.signdate1 = data.signdate1;
@@ -204,150 +205,166 @@ namespace onlineLegalWF.Class
                 var xtof_permitreq_code = dr0["tof_permitreq_code"].ToString().Trim();
                 if (xtof_permitreq_code == "01") 
                 {
-                    res.t1 = "x";
-                    res.t2 = "";
-                    res.t3 = "";
-                    res.t4 = "";
-                    res.t5 = "";
-                    res.t6 = "";
-                    res.t7 = "";
-                    res.t8 = "";
-                    res.t9 = "";
+                    res.t1 = "☑";
+                    res.t2 = "☐";
+                    res.t3 = "☐";
+                    res.t4 = "☐";
+                    res.t5 = "☐";
+                    res.t6 = "☐";
+                    res.t7 = "☐";
+                    res.t8 = "☐";
+                    res.t9 = "☐";
                 }
                 else if (xtof_permitreq_code == "02")
                 {
-                    res.t1 = "";
-                    res.t2 = "x";
-                    res.t3 = "";
-                    res.t4 = "";
-                    res.t5 = "";
-                    res.t6 = "";
-                    res.t7 = "";
-                    res.t8 = "";
-                    res.t9 = "";
+                    res.t1 = "☐";
+                    res.t2 = "☑";
+                    res.t3 = "☐";
+                    res.t4 = "☐";
+                    res.t5 = "☐";
+                    res.t6 = "☐";
+                    res.t7 = "☐";
+                    res.t8 = "☐";
+                    res.t9 = "☐";
                 }
                 else if (xtof_permitreq_code == "03")
                 {
-                    res.t1 = "";
-                    res.t2 = "";
-                    res.t3 = "x";
-                    res.t4 = "";
-                    res.t5 = "";
-                    res.t6 = "";
-                    res.t7 = "";
-                    res.t8 = "";
-                    res.t9 = "";
+                    res.t1 = "☐";
+                    res.t2 = "☐";
+                    res.t3 = "☑";
+                    res.t4 = "☐";
+                    res.t5 = "☐";
+                    res.t6 = "☐";
+                    res.t7 = "☐";
+                    res.t8 = "☐";
+                    res.t9 = "☐";
                 }
                 else if (xtof_permitreq_code == "04")
                 {
-                    res.t1 = "";
-                    res.t2 = "";
-                    res.t3 = "";
-                    res.t4 = "x";
-                    res.t5 = "";
-                    res.t6 = "";
-                    res.t7 = "";
-                    res.t8 = "";
-                    res.t9 = "";
+                    res.t1 = "☐";
+                    res.t2 = "☐";
+                    res.t3 = "☐";
+                    res.t4 = "☑";
+                    res.t5 = "☐";
+                    res.t6 = "☐";
+                    res.t7 = "☐";
+                    res.t8 = "☐";
+                    res.t9 = "☐";
                     res.license_other = dr0["tof_permitreq_other_desc"].ToString().Trim();
                 }
                 else if (xtof_permitreq_code == "05")
                 {
-                    res.t1 = "";
-                    res.t2 = "";
-                    res.t3 = "";
-                    res.t4 = "";
-                    res.t5 = "x";
-                    res.t6 = "";
-                    res.t7 = "";
-                    res.t8 = "";
-                    res.t9 = "";
+                    res.t1 = "☐";
+                    res.t2 = "☐";
+                    res.t3 = "☐";
+                    res.t4 = "☐";
+                    res.t5 = "☑";
+                    res.t6 = "☐";
+                    res.t7 = "☐";
+                    res.t8 = "☐";
+                    res.t9 = "☐";
                 }
                 else if (xtof_permitreq_code == "06")
                 {
-                    res.t1 = "";
-                    res.t2 = "";
-                    res.t3 = "";
-                    res.t4 = "";
-                    res.t5 = "";
-                    res.t6 = "x";
-                    res.t7 = "";
-                    res.t8 = "";
-                    res.t9 = "";
+                    res.t1 = "☐";
+                    res.t2 = "☐";
+                    res.t3 = "☐";
+                    res.t4 = "☐";
+                    res.t5 = "☐";
+                    res.t6 = "☑";
+                    res.t7 = "☐";
+                    res.t8 = "☐";
+                    res.t9 = "☐";
                 }
                 else if (xtof_permitreq_code == "07")
                 {
-                    res.t1 = "";
-                    res.t2 = "";
-                    res.t3 = "";
-                    res.t4 = "";
-                    res.t5 = "";
-                    res.t6 = "";
-                    res.t7 = "x";
-                    res.t8 = "";
-                    res.t9 = "";
+                    res.t1 = "☐";
+                    res.t2 = "☐";
+                    res.t3 = "☐";
+                    res.t4 = "☐";
+                    res.t5 = "☐";
+                    res.t6 = "☐";
+                    res.t7 = "☑";
+                    res.t8 = "☐";
+                    res.t9 = "☐";
                     res.tax_other = dr0["tof_permitreq_other_desc"].ToString().Trim();
                 }
                 else if (xtof_permitreq_code == "08")
                 {
-                    res.t1 = "";
-                    res.t2 = "";
-                    res.t3 = "";
-                    res.t4 = "";
-                    res.t5 = "";
-                    res.t6 = "";
-                    res.t7 = "";
-                    res.t8 = "x";
-                    res.t9 = "";
+                    res.t1 = "☐";
+                    res.t2 = "☐";
+                    res.t3 = "☐";
+                    res.t4 = "☐";
+                    res.t5 = "☐";
+                    res.t6 = "☐";
+                    res.t7 = "☐";
+                    res.t8 = "☑";
+                    res.t9 = "☐";
                 }
                 else if (xtof_permitreq_code == "09")
                 {
-                    res.t1 = "";
-                    res.t2 = "";
-                    res.t3 = "";
-                    res.t4 = "";
-                    res.t5 = "";
-                    res.t6 = "";
-                    res.t7 = "";
-                    res.t8 = "";
-                    res.t9 = "x";
+                    res.t1 = "☐";
+                    res.t2 = "☐";
+                    res.t3 = "☐";
+                    res.t4 = "☐";
+                    res.t5 = "☐";
+                    res.t6 = "☐";
+                    res.t7 = "☐";
+                    res.t8 = "☐";
+                    res.t9 = "☑";
                     res.trademarks_other = dr0["tof_permitreq_other_desc"].ToString().Trim();
                 }
 
                 res.desc_req = dr0["permit_desc"].ToString().Trim();
                 res.contact_agency = dr0["contact_agency"].ToString().Trim();
                 res.attorney_name = dr0["attorney_name"].ToString().Trim();
-                res.list_doc_attach = data.list_doc_attach;
+                res.list_doc_attach = "ตรวจสอบเอกสารแนบได้ที่ระบบ";
 
             }
 
-            //string sql = "select * from wf_routing where process_id = '" + xprocess_id + "' ";
-            //var dt1 = zdb.ExecSql_DataTable(sql, zconnstr);
-            //if (dt1.Rows.Count > 0)
-            //{
-            //    for (int i = 0; i < dt1.Rows.Count; i++)
-            //    {
-            //        var dr = dt1.Rows[i];
+            string sql = "select * from wf_routing where process_id = '" + xprocess_id + "' ";
+            var dt1 = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt1.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt1.Rows.Count; i++)
+                {
+                    var dr = dt1.Rows[i];
 
-            //        if (dr["step_name"].ToString() == "Start")
-            //        {
-            //            if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
-            //            {
-            //                res.signname1 = "Approved by system";
-            //                res.signdate1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
-            //            }
-            //        }
-            //        else if (dr["step_name"].ToString() == "Supervisor Approve")
-            //        {
-            //            if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
-            //            {
-            //                res.signname2 = "Approved by system";
-            //                res.signdate2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
-            //            }
-            //        }
+                    if (dr["step_name"].ToString() == "Start" && xexternal_domain == "N")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.signname1 = "Approved by system";
+                            res.signdate1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    if (dr["step_name"].ToString() == "GM Approve" && xexternal_domain == "N")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.signname2 = "Approved by system";
+                            res.signdate2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    else if (dr["step_name"].ToString() == "AM Approve")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.signname1 = "Approved by system";
+                            res.signdate1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    else if (dr["step_name"].ToString() == "Head AM Approve")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.signname2 = "Approved by system";
+                            res.signdate2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
 
-            //    }
-            //}
+                }
+            }
 
             var dtStr = genTagData(res);
             return dtStr;

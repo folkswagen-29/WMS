@@ -357,6 +357,42 @@ namespace onlineLegalWF.Class
                         xurl = "/frmcommregis/commregisrequestedit.aspx?id=" + id;
                     }
                 }
+                else if (wfA.process_code == "PMT_LIC")
+                {
+                    string sqlreq = @"select * from li_permit_request where process_id = '" + wfA.process_id + "'";
+                    var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                    if (dtreq.Rows.Count > 0)
+                    {
+                        var drreq = dtreq.Rows[0];
+                        string id = drreq["permit_no"].ToString();
+
+                        xurl = "/frmpermit/permitlicenseedit.aspx?id=" + id;
+                    }
+                }
+                else if (wfA.process_code == "PMT_TM")
+                {
+                    string sqlreq = @"select * from li_permit_request where process_id = '" + wfA.process_id + "'";
+                    var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                    if (dtreq.Rows.Count > 0)
+                    {
+                        var drreq = dtreq.Rows[0];
+                        string id = drreq["permit_no"].ToString();
+
+                        xurl = "/frmpermit/permittrademarkedit.aspx?id=" + id;
+                    }
+                }
+                else if (wfA.process_code == "PMT_TAX")
+                {
+                    string sqlreq = @"select * from li_permit_request where process_id = '" + wfA.process_id + "'";
+                    var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                    if (dtreq.Rows.Count > 0)
+                    {
+                        var drreq = dtreq.Rows[0];
+                        string id = drreq["permit_no"].ToString();
+
+                        xurl = "/frmpermit/permitlandtaxedit.aspx?id=" + id;
+                    }
+                }
                 string sqlins = @" insert into wf_routing (process_id, process_code, version_no, subject,
                                 step_no, step_name,link_url_format,
                                 wf_status, attr_apv_value , istrue_nextstep, isfalse_nextstep, created_datetime, submit_answer, submit_by,updated_datetime,updated_by) 
@@ -473,6 +509,133 @@ namespace onlineLegalWF.Class
                     next_step = wfA.isfalse_nextstep;
                 }
             }
+            else if (wfA.step_name == "GM Approve" && wfA.process_code == "PMT_LIC")
+            {
+                if (wfA.attr_apv_value == wfA.submit_answer)
+                {
+                    if (wfA.external_domain == "Y")
+                    {
+                        next_step = 3;
+                    }
+                    else
+                    {
+                        next_step = 5;
+                    }
+                }
+                else
+                {
+                    next_step = wfA.isfalse_nextstep;
+                }
+            }
+            else if (wfA.step_name == "GM Approve" && wfA.process_code == "PMT_TM")
+            {
+                if (wfA.attr_apv_value == wfA.submit_answer)
+                {
+                    if (wfA.external_domain == "Y")
+                    {
+                        next_step = 3;
+                    }
+                    else
+                    {
+                        next_step = 5;
+                    }
+                }
+                else
+                {
+                    next_step = wfA.isfalse_nextstep;
+                }
+            }
+            else if (wfA.step_name == "GM Approve" && wfA.process_code == "PMT_TAX")
+            {
+                if (wfA.attr_apv_value == wfA.submit_answer)
+                {
+                    if (wfA.external_domain == "Y")
+                    {
+                        next_step = 3;
+                    }
+                    else
+                    {
+                        next_step = 5;
+                    }
+                }
+                else
+                {
+                    next_step = wfA.isfalse_nextstep;
+                }
+            }
+            else if (wfA.step_name == "Permit Update" && wfA.process_code == "PMT_LIC")
+            {
+                if (wfA.attr_apv_value == wfA.submit_answer)
+                {
+                    if (wfA.permit_license_external == "Y")
+                    {
+                        next_step = 7;
+                    }
+                    else
+                    {
+                        next_step = 8;
+                    }
+                }
+                else
+                {
+                    next_step = wfA.isfalse_nextstep;
+                }
+            }
+            else if (wfA.step_name == "Permit Update" && wfA.process_code == "PMT_TAX")
+            {
+                if (wfA.attr_apv_value == wfA.submit_answer)
+                {
+                    if (wfA.islandtax)
+                    {
+                        if (wfA.permit_landtax_external == "Y")
+                        {
+                            next_step = 7;
+                        }
+                        else
+                        {
+                            next_step = 8;
+                        }
+                    }
+                    else if (wfA.issignagetax)
+                    {
+                        if (wfA.permit_signagetax_external == "Y")
+                        {
+                            next_step = 7;
+                        }
+                        else
+                        {
+                            next_step = 8;
+                        }
+                    }
+                    else 
+                    {
+                        next_step = 8;
+                    }
+
+                }
+                else
+                {
+                    next_step = wfA.isfalse_nextstep;
+                }
+            }
+            else if (wfA.step_name == "Permit Update" && wfA.process_code == "PMT_TM")
+            {
+                if (wfA.attr_apv_value == wfA.submit_answer)
+                {
+                    if (wfA.permit_tradmark_external == "Y")
+                    {
+                        next_step = 7;
+                    }
+                    else
+                    {
+                        next_step = 8;
+                    }
+                }
+                else
+                {
+                    next_step = wfA.isfalse_nextstep;
+                }
+            }
             else 
             {
                 if (wfA.attr_apv_value == wfA.submit_answer)
@@ -513,6 +676,10 @@ namespace onlineLegalWF.Class
                     if (wfDefault_step.process_code == "CCR")
                         {
                         xurl = "/forms/ccrcomplete.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
+                    }
+                    else if (wfDefault_step.process_code == "PMT_LIC" || wfDefault_step.process_code == "PMT_TM" || wfDefault_step.process_code == "PMT_TAX")
+                    {
+                        xurl = "/forms/permitcomplete.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                     }
                     else
                     {
@@ -574,11 +741,59 @@ namespace onlineLegalWF.Class
                             xurl = "/frmcommregis/commregisrequestedit.aspx?id=" + id;
                         }
                     }
+                    else if (wfDefault_step.process_code == "PMT_LIC")
+                    {
+                        string sqlreq = @"select * from li_permit_request where process_id = '" + wfDefault_step.process_id + "'";
+                        var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                        if (dtreq.Rows.Count > 0)
+                        {
+                            var drreq = dtreq.Rows[0];
+                            string id = drreq["permit_no"].ToString();
+
+                            xurl = "/frmpermit/permitlicenseedit.aspx?id=" + id;
+                        }
+                    }
+                    else if (wfDefault_step.process_code == "PMT_TM")
+                    {
+                        string sqlreq = @"select * from li_permit_request where process_id = '" + wfDefault_step.process_id + "'";
+                        var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                        if (dtreq.Rows.Count > 0)
+                        {
+                            var drreq = dtreq.Rows[0];
+                            string id = drreq["permit_no"].ToString();
+
+                            xurl = "/frmpermit/permittrademarkedit.aspx?id=" + id;
+                        }
+                    }
+                    else if (wfDefault_step.process_code == "PMT_TAX")
+                    {
+                        string sqlreq = @"select * from li_permit_request where process_id = '" + wfDefault_step.process_id + "'";
+                        var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                        if (dtreq.Rows.Count > 0)
+                        {
+                            var drreq = dtreq.Rows[0];
+                            string id = drreq["permit_no"].ToString();
+
+                            xurl = "/frmpermit/permitlandtaxedit.aspx?id=" + id;
+                        }
+                    }
 
                 }
                 else if (wfDefault_step.step_name == "Supervisor Approve" || wfDefault_step.step_name == "Registration Receive" || wfDefault_step.step_name == "Registration Update" && wfDefault_step.process_code == "CCR")
                 {
                     xurl = "/forms/ccrapv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + "&st=" + wfDefault_step.step_name;
+                }
+                else if (wfDefault_step.step_name == "GM Approve" || wfDefault_step.step_name == "AM Approve" || wfDefault_step.step_name == "Head AM Approve" || wfDefault_step.step_name == "Permit Receive" || wfDefault_step.step_name == "Permit Update" || wfDefault_step.step_name == "Requester Update" && wfDefault_step.process_code == "PMT_LIC")
+                {
+                    xurl = "/forms/permitapv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + "&st=" + wfDefault_step.step_name;
+                }
+                else if (wfDefault_step.step_name == "GM Approve" || wfDefault_step.step_name == "AM Approve" || wfDefault_step.step_name == "Head AM Approve" || wfDefault_step.step_name == "Permit Receive" || wfDefault_step.step_name == "Permit Update" || wfDefault_step.step_name == "Requester Update" && wfDefault_step.process_code == "PMT_TM")
+                {
+                    xurl = "/forms/permitapv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + "&st=" + wfDefault_step.step_name;
+                }
+                else if (wfDefault_step.step_name == "GM Approve" || wfDefault_step.step_name == "AM Approve" || wfDefault_step.step_name == "Head AM Approve" || wfDefault_step.step_name == "Permit Receive" || wfDefault_step.step_name == "Permit Update" || wfDefault_step.step_name == "Requester Update" && wfDefault_step.process_code == "PMT_TAX")
+                {
+                    xurl = "/forms/permitapv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + "&st=" + wfDefault_step.step_name;
                 }
                 else
                 {
@@ -644,8 +859,6 @@ namespace onlineLegalWF.Class
                     c_level_login = dr["c_level"].ToString();
                 }
             }
-            
-
 
             if (process_code == "INR_RENEW")
             {
@@ -1130,6 +1343,123 @@ namespace onlineLegalWF.Class
                     xname = submit_by; //Requester Edit Request
                 }
             }
+            else if (process_code == "PMT_LIC")
+            {
+                if (next_step_name == "Start")
+                {
+                    xname = emp.user_login; //Requestor = Login account
+                }
+                else if (next_step_name == "GM Approve")
+                {
+                    xname = gm_login; //GM Login
+                }
+                else if (next_step_name == "AM Approve")
+                {
+                    xname = am_login; //AM Approve Login
+                }
+                else if (next_step_name == "Head AM Approve")
+                {
+                    xname = head_am_login; //Head AM Approve Login
+                }
+                else if (next_step_name == "Permit Receive")
+                {
+                    xname = "naruemol.w, kanita.s, pattanis.r, suradach.k"; //Permit Receive user click receive
+                }
+                else if (next_step_name == "Permit Update")
+                {
+                    xname = emp.user_login; //Permit Update = user click update close job
+                }
+                else if (next_step_name == "Requester Update")
+                {
+                    xname = submit_by; //Requester Update = user click update close job
+                }
+                else if (next_step_name == "End")
+                {
+                    xname = ""; //End
+                }
+                else if (next_step_name == "Edit Request")
+                {
+                    xname = submit_by; //Requester Edit Request
+                }
+            }
+            else if (process_code == "PMT_TM")
+            {
+                if (next_step_name == "Start")
+                {
+                    xname = emp.user_login; //Requestor = Login account
+                }
+                else if (next_step_name == "GM Approve")
+                {
+                    xname = gm_login; //GM Login
+                }
+                else if (next_step_name == "AM Approve")
+                {
+                    xname = am_login; //AM Approve Login
+                }
+                else if (next_step_name == "Head AM Approve")
+                {
+                    xname = head_am_login; //Head AM Approve Login
+                }
+                else if (next_step_name == "Permit Receive")
+                {
+                    xname = "naruemol.w, kanita.s, pattanis.r, suradach.k"; //Permit Receive user click receive
+                }
+                else if (next_step_name == "Permit Update")
+                {
+                    xname = emp.user_login; //Permit Update = user click update close job
+                }
+                else if (next_step_name == "Requester Update")
+                {
+                    xname = submit_by; //Requester Update = user click update close job
+                }
+                else if (next_step_name == "End")
+                {
+                    xname = ""; //End
+                }
+                else if (next_step_name == "Edit Request")
+                {
+                    xname = submit_by; //Requester Edit Request
+                }
+            }
+            else if (process_code == "PMT_TAX")
+            {
+                if (next_step_name == "Start")
+                {
+                    xname = emp.user_login; //Requestor = Login account
+                }
+                else if (next_step_name == "GM Approve")
+                {
+                    xname = gm_login; //GM Login
+                }
+                else if (next_step_name == "AM Approve")
+                {
+                    xname = am_login; //AM Approve Login
+                }
+                else if (next_step_name == "Head AM Approve")
+                {
+                    xname = head_am_login; //Head AM Approve Login
+                }
+                else if (next_step_name == "Permit Receive")
+                {
+                    xname = "naruemol.w, kanita.s, pattanis.r, suradach.k"; //Permit Receive user click receive
+                }
+                else if (next_step_name == "Permit Update")
+                {
+                    xname = emp.user_login; //Permit Update = user click update close job
+                }
+                else if (next_step_name == "Requester Update")
+                {
+                    xname = submit_by; //Requester Update = user click update close job
+                }
+                else if (next_step_name == "End")
+                {
+                    xname = ""; //End
+                }
+                else if (next_step_name == "Edit Request")
+                {
+                    xname = submit_by; //Requester Edit Request
+                }
+            }
 
 
             return xname;
@@ -1158,5 +1488,11 @@ namespace onlineLegalWF.Class
         public string submit_by { get; set; }
         public string updated_by { get; set; }
         public string external_domain { get; set; }
+        public string permit_license_external { get; set; }
+        public string permit_landtax_external { get; set; }
+        public string permit_signagetax_external { get; set; }
+        public string permit_tradmark_external { get; set; }
+        public bool islandtax { get; set; }
+        public bool issignagetax { get; set; }
     }
 }
