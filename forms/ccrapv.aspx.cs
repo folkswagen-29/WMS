@@ -531,7 +531,7 @@ namespace onlineLegalWF.forms
         {
             string req = Request.QueryString["req"];
             string st_name = Request.QueryString["st"];
-            string sqlcheckreceive = @"select * from wf_routing where process_id='"+req+"' and step_name='"+ st_name + "' and wf_status='RECEIVED'";
+            string sqlcheckreceive = @"select * from wf_routing where process_id='"+req+"' and step_name='Registration Receive' and wf_status='RECEIVED'";
             var rescheckreceive = zdb.ExecSql_DataTable(sqlcheckreceive, zconnstr);
             //check receive 
             if (rescheckreceive.Rows.Count > 0)
