@@ -446,6 +446,7 @@ namespace onlineLegalWF.forms
             {
                 //has receive Alert
                 Response.Write("<script> alert('This task has already been received by another user');</script>");
+
                 var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
                 Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
             }
