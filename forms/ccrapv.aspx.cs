@@ -529,50 +529,67 @@ namespace onlineLegalWF.forms
 
         protected void btn_Accept_Click(object sender, EventArgs e)
         {
-            string process_code = Request.QueryString["pc"];
-            int version_no = 1;
-
-            if (!string.IsNullOrEmpty(process_code))
+            string req = Request.QueryString["req"];
+            string st_name = Request.QueryString["st"];
+            string sqlcheckreceive = @"select * from wf_routing where process_id='"+req+"' and step_name='"+ st_name + "' and wf_status='RECEIVED'";
+            var rescheckreceive = zdb.ExecSql_DataTable(sqlcheckreceive, zconnstr);
+            //check receive 
+            if (rescheckreceive.Rows.Count > 0)
             {
-                // getCurrentStep
-                var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+                //has receive Alert
+                Response.Write("<script> alert('This task has already been received by another user');</script>");
+                var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+            }
+            else 
+            {
+                string process_code = Request.QueryString["pc"];
+                int version_no = 1;
 
-                // check session_user
-                if (Session["user_login"] != null)
+                if (!string.IsNullOrEmpty(process_code))
                 {
-                    var xlogin_name = Session["user_login"].ToString();
-                    var empFunc = new EmpInfo();
+                    // getCurrentStep
+                    var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
 
-                    //get data user
-                    var emp = empFunc.getEmpInfo(xlogin_name);
-
-                    // set WF Attributes
-                    wfAttr.subject = "เรื่อง " + subject.Text.Trim() +" "+ companyname_th.Text.Trim();
-                    wfAttr.assto_login = emp.next_line_mgr_login;
-                    wfAttr.wf_status = "RECEIVED";
-                    wfAttr.submit_answer = "RECEIVED";
-                    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, "");
-                    wfAttr.updated_by = emp.user_login;
-                    wfAttr.submit_by = wfAttr.submit_by;
-                    // wf.updateProcess
-                    var wfA_NextStep = zwf.updateProcess(wfAttr);
-                    wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by, wfAttr.process_id, "");
-                    wfA_NextStep.submit_by = wfAttr.submit_by;
-                    wfA_NextStep.wf_status = "";
-                    string status = zwf.Insert_NextStep(wfA_NextStep);
-
-                    if (status == "Success")
+                    // check session_user
+                    if (Session["user_login"] != null)
                     {
-                        //update status li_comm_regis_request
-                        string sqlupdate = @"update li_comm_regis_request set status='inprogress',updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where process_id = '" + wfAttr.process_id + "'";
-                        zdb.ExecNonQuery(sqlupdate, zconnstr);
+                        var xlogin_name = Session["user_login"].ToString();
+                        var empFunc = new EmpInfo();
 
-                        var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                        //get data user
+                        var emp = empFunc.getEmpInfo(xlogin_name);
+
+                        // set WF Attributes
+                        wfAttr.subject = "เรื่อง " + subject.Text.Trim() + " " + companyname_th.Text.Trim();
+                        wfAttr.assto_login = emp.next_line_mgr_login;
+                        wfAttr.wf_status = "RECEIVED";
+                        wfAttr.submit_answer = "RECEIVED";
+                        wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, "");
+                        wfAttr.updated_by = emp.user_login;
+                        wfAttr.submit_by = wfAttr.submit_by;
+                        // wf.updateProcess
+                        var wfA_NextStep = zwf.updateProcess(wfAttr);
+                        wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by, wfAttr.process_id, "");
+                        wfA_NextStep.submit_by = wfAttr.submit_by;
+                        wfA_NextStep.wf_status = "";
+                        string status = zwf.Insert_NextStep(wfA_NextStep);
+
+                        if (status == "Success")
+                        {
+                            //update status li_comm_regis_request
+                            string sqlupdate = @"update li_comm_regis_request set status='inprogress',updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where process_id = '" + wfAttr.process_id + "'";
+                            zdb.ExecNonQuery(sqlupdate, zconnstr);
+
+                            var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                            Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                        }
+
                     }
-
                 }
             }
+
+            
         }
 
         protected void btn_Submit_Click(object sender, EventArgs e)
