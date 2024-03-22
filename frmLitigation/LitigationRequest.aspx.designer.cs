@@ -48,7 +48,7 @@ namespace onlineLegalWF.frmLitigation
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox doc_no;
+        protected global::System.Web.UI.WebControls.Label doc_no;
 
         /// <summary>
         /// subject control.
@@ -58,6 +58,15 @@ namespace onlineLegalWF.frmLitigation
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox subject;
+
+        /// <summary>
+        /// desc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox desc;
 
         /// <summary>
         /// FileUpload1 control.

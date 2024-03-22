@@ -91,7 +91,7 @@ namespace onlineLegalWF.frmPermit
 
             if (doc_no.Text.Trim() == "")
             {
-                doc_no.Text = zwf.genDocNo("PMT-" + System.DateTime.Now.ToString("yyyy", new CultureInfo("en-US")) + "-", 4);
+                doc_no.Text = zwf.genDocNo("DCP-" + System.DateTime.Now.ToString("yyyy", new CultureInfo("en-US")) + "-", 6);
             }
             var xpermit_no = req_no.Text.Trim();
             var xprocess_id = hid_PID.Value.ToString();

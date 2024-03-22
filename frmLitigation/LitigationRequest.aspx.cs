@@ -103,8 +103,37 @@ namespace onlineLegalWF.frmLitigation
                 DataSet ds = new DataSet();
                 //fill the Excel data to data set  
                 da.Fill(ds);
+
+                DataTable dt = ds.Tables[0];
+
+                List<LitigationCivilCaseData> listCivilCaseData = new List<LitigationCivilCaseData>();
+                if (dt.Rows.Count > 0) 
+                {
+                    
+                    foreach (DataRow dr in dt.Rows) 
+                    {
+                        LitigationCivilCaseData civilCaseData = new LitigationCivilCaseData();
+                        civilCaseData.no = dr["ลำดับ"].ToString();
+                        civilCaseData.contract_no = dr["เลขที่สัญญา"].ToString();
+                        civilCaseData.bu_name = dr["Bu"].ToString();
+                        civilCaseData.customer_no = dr["รหัสลูกค้า"].ToString();
+                        civilCaseData.customer_name = dr["ชื่อ"].ToString();
+                        civilCaseData.customer_room = dr["ห้อง"].ToString();
+                        civilCaseData.overdue_desc = dr["ช่วงเวลาที่ค้าง"].ToString();
+                        civilCaseData.outstanding_debt = dr["หนี้ค้างชำระ"].ToString();
+                        civilCaseData.outstanding_debt_ack_of_debt = dr["หนี้ค้างชำระตามรับสภาพหนี้"].ToString();
+                        civilCaseData.fine_debt = dr["ค่าเบี้ยปรับ"].ToString();
+                        civilCaseData.total_net = dr["ยอดรวมสุทธิ"].ToString();
+                        civilCaseData.retention_money = dr["เงินประกัน"].ToString();
+                        civilCaseData.total_after_retention_money = dr["ยอดหลังหักเงินประกัน"].ToString();
+                        civilCaseData.remark = dr["หมายเหตุ"].ToString();
+
+
+                        listCivilCaseData.Add(civilCaseData);
+                    }
+                }
                 //set data source of the grid view  
-                gvExcelFile.DataSource = ds.Tables[0];
+                gvExcelFile.DataSource = listCivilCaseData;
                 //binding the gridview  
                 gvExcelFile.DataBind();
                 //close the connection  
@@ -114,6 +143,24 @@ namespace onlineLegalWF.frmLitigation
                 File.Delete(path);
             }
                 
+        }
+
+        public class LitigationCivilCaseData
+        {
+            public string no { get; set; }
+            public string contract_no { get; set; }
+            public string bu_name { get; set; }
+            public string customer_no { get; set; }
+            public string customer_name { get; set; }
+            public string customer_room { get; set; }
+            public string overdue_desc { get; set; }
+            public string outstanding_debt { get; set; }
+            public string outstanding_debt_ack_of_debt { get; set; }
+            public string fine_debt { get; set; }
+            public string total_net { get; set; }
+            public string retention_money { get; set; }
+            public string total_after_retention_money { get; set; }
+            public string remark { get; set; }
         }
     }
 }

@@ -33,7 +33,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:TextBox ID="doc_no" runat="server" CssClass="Text_400"></asp:TextBox>
+                                <asp:Label ID="doc_no" runat="server" CssClass="Label_md"></asp:Label>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -43,7 +43,17 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:TextBox ID="subject" runat="server" CssClass="Text_600" TextMode="MultiLine" Height="100px"></asp:TextBox>
+                                <asp:TextBox ID="subject" runat="server" CssClass="Text_600"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Description </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="desc" runat="server" CssClass="Text_600" TextMode="MultiLine" Height="100px"></asp:TextBox>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -61,7 +71,80 @@
                             <td colspan="4">
                                 <asp:Label ID="Label1" runat="server"></asp:Label>
                                 <br />
-                                <asp:GridView ID="gvExcelFile" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="table w-100">
+                                <asp:GridView ID="gvExcelFile" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="9pt" ForeColor="#333333" GridLines="None" CssClass="table w-100">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="ลำดับ">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_no" Text='<%# Bind("no") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                            <ItemStyle Width="20px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="เลขที่สัญญา">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_contract_no" Text='<%# Bind("contract_no") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="BU">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_bu_name" Text='<%# Bind("bu_name") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="รหัสลูกค้า">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_customer_no" Text='<%# Bind("customer_no") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="ชื่อ">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_customer_name" Text='<%# Bind("customer_name") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="ห้อง">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_customer_room" Text='<%# Bind("customer_room") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="ช่วงเวลาที่ค้าง">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_overdue_desc" Text='<%# Bind("overdue_desc") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="หนี้ค้างชำระ">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_outstanding_debt" Text='<%# Bind("outstanding_debt") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="หนี้ค้างชำระตามรับสภาพหนี้">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_outstanding_debt_ack_of_debt" Text='<%# Bind("outstanding_debt_ack_of_debt") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="ค่าเบี้ยปรับ">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_fine_debt" Text='<%# Bind("fine_debt") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="ยอดรวมสุทธิ">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_total_net" Text='<%# Bind("total_net") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="เงินประกัน">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_retention_money" Text='<%# Bind("retention_money") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="ยอดหลังหักเงินประกัน">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_total_after_retention_money" Text='<%# Bind("total_after_retention_money") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="หมายเหตุ">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gvExcelFile_remark" Text='<%# Bind("remark") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                     <EditRowStyle BackColor="#999999" />
                                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
