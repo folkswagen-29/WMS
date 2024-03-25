@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Data;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
-using System.Drawing;
 using onlineLegalWF.Class;
 using System.Configuration;
-using iTextSharp.text.pdf;
-using DocumentFormat.OpenXml.ExtendedProperties;
 using System.Globalization;
-using onlineLegalWF.userControls;
 
 namespace onlineLegalWF.frmLitigation
 {
@@ -128,7 +123,7 @@ namespace onlineLegalWF.frmLitigation
                 {
                     //delete li_litigation_req_case by req_id and loopinsert from gridview data
                     string sqlDelCase = @"delete from [li_litigation_req_case] where [req_no] = '"+xreq_no+"'";
-                    ret = zdb.ExecNonQueryReturnID(sqlDelCase, zconnstr);
+                    zdb.ExecNonQuery(sqlDelCase, zconnstr);
 
                     if (ret > 0) 
                     {
@@ -153,6 +148,7 @@ namespace onlineLegalWF.frmLitigation
                             civilCaseData.retention_money = (row.FindControl("gv_retention_money") as Label).Text.ToString();
                             civilCaseData.total_after_retention_money = (row.FindControl("gv_total_after_retention_money") as Label).Text.ToString();
                             civilCaseData.remark = (row.FindControl("gv_remark") as Label).Text.ToString();
+                            civilCaseData.status = xstatus;
                             listCivilCaseData.Add(civilCaseData);
                         }
 
@@ -304,7 +300,7 @@ namespace onlineLegalWF.frmLitigation
                         xcase_no = System.DateTime.Now.ToString("yyyyMMdd_HHmmss_ffffff");
                         LitigationCivilCaseData civilCaseData = new LitigationCivilCaseData();
                         civilCaseData.req_no = xreq_no;
-                        civilCaseData.case_no = xcase_no;
+                        civilCaseData.case_no = xcase_no+"_"+ dr["ลำดับ"].ToString();
                         civilCaseData.no = dr["ลำดับ"].ToString();
                         civilCaseData.contract_no = dr["เลขที่สัญญา"].ToString();
                         civilCaseData.bu_name = dr["Bu"].ToString();
@@ -358,6 +354,8 @@ namespace onlineLegalWF.frmLitigation
             public string retention_money { get; set; }
             public string total_after_retention_money { get; set; }
             public string remark { get; set; }
+            public string status { get; set; }
+            public string assto_login { get; set; }
         }
 
         protected void gv_RowCommand(object sender, GridViewCommandEventArgs e)

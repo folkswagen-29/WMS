@@ -30,7 +30,7 @@
                     </tr>
                     <tr>
                         <td class="cell_content_20PC_TR">
-                            <label class="Label_md">ประเภทเอกสาร </label>
+                            <label class="Label_md">ประเภทเอกสาร : </label>
                         </td>
                         <td class="cell_content_80PC_TL">
                             <asp:DropDownList ID="type_doc" runat="server" CssClass="Text_200">
@@ -42,7 +42,7 @@
                             <label class="Label_md">หมายเหตุ : </label>
                         </td>
                         <td class="cell_content_80PC_TL">
-                            <asp:Textbox ID="note" runat="server" TextMode="MultiLine" CssClass="Text_200"></asp:Textbox>
+                            <asp:Textbox ID="note" runat="server" TextMode="MultiLine" CssClass="Text_400"></asp:Textbox>
                         </td>
                     </tr>
                     <tr>
@@ -115,8 +115,6 @@
 </div>
 
 <asp:HiddenField ID="hidPID" runat="server" />
-<asp:HiddenField ID="eformID" runat="server" />
-<asp:HiddenField ID="eformSecNo" runat="server" />
 <asp:HiddenField ID="hid_caseNo" runat="server" />
 
 <div class="modal fade" id="modalattachlit" role="dialog">

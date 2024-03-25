@@ -1,21 +1,21 @@
-﻿<%@ Page Title="Litigation Request" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationRequest.aspx.cs" Inherits="onlineLegalWF.frmLitigation.LitigationRequest" %>
+﻿<%@ Page Title="Litigation Admin Edit" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationRequestEditByAdmin.aspx.cs" Inherits="onlineLegalWF.frmLitigation.LitigationRequestEditByAdmin" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
 <%@ Register Src="~/userControls/ucCommentlog.ascx" TagPrefix="uc4" TagName="ucCommentlog" %>
 <%@ Register Src="~/userControls/ucLitigationCaseAttachment.ascx" TagPrefix="uc5" TagName="ucLitigationCaseAttachment" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <table class="cell_content_100PC">
-        <tr>
-            <td colspan="2">
+    <asp:Table ID="tb_main" runat="server" class="cell_content_100PC">
+        <asp:TableRow>
+            <asp:TableCell ColumnSpan="2">
                 <div style="background-color: gainsboro;">
                     <uc1:ucHeader runat="server" ID="ucHeader1" />
                 </div>
 
-            </td>
-        </tr>
-        <tr class="cell_content_100PC">
-            <td colspan="2" class="cell_content_100PC">
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow CssClass="cell_content_100PC">
+            <asp:TableCell ColumnSpan="2" CssClass="cell_content_100PC">
                 <asp:Panel ID="Panel1" runat="server" CssClass="div_90">
                     <asp:Table ID="Table1" runat="server">
                         <asp:TableRow>
@@ -44,7 +44,7 @@
                             </asp:TableCell>
                             <asp:TableCell>&nbsp;</asp:TableCell>
                             <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:DropDownList ID="type_req" runat="server" CssClass="Text_400" OnSelectedIndexChanged="type_req_Changed" AutoPostBack="true">
+                                <asp:DropDownList ID="type_req" runat="server" Enabled="false" CssClass="Text_400">
                                 </asp:DropDownList>
                             </asp:TableCell>
                             <asp:TableCell>&nbsp;</asp:TableCell>
@@ -55,7 +55,7 @@
                             </asp:TableCell>
                             <asp:TableCell>&nbsp;</asp:TableCell>
                             <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:TextBox ID="subject" runat="server" CssClass="Text_600"></asp:TextBox>
+                                <asp:TextBox ID="subject" runat="server" Enabled="false" CssClass="Text_600"></asp:TextBox>
                             </asp:TableCell>
                             <asp:TableCell>&nbsp;</asp:TableCell>
                         </asp:TableRow>
@@ -65,27 +65,7 @@
                             </asp:TableCell>
                             <asp:TableCell>&nbsp;</asp:TableCell>
                             <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:TextBox ID="desc" runat="server" CssClass="Text_600" TextMode="MultiLine" Height="100px"></asp:TextBox>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow ID="row_tp_download" runat="server">
-                            <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <%--<label class="Label_md">Upload Excel Template </label>--%>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                            <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:Button ID="btnDownload_template" runat="server" Text="Download Template" OnClick="btnDownload_template_Click" />
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow ID="row_tp_upload" runat="server">
-                            <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <label class="Label_md">Upload Excel Template </label>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                            <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:FileUpload ID="FileUpload1" runat="server" /> &nbsp; <asp:Button ID="btnUpload" runat="server" OnClick="btnUpload_Click" Text="Upload" /> 
+                                <asp:TextBox ID="desc" runat="server" Enabled="false" CssClass="Text_600" TextMode="MultiLine" Height="100px"></asp:TextBox>
                             </asp:TableCell>
                             <asp:TableCell>&nbsp;</asp:TableCell>
                         </asp:TableRow>
@@ -93,7 +73,7 @@
                             <asp:TableCell ColumnSpan="4">
                                 <asp:Label ID="Label1" runat="server"></asp:Label>
                                 <br />
-                                <asp:GridView ID="gvExcelFile" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="9pt" ForeColor="#333333" GridLines="None" CssClass="table w-100" OnRowCommand="gv_RowCommand">
+                                <asp:GridView ID="gvExcelFile" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="8pt" ForeColor="#333333" GridLines="None" CssClass="table w-100" OnRowCommand="gv_RowCommand">
                                     <Columns>
                                         <asp:TemplateField HeaderText="ลำดับ">
                                             <ItemTemplate>
@@ -168,9 +148,19 @@
                                                 <asp:Label ID="gv_remark" Text='<%# Bind("remark") %>' runat="server"></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="สถานะ">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gv_status" Text='<%# Bind("status") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="ผู้รับผิดชอบ">
+                                            <ItemTemplate>
+                                                <asp:Label ID="gv_assto_login" Text='<%# Bind("assto_login") %>' runat="server"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:Button ID="gv_attach" runat="server"  CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModal" Text="Attachment"></asp:Button>
+                                                <asp:Button ID="gv_attach" runat="server" Font-Names="tahoma" Font-Size="8pt" CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModal" Text="Attachment"></asp:Button>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
@@ -191,34 +181,24 @@
                     </asp:Table>
                 </asp:Panel>
                 <br />
-            </td>
-        </tr>
-        <tr class="cell_content_100PC">
-            <td colspan="2" class="cell_content_100PC">
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow CssClass="cell_content_100PC">
+            <asp:TableCell ColumnSpan="2" CssClass="cell_content_100PC">
                 <asp:Panel ID="Panel3" runat="server" CssClass="div_90">
                     <uc3:ucAttachment runat="server" ID="ucAttachment1" />
                 </asp:Panel>
                 <br />
-            </td>
-        </tr>
-        
-
-        <tr class="cell_content_100PC">
-            <td colspan="2" class="cell_content_100PC">
-                <asp:Button ID="btn_save" runat="server" CssClass="btn_normal_silver" Text="Save" OnClick="btn_save_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
-                <asp:Button ID="btn_gendocumnt" runat="server" CssClass="btn_normal_silver" Text="Preview" OnClick="btn_gendocumnt_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
-                <asp:Button ID="btn_cancel" runat="server" CssClass="btn_normal_silver" Text="Cancel" OnClientClick="JavaScript:window.history.back(1); return false;" />
-            </td>
-        </tr>
-        
-        <tr class="cell_content_100PC">
-            <td colspan="2" class="cell_content_100PC">
-                <br />
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow class="cell_content_100PC">
+            <asp:TableCell ColumnSpan="2" CssClass="cell_content_100PC">
                 <uc4:ucCommentlog runat="server" ID="ucCommentlog1" />
-            </td>
-        </tr>
-    </table>
+            </asp:TableCell>
+        </asp:TableRow>
+    </asp:Table>
     <asp:HiddenField ID="hid_PID" runat="server" />
+    <asp:HiddenField ID="req_date" runat="server" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">

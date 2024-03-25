@@ -105,7 +105,7 @@ namespace onlineLegalWF.userControls
                                    ,'" + xcreate_date + "')";
 
                 zdb.ExecNonQuery(sql, zconnstr);
-
+                note.Text = "";
             }
             else
             {
@@ -153,6 +153,7 @@ namespace onlineLegalWF.userControls
                                    ,'" + xcreate_date + "')";
 
                     zdb.ExecNonQuery(sql, zconnstr);
+                    note.Text = "";
                 }
             }
 

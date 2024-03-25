@@ -181,7 +181,6 @@
                 <asp:Button ID="btn_submit" runat="server" CssClass="btn_normal_silver" Text="Submit" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_submit_Click" />
                 <asp:Button ID="btn_gendocumnt" runat="server" CssClass="btn_normal_silver" Text="Preview" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_gendocumnt_Click" />
             </td>
-
         </tr>
         
         <tr class="cell_content_100PC">

@@ -114,24 +114,6 @@ namespace onlineLegalWF.userControls
         protected global::System.Web.UI.WebControls.HiddenField hidPID;
 
         /// <summary>
-        /// eformID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField eformID;
-
-        /// <summary>
-        /// eformSecNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField eformSecNo;
-
-        /// <summary>
         /// hid_caseNo control.
         /// </summary>
         /// <remarks>
