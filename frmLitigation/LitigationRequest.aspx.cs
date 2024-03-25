@@ -10,6 +10,10 @@ using System.IO;
 using System.Drawing;
 using onlineLegalWF.Class;
 using System.Configuration;
+using iTextSharp.text.pdf;
+using DocumentFormat.OpenXml.ExtendedProperties;
+using System.Globalization;
+using onlineLegalWF.userControls;
 
 namespace onlineLegalWF.frmLitigation
 {
@@ -40,12 +44,196 @@ namespace onlineLegalWF.frmLitigation
             hid_PID.Value = pid;
             ucAttachment1.ini_object(pid);
             ucCommentlog1.ini_object(pid);
+
+            type_req.DataSource = GetTypeOfRequest();
+            type_req.DataBind();
+            type_req.DataTextField = "tof_litigationreq_desc";
+            type_req.DataValueField = "tof_litigationreq_code";
+            type_req.DataBind();
         }
 
+        public DataTable GetTypeOfRequest()
+        {
+            string sql = "select * from li_type_of_litigationrequest order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
+        protected void type_req_Changed(object sender, EventArgs e)
+        {
+            if (type_req.SelectedValue.ToString() == "01")
+            {
+                row_tp_download.Visible = true;
+                row_tp_upload.Visible = true;
+                row_gv_data.Visible = true;
+
+            }
+            else
+            {
+                row_tp_download.Visible = false;
+                row_tp_upload.Visible = false;
+                row_gv_data.Visible = false;
+            }
+        }
+        private int SaveRequest()
+        {
+            int ret = 0;
+
+            if (doc_no.Text.Trim() == "")
+            {
+                doc_no.Text = zwf.genDocNo("LIT-" + System.DateTime.Now.ToString("yyyy", new CultureInfo("en-US")) + "-", 4);
+            }
+
+            var xreq_no = req_no.Text.Trim();
+            var xreq_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            var xprocess_id = hid_PID.Value.ToString();
+            var xdoc_no = doc_no.Text.Trim();
+            var xtype_req = type_req.SelectedValue.ToString();
+            var xsubject = subject.Text.Trim();
+            var xdesc = desc.Text.Trim();
+            var xstatus = "verify";
+
+            string sqlLit = @"select * from li_litigation_request where req_no = '"+ xreq_no + "'";
+            var resLit = zdb.ExecSql_DataTable(sqlLit, zconnstr);
+
+            //check data from li_litigation_request if has data Update else insert data
+            if (resLit.Rows.Count > 0)
+            {
+                string sqlUpdate = @"UPDATE [li_litigation_request]
+                                       SET [lit_subject] = '"+ xsubject +@"'
+                                          ,[lit_desc] = '"+ xdesc +@"'
+                                          ,[tof_litigationreq_code] = '"+ xtype_req +@"'
+                                          ,[updated_datetime] = '"+ xreq_date + @"'
+                                     WHERE [req_no] = '"+ xreq_no +"'";
+                ret = zdb.ExecNonQueryReturnID(sqlUpdate, zconnstr);
+            }
+            else 
+            {
+                string sqlInsert = @"INSERT INTO [dbo].[li_litigation_request]
+                                           ([process_id],[req_no],[document_no],[req_date],[lit_subject],[lit_desc],[tof_litigationreq_code],[status])
+                                     VALUES
+                                           ('"+ xprocess_id +@"'
+                                           ,'"+ xreq_no +@"'
+                                           ,'"+ xdoc_no +@"'
+                                           ,'"+ xreq_date +@"'
+                                           ,'"+ xsubject +@"'
+                                           ,'"+ xdesc +@"'
+                                           ,'"+ xtype_req +@"'
+                                           ,'"+ xstatus +"')";
+                ret = zdb.ExecNonQueryReturnID(sqlInsert, zconnstr);
+            }
+
+            if (ret > 0) 
+            {
+                if (xtype_req == "01")
+                {
+                    //delete li_litigation_req_case by req_id and loopinsert from gridview data
+                    string sqlDelCase = @"delete from [li_litigation_req_case] where [req_no] = '"+xreq_no+"'";
+                    ret = zdb.ExecNonQueryReturnID(sqlDelCase, zconnstr);
+
+                    if (ret > 0) 
+                    {
+                        //get data from gridview
+                        List<LitigationCivilCaseData> listCivilCaseData = new List<LitigationCivilCaseData>();
+                        foreach (GridViewRow row in gvExcelFile.Rows)
+                        {
+                            LitigationCivilCaseData civilCaseData = new LitigationCivilCaseData();
+                            civilCaseData.req_no = (row.FindControl("gv_req_no") as HiddenField).Value.ToString();
+                            civilCaseData.case_no = (row.FindControl("gv_case_no") as HiddenField).Value.ToString();
+                            civilCaseData.no = (row.FindControl("gv_no") as Label).Text.ToString();
+                            civilCaseData.contract_no = (row.FindControl("gv_contract_no") as Label).Text.ToString();
+                            civilCaseData.bu_name = (row.FindControl("gv_bu_name") as Label).Text.ToString();
+                            civilCaseData.customer_no = (row.FindControl("gv_customer_no") as Label).Text.ToString();
+                            civilCaseData.customer_name = (row.FindControl("gv_customer_name") as Label).Text.ToString();
+                            civilCaseData.customer_room = (row.FindControl("gv_customer_room") as Label).Text.ToString();
+                            civilCaseData.overdue_desc = (row.FindControl("gv_overdue_desc") as Label).Text.ToString();
+                            civilCaseData.outstanding_debt = (row.FindControl("gv_outstanding_debt") as Label).Text.ToString();
+                            civilCaseData.outstanding_debt_ack_of_debt = (row.FindControl("gv_outstanding_debt_ack_of_debt") as Label).Text.ToString();
+                            civilCaseData.fine_debt = (row.FindControl("gv_fine_debt") as Label).Text.ToString();
+                            civilCaseData.total_net = (row.FindControl("gv_total_net") as Label).Text.ToString();
+                            civilCaseData.retention_money = (row.FindControl("gv_retention_money") as Label).Text.ToString();
+                            civilCaseData.total_after_retention_money = (row.FindControl("gv_total_after_retention_money") as Label).Text.ToString();
+                            civilCaseData.remark = (row.FindControl("gv_remark") as Label).Text.ToString();
+                            listCivilCaseData.Add(civilCaseData);
+                        }
+
+                        //check length > 0 insert
+                        if (listCivilCaseData.Count > 0) 
+                        {
+                            foreach (var item in listCivilCaseData) 
+                            {
+                                string sqlCaseReq = @"INSERT INTO [li_litigation_req_case]
+                                                           ([req_no],[case_no],[no],[contract_no],[bu_name],[customer_no],[customer_name],[customer_room]
+                                                           ,[overdue_desc],[outstanding_debt],[outstanding_debt_ack_of_debt],[fine_debt],[total_net],[retention_money],[total_after_retention_money],[remark])
+                                                     VALUES
+                                                           ('"+item.req_no+@"'
+                                                           ,'"+item.case_no+@"'
+                                                           ,'"+item.no+@"'
+                                                           ,'"+item.contract_no+@"'
+                                                           ,'"+item.bu_name+@"'
+                                                           ,'"+item.customer_no+@"'
+                                                           ,'"+item.customer_name+@"'
+                                                           ,'"+item.customer_room+@"'
+                                                           ,'"+item.overdue_desc+@"'
+                                                           ,'"+item.outstanding_debt+@"'
+                                                           ,'"+item.outstanding_debt_ack_of_debt+@"'
+                                                           ,'"+item.fine_debt+@"'
+                                                           ,'"+item.total_net+@"'
+                                                           ,'"+item.retention_money+@"'
+                                                           ,'"+item.total_after_retention_money+@"'
+                                                           ,'"+item.remark+"')";
+                                ret = zdb.ExecNonQueryReturnID(sqlCaseReq, zconnstr);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return ret;
+        }
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
+            int res = SaveRequest();
 
+            if (res > 0)
+            {
+                //// wf save draft
+                //string process_code = "INR_RENEW";
+                //int version_no = 1;
+                //string xbu_code = ddl_bu.SelectedValue;
+
+                //// getCurrentStep
+                //var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+
+                //// check session_user
+                //if (Session["user_login"] != null)
+                //{
+                //    var xlogin_name = Session["user_login"].ToString();
+                //    var empFunc = new EmpInfo();
+
+                //    //get data user
+                //    var emp = empFunc.getEmpInfo(xlogin_name);
+
+                //    // set WF Attributes
+                //    wfAttr.subject = subject.Text.Trim();
+                //    wfAttr.wf_status = "SAVE";
+                //    wfAttr.submit_answer = "SAVE";
+                //    wfAttr.submit_by = emp.user_login;
+                //    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, xbu_code);
+
+                //    // wf.updateProcess
+                //    var wfA_NextStep = zwf.updateProcess(wfAttr);
+
+                //}
+                Response.Write("<script>alert('Successfully added');</script>");
+                //Response.Redirect("frmInsurance/InsuranceRenewRequestList");
+                var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                Response.Redirect(host_url + "frmLitigation/LitigationRequestEdit.aspx?id=" + req_no.Text.Trim());
+            }
+            else
+            {
+                Response.Write("<script>alert('Error !!!');</script>");
+            }
         }
 
         protected void btn_gendocumnt_Click(object sender, EventArgs e)
@@ -109,10 +297,14 @@ namespace onlineLegalWF.frmLitigation
                 List<LitigationCivilCaseData> listCivilCaseData = new List<LitigationCivilCaseData>();
                 if (dt.Rows.Count > 0) 
                 {
-                    
+                    string xreq_no = req_no.Text.Trim();
+                    string xcase_no = "";
                     foreach (DataRow dr in dt.Rows) 
                     {
+                        xcase_no = System.DateTime.Now.ToString("yyyyMMdd_HHmmss_ffffff");
                         LitigationCivilCaseData civilCaseData = new LitigationCivilCaseData();
+                        civilCaseData.req_no = xreq_no;
+                        civilCaseData.case_no = xcase_no;
                         civilCaseData.no = dr["ลำดับ"].ToString();
                         civilCaseData.contract_no = dr["เลขที่สัญญา"].ToString();
                         civilCaseData.bu_name = dr["Bu"].ToString();
@@ -141,12 +333,17 @@ namespace onlineLegalWF.frmLitigation
 
                 //delete file inside the Temp of the server 
                 File.Delete(path);
+
+                //save request
+                SaveRequest();
             }
                 
         }
 
         public class LitigationCivilCaseData
         {
+            public string req_no { get; set; }
+            public string case_no { get; set; }
             public string no { get; set; }
             public string contract_no { get; set; }
             public string bu_name { get; set; }
@@ -161,6 +358,35 @@ namespace onlineLegalWF.frmLitigation
             public string retention_money { get; set; }
             public string total_after_retention_money { get; set; }
             public string remark { get; set; }
+        }
+
+        protected void gv_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "openModal")
+            {
+                int i = System.Convert.ToInt32(e.CommandArgument);
+                //var xreq_no = ((HiddenField)gvExcelFile.Rows[i].FindControl("gv_req_no")).Value;
+                var xcase_no = ((HiddenField)gvExcelFile.Rows[i].FindControl("gv_case_no")).Value;
+                var xcontract_no = ((Label)gvExcelFile.Rows[i].FindControl("gv_contract_no")).Text;
+                var xcustomer_no = ((Label)gvExcelFile.Rows[i].FindControl("gv_customer_no")).Text;
+                var xcustomer_name = ((Label)gvExcelFile.Rows[i].FindControl("gv_customer_name")).Text;
+
+                ucLitigationCaseAttachment1.ini_object(xcase_no,xcontract_no,xcustomer_no,xcustomer_name);
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalEditData();", true);
+            }
+        }
+
+        protected void btnDownload_template_Click(object sender, EventArgs e)
+        {
+            var WT_Template_litigation = ConfigurationManager.AppSettings["WT_Template_litigation"].ToString();
+            string filePath = WT_Template_litigation + @"\TemplateLitigation.xlsx";
+            var mimeType = MimeMapping.GetMimeMapping(Path.GetFileName(filePath));
+
+            Response.ContentType = mimeType;
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
+            Response.WriteFile(filePath);
+            Response.End();
         }
     }
 }

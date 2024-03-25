@@ -288,6 +288,7 @@
     <Content Include="userControls\ucCommentlog.ascx" />
     <Content Include="userControls\ucCommentlogdata.ascx" />
     <Content Include="userControls\ucHeader.ascx" />
+    <Content Include="userControls\ucLitigationCaseAttachment.ascx" />
     <Content Include="userControls\ucMenu.ascx" />
     <Content Include="userControls\ucMenulist.ascx" />
     <Content Include="userControls\ucPersonSign.ascx" />
@@ -768,6 +769,13 @@
     </Compile>
     <Compile Include="userControls\ucHeader.ascx.designer.cs">
       <DependentUpon>ucHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="userControls\ucLitigationCaseAttachment.ascx.cs">
+      <DependentUpon>ucLitigationCaseAttachment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userControls\ucLitigationCaseAttachment.ascx.designer.cs">
+      <DependentUpon>ucLitigationCaseAttachment.ascx</DependentUpon>
     </Compile>
     <Compile Include="userControls\ucMenu.ascx.cs">
       <DependentUpon>ucMenu.ascx</DependentUpon>
