@@ -7,21 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace onlineLegalWF.frmLitigation
+namespace onlineLegalWF.forms
 {
 
 
-    public partial class LitigationRequestEditByAdmin
+    public partial class litapv
     {
-
-        /// <summary>
-        /// tb_main control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tb_main;
 
         /// <summary>
         /// ucHeader1 control.
@@ -42,22 +33,13 @@ namespace onlineLegalWF.frmLitigation
         protected global::System.Web.UI.WebControls.Panel Panel1;
 
         /// <summary>
-        /// Table1 control.
+        /// tb_1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Table1;
-
-        /// <summary>
-        /// req_no control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label req_no;
+        protected global::System.Web.UI.WebControls.Table tb_1;
 
         /// <summary>
         /// doc_no control.
@@ -69,13 +51,13 @@ namespace onlineLegalWF.frmLitigation
         protected global::System.Web.UI.WebControls.Label doc_no;
 
         /// <summary>
-        /// type_req control.
+        /// req_date control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList type_req;
+        protected global::System.Web.UI.WebControls.Label req_date;
 
         /// <summary>
         /// subject control.
@@ -84,16 +66,7 @@ namespace onlineLegalWF.frmLitigation
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox subject;
-
-        /// <summary>
-        /// desc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox desc;
+        protected global::System.Web.UI.WebControls.Label subject;
 
         /// <summary>
         /// row_gv_data control.
@@ -105,15 +78,6 @@ namespace onlineLegalWF.frmLitigation
         protected global::System.Web.UI.WebControls.TableRow row_gv_data;
 
         /// <summary>
-        /// Label1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-
-        /// <summary>
         /// gvExcelFile control.
         /// </summary>
         /// <remarks>
@@ -121,6 +85,42 @@ namespace onlineLegalWF.frmLitigation
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvExcelFile;
+
+        /// <summary>
+        /// pdf_render control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlIframe pdf_render;
+
+        /// <summary>
+        /// ucCommentlog1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::onlineLegalWF.userControls.ucCommentlog ucCommentlog1;
+
+        /// <summary>
+        /// btn_Approve control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Approve;
+
+        /// <summary>
+        /// btn_Reject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Reject;
 
         /// <summary>
         /// Panel3 control.
@@ -141,22 +141,13 @@ namespace onlineLegalWF.frmLitigation
         protected global::onlineLegalWF.userControls.ucAttachment ucAttachment1;
 
         /// <summary>
-        /// ucCommentlog1 control.
+        /// req_no control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucCommentlog ucCommentlog1;
-
-        /// <summary>
-        /// btn_Submit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Submit;
+        protected global::System.Web.UI.WebControls.HiddenField req_no;
 
         /// <summary>
         /// hid_PID control.
@@ -168,58 +159,22 @@ namespace onlineLegalWF.frmLitigation
         protected global::System.Web.UI.WebControls.HiddenField hid_PID;
 
         /// <summary>
-        /// req_date control.
+        /// hid_bucode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField req_date;
+        protected global::System.Web.UI.WebControls.HiddenField hid_bucode;
 
         /// <summary>
-        /// hid_case_no control.
+        /// hid_external_domain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hid_case_no;
-
-        /// <summary>
-        /// rdlAction control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdlAction;
-
-        /// <summary>
-        /// ddlNameList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlNameList;
-
-        /// <summary>
-        /// btn_update_modal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_update_modal;
-
-        /// <summary>
-        /// btn_update_all_modal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_update_all_modal;
+        protected global::System.Web.UI.WebControls.HiddenField hid_external_domain;
 
         /// <summary>
         /// lblPID control.
@@ -231,12 +186,30 @@ namespace onlineLegalWF.frmLitigation
         protected global::System.Web.UI.WebControls.Label lblPID;
 
         /// <summary>
-        /// ucLitigationCaseAttachment1 control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucLitigationCaseAttachment ucLitigationCaseAttachment1;
+        protected global::System.Web.UI.WebControls.Label Label2;
+
+        /// <summary>
+        /// comment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox comment;
+
+        /// <summary>
+        /// btn_reject_submit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_reject_submit;
     }
 }

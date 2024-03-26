@@ -17,7 +17,9 @@ namespace onlineLegalWF.frmLitigation
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
+        public string zconnstrrpa = ConfigurationManager.AppSettings["RPADB"].ToString();
         public WFFunctions zwf = new WFFunctions();
+        public SendMail zsendmail = new SendMail();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -283,6 +285,129 @@ namespace onlineLegalWF.frmLitigation
             else
             {
                 Response.Write("<script>alert('Error !!!');</script>");
+            }
+        }
+
+        protected void btn_Submit_Click(object sender, EventArgs e)
+        {
+            string process_code = "";
+            var xtype_req = type_req.SelectedValue;
+            if (xtype_req == "01")
+            {
+                process_code = "LIT";
+            }
+            else
+            {
+                process_code = "LIT_2";
+            }
+            int version_no = 1;
+
+            if (!string.IsNullOrEmpty(process_code))
+            {
+                // getCurrentStep
+                var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+
+                // check session_user
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+                    var empFunc = new EmpInfo();
+
+                    //get data user
+                    var emp = empFunc.getEmpInfo(xlogin_name);
+
+                    // set WF Attributes
+                    wfAttr.subject = "เรื่อง " + subject.Text.Trim();
+                    wfAttr.assto_login = emp.next_line_mgr_login;
+                    wfAttr.wf_status = "COMPLETED";
+                    wfAttr.submit_answer = "COMPLETED";
+                    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, "");
+                    wfAttr.updated_by = emp.user_login;
+                    wfAttr.submit_by = wfAttr.submit_by;
+                    // wf.updateProcess
+                    var wfA_NextStep = zwf.updateProcess(wfAttr);
+                    wfA_NextStep.submit_by = wfAttr.submit_by;
+                    wfA_NextStep.wf_status = "COMPLETED";
+                    string status = zwf.Insert_NextStep(wfA_NextStep);
+
+                    if (status == "Success")
+                    {
+                        string sqlupdate = @"update li_litigation_request set status='completed',updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where process_id = '" + wfAttr.process_id + "'";
+                        zdb.ExecNonQuery(sqlupdate, zconnstr);
+
+                        string subject = "";
+                        string body = "";
+                        string sql = @"select * from li_litigation_request
+                                                where process_id = '" + wfAttr.process_id + "'";
+                        var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                        if (dt.Rows.Count > 0)
+                        {
+                            var dr = dt.Rows[0];
+                            string id = dr["req_no"].ToString();
+                            subject = wfAttr.subject;
+                            body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการดำเนินการเสร็จสิ้นแล้ว";
+
+                            string pathfileCommregis = "";
+
+                            string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                            var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                            if (resfile.Rows.Count > 0)
+                            {
+                                pathfileCommregis = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+
+                                string email = "";
+
+                                var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                ////get mail from db
+                                if (isdev != "true")
+                                {
+                                    string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                    System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                    if (dtbpm.Rows.Count > 0)
+                                    {
+                                        email = dtbpm.Rows[0]["email"].ToString();
+
+                                    }
+                                    else
+                                    {
+                                        string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                        System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                        if (dtrpa.Rows.Count > 0)
+                                        {
+                                            email = dtrpa.Rows[0]["Email"].ToString();
+                                        }
+                                        else
+                                        {
+                                            email = "";
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    ////fix mail test
+                                    email = "legalwfuat2024@gmail.com";
+                                }
+
+                                if (!string.IsNullOrEmpty(email))
+                                {
+                                    //send mail to requester
+                                    _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, pathfileCommregis);
+                                }
+
+                            }
+
+                        }
+
+                        var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                    }
+
+                }
             }
         }
 

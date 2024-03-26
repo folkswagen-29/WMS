@@ -5,7 +5,7 @@
 <%@ Register Src="~/userControls/ucLitigationCaseAttachment.ascx" TagPrefix="uc5" TagName="ucLitigationCaseAttachment" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:Table ID="tb_main" runat="server" class="cell_content_100PC">
+    <asp:Table ID="tb_main" runat="server" CssClass="cell_content_100PC">
         <asp:TableRow>
             <asp:TableCell ColumnSpan="2">
                 <div style="background-color: gainsboro;">
@@ -198,9 +198,14 @@
                 <br />
             </asp:TableCell>
         </asp:TableRow>
-        <asp:TableRow class="cell_content_100PC">
+        <asp:TableRow CssClass="cell_content_100PC">
             <asp:TableCell ColumnSpan="2" CssClass="cell_content_100PC">
                 <uc4:ucCommentlog runat="server" ID="ucCommentlog1" />
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow CssClass="cell_content_100PC">
+            <asp:TableCell ColumnSpan="2" CssClass="cell_content_100PC">
+                <asp:Button ID="btn_Submit" runat="server" CssClass="btn_normal_blue" Text="Submit" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_Submit_Click" />
             </asp:TableCell>
         </asp:TableRow>
     </asp:Table>

@@ -345,6 +345,18 @@ namespace onlineLegalWF.Class
                         xurl = "/frminsurance/insuranceclaimedit.aspx?id=" + id + "&st=" + wfA.step_name;
                     }
                 }
+                else if (wfA.process_code == "LIT")
+                {
+                    string sqlreq = @"select * from li_litigation_request where process_id = '" + wfA.process_id + "'";
+                    var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                    if (dtreq.Rows.Count > 0)
+                    {
+                        var drreq = dtreq.Rows[0];
+                        string id = drreq["req_no"].ToString();
+
+                        xurl = "/frmlitigation/litigationrequestedit.aspx?id=" + id;
+                    }
+                }
                 else if (wfA.process_code == "CCR")
                 {
                     string sqlreq = @"select * from li_comm_regis_request where process_id = '" + wfA.process_id + "'";
@@ -674,12 +686,16 @@ namespace onlineLegalWF.Class
                 else if (wfDefault_step.step_name == "End")
                 {
                     if (wfDefault_step.process_code == "CCR")
-                        {
+                    {
                         xurl = "/forms/ccrcomplete.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                     }
                     else if (wfDefault_step.process_code == "PMT_LIC" || wfDefault_step.process_code == "PMT_TM" || wfDefault_step.process_code == "PMT_TAX")
                     {
                         xurl = "/forms/permitcomplete.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
+                    }
+                    else if (wfDefault_step.process_code == "LIT")
+                    {
+                        xurl = "/forms/litcomplete.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                     }
                     else
                     {
@@ -777,7 +793,27 @@ namespace onlineLegalWF.Class
                             xurl = "/frmpermit/permitlandtaxedit.aspx?id=" + id;
                         }
                     }
+                    else if (wfDefault_step.process_code == "LIT")
+                    {
+                        string sqlreq = @"select * from li_litigation_request where process_id = '" + wfDefault_step.process_id + "'";
+                        var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
+                        if (dtreq.Rows.Count > 0)
+                        {
+                            var drreq = dtreq.Rows[0];
+                            string id = drreq["req_no"].ToString();
 
+                            xurl = "/frmlitigation/litigationrequestedit.aspx?id=" + id;
+                        }
+                    }
+
+                }
+                else if (wfDefault_step.step_name == "Head of Treasury Operation Approve" && wfDefault_step.process_code == "LIT")
+                {
+                    xurl = "/forms/litapv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + "&st=" + wfDefault_step.step_name;
+                }
+                else if (wfDefault_step.step_name == "Litigation Update" && wfDefault_step.process_code == "LIT")
+                {
+                    xurl = "/frmlitigation/litigationrequesteditbyadmin.aspx?req=" + wfDefault_step.process_id;
                 }
                 else if (wfDefault_step.step_name == "Supervisor Approve" || wfDefault_step.step_name == "Registration Receive" || wfDefault_step.step_name == "Registration Update" && wfDefault_step.process_code == "CCR")
                 {
@@ -1450,6 +1486,29 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "Requester Update")
                 {
                     xname = submit_by; //Requester Update = user click update close job
+                }
+                else if (next_step_name == "End")
+                {
+                    xname = ""; //End
+                }
+                else if (next_step_name == "Edit Request")
+                {
+                    xname = submit_by; //Requester Edit Request
+                }
+            }
+            else if (process_code == "LIT")
+            {
+                if (next_step_name == "Start")
+                {
+                    xname = emp.user_login; //Requestor = Login account
+                }
+                else if (next_step_name == "Head of Treasury Operation Approve")
+                {
+                    xname = "sarawut.l"; //Head of Treasury Operation Approve account
+                }
+                else if (next_step_name == "Litigation Update")
+                {
+                    xname = "supoj.k, peeranat.u, nuttanun.su, supat.ku, wiwek.s, phooriwit.l, nares.l"; //Litigation Update account
                 }
                 else if (next_step_name == "End")
                 {

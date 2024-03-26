@@ -9,6 +9,7 @@ using System.IO;
 using onlineLegalWF.Class;
 using System.Configuration;
 using System.Globalization;
+using static onlineLegalWF.Class.ReplaceLitigation;
 
 namespace onlineLegalWF.frmLitigation
 {
@@ -16,9 +17,10 @@ namespace onlineLegalWF.frmLitigation
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
-        //public string zconnstr = ConfigurationSettings.AppSettings["BPMDB"].ToString();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
         public WFFunctions zwf = new WFFunctions();
+        public ReplaceLitigation zreplacelitigation = new ReplaceLitigation();
+
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -193,34 +195,43 @@ namespace onlineLegalWF.frmLitigation
 
             if (res > 0)
             {
-                //// wf save draft
-                //string process_code = "INR_RENEW";
-                //int version_no = 1;
-                //string xbu_code = ddl_bu.SelectedValue;
+                // wf save draft
+                string process_code = "";
+                var xtype_req = type_req.SelectedValue;
+                if (xtype_req == "01")
+                {
+                    process_code = "LIT";
+                }
+                else 
+                {
+                    process_code = "LIT_2";
+                }
+                int version_no = 1;
+                string xbu_code = "";
 
-                //// getCurrentStep
-                //var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+                // getCurrentStep
+                var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
 
-                //// check session_user
-                //if (Session["user_login"] != null)
-                //{
-                //    var xlogin_name = Session["user_login"].ToString();
-                //    var empFunc = new EmpInfo();
+                // check session_user
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+                    var empFunc = new EmpInfo();
 
-                //    //get data user
-                //    var emp = empFunc.getEmpInfo(xlogin_name);
+                    //get data user
+                    var emp = empFunc.getEmpInfo(xlogin_name);
 
-                //    // set WF Attributes
-                //    wfAttr.subject = subject.Text.Trim();
-                //    wfAttr.wf_status = "SAVE";
-                //    wfAttr.submit_answer = "SAVE";
-                //    wfAttr.submit_by = emp.user_login;
-                //    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, xbu_code);
+                    // set WF Attributes
+                    wfAttr.subject = subject.Text.Trim();
+                    wfAttr.wf_status = "SAVE";
+                    wfAttr.submit_answer = "SAVE";
+                    wfAttr.submit_by = emp.user_login;
+                    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, xbu_code);
 
-                //    // wf.updateProcess
-                //    var wfA_NextStep = zwf.updateProcess(wfAttr);
+                    // wf.updateProcess
+                    var wfA_NextStep = zwf.updateProcess(wfAttr);
 
-                //}
+                }
                 Response.Write("<script>alert('Successfully added');</script>");
                 //Response.Redirect("frmInsurance/InsuranceRenewRequestList");
                 var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
@@ -234,7 +245,161 @@ namespace onlineLegalWF.frmLitigation
 
         protected void btn_gendocumnt_Click(object sender, EventArgs e)
         {
+            GenDocumnet();
+        }
 
+        private void GenDocumnet()
+        {
+            // Replace Doc
+            var xtype_req = type_req.SelectedValue;
+            var xdoc_no = doc_no.Text.Trim();
+            var xprocess_id = hid_PID.Value.ToString();
+            var xreq_date = System.DateTime.Now;
+            var xsubject = subject.Text.Trim();
+            var xdesc = desc.Text.Trim();
+
+            var path_template = ConfigurationManager.AppSettings["WT_Template_litigation"].ToString();
+            string templatefile = "";
+            ReplaceLitigation_TagData data = new ReplaceLitigation_TagData();
+            if (xtype_req == "01")
+            {
+                templatefile = path_template + @"\LitigationTemplate.docx";
+
+                #region gentagstr data form
+                data.docno = xdoc_no.Replace(",", "!comma");
+                data.subject = xsubject.Replace(",", "!comma");
+                data.desc = xdesc.Replace(",", "!comma");
+                data.reqdate = Utillity.ConvertDateToLongDateTime(xreq_date, "en");
+                data.to = "คุณอร่าม รัตนโชติ Head of Litigation and Registration";
+
+                var requestor = "";
+                var requestorpos = "";
+                var supervisor = "";
+                var supervisorpos = "";
+
+                // check session_user
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+                    var empFunc = new EmpInfo();
+
+                    //get data user
+                    var emp = empFunc.getEmpInfo(xlogin_name);
+                    if (!string.IsNullOrEmpty(emp.full_name_en))
+                    {
+                        requestor = emp.full_name_en;
+                        requestorpos = emp.position_en;
+                    }
+
+                    //get supervisor data
+                    var empSupervisor = empFunc.getEmpInfo("sarawut.l");
+                    if (!string.IsNullOrEmpty(empSupervisor.full_name_en))
+                    {
+                        supervisor = empSupervisor.full_name_en;
+                        supervisorpos = empSupervisor.position_en;
+                    }
+
+                }
+
+                data.sign_name1 = "";
+                data.name1 = requestor;
+                data.position1 = requestorpos;
+                data.date1 = "";
+
+                data.sign_name2 = "";
+                data.name2 = supervisor;
+                data.position2 = supervisorpos;
+                data.date2 = "";
+                #endregion
+            }
+            else
+            {
+                templatefile = path_template + @"\LitigationTemplate.docx";
+
+                #region gentagstr data form
+                data.docno = xdoc_no.Replace(",", "!comma");
+                data.subject = xsubject.Replace(",", "!comma");
+                data.desc = xdesc.Replace(",", "!comma");
+                data.reqdate = Utillity.ConvertDateToLongDateTime(xreq_date, "en");
+                data.to = "คุณอร่าม รัตนโชติ Head of Litigation and Registration";
+
+                var requestor = "";
+                var requestorpos = "";
+                var supervisor = "";
+                var supervisorpos = "";
+
+                // check session_user
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+                    var empFunc = new EmpInfo();
+
+                    //get data user
+                    var emp = empFunc.getEmpInfo(xlogin_name);
+                    if (!string.IsNullOrEmpty(emp.full_name_en))
+                    {
+                        requestor = emp.full_name_en;
+                        requestorpos = emp.position_en;
+                    }
+
+                    //get supervisor data
+                    var empSupervisor = empFunc.getEmpInfo("sarawut.l");
+                    if (!string.IsNullOrEmpty(empSupervisor.full_name_en))
+                    {
+                        supervisor = empSupervisor.full_name_en;
+                        supervisorpos = empSupervisor.position_en;
+                    }
+
+                }
+
+                data.sign_name1 = "";
+                data.name1 = requestor;
+                data.position1 = requestorpos;
+                data.date1 = "";
+
+                data.sign_name2 = "";
+                data.name2 = supervisor;
+                data.position2 = supervisorpos;
+                data.date2 = "";
+                #endregion
+            }
+            string outputfolder = path_template + @"\Output";
+            string outputfn = outputfolder + @"\litigation_" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+            var rdoc = new ReplaceDocx.Class.ReplaceDocx();
+
+            DataTable dtStr = zreplacelitigation.genTagData(data);
+
+            ReplaceDocx.Class.ReplaceDocx repl = new ReplaceDocx.Class.ReplaceDocx();
+            var jsonDTStr = repl.DataTableToJSONWithStringBuilder(dtStr);
+
+            var jsonDTProperties1 = "";
+            var jsonDTdata = "";
+            //end prepare data
+
+            // Save to Database z_replacedocx_log
+            string xreq_no = req_no.Text.Trim();
+            string sql = @"insert into z_replacedocx_log (replacedocx_reqno,jsonTagString, jsonTableProp, jsonTableData,template_filepath , output_directory,output_filepath, delete_output ) 
+                        values('" + xreq_no + @"',
+                               '" + jsonDTStr + @"', 
+                                '" + jsonDTProperties1 + @"', 
+                                '" + jsonDTdata + @"', 
+                                '" + templatefile + @"', 
+                                '" + outputfolder + @"', 
+                                '" + outputfn + @"',  
+                                '" + "0" + @"'
+                            ) ";
+
+            zdb.ExecNonQuery(sql, zconnstr);
+
+            var outputbyte = rdoc.ReplaceData2(jsonDTStr, jsonDTProperties1, jsonDTdata, templatefile, outputfolder, outputfn, false);
+
+            repl.convertDOCtoPDF(outputfn, outputfn.Replace(".docx", ".pdf"), false);
+
+            string filePath = outputfn.Replace(".docx", ".pdf");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalDoc();", true);
+            var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+            pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filePath;
         }
 
         protected void btnUpload_Click(object sender, EventArgs e)

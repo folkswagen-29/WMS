@@ -247,5 +247,14 @@ namespace onlineLegalWF.frmLitigation
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::onlineLegalWF.userControls.ucLitigationCaseAttachment ucLitigationCaseAttachment1;
+
+        /// <summary>
+        /// pdf_render control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlIframe pdf_render;
     }
 }

@@ -1,99 +1,42 @@
-﻿<%@ Page Title="Litigation Request" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationRequest.aspx.cs" Inherits="onlineLegalWF.frmLitigation.LitigationRequest" %>
-<%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
+﻿<%@ Page Title="Litigation Approve" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="litapv.aspx.cs" Inherits="onlineLegalWF.forms.litapv" %>
+<%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
 <%@ Register Src="~/userControls/ucCommentlog.ascx" TagPrefix="uc4" TagName="ucCommentlog" %>
-<%@ Register Src="~/userControls/ucLitigationCaseAttachment.ascx" TagPrefix="uc5" TagName="ucLitigationCaseAttachment" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <table class="cell_content_100PC">
+    <table class="cell_content_100PC" style="font-family: Tahoma;">
         <tr>
             <td colspan="2">
                 <div style="background-color: gainsboro;">
-                    <uc1:ucHeader runat="server" ID="ucHeader1" />
+                    <uc2:ucHeader runat="server" ID="ucHeader1" />
                 </div>
-
             </td>
         </tr>
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
                 <asp:Panel ID="Panel1" runat="server" CssClass="div_90">
-                    <asp:Table ID="Table1" runat="server">
+                    <asp:Table ID="tb_1" runat="server" CssClass="cell_content_100PC">
                         <asp:TableRow>
                             <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <label class="Label_md">Request No. </label>
+                                <label class="Label_md">Document No. : </label>
                             </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
                             <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:Label ID="req_no" runat="server" CssClass="Label_md" Text=""></asp:Label>
+                            <asp:Label ID="doc_no" runat="server" CssClass="Label_md"></asp:Label>
+                            <label class="Label_md">Submitted Date : </label>
+                            <asp:Label ID="req_date" runat="server" CssClass="Label_md"></asp:Label>
                             </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
-                            <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <label class="Label_md">Documnet No. </label>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                            <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:Label ID="doc_no" runat="server" CssClass="Label_md"></asp:Label>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
                             <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <label class="Label_md">Type of Request </label>
+                                <label class="Label_md">Subject : </label>
                             </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
                             <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:DropDownList ID="type_req" runat="server" CssClass="Text_400" OnSelectedIndexChanged="type_req_Changed" AutoPostBack="true">
-                                </asp:DropDownList>
+                                <asp:Label ID="subject" runat="server" CssClass="Label_md"></asp:Label>
                             </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
-                            <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <label class="Label_md">Subject </label>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                            <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:TextBox ID="subject" runat="server" CssClass="Text_600"></asp:TextBox>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
-                            <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <label class="Label_md">Description </label>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                            <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:TextBox ID="desc" runat="server" CssClass="Text_600" TextMode="MultiLine" Height="100px"></asp:TextBox>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow ID="row_tp_download" runat="server">
-                            <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <%--<label class="Label_md">Upload Excel Template </label>--%>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                            <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:Button ID="btnDownload_template" runat="server" Text="Download Template" OnClick="btnDownload_template_Click" />
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow ID="row_tp_upload" runat="server">
-                            <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <label class="Label_md">Upload Excel Template </label>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                            <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:FileUpload ID="FileUpload1" runat="server" /> &nbsp; <asp:Button ID="btnUpload" runat="server" OnClick="btnUpload_Click" Text="Upload" /> 
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow ID="row_gv_data" runat="server">
                             <asp:TableCell ColumnSpan="4">
-                                <asp:Label ID="Label1" runat="server"></asp:Label>
-                                <br />
-                                <asp:GridView ID="gvExcelFile" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="9pt" ForeColor="#333333" GridLines="None" CssClass="table w-100" OnRowCommand="gv_RowCommand">
+                                <asp:GridView ID="gvExcelFile" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="8pt" ForeColor="#333333" GridLines="None" CssClass="table w-100" OnRowCommand="gv_RowCommand">
                                     <Columns>
                                         <asp:TemplateField HeaderText="ลำดับ">
                                             <ItemTemplate>
@@ -168,12 +111,6 @@
                                                 <asp:Label ID="gv_remark" Text='<%# Bind("remark") %>' runat="server"></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField>
-                                            <ItemTemplate>
-                                                <asp:ImageButton ID="gv_attach" runat="server" Height="20px" ImageUrl="~/images/icon_upload.png" CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModal" ToolTip="AttachMent" />
-                                                <%--<asp:Button ID="gv_attach" runat="server" Font-Names="tahoma" Font-Size="8pt" CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModal" Text="Attachment"></asp:Button>--%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
                                     </Columns>
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                     <EditRowStyle BackColor="#999999" />
@@ -189,72 +126,72 @@
                                 </asp:GridView>
                             </asp:TableCell>
                         </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell ColumnSpan="6">
+                                <table style="margin-left: auto; margin-right: auto;">
+                                    <tr class="cell_content_100PC">
+                                        <td colspan="6">
+                                            <iframe id="pdf_render" runat="server" width="900" height="600" frameborder="0"></iframe>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:TableCell>
+                        </asp:TableRow>
                     </asp:Table>
                 </asp:Panel>
                 <br />
             </td>
+
+        </tr>
+        <tr class="cell_content_100PC">
+            <td colspan="6" class="cell_content_100PC">
+                <uc4:ucCommentlog runat="server" ID="ucCommentlog1" />
+            </td>
         </tr>
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
+                <asp:Button ID="btn_Approve" runat="server" CssClass="btn_normal_blue" Text="Approve" OnClick="btn_Approve_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
+                <asp:Button ID="btn_Reject" runat="server" CssClass="btn_normal_red" Text="Reject" OnClick="btn_Reject_Click" />
+            </td>
+        </tr>
+        <tr class="cell_content_100PC">
+            <td colspan="2" class="cell_content_100PC">
+                <br />
                 <asp:Panel ID="Panel3" runat="server" CssClass="div_90">
                     <uc3:ucAttachment runat="server" ID="ucAttachment1" />
                 </asp:Panel>
                 <br />
             </td>
         </tr>
-        
-
-        <tr class="cell_content_100PC">
-            <td colspan="2" class="cell_content_100PC">
-                <asp:Button ID="btn_save" runat="server" CssClass="btn_normal_silver" Text="Save" OnClick="btn_save_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
-                <asp:Button ID="btn_gendocumnt" runat="server" CssClass="btn_normal_silver" Text="Preview" OnClick="btn_gendocumnt_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
-                <asp:Button ID="btn_cancel" runat="server" CssClass="btn_normal_silver" Text="Cancel" OnClientClick="JavaScript:window.history.back(1); return false;" />
-            </td>
-        </tr>
-        
-        <tr class="cell_content_100PC">
-            <td colspan="2" class="cell_content_100PC">
-                <br />
-                <uc4:ucCommentlog runat="server" ID="ucCommentlog1" />
-            </td>
-        </tr>
     </table>
+    <asp:HiddenField ID="req_no" runat="server" />
     <asp:HiddenField ID="hid_PID" runat="server" />
+    <asp:HiddenField ID="hid_bucode" runat="server" />
+    <asp:HiddenField ID="hid_external_domain" runat="server" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <asp:Label ID="lblPID" runat="server" CssClass="Label_sm"></asp:Label>
-    <div class="modal fade" id="editDataModal" role="dialog" style="">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header" style="border: 0;">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Attachment</h4>
-                </div>
-                <div class="modal-body" style="font-size: 10pt; font-family: tahoma;">
-                    <uc5:ucLitigationCaseAttachment runat="server" id="ucLitigationCaseAttachment1" />
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modaldocument" role="dialog">
+    <div class="modal fade" id="modalreject" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header" style="border: 0;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <iframe id="pdf_render" runat="server" width="865" height="600" frameborder="0"></iframe>
+                    <div><asp:Label ID="Label2" runat="server" CssClass="Label_lg" Text="Comment"></asp:Label></div>
+                    <asp:TextBox ID="comment" runat="server" CssClass="Text_600" TextMode="MultiLine" Height="90"></asp:TextBox>
+                </div>
+                <div class="modal-footer" style="text-align: left; border-top: 0;">
+                    <asp:Button ID="btn_reject_submit" runat="server" Text="Submit" CssClass="btn_normal_blue" OnClick="btn_reject_submit_Click" />
                 </div>
             </div>
         </div>
     </div>
+
     <script type="text/javascript">
-        function showModalEditData() {
-            $("#editDataModal").modal('show');
-        }
-        function showModalDoc() {
-            $("#modaldocument").modal('show');
+        function showModalReject() {
+            $("#modalreject").modal('show');
         }
     </script>
 </asp:Content>

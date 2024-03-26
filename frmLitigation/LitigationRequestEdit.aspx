@@ -238,12 +238,24 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modaldocument" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="border: 0;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="pdf_render" runat="server" width="865" height="600" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
         function showModalEditData() {
             $("#editDataModal").modal('show');
         }
-        function hideModalEditData() {
-            $("#editDataModal").modal('hide');
+        function showModalDoc() {
+            $("#modaldocument").modal('show');
         }
     </script>
 </asp:Content>
