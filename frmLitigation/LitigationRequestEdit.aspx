@@ -170,7 +170,8 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:Button ID="gv_attach" runat="server"  CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModal" Text="Attachment"></asp:Button>
+                                                <asp:ImageButton ID="gv_attach" runat="server" Height="20px" ImageUrl="~/images/icon_upload.png" CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModal" ToolTip="AttachMent" />
+                                                <%--<asp:Button ID="gv_attach" runat="server" Font-Names="tahoma" Font-Size="8pt" CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModal" Text="Attachment"></asp:Button>--%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
