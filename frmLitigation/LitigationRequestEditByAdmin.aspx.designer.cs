@@ -168,6 +168,51 @@ namespace onlineLegalWF.frmLitigation
         protected global::System.Web.UI.WebControls.HiddenField req_date;
 
         /// <summary>
+        /// hid_case_no control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hid_case_no;
+
+        /// <summary>
+        /// rdlAction control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rdlAction;
+
+        /// <summary>
+        /// ddlNameList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlNameList;
+
+        /// <summary>
+        /// btn_update_modal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_update_modal;
+
+        /// <summary>
+        /// btn_update_all_modal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_update_all_modal;
+
+        /// <summary>
         /// lblPID control.
         /// </summary>
         /// <remarks>

@@ -160,8 +160,12 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:ImageButton ID="gv_attach" runat="server" Height="20px" ImageUrl="~/images/icon_upload.png" CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModal" ToolTip="AttachMent" />
-                                                <%--<asp:Button ID="gv_attach" runat="server" Font-Names="tahoma" Font-Size="8pt" CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModal" Text="Attachment"></asp:Button>--%>
+                                                <table>
+                                                    <tr>
+                                                        <td><asp:ImageButton ID="gv_attach" runat="server" Height="20px" ImageUrl="~/images/icon_upload.png" CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModal" ToolTip="AttachMent" /></td>
+                                                        <td><asp:ImageButton ID="gv_btnEdit" runat="server" Height="20px" ImageUrl="~/images/icon_edit.png" CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModalAssign" ToolTip="Update" /></td>
+                                                    </tr>
+                                                </table>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
@@ -200,6 +204,54 @@
     </asp:Table>
     <asp:HiddenField ID="hid_PID" runat="server" />
     <asp:HiddenField ID="req_date" runat="server" />
+    <div class="modal fade" id="assignModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="border: 0;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Assign</h4>
+                </div>
+                <div class="modal-body" style="font-size: 10pt; font-family: tahoma;">
+                    <asp:HiddenField ID="hid_case_no" runat="server" />
+                    <table>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Status : </label>
+                            </td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:RadioButtonList ID="rdlAction" runat="server" RepeatDirection="Horizontal">
+                                    <asp:ListItem Value="verify" Selected="True">verify</asp:ListItem>
+                                    <asp:ListItem Value="Close Request & Proceeding">Close Request & Proceeding</asp:ListItem>
+                                    <asp:ListItem Value="Close Request & Close Litigation">Close Request & Close Litigation</asp:ListItem>
+                                    <asp:ListItem Value="Close Request & No Proceeding ">Close Request & No Proceeding</asp:ListItem>
+                                </asp:RadioButtonList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Assign To : </label>
+                            </td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:DropDownList ID="ddlNameList" runat="server" CssClass="Text_200">
+                                    <asp:ListItem Value="supoj.k">supoj.k</asp:ListItem>
+                                    <asp:ListItem Value="peeranat.u">peeranat.u</asp:ListItem>
+                                    <asp:ListItem Value="nuttanun.su">nuttanun.su</asp:ListItem>
+                                    <asp:ListItem Value="supat.ku">supat.ku</asp:ListItem>
+                                    <asp:ListItem Value="wiwek.s">wiwek.s</asp:ListItem>
+                                    <asp:ListItem Value="phooriwit.l">phooriwit.l</asp:ListItem>
+                                    <asp:ListItem Value="nares.l">nares.l</asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer" style="text-align: left; border-top: 0;">
+                    <asp:Button ID="btn_update_modal" runat="server" Text="Update" CssClass="btn_normal_blue" OnClick="Assign_Update_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
+                    <asp:Button ID="btn_update_all_modal" runat="server" Text="Update" CssClass="btn_normal_blue" Visible="false" />
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
@@ -221,8 +273,8 @@
         function showModalEditData() {
             $("#editDataModal").modal('show');
         }
-        function hideModalEditData() {
-            $("#editDataModal").modal('hide');
+        function showModalAssign() {
+            $("#assignModal").modal('show');
         }
     </script>
 </asp:Content>

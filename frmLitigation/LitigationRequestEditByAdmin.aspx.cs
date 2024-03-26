@@ -141,15 +141,138 @@ namespace onlineLegalWF.frmLitigation
             if (e.CommandName == "openModal")
             {
                 int i = System.Convert.ToInt32(e.CommandArgument);
-                //var xreq_no = ((HiddenField)gvExcelFile.Rows[i].FindControl("gv_req_no")).Value;
-                var xcase_no = ((HiddenField)gvExcelFile.Rows[i].FindControl("gv_case_no")).Value;
-                var xcontract_no = ((Label)gvExcelFile.Rows[i].FindControl("gv_contract_no")).Text;
-                var xcustomer_no = ((Label)gvExcelFile.Rows[i].FindControl("gv_customer_no")).Text;
-                var xcustomer_name = ((Label)gvExcelFile.Rows[i].FindControl("gv_customer_name")).Text;
+                var xcase_no = ((HiddenField)gvExcelFile.Rows[i].FindControl("gv_case_no")).Value.ToString();
+                var xcontract_no = ((Label)gvExcelFile.Rows[i].FindControl("gv_contract_no")).Text.ToString();
+                var xcustomer_no = ((Label)gvExcelFile.Rows[i].FindControl("gv_customer_no")).Text.ToString();
+                var xcustomer_name = ((Label)gvExcelFile.Rows[i].FindControl("gv_customer_name")).Text.ToString();
 
                 ucLitigationCaseAttachment1.ini_object(xcase_no, xcontract_no, xcustomer_no, xcustomer_name);
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalEditData();", true);
+            }
+            else if(e.CommandName == "openModalAssign")
+            {
+                int i = System.Convert.ToInt32(e.CommandArgument);
+                var xcase_no = ((HiddenField)gvExcelFile.Rows[i].FindControl("gv_case_no")).Value.ToString();
+                var xassto_login = ((Label)gvExcelFile.Rows[i].FindControl("gv_assto_login")).Text.ToString();
+                var xstatus = ((Label)gvExcelFile.Rows[i].FindControl("gv_status")).Text.ToString();
+                hid_case_no.Value = xcase_no;
+                if (!string.IsNullOrEmpty(xassto_login))
+                {
+                    ddlNameList.SelectedValue = xassto_login;
+                }
+
+                rdlAction.SelectedValue = xstatus;
+
+                btn_update_modal.Visible = true;
+                btn_update_all_modal.Visible = false;
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalAssign();", true);
+            }
+        }
+
+        protected void Assign_Update_Click(object sender, EventArgs e)
+        {
+            var xcase_no = hid_case_no.Value.Trim();
+            var xassto_login = ddlNameList.SelectedValue.Trim();
+            var xstatus = rdlAction.SelectedValue.Trim();
+            var xupdate_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
+            int ret = 0;
+            string sqlupdate = @"UPDATE [li_litigation_req_case]
+                                   SET [status] = '"+xstatus+@"'
+                                      ,[assto_login] = '"+xassto_login+@"'
+	                                  ,[updated_datetime] = '"+xupdate_date+@"'
+                                 WHERE [case_no] = '"+xcase_no+"'";
+
+            ret = zdb.ExecNonQueryReturnID(sqlupdate, zconnstr);
+            if (ret > 0)
+            {
+                Response.Write("<script>alert('Successfully Updated');</script>");
+          //      setDataEditRequest(xreq_no);
+
+          //      if (xstatus == "In Progress")
+          //      {
+          //          //send mail
+          //          string subject = "";
+          //          string body = "";
+          //          string sqlmail = @"SELECT [process_id],commreg.[req_no],[req_date],commreg.[toc_regis_code],toc.[toc_regis_desc],[document_no],addi.subsidiary_code,comsub.subsidiary_name_th
+          //                              FROM li_comm_regis_request AS commreg
+										//INNER JOIN li_comm_regis_request_additional as addi on commreg.req_no = addi.req_no
+          //                              LEFT OUTER JOIN li_comm_regis_subsidiary AS comsub ON addi.subsidiary_code = comsub.subsidiary_code
+          //                              INNER JOIN li_type_of_comm_regis AS toc ON commreg.toc_regis_code = toc.toc_regis_code
+										//where commreg.[req_no] = '" + xreq_no + "' and addi.subsidiary_code = '" + xsubsidiary_code + "'";
+          //          var dt = zdb.ExecSql_DataTable(sqlmail, zconnstr);
+          //          if (dt.Rows.Count > 0)
+          //          {
+          //              var dr = dt.Rows[0];
+          //              string id = dr["req_no"].ToString();
+          //              subject = "เรื่อง " + dr["toc_regis_desc"].ToString().Trim() + " " + dr["subsidiary_name_th"].ToString().Trim();
+          //              var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+          //              body = "คุณได้รับมอบหมายงาน " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url + "frmcommregis/commregisrequesteditbyadmin.aspx?id=" + xreq_no + "'>Click</a>";
+
+
+
+          //              string pathfileins = "";
+
+          //              string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+          //              var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+          //              if (resfile.Rows.Count > 0)
+          //              {
+          //                  pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+
+          //                  string email = "";
+
+          //                  var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+          //                  ////get mail from db
+          //                  /////send mail to next_approve
+          //                  if (isdev != "true")
+          //                  {
+          //                      string sqlbpm = "select * from li_user where user_login = '" + xassto_login + "' ";
+          //                      System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+          //                      if (dtbpm.Rows.Count > 0)
+          //                      {
+          //                          email = dtbpm.Rows[0]["email"].ToString();
+
+          //                      }
+          //                      else
+          //                      {
+          //                          string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + xassto_login + "' ";
+          //                          System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+          //                          if (dtrpa.Rows.Count > 0)
+          //                          {
+          //                              email = dtrpa.Rows[0]["Email"].ToString();
+          //                          }
+          //                          else
+          //                          {
+          //                              email = "";
+          //                          }
+
+          //                      }
+          //                  }
+          //                  else
+          //                  {
+          //                      ////fix mail test
+          //                      email = "legalwfuat2024@gmail.com";
+          //                  }
+
+          //                  if (!string.IsNullOrEmpty(email))
+          //                  {
+          //                      _ = zsendmail.sendEmail(subject, email, body, pathfileins);
+          //                  }
+
+          //              }
+
+          //          }
+          //      }
+            }
+            else
+            {
+                Response.Write("<script>alert('Error !!!');</script>");
             }
         }
 
