@@ -16,7 +16,6 @@ namespace onlineLegalWF.frmLitigation
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
-        //public string zconnstr = ConfigurationSettings.AppSettings["BPMDB"].ToString();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
         public WFFunctions zwf = new WFFunctions();
         #endregion
@@ -72,8 +71,10 @@ namespace onlineLegalWF.frmLitigation
                 if (rescase.Rows.Count > 0)
                 {
                     List<LitigationCivilCaseData> listCivilCaseData = new List<LitigationCivilCaseData>();
+                    var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
                     foreach (DataRow item in rescase.Rows)
                     {
+                        string xurl_detail = host_url + "frmlitigation/litigationdetail.aspx?id=" + item["case_no"].ToString();
                         LitigationCivilCaseData civilCaseData = new LitigationCivilCaseData();
                         civilCaseData.req_no = item["req_no"].ToString();
                         civilCaseData.case_no = item["case_no"].ToString();
@@ -93,6 +94,7 @@ namespace onlineLegalWF.frmLitigation
                         civilCaseData.remark = item["remark"].ToString();
                         civilCaseData.status = item["status"].ToString();
                         civilCaseData.assto_login = item["assto_login"].ToString();
+                        civilCaseData.url_detail = xurl_detail;
                         listCivilCaseData.Add(civilCaseData);
                     }
                     gvExcelFile.DataSource = listCivilCaseData;
@@ -134,6 +136,7 @@ namespace onlineLegalWF.frmLitigation
             public string remark { get; set; }
             public string status { get; set; }
             public string assto_login { get; set; }
+            public string url_detail { get; set; }
         }
 
         protected void gv_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -168,6 +171,13 @@ namespace onlineLegalWF.frmLitigation
                 btn_update_all_modal.Visible = false;
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalAssign();", true);
+            }
+            else if (e.CommandName == "openNewTab")
+            {
+                int i = System.Convert.ToInt32(e.CommandArgument);
+                var xurl_detail = ((HiddenField)gvExcelFile.Rows[i].FindControl("hid_url_detail")).Value.ToString();
+
+                ScriptManager.RegisterStartupScript(this ,this.GetType(), "OpenWindow", "window.open('"+ xurl_detail + "','_newtab');", true);
             }
         }
 

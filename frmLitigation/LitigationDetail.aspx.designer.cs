@@ -11,7 +11,7 @@ namespace onlineLegalWF.frmLitigation
 {
 
 
-    public partial class LitigationCaseDetail
+    public partial class LitigationDetail
     {
 
         /// <summary>
@@ -42,129 +42,138 @@ namespace onlineLegalWF.frmLitigation
         protected global::System.Web.UI.WebControls.Panel Panel1;
 
         /// <summary>
-        /// case_no control.
+        /// Table1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox case_no;
+        protected global::System.Web.UI.WebControls.Table Table1;
 
         /// <summary>
-        /// court control.
+        /// row_gv_data control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox court;
+        protected global::System.Web.UI.WebControls.TableRow row_gv_data;
 
         /// <summary>
-        /// city control.
+        /// gvExcelFile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox city;
+        protected global::System.Web.UI.WebControls.GridView gvExcelFile;
 
         /// <summary>
-        /// county control.
+        /// Panel3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox county;
+        protected global::System.Web.UI.WebControls.Panel Panel3;
 
         /// <summary>
-        /// judge control.
+        /// ucLitigationCaseAttachment1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox judge;
+        protected global::onlineLegalWF.userControls.ucLitigationCaseAttachment ucLitigationCaseAttachment1;
 
         /// <summary>
-        /// case_desc control.
+        /// btn_litigation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox case_desc;
+        protected global::System.Web.UI.WebControls.Button btn_litigation;
 
         /// <summary>
-        /// plaintiff control.
+        /// hid_PID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox plaintiff;
+        protected global::System.Web.UI.WebControls.HiddenField hid_PID;
 
         /// <summary>
-        /// plaintiff_attorney control.
+        /// hid_caseNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox plaintiff_attorney;
+        protected global::System.Web.UI.WebControls.HiddenField hid_caseNo;
 
         /// <summary>
-        /// defendant control.
+        /// req_date control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox defendant;
+        protected global::System.Web.UI.WebControls.HiddenField req_date;
 
         /// <summary>
-        /// defendant_attorney control.
+        /// hid_case_no control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox defendant_attorney;
+        protected global::System.Web.UI.WebControls.HiddenField hid_case_no;
 
         /// <summary>
-        /// filing_date control.
+        /// rdlAction control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox filing_date;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdlAction;
 
         /// <summary>
-        /// trial_date control.
+        /// ddlNameList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox trial_date;
+        protected global::System.Web.UI.WebControls.DropDownList ddlNameList;
 
         /// <summary>
-        /// btn_update control.
+        /// btn_update_modal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_update;
+        protected global::System.Web.UI.WebControls.Button btn_update_modal;
 
         /// <summary>
-        /// btn_task control.
+        /// btn_update_all_modal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_task;
+        protected global::System.Web.UI.WebControls.Button btn_update_all_modal;
+
+        /// <summary>
+        /// lblPID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPID;
     }
 }

@@ -1,11 +1,11 @@
-﻿<%@ Page Title="Litigation Admin Edit" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationRequestEditByAdmin.aspx.cs" Inherits="onlineLegalWF.frmLitigation.LitigationRequestEditByAdmin" %>
+﻿<%@ Page Title="Litigation Detail" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationDetail.aspx.cs" Inherits="onlineLegalWF.frmLitigation.LitigationDetail" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
 <%@ Register Src="~/userControls/ucCommentlog.ascx" TagPrefix="uc4" TagName="ucCommentlog" %>
 <%@ Register Src="~/userControls/ucLitigationCaseAttachment.ascx" TagPrefix="uc5" TagName="ucLitigationCaseAttachment" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:Table ID="tb_main" runat="server" class="cell_content_100PC">
+    <asp:Table ID="tb_main" runat="server" CssClass="cell_content_100PC">
         <asp:TableRow>
             <asp:TableCell ColumnSpan="2">
                 <div style="background-color: gainsboro;">
@@ -18,61 +18,8 @@
             <asp:TableCell ColumnSpan="2" CssClass="cell_content_100PC">
                 <asp:Panel ID="Panel1" runat="server" CssClass="div_90">
                     <asp:Table ID="Table1" runat="server">
-                        <asp:TableRow>
-                            <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <label class="Label_md">Request No. </label>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                            <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:Label ID="req_no" runat="server" CssClass="Label_md" Text=""></asp:Label>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
-                            <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <label class="Label_md">Documnet No. </label>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                            <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:Label ID="doc_no" runat="server" CssClass="Label_md"></asp:Label>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
-                            <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <label class="Label_md">Type of Request </label>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                            <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:DropDownList ID="type_req" runat="server" Enabled="false" CssClass="Text_400">
-                                </asp:DropDownList>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
-                            <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <label class="Label_md">Subject </label>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                            <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:TextBox ID="subject" runat="server" Enabled="false" CssClass="Text_600"></asp:TextBox>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
-                            <asp:TableCell CssClass="cell_content_20PC_TR">
-                                <label class="Label_md">Description </label>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                            <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:TextBox ID="desc" runat="server" Enabled="false" CssClass="Text_600" TextMode="MultiLine" Height="100px"></asp:TextBox>
-                            </asp:TableCell>
-                            <asp:TableCell>&nbsp;</asp:TableCell>
-                        </asp:TableRow>
                         <asp:TableRow ID="row_gv_data" runat="server">
                             <asp:TableCell ColumnSpan="4">
-                                <asp:Label ID="Label1" runat="server"></asp:Label>
-                                <br />
                                 <asp:GridView ID="gvExcelFile" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="8pt" ForeColor="#333333" GridLines="None" CssClass="table w-100" OnRowCommand="gv_RowCommand">
                                     <Columns>
                                         <asp:TemplateField HeaderText="ลำดับ">
@@ -162,10 +109,8 @@
                                             <ItemTemplate>
                                                 <table>
                                                     <tr>
-                                                        <asp:HiddenField ID="hid_url_detail" runat="server" Value='<%# Bind("url_detail") %>' />
                                                         <%--<td><asp:ImageButton ID="gv_attach" runat="server" Height="20px" ImageUrl="~/images/icon_upload.png" CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModal" ToolTip="AttachMent" /></td>--%>
                                                         <td><asp:ImageButton ID="gv_btnEdit" runat="server" Height="20px" ImageUrl="~/images/icon_edit.png" CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModalAssign" ToolTip="Update" /></td>
-                                                        <td><asp:ImageButton ID="gv_btnDetail" runat="server" Height="20px" ImageUrl="~/images/icon_view.png" ToolTip="View Detail" CommandArgument="<%# Container.DataItemIndex %>" CommandName="openNewTab" /></td>
                                                     </tr>
                                                 </table>
                                             </ItemTemplate>
@@ -193,18 +138,19 @@
         <asp:TableRow CssClass="cell_content_100PC">
             <asp:TableCell ColumnSpan="2" CssClass="cell_content_100PC">
                 <asp:Panel ID="Panel3" runat="server" CssClass="div_90">
-                    <uc3:ucAttachment runat="server" ID="ucAttachment1" />
+                    <uc5:ucLitigationCaseAttachment runat="server" id="ucLitigationCaseAttachment1" />
                 </asp:Panel>
                 <br />
             </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow class="cell_content_100PC">
             <asp:TableCell ColumnSpan="2" CssClass="cell_content_100PC">
-                <uc4:ucCommentlog runat="server" ID="ucCommentlog1" />
+                <asp:Button ID="btn_litigation" runat="server" CssClass="btn_normal_blue" Text="Litigation" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_litigation_Click" />
             </asp:TableCell>
         </asp:TableRow>
     </asp:Table>
     <asp:HiddenField ID="hid_PID" runat="server" />
+    <asp:HiddenField ID="hid_caseNo" runat="server" />
     <asp:HiddenField ID="req_date" runat="server" />
     <div class="modal fade" id="assignModal" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -258,7 +204,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <asp:Label ID="lblPID" runat="server" CssClass="Label_sm"></asp:Label>
-    <div class="modal fade" id="editDataModal" role="dialog" style="">
+    <%--<div class="modal fade" id="editDataModal" role="dialog" style="">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header" style="border: 0;">
@@ -270,7 +216,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--%>
     <script type="text/javascript">
         function showModalEditData() {
             $("#editDataModal").modal('show');
@@ -278,6 +224,5 @@
         function showModalAssign() {
             $("#assignModal").modal('show');
         }
-        
     </script>
 </asp:Content>

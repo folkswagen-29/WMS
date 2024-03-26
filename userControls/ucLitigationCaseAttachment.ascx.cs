@@ -106,6 +106,7 @@ namespace onlineLegalWF.userControls
 
                 zdb.ExecNonQuery(sql, zconnstr);
                 note.Text = "";
+                Response.Write("<script>alert('Successfully Updated');</script>");
             }
             else
             {
@@ -154,6 +155,7 @@ namespace onlineLegalWF.userControls
 
                     zdb.ExecNonQuery(sql, zconnstr);
                     note.Text = "";
+                    Response.Write("<script>alert('Successfully Updated');</script>");
                 }
             }
 
