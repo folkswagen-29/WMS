@@ -211,18 +211,19 @@
             <div class="modal-content">
                 <div class="modal-header" style="border: 0;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Assign</h4>
+                    <h4 class="modal-title" style="font-family: tahoma;">Modal Assign</h4>
                 </div>
                 <div class="modal-body" style="font-size: 10pt; font-family: tahoma;">
                     <asp:HiddenField ID="hid_case_no" runat="server" />
                     <table>
                         <tr>
-                            <td class="cell_content_20PC_TR">
+                            <td class="cell_content_10PC_TR">
                                 <label class="Label_md">Status : </label>
                             </td>
-                            <td class="cell_content_80PC_TL">
+                            <td class="cell_content_90PC_TL">
                                 <asp:RadioButtonList ID="rdlAction" runat="server" RepeatDirection="Horizontal">
                                     <asp:ListItem Value="verify" Selected="True">verify</asp:ListItem>
+                                    <asp:ListItem Value="In Progress">In Progress</asp:ListItem>
                                     <asp:ListItem Value="Close Request & Proceeding">Close Request & Proceeding</asp:ListItem>
                                     <asp:ListItem Value="Close Request & Close Litigation">Close Request & Close Litigation</asp:ListItem>
                                     <asp:ListItem Value="Close Request & No Proceeding ">Close Request & No Proceeding</asp:ListItem>
@@ -230,10 +231,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="cell_content_20PC_TR">
+                            <td class="cell_content_10PC_TR">
                                 <label class="Label_md">Assign To : </label>
                             </td>
-                            <td class="cell_content_80PC_TL">
+                            <td class="cell_content_90PC_TL">
                                 <asp:DropDownList ID="ddlNameList" runat="server" CssClass="Text_200">
                                     <asp:ListItem Value="supoj.k">supoj.k</asp:ListItem>
                                     <asp:ListItem Value="peeranat.u">peeranat.u</asp:ListItem>

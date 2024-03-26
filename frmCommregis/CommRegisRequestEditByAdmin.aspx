@@ -693,7 +693,6 @@
                                 <asp:DropDownList ID="ddlNameList" runat="server" CssClass="Text_200">
                                     <asp:ListItem Value="apicha.w">apicha.w</asp:ListItem>
                                     <asp:ListItem Value="thunchanok.i">thunchanok.i</asp:ListItem>
-                                    <%--<asp:ListItem Value="apicha.w, thunchanok.i">apicha.w, thunchanok.i</asp:ListItem>--%>
                                 </asp:DropDownList>
                             </td>
                         </tr>

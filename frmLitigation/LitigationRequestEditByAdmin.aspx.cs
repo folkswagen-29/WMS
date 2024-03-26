@@ -177,7 +177,7 @@ namespace onlineLegalWF.frmLitigation
                 int i = System.Convert.ToInt32(e.CommandArgument);
                 var xurl_detail = ((HiddenField)gvExcelFile.Rows[i].FindControl("hid_url_detail")).Value.ToString();
 
-                ScriptManager.RegisterStartupScript(this ,this.GetType(), "OpenWindow", "window.open('"+ xurl_detail + "','_newtab');", true);
+                ScriptManager.RegisterStartupScript(this ,this.GetType(), "OpenWindow", "window.open('"+ xurl_detail + "','_blank');", true);
             }
         }
 
@@ -199,86 +199,86 @@ namespace onlineLegalWF.frmLitigation
             if (ret > 0)
             {
                 Response.Write("<script>alert('Successfully Updated');</script>");
-          //      setDataEditRequest(xreq_no);
+                setData(hid_PID.Value);
 
-          //      if (xstatus == "In Progress")
-          //      {
-          //          //send mail
-          //          string subject = "";
-          //          string body = "";
-          //          string sqlmail = @"SELECT [process_id],commreg.[req_no],[req_date],commreg.[toc_regis_code],toc.[toc_regis_desc],[document_no],addi.subsidiary_code,comsub.subsidiary_name_th
-          //                              FROM li_comm_regis_request AS commreg
-										//INNER JOIN li_comm_regis_request_additional as addi on commreg.req_no = addi.req_no
-          //                              LEFT OUTER JOIN li_comm_regis_subsidiary AS comsub ON addi.subsidiary_code = comsub.subsidiary_code
-          //                              INNER JOIN li_type_of_comm_regis AS toc ON commreg.toc_regis_code = toc.toc_regis_code
-										//where commreg.[req_no] = '" + xreq_no + "' and addi.subsidiary_code = '" + xsubsidiary_code + "'";
-          //          var dt = zdb.ExecSql_DataTable(sqlmail, zconnstr);
-          //          if (dt.Rows.Count > 0)
-          //          {
-          //              var dr = dt.Rows[0];
-          //              string id = dr["req_no"].ToString();
-          //              subject = "เรื่อง " + dr["toc_regis_desc"].ToString().Trim() + " " + dr["subsidiary_name_th"].ToString().Trim();
-          //              var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-          //              body = "คุณได้รับมอบหมายงาน " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url + "frmcommregis/commregisrequesteditbyadmin.aspx?id=" + xreq_no + "'>Click</a>";
+                //      if (xstatus == "In Progress")
+                //      {
+                //          //send mail
+                //          string subject = "";
+                //          string body = "";
+                //          string sqlmail = @"SELECT [process_id],commreg.[req_no],[req_date],commreg.[toc_regis_code],toc.[toc_regis_desc],[document_no],addi.subsidiary_code,comsub.subsidiary_name_th
+                //                              FROM li_comm_regis_request AS commreg
+                //INNER JOIN li_comm_regis_request_additional as addi on commreg.req_no = addi.req_no
+                //                              LEFT OUTER JOIN li_comm_regis_subsidiary AS comsub ON addi.subsidiary_code = comsub.subsidiary_code
+                //                              INNER JOIN li_type_of_comm_regis AS toc ON commreg.toc_regis_code = toc.toc_regis_code
+                //where commreg.[req_no] = '" + xreq_no + "' and addi.subsidiary_code = '" + xsubsidiary_code + "'";
+                //          var dt = zdb.ExecSql_DataTable(sqlmail, zconnstr);
+                //          if (dt.Rows.Count > 0)
+                //          {
+                //              var dr = dt.Rows[0];
+                //              string id = dr["req_no"].ToString();
+                //              subject = "เรื่อง " + dr["toc_regis_desc"].ToString().Trim() + " " + dr["subsidiary_name_th"].ToString().Trim();
+                //              var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                //              body = "คุณได้รับมอบหมายงาน " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url + "frmcommregis/commregisrequesteditbyadmin.aspx?id=" + xreq_no + "'>Click</a>";
 
 
 
-          //              string pathfileins = "";
+                //              string pathfileins = "";
 
-          //              string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+                //              string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
 
-          //              var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+                //              var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
 
-          //              if (resfile.Rows.Count > 0)
-          //              {
-          //                  pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+                //              if (resfile.Rows.Count > 0)
+                //              {
+                //                  pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
 
-          //                  string email = "";
+                //                  string email = "";
 
-          //                  var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
-          //                  ////get mail from db
-          //                  /////send mail to next_approve
-          //                  if (isdev != "true")
-          //                  {
-          //                      string sqlbpm = "select * from li_user where user_login = '" + xassto_login + "' ";
-          //                      System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+                //                  var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                //                  ////get mail from db
+                //                  /////send mail to next_approve
+                //                  if (isdev != "true")
+                //                  {
+                //                      string sqlbpm = "select * from li_user where user_login = '" + xassto_login + "' ";
+                //                      System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
 
-          //                      if (dtbpm.Rows.Count > 0)
-          //                      {
-          //                          email = dtbpm.Rows[0]["email"].ToString();
+                //                      if (dtbpm.Rows.Count > 0)
+                //                      {
+                //                          email = dtbpm.Rows[0]["email"].ToString();
 
-          //                      }
-          //                      else
-          //                      {
-          //                          string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + xassto_login + "' ";
-          //                          System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+                //                      }
+                //                      else
+                //                      {
+                //                          string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + xassto_login + "' ";
+                //                          System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
 
-          //                          if (dtrpa.Rows.Count > 0)
-          //                          {
-          //                              email = dtrpa.Rows[0]["Email"].ToString();
-          //                          }
-          //                          else
-          //                          {
-          //                              email = "";
-          //                          }
+                //                          if (dtrpa.Rows.Count > 0)
+                //                          {
+                //                              email = dtrpa.Rows[0]["Email"].ToString();
+                //                          }
+                //                          else
+                //                          {
+                //                              email = "";
+                //                          }
 
-          //                      }
-          //                  }
-          //                  else
-          //                  {
-          //                      ////fix mail test
-          //                      email = "legalwfuat2024@gmail.com";
-          //                  }
+                //                      }
+                //                  }
+                //                  else
+                //                  {
+                //                      ////fix mail test
+                //                      email = "legalwfuat2024@gmail.com";
+                //                  }
 
-          //                  if (!string.IsNullOrEmpty(email))
-          //                  {
-          //                      _ = zsendmail.sendEmail(subject, email, body, pathfileins);
-          //                  }
+                //                  if (!string.IsNullOrEmpty(email))
+                //                  {
+                //                      _ = zsendmail.sendEmail(subject, email, body, pathfileins);
+                //                  }
 
-          //              }
+                //              }
 
-          //          }
-          //      }
+                //          }
+                //      }
             }
             else
             {

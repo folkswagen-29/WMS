@@ -27,9 +27,7 @@ namespace onlineLegalWF.frmLitigation
                 {
                     setData(id);
                 }
-
             }
-
         }
 
         private void setData(string id)
@@ -82,7 +80,6 @@ namespace onlineLegalWF.frmLitigation
                 //ucCommentlog1.ini_object(pid);
             }
         }
-
         public class LitigationCivilCaseData
         {
             public string req_no { get; set; }
@@ -105,7 +102,6 @@ namespace onlineLegalWF.frmLitigation
             public string assto_login { get; set; }
             public string url_detail { get; set; }
         }
-
         protected void gv_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "openModal")
@@ -145,8 +141,7 @@ namespace onlineLegalWF.frmLitigation
         {
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
             var xurl = host_url + "frmlitigation/litigationcasedetail.aspx?id=" + hid_caseNo.Value;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenWindow", "window.open('" + xurl + "','_newtab');", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenWindow", "window.open('" + xurl + "','_blank');", true);
         }
 
         protected void Assign_Update_Click(object sender, EventArgs e)
@@ -167,7 +162,7 @@ namespace onlineLegalWF.frmLitigation
             if (ret > 0)
             {
                 Response.Write("<script>alert('Successfully Updated');</script>");
-                //      setDataEditRequest(xreq_no);
+                setData(hid_PID.Value);
 
                 //      if (xstatus == "In Progress")
                 //      {

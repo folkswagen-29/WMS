@@ -17,7 +17,7 @@
         <asp:TableRow CssClass="cell_content_100PC">
             <asp:TableCell ColumnSpan="2" CssClass="cell_content_100PC">
                 <asp:Panel ID="Panel1" runat="server" CssClass="div_90">
-                    <asp:Table ID="Table1" runat="server">
+                    <asp:Table ID="Table1" runat="server" CssClass="cell_content_100PC">
                         <asp:TableRow ID="row_gv_data" runat="server">
                             <asp:TableCell ColumnSpan="4">
                                 <asp:GridView ID="gvExcelFile" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="8pt" ForeColor="#333333" GridLines="None" CssClass="table w-100" OnRowCommand="gv_RowCommand">
@@ -157,7 +157,7 @@
             <div class="modal-content">
                 <div class="modal-header" style="border: 0;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Assign</h4>
+                    <h4 class="modal-title" style="font-family: tahoma;">Modal Assign</h4>
                 </div>
                 <div class="modal-body" style="font-size: 10pt; font-family: tahoma;">
                     <asp:HiddenField ID="hid_case_no" runat="server" />
@@ -169,6 +169,7 @@
                             <td class="cell_content_80PC_TL">
                                 <asp:RadioButtonList ID="rdlAction" runat="server" RepeatDirection="Horizontal">
                                     <asp:ListItem Value="verify" Selected="True">verify</asp:ListItem>
+                                    <asp:ListItem Value="In Progress">In Progress</asp:ListItem>
                                     <asp:ListItem Value="Close Request & Proceeding">Close Request & Proceeding</asp:ListItem>
                                     <asp:ListItem Value="Close Request & Close Litigation">Close Request & Close Litigation</asp:ListItem>
                                     <asp:ListItem Value="Close Request & No Proceeding ">Close Request & No Proceeding</asp:ListItem>
@@ -204,23 +205,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <asp:Label ID="lblPID" runat="server" CssClass="Label_sm"></asp:Label>
-    <%--<div class="modal fade" id="editDataModal" role="dialog" style="">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header" style="border: 0;">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Attachment</h4>
-                </div>
-                <div class="modal-body" style="font-size: 10pt; font-family: tahoma;">
-                    <uc5:ucLitigationCaseAttachment runat="server" id="ucLitigationCaseAttachment1" />
-                </div>
-            </div>
-        </div>
-    </div>--%>
+    
     <script type="text/javascript">
-        function showModalEditData() {
-            $("#editDataModal").modal('show');
-        }
         function showModalAssign() {
             $("#assignModal").modal('show');
         }

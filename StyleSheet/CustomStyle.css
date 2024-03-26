@@ -482,6 +482,20 @@ button.close {
     text-align: left;
     vertical-align: top;
 }
+.cell_content_90PC_TL {
+    padding: 5px;
+    border-color: transparent;
+    border-left: 0px;
+    border-top: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    min-width: 90%;
+    width: 90%;
+    /* min-height: 80px;*/
+    background-color: transparent;
+    text-align: left;
+    vertical-align: top;
+}
 .cell_content_100PC_TR {
     padding: 5px;
     border-color: transparent;
@@ -493,6 +507,20 @@ button.close {
     max-width: 100%;
     width: 100%;
    /* min-height: 80px;*/
+    background-color: transparent;
+    text-align: right;
+    vertical-align: top;
+}
+.cell_content_10PC_TR {
+    padding: 5px;
+    border-color: transparent;
+    border-left: 0px;
+    border-top: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    min-width: 10%;
+    width: 10%;
+    /*  min-height: 80px;*/
     background-color: transparent;
     text-align: right;
     vertical-align: top;
