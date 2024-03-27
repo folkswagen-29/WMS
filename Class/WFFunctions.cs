@@ -813,7 +813,7 @@ namespace onlineLegalWF.Class
                 }
                 else if (wfDefault_step.step_name == "Litigation Update" && wfDefault_step.process_code == "LIT")
                 {
-                    xurl = "/frmlitigation/litigationrequesteditbyadmin.aspx?req=" + wfDefault_step.process_id;
+                    xurl = "/frmlitigation/litigationrequesteditbyadmin.aspx?id=" + wfDefault_step.process_id;
                 }
                 else if (wfDefault_step.step_name == "Supervisor Approve" || wfDefault_step.step_name == "Registration Receive" || wfDefault_step.step_name == "Registration Update" && wfDefault_step.process_code == "CCR")
                 {

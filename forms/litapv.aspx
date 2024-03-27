@@ -34,9 +34,17 @@
                                 <asp:Label ID="subject" runat="server" CssClass="Label_md"></asp:Label>
                             </asp:TableCell>
                         </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell CssClass="cell_content_20PC_TR">
+                                <label class="Label_md">Description : </label>
+                            </asp:TableCell>
+                            <asp:TableCell CssClass="cell_content_80PC_TL">
+                                <asp:Label ID="desc" runat="server" CssClass="Label_md"></asp:Label>
+                            </asp:TableCell>
+                        </asp:TableRow>
                         <asp:TableRow ID="row_gv_data" runat="server">
                             <asp:TableCell ColumnSpan="4">
-                                <asp:GridView ID="gvExcelFile" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="8pt" ForeColor="#333333" GridLines="None" CssClass="table w-100" OnRowCommand="gv_RowCommand">
+                                <asp:GridView ID="gvExcelFile" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="8pt" ForeColor="#333333" BorderColor="#000" CssClass="table w-100">
                                     <Columns>
                                         <asp:TemplateField HeaderText="ลำดับ">
                                             <ItemTemplate>
@@ -124,6 +132,7 @@
                                     <SortedDescendingCellStyle BackColor="#FFFDF8" />
                                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                                 </asp:GridView>
+                                <br />
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
@@ -151,7 +160,7 @@
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
                 <asp:Button ID="btn_Approve" runat="server" CssClass="btn_normal_blue" Text="Approve" OnClick="btn_Approve_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
-                <asp:Button ID="btn_Reject" runat="server" CssClass="btn_normal_red" Text="Reject" OnClick="btn_Reject_Click" />
+                <asp:Button ID="btn_Reject" runat="server" CssClass="btn_normal_red" Text="Reject" OnClick="btn_Reject_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
             </td>
         </tr>
         <tr class="cell_content_100PC">

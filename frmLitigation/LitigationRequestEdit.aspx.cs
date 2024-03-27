@@ -859,7 +859,7 @@ namespace onlineLegalWF.frmLitigation
 
                     }
                     var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                    Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                    Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myrequest", false);
                 }
 
             }

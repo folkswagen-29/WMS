@@ -102,33 +102,33 @@ namespace onlineLegalWF.Class
                 res.date2 = data.date2;
             }
 
-            //string sql = "select * from wf_routing where process_id = '" + xprocess_id + "' ";
-            //var dt1 = zdb.ExecSql_DataTable(sql, zconnstr);
-            //if (dt1.Rows.Count > 0)
-            //{
-            //    for (int i = 0; i < dt1.Rows.Count; i++)
-            //    {
-            //        var dr = dt1.Rows[i];
+            string sql = "select * from wf_routing where process_id = '" + xprocess_id + "' ";
+            var dt1 = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt1.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt1.Rows.Count; i++)
+                {
+                    var dr = dt1.Rows[i];
 
-            //        if (dr["step_name"].ToString() == "Start")
-            //        {
-            //            if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
-            //            {
-            //                res.sign_name1 = "Approved by system";
-            //                res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
-            //            }
-            //        }
-            //        else if (dr["step_name"].ToString() == "Supervisor Approve")
-            //        {
-            //            if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
-            //            {
-            //                res.sign_name2 = "Approved by system";
-            //                res.date2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
-            //            }
-            //        }
+                    if (dr["step_name"].ToString() == "Start")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.sign_name1 = "Approved by system";
+                            res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    else if (dr["step_name"].ToString() == "Head of Treasury Operation Approve")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.sign_name2 = "Approved by system";
+                            res.date2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
 
-            //    }
-            //}
+                }
+            }
 
             var dtStr = genTagData(res);
             return dtStr;
