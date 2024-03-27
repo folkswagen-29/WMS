@@ -60,7 +60,7 @@ namespace onlineLegalWF.forms
                     subject.Text = resinsreq.Rows[0]["lit_subject"].ToString();
                     desc.Text = resinsreq.Rows[0]["lit_desc"].ToString();
                     var xtype_req = resinsreq.Rows[0]["tof_litigationreq_code"].ToString();
-
+                    row_gv_data.Visible = false;
                     if (xtype_req == "01") 
                     {
                         string sql = @"select lit.[process_id],reqcase.[req_no],[case_no],[no],[contract_no],[bu_name],[customer_no],[customer_name],[customer_room],[overdue_desc],[outstanding_debt],[outstanding_debt_ack_of_debt],[fine_debt]
@@ -72,6 +72,7 @@ namespace onlineLegalWF.forms
                         var res = zdb.ExecSql_DataTable(sql, zconnstr);
                         if (res.Rows.Count > 0)
                         {
+                            row_gv_data.Visible = true;
                             List<LitigationCivilCaseData> listCivilCaseData = new List<LitigationCivilCaseData>();
 
                             foreach (DataRow item in res.Rows)

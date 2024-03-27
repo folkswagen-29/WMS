@@ -91,7 +91,7 @@ namespace onlineLegalWF.Class
                 var dr0 = dt0.Rows[0];
                 res.docno = dr0["document_no"].ToString().Trim();
                 res.subject = dr0["lit_subject"].ToString().Trim();
-                res.reqdate = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["req_date"]), "th").Trim();
+                res.reqdate = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["req_date"]), "en").Trim();
                 res.desc = dr0["lit_desc"].ToString().Trim();
                 res.to = "คุณอร่าม รัตนโชติ Head of Litigation and Registration";
                 res.name1 = data.name1;

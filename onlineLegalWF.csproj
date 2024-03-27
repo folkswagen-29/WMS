@@ -184,6 +184,7 @@
     <Content Include="forms\Complete.aspx" />
     <Content Include="forms\LegalAssign.aspx" />
     <Content Include="forms\litapv.aspx" />
+    <Content Include="forms\litcomplete.aspx" />
     <Content Include="forms\permitapv.aspx" />
     <Content Include="forms\permitcomplete.aspx" />
     <Content Include="forms\RequesterCloseJob.aspx" />
@@ -384,6 +385,13 @@
     </Compile>
     <Compile Include="forms\litapv.aspx.designer.cs">
       <DependentUpon>litapv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\litcomplete.aspx.cs">
+      <DependentUpon>litcomplete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\litcomplete.aspx.designer.cs">
+      <DependentUpon>litcomplete.aspx</DependentUpon>
     </Compile>
     <Compile Include="forms\permitapv.aspx.cs">
       <DependentUpon>permitapv.aspx</DependentUpon>
