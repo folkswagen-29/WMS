@@ -123,6 +123,15 @@ namespace onlineLegalWF.forms
         protected global::System.Web.UI.WebControls.Button btn_Approve;
 
         /// <summary>
+        /// btn_assign control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_assign;
+
+        /// <summary>
         /// btn_Reject control.
         /// </summary>
         /// <remarks>
@@ -184,6 +193,33 @@ namespace onlineLegalWF.forms
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_external_domain;
+
+        /// <summary>
+        /// hid_assto_login control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hid_assto_login;
+
+        /// <summary>
+        /// ddlAssign_NameList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAssign_NameList;
+
+        /// <summary>
+        /// btn_update_modal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_update_modal;
 
         /// <summary>
         /// lblPID control.

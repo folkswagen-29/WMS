@@ -404,5 +404,78 @@ namespace onlineLegalWF.frmLitigation
             }
         }
 
+        protected void btn_Reject_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalReject();", true);
+        }
+        protected void btn_reject_submit_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(comment.Text))
+            {
+                // comment not found 
+                Response.Write("<script> alert('Warning! Please input comment');</script>");
+
+            }
+            else
+            {
+                //insert comment
+                string xpid = hid_PID.Value;
+                string xcomment = comment.Text.Trim();
+                string xcreate_date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff", new CultureInfo("en-US"));
+                string xby_login = Session["user_login"].ToString();
+
+                // insert into db
+                string sql = @"INSERT INTO [dbo].[wf_comment_log] 
+                                        ([pid],[comment],[by_login],[created_datetime])
+                                         VALUES
+                                               ('" + xpid + @"'
+                                               ,'" + xcomment + @"'
+                                               ,'" + xby_login + @"'
+                                               ,'" + xcreate_date + @"')";
+                zdb.ExecNonQuery(sql, zconnstr);
+
+                //submit workflow
+                string process_code = Request.QueryString["pc"];
+                int version_no = 1;
+                string xbu_code = "";
+
+                // getCurrentStep
+                var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+
+                // check session_user
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+                    var empFunc = new EmpInfo();
+
+                    //get data user
+                    var emp = empFunc.getEmpInfo(xlogin_name);
+
+                    // set WF Attributes
+                    wfAttr.subject = "เรื่อง " + subject.Text.Trim();
+                    wfAttr.assto_login = emp.next_line_mgr_login;
+                    wfAttr.wf_status = "REJECT";
+                    wfAttr.submit_answer = "REJECT";
+                    wfAttr.submit_by = wfAttr.submit_by;
+                    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, xbu_code);
+                    wfAttr.updated_by = emp.user_login;
+
+                    // wf.updateProcess
+                    var wfA_NextStep = zwf.updateProcess(wfAttr);
+                    wfA_NextStep.wf_status = "SAVE";
+                    wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, xbu_code);
+                    string status = zwf.Insert_NextStep(wfA_NextStep);
+
+                    if (status == "Success")
+                    {
+                        var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                    }
+
+                }
+            }
+
+        }
+
     }
 }

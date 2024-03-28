@@ -160,6 +160,7 @@
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
                 <asp:Button ID="btn_Approve" runat="server" CssClass="btn_normal_blue" Text="Approve" OnClick="btn_Approve_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
+                <asp:Button ID="btn_assign" runat="server" CssClass="btn_normal_blue" Text="Assign" Visible="false" OnClick="btn_assign_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
                 <asp:Button ID="btn_Reject" runat="server" CssClass="btn_normal_red" Text="Reject" OnClick="btn_Reject_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
             </td>
         </tr>
@@ -177,6 +178,40 @@
     <asp:HiddenField ID="hid_PID" runat="server" />
     <asp:HiddenField ID="hid_bucode" runat="server" />
     <asp:HiddenField ID="hid_external_domain" runat="server" />
+    <asp:HiddenField ID="hid_assto_login" runat="server" />
+    <div class="modal fade" id="assignModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="border: 0;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="font-family: tahoma;">Modal Assign</h4>
+                </div>
+                <div class="modal-body" style="font-size: 10pt; font-family: tahoma;">
+                    <table>
+                        <tr>
+                            <td class="cell_content_10PC_TR">
+                                <label class="Label_md">Assign To : </label>
+                            </td>
+                            <td class="cell_content_90PC_TL">
+                                <asp:DropDownList ID="ddlAssign_NameList" runat="server" CssClass="Text_200">
+                                    <asp:ListItem Value="supoj.k">supoj.k</asp:ListItem>
+                                    <asp:ListItem Value="peeranat.u">peeranat.u</asp:ListItem>
+                                    <asp:ListItem Value="nuttanun.su">nuttanun.su</asp:ListItem>
+                                    <asp:ListItem Value="supat.ku">supat.ku</asp:ListItem>
+                                    <asp:ListItem Value="wiwek.s">wiwek.s</asp:ListItem>
+                                    <asp:ListItem Value="phooriwit.l">phooriwit.l</asp:ListItem>
+                                    <asp:ListItem Value="nares.l">nares.l</asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer" style="text-align: left; border-top: 0;">
+                    <asp:Button ID="btn_update_modal" runat="server" Text="Update" CssClass="btn_normal_blue" OnClick="Assign_Update_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
@@ -201,6 +236,9 @@
     <script type="text/javascript">
         function showModalReject() {
             $("#modalreject").modal('show');
+        }
+        function showModalAssign() {
+            $("#assignModal").modal('show');
         }
     </script>
 </asp:Content>

@@ -807,13 +807,13 @@ namespace onlineLegalWF.Class
                     }
 
                 }
-                else if (wfDefault_step.step_name == "Head of Treasury Operation Approve" && wfDefault_step.process_code == "LIT")
+                else if (wfDefault_step.step_name == "Head of Treasury Operation Approve" || wfDefault_step.step_name == "Head of Litigation Assign" && wfDefault_step.process_code == "LIT")
                 {
                     xurl = "/forms/litapv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + "&st=" + wfDefault_step.step_name;
                 }
                 else if (wfDefault_step.step_name == "Litigation Update" && wfDefault_step.process_code == "LIT")
                 {
-                    xurl = "/frmlitigation/litigationrequesteditbyadmin.aspx?id=" + wfDefault_step.process_id;
+                    xurl = "/frmlitigation/litigationrequesteditbyadmin.aspx?id=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                 }
                 else if (wfDefault_step.step_name == "Supervisor Approve" || wfDefault_step.step_name == "Registration Receive" || wfDefault_step.step_name == "Registration Update" && wfDefault_step.process_code == "CCR")
                 {
@@ -1506,9 +1506,13 @@ namespace onlineLegalWF.Class
                 {
                     xname = "sarawut.l"; //Head of Treasury Operation Approve account
                 }
+                else if (next_step_name == "Head of Litigation Assign")
+                {
+                    xname = "aram.r"; //Head of Litigation Assign account
+                }
                 else if (next_step_name == "Litigation Update")
                 {
-                    xname = "supoj.k, peeranat.u, nuttanun.su, supat.ku, wiwek.s, phooriwit.l, nares.l"; //Litigation Update account
+                    xname = submit_by; //Head of Litigation Assign Select Assign value from display add to variable submit_by
                 }
                 else if (next_step_name == "End")
                 {

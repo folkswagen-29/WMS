@@ -126,6 +126,16 @@ namespace onlineLegalWF.Class
                             res.date2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
+                    else if (dr["step_name"].ToString() == "Edit Request")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.sign_name1 = "Approved by system";
+                            res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                            res.sign_name2 = "";
+                            res.date2 = "";
+                        }
+                    }
 
                 }
             }

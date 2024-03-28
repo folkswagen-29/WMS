@@ -1,4 +1,6 @@
-﻿using onlineLegalWF.Class;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.Office.Interop.Word;
+using onlineLegalWF.Class;
 using onlineLegalWF.userControls;
 using System;
 using System.Collections.Generic;
@@ -107,6 +109,13 @@ namespace onlineLegalWF.forms
                     initDataAttachAndComment(resinsreq.Rows[0]["process_id"].ToString());
 
                     getDocument(id);
+                }
+
+                string st_name = Request.QueryString["st"];
+                if (st_name == "Head of Litigation Assign") 
+                {
+                    btn_Approve.Visible = false;
+                    btn_assign.Visible = true;
                 }
             }
         }
@@ -281,7 +290,8 @@ namespace onlineLegalWF.forms
                                     ////get mail from db
                                     if (isdev != "true")
                                     {
-                                        emailLitigation = new string[] { "aram.r@assetworldcorp-th.com", "supoj.k@assetworldcorp-th.com", "peeranat.u@assetworldcorp-th.com", "nuttanun.su@assetworldcorp-th.com", "supat.ku@assetworldcorp-th.com", "wiwek.s@assetworldcorp-th.com", "phooriwit.l@assetworldcorp-th.com", "nares.l@assetworldcorp-th.com" };
+                                        //emailLitigation = new string[] { "aram.r@assetworldcorp-th.com", "supoj.k@assetworldcorp-th.com", "peeranat.u@assetworldcorp-th.com", "nuttanun.su@assetworldcorp-th.com", "supat.ku@assetworldcorp-th.com", "wiwek.s@assetworldcorp-th.com", "phooriwit.l@assetworldcorp-th.com", "nares.l@assetworldcorp-th.com" };
+                                        emailLitigation = new string[] { "aram.r@assetworldcorp-th.com" };
                                     }
                                     else
                                     {
@@ -291,7 +301,7 @@ namespace onlineLegalWF.forms
 
                                     if (emailLitigation.Length > 0)
                                     {
-                                        _ = zsendmail.sendEmails(subject + " Mail To Litigation", emailLitigation, body, pathfile);
+                                        _ = zsendmail.sendEmails(subject + " Mail To Head Of Litigation", emailLitigation, body, pathfile);
                                     }
                                 }
 
@@ -406,7 +416,7 @@ namespace onlineLegalWF.forms
 
             var rdoc = new ReplaceDocx.Class.ReplaceDocx();
 
-            DataTable dtStr = zreplacelitigation.BindTagData(pid, data);
+            System.Data.DataTable dtStr = zreplacelitigation.BindTagData(pid, data);
 
             ReplaceDocx.Class.ReplaceDocx repl = new ReplaceDocx.Class.ReplaceDocx();
             var jsonDTStr = repl.DataTableToJSONWithStringBuilder(dtStr);
@@ -432,6 +442,128 @@ namespace onlineLegalWF.forms
 
             repl.convertDOCtoPDF(outputfn, outputfn.Replace(".docx", ".pdf"), false);
 
+        }
+
+        protected void btn_assign_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopupAssign", "showModalAssign();", true);
+        }
+        protected void Assign_Update_Click(object sender, EventArgs e)
+        {
+            hid_assto_login.Value = ddlAssign_NameList.SelectedValue;
+
+            string process_code = Request.QueryString["pc"];
+            int version_no = 1;
+
+            if (!string.IsNullOrEmpty(process_code))
+            {
+
+                // getCurrentStep
+                var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+
+                // check session_user
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+                    var empFunc = new EmpInfo();
+
+                    //get data user
+                    var emp = empFunc.getEmpInfo(xlogin_name);
+
+                    // set WF Attributes
+                    wfAttr.external_domain = hid_external_domain.Value;
+                    wfAttr.subject = subject.Text.Trim();
+                    wfAttr.assto_login = emp.next_line_mgr_login;
+                    wfAttr.wf_status = wfAttr.step_name + " Assigned";
+                    wfAttr.submit_answer = "ASSIGNED";
+                    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, wfAttr.process_id, hid_bucode.Value);
+                    wfAttr.updated_by = emp.user_login;
+                    wfAttr.submit_by = wfAttr.submit_by;
+                    // wf.updateProcess
+                    var wfA_NextStep = zwf.updateProcess(wfAttr);
+                    wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, hid_assto_login.Value, wfAttr.process_id, hid_bucode.Value);
+                    wfA_NextStep.submit_by = wfA_NextStep.submit_by;
+                    string status = zwf.Insert_NextStep(wfA_NextStep);
+
+                    if (status == "Success")
+                    {
+                        // check processcode loop gendocument
+                        if (wfAttr.step_name == "Head of Litigation Assign")
+                        {
+                            GenDocumnetLitigation(lblPID.Text, wfAttr.submit_by);
+                            string subject = "";
+                            string body = "";
+                            string sql = @"select * from li_litigation_request where process_id = '" + wfAttr.process_id + "'";
+                            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dr = dt.Rows[0];
+                                string id = dr["req_no"].ToString();
+                                subject = wfAttr.subject;
+                                var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                                body = "คุณได้รับมอบหมายให้ดำเนินการเอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+
+                                string pathfile = "";
+
+                                string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                                var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                                if (resfile.Rows.Count > 0)
+                                {
+                                    pathfile = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+
+                                    string email;
+
+                                    var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                    ////get mail from db
+                                    if (isdev != "true")
+                                    {
+                                        string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                        System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                        if (dtbpm.Rows.Count > 0)
+                                        {
+                                            email = dtbpm.Rows[0]["email"].ToString();
+
+                                        }
+                                        else
+                                        {
+                                            string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                            System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                            if (dtrpa.Rows.Count > 0)
+                                            {
+                                                email = dtrpa.Rows[0]["Email"].ToString();
+                                            }
+                                            else
+                                            {
+                                                email = "";
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ////fix mail test
+                                        email = "legalwfuat2024@gmail.com";
+                                    }
+
+                                    if (!string.IsNullOrEmpty(email))
+                                    {
+                                        _ = zsendmail.sendEmail(subject + " Mail To Litigation", email, body, pathfile);
+                                    }
+                                }
+
+                            }
+                        }
+
+                        var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                    }
+
+                }
+            }
         }
     }
 }
