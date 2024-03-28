@@ -310,14 +310,6 @@ namespace onlineLegalWF.Class
                             res.propdate1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
-                    else if (dr["step_name"].ToString() == "Edit Request")
-                    {
-                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
-                        {
-                            res.sign_propname1 = "Approved by system";
-                            res.propdate1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
-                        }
-                    }
                     else if (dr["step_name"].ToString() == "GM Approve")
                     {
                         if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
@@ -380,6 +372,30 @@ namespace onlineLegalWF.Class
                         {
                             res.sign_awcname3 = "Approved by system";
                             res.awcdate3 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    else if (dr["step_name"].ToString() == "Edit Request")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.sign_propname1 = "Approved by system";
+                            res.propdate1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                            res.sign_propname2 = "";
+                            res.propdate2 = "";
+                            res.sign_propname3 = "";
+                            res.propdate3 = "";
+                            res.sign_propname3_1 = "";
+                            res.propdate3_1 = "";
+                            res.sign_awcname1 = "";
+                            res.awcdate1 = "";
+                            res.sign_awcname1_2 = "";
+                            res.awcdate1_2 = "";
+                            res.sign_awcname1_3 = "";
+                            res.awcdate1_3 = "";
+                            res.sign_awcname2 = "";
+                            res.awcdate2 = "";
+                            res.sign_awcname3 = "";
+                            res.awcdate3 = "";
                         }
                     }
                 }

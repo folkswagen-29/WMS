@@ -211,17 +211,6 @@ namespace onlineLegalWF.Class
                             res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
-                    else if (dr["step_name"].ToString() == "Edit Request")
-                    {
-                        res.name1 = data.name1;
-                        res.position1 = data.position1;
-                        res.date1 = data.date1;
-                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
-                        {
-                            res.sign_name1 = "Approved by system";
-                            res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
-                        }
-                    }
                     else if (dr["step_name"].ToString() == "GM Approve")
                     {
                         res.name2 = data.name2;
@@ -264,6 +253,26 @@ namespace onlineLegalWF.Class
                         {
                             res.sign_name4 = "Approved by system";
                             res.date4 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    else if (dr["step_name"].ToString() == "Edit Request")
+                    {
+                        res.name1 = data.name1;
+                        res.position1 = data.position1;
+                        res.date1 = data.date1;
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.sign_name1 = "Approved by system";
+                            res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+
+                            res.sign_name2 = "";
+                            res.date2 = "";
+                            res.sign_name3 = "";
+                            res.date3 = "";
+                            res.sign_name3_1 = "";
+                            res.date3_1 = "";
+                            res.sign_name4 = "";
+                            res.date4 = "";
                         }
                     }
 

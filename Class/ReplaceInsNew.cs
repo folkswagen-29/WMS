@@ -294,6 +294,25 @@ namespace onlineLegalWF.Class
                             res.date5 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
+                    else if (dr["step_name"].ToString() == "Edit Request")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.sign_name1 = "";
+                            res.date1 = "";
+                            res.sign_name2 = "";
+                            res.date2 = "";
+                            res.sign_name22 = "";
+                            res.date22 = "";
+                            res.sign_name3 = "";
+                            res.date3 = "";
+                            res.sign_name4 = "";
+                            res.date4 = "";
+                            res.cb1 = "";
+                            res.sign_name5 = "";
+                            res.date5 = "";
+                        }
+                    }
 
                 }
             }
