@@ -2570,7 +2570,7 @@ namespace onlineLegalWF.forms
                         xbu_code = resinsreq.Rows[0]["bu_code"].ToString();
                     }
                 }
-                else if (process_code == "INR_CLAIM")
+                else if (process_code == "INR_CLAIM" || process_code == "INR_CLAIM_2" || process_code == "INR_CLAIM_3")
                 {
                     string sqlinsreq = "select * from li_insurance_claim where process_id='" + lblPID.Text + "'";
                     var resinsreq = zdb.ExecSql_DataTable(sqlinsreq, zconnstr);
@@ -2611,6 +2611,281 @@ namespace onlineLegalWF.forms
 
                     if (status == "Success")
                     {
+                        if (process_code == "INR_NEW")
+                        {
+                            GenDocumnetInsNew(lblPID.Text);
+                            string subject = "";
+                            string body = "";
+                            string sqlins = @"select * from li_insurance_request where process_id = '" + wfAttr.process_id + "'";
+                            var dt = zdb.ExecSql_DataTable(sqlins, zconnstr);
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dr = dt.Rows[0];
+                                string id = dr["req_no"].ToString();
+                                subject = dr["subject"].ToString();
+                                var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้ถูก Reject กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+
+                                string pathfileins = "";
+                                string outputdirectory = "";
+
+                                string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                                var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                                if (resfile.Rows.Count > 0)
+                                {
+                                    pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+                                    outputdirectory = resfile.Rows[0]["output_directory"].ToString();
+
+                                    List<string> listpdf = new List<string>();
+                                    listpdf.Add(pathfileins);
+
+                                    string sqlattachfile = "select * from wf_attachment where pid = '" + wfAttr.process_id + "' and e_form IS NULL";
+
+                                    var resattachfile = zdb.ExecSql_DataTable(sqlattachfile, zconnstr);
+
+                                    if (resattachfile.Rows.Count > 0)
+                                    {
+                                        foreach (DataRow item in resattachfile.Rows)
+                                        {
+                                            listpdf.Add(item["attached_filepath"].ToString());
+                                        }
+                                    }
+                                    //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
+                                    string[] pdfFiles = listpdf.ToArray();
+
+                                    string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
+
+                                    string email = "";
+
+                                    var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                    ////get mail from db
+                                    /////send mail to next_approve
+                                    if (isdev != "true")
+                                    {
+                                        string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                        System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                        if (dtbpm.Rows.Count > 0)
+                                        {
+                                            email = dtbpm.Rows[0]["email"].ToString();
+
+                                        }
+                                        else
+                                        {
+                                            string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                            System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                            if (dtrpa.Rows.Count > 0)
+                                            {
+                                                email = dtrpa.Rows[0]["Email"].ToString();
+                                            }
+                                            else
+                                            {
+                                                email = "";
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ////fix mail test
+                                        email = "legalwfuat2024@gmail.com";
+                                    }
+
+                                    if (!string.IsNullOrEmpty(email))
+                                    {
+                                        _ = zsendmail.sendEmail("Reject "+ subject + " Mail To Requester", email, body, filepath);
+                                    }
+                                }
+
+                            }
+                        }
+                        else if (process_code == "INR_CLAIM" || process_code == "INR_CLAIM_2" || process_code == "INR_CLAIM_3")
+                        {
+                            GenDocumnetInsClaim(lblPID.Text);
+                            string subject = "";
+                            string body = "";
+                            string sqlclaim = @"select * from li_insurance_claim where process_id = '" + wfAttr.process_id + "'";
+                            var dt = zdb.ExecSql_DataTable(sqlclaim, zconnstr);
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dr = dt.Rows[0];
+                                string id = dr["claim_no"].ToString();
+                                subject = dr["incident"].ToString();
+                                var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้ถูก Reject กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+
+                                string pathfileins = "";
+                                string outputdirectory = "";
+
+                                string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                                var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                                if (resfile.Rows.Count > 0)
+                                {
+                                    pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+                                    outputdirectory = resfile.Rows[0]["output_directory"].ToString();
+
+                                    List<string> listpdf = new List<string>();
+                                    listpdf.Add(pathfileins);
+
+                                    string sqlattachfile = "select * from wf_attachment where pid = '" + wfAttr.process_id + "' and e_form IS NULL";
+
+                                    var resattachfile = zdb.ExecSql_DataTable(sqlattachfile, zconnstr);
+
+                                    if (resattachfile.Rows.Count > 0)
+                                    {
+                                        foreach (DataRow item in resattachfile.Rows)
+                                        {
+                                            listpdf.Add(item["attached_filepath"].ToString());
+                                        }
+                                    }
+                                    //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
+                                    string[] pdfFiles = listpdf.ToArray();
+
+                                    string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
+
+                                    string email = "";
+
+                                    var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                    ////get mail from db
+                                    /////send mail to next_approve
+                                    if (isdev != "true")
+                                    {
+                                        string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                        System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                        if (dtbpm.Rows.Count > 0)
+                                        {
+                                            email = dtbpm.Rows[0]["email"].ToString();
+
+                                        }
+                                        else
+                                        {
+                                            string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                            System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                            if (dtrpa.Rows.Count > 0)
+                                            {
+                                                email = dtrpa.Rows[0]["Email"].ToString();
+                                            }
+                                            else
+                                            {
+                                                email = "";
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ////fix mail test
+                                        email = "legalwfuat2024@gmail.com";
+                                    }
+
+                                    if (!string.IsNullOrEmpty(email))
+                                    {
+                                        _ = zsendmail.sendEmail("Reject " + subject + " Mail To Requester", email, body, filepath);
+                                    }
+
+                                }
+
+                            }
+                        }
+                        else if (process_code == "INR_RENEW")
+                        {
+                            GenDocumnetInsRenew(lblPID.Text);
+                            string subject = "";
+                            string body = "";
+                            string sqlre = @"select * from li_insurance_request where process_id = '" + wfAttr.process_id + "'";
+                            var dt = zdb.ExecSql_DataTable(sqlre, zconnstr);
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dr = dt.Rows[0];
+                                string id = dr["req_no"].ToString();
+                                subject = dr["subject"].ToString();
+                                var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้ถูก Reject กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+
+                                string pathfileins = "";
+                                string outputdirectory = "";
+
+                                string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                                var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                                if (resfile.Rows.Count > 0)
+                                {
+                                    pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+                                    outputdirectory = resfile.Rows[0]["output_directory"].ToString();
+
+                                    List<string> listpdf = new List<string>();
+                                    listpdf.Add(pathfileins);
+
+                                    string sqlattachfile = "select * from wf_attachment where pid = '" + wfAttr.process_id + "' and e_form IS NULL";
+
+                                    var resattachfile = zdb.ExecSql_DataTable(sqlattachfile, zconnstr);
+
+                                    if (resattachfile.Rows.Count > 0)
+                                    {
+                                        foreach (DataRow item in resattachfile.Rows)
+                                        {
+                                            listpdf.Add(item["attached_filepath"].ToString());
+                                        }
+                                    }
+                                    //get list pdf file from tb z_replacedocx_log where replacedocx_reqno
+                                    string[] pdfFiles = listpdf.ToArray();
+
+                                    string filepath = zmergepdf.mergefilePDF(pdfFiles, outputdirectory);
+
+                                    string email = "";
+
+                                    var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                    ////get mail from db
+                                    /////send mail to next_approve
+                                    if (isdev != "true")
+                                    {
+                                        string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                        System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                        if (dtbpm.Rows.Count > 0)
+                                        {
+                                            email = dtbpm.Rows[0]["email"].ToString();
+
+                                        }
+                                        else
+                                        {
+                                            string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                            System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                            if (dtrpa.Rows.Count > 0)
+                                            {
+                                                email = dtrpa.Rows[0]["Email"].ToString();
+                                            }
+                                            else
+                                            {
+                                                email = "";
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ////fix mail test
+                                        email = "legalwfuat2024@gmail.com";
+                                    }
+
+                                    if (!string.IsNullOrEmpty(email))
+                                    {
+                                        _ = zsendmail.sendEmail("Reject " + subject + " Mail To Requester", email, body, filepath);
+                                    }
+                                }
+
+                            }
+                        }
+
                         var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
                         Response.Redirect(host_url+"legalportal/legalportal.aspx?m=myworklist", false);
                     }

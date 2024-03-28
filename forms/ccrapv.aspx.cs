@@ -249,6 +249,90 @@ namespace onlineLegalWF.forms
 
                     if (status == "Success")
                     {
+                        if (process_code == "CCR")
+                        {
+                            GenDocumnetCCRRegis(lblPID.Text, wfAttr.submit_by);
+                            string subject = "";
+                            string body = "";
+                            string sqlccr = @"SELECT [process_id],[req_no],[req_date],commreg.[toc_regis_code],toc.[toc_regis_desc],commreg.[subsidiary_code],[document_no],[mt_res_desc],[mt_res_no],[mt_res_date],
+                                                CASE
+                                                WHEN commreg.subsidiary_code IS NULL THEN commreg.company_name_th
+                                                ELSE comsub.subsidiary_name_th
+                                                END AS company_name_th,
+                                                CASE
+                                                WHEN commreg.subsidiary_code IS NULL THEN commreg.company_name_en
+                                                ELSE comsub.subsidiary_name_en
+                                                END AS company_name_en,
+                                                [isrdregister],[status],[updated_datetime]
+                                                FROM li_comm_regis_request AS commreg
+                                                LEFT OUTER JOIN li_comm_regis_subsidiary AS comsub ON commreg.subsidiary_code = comsub.subsidiary_code
+                                                INNER JOIN li_type_of_comm_regis AS toc ON commreg.toc_regis_code = toc.toc_regis_code  
+                                                where process_id = '" + wfAttr.process_id + "'";
+                            var dt = zdb.ExecSql_DataTable(sqlccr, zconnstr);
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dr = dt.Rows[0];
+                                string id = dr["req_no"].ToString();
+                                subject = wfAttr.subject;
+                                var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้ถูก Reject กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+
+                                string pathfilecommregis = "";
+
+                                string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                                var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                                if (resfile.Rows.Count > 0)
+                                {
+                                    pathfilecommregis = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+
+                                    string email = "";
+
+                                    var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                    ////get mail from db
+                                    /////send mail to next_approve
+                                    if (isdev != "true")
+                                    {
+                                        string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                        System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                        if (dtbpm.Rows.Count > 0)
+                                        {
+                                            email = dtbpm.Rows[0]["email"].ToString();
+
+                                        }
+                                        else
+                                        {
+                                            string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                            System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                            if (dtrpa.Rows.Count > 0)
+                                            {
+                                                email = dtrpa.Rows[0]["Email"].ToString();
+                                            }
+                                            else
+                                            {
+                                                email = "";
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ////fix mail test
+                                        email = "legalwfuat2024@gmail.com";
+                                    }
+
+                                    if (!string.IsNullOrEmpty(email))
+                                    {
+                                        _ = zsendmail.sendEmail("Reject " + subject + " Mail To Requester", email, body, pathfilecommregis);
+                                    }
+                                }
+
+                            }
+                        }
+
                         var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
                         Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
                     }

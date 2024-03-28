@@ -564,6 +564,74 @@ namespace onlineLegalWF.forms
 
                     if (status == "Success")
                     {
+                        GenDocumnetPermit(lblPID.Text, wfAttr.submit_by);
+                        string subject = "";
+                        string body = "";
+                        string sqlmail = @"select * from li_permit_request where process_id = '" + wfAttr.process_id + "'";
+                        var dt = zdb.ExecSql_DataTable(sqlmail, zconnstr);
+                        if (dt.Rows.Count > 0)
+                        {
+                            var dr = dt.Rows[0];
+                            string id = dr["permit_no"].ToString();
+                            subject = wfAttr.subject;
+                            var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                            body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้ถูก Reject กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+
+                            string pathfilecommregis = "";
+
+                            string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                            var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                            if (resfile.Rows.Count > 0)
+                            {
+                                pathfilecommregis = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+
+                                string email = "";
+
+                                var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                                ////get mail from db
+                                /////send mail to next_approve
+                                if (isdev != "true")
+                                {
+                                    string sqlbpm = "select * from li_user where user_login = '" + wfA_NextStep.next_assto_login + "' ";
+                                    System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                    if (dtbpm.Rows.Count > 0)
+                                    {
+                                        email = dtbpm.Rows[0]["email"].ToString();
+
+                                    }
+                                    else
+                                    {
+                                        string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + wfA_NextStep.next_assto_login + "' ";
+                                        System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                        if (dtrpa.Rows.Count > 0)
+                                        {
+                                            email = dtrpa.Rows[0]["Email"].ToString();
+                                        }
+                                        else
+                                        {
+                                            email = "";
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    ////fix mail test
+                                    email = "legalwfuat2024@gmail.com";
+                                }
+
+                                if (!string.IsNullOrEmpty(email))
+                                {
+                                    _ = zsendmail.sendEmail("Reject " + subject + " Mail To Requester", email, body, pathfilecommregis);
+                                }
+                            }
+
+                        }
+
                         var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
                         Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
                     }
