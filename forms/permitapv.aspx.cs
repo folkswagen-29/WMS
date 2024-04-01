@@ -329,7 +329,8 @@ namespace onlineLegalWF.forms
                 string id = dr["permit_no"].ToString();
                 subject = xsubject;
                 var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a> <br/>" +
+                                "You have been assigned to check document no " + dr["document_no"].ToString() + " Please check and proceed through the system <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
 
                 string pathfileins = "";
 
@@ -400,7 +401,8 @@ namespace onlineLegalWF.forms
                 string id = dr["permit_no"].ToString();
                 subject = xsubject;
                 var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a><br/>" +
+                    "Document no" + dr["document_no"].ToString() + " It has been approved from the system. Please check and proceed through the system. <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
 
                 string pathfilecommregis = "";
 
@@ -720,7 +722,8 @@ namespace onlineLegalWF.forms
                 string id = dr["permit_no"].ToString();
                 subject = xsubject;
                 var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a> <br/>" +
+                                "You have been assigned to check document no " + dr["document_no"].ToString() + " Please check and proceed through the system <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
 
                 string pathfileins = "";
 
@@ -793,7 +796,9 @@ namespace onlineLegalWF.forms
                 var dr = dt.Rows[0];
                 string id = dr["permit_no"].ToString();
                 subject = xsubject;
-                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการดำเนินการเสร็จสิ้นแล้ว";
+                var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                body = "เอกสารเลขที่" + dr["document_no"].ToString() + " ได้รับการดำเนินการเสร็จสิ้นแล้ว กรุณาตรวจสอบผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a><br/>" + 
+                        "Document no" + dr["document_no"].ToString() + " It has been completed. Please check through the system. <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
 
                 string pathfileCommregis = "";
 

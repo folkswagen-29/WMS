@@ -666,7 +666,8 @@ namespace onlineLegalWF.frmPermit
                         string id = dr["permit_no"].ToString();
                         subject = wfAttr.subject;
                         var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                        body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+                        body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a> <br/>" +
+                                "You have been assigned to check document no " + dr["document_no"].ToString() + " Please check and proceed through the system <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
 
                         string pathfileins = "";
 

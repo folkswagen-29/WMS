@@ -57,7 +57,7 @@ namespace onlineLegalWF.frmPermit
 
             license_code.DataSource = GetTypeOfPermitLicense();
             license_code.DataBind();
-            license_code.DataTextField = "license_desc";
+            license_code.DataTextField = "license_desc_all";
             license_code.DataValueField = "license_code";
             license_code.DataBind();
 
@@ -87,6 +87,24 @@ namespace onlineLegalWF.frmPermit
             }
 
 
+        }
+        public string GetCompanyNameByBuCode(string xbu_code)
+        {
+            string company_name = "";
+
+            string sql = @"select * from li_business_unit where bu_code='" + xbu_code + "'";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                company_name = dt.Rows[0]["company_name"].ToString();
+
+            }
+
+            return company_name;
+        }
+        protected void type_project_Changed(object sender, EventArgs e)
+        {
+            company.Text = GetCompanyNameByBuCode(type_project.SelectedValue.ToString());
         }
 
         protected void ddl_type_requester_Changed(object sender, EventArgs e)
@@ -246,7 +264,7 @@ namespace onlineLegalWF.frmPermit
 
         public DataTable GetTypeOfPermitLicense()
         {
-            string sql = "select * from li_permit_license order by row_sort asc";
+            string sql = "select [license_code],[license_desc],[license_desc_en],concat(license_desc_en, ' : ', license_desc) as [license_desc_all],[row_sort] from [li_permit_license] order by row_sort asc";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }
