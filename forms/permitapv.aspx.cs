@@ -908,7 +908,7 @@ namespace onlineLegalWF.forms
 
                     if (!string.IsNullOrEmpty(email))
                     {
-                        _ = zsendmail.sendEmail(subject + " Mail To Next Appove", email, body, pathfileins);
+                        _ = zsendmail.sendEmail(subject + " Mail To Requester", email, body, pathfileins);
                     }
 
                 }

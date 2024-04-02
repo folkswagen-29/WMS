@@ -32,8 +32,9 @@ namespace onlineLegalWF.userControls
             if (!string.IsNullOrEmpty(eformID.Value))
             {
                 lblSecAttach.CssClass = "Label_lg";
-                seal_attach.Visible = false;
+                //seal_attach.Visible = false;
                 //lbltitleAttach.Visible = false;
+                lblSecAttach.Text = "Attachments " + eformID.Value;
             }
         }
         private void ini_data_wf_attach()
@@ -65,7 +66,7 @@ namespace onlineLegalWF.userControls
 
             if (extension == ".pdf")
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", string.Format("$('#{0}').modal('show');", modalattach.ClientID), true);
                 var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
                 pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filePath;
             }

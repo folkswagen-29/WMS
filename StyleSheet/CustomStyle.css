@@ -1056,7 +1056,7 @@ button.close {
     font-size: 9pt;
     color: white;
     height: 30px;
-    width: 120px;
+    min-width: 120px;
     background-color: red;
     border: solid;
     border-width: 1px;
