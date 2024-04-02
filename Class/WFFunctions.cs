@@ -819,7 +819,7 @@ namespace onlineLegalWF.Class
                 {
                     xurl = "/forms/ccrapv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + "&st=" + wfDefault_step.step_name;
                 }
-                else if (wfDefault_step.step_name == "GM Approve" || wfDefault_step.step_name == "AM Approve" || wfDefault_step.step_name == "Head AM Approve" || wfDefault_step.step_name == "Permit Receive" || wfDefault_step.step_name == "Permit Update" || wfDefault_step.step_name == "Requester Update" && wfDefault_step.process_code == "PMT_LIC")
+                else if (wfDefault_step.step_name == "GM Approve" || wfDefault_step.step_name == "AM Approve" || wfDefault_step.step_name == "Head AM Approve" || wfDefault_step.step_name == "Permit Receive" || wfDefault_step.step_name == "Permit Update" || wfDefault_step.step_name == "Requester Update" || wfDefault_step.step_name == "Permit Check Update" && wfDefault_step.process_code == "PMT_LIC")
                 {
                     xurl = "/forms/permitapv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + "&st=" + wfDefault_step.step_name;
                 }
@@ -1399,7 +1399,7 @@ namespace onlineLegalWF.Class
                 }
                 else if (next_step_name == "Permit Receive")
                 {
-                    xname = "naruemol.w, kanita.s, pattanis.r, suradach.k"; //Permit Receive user click receive
+                    xname = "pornsawan.s, naruemol.w, kanita.s, pattanis.r, suradach.k"; //Permit Receive user click receive
                 }
                 else if (next_step_name == "Permit Update")
                 {
@@ -1408,6 +1408,10 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "Requester Update")
                 {
                     xname = submit_by; //Requester Update = user click update close job
+                }
+                else if (next_step_name == "Permit Check Update")
+                {
+                    xname = "pornsawan.s, naruemol.w, kanita.s, pattanis.r, suradach.k"; //Permit Check Update Close Job
                 }
                 else if (next_step_name == "End")
                 {

@@ -40,8 +40,9 @@ namespace onlineLegalWF.userControls
             if (!string.IsNullOrEmpty(eformID.Value)) 
             {
                 lblSecAttach.CssClass = "Label_lg";
-                seal_attach.Visible = false;
-                lbltitleAttach.Visible = false;
+                //seal_attach.Visible = false;
+                //lbltitleAttach.Visible = false;
+                lblSecAttach.Text = "Attachments "+ eformID.Value;
             }
         }
         private void ini_data_wf_attach()

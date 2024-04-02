@@ -96,7 +96,7 @@ namespace onlineLegalWF.forms
                 btn_Reject.Visible = true;
                 btn_Accept.Visible = false;
                 btn_Submit.Visible = false;
-                //btn_Edit.Visible = false;
+                btn_send_requester.Visible = false;
             }
             else if (st_name == "Permit Receive")
             {
@@ -105,7 +105,7 @@ namespace onlineLegalWF.forms
                 btn_Reject.Visible = true;
                 btn_Accept.Visible = true;
                 btn_Submit.Visible = false;
-                //btn_Edit.Visible = false;
+                btn_send_requester.Visible = false;
             }
             else if (st_name == "Permit Update" || st_name == "Requester Update")
             {
@@ -114,6 +114,16 @@ namespace onlineLegalWF.forms
                 btn_Reject.Visible = false;
                 btn_Accept.Visible = false;
                 btn_Submit.Visible = true;
+                btn_send_requester.Visible = false;
+            }
+            else if (st_name == "Permit Check Update")
+            {
+                ucHeader1.setHeader(process_code + " " + st_name);
+                btn_Approve.Visible = false;
+                btn_Reject.Visible = false;
+                btn_Accept.Visible = false;
+                btn_Submit.Visible = true;
+                btn_send_requester.Visible = true;
             }
         }
         private void getDocument(string id)
@@ -135,6 +145,8 @@ namespace onlineLegalWF.forms
             lblPID.Text = pid;
             hid_PID.Value = pid;
             ucAttachment1.ini_object(pid);
+            ucAttachment2.ini_object(pid,"POA","1");
+            ucAttachment3.ini_object(pid,"License","2");
             ucCommentlog1.ini_object(pid);
         }
 
@@ -697,7 +709,11 @@ namespace onlineLegalWF.forms
                         {
                             sendMailUserClosejob(wfAttr.process_id, wfAttr.subject, wfA_NextStep.next_assto_login);
                         }
-                        else 
+                        else if (wfA_NextStep.step_name == "Permit Check Update")
+                        {
+                            sendMailToPermitColseJob(wfAttr.process_id, wfAttr.subject);
+                        }
+                        else if(wfA_NextStep.step_name == "End")
                         {
                             sendMailToRequester(wfAttr.process_id, wfAttr.subject, wfAttr.submit_by);
                         }
@@ -707,6 +723,124 @@ namespace onlineLegalWF.forms
                     }
 
                 }
+            }
+        }
+
+        protected void btn_send_requester_Click(object sender, EventArgs e)
+        {
+            string process_code = Request.QueryString["pc"];
+            int version_no = 1;
+
+            if (!string.IsNullOrEmpty(process_code))
+            {
+                // getCurrentStep
+                var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+
+                // check session_user
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+                    var empFunc = new EmpInfo();
+
+                    //get data user
+                    var emp = empFunc.getEmpInfo(xlogin_name);
+
+                    // set WF Attributes
+                    wfAttr.subject = "เรื่อง " + subject.Text.Trim();
+                    wfAttr.assto_login = emp.next_line_mgr_login;
+                    wfAttr.wf_status = "Reject";
+                    wfAttr.submit_answer = "Reject";
+                    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, "");
+                    wfAttr.updated_by = emp.user_login;
+                    wfAttr.submit_by = wfAttr.submit_by;
+                    wfAttr.external_domain = hid_external_domain.Value;
+                    wfAttr.islandtax = Convert.ToBoolean(hid_islandtax.Value);
+                    wfAttr.issignagetax = Convert.ToBoolean(hid_issignagetax.Value);
+                    wfAttr.permit_license_external = hid_permit_license_external.Value;
+                    wfAttr.permit_landtax_external = hid_permit_landtax_external.Value;
+                    wfAttr.permit_tradmark_external = hid_permit_tradmark_external.Value;
+                    wfAttr.permit_signagetax_external = hid_permit_signagetax_external.Value;
+                    // wf.updateProcess
+                    var wfA_NextStep = zwf.updateProcess(wfAttr);
+                    wfA_NextStep.submit_by = wfAttr.submit_by;
+                    if (wfA_NextStep.step_name == "End")
+                    {
+                        wfA_NextStep.wf_status = "COMPLETED";
+                    }
+                    else
+                    {
+                        wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by, wfAttr.process_id, hid_bucode.Value);
+                    }
+
+                    string status = zwf.Insert_NextStep(wfA_NextStep);
+
+                    if (status == "Success")
+                    {
+                        if (wfA_NextStep.step_name == "Requester Update")
+                        {
+                            sendMailUserClosejob(wfAttr.process_id, wfAttr.subject, wfA_NextStep.next_assto_login);
+                        }
+                        else if (wfA_NextStep.step_name == "Permit Check Update")
+                        {
+                            sendMailToPermitColseJob(wfAttr.process_id, wfAttr.subject);
+                        }
+                        else if (wfA_NextStep.step_name == "End")
+                        {
+                            sendMailToRequester(wfAttr.process_id, wfAttr.subject, wfAttr.submit_by);
+                        }
+
+                        var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                    }
+
+                }
+            }
+        }
+        private void sendMailToPermitColseJob(string pid, string xsubject)
+        {
+            string subject = "";
+            string body = "";
+            string sql = @"select * from li_permit_request where process_id = '" + pid + "'";
+            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                var dr = dt.Rows[0];
+                string id = dr["permit_no"].ToString();
+                subject = xsubject;
+                var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a> <br/>" +
+                                "You have been assigned to check document no " + dr["document_no"].ToString() + " Please check and proceed through the system <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+
+                string pathfilecommregis = "";
+
+                string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                if (resfile.Rows.Count > 0)
+                {
+                    pathfilecommregis = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+
+                    string[] emailCommregis;
+
+                    var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                    ////get mail from db
+                    if (isdev != "true")
+                    {
+                        emailCommregis = new string[] { "pornsawan.s@assetworldcorp-th.com", "naruemol.w@assetworldcorp-th.com", "kanita.s@assetworldcorp-th.com", "pattanis.r@assetworldcorp-th.com", "suradach.k@assetworldcorp-th.com" };
+                    }
+                    else
+                    {
+                        ////fix mail test
+                        emailCommregis = new string[] { "legalwfuat2024@gmail.com", "manit.ch@assetworldcorp-th.com" };
+                    }
+
+                    if (emailCommregis.Length > 0)
+                    {
+                        _ = zsendmail.sendEmails(subject + " Mail To Permit", emailCommregis, body, pathfilecommregis);
+                    }
+                }
+
             }
         }
 

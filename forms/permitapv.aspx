@@ -72,6 +72,7 @@
                 <asp:Button ID="btn_Reject" runat="server" CssClass="btn_normal_red" Text="Reject" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_Reject_Click" />
                 <asp:Button ID="btn_Accept" runat="server" CssClass="btn_normal_blue" Text="Accept" Visible="false" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_Accept_Click" />
                 <asp:Button ID="btn_Submit" runat="server" CssClass="btn_normal_blue" Text="Submit" Visible="false" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_Submit_Click" />
+                <asp:Button ID="btn_send_requester" runat="server" CssClass="btn_normal_red" Text="Send Requester Update" Visible="false" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_send_requester_Click" />
             </td>
         </tr>
         <tr class="cell_content_100PC">
@@ -80,7 +81,22 @@
                 <asp:Panel ID="Panel3" runat="server" CssClass="div_90">
                     <uc3:ucAttachment runat="server" ID="ucAttachment1" />
                 </asp:Panel>
+            </td>
+        </tr>
+        <tr class="cell_content_100PC">
+            <td colspan="2" class="cell_content_100PC">
                 <br />
+                <asp:Panel ID="Panel2" runat="server" CssClass="div_90">
+                    <uc3:ucAttachment runat="server" ID="ucAttachment2" />
+                </asp:Panel>
+            </td>
+        </tr>
+        <tr class="cell_content_100PC">
+            <td colspan="2" class="cell_content_100PC">
+                <br />
+                <asp:Panel ID="Panel4" runat="server" CssClass="div_90">
+                    <uc3:ucAttachment runat="server" ID="ucAttachment3" />
+                </asp:Panel>
             </td>
         </tr>
     </table>
