@@ -75,7 +75,7 @@
 <asp:HiddenField ID="eformID" runat="server" />
 <asp:HiddenField ID="eformSecNo" runat="server" />
 
-<div class="modal fade" id="modalattach" role="dialog">
+<div class="modal fade" id="modalattach" role="dialog" runat="server">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="border: 0;">
@@ -89,7 +89,7 @@
 </div>
 
 <script type="text/javascript">
-        function showModalAttach() {
-            $("#modalattach").modal('show');
-        }
+    function showModalAttach() {
+        $("#modalattach").modal('show');
+    }
 </script>

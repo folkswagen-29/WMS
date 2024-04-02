@@ -177,10 +177,11 @@ namespace onlineLegalWF.userControls
             var mimeType = MimeMapping.GetMimeMapping(Path.GetFileName(filePath));
             //Response.ContentType = ContentType;
             string extension = Path.GetExtension(filePath);
+            var xeform = eformID.Value.ToString();
 
             if (extension == ".pdf")
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalAttach();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", string.Format("$('#{0}').modal('show');", modalattach.ClientID), true);
                 var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
                 pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filePath;
             }
