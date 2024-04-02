@@ -61,13 +61,32 @@
                         </tr>
                         <tr>
                             <td class="cell_content_20PC_TR">
-                                <label class="Label_md">Project </label>
+                                <label class="Label_md">BU </label>
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:DropDownList ID="type_lt_project" runat="server" CssClass="Text_400">
-
+                                <asp:DropDownList ID="type_lt_project" runat="server" CssClass="Text_400" OnSelectedIndexChanged="type_lt_project_Changed" AutoPostBack="true">
                                 </asp:DropDownList>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Company </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="company" runat="server" CssClass="Text_600" Enabled="false"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Responsible Phone </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="responsible_phone" runat="server" CssClass="Text_400"></asp:TextBox>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -117,7 +136,7 @@
                         </tr>
                         <tr>
                             <td class="cell_content_20PC_TR">
-                                <label class="Label_md">หน่วยงานที่ต้องไปติดต่อ </label>
+                                <label class="Label_md">Contact Agency </label>
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
@@ -127,7 +146,7 @@
                         </tr>
                         <tr>
                             <td class="cell_content_20PC_TR">
-                                <label class="Label_md">ชื่อผู้รับมอบอำนาจ </label>
+                                <label class="Label_md">Attorney Name </label>
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
@@ -137,7 +156,7 @@
                         </tr>
                         <tr>
                             <td class="cell_content_20PC_TR">
-                                <label class="Label_md">email ของบัญชีที่ต้องการให้รับทราบ </label>
+                                <label class="Label_md">Email Accounting </label>
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">

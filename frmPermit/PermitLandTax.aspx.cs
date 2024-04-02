@@ -54,6 +54,24 @@ namespace onlineLegalWF.frmPermit
             type_requester.DataValueField = "tof_requester_code";
             type_requester.DataBind();
         }
+        public string GetCompanyNameByBuCode(string xbu_code)
+        {
+            string company_name = "";
+
+            string sql = @"select * from li_business_unit where bu_code='" + xbu_code + "'";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                company_name = dt.Rows[0]["company_name"].ToString();
+
+            }
+
+            return company_name;
+        }
+        protected void type_lt_project_Changed(object sender, EventArgs e)
+        {
+            company.Text = GetCompanyNameByBuCode(type_lt_project.SelectedValue.ToString());
+        }
 
         protected void ddl_type_requester_Changed(object sender, EventArgs e)
         {
@@ -166,9 +184,10 @@ namespace onlineLegalWF.frmPermit
             var xattorney_name = attorney_name.Text.Trim();
             var xemail_accounting = email_accounting.Text.Trim();
             var xstatus = "verify";
+            var xresponsible_phone = responsible_phone.Text.Trim();
 
             string sql = @"INSERT INTO [dbo].[li_permit_request]
-                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_subject],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[contact_agency],[attorney_name],[email_accounting],[status])
+                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_subject],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[contact_agency],[attorney_name],[email_accounting],[responsible_phone],[status])
                              VALUES
                                    ('" + xprocess_id + @"'
                                    ,'" + xpermit_no + @"'
@@ -184,6 +203,7 @@ namespace onlineLegalWF.frmPermit
                                    ,'" + xcontact_agency + @"'
                                    ,'" + xattorney_name + @"'
                                    ,'" + xemail_accounting + @"'
+                                   ,'" + xresponsible_phone + @"'
                                    ,'" + xstatus + @"')";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
@@ -213,6 +233,7 @@ namespace onlineLegalWF.frmPermit
             data.reqdate = Utillity.ConvertDateToLongDateTime(xreq_date, "th");
             var xrequester_code = type_requester.SelectedValue;
             data.req_other = "";
+            data.responsible_phone = responsible_phone.Text.Trim();
             if (xrequester_code == "01")
             {
                 data.r1 = "☑";

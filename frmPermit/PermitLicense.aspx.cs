@@ -312,6 +312,7 @@ namespace onlineLegalWF.frmPermit
             var xattorney_name = attorney_name.Text.Trim();
             var xstatus = "verify";
             var xsubject = permit_subject.Text.Trim();
+            var xresponsible_phone = responsible_phone.Text.Trim();
 
             string sql = "";
 
@@ -328,7 +329,7 @@ namespace onlineLegalWF.frmPermit
             if (license_code.SelectedValue == "11" || license_code.SelectedValue == "13")
             {
                 sql = @"INSERT INTO [dbo].[li_permit_request]
-                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_subject],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[license_code],[contact_agency],[attorney_name],[status])
+                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_subject],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[license_code],[contact_agency],[attorney_name],[responsible_phone],[status])
                              VALUES
                                    ('" + xprocess_id + @"'
                                    ,'" + xpermit_no + @"'
@@ -344,12 +345,13 @@ namespace onlineLegalWF.frmPermit
                                    ,'" + xlicense_code + @"'
                                    ,'" + xcontact_agency + @"'
                                    ,'" + xattorney_name + @"'
+                                   ,'" + xresponsible_phone + @"'
                                    ,'" + xstatus + @"')";
             }
             else 
             {
                 sql = @"INSERT INTO [dbo].[li_permit_request]
-                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_subject],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[license_code],[sublicense_code],[contact_agency],[attorney_name],[status])
+                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_subject],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[license_code],[sublicense_code],[contact_agency],[attorney_name],[responsible_phone],[status])
                              VALUES
                                    ('" + xprocess_id + @"'
                                    ,'" + xpermit_no + @"'
@@ -366,6 +368,7 @@ namespace onlineLegalWF.frmPermit
                                    ,'" + xsublicense_code + @"'
                                    ,'" + xcontact_agency + @"'
                                    ,'" + xattorney_name + @"'
+                                   ,'" + xresponsible_phone + @"'
                                    ,'" + xstatus + @"')";
             }
 
@@ -398,6 +401,7 @@ namespace onlineLegalWF.frmPermit
             data.reqdate = Utillity.ConvertDateToLongDateTime(xreq_date, "th");
             var xrequester_code = type_requester.SelectedValue;
             data.req_other = "";
+            data.responsible_phone = responsible_phone.Text.Trim();
             if (xrequester_code == "01")
             {
                 data.r1 = "☑";

@@ -69,6 +69,7 @@ namespace onlineLegalWF.frmPermit
                 permit_desc.Text = res.Rows[0]["permit_desc"].ToString();
                 type_requester.SelectedValue = res.Rows[0]["tof_requester_code"].ToString();
                 tof_requester_other_desc.Text = res.Rows[0]["tof_requester_other_desc"].ToString();
+                responsible_phone.Text = res.Rows[0]["responsible_phone"].ToString();
                 if (res.Rows[0]["tof_requester_code"].ToString() == "03")
                 {
                     tof_requester_other_desc.Enabled = true;
@@ -94,7 +95,24 @@ namespace onlineLegalWF.frmPermit
                 email_accounting.Text = res.Rows[0]["email_accounting"].ToString();
             }
         }
+        public string GetCompanyNameByBuCode(string xbu_code)
+        {
+            string company_name = "";
 
+            string sql = @"select * from li_business_unit where bu_code='" + xbu_code + "'";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                company_name = dt.Rows[0]["company_name"].ToString();
+
+            }
+
+            return company_name;
+        }
+        protected void type_lt_project_Changed(object sender, EventArgs e)
+        {
+            company.Text = GetCompanyNameByBuCode(type_lt_project.SelectedValue.ToString());
+        }
         protected void ddl_type_requester_Changed(object sender, EventArgs e)
         {
             if (type_requester.SelectedValue == "03")
@@ -168,6 +186,7 @@ namespace onlineLegalWF.frmPermit
             var xcontact_agency = contact_agency.Text.Trim();
             var xattorney_name = attorney_name.Text.Trim();
             var xemail_accounting = email_accounting.Text.Trim();
+            var xresponsible_phone = responsible_phone.Text.Trim();
 
             string sql = @"UPDATE [dbo].[li_permit_request]
                            SET [permit_subject] = '" + xpermit_subject + @"'
@@ -181,6 +200,7 @@ namespace onlineLegalWF.frmPermit
                               ,[attorney_name] = '" + xattorney_name + @"'
                               ,[bu_code] = '" + xlt_project_code + @"'
                               ,[updated_datetime] = '" + xpermit_updatedate + @"'
+                              ,[responsible_phone] = '" + xresponsible_phone + @"'
                          WHERE [permit_no] = '" + xpermit_no + "'";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
@@ -210,6 +230,7 @@ namespace onlineLegalWF.frmPermit
             data.reqdate = Utillity.ConvertDateToLongDateTime(xreq_date, "th");
             var xrequester_code = type_requester.SelectedValue;
             data.req_other = "";
+            data.responsible_phone = responsible_phone.Text.Trim();
             if (xrequester_code == "01")
             {
                 data.r1 = "☑";

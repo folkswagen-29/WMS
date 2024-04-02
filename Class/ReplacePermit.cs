@@ -147,6 +147,10 @@ namespace onlineLegalWF.Class
             dr0["tagname"] = "#list_doc_attach#";
             dr0["tagvalue"] = (!string.IsNullOrEmpty(data.list_doc_attach) ? data.list_doc_attach.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#responsible_phone#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.responsible_phone) ? data.responsible_phone.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
 
 
             return dtStr;
@@ -159,7 +163,7 @@ namespace onlineLegalWF.Class
             string xexternal_domain = "";
             string sql0 = @"SELECT permit.[row_id],permit.[process_id],permit.[permit_no],permit.[document_no],permit.[permit_date],permit.[permit_subject],permit.[permit_desc]
                                   ,permit.[tof_requester_code],permit.[tof_requester_other_desc],permit.[tof_permitreq_code],permit.[tof_permitreq_other_desc],permit.[license_code],permit.[sublicense_code]
-                                  ,permit.[contact_agency],permit.[attorney_name],permit.[email_accounting],permit.[bu_code],bu.[bu_desc],permit.[status],permit.[updated_datetime],bu.[external_domain]
+                                  ,permit.[contact_agency],permit.[attorney_name],permit.[email_accounting],permit.[bu_code],bu.[bu_desc],permit.[status],permit.[updated_datetime],permit.[responsible_phone],bu.[external_domain]
                               FROM [li_permit_request] as permit
                               INNER JOIN [li_business_unit] as bu on permit.bu_code = bu.bu_code
                               where process_id = '" + xprocess_id + "'";
@@ -172,6 +176,7 @@ namespace onlineLegalWF.Class
                 var xrequester_code = dr0["tof_requester_code"].ToString().Trim();
                 xexternal_domain = dr0["external_domain"].ToString();
                 data.req_other = "";
+                data.responsible_phone = dr0["responsible_phone"].ToString().Trim();
                 if (xrequester_code == "01")
                 {
                     res.r1 = "☑";
@@ -404,6 +409,7 @@ namespace onlineLegalWF.Class
             public string contact_agency { get; set; }
             public string attorney_name { get; set; }
             public string list_doc_attach { get; set; }
+            public string responsible_phone { get; set; }
         }
     }
 }

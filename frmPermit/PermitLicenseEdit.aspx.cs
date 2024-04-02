@@ -55,7 +55,7 @@ namespace onlineLegalWF.frmPermit
 
             license_code.DataSource = GetTypeOfPermitLicense();
             license_code.DataBind();
-            license_code.DataTextField = "license_desc";
+            license_code.DataTextField = "license_desc_all";
             license_code.DataValueField = "license_code";
             license_code.DataBind();
 
@@ -101,6 +101,7 @@ namespace onlineLegalWF.frmPermit
                 permit_desc.Text = res.Rows[0]["permit_desc"].ToString();
                 type_requester.SelectedValue = res.Rows[0]["tof_requester_code"].ToString();
                 tof_requester_other_desc.Text = res.Rows[0]["tof_requester_other_desc"].ToString();
+                responsible_phone.Text = res.Rows[0]["responsible_phone"].ToString();
                 if (res.Rows[0]["tof_requester_code"].ToString() == "03")
                 {
                     tof_requester_other_desc.Enabled = true;
@@ -158,6 +159,25 @@ namespace onlineLegalWF.frmPermit
             }
 
 
+        }
+
+        public string GetCompanyNameByBuCode(string xbu_code)
+        {
+            string company_name = "";
+
+            string sql = @"select * from li_business_unit where bu_code='" + xbu_code + "'";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                company_name = dt.Rows[0]["company_name"].ToString();
+
+            }
+
+            return company_name;
+        }
+        protected void type_project_Changed(object sender, EventArgs e)
+        {
+            company.Text = GetCompanyNameByBuCode(type_project.SelectedValue.ToString());
         }
 
         protected void ddl_type_requester_Changed(object sender, EventArgs e)
@@ -287,7 +307,7 @@ namespace onlineLegalWF.frmPermit
 
         public DataTable GetTypeOfPermitLicense()
         {
-            string sql = "select * from li_permit_license order by row_sort asc";
+            string sql = "select [license_code],[license_desc],[license_desc_en],concat(license_desc_en, ' : ', license_desc) as [license_desc_all],[row_sort] from [li_permit_license] order by row_sort asc";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
             return dt;
         }
@@ -324,6 +344,7 @@ namespace onlineLegalWF.frmPermit
             var xtof_permitreq_other_desc = tof_permitreq_other_desc.Text.Trim();
             var xlicense_code = license_code.SelectedValue;
             var xsublicense_code = "";
+            var xresponsible_phone = responsible_phone.Text.Trim();
             if (license_code.SelectedValue != "11" || license_code.SelectedValue != "13") 
             {
                 xsublicense_code = ddl_sublicense.SelectedValue;
@@ -345,7 +366,8 @@ namespace onlineLegalWF.frmPermit
                               ,[contact_agency] = '"+xcontact_agency+@"'
                               ,[attorney_name] = '"+xattorney_name+@"'
                               ,[bu_code] = '"+xproject_code+@"'
-                              ,[updated_datetime] = '"+xpermit_updatedate+@"'
+                              ,[updated_datetime] = '"+xpermit_updatedate+ @"'
+                              ,[responsible_phone] = '" + xresponsible_phone+@"'
                          WHERE [permit_no] = '"+ xpermit_no + "'";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
@@ -373,6 +395,7 @@ namespace onlineLegalWF.frmPermit
 
             data.docno = xdoc_no.Replace(",", "!comma");
             data.reqdate = Utillity.ConvertDateToLongDateTime(xreq_date, "th");
+            data.responsible_phone = responsible_phone.Text.Trim();
             var xrequester_code = type_requester.SelectedValue;
             if (xrequester_code == "01")
             {

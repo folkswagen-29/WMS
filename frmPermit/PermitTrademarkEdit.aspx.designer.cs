@@ -78,6 +78,24 @@ namespace onlineLegalWF.frmPermit
         protected global::System.Web.UI.WebControls.DropDownList type_project;
 
         /// <summary>
+        /// company control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox company;
+
+        /// <summary>
+        /// responsible_phone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox responsible_phone;
+
+        /// <summary>
         /// type_req_trademarks control.
         /// </summary>
         /// <remarks>
