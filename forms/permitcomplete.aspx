@@ -72,7 +72,22 @@
                 <asp:Panel ID="Panel3" runat="server" CssClass="div_90">
                     <uc3:ucAttachmentdata runat="server" ID="ucAttachment1" />
                 </asp:Panel>
+            </td>
+        </tr>
+        <tr class="cell_content_100PC">
+            <td colspan="2" class="cell_content_100PC">
                 <br />
+                <asp:Panel ID="Panel2" runat="server" CssClass="div_90">
+                    <uc3:ucAttachmentdata runat="server" ID="ucAttachment2" />
+                </asp:Panel>
+            </td>
+        </tr>
+        <tr class="cell_content_100PC">
+            <td colspan="2" class="cell_content_100PC">
+                <br />
+                <asp:Panel ID="Panel4" runat="server" CssClass="div_90">
+                    <uc3:ucAttachmentdata runat="server" ID="ucAttachment3" />
+                </asp:Panel>
             </td>
         </tr>
     </table>

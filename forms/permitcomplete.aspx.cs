@@ -78,6 +78,8 @@ namespace onlineLegalWF.forms
             lblPID.Text = pid;
             hid_PID.Value = pid;
             ucAttachment1.ini_object(pid);
+            ucAttachment2.ini_object(pid, "POA", "1");
+            ucAttachment3.ini_object(pid, "License", "2");
             ucCommentlog1.ini_object(pid);
         }
     }
