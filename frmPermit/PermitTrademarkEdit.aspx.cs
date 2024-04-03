@@ -88,6 +88,7 @@ namespace onlineLegalWF.frmPermit
                 {
                     tof_permitreq_other_desc.Enabled = false;
                 }
+                company.Text = GetCompanyNameByBuCode(type_project.SelectedValue);
             }
         }
         public string GetCompanyNameByBuCode(string xbu_code)

@@ -76,7 +76,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:TextBox ID="company" runat="server" CssClass="Text_600" Enabled="false"></asp:TextBox>
+                                <asp:TextBox ID="company" runat="server" Text="T.C.C. COMMERCIAL PROPERTY MANAGEMENT CO., LTD." CssClass="Text_600" Enabled="false"></asp:TextBox>
                             </td>
                             <td>&nbsp;</td>
                         </tr>

@@ -156,6 +156,7 @@ namespace onlineLegalWF.frmPermit
                 }
                 contact_agency.Text = res.Rows[0]["contact_agency"].ToString();
                 attorney_name.Text = res.Rows[0]["attorney_name"].ToString();
+                company.Text = GetCompanyNameByBuCode(type_project.SelectedValue);
             }
 
 
