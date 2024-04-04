@@ -41,7 +41,8 @@ namespace onlineLegalWF.frmPermit
         {
             ucHeader1.setHeader("Tradmark Edit");
 
-            type_project.DataSource = GetBusinessUnit();
+            //type_project.DataSource = GetBusinessUnit();
+            type_project.DataSource = GetListBuByTypeReq("01");
             type_project.DataBind();
             type_project.DataTextField = "bu_desc";
             type_project.DataValueField = "bu_code";
@@ -135,6 +136,32 @@ namespace onlineLegalWF.frmPermit
                 tof_requester_other_desc.Text = string.Empty;
                 tof_requester_other_desc.Enabled = false;
             }
+
+            type_project.DataSource = GetListBuByTypeReq(type_requester.SelectedValue);
+            type_project.DataBind();
+            type_project.DataTextField = "bu_desc";
+            type_project.DataValueField = "bu_code";
+            type_project.DataBind();
+
+        }
+        public DataTable GetListBuByTypeReq(string tof_reqid)
+        {
+            string sql = "";
+            if (tof_reqid == "01")
+            {
+                sql = "select * from li_business_unit where bu_type in ('C','RW&WH') and isactive=1 order by row_sort asc";
+            }
+            else if (tof_reqid == "02")
+            {
+                sql = "select * from li_business_unit where bu_type in ('H') and isactive=1 order by row_sort asc";
+            }
+            else
+            {
+                sql = "select * from li_business_unit where isactive=1 order by row_sort asc";
+            }
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+
+            return dt;
         }
 
         protected void type_req_trademarks_Changed(object sender, EventArgs e)
