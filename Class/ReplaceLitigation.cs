@@ -88,7 +88,12 @@ namespace onlineLegalWF.Class
         {
             ReplaceLitigation_TagData res = new ReplaceLitigation_TagData();
 
-            string sql0 = @"select * from li_litigation_request where process_id = '" + xprocess_id + "'";
+            string xexternal_domain = "";
+            string sql0 = @"select [row_id],[process_id],[req_no],[document_no],[req_date],[lit_subject],[lit_desc]
+                          ,[tof_litigationreq_code],[status],[pro_occ_desc],li_req.[bu_code],li_req.[company_name],bu.[external_domain],[updated_datetime]
+                          from [li_litigation_request] as li_req
+                          left outer join li_business_unit as bu on li_req.bu_code = bu.bu_code
+                          where process_id = '" + xprocess_id + "'";
             var dt0 = zdb.ExecSql_DataTable(sql0, zconnstr);
             if (dt0.Rows.Count > 0)
             {
@@ -105,6 +110,7 @@ namespace onlineLegalWF.Class
                 res.name2 = data.name2;
                 res.position2 = data.position2;
                 res.date2 = data.date2;
+                xexternal_domain = dr0["external_domain"].ToString();
             }
 
             string sql = "select * from wf_routing where process_id = '" + xprocess_id + "' ";
@@ -115,12 +121,36 @@ namespace onlineLegalWF.Class
                 {
                     var dr = dt1.Rows[i];
 
-                    if (dr["step_name"].ToString() == "Start")
+                    if (dr["step_name"].ToString() == "Start" && xexternal_domain == "N")
                     {
                         if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
                             res.sign_name1 = "Approved by system";
                             res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    else if (dr["step_name"].ToString() == "GM Approve" && xexternal_domain == "N")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.sign_name2 = "Approved by system";
+                            res.date2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    else if (dr["step_name"].ToString() == "AM Approve")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.sign_name1 = "Approved by system";
+                            res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
+                        }
+                    }
+                    else if (dr["step_name"].ToString() == "Head AM Approve")
+                    {
+                        if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
+                        {
+                            res.sign_name2 = "Approved by system";
+                            res.date2 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
                     else if (dr["step_name"].ToString() == "Head of Treasury Operation Approve")
