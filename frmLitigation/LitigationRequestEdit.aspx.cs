@@ -916,6 +916,7 @@ namespace onlineLegalWF.frmLitigation
             // Sample Submit
             string process_code = "";
             var xtype_req = type_req.SelectedValue;
+            var xbu_code = "";
             if (xtype_req == "01")
             {
                 process_code = "LIT";
@@ -923,6 +924,7 @@ namespace onlineLegalWF.frmLitigation
             else
             {
                 process_code = "LIT_2";
+                xbu_code = ddl_bu.SelectedValue.ToString();
             }
             int version_no = 1;
             var xsubject = subject.Text.Trim();
@@ -946,13 +948,13 @@ namespace onlineLegalWF.frmLitigation
                 wfAttr.submit_answer = "SUBMITTED";
                 wfAttr.submit_by = emp.user_login;
 
-                wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, "");
+                wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, xbu_code);
                 wfAttr.updated_by = emp.user_login;
 
                 // wf.updateProcess
                 var wfA_NextStep = zwf.updateProcess(wfAttr);
                 //wfA_NextStep.next_assto_login = emp.next_line_mgr_login;
-                wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, "");
+                wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by, lblPID.Text, xbu_code);
                 string status = zwf.Insert_NextStep(wfA_NextStep);
 
                 if (status == "Success")

@@ -345,7 +345,7 @@ namespace onlineLegalWF.Class
                         xurl = "/frminsurance/insuranceclaimedit.aspx?id=" + id + "&st=" + wfA.step_name;
                     }
                 }
-                else if (wfA.process_code == "LIT" || wfA.process_code == "LIT2")
+                else if (wfA.process_code == "LIT" || wfA.process_code == "LIT_2")
                 {
                     string sqlreq = @"select * from li_litigation_request where process_id = '" + wfA.process_id + "'";
                     var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
@@ -826,7 +826,11 @@ namespace onlineLegalWF.Class
                     }
 
                 }
-                else if (wfDefault_step.step_name == "Head of Treasury Operation Approve" || wfDefault_step.step_name == "Head of Litigation Assign" && wfDefault_step.process_code == "LIT" || wfDefault_step.process_code == "LIT_2")
+                else if (wfDefault_step.step_name == "GM Approve" || wfDefault_step.step_name == "AM Approve" || wfDefault_step.step_name == "Head AM Approve" || wfDefault_step.step_name == "Head of Treasury Operation Approve" || wfDefault_step.step_name == "Head of Litigation Assign" && wfDefault_step.process_code == "LIT")
+                {
+                    xurl = "/forms/litapv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + "&st=" + wfDefault_step.step_name;
+                }
+                else if (wfDefault_step.step_name == "GM Approve" || wfDefault_step.step_name == "AM Approve" || wfDefault_step.step_name == "Head AM Approve" || wfDefault_step.step_name == "Head of Treasury Operation Approve" || wfDefault_step.step_name == "Head of Litigation Assign" && wfDefault_step.process_code == "LIT_2")
                 {
                     xurl = "/forms/litapv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + "&st=" + wfDefault_step.step_name;
                 }

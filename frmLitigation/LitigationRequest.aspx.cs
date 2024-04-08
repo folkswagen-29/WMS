@@ -279,6 +279,7 @@ namespace onlineLegalWF.frmLitigation
                 // wf save draft
                 string process_code = "";
                 var xtype_req = type_req.SelectedValue;
+                string xbu_code = "";
                 if (xtype_req == "01")
                 {
                     process_code = "LIT";
@@ -286,9 +287,11 @@ namespace onlineLegalWF.frmLitigation
                 else 
                 {
                     process_code = "LIT_2";
+                    xbu_code = ddl_bu.SelectedValue.ToString();
+
                 }
                 int version_no = 1;
-                string xbu_code = "";
+                
 
                 // getCurrentStep
                 var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);

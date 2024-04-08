@@ -1000,7 +1000,7 @@ button.close {
 
 .btn_normal {
     margin-top: 2px;
-    margin-left: 2px;
+    margin-left: 4px;
     font-family: Tahoma;
     font-size: 9pt;
     color: black;
@@ -1034,7 +1034,7 @@ button.close {
 
 .btn_normal_silver {
     margin-top: 2px;
-    margin-left: 2px;
+    margin-left: 4px;
     font-family: Tahoma;
     font-size: 9pt;
     color: dimgray;
@@ -1051,7 +1051,7 @@ button.close {
 
 .btn_normal_red {
     margin-top: 2px;
-    margin-left: 2px;
+    margin-left: 4px;
     font-family: Tahoma;
     font-size: 9pt;
     color: white;
@@ -1085,7 +1085,7 @@ button.close {
 
 .btn_small_silver {
     margin-top: 2px;
-    margin-left: 2px;
+    margin-left: 4px;
     font-family: Tahoma;
     font-size: 9pt;
     color: dimgray;
@@ -1102,7 +1102,7 @@ button.close {
 
 .btn_small_red {
     margin-top: 2px;
-    margin-left: 2px;
+    margin-left: 4px;
     font-family: Tahoma;
     font-size: 9pt;
     color: white;
