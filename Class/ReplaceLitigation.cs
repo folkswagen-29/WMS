@@ -43,6 +43,10 @@ namespace onlineLegalWF.Class
             dr0["tagname"] = "#desc#";
             dr0["tagvalue"] = (!string.IsNullOrEmpty(data.desc) ? data.desc.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#pro_occ_desc#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.pro_occ_desc) ? data.pro_occ_desc.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
 
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#name1#";
@@ -93,6 +97,7 @@ namespace onlineLegalWF.Class
                 res.subject = dr0["lit_subject"].ToString().Trim();
                 res.reqdate = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr0["req_date"]), "en").Trim();
                 res.desc = dr0["lit_desc"].ToString().Trim();
+                res.pro_occ_desc = dr0["pro_occ_desc"].ToString().Trim();
                 res.to = "คุณอร่าม รัตนโชติ Head of Litigation and Registration";
                 res.name1 = data.name1;
                 res.position1 = data.position1;
@@ -151,6 +156,7 @@ namespace onlineLegalWF.Class
             public string to { get; set; }
             public string reqdate { get; set; }
             public string desc { get; set; }
+            public string pro_occ_desc { get; set; }
 
             public string sign_name1 { get; set; }
             public string name1 { get; set; }

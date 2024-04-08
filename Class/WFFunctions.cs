@@ -345,7 +345,7 @@ namespace onlineLegalWF.Class
                         xurl = "/frminsurance/insuranceclaimedit.aspx?id=" + id + "&st=" + wfA.step_name;
                     }
                 }
-                else if (wfA.process_code == "LIT")
+                else if (wfA.process_code == "LIT" || wfA.process_code == "LIT2")
                 {
                     string sqlreq = @"select * from li_litigation_request where process_id = '" + wfA.process_id + "'";
                     var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
@@ -648,6 +648,25 @@ namespace onlineLegalWF.Class
                     next_step = wfA.isfalse_nextstep;
                 }
             }
+            else if (wfA.step_name == "GM Approve" && wfA.process_code == "LIT_2")
+            {
+                if (wfA.attr_apv_value == wfA.submit_answer)
+                {
+                    if (wfA.external_domain == "Y")
+                    {
+                        next_step = 3;
+                    }
+                    else
+                    {
+                        next_step = 5;
+                    }
+                }
+                else
+                {
+                    next_step = wfA.isfalse_nextstep;
+                }
+
+            }
             else 
             {
                 if (wfA.attr_apv_value == wfA.submit_answer)
@@ -793,7 +812,7 @@ namespace onlineLegalWF.Class
                             xurl = "/frmpermit/permitlandtaxedit.aspx?id=" + id;
                         }
                     }
-                    else if (wfDefault_step.process_code == "LIT")
+                    else if (wfDefault_step.process_code == "LIT" || wfDefault_step.process_code == "LIT_2")
                     {
                         string sqlreq = @"select * from li_litigation_request where process_id = '" + wfDefault_step.process_id + "'";
                         var dtreq = zdb.ExecSql_DataTable(sqlreq, zconnstr);
@@ -807,11 +826,11 @@ namespace onlineLegalWF.Class
                     }
 
                 }
-                else if (wfDefault_step.step_name == "Head of Treasury Operation Approve" || wfDefault_step.step_name == "Head of Litigation Assign" && wfDefault_step.process_code == "LIT")
+                else if (wfDefault_step.step_name == "Head of Treasury Operation Approve" || wfDefault_step.step_name == "Head of Litigation Assign" && wfDefault_step.process_code == "LIT" || wfDefault_step.process_code == "LIT_2")
                 {
                     xurl = "/forms/litapv.aspx?req=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code + "&st=" + wfDefault_step.step_name;
                 }
-                else if (wfDefault_step.step_name == "Litigation Update" && wfDefault_step.process_code == "LIT")
+                else if (wfDefault_step.step_name == "Litigation Update" && wfDefault_step.process_code == "LIT" || wfDefault_step.process_code == "LIT_2")
                 {
                     xurl = "/frmlitigation/litigationrequesteditbyadmin.aspx?id=" + wfDefault_step.process_id + "&pc=" + wfDefault_step.process_code;
                 }
@@ -1509,6 +1528,41 @@ namespace onlineLegalWF.Class
                 else if (next_step_name == "Head of Treasury Operation Approve")
                 {
                     xname = "sarawut.l"; //Head of Treasury Operation Approve account
+                }
+                else if (next_step_name == "Head of Litigation Assign")
+                {
+                    xname = "aram.r"; //Head of Litigation Assign account
+                }
+                else if (next_step_name == "Litigation Update")
+                {
+                    xname = submit_by; //Head of Litigation Assign Select Assign value from display add to variable submit_by
+                }
+                else if (next_step_name == "End")
+                {
+                    xname = ""; //End
+                }
+                else if (next_step_name == "Edit Request")
+                {
+                    xname = submit_by; //Requester Edit Request
+                }
+            }
+            else if (process_code == "LIT_2")
+            {
+                if (next_step_name == "Start")
+                {
+                    xname = emp.user_login; //Requestor = Login account
+                }
+                else if (next_step_name == "GM Approve")
+                {
+                    xname = gm_login; //GM Login
+                }
+                else if (next_step_name == "AM Approve")
+                {
+                    xname = am_login; //AM Approve Login
+                }
+                else if (next_step_name == "Head AM Approve")
+                {
+                    xname = head_am_login; //Head AM Approve Login
                 }
                 else if (next_step_name == "Head of Litigation Assign")
                 {

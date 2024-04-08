@@ -372,7 +372,7 @@ namespace onlineLegalWF.forms
                 }
                 else
                 {
-                    templatefile = path_template + @"\LitigationTemplate.docx";
+                    templatefile = path_template + @"\LitigationTemplate2.docx";
                     #region gentagstr data form
 
                     var requestor = "";
@@ -380,22 +380,68 @@ namespace onlineLegalWF.forms
                     var supervisor = "";
                     var supervisorpos = "";
 
-                    var empFunc = new EmpInfo();
+                    ///get gm heam_am c_level
+                    string sqlbu = @"select * from li_business_unit where bu_code = '" + reslit.Rows[0]["bu_code"] + "'";
+                    var res = zdb.ExecSql_DataTable(sqlbu, zconnstr);
 
-                    //get data user
-                    var emp = empFunc.getEmpInfo(submit_by);
-                    if (!string.IsNullOrEmpty(emp.full_name_en))
+                    if (res.Rows.Count > 0)
                     {
-                        requestor = emp.full_name_en;
-                        requestorpos = emp.position_en;
-                    }
+                        // check session_user
+                        if (Session["user_login"] != null)
+                        {
+                            var xlogin_name = Session["user_login"].ToString();
+                            var empFunc = new EmpInfo();
 
-                    //get supervisor data
-                    var empSupervisor = empFunc.getEmpInfo("sarawut.l");
-                    if (!string.IsNullOrEmpty(empSupervisor.full_name_en))
-                    {
-                        supervisor = empSupervisor.full_name_en;
-                        supervisorpos = empSupervisor.position_en;
+                            string xgm = res.Rows[0]["gm"].ToString();
+                            string xam = res.Rows[0]["am"].ToString();
+                            string xhead_am = res.Rows[0]["head_am"].ToString();
+                            string xexternal_domain = res.Rows[0]["external_domain"].ToString();
+
+                            if (xexternal_domain == "Y")
+                            {
+                                //get data am user
+                                if (!string.IsNullOrEmpty(xam))
+                                {
+                                    var empam = empFunc.getEmpInfo(xam);
+                                    if (empam.user_login != null)
+                                    {
+                                        requestor = empam.full_name_en;
+                                        requestorpos = empam.position_en;
+                                    }
+                                }
+                                //get data head am user
+                                if (!string.IsNullOrEmpty(xhead_am))
+                                {
+                                    var empheadam = empFunc.getEmpInfo(xhead_am);
+                                    if (empheadam.user_login != null)
+                                    {
+                                        supervisor = empheadam.full_name_en;
+                                        supervisorpos = empheadam.position_en;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                //get data user
+                                var emp = empFunc.getEmpInfo(xlogin_name);
+                                if (!string.IsNullOrEmpty(emp.full_name_en))
+                                {
+                                    requestor = emp.full_name_en;
+                                    requestorpos = emp.position_en;
+                                }
+
+                                //get data gm user
+                                if (!string.IsNullOrEmpty(xgm))
+                                {
+                                    var empgm = empFunc.getEmpInfo(xgm);
+                                    if (empgm.user_login != null)
+                                    {
+                                        supervisor = empgm.full_name_en;
+                                        supervisorpos = empgm.position_en;
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     data.sign_name1 = "";

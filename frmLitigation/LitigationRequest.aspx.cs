@@ -47,8 +47,39 @@ namespace onlineLegalWF.frmLitigation
             type_req.DataTextField = "tof_litigationreq_desc";
             type_req.DataValueField = "tof_litigationreq_code";
             type_req.DataBind();
-        }
 
+            ddl_bu.DataSource = GetBusinessUnit();
+            ddl_bu.DataBind();
+            ddl_bu.DataTextField = "bu_desc";
+            ddl_bu.DataValueField = "bu_code";
+            ddl_bu.DataBind();
+
+            company.Text = GetCompanyNameByBuCode(ddl_bu.SelectedValue.ToString());
+        }
+        public DataTable GetBusinessUnit()
+        {
+            string sql = "select * from li_business_unit where isactive=1 order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
+        public string GetCompanyNameByBuCode(string xbu_code)
+        {
+            string company_name = "";
+
+            string sql = @"select * from li_business_unit where bu_code='" + xbu_code + "'";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                company_name = dt.Rows[0]["company_name"].ToString();
+
+            }
+
+            return company_name;
+        }
+        protected void ddl_bu_Changed(object sender, EventArgs e)
+        {
+            company.Text = GetCompanyNameByBuCode(ddl_bu.SelectedValue.ToString());
+        }
         public DataTable GetTypeOfRequest()
         {
             string sql = "select * from li_type_of_litigationrequest order by row_sort asc";
@@ -62,6 +93,9 @@ namespace onlineLegalWF.frmLitigation
                 row_tp_download.Visible = true;
                 row_tp_upload.Visible = true;
                 row_gv_data.Visible = true;
+                pro_occ_section.Visible = false;
+                section_bu.Visible = false;
+                section_company.Visible = false;
 
             }
             else
@@ -69,6 +103,9 @@ namespace onlineLegalWF.frmLitigation
                 row_tp_download.Visible = false;
                 row_tp_upload.Visible = false;
                 row_gv_data.Visible = false;
+                pro_occ_section.Visible = true;
+                section_bu.Visible = true;
+                section_company.Visible = true;
             }
         }
         private int SaveRequest()
@@ -88,6 +125,9 @@ namespace onlineLegalWF.frmLitigation
             var xsubject = subject.Text.Trim();
             var xdesc = desc.Text.Trim();
             var xstatus = "verify";
+            var xbucode = ddl_bu.SelectedValue.ToString();
+            var xcompany_name = company.Text.Trim();
+            var xpro_occ_desc = pro_occ_desc.Text.Trim();
 
             string sqlLit = @"select * from li_litigation_request where req_no = '"+ xreq_no + "'";
             var resLit = zdb.ExecSql_DataTable(sqlLit, zconnstr);
@@ -95,27 +135,68 @@ namespace onlineLegalWF.frmLitigation
             //check data from li_litigation_request if has data Update else insert data
             if (resLit.Rows.Count > 0)
             {
-                string sqlUpdate = @"UPDATE [li_litigation_request]
-                                       SET [lit_subject] = '"+ xsubject +@"'
-                                          ,[lit_desc] = '"+ xdesc +@"'
-                                          ,[tof_litigationreq_code] = '"+ xtype_req +@"'
-                                          ,[updated_datetime] = '"+ xreq_date + @"'
-                                     WHERE [req_no] = '"+ xreq_no +"'";
+                string sqlUpdate = "";
+                if (xtype_req == "01")
+                {
+                    sqlUpdate = @"UPDATE [li_litigation_request]
+                                       SET [lit_subject] = '" + xsubject + @"'
+                                          ,[lit_desc] = '" + xdesc + @"'
+                                          ,[tof_litigationreq_code] = '" + xtype_req + @"'
+                                          ,[bu_code] = NULL
+                                          ,[company_name] = NULL
+                                          ,[updated_datetime] = '" + xreq_date + @"'
+                                     WHERE [req_no] = '" + xreq_no + "'";
+                }
+                else 
+                {
+                    sqlUpdate = @"UPDATE [li_litigation_request]
+                                       SET [lit_subject] = '" + xsubject + @"'
+                                          ,[lit_desc] = '" + xdesc + @"'
+                                          ,[tof_litigationreq_code] = '" + xtype_req + @"'
+                                          ,[bu_code] = '" + xbucode + @"'
+                                          ,[company_name] = '" + xcompany_name + @"'
+                                          ,[updated_datetime] = '" + xreq_date + @"'
+                                          ,[pro_occ_desc] = '" + xpro_occ_desc + @"'
+                                     WHERE [req_no] = '" + xreq_no + "'";
+                }
+                
                 ret = zdb.ExecNonQueryReturnID(sqlUpdate, zconnstr);
             }
             else 
             {
-                string sqlInsert = @"INSERT INTO [dbo].[li_litigation_request]
+                string sqlInsert = "";
+                if (xtype_req == "01")
+                {
+                    sqlInsert = @"INSERT INTO [dbo].[li_litigation_request]
                                            ([process_id],[req_no],[document_no],[req_date],[lit_subject],[lit_desc],[tof_litigationreq_code],[status])
                                      VALUES
-                                           ('"+ xprocess_id +@"'
-                                           ,'"+ xreq_no +@"'
-                                           ,'"+ xdoc_no +@"'
-                                           ,'"+ xreq_date +@"'
-                                           ,'"+ xsubject +@"'
-                                           ,'"+ xdesc +@"'
-                                           ,'"+ xtype_req +@"'
-                                           ,'"+ xstatus +"')";
+                                           ('" + xprocess_id + @"'
+                                           ,'" + xreq_no + @"'
+                                           ,'" + xdoc_no + @"'
+                                           ,'" + xreq_date + @"'
+                                           ,'" + xsubject + @"'
+                                           ,'" + xdesc + @"'
+                                           ,'" + xtype_req + @"'
+                                           ,'" + xstatus + "')";
+                }
+                else 
+                {
+                    sqlInsert = @"INSERT INTO [dbo].[li_litigation_request]
+                                           ([process_id],[req_no],[document_no],[req_date],[lit_subject],[lit_desc],[tof_litigationreq_code],[status],[pro_occ_desc],[bu_code],[company_name])
+                                     VALUES
+                                           ('" + xprocess_id + @"'
+                                           ,'" + xreq_no + @"'
+                                           ,'" + xdoc_no + @"'
+                                           ,'" + xreq_date + @"'
+                                           ,'" + xsubject + @"'
+                                           ,'" + xdesc + @"'
+                                           ,'" + xtype_req + @"'
+                                           ,'" + xstatus + @"'
+                                           ,'" + xpro_occ_desc + @"'
+                                           ,'" + xbucode + @"'
+                                           ,'" + xcompany_name + "')";
+                }
+                
                 ret = zdb.ExecNonQueryReturnID(sqlInsert, zconnstr);
             }
 
@@ -257,6 +338,8 @@ namespace onlineLegalWF.frmLitigation
             var xreq_date = System.DateTime.Now;
             var xsubject = subject.Text.Trim();
             var xdesc = desc.Text.Trim();
+            var xpro_occ_desc = pro_occ_desc.Text.Trim();
+            var xbu_code = ddl_bu.SelectedValue.ToString();
 
             var path_template = ConfigurationManager.AppSettings["WT_Template_litigation"].ToString();
             string templatefile = "";
@@ -314,12 +397,13 @@ namespace onlineLegalWF.frmLitigation
             }
             else
             {
-                templatefile = path_template + @"\LitigationTemplate.docx";
+                templatefile = path_template + @"\LitigationTemplate2.docx";
 
                 #region gentagstr data form
                 data.docno = xdoc_no.Replace(",", "!comma");
                 data.subject = xsubject.Replace(",", "!comma");
                 data.desc = xdesc.Replace(",", "!comma");
+                data.pro_occ_desc = xpro_occ_desc.Replace(",", "!comma");
                 data.reqdate = Utillity.ConvertDateToLongDateTime(xreq_date, "en");
                 data.to = "คุณอร่าม รัตนโชติ Head of Litigation and Registration";
 
@@ -328,29 +412,70 @@ namespace onlineLegalWF.frmLitigation
                 var supervisor = "";
                 var supervisorpos = "";
 
-                // check session_user
-                if (Session["user_login"] != null)
+                ///get gm heam_am c_level
+                string sqlbu = @"select * from li_business_unit where bu_code = '" + xbu_code + "'";
+                var res = zdb.ExecSql_DataTable(sqlbu, zconnstr);
+
+                if (res.Rows.Count > 0) 
                 {
-                    var xlogin_name = Session["user_login"].ToString();
-                    var empFunc = new EmpInfo();
-
-                    //get data user
-                    var emp = empFunc.getEmpInfo(xlogin_name);
-                    if (!string.IsNullOrEmpty(emp.full_name_en))
+                    // check session_user
+                    if (Session["user_login"] != null)
                     {
-                        requestor = emp.full_name_en;
-                        requestorpos = emp.position_en;
-                    }
+                        var xlogin_name = Session["user_login"].ToString();
+                        var empFunc = new EmpInfo();
 
-                    //get supervisor data
-                    var empSupervisor = empFunc.getEmpInfo("sarawut.l");
-                    if (!string.IsNullOrEmpty(empSupervisor.full_name_en))
-                    {
-                        supervisor = empSupervisor.full_name_en;
-                        supervisorpos = empSupervisor.position_en;
-                    }
+                        string xgm = res.Rows[0]["gm"].ToString();
+                        string xam = res.Rows[0]["am"].ToString();
+                        string xhead_am = res.Rows[0]["head_am"].ToString();
+                        string xexternal_domain = res.Rows[0]["external_domain"].ToString();
 
+                        if (xexternal_domain == "Y")
+                        {
+                            //get data am user
+                            if (!string.IsNullOrEmpty(xam))
+                            {
+                                var empam = empFunc.getEmpInfo(xam);
+                                if (empam.user_login != null)
+                                {
+                                    requestor = empam.full_name_en;
+                                    requestorpos = empam.position_en;
+                                }
+                            }
+                            //get data head am user
+                            if (!string.IsNullOrEmpty(xhead_am))
+                            {
+                                var empheadam = empFunc.getEmpInfo(xhead_am);
+                                if (empheadam.user_login != null)
+                                {
+                                    supervisor = empheadam.full_name_en;
+                                    supervisorpos = empheadam.position_en;
+                                }
+                            }
+                        }
+                        else 
+                        {
+                            //get data user
+                            var emp = empFunc.getEmpInfo(xlogin_name);
+                            if (!string.IsNullOrEmpty(emp.full_name_en))
+                            {
+                                requestor = emp.full_name_en;
+                                requestorpos = emp.position_en;
+                            }
+
+                            //get data gm user
+                            if (!string.IsNullOrEmpty(xgm))
+                            {
+                                var empgm = empFunc.getEmpInfo(xgm);
+                                if (empgm.user_login != null)
+                                {
+                                    supervisor = empgm.full_name_en;
+                                    supervisorpos = empgm.position_en;
+                                }
+                            }
+                        }
+                    }
                 }
+                
 
                 data.sign_name1 = "";
                 data.name1 = requestor;
