@@ -74,6 +74,7 @@ namespace onlineLegalWF.frmLitigation
                     section_bu.Visible = true;
                     section_company.Visible = true;
                 }
+
                 subject.Text = res.Rows[0]["lit_subject"].ToString();
                 desc.Text = res.Rows[0]["lit_desc"].ToString();
                 company.Text = res.Rows[0]["company_name"].ToString();
