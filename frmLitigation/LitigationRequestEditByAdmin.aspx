@@ -49,6 +49,28 @@
                             </asp:TableCell>
                             <asp:TableCell>&nbsp;</asp:TableCell>
                         </asp:TableRow>
+                        <asp:TableRow ID="section_bu" runat="server" Visible="false">
+                            <asp:TableCell CssClass="cell_content_20PC_TR">
+                                <label class="Label_md">Bu </label>
+                            </asp:TableCell>
+                            <asp:TableCell>&nbsp;</asp:TableCell>
+                            <asp:TableCell CssClass="cell_content_80PC_TL">
+                                <asp:DropDownList ID="ddl_bu" runat="server" Enabled="false" CssClass="Text_200">
+                                    <asp:ListItem>-Please select-</asp:ListItem>
+                                </asp:DropDownList>
+                            </asp:TableCell>
+                            <asp:TableCell>&nbsp;</asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow ID="section_company" runat="server" Visible="false">
+                            <asp:TableCell CssClass="cell_content_20PC_TR">
+                                <label class="Label_md">Company </label>
+                            </asp:TableCell>
+                            <asp:TableCell>&nbsp;</asp:TableCell>
+                            <asp:TableCell CssClass="cell_content_80PC_TL">
+                                <asp:TextBox ID="company" runat="server" CssClass="Text_600" Enabled="false"></asp:TextBox>
+                            </asp:TableCell>
+                            <asp:TableCell>&nbsp;</asp:TableCell>
+                        </asp:TableRow>
                         <asp:TableRow>
                             <asp:TableCell CssClass="cell_content_20PC_TR">
                                 <label class="Label_md">Subject </label>
@@ -66,6 +88,16 @@
                             <asp:TableCell>&nbsp;</asp:TableCell>
                             <asp:TableCell CssClass="cell_content_80PC_TL">
                                 <asp:TextBox ID="desc" runat="server" Enabled="false" CssClass="Text_600" TextMode="MultiLine" Height="100px"></asp:TextBox>
+                            </asp:TableCell>
+                            <asp:TableCell>&nbsp;</asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow ID="pro_occ_section" runat="server" Visible="false">
+                            <asp:TableCell CssClass="cell_content_20PC_TR">
+                                <label class="Label_md">Problems of occurred </label>
+                            </asp:TableCell>
+                            <asp:TableCell>&nbsp;</asp:TableCell>
+                            <asp:TableCell CssClass="cell_content_80PC_TL">
+                                <asp:TextBox ID="pro_occ_desc" runat="server" Enabled="false" CssClass="Text_600" TextMode="MultiLine" Height="100px"></asp:TextBox>
                             </asp:TableCell>
                             <asp:TableCell>&nbsp;</asp:TableCell>
                         </asp:TableRow>

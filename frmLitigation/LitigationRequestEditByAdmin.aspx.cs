@@ -46,6 +46,12 @@ namespace onlineLegalWF.frmLitigation
             type_req.DataValueField = "tof_litigationreq_code";
             type_req.DataBind();
 
+            ddl_bu.DataSource = GetBusinessUnit();
+            ddl_bu.DataBind();
+            ddl_bu.DataTextField = "bu_desc";
+            ddl_bu.DataValueField = "bu_code";
+            ddl_bu.DataBind();
+
             string sql = "select * from li_litigation_request where process_id='" + id + "'";
 
             var res = zdb.ExecSql_DataTable(sql, zconnstr);
@@ -58,20 +64,28 @@ namespace onlineLegalWF.frmLitigation
                 type_req.SelectedValue = res.Rows[0]["tof_litigationreq_code"].ToString();
                 if (type_req.SelectedValue == "01")
                 {
-                    row_gv_data.Visible = true;
+                    pro_occ_section.Visible = false;
+                    section_bu.Visible = false;
+                    section_company.Visible = false;
                 }
                 else
                 {
-                    row_gv_data.Visible = false;
+                    pro_occ_section.Visible = true;
+                    section_bu.Visible = true;
+                    section_company.Visible = true;
                 }
                 subject.Text = res.Rows[0]["lit_subject"].ToString();
                 desc.Text = res.Rows[0]["lit_desc"].ToString();
+                company.Text = res.Rows[0]["company_name"].ToString();
+                ddl_bu.SelectedValue = res.Rows[0]["bu_code"].ToString();
+                pro_occ_desc.Text = res.Rows[0]["pro_occ_desc"].ToString();
 
                 string sqlcase = "select * from li_litigation_req_case where req_no='" + res.Rows[0]["req_no"].ToString() + "'";
                 var rescase = zdb.ExecSql_DataTable(sqlcase, zconnstr);
 
                 if (rescase.Rows.Count > 0)
                 {
+                    row_gv_data.Visible = true;
                     List<LitigationCivilCaseData> listCivilCaseData = new List<LitigationCivilCaseData>();
                     var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
                     foreach (DataRow item in rescase.Rows)
@@ -111,6 +125,26 @@ namespace onlineLegalWF.frmLitigation
             }
         }
 
+        public DataTable GetBusinessUnit()
+        {
+            string sql = "select * from li_business_unit where isactive=1 order by row_sort asc";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            return dt;
+        }
+        public string GetCompanyNameByBuCode(string xbu_code)
+        {
+            string company_name = "";
+
+            string sql = @"select * from li_business_unit where bu_code='" + xbu_code + "'";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                company_name = dt.Rows[0]["company_name"].ToString();
+
+            }
+
+            return company_name;
+        }
         public DataTable GetTypeOfRequest()
         {
             string sql = "select * from li_type_of_litigationrequest order by row_sort asc";

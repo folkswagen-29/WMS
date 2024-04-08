@@ -69,46 +69,43 @@ namespace onlineLegalWF.forms
                     row_gv_data.Visible = false;
                     hid_external_domain.Value = resinsreq.Rows[0]["external_domain"].ToString();
                     hid_bucode.Value = resinsreq.Rows[0]["bu_code"].ToString();
-                    if (xtype_req == "01") 
-                    {
-                        string sql = @"select lit.[process_id],reqcase.[req_no],[case_no],[no],[contract_no],[bu_name],[customer_no],[customer_name],[customer_room],[overdue_desc],[outstanding_debt],[outstanding_debt_ack_of_debt],[fine_debt]
+                    string sql = @"select lit.[process_id],reqcase.[req_no],[case_no],[no],[contract_no],[bu_name],[customer_no],[customer_name],[customer_room],[overdue_desc],[outstanding_debt],[outstanding_debt_ack_of_debt],[fine_debt]
                                     ,[total_net],[retention_money],[total_after_retention_money],[remark],reqcase.[status],[assto_login],reqcase.[updated_datetime] 
                                     from [li_litigation_req_case] as reqcase 
                                     inner join li_litigation_request as lit on lit.req_no = reqcase.req_no 
                                     where reqcase.[req_no]='" + id + "'";
 
-                        var res = zdb.ExecSql_DataTable(sql, zconnstr);
-                        if (res.Rows.Count > 0)
-                        {
-                            row_gv_data.Visible = true;
-                            List<LitigationCivilCaseData> listCivilCaseData = new List<LitigationCivilCaseData>();
+                    var res = zdb.ExecSql_DataTable(sql, zconnstr);
+                    if (res.Rows.Count > 0)
+                    {
+                        row_gv_data.Visible = true;
+                        List<LitigationCivilCaseData> listCivilCaseData = new List<LitigationCivilCaseData>();
 
-                            foreach (DataRow item in res.Rows)
-                            {
-                                LitigationCivilCaseData civilCaseData = new LitigationCivilCaseData();
-                                civilCaseData.req_no = item["req_no"].ToString();
-                                civilCaseData.case_no = item["case_no"].ToString();
-                                civilCaseData.no = item["no"].ToString();
-                                civilCaseData.contract_no = item["contract_no"].ToString();
-                                civilCaseData.bu_name = item["bu_name"].ToString();
-                                civilCaseData.customer_no = item["customer_no"].ToString();
-                                civilCaseData.customer_name = item["customer_name"].ToString();
-                                civilCaseData.customer_room = item["customer_room"].ToString();
-                                civilCaseData.overdue_desc = item["overdue_desc"].ToString();
-                                civilCaseData.outstanding_debt = item["outstanding_debt"].ToString();
-                                civilCaseData.outstanding_debt_ack_of_debt = item["outstanding_debt_ack_of_debt"].ToString();
-                                civilCaseData.fine_debt = item["fine_debt"].ToString();
-                                civilCaseData.total_net = item["total_net"].ToString();
-                                civilCaseData.retention_money = item["retention_money"].ToString();
-                                civilCaseData.total_after_retention_money = item["total_after_retention_money"].ToString();
-                                civilCaseData.remark = item["remark"].ToString();
-                                civilCaseData.status = item["status"].ToString();
-                                civilCaseData.assto_login = item["assto_login"].ToString();
-                                listCivilCaseData.Add(civilCaseData);
-                            }
-                            gvExcelFile.DataSource = listCivilCaseData;
-                            gvExcelFile.DataBind();
+                        foreach (DataRow item in res.Rows)
+                        {
+                            LitigationCivilCaseData civilCaseData = new LitigationCivilCaseData();
+                            civilCaseData.req_no = item["req_no"].ToString();
+                            civilCaseData.case_no = item["case_no"].ToString();
+                            civilCaseData.no = item["no"].ToString();
+                            civilCaseData.contract_no = item["contract_no"].ToString();
+                            civilCaseData.bu_name = item["bu_name"].ToString();
+                            civilCaseData.customer_no = item["customer_no"].ToString();
+                            civilCaseData.customer_name = item["customer_name"].ToString();
+                            civilCaseData.customer_room = item["customer_room"].ToString();
+                            civilCaseData.overdue_desc = item["overdue_desc"].ToString();
+                            civilCaseData.outstanding_debt = item["outstanding_debt"].ToString();
+                            civilCaseData.outstanding_debt_ack_of_debt = item["outstanding_debt_ack_of_debt"].ToString();
+                            civilCaseData.fine_debt = item["fine_debt"].ToString();
+                            civilCaseData.total_net = item["total_net"].ToString();
+                            civilCaseData.retention_money = item["retention_money"].ToString();
+                            civilCaseData.total_after_retention_money = item["total_after_retention_money"].ToString();
+                            civilCaseData.remark = item["remark"].ToString();
+                            civilCaseData.status = item["status"].ToString();
+                            civilCaseData.assto_login = item["assto_login"].ToString();
+                            listCivilCaseData.Add(civilCaseData);
                         }
+                        gvExcelFile.DataSource = listCivilCaseData;
+                        gvExcelFile.DataBind();
                     }
 
                     //init data UcAttachAndCommentLogs

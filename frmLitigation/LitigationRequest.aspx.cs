@@ -100,9 +100,9 @@ namespace onlineLegalWF.frmLitigation
             }
             else
             {
-                row_tp_download.Visible = false;
-                row_tp_upload.Visible = false;
-                row_gv_data.Visible = false;
+                row_tp_download.Visible = true;
+                row_tp_upload.Visible = true;
+                row_gv_data.Visible = true;
                 pro_occ_section.Visible = true;
                 section_bu.Visible = true;
                 section_company.Visible = true;
@@ -202,66 +202,63 @@ namespace onlineLegalWF.frmLitigation
 
             if (ret > 0) 
             {
-                if (xtype_req == "01")
+                //delete li_litigation_req_case by req_id and loopinsert from gridview data
+                string sqlDelCase = @"delete from [li_litigation_req_case] where [req_no] = '" + xreq_no + "'";
+                zdb.ExecNonQuery(sqlDelCase, zconnstr);
+
+                if (ret > 0)
                 {
-                    //delete li_litigation_req_case by req_id and loopinsert from gridview data
-                    string sqlDelCase = @"delete from [li_litigation_req_case] where [req_no] = '"+xreq_no+"'";
-                    zdb.ExecNonQuery(sqlDelCase, zconnstr);
-
-                    if (ret > 0) 
+                    //get data from gridview
+                    List<LitigationCivilCaseData> listCivilCaseData = new List<LitigationCivilCaseData>();
+                    foreach (GridViewRow row in gvExcelFile.Rows)
                     {
-                        //get data from gridview
-                        List<LitigationCivilCaseData> listCivilCaseData = new List<LitigationCivilCaseData>();
-                        foreach (GridViewRow row in gvExcelFile.Rows)
-                        {
-                            LitigationCivilCaseData civilCaseData = new LitigationCivilCaseData();
-                            civilCaseData.req_no = (row.FindControl("gv_req_no") as HiddenField).Value.ToString();
-                            civilCaseData.case_no = (row.FindControl("gv_case_no") as HiddenField).Value.ToString();
-                            civilCaseData.no = (row.FindControl("gv_no") as Label).Text.ToString();
-                            civilCaseData.contract_no = (row.FindControl("gv_contract_no") as Label).Text.ToString();
-                            civilCaseData.bu_name = (row.FindControl("gv_bu_name") as Label).Text.ToString();
-                            civilCaseData.customer_no = (row.FindControl("gv_customer_no") as Label).Text.ToString();
-                            civilCaseData.customer_name = (row.FindControl("gv_customer_name") as Label).Text.ToString();
-                            civilCaseData.customer_room = (row.FindControl("gv_customer_room") as Label).Text.ToString();
-                            civilCaseData.overdue_desc = (row.FindControl("gv_overdue_desc") as Label).Text.ToString();
-                            civilCaseData.outstanding_debt = (row.FindControl("gv_outstanding_debt") as Label).Text.ToString();
-                            civilCaseData.outstanding_debt_ack_of_debt = (row.FindControl("gv_outstanding_debt_ack_of_debt") as Label).Text.ToString();
-                            civilCaseData.fine_debt = (row.FindControl("gv_fine_debt") as Label).Text.ToString();
-                            civilCaseData.total_net = (row.FindControl("gv_total_net") as Label).Text.ToString();
-                            civilCaseData.retention_money = (row.FindControl("gv_retention_money") as Label).Text.ToString();
-                            civilCaseData.total_after_retention_money = (row.FindControl("gv_total_after_retention_money") as Label).Text.ToString();
-                            civilCaseData.remark = (row.FindControl("gv_remark") as Label).Text.ToString();
-                            civilCaseData.status = xstatus;
-                            listCivilCaseData.Add(civilCaseData);
-                        }
+                        LitigationCivilCaseData civilCaseData = new LitigationCivilCaseData();
+                        civilCaseData.req_no = (row.FindControl("gv_req_no") as HiddenField).Value.ToString();
+                        civilCaseData.case_no = (row.FindControl("gv_case_no") as HiddenField).Value.ToString();
+                        civilCaseData.no = (row.FindControl("gv_no") as Label).Text.ToString();
+                        civilCaseData.contract_no = (row.FindControl("gv_contract_no") as Label).Text.ToString();
+                        civilCaseData.bu_name = (row.FindControl("gv_bu_name") as Label).Text.ToString();
+                        civilCaseData.customer_no = (row.FindControl("gv_customer_no") as Label).Text.ToString();
+                        civilCaseData.customer_name = (row.FindControl("gv_customer_name") as Label).Text.ToString();
+                        civilCaseData.customer_room = (row.FindControl("gv_customer_room") as Label).Text.ToString();
+                        civilCaseData.overdue_desc = (row.FindControl("gv_overdue_desc") as Label).Text.ToString();
+                        civilCaseData.outstanding_debt = (row.FindControl("gv_outstanding_debt") as Label).Text.ToString();
+                        civilCaseData.outstanding_debt_ack_of_debt = (row.FindControl("gv_outstanding_debt_ack_of_debt") as Label).Text.ToString();
+                        civilCaseData.fine_debt = (row.FindControl("gv_fine_debt") as Label).Text.ToString();
+                        civilCaseData.total_net = (row.FindControl("gv_total_net") as Label).Text.ToString();
+                        civilCaseData.retention_money = (row.FindControl("gv_retention_money") as Label).Text.ToString();
+                        civilCaseData.total_after_retention_money = (row.FindControl("gv_total_after_retention_money") as Label).Text.ToString();
+                        civilCaseData.remark = (row.FindControl("gv_remark") as Label).Text.ToString();
+                        civilCaseData.status = xstatus;
+                        listCivilCaseData.Add(civilCaseData);
+                    }
 
-                        //check length > 0 insert
-                        if (listCivilCaseData.Count > 0) 
+                    //check length > 0 insert
+                    if (listCivilCaseData.Count > 0)
+                    {
+                        foreach (var item in listCivilCaseData)
                         {
-                            foreach (var item in listCivilCaseData) 
-                            {
-                                string sqlCaseReq = @"INSERT INTO [li_litigation_req_case]
+                            string sqlCaseReq = @"INSERT INTO [li_litigation_req_case]
                                                            ([req_no],[case_no],[no],[contract_no],[bu_name],[customer_no],[customer_name],[customer_room]
                                                            ,[overdue_desc],[outstanding_debt],[outstanding_debt_ack_of_debt],[fine_debt],[total_net],[retention_money],[total_after_retention_money],[remark])
                                                      VALUES
-                                                           ('"+item.req_no+@"'
-                                                           ,'"+item.case_no+@"'
-                                                           ,'"+item.no+@"'
-                                                           ,'"+item.contract_no+@"'
-                                                           ,'"+item.bu_name+@"'
-                                                           ,'"+item.customer_no+@"'
-                                                           ,'"+item.customer_name+@"'
-                                                           ,'"+item.customer_room+@"'
-                                                           ,'"+item.overdue_desc+@"'
-                                                           ,'"+item.outstanding_debt+@"'
-                                                           ,'"+item.outstanding_debt_ack_of_debt+@"'
-                                                           ,'"+item.fine_debt+@"'
-                                                           ,'"+item.total_net+@"'
-                                                           ,'"+item.retention_money+@"'
-                                                           ,'"+item.total_after_retention_money+@"'
-                                                           ,'"+item.remark+"')";
-                                ret = zdb.ExecNonQueryReturnID(sqlCaseReq, zconnstr);
-                            }
+                                                           ('" + item.req_no + @"'
+                                                           ,'" + item.case_no + @"'
+                                                           ,'" + item.no + @"'
+                                                           ,'" + item.contract_no + @"'
+                                                           ,'" + item.bu_name + @"'
+                                                           ,'" + item.customer_no + @"'
+                                                           ,'" + item.customer_name + @"'
+                                                           ,'" + item.customer_room + @"'
+                                                           ,'" + item.overdue_desc + @"'
+                                                           ,'" + item.outstanding_debt + @"'
+                                                           ,'" + item.outstanding_debt_ack_of_debt + @"'
+                                                           ,'" + item.fine_debt + @"'
+                                                           ,'" + item.total_net + @"'
+                                                           ,'" + item.retention_money + @"'
+                                                           ,'" + item.total_after_retention_money + @"'
+                                                           ,'" + item.remark + "')";
+                            ret = zdb.ExecNonQueryReturnID(sqlCaseReq, zconnstr);
                         }
                     }
                 }
