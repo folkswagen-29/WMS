@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Case Detail" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationCaseDetail.aspx.cs" Inherits="onlineLegalWF.frmLitigation.LitigationCaseDetail" %>
+﻿<%@ Page Title="Case Detail" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationCaseDetail.aspx.cs" Inherits="onlineLegalWF.frmLitigation.LitigationCaseDetail" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -172,6 +172,7 @@
                     <asp:Table ID="Table1" runat="server" CssClass="cell_content_100PC">
                         <asp:TableRow>
                             <asp:TableCell ColumnSpan="4">
+                                <%--<asp:GridView ID="gvTask" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="9pt" ForeColor="#333333" GridLines="None" CssClass="table w-100" OnRowCommand="gv_RowCommand">--%>
                                 <asp:GridView ID="gvTask" runat="server" AutoGenerateColumns="False" CellPadding="4" Font-Names="Tahoma" Font-Size="9pt" ForeColor="#333333" GridLines="None" CssClass="table w-100">
                                     <Columns>
                                         <asp:TemplateField HeaderText="No">
@@ -220,6 +221,11 @@
                                                 <asp:Label ID="gv_nextaction_desc" Text='<%# Bind("nextaction_desc") %>' runat="server"></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
+                                        <%--<asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="gv_sendmail" runat="server" Height="20px" ImageUrl="~/images/icon_sendmail.png" CommandArgument="<%# Container.DataItemIndex %>" CommandName="openModal" ToolTip="SendEmail" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>--%>
                                     </Columns>
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                     <EditRowStyle BackColor="#999999" />

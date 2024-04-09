@@ -1,5 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Office2010.Excel;
 using onlineLegalWF.Class;
+using onlineLegalWF.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,7 +19,10 @@ namespace onlineLegalWF.frmLitigation
         #region Public
         public DbControllerBase zdb = new DbControllerBase();
         public string zconnstr = ConfigurationManager.AppSettings["BPMDB"].ToString();
+        public string zconnstrrpa = ConfigurationManager.AppSettings["RPADB"].ToString();
         public WFFunctions zwf = new WFFunctions();
+        public ReplaceLitigation zreplacelitigation = new ReplaceLitigation();
+        public SendMail zsendmail = new SendMail();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -66,6 +70,25 @@ namespace onlineLegalWF.frmLitigation
             }
 
             getTaskDetail(id);
+
+            string mode = Request.QueryString["mode"];
+
+            if (mode == "view") 
+            {
+                court.Enabled = false;
+                city.Enabled = false;
+                county.Enabled = false;
+                judge.Enabled = false;
+                case_desc.Enabled = false;
+                plaintiff.Enabled = false;
+                plaintiff_attorney.Enabled = false;
+                defendant.Enabled = false;
+                defendant_attorney.Enabled = false;
+                filing_date.Enabled = false;
+                trial_date.Enabled = false;
+                btn_task.Enabled = false;
+                btn_update.Enabled = false;
+            }
         }
 
         protected void btn_update_Click(object sender, EventArgs e)
@@ -127,6 +150,88 @@ namespace onlineLegalWF.frmLitigation
             {
                 Response.Write("<script>alert('Successfully Update');</script>");
                 getTaskDetail(xcase_no);
+
+                //send Email to Requester
+                string sqlcase = @"select req.process_id,req_case.req_no,req_case.case_no,req.lit_subject,req.document_no from li_litigation_req_case as req_case 
+                                  inner join li_litigation_request as req on req.req_no = req_case.req_no
+                                  where req_case.case_no = '"+hid_case_no.Value+"'";
+                var rescase = zdb.ExecSql_DataTable(sqlcase, zconnstr);
+
+                if (rescase.Rows.Count > 0) 
+                {
+                    string title = rescase.Rows[0]["lit_subject"].ToString();
+                    string doc_no = rescase.Rows[0]["document_no"].ToString();
+                    string req_no = rescase.Rows[0]["req_no"].ToString();
+                    string pid = rescase.Rows[0]["process_id"].ToString();
+
+                    string sqlwf = @"SELECT process_id,MAX(row_id) as row_id,submit_by
+                                    FROM wf_routing where process_id = '"+ pid +@"'
+                                    GROUP BY process_id,submit_by";
+                    var reswf = zdb.ExecSql_DataTable(sqlwf, zconnstr);
+                    string submit_by = "";
+                    if (reswf.Rows.Count > 0) 
+                    {
+                        submit_by = reswf.Rows[0]["submit_by"].ToString();
+
+                        string subject = title;
+                        var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                        string body = "มีการอัพเดทสถานะรายการเอกสารเลขที่ " + doc_no + " กรุณาตรวจสอบผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "frmlitigation/litigationcasedetail.aspx?id=" + xcase_no +"&mode=view'>Click</a>";
+
+                        string pathfileins = "";
+
+                        string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + req_no + "' order by row_id desc";
+
+                        var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                        if (resfile.Rows.Count > 0)
+                        {
+                            pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+
+                            string email = "";
+
+                            var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                            ////get mail from db
+                            /////send mail to next_approve
+                            if (isdev != "true")
+                            {
+                                string sqlbpm = "select * from li_user where user_login = '" + submit_by + "' ";
+                                System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                                if (dtbpm.Rows.Count > 0)
+                                {
+                                    email = dtbpm.Rows[0]["email"].ToString();
+
+                                }
+                                else
+                                {
+                                    string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + submit_by + "' ";
+                                    System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                                    if (dtrpa.Rows.Count > 0)
+                                    {
+                                        email = dtrpa.Rows[0]["Email"].ToString();
+                                    }
+                                    else
+                                    {
+                                        email = "";
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                ////fix mail test
+                                email = "legalwfuat2024@gmail.com";
+                            }
+
+                            if (!string.IsNullOrEmpty(email))
+                            {
+                                _ = zsendmail.sendEmail("Update " +subject + " Mail To Requester", email, body, pathfileins);
+                            }
+
+                        }
+                    }
+                }
             }
             else 
             {
@@ -237,6 +342,23 @@ namespace onlineLegalWF.frmLitigation
 
             return ret;
         }
+
+        //protected void gv_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //    if (e.CommandName == "openModal")
+        //    {
+        //        int i = System.Convert.ToInt32(e.CommandArgument);
+        //        string sql = @"select req_case.req_no,req_case.case_no,req.lit_subject,req.document_no from li_litigation_req_case as req_case 
+        //                          inner join li_litigation_request as req on req.req_no = req_case.req_no
+        //                          where req_case.case_no = '"+hid_case_no.Value+"' ";
+        //        //var xcase_no = ((HiddenField)gvExcelFile.Rows[i].FindControl("gv_case_no")).Value;
+        //        //var xcontract_no = ((Label)gvExcelFile.Rows[i].FindControl("gv_contract_no")).Text;
+        //        //var xcustomer_no = ((Label)gvExcelFile.Rows[i].FindControl("gv_customer_no")).Text;
+        //        //var xcustomer_name = ((Label)gvExcelFile.Rows[i].FindControl("gv_customer_name")).Text;
+
+        //        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalEditData();", true);
+        //    }
+        //}
 
         public class TaskDetailData
         {

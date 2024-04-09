@@ -242,6 +242,7 @@
     <Content Include="images\icon_menuitem.png" />
     <Content Include="images\icon_menulist.png" />
     <Content Include="images\icon_search.png" />
+    <Content Include="images\icon_sendmail.png" />
     <Content Include="images\icon_upload.png" />
     <Content Include="images\icon_view.png" />
     <Content Include="legalPortal\legalPortal.aspx" />
