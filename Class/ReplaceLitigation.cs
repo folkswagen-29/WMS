@@ -121,7 +121,7 @@ namespace onlineLegalWF.Class
                 {
                     var dr = dt1.Rows[i];
 
-                    if (dr["step_name"].ToString() == "Start" && xexternal_domain == "N")
+                    if (dr["step_name"].ToString() == "Start" && xexternal_domain == "N" || dr["step_name"].ToString() == "Start" && string.IsNullOrEmpty(xexternal_domain))
                     {
                         if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {
@@ -129,7 +129,7 @@ namespace onlineLegalWF.Class
                             res.date1 = Utillity.ConvertDateToLongDateTime(Convert.ToDateTime(dr["updated_datetime"]), "en");
                         }
                     }
-                    else if (dr["step_name"].ToString() == "GM Approve" && xexternal_domain == "N")
+                    else if (dr["step_name"].ToString() == "GM Approve" && xexternal_domain == "N" || dr["step_name"].ToString() == "GM Approve" && string.IsNullOrEmpty(xexternal_domain))
                     {
                         if (dr["wf_status"].ToString() != "" && dr["updated_datetime"].ToString() != "")
                         {

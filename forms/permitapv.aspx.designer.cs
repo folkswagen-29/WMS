@@ -69,6 +69,33 @@ namespace onlineLegalWF.forms
         protected global::System.Web.UI.WebControls.Label req_date;
 
         /// <summary>
+        /// section_comcode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow section_comcode;
+
+        /// <summary>
+        /// com_code control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label com_code;
+
+        /// <summary>
+        /// gl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label gl;
+
+        /// <summary>
         /// pdf_render control.
         /// </summary>
         /// <remarks>
@@ -274,6 +301,24 @@ namespace onlineLegalWF.forms
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hid_permit_tradmark_external;
+
+        /// <summary>
+        /// hid_permit_energy_external control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hid_permit_energy_external;
+
+        /// <summary>
+        /// hid_permit_utility_external control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hid_permit_utility_external;
 
         /// <summary>
         /// lblPID control.

@@ -69,6 +69,7 @@ namespace onlineLegalWF.forms
                 else if (xtype_of_permitrequest == "06")
                 {
                     hid_islandtax.Value = "true";
+                    section_comcode.Visible = true;
                 }
 
                 string sqlbu = "select * from li_business_unit where bu_code = '" + hid_bucode.Value + "'";
@@ -81,6 +82,8 @@ namespace onlineLegalWF.forms
                     hid_permit_landtax_external.Value = dr["permit_landtax_external"].ToString();
                     hid_permit_signagetax_external.Value = dr["permit_signagetax_external"].ToString();
                     hid_permit_tradmark_external.Value = dr["permit_tradmark_external"].ToString();
+                    hid_permit_energy_external.Value = dr["permit_energy_external"].ToString();
+                    hid_permit_utility_external.Value = dr["permit_utility_external"].ToString();
                 }
 
                 //init data UcAttachAndCommentLogs
@@ -296,6 +299,8 @@ namespace onlineLegalWF.forms
                     wfAttr.permit_landtax_external = hid_permit_landtax_external.Value;
                     wfAttr.permit_tradmark_external = hid_permit_tradmark_external.Value;
                     wfAttr.permit_signagetax_external = hid_permit_signagetax_external.Value;
+                    wfAttr.permit_energy_external = hid_permit_energy_external.Value;
+                    wfAttr.permit_utility_external = hid_permit_utility_external.Value;
                     // wf.updateProcess
                     var wfA_NextStep = zwf.updateProcess(wfAttr);
                     wfA_NextStep.next_assto_login = zwf.findNextStep_Assignee(wfA_NextStep.process_code, wfA_NextStep.step_name, emp.user_login, wfAttr.submit_by, wfAttr.process_id, hid_bucode.Value);
@@ -697,6 +702,8 @@ namespace onlineLegalWF.forms
                     wfAttr.permit_landtax_external = hid_permit_landtax_external.Value;
                     wfAttr.permit_tradmark_external = hid_permit_tradmark_external.Value;
                     wfAttr.permit_signagetax_external = hid_permit_signagetax_external.Value;
+                    wfAttr.permit_energy_external = hid_permit_energy_external.Value;
+                    wfAttr.permit_utility_external = hid_permit_utility_external.Value;
                     // wf.updateProcess
                     var wfA_NextStep = zwf.updateProcess(wfAttr);
                     wfA_NextStep.submit_by = wfAttr.submit_by;
@@ -768,6 +775,8 @@ namespace onlineLegalWF.forms
                     wfAttr.permit_landtax_external = hid_permit_landtax_external.Value;
                     wfAttr.permit_tradmark_external = hid_permit_tradmark_external.Value;
                     wfAttr.permit_signagetax_external = hid_permit_signagetax_external.Value;
+                    wfAttr.permit_energy_external = hid_permit_energy_external.Value;
+                    wfAttr.permit_utility_external = hid_permit_utility_external.Value;
                     // wf.updateProcess
                     var wfA_NextStep = zwf.updateProcess(wfAttr);
                     wfA_NextStep.submit_by = wfAttr.submit_by;

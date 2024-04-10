@@ -130,6 +130,18 @@ namespace onlineLegalWF.Class
             dr0["tagname"] = "#t9#";
             dr0["tagvalue"] = (!string.IsNullOrEmpty(data.t9) ? data.t9.Replace(",", "!comma") : "");
             dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#t10#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.t10) ? data.t10.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#t11#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.t11) ? data.t11.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
+            dr0 = dtStr.NewRow();
+            dr0["tagname"] = "#t12#";
+            dr0["tagvalue"] = (!string.IsNullOrEmpty(data.t12) ? data.t12.Replace(",", "!comma") : "");
+            dtStr.Rows.Add(dr0);
 
             dr0 = dtStr.NewRow();
             dr0["tagname"] = "#desc_req#";
@@ -219,6 +231,9 @@ namespace onlineLegalWF.Class
                     res.t7 = "☐";
                     res.t8 = "☐";
                     res.t9 = "☐";
+                    res.t10 = "☐";
+                    res.t11 = "☐";
+                    res.t12 = "☐";
                 }
                 else if (xtof_permitreq_code == "02")
                 {
@@ -231,6 +246,9 @@ namespace onlineLegalWF.Class
                     res.t7 = "☐";
                     res.t8 = "☐";
                     res.t9 = "☐";
+                    res.t10 = "☐";
+                    res.t11 = "☐";
+                    res.t12 = "☐";
                 }
                 else if (xtof_permitreq_code == "03")
                 {
@@ -243,6 +261,9 @@ namespace onlineLegalWF.Class
                     res.t7 = "☐";
                     res.t8 = "☐";
                     res.t9 = "☐";
+                    res.t10 = "☐";
+                    res.t11 = "☐";
+                    res.t12 = "☐";
                 }
                 else if (xtof_permitreq_code == "04")
                 {
@@ -255,6 +276,9 @@ namespace onlineLegalWF.Class
                     res.t7 = "☐";
                     res.t8 = "☐";
                     res.t9 = "☐";
+                    res.t10 = "☐";
+                    res.t11 = "☐";
+                    res.t12 = "☐";
                     res.license_other = dr0["tof_permitreq_other_desc"].ToString().Trim();
                 }
                 else if (xtof_permitreq_code == "05")
@@ -268,6 +292,9 @@ namespace onlineLegalWF.Class
                     res.t7 = "☐";
                     res.t8 = "☐";
                     res.t9 = "☐";
+                    res.t10 = "☐";
+                    res.t11 = "☐";
+                    res.t12 = "☐";
                 }
                 else if (xtof_permitreq_code == "06")
                 {
@@ -280,6 +307,9 @@ namespace onlineLegalWF.Class
                     res.t7 = "☐";
                     res.t8 = "☐";
                     res.t9 = "☐";
+                    res.t10 = "☐";
+                    res.t11 = "☐";
+                    res.t12 = "☐";
                 }
                 else if (xtof_permitreq_code == "07")
                 {
@@ -292,6 +322,9 @@ namespace onlineLegalWF.Class
                     res.t7 = "☑";
                     res.t8 = "☐";
                     res.t9 = "☐";
+                    res.t10 = "☐";
+                    res.t11 = "☐";
+                    res.t12 = "☐";
                     res.tax_other = dr0["tof_permitreq_other_desc"].ToString().Trim();
                 }
                 else if (xtof_permitreq_code == "08")
@@ -305,6 +338,9 @@ namespace onlineLegalWF.Class
                     res.t7 = "☐";
                     res.t8 = "☑";
                     res.t9 = "☐";
+                    res.t10 = "☐";
+                    res.t11 = "☐";
+                    res.t12 = "☐";
                 }
                 else if (xtof_permitreq_code == "09")
                 {
@@ -317,7 +353,55 @@ namespace onlineLegalWF.Class
                     res.t7 = "☐";
                     res.t8 = "☐";
                     res.t9 = "☑";
+                    res.t10 = "☐";
+                    res.t11 = "☐";
+                    res.t12 = "☐";
                     res.trademarks_other = dr0["tof_permitreq_other_desc"].ToString().Trim();
+                }
+                else if (xtof_permitreq_code == "10")
+                {
+                    res.t1 = "☐";
+                    res.t2 = "☐";
+                    res.t3 = "☐";
+                    res.t4 = "☐";
+                    res.t5 = "☐";
+                    res.t6 = "☐";
+                    res.t7 = "☐";
+                    res.t8 = "☐";
+                    res.t9 = "☐";
+                    res.t10 = "☑";
+                    res.t11 = "☐";
+                    res.t12 = "☐";
+                }
+                else if (xtof_permitreq_code == "11")
+                {
+                    res.t1 = "☐";
+                    res.t2 = "☐";
+                    res.t3 = "☐";
+                    res.t4 = "☐";
+                    res.t5 = "☐";
+                    res.t6 = "☐";
+                    res.t7 = "☐";
+                    res.t8 = "☐";
+                    res.t9 = "☐";
+                    res.t10 = "☐";
+                    res.t11 = "☑";
+                    res.t12 = "☐";
+                }
+                else if (xtof_permitreq_code == "12")
+                {
+                    res.t1 = "☐";
+                    res.t2 = "☐";
+                    res.t3 = "☐";
+                    res.t4 = "☐";
+                    res.t5 = "☐";
+                    res.t6 = "☐";
+                    res.t7 = "☐";
+                    res.t8 = "☐";
+                    res.t9 = "☐";
+                    res.t10 = "☐";
+                    res.t11 = "☐";
+                    res.t12 = "☑";
                 }
 
                 res.desc_req = dr0["permit_desc"].ToString().Trim();
@@ -405,6 +489,9 @@ namespace onlineLegalWF.Class
             public string t7 { get; set; }
             public string t8 { get; set; }
             public string t9 { get; set; }
+            public string t10 { get; set; }
+            public string t11 { get; set; }
+            public string t12 { get; set; }
             public string desc_req { get; set; }
             public string contact_agency { get; set; }
             public string attorney_name { get; set; }

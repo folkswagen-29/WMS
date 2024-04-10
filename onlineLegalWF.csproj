@@ -214,6 +214,8 @@
     <Content Include="frmLitigation\LitigationCaseDetail.aspx" />
     <Content Include="frmLitigation\LitigationRequest.aspx" />
     <Content Include="frmLitigation\LitigationRequestEdit.aspx" />
+    <Content Include="frmPermit\PermitEnergy.aspx" />
+    <Content Include="frmPermit\PermitEnergyEdit.aspx" />
     <Content Include="frmPermit\PermitLandTax.aspx" />
     <Content Include="frmPermit\PermitLandTaxEdit.aspx" />
     <Content Include="frmPermit\PermitLicense.aspx" />
@@ -221,6 +223,8 @@
     <Content Include="frmPermit\PermitSignageTax.aspx" />
     <Content Include="frmPermit\PermitTrademark.aspx" />
     <Content Include="frmPermit\PermitTrademarkEdit.aspx" />
+    <Content Include="frmPermit\PermitUtility.aspx" />
+    <Content Include="frmPermit\PermitUtilityEdit.aspx" />
     <Content Include="frmPermit\PermitWorkAssign.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -597,6 +601,20 @@
     <Compile Include="frmLitigation\LitigationRequestEdit.aspx.designer.cs">
       <DependentUpon>LitigationRequestEdit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="frmPermit\PermitEnergy.aspx.cs">
+      <DependentUpon>PermitEnergy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmPermit\PermitEnergy.aspx.designer.cs">
+      <DependentUpon>PermitEnergy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmPermit\PermitEnergyEdit.aspx.cs">
+      <DependentUpon>PermitEnergyEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmPermit\PermitEnergyEdit.aspx.designer.cs">
+      <DependentUpon>PermitEnergyEdit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="frmPermit\PermitLandTax.aspx.cs">
       <DependentUpon>PermitLandTax.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -645,6 +663,20 @@
     </Compile>
     <Compile Include="frmPermit\PermitTrademarkEdit.aspx.designer.cs">
       <DependentUpon>PermitTrademarkEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmPermit\PermitUtility.aspx.cs">
+      <DependentUpon>PermitUtility.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmPermit\PermitUtility.aspx.designer.cs">
+      <DependentUpon>PermitUtility.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmPermit\PermitUtilityEdit.aspx.cs">
+      <DependentUpon>PermitUtilityEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmPermit\PermitUtilityEdit.aspx.designer.cs">
+      <DependentUpon>PermitUtilityEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmPermit\PermitWorkAssign.aspx.cs">
       <DependentUpon>PermitWorkAssign.aspx</DependentUpon>

@@ -42,7 +42,16 @@
                             <asp:Label ID="req_date" runat="server" CssClass="Label_md"></asp:Label>
                             </td>
                         </tr>
-                        
+                        <tr id="section_comcode" runat="server" visible="false">
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Com Code : </label>
+                            </td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:Label ID="com_code" runat="server" CssClass="Label_md"></asp:Label>
+                                <label class="Label_md">Gl : </label>
+                                <asp:Label ID="gl" runat="server" CssClass="Label_md"></asp:Label>
+                            </td>
+                        </tr>
                         <tr>
                             <td colspan="6">
                                 <table style="margin-left: auto; margin-right: auto;">
@@ -110,6 +119,8 @@
     <asp:HiddenField ID="hid_permit_landtax_external" runat="server" />
     <asp:HiddenField ID="hid_permit_signagetax_external" runat="server" />
     <asp:HiddenField ID="hid_permit_tradmark_external" runat="server" />
+    <asp:HiddenField ID="hid_permit_energy_external" runat="server" />
+    <asp:HiddenField ID="hid_permit_utility_external" runat="server" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
