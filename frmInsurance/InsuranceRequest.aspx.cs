@@ -677,12 +677,12 @@ namespace onlineLegalWF.frmInsurance
             return ret;
         }
 
-        void showAlertSuccess(string key, string msg)
+        public void showAlertSuccess(string key, string msg)
         {
             ClientScript.RegisterStartupScript(GetType(), key, "showAlertSuccess('" + msg + "');", true);
         }
 
-        void showAlertError(string key, string msg)
+        public void showAlertError(string key, string msg)
         {
             ClientScript.RegisterStartupScript(GetType(), key, "showAlertError('" + msg + "');", true);
         }

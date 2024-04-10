@@ -118,57 +118,123 @@ namespace onlineLegalWF.frmPermit
             if (type_req_tax.SelectedValue == "07")
             {
                 tof_permitreq_other_desc.Enabled = true;
+                section_comcode.Visible = false;
+                section_gl.Visible = false;
+
+            }
+            else if (type_req_tax.SelectedValue == "06")
+            {
+                tof_permitreq_other_desc.Enabled = false;
+                tof_permitreq_other_desc.Text = string.Empty;
+                section_comcode.Visible = true;
+                section_gl.Visible = true;
 
             }
             else
             {
                 tof_permitreq_other_desc.Enabled = false;
                 tof_permitreq_other_desc.Text = string.Empty;
+                section_comcode.Visible = false;
+                section_gl.Visible = false;
             }
         }
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            int res = SaveRequest();
-
-            if (res > 0)
+            try
             {
-                // wf save draft
-                string process_code = "PMT_TAX";
-                int version_no = 1;
-
-                // getCurrentStep
-                var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
-                var xbu_code = type_lt_project.SelectedValue.Trim();
-
-                // check session_user
-                if (Session["user_login"] != null)
+                // Validate
+                if (string.IsNullOrEmpty(responsible_phone.Text))
                 {
-                    var xlogin_name = Session["user_login"].ToString();
-                    var empFunc = new EmpInfo();
-
-                    //get data user
-                    var emp = empFunc.getEmpInfo(xlogin_name);
-
-                    // set WF Attributes
-                    wfAttr.subject = "เรื่อง " + permit_subject.Text.Trim();
-                    wfAttr.wf_status = "SAVE";
-                    wfAttr.submit_answer = "SAVE";
-                    wfAttr.submit_by = emp.user_login;
-                    wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, emp.user_login, lblPID.Text, xbu_code);
-                    // wf.updateProcess
-                    var wfA_NextStep = zwf.updateProcess(wfAttr);
-
+                    showAlertError("alertTitleErr", "Warning! Please input responsible_phone");
+                    return;
+                }
+                if (string.IsNullOrEmpty(permit_subject.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input permit_subject");
+                    return;
+                }
+                if (string.IsNullOrEmpty(permit_desc.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input permit_desc");
+                    return;
+                }
+                if (string.IsNullOrEmpty(contact_agency.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input contact_agency");
+                    return;
+                }
+                if (string.IsNullOrEmpty(attorney_name.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input attorney_name");
+                    return;
+                }
+                if (string.IsNullOrEmpty(email_accounting.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input Email Accounting");
+                    return;
+                }
+                if (type_req_tax.SelectedValue == "06") 
+                {
+                    if (string.IsNullOrEmpty(com_code.Text))
+                    {
+                        showAlertError("alertTitleErr", "Warning! Please input Com Code");
+                        return;
+                    }
+                    if (string.IsNullOrEmpty(gl.Text))
+                    {
+                        showAlertError("alertTitleErr", "Warning! Please input GL");
+                        return;
+                    }
                 }
 
-                Response.Write("<script>alert('Successfully added');</script>");
-                var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                Response.Redirect(host_url + "frmPermit/PermitLandTaxEdit.aspx?id=" + req_no.Text.Trim());
+                int res = SaveRequest();
+
+                if (res > 0)
+                {
+                    // wf save draft
+                    string process_code = "PMT_TAX";
+                    int version_no = 1;
+
+                    // getCurrentStep
+                    var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+                    var xbu_code = type_lt_project.SelectedValue.Trim();
+
+                    // check session_user
+                    if (Session["user_login"] != null)
+                    {
+                        var xlogin_name = Session["user_login"].ToString();
+                        var empFunc = new EmpInfo();
+
+                        //get data user
+                        var emp = empFunc.getEmpInfo(xlogin_name);
+
+                        // set WF Attributes
+                        wfAttr.subject = "เรื่อง " + permit_subject.Text.Trim();
+                        wfAttr.wf_status = "SAVE";
+                        wfAttr.submit_answer = "SAVE";
+                        wfAttr.submit_by = emp.user_login;
+                        wfAttr.next_assto_login = zwf.findNextStep_Assignee(wfAttr.process_code, wfAttr.step_name, emp.user_login, emp.user_login, lblPID.Text, xbu_code);
+                        // wf.updateProcess
+                        var wfA_NextStep = zwf.updateProcess(wfAttr);
+
+                    }
+
+                    //Response.Write("<script>alert('Successfully added');</script>");
+                    showAlertSuccess("alertSuccess", "Successfully added");
+                    var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                    Response.Redirect(host_url + "frmPermit/PermitLandTaxEdit.aspx?id=" + req_no.Text.Trim());
+                }
+                else
+                {
+                    showAlertError("alertErr", "Error !!!");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Response.Write("<script>alert('Error !!!');</script>");
+                showAlertError("alertErr", ex.Message);
             }
+            
         }
 
         protected void btn_gendocumnt_Click(object sender, EventArgs e)
@@ -212,9 +278,11 @@ namespace onlineLegalWF.frmPermit
             var xemail_accounting = email_accounting.Text.Trim();
             var xstatus = "verify";
             var xresponsible_phone = responsible_phone.Text.Trim();
+            var xcom_code = com_code.Text.Trim();
+            var xgl = gl.Text.Trim();
 
             string sql = @"INSERT INTO [dbo].[li_permit_request]
-                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_subject],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[contact_agency],[attorney_name],[email_accounting],[responsible_phone],[status])
+                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_subject],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[contact_agency],[attorney_name],[email_accounting],[responsible_phone],[com_code],[gl],[status])
                              VALUES
                                    ('" + xprocess_id + @"'
                                    ,'" + xpermit_no + @"'
@@ -231,6 +299,8 @@ namespace onlineLegalWF.frmPermit
                                    ,'" + xattorney_name + @"'
                                    ,'" + xemail_accounting + @"'
                                    ,'" + xresponsible_phone + @"'
+                                   ,'" + xcom_code + @"'
+                                   ,'" + xgl + @"'
                                    ,'" + xstatus + @"')";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);
@@ -500,6 +570,15 @@ namespace onlineLegalWF.frmPermit
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalDoc();", true);
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
             pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filePath;
+        }
+        public void showAlertSuccess(string key, string msg)
+        {
+            ClientScript.RegisterStartupScript(GetType(), key, "showAlertSuccess('" + msg + "');", true);
+        }
+
+        public void showAlertError(string key, string msg)
+        {
+            ClientScript.RegisterStartupScript(GetType(), key, "showAlertError('" + msg + "');", true);
         }
     }
 }

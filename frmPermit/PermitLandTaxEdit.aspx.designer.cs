@@ -159,6 +159,42 @@ namespace onlineLegalWF.frmPermit
         protected global::System.Web.UI.WebControls.TextBox email_accounting;
 
         /// <summary>
+        /// section_comcode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow section_comcode;
+
+        /// <summary>
+        /// com_code control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox com_code;
+
+        /// <summary>
+        /// section_gl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow section_gl;
+
+        /// <summary>
+        /// gl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox gl;
+
+        /// <summary>
         /// Panel3 control.
         /// </summary>
         /// <remarks>

@@ -20,11 +20,23 @@
                     <table>
                         <tr>
                             <td class="cell_content_20PC_TR">
+                                <label class="Label_md" style="color: red;">Remark *** </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <label class="Label_md" style="color: red;">มาตรา ๑๒  ให้เจ้าของป้ายซึ่งจะต้องเสียภาษีป้าย ยื่นแบบแสดงรายการภาษีป้ายตามแบบและวิธีการที่กระทรวงมหาดไทยกำหนด ภายในเดือนมีนาคมของทุกปี</label>
+                                <br />
+                                <label class="Label_md" style="color: red;">Section 12: The owner of the sign who must pay sign tax have Submit a sign tax form  By March each year</label>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
                                 <label class="Label_md">Request No. </label>
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:Label ID="req_no" runat="server" Text=""></asp:Label>
+                                <asp:Label ID="req_no" CssClass="Label_md" runat="server" Text=""></asp:Label>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -161,7 +173,27 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:TextBox ID="email_accounting" runat="server" CssClass="Text_400"></asp:TextBox>
+                                <asp:TextBox ID="email_accounting" runat="server" placeholder="xxxx@mail.com" CssClass="Text_400"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr id="section_comcode" runat="server" Visible="false">
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Com Code </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="com_code" runat="server" CssClass="Text_400"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr id="section_gl" runat="server" Visible="false">
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">GL </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="gl" runat="server" CssClass="Text_400"></asp:TextBox>
                             </td>
                             <td>&nbsp;</td>
                         </tr>

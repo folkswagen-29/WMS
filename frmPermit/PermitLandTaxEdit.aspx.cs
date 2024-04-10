@@ -159,12 +159,24 @@ namespace onlineLegalWF.frmPermit
             if (type_req_tax.SelectedValue == "07")
             {
                 tof_permitreq_other_desc.Enabled = true;
+                section_comcode.Visible = false;
+                section_gl.Visible = false;
+
+            }
+            else if (type_req_tax.SelectedValue == "06")
+            {
+                tof_permitreq_other_desc.Enabled = false;
+                tof_permitreq_other_desc.Text = string.Empty;
+                section_comcode.Visible = true;
+                section_gl.Visible = true;
 
             }
             else
             {
                 tof_permitreq_other_desc.Enabled = false;
                 tof_permitreq_other_desc.Text = string.Empty;
+                section_comcode.Visible = false;
+                section_gl.Visible = false;
             }
         }
 
@@ -215,6 +227,8 @@ namespace onlineLegalWF.frmPermit
             var xattorney_name = attorney_name.Text.Trim();
             var xemail_accounting = email_accounting.Text.Trim();
             var xresponsible_phone = responsible_phone.Text.Trim();
+            var xcom_code = com_code.Text.Trim();
+            var xgl = gl.Text.Trim();
 
             string sql = @"UPDATE [dbo].[li_permit_request]
                            SET [permit_subject] = '" + xpermit_subject + @"'
@@ -229,6 +243,8 @@ namespace onlineLegalWF.frmPermit
                               ,[bu_code] = '" + xlt_project_code + @"'
                               ,[updated_datetime] = '" + xpermit_updatedate + @"'
                               ,[responsible_phone] = '" + xresponsible_phone + @"'
+                              ,[com_code] = '" + xcom_code + @"'
+                              ,[gl] = '" + xgl + @"'
                          WHERE [permit_no] = '" + xpermit_no + "'";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);

@@ -24,7 +24,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:Label ID="req_no" runat="server" Text=""></asp:Label>
+                                <asp:Label ID="req_no" CssClass="Label_md" runat="server" Text=""></asp:Label>
                             </td>
                             <td>&nbsp;</td>
                         </tr>
