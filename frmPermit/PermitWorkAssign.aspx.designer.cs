@@ -24,12 +24,12 @@ namespace onlineLegalWF.frmPermit
         protected global::onlineLegalWF.userControls.ucHeader ucHeader1;
 
         /// <summary>
-        /// ucWorkflowlist1 control.
+        /// ucTaskList1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucWorkflowlist ucWorkflowlist1;
+        protected global::onlineLegalWF.userControls.ucTaskList ucTaskList1;
     }
 }

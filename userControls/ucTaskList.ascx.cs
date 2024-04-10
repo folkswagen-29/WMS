@@ -68,7 +68,11 @@ namespace onlineLegalWF.userControls
                     {
                         bind_gv1(getCompleteList()); 
                     }; break;
-               
+                case "permitTracking":
+                    {
+                        bind_gv1(getPermitTrackingList());
+                    }; break;
+
             }
         }
         public DataTable getMyRequest()
@@ -106,6 +110,25 @@ namespace onlineLegalWF.userControls
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
             string sql = "Select assto_login,process_id,subject,submit_by,updated_by,created_datetime,wf_status,updated_datetime, ( '" + host_url + "' + link_url_format) as link_url_format from " +
                 "wf_routing where process_id in (Select process_id from wf_routing where submit_by = '" + hidLogin.Value + "' and step_name = 'End') and step_name = 'End'";
+            DataTable dt = zdb.ExecSql_DataTable(sql, zconnstrbpm);
+
+            return dt;
+        }
+        public DataTable getPermitTrackingList()
+        {
+            var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+            string sql = @"Select process_code,assto_login,process_id,subject,submit_by,updated_by,created_datetime,updated_datetime,
+                            CASE 
+                                WHEN wf_status = '' THEN 'IN PROGRESS' 
+                                ELSE wf_status
+                            END AS wf_status 
+                            ,'" + host_url + @"forms/permitapv.aspx?req='+process_id+'&pc='+process_code+'&st='+step_name+'&mode=tracking' AS link_url_format
+                            from wf_routing where process_code in ('PMT_LIC', 'PMT_TAX', 'PMT_TM')
+                             and row_id in (select tb1.row_id from
+                            (SELECT process_id,
+                            MAX(row_id) as row_id
+                            FROM wf_routing where process_code in ('PMT_LIC', 'PMT_TAX', 'PMT_TM')
+                            GROUP BY process_id)as tb1)";
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstrbpm);
 
             return dt;

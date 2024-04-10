@@ -72,14 +72,45 @@ namespace onlineLegalWF.userControls
                 var xmenu_group_name = ((Label)gv.Rows[i].FindControl("gvlblMenuGroupName")).Text;
                 var gvA = ((GridView)gv.Rows[i].FindControl("gvA"));
                 string sql = @"
-           select  menu_code, menu_name, ( '" + host_url + @"' + menu_icon_filename) as menu_icon_filename, menu_url , row_sort ,menu_group_name
+                               select  menu_code, menu_name, ( '" + host_url + @"' + menu_icon_filename) as menu_icon_filename, menu_url , row_sort ,menu_group_name
 
-            from m_portal_menu 
-            where menu_group_name = '" + xmenu_group_name + @"' and menu_url <> '' 
-            order by row_sort";
+                                from m_portal_menu 
+                                where menu_group_name = '" + xmenu_group_name + @"' and menu_url <> '' 
+                                order by row_sort";
                 var ds = zdb.ExecSql_DataSet(sql, zconnstr);
                 gvA.DataSource = ds.Tables[0];
                 gvA.DataBind();
+
+                //check menu permit tracking
+                foreach (GridViewRow row in gvA.Rows)
+                {
+                    string menu_code = (row.FindControl("gvAlblMenuCode") as Label).Text;
+                    if (menu_code == "permit_tracking")
+                    {
+                        if (Session["user_login"] != null)
+                        {
+                            var xlogin_name = Session["user_login"].ToString();
+
+                            //pornsawan.s, naruemol.w, kanita.s, pattanis.r, suradach.k
+                            if (xlogin_name == "pornsawan.s" || xlogin_name == "naruemol.w" || xlogin_name == "kanita.s" || xlogin_name == "pattanis.r" || xlogin_name == "suradach.k")
+                            {
+                                (row.FindControl("gvAlbtnMenu") as LinkButton).Visible = true;
+                                (row.FindControl("gvAibtnMenuItemIcon") as ImageButton).Visible = true;
+                            }
+                            else 
+                            {
+                                (row.FindControl("gvAlbtnMenu") as LinkButton).Visible = false;
+                                (row.FindControl("gvAibtnMenuItemIcon") as ImageButton).Visible = false;
+                            }
+                        }
+                        
+                    }
+                    //else
+                    //{
+                    //    (row.FindControl("gvAlbtnMenu") as LinkButton).Visible = false;
+                    //    (row.FindControl("gvAibtnMenuItemIcon") as ImageButton).Visible = false;
+                    //}
+                }
 
                 if (Session["user_login"] != null)
                 {
@@ -107,6 +138,36 @@ namespace onlineLegalWF.userControls
             var ds = zdb.ExecSql_DataSet(sql, zconnstr);
             gvA.DataSource = ds.Tables[0];
             gvA.DataBind();
+
+            //check menu permit tracking
+            foreach (GridViewRow row in gvA.Rows) 
+            {
+                string menu_code = (row.FindControl("gvAlblMenuCode") as Label).Text;
+                if (menu_code == "permit_tracking")
+                {
+                    if (Session["user_login"] != null)
+                    {
+                        var xlogin_name = Session["user_login"].ToString();
+
+                        //pornsawan.s, naruemol.w, kanita.s, pattanis.r, suradach.k
+                        if (xlogin_name == "pornsawan.s" || xlogin_name == "naruemol.w" || xlogin_name == "kanita.s" || xlogin_name == "pattanis.r" || xlogin_name == "suradach.k")
+                        {
+                            (row.FindControl("gvAlbtnMenu") as LinkButton).Visible = true;
+                            (row.FindControl("gvAibtnMenuItemIcon") as ImageButton).Visible = true;
+                        }
+                        else
+                        {
+                            (row.FindControl("gvAlbtnMenu") as LinkButton).Visible = false;
+                            (row.FindControl("gvAibtnMenuItemIcon") as ImageButton).Visible = false;
+                        }
+                    }
+                }
+                //else 
+                //{
+                //    (row.FindControl("gvAlbtnMenu") as LinkButton).Visible = false;
+                //    (row.FindControl("gvAibtnMenuItemIcon") as ImageButton).Visible = false;
+                //}
+            }
 
             if (Session["user_login"] != null)
             {

@@ -89,6 +89,8 @@ namespace onlineLegalWF.forms
                 getDocument(id);
             }
 
+            string mode = Request.QueryString["mode"];
+
             //check switch button approve 
             if (st_name == "GM Approve" || st_name == "AM Approve" || st_name == "Head AM Approve")
             {
@@ -124,6 +126,12 @@ namespace onlineLegalWF.forms
                 btn_Accept.Visible = false;
                 btn_Submit.Visible = true;
                 btn_send_requester.Visible = true;
+            }
+
+            if (mode == "tracking") 
+            {
+                btn_Approve.Visible = false;
+                btn_Reject.Visible = false;
             }
         }
         private void getDocument(string id)
