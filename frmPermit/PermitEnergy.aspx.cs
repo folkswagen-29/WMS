@@ -41,7 +41,7 @@ namespace onlineLegalWF.frmPermit
             ucCommentlog1.ini_object(pid);
 
             //type_project.DataSource = GetBusinessUnit();
-            type_project.DataSource = GetListBuByTypeReq("01");
+            type_project.DataSource = GetListBuByTypeReq("02");
             type_project.DataBind();
             type_project.DataTextField = "bu_desc";
             type_project.DataValueField = "bu_code";

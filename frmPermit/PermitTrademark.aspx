@@ -44,7 +44,7 @@
                             </td>
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
-                                <asp:DropDownList ID="type_requester" runat="server" CssClass="Text_400">
+                                <asp:DropDownList ID="type_requester" runat="server" CssClass="Text_400" OnSelectedIndexChanged="ddl_type_requester_Changed" AutoPostBack="true">
                                 </asp:DropDownList>
                             </td>
                             <td>&nbsp;</td>

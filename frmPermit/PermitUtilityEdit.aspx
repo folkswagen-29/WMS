@@ -45,6 +45,7 @@
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
                                 <asp:DropDownList ID="type_requester" runat="server" CssClass="Text_400">
+                                    <asp:ListItem Value="02">Hospitality Group Officer / กลุ่มโรงแรม</asp:ListItem>
                                 </asp:DropDownList>
                             </td>
                             <td>&nbsp;</td>

@@ -132,7 +132,11 @@ namespace onlineLegalWF.legalPortal
 
                 //    if (dtbpm.Rows.Count > 0)
                 //    {
-                //        token = "IsPass";
+                //        if (dtbpm.Rows[0]["isADAccount"].ToString() == "N") 
+                //        {
+                //            token = "IsPass";
+                //        }
+
                 //    }
                 //}
 

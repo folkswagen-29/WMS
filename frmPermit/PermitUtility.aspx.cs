@@ -30,7 +30,7 @@ namespace onlineLegalWF.frmPermit
 
         private void setData()
         {
-            ucHeader1.setHeader("Energy Management Report Request");
+            ucHeader1.setHeader("Utility Request");
             string xreq_no = System.DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
             req_no.Text = xreq_no;
 
@@ -41,7 +41,7 @@ namespace onlineLegalWF.frmPermit
             ucCommentlog1.ini_object(pid);
 
             //type_project.DataSource = GetBusinessUnit();
-            type_project.DataSource = GetListBuByTypeReq("01");
+            type_project.DataSource = GetListBuByTypeReq("02");
             type_project.DataBind();
             type_project.DataTextField = "bu_desc";
             type_project.DataValueField = "bu_code";

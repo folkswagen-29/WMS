@@ -38,7 +38,7 @@ namespace onlineLegalWF.frmPermit
         {
             ucHeader1.setHeader("Energy Management Report Edit");
 
-            type_project.DataSource = GetListBuByTypeReq("01");
+            type_project.DataSource = GetListBuByTypeReq("02");
             type_project.DataBind();
             type_project.DataTextField = "bu_desc";
             type_project.DataValueField = "bu_code";
