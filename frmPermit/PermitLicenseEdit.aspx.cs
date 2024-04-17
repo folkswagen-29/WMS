@@ -200,6 +200,8 @@ namespace onlineLegalWF.frmPermit
             type_project.DataValueField = "bu_code";
             type_project.DataBind();
 
+            company.Text = GetCompanyNameByBuCode(type_project.SelectedValue.ToString());
+
         }
         public DataTable GetListBuByTypeReq(string tof_reqid)
         {

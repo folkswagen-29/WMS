@@ -47,11 +47,12 @@ namespace onlineLegalWF.frmPermit
             type_project.DataValueField = "bu_code";
             type_project.DataBind();
 
-            type_requester.DataSource = GetTypeOfRequester();
-            type_requester.DataBind();
-            type_requester.DataTextField = "tof_requester_desc";
-            type_requester.DataValueField = "tof_requester_code";
-            type_requester.DataBind();
+            //type_requester.DataSource = GetTypeOfRequester();
+            //type_requester.DataBind();
+            //type_requester.DataTextField = "tof_requester_desc";
+            //type_requester.DataValueField = "tof_requester_code";
+            //type_requester.DataBind();
+            company.Text = GetCompanyNameByBuCode(type_project.SelectedValue.ToString());
         }
         public string GetCompanyNameByBuCode(string xbu_code)
         {

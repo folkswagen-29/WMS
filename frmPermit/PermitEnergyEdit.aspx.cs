@@ -44,11 +44,11 @@ namespace onlineLegalWF.frmPermit
             type_project.DataValueField = "bu_code";
             type_project.DataBind();
 
-            type_requester.DataSource = GetTypeOfRequester();
-            type_requester.DataBind();
-            type_requester.DataTextField = "tof_requester_desc";
-            type_requester.DataValueField = "tof_requester_code";
-            type_requester.DataBind();
+            //type_requester.DataSource = GetTypeOfRequester();
+            //type_requester.DataBind();
+            //type_requester.DataTextField = "tof_requester_desc";
+            //type_requester.DataValueField = "tof_requester_code";
+            //type_requester.DataBind();
 
             string sql = "select * from li_permit_request where permit_no='" + id + "'";
             var res = zdb.ExecSql_DataTable(sql, zconnstr);
