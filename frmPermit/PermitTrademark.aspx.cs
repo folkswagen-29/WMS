@@ -93,6 +93,36 @@ namespace onlineLegalWF.frmPermit
                     showAlertError("alertTitleErr", "Warning! Please input permit_desc");
                     return;
                 }
+                if (string.IsNullOrEmpty(tradmark_name_en.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input Trademark English Name");
+                    return;
+                }
+                if (string.IsNullOrEmpty(tradmark_name_th.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input Trademark Thai Name");
+                    return;
+                }
+                if (string.IsNullOrEmpty(tradmark_translation.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input Trademark Translation");
+                    return;
+                }
+                if (string.IsNullOrEmpty(trademark_regis_in_name.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input Trademark Registration In Name");
+                    return;
+                }
+                if (string.IsNullOrEmpty(trademark_type_of_regis.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input Trademark Type of Registration");
+                    return;
+                }
+                if (string.IsNullOrEmpty(trademark_cost.Text))
+                {
+                    showAlertError("alertTitleErr", "Warning! Please input Trademark Cost");
+                    return;
+                }
 
                 int res = SaveRequest();
 
@@ -201,6 +231,15 @@ namespace onlineLegalWF.frmPermit
         {
             GenDocumnet();
         }
+        protected void btn_preview_Click(object sender, EventArgs e)
+        {
+            var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+            var path_template = ConfigurationManager.AppSettings["WT_Template_permit"].ToString();
+            string filePath = path_template + @"\รายการสินค้า บริการจดเครื่องหมายการค้า.pdf";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalDoc();", true);
+            
+            pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filePath;
+        }
 
         public DataTable GetTypeOfRequester()
         {
@@ -236,9 +275,15 @@ namespace onlineLegalWF.frmPermit
             var xpermit_desc = permit_desc.Text.Trim();
             var xstatus = "verify";
             var xresponsible_phone = responsible_phone.Text.Trim();
+            var xtradmark_name_en = tradmark_name_en.Text.Trim();
+            var xtradmark_name_th = tradmark_name_th.Text.Trim();
+            var xtradmark_translation = tradmark_translation.Text.Trim();
+            var xtrademark_regis_in_name = trademark_regis_in_name.Text.Trim();
+            var xtrademark_type_of_regis = trademark_type_of_regis.Text.Trim();
+            var xtrademark_cost = trademark_cost.Text.Trim();
 
             string sql = @"INSERT INTO [dbo].[li_permit_request]
-                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_subject],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[responsible_phone],[status])
+                                   ([process_id],[permit_no],[document_no],[permit_date],[permit_subject],[permit_desc],[tof_requester_code],[tof_requester_other_desc],[bu_code],[tof_permitreq_code],[tof_permitreq_other_desc],[responsible_phone],[tradmark_name_en],[tradmark_name_th],[tradmark_translation],[trademark_regis_in_name],[trademark_type_of_regis],[trademark_cost],[status])
                              VALUES
                                    ('" + xprocess_id + @"'
                                    ,'" + xpermit_no + @"'
@@ -252,6 +297,12 @@ namespace onlineLegalWF.frmPermit
                                    ,'" + xtof_permitreq_code + @"'
                                    ,'" + xtof_permitreq_other_desc + @"'
                                    ,'" + xresponsible_phone + @"'
+                                   ,'" + xtradmark_name_en + @"'
+                                   ,'" + xtradmark_name_th + @"'
+                                   ,'" + xtradmark_translation + @"'
+                                   ,'" + xtrademark_regis_in_name + @"'
+                                   ,'" + xtrademark_type_of_regis + @"'
+                                   ,'" + xtrademark_cost + @"'
                                    ,'" + xstatus + @"')";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);

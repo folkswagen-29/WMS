@@ -70,6 +70,12 @@ namespace onlineLegalWF.frmPermit
                 type_requester.SelectedValue = res.Rows[0]["tof_requester_code"].ToString();
                 tof_requester_other_desc.Text = res.Rows[0]["tof_requester_other_desc"].ToString();
                 responsible_phone.Text = res.Rows[0]["responsible_phone"].ToString();
+                tradmark_name_en.Text = res.Rows[0]["tradmark_name_en"].ToString();
+                tradmark_name_th.Text = res.Rows[0]["tradmark_name_th"].ToString();
+                tradmark_translation.Text = res.Rows[0]["tradmark_translation"].ToString();
+                trademark_regis_in_name.Text = res.Rows[0]["trademark_regis_in_name"].ToString();
+                trademark_type_of_regis.Text = res.Rows[0]["trademark_type_of_regis"].ToString();
+                trademark_cost.Text = res.Rows[0]["trademark_cost"].ToString();
                 if (res.Rows[0]["tof_requester_code"].ToString() == "03")
                 {
                     tof_requester_other_desc.Enabled = true;
@@ -184,6 +190,16 @@ namespace onlineLegalWF.frmPermit
             GenDocumnet();
         }
 
+        protected void btn_preview_Click(object sender, EventArgs e)
+        {
+            var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+            var path_template = ConfigurationManager.AppSettings["WT_Template_permit"].ToString();
+            string filePath = path_template + @"\รายการสินค้า บริการจดเครื่องหมายการค้า.pdf";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModalDoc();", true);
+
+            pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filePath;
+        }
+
         public DataTable GetTypeOfRequester()
         {
             string sql = "select * from li_type_of_requester order by row_sort asc";
@@ -211,6 +227,12 @@ namespace onlineLegalWF.frmPermit
             var xpermit_subject = permit_subject.Text.Trim();
             var xpermit_desc = permit_desc.Text.Trim();
             var xresponsible_phone = responsible_phone.Text.Trim();
+            var xtradmark_name_en = tradmark_name_en.Text.Trim();
+            var xtradmark_name_th = tradmark_name_th.Text.Trim();
+            var xtradmark_translation = tradmark_translation.Text.Trim();
+            var xtrademark_regis_in_name = trademark_regis_in_name.Text.Trim();
+            var xtrademark_type_of_regis = trademark_type_of_regis.Text.Trim();
+            var xtrademark_cost = trademark_cost.Text.Trim();
 
             string sql = @"UPDATE [dbo].[li_permit_request]
                            SET [permit_subject] = '" + xpermit_subject + @"'
@@ -222,6 +244,12 @@ namespace onlineLegalWF.frmPermit
                               ,[bu_code] = '" + xproject_code + @"'
                               ,[updated_datetime] = '" + xpermit_updatedate + @"'
                               ,[responsible_phone] = '" + xresponsible_phone + @"'
+                              ,[tradmark_name_en] = '" + xtradmark_name_en + @"'
+                              ,[tradmark_name_th] = '" + xtradmark_name_th + @"'
+                              ,[tradmark_translation] = '" + xtradmark_translation + @"'
+                              ,[trademark_regis_in_name] = '" + xtrademark_regis_in_name + @"'
+                              ,[trademark_type_of_regis] = '" + xtrademark_type_of_regis + @"'
+                              ,[trademark_cost] = '" + xtrademark_cost + @"'
                          WHERE [permit_no] = '" + xpermit_no + "'";
 
             ret = zdb.ExecNonQueryReturnID(sql, zconnstr);

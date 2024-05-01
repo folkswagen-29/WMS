@@ -20,6 +20,18 @@
                     <table>
                         <tr>
                             <td class="cell_content_20PC_TR">
+                                <label class="Label_md" style="color: red;">Remark *** </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <label class="Label_md" style="color: red;">เครื่องหมายการค้าทุกเครื่องหมายจะจดภายใต้ AWC และ ใบเสร็จออกเป็น AWC</label>
+                                <br />
+                                <label class="Label_md" style="color: red;">All trademarks will registered under AWC and the receipt for registering will be AWC</label>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
                                 <label class="Label_md">Request No. </label>
                             </td>
                             <td>&nbsp;</td>
@@ -130,6 +142,69 @@
                             <td>&nbsp;</td>
                             <td class="cell_content_80PC_TL">
                                 <asp:TextBox ID="permit_desc" runat="server" TextMode="MultiLine" CssClass="Text_600"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Trademark English Name </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="tradmark_name_en" runat="server" CssClass="Text_400"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Trademark Thai Name </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="tradmark_name_th" runat="server" CssClass="Text_400"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Trademark Translation</label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="tradmark_translation" runat="server" TextMode="MultiLine" CssClass="Text_600"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Trademark Registration In Name </label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="trademark_regis_in_name" placeholder="AWC" runat="server" CssClass="Text_400"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Trademark Type of Registration</label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:Button ID="btn_preview" runat="server" CssClass="btn_normal_silver" Text="Preview Detail" OnClick="btn_preview_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
+                                <br />
+                                <asp:TextBox ID="trademark_type_of_regis" runat="server" TextMode="MultiLine" CssClass="Text_600"></asp:TextBox>
+
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Trademark Cost</label>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:TextBox ID="trademark_cost" runat="server" CssClass="Text_400"></asp:TextBox>
                             </td>
                             <td>&nbsp;</td>
                         </tr>

@@ -132,6 +132,69 @@ namespace onlineLegalWF.frmPermit
         protected global::System.Web.UI.WebControls.TextBox permit_desc;
 
         /// <summary>
+        /// tradmark_name_en control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tradmark_name_en;
+
+        /// <summary>
+        /// tradmark_name_th control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tradmark_name_th;
+
+        /// <summary>
+        /// tradmark_translation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tradmark_translation;
+
+        /// <summary>
+        /// trademark_regis_in_name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox trademark_regis_in_name;
+
+        /// <summary>
+        /// btn_preview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_preview;
+
+        /// <summary>
+        /// trademark_type_of_regis control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox trademark_type_of_regis;
+
+        /// <summary>
+        /// trademark_cost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox trademark_cost;
+
+        /// <summary>
         /// Panel3 control.
         /// </summary>
         /// <remarks>
