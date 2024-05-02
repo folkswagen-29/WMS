@@ -14,15 +14,79 @@
                 
             </td>
         </tr>
+        
         <tr>
             <td colspan="2" class="cell_content_100PC">
-                <uc2:ucTaskList runat="server" id="ucTaskList1" />
+                <%--<uc2:ucTaskList runat="server" id="ucTaskList1" />--%>
+                <asp:Panel ID="Panel1" runat="server" Height="600px" CssClass="div_90">
+                    <table class="w-100">
+                        <tr>
+                            <td style="text-align: right;" colspan="2" class="cell_content_100PC">
+                                <asp:TextBox runat="server" ID="txtSearch" AutoPostBack="true" OnTextChanged="Search" />
+                                <br />
+                                Type of Request :
+                                <asp:DropDownList runat="server" ID="ddlType_of_request" CssClass="Text_200" AutoPostBack="true" OnSelectedIndexChanged="SearchByTOR">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <asp:GridView ID="gv1" runat="server" AutoGenerateColumns="False" CssClass="w-100 table" AllowSorting="true" AllowPaging="true" PageSize="10" OnPageIndexChanging="gv1_PageIndexChanging">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="Request No">
+                                        <ItemTemplate>
+                                            <asp:HyperLink ID="lbtnReqNo" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("process_id") %>' ForeColor="#003399" NavigateUrl='<%# Bind("link_url_format") %>'></asp:HyperLink>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Type Request">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblTypeRequest" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("tof_permitreq_desc") %>' ForeColor="#003399"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Subject">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblSubject" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("subject") %>' ForeColor="#003399"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Request By">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblReqBy" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("submit_by") %>' ForeColor="#003399"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Submitted Date">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblSubmittedDate" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("created_datetime" , "{0:dd/MM/yy}") %>' ForeColor="#003399"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Status">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblStatus" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("wf_status") %>' ForeColor="#003399"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Last updated">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblLastupdated" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("updated_datetime" , "{0:dd/MM/yy}") %>' ForeColor="#003399"></asp:Label>
+                                        </ItemTemplate>
+
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Last updated by">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblLastupdateby" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("updated_by") %>' ForeColor="#003399"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Assign To">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblAssignto" runat="server" Font-Names="Tahoma" Font-Size="9pt" Text='<%# Bind("assto_login") %>' ForeColor="#003399"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </tr>
+                    </table>
+                    
+                    <asp:HiddenField ID="hidLogin" runat="server" />
+                    <asp:HiddenField ID="hidMode" runat="server" />
+                </asp:Panel>
             </td>
-            <%--<td colspan="2">
-                <div class="div_90">
-                    <uc2:ucWorkflowlist runat="server" id="ucWorkflowlist1" />
-                </div>
-            </td>--%>
         </tr>
         
     </table>
