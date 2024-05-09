@@ -90,6 +90,11 @@ namespace onlineLegalWF.forms
                 initDataAttachAndComment(respermit.Rows[0]["process_id"].ToString());
 
                 getDocument(id);
+
+                int version_no = 1;
+
+                var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+                step_name.Text = wfAttr.step_name;
             }
 
             string mode = Request.QueryString["mode"];
@@ -135,6 +140,20 @@ namespace onlineLegalWF.forms
             {
                 btn_Approve.Visible = false;
                 btn_Reject.Visible = false;
+
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+                    if (xlogin_name == "pornsawan.s") 
+                    {
+                        if (st_name == "Permit Update" || st_name == "Permit Check Update") 
+                        {
+                            btn_assign.Visible = true;
+                        }
+                        
+                    }
+                }
+                
             }
         }
         private void getDocument(string id)
@@ -933,6 +952,78 @@ namespace onlineLegalWF.forms
             }
         }
 
+        private void sendMailChangeAssign(string pid, string xsubject, string xassign_to)
+        {
+            string subject = "";
+            string body = "";
+            string sqlmail = @"select * from li_permit_request where process_id = '" + pid + "'";
+            var dt = zdb.ExecSql_DataTable(sqlmail, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                var dr = dt.Rows[0];
+                string id = dr["permit_no"].ToString();
+                subject = xsubject;
+                var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
+                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a> <br/>" +
+                                "You have been assigned to check document no " + dr["document_no"].ToString() + " Please check and proceed through the system <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+
+                string pathfileins = "";
+
+                string sqlfile = "select top 1 * from z_replacedocx_log where replacedocx_reqno='" + id + "' order by row_id desc";
+
+                var resfile = zdb.ExecSql_DataTable(sqlfile, zconnstr);
+
+                if (resfile.Rows.Count > 0)
+                {
+                    pathfileins = resfile.Rows[0]["output_filepath"].ToString().Replace(".docx", ".pdf");
+
+                    string email = "";
+
+                    var isdev = ConfigurationManager.AppSettings["isDev"].ToString();
+                    ////get mail from db
+                    /////send mail to next_approve
+                    if (isdev != "true")
+                    {
+                        string sqlbpm = "select * from li_user where user_login = '" + xassign_to + "' ";
+                        System.Data.DataTable dtbpm = zdb.ExecSql_DataTable(sqlbpm, zconnstr);
+
+                        if (dtbpm.Rows.Count > 0)
+                        {
+                            email = dtbpm.Rows[0]["email"].ToString();
+
+                        }
+                        else
+                        {
+                            string sqlpra = "select * from Rpa_Mst_HrNameList where Login = 'ASSETWORLDCORP-\\" + xassign_to + "' ";
+                            System.Data.DataTable dtrpa = zdb.ExecSql_DataTable(sqlpra, zconnstrrpa);
+
+                            if (dtrpa.Rows.Count > 0)
+                            {
+                                email = dtrpa.Rows[0]["Email"].ToString();
+                            }
+                            else
+                            {
+                                email = "";
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        ////fix mail test
+                        email = "legalwfuat2024@gmail.com";
+                    }
+
+                    if (!string.IsNullOrEmpty(email))
+                    {
+                        _ = zsendmail.sendEmail(subject + " Mail To Permit ChangeAssign", email, body, pathfileins);
+                    }
+
+                }
+
+            }
+        }
+
         private void sendMailToRequester(string pid, string xsubject, string xsumit_by)
         {
             string sqlupdate = @"update li_permit_request set status='completed',updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where process_id = '" + pid + "'";
@@ -1007,6 +1098,51 @@ namespace onlineLegalWF.forms
 
             }
 
+        }
+
+        protected void btn_assign_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopupAssign", "showModalAssign();", true);
+        }
+        protected void Assign_Update_Click(object sender, EventArgs e)
+        {
+            hid_assto_login.Value = ddlAssign_NameList.SelectedValue;
+
+            string process_code = Request.QueryString["pc"];
+            int version_no = 1;
+
+            if (!string.IsNullOrEmpty(process_code))
+            {
+
+                // getCurrentStep
+                var wfAttr = zwf.getCurrentStep(lblPID.Text, process_code, version_no);
+
+                // check session_user
+                if (Session["user_login"] != null)
+                {
+                    var xlogin_name = Session["user_login"].ToString();
+                    var empFunc = new EmpInfo();
+
+                    //get data user
+                    var emp = empFunc.getEmpInfo(xlogin_name);
+
+                    // set WF Attributes
+                    wfAttr.assto_login = hid_assto_login.Value;
+                    wfAttr.updated_by = emp.user_login;
+                    wfAttr.submit_by = wfAttr.submit_by;
+                    // wf.updateAssignto
+                    string status = zwf.updateAssignto(wfAttr);
+
+                    if (status == "Success")
+                    {
+                        sendMailChangeAssign(wfAttr.process_id, wfAttr.subject, hid_assto_login.Value);
+
+                        var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
+                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                    }
+
+                }
+            }
         }
     }
 }

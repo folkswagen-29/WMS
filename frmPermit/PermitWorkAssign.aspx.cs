@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -172,8 +173,8 @@ namespace onlineLegalWF.frmPermit
                             ,'" + host_url + @"forms/permitapv.aspx?req='+wf.process_id+'&pc='+process_code+'&st='+step_name+'&mode=tracking' AS link_url_format
 							,code.tof_permitreq_desc,req.tof_permitreq_code
                             from wf_routing as wf
-							inner join li_permit_request as req on req.process_id = wf.process_id
-							inner join li_type_of_permitrequest as code on code.tof_permitreq_code = req.tof_permitreq_code
+							left outer join li_permit_request as req on req.process_id = wf.process_id
+							left outer join li_type_of_permitrequest as code on code.tof_permitreq_code = req.tof_permitreq_code
 							where wf.process_code in ('PMT_LIC', 'PMT_TAX', 'PMT_TM')
                              and wf.row_id in (select tb1.row_id from
                             (SELECT process_id,
@@ -195,8 +196,8 @@ namespace onlineLegalWF.frmPermit
                             ,'" + host_url + @"forms/permitapv.aspx?req='+wf.process_id+'&pc='+process_code+'&st='+step_name+'&mode=tracking' AS link_url_format
 							,code.tof_permitreq_desc,req.tof_permitreq_code
                             from wf_routing as wf
-							inner join li_permit_request as req on req.process_id = wf.process_id
-							inner join li_type_of_permitrequest as code on code.tof_permitreq_code = req.tof_permitreq_code
+							left outer join li_permit_request as req on req.process_id = wf.process_id
+							left outer join li_type_of_permitrequest as code on code.tof_permitreq_code = req.tof_permitreq_code
 							where wf.process_code in ('PMT_LIC', 'PMT_TAX', 'PMT_TM')
                              and wf.row_id in (select tb1.row_id from
                             (SELECT process_id,
@@ -217,6 +218,62 @@ namespace onlineLegalWF.frmPermit
             DataTable dt = zdb.ExecSql_DataTable(sql, zconnstrbpm);
 
             return dt;
+        }
+
+        protected void btn_Export_Click(object sender, EventArgs e)
+        {
+            ExportGridToExcel();
+        }
+        public override void VerifyRenderingInServerForm(Control control)
+        {
+            //required to avoid the runtime error "
+            //Control 'GridView1' of type 'GridView' must be placed inside a form tag with runat=server."
+        }
+        private void ExportGridToExcel()
+        {
+            Response.Clear();
+            Response.Buffer = true;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Response.Charset = "";
+            string FileName = "PermitTracking_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xls";
+            //string FileName = "PermitTracking_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx";
+            StringWriter strwritter = new StringWriter();
+            HtmlTextWriter htmltextwrtter = new HtmlTextWriter(strwritter);
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.ContentType = "application/vnd.ms-excel";
+            //Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("Content-Disposition", "attachment;filename=" + FileName);
+            gv1.GridLines = GridLines.Both;
+            gv1.HeaderStyle.Font.Bold = true;
+            gv1.RenderControl(htmltextwrtter);
+            Response.Write(strwritter.ToString());
+            //Response.Flush();
+            Response.End();
+
+            //Response.Clear();
+            //string FileName = "PermitTracking_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx";
+            //Response.AddHeader("content-disposition", "attachment;filename=" + FileName);
+            //Response.Charset = "";
+            //Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+            //StringWriter sw = new StringWriter();
+            //HtmlTextWriter htmlWriter = new HtmlTextWriter(sw);
+
+            //foreach (GridViewRow row in gv1.Rows)
+            //{
+            //    if (row.RowType == DataControlRowType.DataRow)
+            //        for (int idxColumn = 0; idxColumn < row.Cells.Count; idxColumn++)
+            //            row.Cells[idxColumn].Attributes.Add("class", "xlText");
+            //}
+
+            //gv1.RenderControl(htmlWriter);
+
+            //string appendStyle = @"<style> .xlText { mso-number-format:\@; } </style> ";
+            //Response.Write(appendStyle);
+
+            //Response.Write(sw.ToString());
+            //Response.End();
         }
         #region gv1
         public void bind_gv1(DataTable dt)

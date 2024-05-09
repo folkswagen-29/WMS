@@ -53,6 +53,14 @@
                             </td>
                         </tr>
                         <tr>
+                            <td class="cell_content_20PC_TR">
+                                <label class="Label_md">Stepname : </label>
+                            </td>
+                            <td class="cell_content_80PC_TL">
+                                <asp:Label ID="step_name" runat="server" CssClass="Label_md"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
                             <td colspan="6">
                                 <table style="margin-left: auto; margin-right: auto;">
                                     <tr class="cell_content_100PC">
@@ -78,6 +86,7 @@
         <tr class="cell_content_100PC">
             <td colspan="2" class="cell_content_100PC">
                 <asp:Button ID="btn_Approve" runat="server" CssClass="btn_normal_blue" Text="Approve" OnClick="btn_Approve_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
+                <asp:Button ID="btn_assign" runat="server" CssClass="btn_normal_blue" Text="Assign" Visible="false" OnClick="btn_assign_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
                 <asp:Button ID="btn_Reject" runat="server" CssClass="btn_normal_red" Text="Reject" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_Reject_Click" />
                 <asp:Button ID="btn_Accept" runat="server" CssClass="btn_normal_blue" Text="Accept" Visible="false" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_Accept_Click" />
                 <asp:Button ID="btn_Submit" runat="server" CssClass="btn_normal_blue" Text="Submit" Visible="false" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" OnClick="btn_Submit_Click" />
@@ -121,6 +130,37 @@
     <asp:HiddenField ID="hid_permit_tradmark_external" runat="server" />
     <asp:HiddenField ID="hid_permit_energy_external" runat="server" />
     <asp:HiddenField ID="hid_permit_utility_external" runat="server" />
+    <asp:HiddenField ID="hid_assto_login" runat="server" />
+    <div class="modal fade" id="assignModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="border: 0;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="font-family: tahoma;">Modal Assign</h4>
+                </div>
+                <div class="modal-body" style="font-size: 10pt; font-family: tahoma;">
+                    <table>
+                        <tr>
+                            <td class="cell_content_10PC_TR">
+                                <label class="Label_md">Assign To : </label>
+                            </td>
+                            <td class="cell_content_90PC_TL">
+                                <asp:DropDownList ID="ddlAssign_NameList" runat="server" CssClass="Text_200">
+                                    <asp:ListItem Value="naruemol.w">naruemol.w</asp:ListItem>
+                                    <asp:ListItem Value="kanita.s">kanita.s</asp:ListItem>
+                                    <asp:ListItem Value="pattanis.r">pattanis.r</asp:ListItem>
+                                    <asp:ListItem Value="suradach.k">suradach.k</asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer" style="text-align: left; border-top: 0;">
+                    <asp:Button ID="btn_update_modal" runat="server" Text="Update" CssClass="btn_normal_blue" OnClick="Assign_Update_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
@@ -145,6 +185,9 @@
     <script type="text/javascript">
         function showModalReject() {
             $("#modalreject").modal('show');
+        }
+        function showModalAssign() {
+            $("#assignModal").modal('show');
         }
     </script>
 </asp:Content>

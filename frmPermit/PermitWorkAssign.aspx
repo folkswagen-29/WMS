@@ -30,6 +30,11 @@
                             </td>
                         </tr>
                         <tr>
+                            <td style="text-align: right;" colspan="2" class="cell_content_100PC">
+                                <asp:Button ID="btn_Export" runat="server" CssClass="btn_normal_silver" Text="Export" OnClick="btn_Export_Click" OnClientClick="this.disabled = true;" UseSubmitBehavior="false" />
+                            </td>
+                        </tr>
+                        <tr>
                             <asp:GridView ID="gv1" runat="server" AutoGenerateColumns="False" CssClass="w-100 table" AllowSorting="true" AllowPaging="true" PageSize="10" OnPageIndexChanging="gv1_PageIndexChanging">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Request No">

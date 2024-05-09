@@ -273,6 +273,29 @@ namespace onlineLegalWF.Class
             return x ;
         }
 
+        public string updateAssignto(wf_attributes wfA) 
+        {
+            string res = "";
+            // Update Current Step
+            string sql = " select * from wf_routing where process_id = '" + wfA.process_id + "' and process_code = '" + wfA.process_code + "' and version_no = " + wfA.version_no.ToString() + " and step_no = " + wfA.step_no.ToString();
+            var dt = zdb.ExecSql_DataTable(sql, zconnstr);
+            if (dt.Rows.Count > 0)
+            {
+                string sqlupd = @"update wf_routing 
+                set 
+                    updated_by = '" + wfA.updated_by + @"' ,
+                    assto_login = '" + wfA.assto_login + @"',
+                    updated_datetime = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + @"' 
+                where process_id = '" + wfA.process_id + @"' and step_no = " + wfA.step_no + @"
+                ";
+                zdb.ExecNonQuery(sqlupd, zconnstr);
+
+                res = "Success";
+            }
+
+            return res;
+        }
+
         public wf_attributes updateProcess(wf_attributes wfA) //return next_step_attribute
         {
             string x = "";
