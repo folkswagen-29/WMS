@@ -73,12 +73,16 @@ namespace onlineLegalWF.frmLitigation
                     pro_occ_section.Visible = true;
                     section_bu.Visible = true;
                     section_company.Visible = true;
+                    if (!string.IsNullOrEmpty(res.Rows[0]["bu_code"].ToString()))
+                    {
+                        ddl_bu.SelectedValue = res.Rows[0]["bu_code"].ToString();
+                    }
                 }
 
                 subject.Text = res.Rows[0]["lit_subject"].ToString();
                 desc.Text = res.Rows[0]["lit_desc"].ToString();
                 company.Text = res.Rows[0]["company_name"].ToString();
-                ddl_bu.SelectedValue = res.Rows[0]["bu_code"].ToString();
+                
                 pro_occ_desc.Text = res.Rows[0]["pro_occ_desc"].ToString();
 
                 string sqlcase = "select * from li_litigation_req_case where req_no='" + res.Rows[0]["req_no"].ToString() + "'";

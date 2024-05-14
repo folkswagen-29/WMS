@@ -634,6 +634,7 @@ button.close {
     background-color: whitesmoke;
     box-shadow: 0 3px 6px 0 rgba(0,0,0,0.5) !important;
     border-radius: 3px !important;
+    height: auto !important;
 }
 
 .div_100{
