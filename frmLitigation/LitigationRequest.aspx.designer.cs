@@ -168,22 +168,22 @@ namespace onlineLegalWF.frmLitigation
         protected global::System.Web.UI.WebControls.TableRow row_tp_upload;
 
         /// <summary>
-        /// FileUpload1 control.
+        /// FileUploadExcel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadExcel;
 
         /// <summary>
-        /// btnUpload control.
+        /// btnUploadExcel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpload;
+        protected global::System.Web.UI.WebControls.Button btnUploadExcel;
 
         /// <summary>
         /// row_gv_data control.

@@ -580,21 +580,21 @@ namespace onlineLegalWF.frmLitigation
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
             pdf_render.Attributes["src"] = host_url + "render/pdf?id=" + filePath;
         }
-        protected void btnUpload_Click(object sender, EventArgs e)
+        protected void btnUploadExcel_Click(object sender, EventArgs e)
         {
             //Coneection String by default empty  
             string ConStr = "";
 
-            if (FileUpload1.HasFile)
+            if (FileUploadExcel.HasFile)
             {
                 //Extantion of the file upload control saving into ext because   
                 //there are two types of extation .xls and .xlsx of Excel   
-                string ext = Path.GetExtension(FileUpload1.FileName).ToLower();
+                string ext = Path.GetExtension(FileUploadExcel.FileName).ToLower();
                 //getting the path of the file   
-                string path = Server.MapPath("~/Temp/" + FileUpload1.FileName);
+                string path = Server.MapPath("~/Temp/" + FileUploadExcel.FileName);
                 //saving the file inside the Temp of the server  
-                FileUpload1.SaveAs(path);
-                Label1.Text = FileUpload1.FileName + "\'s Data showing into the GridView";
+                FileUploadExcel.SaveAs(path);
+                Label1.Text = FileUploadExcel.FileName + "\'s Data showing into the GridView";
                 //checking that extantion is .xls or .xlsx  
                 if (ext.Trim() == ".xls")
                 {

@@ -117,7 +117,7 @@
                             </asp:TableCell>
                             <asp:TableCell>&nbsp;</asp:TableCell>
                             <asp:TableCell CssClass="cell_content_80PC_TL">
-                                <asp:FileUpload ID="FileUpload1" runat="server" /> &nbsp; <asp:Button ID="btnUpload" runat="server" OnClick="btnUpload_Click" Text="Upload" /> 
+                                <asp:FileUpload ID="FileUploadExcel" runat="server" /> &nbsp; <asp:Button ID="btnUploadExcel" runat="server" OnClick="btnUploadExcel_Click" Text="Upload" /> 
                             </asp:TableCell>
                             <asp:TableCell>&nbsp;</asp:TableCell>
                         </asp:TableRow>
