@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Litigation Admin Edit" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationRequestEditByAdmin.aspx.cs" Inherits="onlineLegalWF.frmLitigation.LitigationRequestEditByAdmin" %>
+﻿<%@ Page Title="Litigation Admin Edit" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationRequestEditByAdmin.aspx.cs" Inherits="WMS.frmLitigation.LitigationRequestEditByAdmin" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
 <%@ Register Src="~/userControls/ucCommentlog.ascx" TagPrefix="uc4" TagName="ucCommentlog" %>

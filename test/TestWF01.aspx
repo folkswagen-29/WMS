@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestWF01.aspx.cs" Inherits="onlineLegalWF.test.TestWF01" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestWF01.aspx.cs" Inherits="WMS.test.TestWF01" %>
 
 <%@ Register src="../userControls/ucAttachment.ascx" tagname="ucAttachment" tagprefix="uc1" %>
 

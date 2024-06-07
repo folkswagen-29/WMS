@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace onlineLegalWF.forms
+namespace WMS.forms
 {
 
 
@@ -21,7 +21,7 @@ namespace onlineLegalWF.forms
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucHeader ucHeader1;
+        protected global::WMS.userControls.ucHeader ucHeader1;
 
         /// <summary>
         /// Panel1 control.
@@ -111,7 +111,7 @@ namespace onlineLegalWF.forms
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucCommentlogdata ucCommentlog1;
+        protected global::WMS.userControls.ucCommentlogdata ucCommentlog1;
 
         /// <summary>
         /// Panel3 control.
@@ -129,7 +129,7 @@ namespace onlineLegalWF.forms
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucAttachmentdata ucAttachment1;
+        protected global::WMS.userControls.ucAttachmentdata ucAttachment1;
 
         /// <summary>
         /// req_no control.

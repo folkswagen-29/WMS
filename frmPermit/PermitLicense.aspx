@@ -1,4 +1,4 @@
-﻿<%@ Page Title="License Request" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitLicense.aspx.cs" Inherits="onlineLegalWF.frmPermit.PermitLicense" %>
+﻿<%@ Page Title="License Request" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitLicense.aspx.cs" Inherits="WMS.frmPermit.PermitLicense" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc2" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>

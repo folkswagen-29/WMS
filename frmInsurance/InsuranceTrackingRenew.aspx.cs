@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
-using onlineLegalWF.Class;
+using WMS.Class;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.frmInsurance
+namespace WMS.frmInsurance
 {
     public partial class InsuranceTrackingRenew : System.Web.UI.Page
     {

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Legal Update" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LegalAssign.aspx.cs" Inherits="onlineLegalWF.forms.LegalAssign" %>
+﻿<%@ Page Title="Legal Update" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LegalAssign.aspx.cs" Inherits="WMS.forms.LegalAssign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
 <%@ Register Src="~/userControls/ucCommentlog.ascx" TagPrefix="uc4" TagName="ucCommentlog" %>

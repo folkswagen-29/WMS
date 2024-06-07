@@ -1,5 +1,5 @@
 ﻿using Microsoft.Office.Interop.Word;
-using onlineLegalWF.frmInsurance;
+using WMS.frmInsurance;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.userControls
+namespace WMS.userControls
 {
     public partial class ucMenulist : System.Web.UI.UserControl
     {

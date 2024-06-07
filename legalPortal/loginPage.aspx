@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="loginPage.aspx.cs" Inherits="onlineLegalWF.legalPortal.loginPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="loginPage.aspx.cs" Inherits="WMS.legalPortal.loginPage" %>
 
 <!DOCTYPE html>
 

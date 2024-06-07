@@ -8,10 +8,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MailMessage = System.Net.Mail.MailMessage;
-using onlineLegalWF.userControls;
-using onlineLegalWF.Class;
+using WMS.userControls;
+using WMS.Class;
 
-namespace onlineLegalWF.test
+namespace WMS.test
 {
     public partial class testsendmail : System.Web.UI.Page
     {

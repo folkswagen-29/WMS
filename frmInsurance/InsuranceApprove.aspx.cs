@@ -1,6 +1,6 @@
 ﻿using Microsoft.Office.Interop.Word;
-using onlineLegalWF.Class;
-using onlineLegalWF.userControls;
+using WMS.Class;
+using WMS.userControls;
 using Spire.Doc;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.frmInsurance
+namespace WMS.frmInsurance
 {
     public partial class InsuranceApprove : System.Web.UI.Page
     {

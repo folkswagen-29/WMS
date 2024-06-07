@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucWorkflowlist.ascx.cs" Inherits="onlineLegalWF.userControls.ucWorkflowlist" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucWorkflowlist.ascx.cs" Inherits="WMS.userControls.ucWorkflowlist" %>
 <%--<asp:ScriptManager runat="server">
     <Scripts>
         <asp:ScriptReference Name="jquery" />

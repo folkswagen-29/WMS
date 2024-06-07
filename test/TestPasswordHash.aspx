@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestPasswordHash.aspx.cs" Inherits="onlineLegalWF.test.TestPasswordHash" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestPasswordHash.aspx.cs" Inherits="WMS.test.TestPasswordHash" %>
 
 <!DOCTYPE html>
 

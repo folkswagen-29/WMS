@@ -1,5 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Presentation;
-using onlineLegalWF.Class;
+using WMS.Class;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,9 +9,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using static onlineLegalWF.Class.ReplacePermit;
+using static WMS.Class.ReplacePermit;
 
-namespace onlineLegalWF.forms
+namespace WMS.forms
 {
     public partial class permitapv : System.Web.UI.Page
     {

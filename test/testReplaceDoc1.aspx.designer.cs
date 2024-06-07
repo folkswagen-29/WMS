@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace onlineLegalWF.test
+namespace WMS.test
 {
 
 

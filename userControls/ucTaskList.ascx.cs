@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.userControls
+namespace WMS.userControls
 {
     public partial class ucTaskList : System.Web.UI.UserControl
     {

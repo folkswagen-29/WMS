@@ -1,7 +1,7 @@
 ﻿using DocumentFormat.OpenXml.ExtendedProperties;
 using iTextSharp.text.pdf;
 using Newtonsoft.Json.Linq;
-using onlineLegalWF.Class;
+using WMS.Class;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,9 +13,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
-using static onlineLegalWF.Class.ReplaceCommRegis;
+using static WMS.Class.ReplaceCommRegis;
 
-namespace onlineLegalWF.frmCommregis
+namespace WMS.frmCommregis
 {
     public partial class CommRegisRequest : System.Web.UI.Page
     {

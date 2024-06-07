@@ -1,4 +1,4 @@
-﻿using onlineLegalWF.Class;
+﻿using WMS.Class;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,9 +8,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using static onlineLegalWF.frmLitigation.LitigationRequestEdit;
+using static WMS.frmLitigation.LitigationRequestEdit;
 
-namespace onlineLegalWF.forms
+namespace WMS.forms
 {
     public partial class litcomplete : System.Web.UI.Page
     {

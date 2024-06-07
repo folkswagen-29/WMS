@@ -1,6 +1,6 @@
-﻿<%@ Page Title="ClaimRequestList" Language="C#" MasterPageFile="SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceClaimList.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceClaimList" %>
+﻿<%@ Page Title="ClaimRequestList" Language="C#" MasterPageFile="SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceClaimList.aspx.cs" Inherits="WMS.frmInsurance.InsuranceClaimList" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
-<%@ Import Namespace="onlineLegalWF.Class" %> 
+<%@ Import Namespace="WMS.Class" %> 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table class="cell_content_100PC">

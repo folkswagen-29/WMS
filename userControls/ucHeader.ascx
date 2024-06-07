@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucHeader.ascx.cs" Inherits="onlineLegalWF.userControls.ucHeader" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucHeader.ascx.cs" Inherits="WMS.userControls.ucHeader" %>
 <table class="w-100">
     <tr>
         <td style="font-family:Tahoma; font-size:medium; height:65px;background-color:gainsboro;">

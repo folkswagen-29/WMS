@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace onlineLegalWF.test
+namespace WMS.test
 {
 
 
@@ -30,7 +30,7 @@ namespace onlineLegalWF.test
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucAssignment ucAssignment1;
+        protected global::WMS.userControls.ucAssignment ucAssignment1;
 
         /// <summary>
         /// hidProcessID control.

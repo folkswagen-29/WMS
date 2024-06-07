@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using onlineLegalWF.Class;
+using WMS.Class;
 
-namespace onlineLegalWF.test
+namespace WMS.test
 {
     public partial class TestWF01 : System.Web.UI.Page
     {

@@ -1,4 +1,4 @@
-﻿using onlineLegalWF.userControls;
+﻿using WMS.userControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.frmCommregis
+namespace WMS.frmCommregis
 {
     public partial class CommRegisWorkAssign : System.Web.UI.Page
     {

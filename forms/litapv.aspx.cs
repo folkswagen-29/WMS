@@ -1,7 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.Office.Interop.Word;
-using onlineLegalWF.Class;
-using onlineLegalWF.userControls;
+using WMS.Class;
+using WMS.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,10 +11,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using static onlineLegalWF.Class.ReplaceLitigation;
-using static onlineLegalWF.frmLitigation.LitigationDetail;
+using static WMS.Class.ReplaceLitigation;
+using static WMS.frmLitigation.LitigationDetail;
 
-namespace onlineLegalWF.forms
+namespace WMS.forms
 {
     public partial class litapv : System.Web.UI.Page
     {

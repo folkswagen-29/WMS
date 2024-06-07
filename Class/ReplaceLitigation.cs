@@ -4,9 +4,9 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
-using static onlineLegalWF.Class.ReplaceCommRegis;
+using static WMS.Class.ReplaceCommRegis;
 
-namespace onlineLegalWF.Class
+namespace WMS.Class
 {
     public class ReplaceLitigation
     {

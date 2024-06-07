@@ -1,5 +1,5 @@
-﻿using onlineLegalWF.Class;
-using onlineLegalWF.userControls;
+﻿using WMS.Class;
+using WMS.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,9 +9,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using static onlineLegalWF.Class.ReplacePermit;
+using static WMS.Class.ReplacePermit;
 
-namespace onlineLegalWF.frmPermit
+namespace WMS.frmPermit
 {
     public partial class PermitTrademark : System.Web.UI.Page
     {

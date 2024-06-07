@@ -1,4 +1,4 @@
-﻿using onlineLegalWF.Class;
+﻿using WMS.Class;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.frmLitigation
+namespace WMS.frmLitigation
 {
     public partial class LitigationDetail : System.Web.UI.Page
     {

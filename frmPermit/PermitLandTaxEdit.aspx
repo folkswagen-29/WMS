@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Tax Edit" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitLandTaxEdit.aspx.cs" Inherits="onlineLegalWF.frmPermit.PermitLandTaxEdit" %>
+﻿<%@ Page Title="Tax Edit" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitLandTaxEdit.aspx.cs" Inherits="WMS.frmPermit.PermitLandTaxEdit" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc2" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Trademark Request" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitTrademark.aspx.cs" Inherits="onlineLegalWF.frmPermit.PermitTrademark" %>
+﻿<%@ Page Title="Trademark Request" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitTrademark.aspx.cs" Inherits="WMS.frmPermit.PermitTrademark" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc2" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>

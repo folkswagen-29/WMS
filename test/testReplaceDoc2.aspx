@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="testReplaceDoc2.aspx.cs" Inherits="onlineLegalWF.test.testReplaceDoc2" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="testReplaceDoc2.aspx.cs" Inherits="WMS.test.testReplaceDoc2" %>
 
 <!DOCTYPE html>
 

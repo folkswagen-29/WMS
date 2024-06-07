@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace onlineLegalWF
+namespace WMS
 {
 
 
@@ -66,7 +66,7 @@ namespace onlineLegalWF
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucMenulist ucMenulist1;
+        protected global::WMS.userControls.ucMenulist ucMenulist1;
 
         /// <summary>
         /// ContentPlaceHolder1 control.

@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace onlineLegalWF
+namespace WMS
 {
     public class MargePDF
     {

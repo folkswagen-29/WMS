@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Insurance Search and Report" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceRenewSearch.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceRenewSearch" %>
+﻿<%@ Page Title="Insurance Search and Report" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceRenewSearch.aspx.cs" Inherits="WMS.frmInsurance.InsuranceRenewSearch" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

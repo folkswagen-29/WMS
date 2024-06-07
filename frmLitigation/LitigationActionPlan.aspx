@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Action Plan & Update" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationActionPlan.aspx.cs" Inherits="onlineLegalWF.frmLitigation.LitigationActionPlan" %>
+﻿<%@ Page Title="Action Plan & Update" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationActionPlan.aspx.cs" Inherits="WMS.frmLitigation.LitigationActionPlan" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

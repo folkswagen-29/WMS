@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace onlineLegalWF.legalPortal
+namespace WMS.legalPortal
 {
 
 
@@ -21,7 +21,7 @@ namespace onlineLegalWF.legalPortal
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucHeader ucHeader1;
+        protected global::WMS.userControls.ucHeader ucHeader1;
 
         /// <summary>
         /// ucTaskList1 control.
@@ -30,6 +30,6 @@ namespace onlineLegalWF.legalPortal
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucTaskList ucTaskList1;
+        protected global::WMS.userControls.ucTaskList ucTaskList1;
     }
 }

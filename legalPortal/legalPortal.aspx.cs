@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.legalPortal
+namespace WMS.legalPortal
 {
     public partial class legalPortal : System.Web.UI.Page
     {

@@ -7,7 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using static ReplaceDocx.Class.ReplaceDocx;
-using onlineLegalWF.Class;
+using WMS.Class;
 using System.Globalization;
 using Spire.Doc;
 using Spire.Pdf;
@@ -17,7 +17,7 @@ using System.IO;
 using DocumentFormat.OpenXml.Packaging;
 using iTextSharp.text.pdf;
 
-namespace onlineLegalWF.test
+namespace WMS.test
 {
     public partial class testReplaceDoc1 : System.Web.UI.Page
     {

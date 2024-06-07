@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Tax Request" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitLandTax.aspx.cs" Inherits="onlineLegalWF.frmPermit.PermitLandTax" %>
+﻿<%@ Page Title="Tax Request" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitLandTax.aspx.cs" Inherits="WMS.frmPermit.PermitLandTax" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc2" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pdf.aspx.cs" Inherits="onlineLegalWF.render.Pdf" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pdf.aspx.cs" Inherits="WMS.render.Pdf" %>
 
 <!DOCTYPE html>
 

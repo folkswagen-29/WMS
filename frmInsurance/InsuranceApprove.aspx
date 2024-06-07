@@ -1,4 +1,4 @@
-﻿<%@ Title="Insurance Approve" Language="C#" MasterPageFile="SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceApprove.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceApprove" %>
+﻿<%@ Title="Insurance Approve" Language="C#" MasterPageFile="SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceApprove.aspx.cs" Inherits="WMS.frmInsurance.InsuranceApprove" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
 <%@ Register Src="~/userControls/ucCommentlog.ascx" TagPrefix="uc4" TagName="ucCommentlog" %>

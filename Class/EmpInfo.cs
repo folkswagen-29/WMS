@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace onlineLegalWF.Class
+namespace WMS.Class
 {
     public class EmpInfo
     {

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucMenulist.ascx.cs" Inherits="onlineLegalWF.userControls.ucMenulist" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucMenulist.ascx.cs" Inherits="WMS.userControls.ucMenulist" %>
    <link href="../StyleSheet/CustomStyle.css" rel="stylesheet" type="text/css"/>
 <asp:Panel ID="pMenu" runat="server" Height="600px" CssClass="menu w-100">
     <asp:GridView ID="gv" runat="server" AutoGenerateColumns="False" 

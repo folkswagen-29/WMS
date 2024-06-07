@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucLitigationCaseAttachment.ascx.cs" Inherits="onlineLegalWF.userControls.ucLitigationCaseAttachment" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucLitigationCaseAttachment.ascx.cs" Inherits="WMS.userControls.ucLitigationCaseAttachment" %>
 <div>
     <table cellpadding="0" cellspacing="0" class="w-100">
         <tr>

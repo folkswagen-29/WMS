@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteLigalWorkFlow.master.cs" Inherits="onlineLegalWF.SiteLigalWorkFlow" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteLigalWorkFlow.master.cs" Inherits="WMS.SiteLigalWorkFlow" %>
 
 <%--<%@ Register Src="~/userControls/ucMenu.ascx" TagPrefix="uc1" TagName="ucMenu" %>--%>
 <%@ Register Src="~/userControls/ucMenulist.ascx" TagPrefix="uc1" TagName="ucMenulist" %>

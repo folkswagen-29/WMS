@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace onlineLegalWF.frmInsurance
+namespace WMS.frmInsurance
 {
 
 
@@ -21,7 +21,7 @@ namespace onlineLegalWF.frmInsurance
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucHeader ucHeader1;
+        protected global::WMS.userControls.ucHeader ucHeader1;
 
         /// <summary>
         /// Panel1 control.
@@ -183,7 +183,7 @@ namespace onlineLegalWF.frmInsurance
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucAttachment ucAttachment1;
+        protected global::WMS.userControls.ucAttachment ucAttachment1;
 
         /// <summary>
         /// ucCommentlog1 control.
@@ -192,7 +192,7 @@ namespace onlineLegalWF.frmInsurance
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucCommentlog ucCommentlog1;
+        protected global::WMS.userControls.ucCommentlog ucCommentlog1;
 
         /// <summary>
         /// req_date control.

@@ -6,12 +6,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
-using onlineLegalWF.Class;
+using WMS.Class;
 using System.Configuration;
 using System.Globalization;
-using static onlineLegalWF.Class.ReplaceLitigation;
+using static WMS.Class.ReplaceLitigation;
 
-namespace onlineLegalWF.frmLitigation
+namespace WMS.frmLitigation
 {
     public partial class LitigationRequestEdit : System.Web.UI.Page
     {

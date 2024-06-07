@@ -1,6 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Office2010.Excel;
-using onlineLegalWF.Class;
-using onlineLegalWF.userControls;
+using WMS.Class;
+using WMS.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,7 +12,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.frmLitigation
+namespace WMS.frmLitigation
 {
     public partial class LitigationCaseDetail : System.Web.UI.Page
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using static iTextSharp.text.pdf.AcroFields;
 
-namespace onlineLegalWF.Class
+namespace WMS.Class
 {
     public class ReplaceInsRenewAWC
     {

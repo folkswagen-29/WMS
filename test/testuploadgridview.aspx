@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="testuploadgridview.aspx.cs" Inherits="onlineLegalWF.test.testuploadgridview" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="testuploadgridview.aspx.cs" Inherits="WMS.test.testuploadgridview" %>
 
 <!DOCTYPE html>
 

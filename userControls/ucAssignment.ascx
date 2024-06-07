@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucAssignment.ascx.cs" Inherits="onlineLegalWF.userControls.ucAssignment" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucAssignment.ascx.cs" Inherits="WMS.userControls.ucAssignment" %>
  <link href="../StyleSheet/CustomStyle.css" rel="stylesheet" type="text/css"/>
 <style type="text/css">
     .auto-style3 {

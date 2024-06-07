@@ -1,4 +1,4 @@
-﻿<%@ Page Title="PermitWorkAssign" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitWorkAssign.aspx.cs" Inherits="onlineLegalWF.frmPermit.PermitWorkAssign" %>
+﻿<%@ Page Title="PermitWorkAssign" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="PermitWorkAssign.aspx.cs" Inherits="WMS.frmPermit.PermitWorkAssign" %>
 <%--<%@ Register Src="~/userControls/ucWorkflowlist.ascx" TagPrefix="uc2" TagName="ucWorkflowlist" %>--%>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucTaskList.ascx" TagPrefix="uc2" TagName="ucTaskList" %>

@@ -10,9 +10,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using Newtonsoft.Json;
-using onlineLegalWF.Class; 
+using WMS.Class; 
 
-namespace onlineLegalWF.legalPortal
+namespace WMS.legalPortal
 {
     public partial class loginPage : System.Web.UI.Page
     {

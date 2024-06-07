@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Litigation Complete" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="litcomplete.aspx.cs" Inherits="onlineLegalWF.forms.litcomplete" %>
+﻿<%@ Page Title="Litigation Complete" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="litcomplete.aspx.cs" Inherits="WMS.forms.litcomplete" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachmentdata.ascx" TagPrefix="uc3" TagName="ucAttachmentdata" %>
 <%@ Register Src="~/userControls/ucCommentlogdata.ascx" TagPrefix="uc4" TagName="ucCommentlogdata" %>

@@ -1,4 +1,4 @@
-﻿using onlineLegalWF.userControls;
+﻿using WMS.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.frmInsurance
+namespace WMS.frmInsurance
 {
     public partial class InsuranceClaimList : System.Web.UI.Page
     {

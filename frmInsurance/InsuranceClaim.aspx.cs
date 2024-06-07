@@ -12,11 +12,11 @@ using System.Xml.Linq;
 using DocumentFormat.OpenXml.EMMA;
 using DocumentFormat.OpenXml.ExtendedProperties;
 using Newtonsoft.Json.Linq;
-using onlineLegalWF.Class;
-using onlineLegalWF.userControls;
-using static onlineLegalWF.Class.ReplaceInsClaim;
+using WMS.Class;
+using WMS.userControls;
+using static WMS.Class.ReplaceInsClaim;
 
-namespace onlineLegalWF.frmInsurance
+namespace WMS.frmInsurance
 {
     public partial class InsuranceClaim : System.Web.UI.Page
     {

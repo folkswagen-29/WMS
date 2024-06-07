@@ -1,4 +1,4 @@
-﻿<%@ Page Title="CommRegisWorkAssign" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="CommRegisWorkAssign.aspx.cs" Inherits="onlineLegalWF.frmCommregis.CommRegisWorkAssign" %>
+﻿<%@ Page Title="CommRegisWorkAssign" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="CommRegisWorkAssign.aspx.cs" Inherits="WMS.frmCommregis.CommRegisWorkAssign" %>
 <%@ Register Src="~/userControls/ucWorkflowlist.ascx" TagPrefix="uc2" TagName="ucWorkflowlist" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 

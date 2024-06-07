@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Commercial Registration Request" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="CommRegisRequest.aspx.cs" Inherits="onlineLegalWF.frmCommregis.CommRegisRequest" %>
+﻿<%@ Page Title="Commercial Registration Request" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="CommRegisRequest.aspx.cs" Inherits="WMS.frmCommregis.CommRegisRequest" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc2" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>

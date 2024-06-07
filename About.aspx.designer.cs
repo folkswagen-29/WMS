@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace onlineLegalWF
+namespace WMS
 {
     public partial class About
     {

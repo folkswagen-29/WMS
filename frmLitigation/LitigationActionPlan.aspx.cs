@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.frmLitigation
+namespace WMS.frmLitigation
 {
     public partial class LitigationActionPlan : System.Web.UI.Page
     {

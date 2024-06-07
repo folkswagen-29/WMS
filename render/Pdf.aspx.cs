@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.render
+namespace WMS.render
 {
     public partial class Pdf : System.Web.UI.Page
     {

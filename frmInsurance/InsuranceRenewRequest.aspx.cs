@@ -1,6 +1,6 @@
 ﻿using DocumentFormat.OpenXml.ExtendedProperties;
-using onlineLegalWF.Class;
-using onlineLegalWF.userControls;
+using WMS.Class;
+using WMS.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,9 +13,9 @@ using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using static iTextSharp.text.pdf.AcroFields;
-using static onlineLegalWF.Class.ReplaceInsRenew;
+using static WMS.Class.ReplaceInsRenew;
 
-namespace onlineLegalWF.frmInsurance
+namespace WMS.frmInsurance
 {
     public partial class InsuranceRenewRequest : System.Web.UI.Page
     {

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucCommentlog.ascx.cs" Inherits="onlineLegalWF.userControls.ucCommentlog" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucCommentlog.ascx.cs" Inherits="WMS.userControls.ucCommentlog" %>
 
 <link href="../StyleSheet/CustomStyle.css" rel="stylesheet" type="text/css"/>
 

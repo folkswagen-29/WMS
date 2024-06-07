@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace onlineLegalWF.frmCommregis
+namespace WMS.frmCommregis
 {
 
 
@@ -21,7 +21,7 @@ namespace onlineLegalWF.frmCommregis
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucHeader ucHeader1;
+        protected global::WMS.userControls.ucHeader ucHeader1;
 
         /// <summary>
         /// ucWorkflowlist1 control.
@@ -30,6 +30,6 @@ namespace onlineLegalWF.frmCommregis
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucWorkflowlist ucWorkflowlist1;
+        protected global::WMS.userControls.ucWorkflowlist ucWorkflowlist1;
     }
 }

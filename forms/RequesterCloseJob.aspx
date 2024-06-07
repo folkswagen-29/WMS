@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Close Job" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="RequesterCloseJob.aspx.cs" Inherits="onlineLegalWF.forms.RequesterCloseJob" %>
+﻿<%@ Page Title="Close Job" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="RequesterCloseJob.aspx.cs" Inherits="WMS.forms.RequesterCloseJob" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>
 <%@ Register Src="~/userControls/ucCommentlog.ascx" TagPrefix="uc4" TagName="ucCommentlog" %>

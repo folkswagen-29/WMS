@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucMenu.ascx.cs" Inherits="onlineLegalWF.userControls.ucMenu" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucMenu.ascx.cs" Inherits="WMS.userControls.ucMenu" %>
 <style type="text/css">
     .auto-style4 {
        height:auto; 

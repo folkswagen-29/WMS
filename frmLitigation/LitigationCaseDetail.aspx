@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Case Detail" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationCaseDetail.aspx.cs" Inherits="onlineLegalWF.frmLitigation.LitigationCaseDetail" %>
+﻿<%@ Page Title="Case Detail" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="LitigationCaseDetail.aspx.cs" Inherits="WMS.frmLitigation.LitigationCaseDetail" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

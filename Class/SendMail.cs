@@ -6,7 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace onlineLegalWF.Class
+namespace WMS.Class
 {
     public class SendMail
     {

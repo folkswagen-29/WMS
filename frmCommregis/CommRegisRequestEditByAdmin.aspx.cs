@@ -1,7 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Office2010.Excel;
 using iTextSharp.text.pdf;
-using onlineLegalWF.Class;
-using onlineLegalWF.userControls;
+using WMS.Class;
+using WMS.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,9 +10,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using static onlineLegalWF.Class.ReplaceCommRegis;
+using static WMS.Class.ReplaceCommRegis;
 
-namespace onlineLegalWF.frmCommregis
+namespace WMS.frmCommregis
 {
     public partial class CommRegisRequestEditByAdmin : System.Web.UI.Page
     {

@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.frmPermit
+namespace WMS.frmPermit
 {
     public partial class PermitWorkAssign : System.Web.UI.Page
     {

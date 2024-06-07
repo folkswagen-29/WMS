@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.Class
+namespace WMS.Class
 {
    
     public class WFFunctions

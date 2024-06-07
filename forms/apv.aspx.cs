@@ -1,5 +1,5 @@
 ﻿using Microsoft.Office.Interop.Word;
-using onlineLegalWF.Class;
+using WMS.Class;
 using Org.BouncyCastle.Ocsp;
 using Spire.Doc;
 using System;
@@ -13,11 +13,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
-using static onlineLegalWF.Class.ReplaceInsClaim;
-using static onlineLegalWF.Class.ReplaceInsRenew;
-using static onlineLegalWF.Class.ReplaceInsRenewAWC;
+using static WMS.Class.ReplaceInsClaim;
+using static WMS.Class.ReplaceInsRenew;
+using static WMS.Class.ReplaceInsRenewAWC;
 
-namespace onlineLegalWF.forms
+namespace WMS.forms
 {
     public partial class apv : System.Web.UI.Page
     {

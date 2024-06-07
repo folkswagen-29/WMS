@@ -1,6 +1,6 @@
 ﻿using iTextSharp.text.pdf;
-using onlineLegalWF.Class;
-using onlineLegalWF.userControls;
+using WMS.Class;
+using WMS.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,7 +13,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.frmInsurance
+namespace WMS.frmInsurance
 {
     public partial class InsuranceRequestEdit : System.Web.UI.Page
     {
@@ -1142,7 +1142,7 @@ namespace onlineLegalWF.frmInsurance
                 string id = dr["req_no"].ToString();
                 subject = dr["subject"].ToString();
                 var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='"+host_url_sendmail+"onlinelegalwf/legalportal/legalportal?m=myworklist'>Click</a>";
+                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='"+host_url_sendmail+"WMS/legalportal/legalportal?m=myworklist'>Click</a>";
 
                 string pathfileins = "";
                 string outputdirectory = "";

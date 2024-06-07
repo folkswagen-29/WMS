@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="testsendmail.aspx.cs" Inherits="onlineLegalWF.test.testsendmail" Async="true" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="testsendmail.aspx.cs" Inherits="WMS.test.testsendmail" Async="true" %>
 
 <!DOCTYPE html>
 

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcAttachForm.ascx.cs" Inherits="onlineLegalWF.userControls.UcAttachForm" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcAttachForm.ascx.cs" Inherits="WMS.userControls.UcAttachForm" %>
 <%-- <link href="../StyleSheet/CustomStyle.css" rel="stylesheet" type="text/css"/>
 <asp:ScriptManager ID="scriptfrmattach" runat="server">
     <Scripts>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Permit Complete" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="permitcomplete.aspx.cs" Inherits="onlineLegalWF.forms.permitcomplete" %>
+﻿<%@ Page Title="Permit Complete" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="permitcomplete.aspx.cs" Inherits="WMS.forms.permitcomplete" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachmentdata.ascx" TagPrefix="uc3" TagName="ucAttachmentdata" %>
 <%@ Register Src="~/userControls/ucCommentlogdata.ascx" TagPrefix="uc4" TagName="ucCommentlogdata" %>

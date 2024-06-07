@@ -1,5 +1,5 @@
-﻿using onlineLegalWF.Class;
-using onlineLegalWF.userControls;
+﻿using WMS.Class;
+using WMS.userControls;
 using Spire.Doc;
 using System;
 using System.Collections.Generic;
@@ -11,9 +11,9 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using static onlineLegalWF.Class.ReplaceInsClaim;
+using static WMS.Class.ReplaceInsClaim;
 
-namespace onlineLegalWF.frmInsurance
+namespace WMS.frmInsurance
 {
     public partial class InsuranceClaimEdit : System.Web.UI.Page
     {

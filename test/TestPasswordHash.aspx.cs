@@ -1,4 +1,4 @@
-﻿using onlineLegalWF.Class;
+﻿using WMS.Class;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.test
+namespace WMS.test
 {
     public partial class TestPasswordHash : System.Web.UI.Page
     {

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Tracking Request" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceTrackingRequest.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceTrackingRequest" %>
+﻿<%@ Page Title="Tracking Request" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceTrackingRequest.aspx.cs" Inherits="WMS.frmInsurance.InsuranceTrackingRequest" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

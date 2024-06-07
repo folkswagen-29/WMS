@@ -1,6 +1,6 @@
 ﻿using Microsoft.Office.Interop.Word;
-using onlineLegalWF.Class;
-using onlineLegalWF.userControls;
+using WMS.Class;
+using WMS.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,7 +13,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DataTable = System.Data.DataTable;
 
-namespace onlineLegalWF.frmInsurance
+namespace WMS.frmInsurance
 {
     public partial class InsuranceRequest : System.Web.UI.Page
     {

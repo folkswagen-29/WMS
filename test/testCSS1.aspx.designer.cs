@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace onlineLegalWF.test
+namespace WMS.test
 {
 
 
@@ -156,7 +156,7 @@ namespace onlineLegalWF.test
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucAttachment ucAttachment1;
+        protected global::WMS.userControls.ucAttachment ucAttachment1;
 
         /// <summary>
         /// lblPID control.
@@ -192,7 +192,7 @@ namespace onlineLegalWF.test
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucMenulist ucMenulist1;
+        protected global::WMS.userControls.ucMenulist ucMenulist1;
 
         /// <summary>
         /// ucAttachmentEform control.
@@ -201,6 +201,6 @@ namespace onlineLegalWF.test
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucAttachment ucAttachmentEform;
+        protected global::WMS.userControls.ucAttachment ucAttachmentEform;
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.test
+namespace WMS.test
 {
     public partial class test02 : System.Web.UI.Page
     {

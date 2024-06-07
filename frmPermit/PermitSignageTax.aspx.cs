@@ -1,5 +1,5 @@
-﻿using onlineLegalWF.Class;
-using onlineLegalWF.userControls;
+﻿using WMS.Class;
+using WMS.userControls;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace onlineLegalWF.frmPermit
+namespace WMS.frmPermit
 {
     public partial class PermitSignageTax : System.Web.UI.Page
     {

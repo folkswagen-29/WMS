@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="onlineLegalWF.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="WMS.Global" Language="C#" %>

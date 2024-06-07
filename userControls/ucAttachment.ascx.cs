@@ -15,7 +15,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
 
-namespace onlineLegalWF.userControls
+namespace WMS.userControls
 {
     public partial class ucAttachment : System.Web.UI.UserControl
     {

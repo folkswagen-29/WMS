@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPersonSign.ascx.cs" Inherits="onlineLegalWF.userControls.ucPersonSign" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPersonSign.ascx.cs" Inherits="WMS.userControls.ucPersonSign" %>
 <div style="font-family:Tahoma; font-size:10pt; vertical-align:top; text-align:left ; /*width:220px;*/">
 
 </div>

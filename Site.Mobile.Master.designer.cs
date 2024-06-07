@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace onlineLegalWF {
+namespace WMS {
     
     
     public partial class Site_Mobile {

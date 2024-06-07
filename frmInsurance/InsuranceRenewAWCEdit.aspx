@@ -1,4 +1,4 @@
-﻿<%@ Page Title="AWCRenewInusurance Memo Edit" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceRenewAWCEdit.aspx.cs" Inherits="onlineLegalWF.frmInsurance.InsuranceRenewAWCEdit" %>
+﻿<%@ Page Title="AWCRenewInusurance Memo Edit" Async="true" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="InsuranceRenewAWCEdit.aspx.cs" Inherits="WMS.frmInsurance.InsuranceRenewAWCEdit" %>
 <%@ Register Src="~/userControls/ucPersonSign.ascx" TagPrefix="uc1" TagName="ucPersonSign" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc2" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucAttachment.ascx" TagPrefix="uc3" TagName="ucAttachment" %>

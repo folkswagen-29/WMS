@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucCommentlogdata.ascx.cs" Inherits="onlineLegalWF.userControls.ucCommentlogdata" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucCommentlogdata.ascx.cs" Inherits="WMS.userControls.ucCommentlogdata" %>
 <link href="../StyleSheet/CustomStyle.css" rel="stylesheet" type="text/css"/>
 
 <asp:Panel ID="Panel1" runat="server" CssClass="div_90">

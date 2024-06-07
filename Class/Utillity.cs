@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 
-namespace onlineLegalWF.Class
+namespace WMS.Class
 {
     public static class Utillity
     {

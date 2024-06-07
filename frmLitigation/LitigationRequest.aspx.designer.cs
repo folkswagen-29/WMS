@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace onlineLegalWF.frmLitigation
+namespace WMS.frmLitigation
 {
 
 
@@ -21,7 +21,7 @@ namespace onlineLegalWF.frmLitigation
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucHeader ucHeader1;
+        protected global::WMS.userControls.ucHeader ucHeader1;
 
         /// <summary>
         /// Panel1 control.
@@ -228,7 +228,7 @@ namespace onlineLegalWF.frmLitigation
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucAttachment ucAttachment1;
+        protected global::WMS.userControls.ucAttachment ucAttachment1;
 
         /// <summary>
         /// btn_save control.
@@ -264,7 +264,7 @@ namespace onlineLegalWF.frmLitigation
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucCommentlog ucCommentlog1;
+        protected global::WMS.userControls.ucCommentlog ucCommentlog1;
 
         /// <summary>
         /// hid_PID control.
@@ -291,7 +291,7 @@ namespace onlineLegalWF.frmLitigation
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::onlineLegalWF.userControls.ucLitigationCaseAttachment ucLitigationCaseAttachment1;
+        protected global::WMS.userControls.ucLitigationCaseAttachment ucLitigationCaseAttachment1;
 
         /// <summary>
         /// pdf_render control.
