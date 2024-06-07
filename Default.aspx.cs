@@ -14,7 +14,7 @@ namespace WMS
         protected void Page_Load(object sender, EventArgs e)
         {
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-            Response.Redirect(host_url + "legalportal/loginpage.aspx");
+            Response.Redirect(host_url + "portal/loginpage.aspx");
         }
     }
 }

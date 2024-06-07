@@ -23,7 +23,7 @@ namespace WMS.legalPortal
         }
         public void checkSession() 
         {
-            ucHeader1.setHeader("Legal Portal");
+            ucHeader1.setHeader("Portal");
             //var is_login = Session["is_login"].ToString(); 
             //if (is_login == "Y")
             //{

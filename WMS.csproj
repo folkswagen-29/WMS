@@ -249,8 +249,8 @@
     <Content Include="images\icon_sendmail.png" />
     <Content Include="images\icon_upload.png" />
     <Content Include="images\icon_view.png" />
-    <Content Include="legalPortal\legalPortal.aspx" />
-    <Content Include="legalPortal\loginPage.aspx" />
+    <Content Include="Portal\Portal.aspx" />
+    <Content Include="Portal\loginPage.aspx" />
     <Content Include="render\Pdf.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -688,18 +688,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="legalPortal\legalPortal.aspx.cs">
-      <DependentUpon>legalPortal.aspx</DependentUpon>
+    <Compile Include="Portal\Portal.aspx.cs">
+      <DependentUpon>Portal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="legalPortal\legalPortal.aspx.designer.cs">
-      <DependentUpon>legalPortal.aspx</DependentUpon>
+    <Compile Include="Portal\Portal.aspx.designer.cs">
+      <DependentUpon>Portal.aspx</DependentUpon>
     </Compile>
-    <Compile Include="legalPortal\loginPage.aspx.cs">
+    <Compile Include="Portal\loginPage.aspx.cs">
       <DependentUpon>loginPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="legalPortal\loginPage.aspx.designer.cs">
+    <Compile Include="Portal\loginPage.aspx.designer.cs">
       <DependentUpon>loginPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

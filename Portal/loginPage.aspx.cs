@@ -27,7 +27,7 @@ namespace WMS.legalPortal
                 if (Session["user_login"] != null)
                 {
                     var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                    Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myrequest");
+                    Response.Redirect(host_url + "portal/portal.aspx?m=myrequest");
                 }
                 //else 
                 //{
@@ -72,7 +72,7 @@ namespace WMS.legalPortal
                 // clear session 
                 addSession(txtLoginName.Text);
                 var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myrequest");
+                Response.Redirect(host_url + "portal/portal.aspx?m=myrequest");
             }
             else
             {
