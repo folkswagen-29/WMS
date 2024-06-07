@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WMS.legalPortal
+namespace WMS.Portal
 {
 
 

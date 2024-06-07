@@ -36,7 +36,7 @@ namespace WMS
             else 
             {
                 var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                Response.Redirect(host_url +"legalportal/loginpage.aspx");
+                Response.Redirect(host_url +"Portal/loginpage.aspx");
             }
             
         }
@@ -45,7 +45,7 @@ namespace WMS
         {
             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
             Session.Clear();
-            Response.Redirect(host_url + "legalportal/loginpage.aspx");
+            Response.Redirect(host_url + "Portal/loginpage.aspx");
         }
     }
 }

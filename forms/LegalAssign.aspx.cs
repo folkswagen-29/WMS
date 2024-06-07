@@ -149,7 +149,7 @@ namespace WMS.forms
 
         //            if (status == "Success")
         //            {
-        //                Response.Redirect("legalportal/legalportal.aspx?m=myworklist");
+        //                Response.Redirect("Portal/Portal.aspx?m=myworklist");
         //            }
 
         //        }

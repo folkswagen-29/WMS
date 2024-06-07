@@ -83,7 +83,7 @@ namespace WMS.userControls
             string sql = "Select assto_login,process_id,subject,submit_by,updated_by,created_datetime,wf_status,updated_datetime,"+
                             "CASE "+
                                 "WHEN step_name = 'Start' or wf_status in ('SAVE', 'WAITATCH') THEN ('" + host_url+ "' + link_url_format) " +
-                                "ELSE '"+host_url+"legalPortal/legalportal?m=myrequest#' " +
+                                "ELSE '"+host_url+"Portal/Portal?m=myrequest#' " +
                             "END AS link_url_format "+
                             "from wf_routing where submit_by = '"+ hidLogin.Value + "'" +
                             " and row_id in (select tb1.row_id from "+

@@ -354,7 +354,7 @@ namespace WMS.forms
                         }
 
                         var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                        Response.Redirect(host_url + "Portal/Portal.aspx?m=myworklist", false);
                     }
 
                 }
@@ -373,8 +373,8 @@ namespace WMS.forms
                 string id = dr["permit_no"].ToString();
                 subject = xsubject;
                 var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a> <br/>" +
-                                "You have been assigned to check document no " + dr["document_no"].ToString() + " Please check and proceed through the system <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a> <br/>" +
+                                "You have been assigned to check document no " + dr["document_no"].ToString() + " Please check and proceed through the system <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a>";
 
                 string pathfileins = "";
 
@@ -445,8 +445,8 @@ namespace WMS.forms
                 string id = dr["permit_no"].ToString();
                 subject = xsubject;
                 var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a><br/>" +
-                    "Document no" + dr["document_no"].ToString() + " It has been approved from the system. Please check and proceed through the system. <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a><br/>" +
+                    "Document no" + dr["document_no"].ToString() + " It has been approved from the system. Please check and proceed through the system. <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a>";
 
                 string pathfilecommregis = "";
 
@@ -494,7 +494,7 @@ namespace WMS.forms
                 Response.Write("<script> alert('This task has already been received by another user');</script>");
 
                 var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                Response.Redirect(host_url + "Portal/Portal.aspx?m=myworklist", false);
             }
             else
             {
@@ -537,7 +537,7 @@ namespace WMS.forms
                             zdb.ExecNonQuery(sqlupdate, zconnstr);
 
                             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                            Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                            Response.Redirect(host_url + "Portal/Portal.aspx?m=myworklist", false);
                         }
 
                     }
@@ -621,7 +621,7 @@ namespace WMS.forms
                             string id = dr["permit_no"].ToString();
                             subject = wfAttr.subject;
                             var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                            body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้ถูก Reject กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+                            body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้ถูก Reject กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a>";
 
                             string pathfilecommregis = "";
 
@@ -679,7 +679,7 @@ namespace WMS.forms
                         }
 
                         var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                        Response.Redirect(host_url + "Portal/Portal.aspx?m=myworklist", false);
                     }
 
                 }
@@ -753,7 +753,7 @@ namespace WMS.forms
                         }
                         
                         var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                        Response.Redirect(host_url + "Portal/Portal.aspx?m=myworklist", false);
                     }
 
                 }
@@ -826,7 +826,7 @@ namespace WMS.forms
                         }
 
                         var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                        Response.Redirect(host_url + "Portal/Portal.aspx?m=myworklist", false);
                     }
 
                 }
@@ -844,8 +844,8 @@ namespace WMS.forms
                 string id = dr["permit_no"].ToString();
                 subject = xsubject;
                 var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a> <br/>" +
-                                "You have been assigned to check document no " + dr["document_no"].ToString() + " Please check and proceed through the system <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a> <br/>" +
+                                "You have been assigned to check document no " + dr["document_no"].ToString() + " Please check and proceed through the system <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a>";
 
                 string pathfilecommregis = "";
 
@@ -892,8 +892,8 @@ namespace WMS.forms
                 string id = dr["permit_no"].ToString();
                 subject = xsubject;
                 var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a> <br/>" +
-                                "You have been assigned to check document no " + dr["document_no"].ToString() + " Please check and proceed through the system <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a> <br/>" +
+                                "You have been assigned to check document no " + dr["document_no"].ToString() + " Please check and proceed through the system <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a>";
 
                 string pathfileins = "";
 
@@ -964,8 +964,8 @@ namespace WMS.forms
                 string id = dr["permit_no"].ToString();
                 subject = xsubject;
                 var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a> <br/>" +
-                                "You have been assigned to check document no " + dr["document_no"].ToString() + " Please check and proceed through the system <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+                body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a> <br/>" +
+                                "You have been assigned to check document no " + dr["document_no"].ToString() + " Please check and proceed through the system <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a>";
 
                 string pathfileins = "";
 
@@ -1039,8 +1039,8 @@ namespace WMS.forms
                 string id = dr["permit_no"].ToString();
                 subject = xsubject;
                 var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                body = "เอกสารเลขที่" + dr["document_no"].ToString() + " ได้รับการดำเนินการเสร็จสิ้นแล้ว กรุณาตรวจสอบผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a><br/>" + 
-                        "Document no" + dr["document_no"].ToString() + " It has been completed. Please check through the system. <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+                body = "เอกสารเลขที่" + dr["document_no"].ToString() + " ได้รับการดำเนินการเสร็จสิ้นแล้ว กรุณาตรวจสอบผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a><br/>" + 
+                        "Document no" + dr["document_no"].ToString() + " It has been completed. Please check through the system. <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a>";
 
                 string pathfileCommregis = "";
 
@@ -1138,7 +1138,7 @@ namespace WMS.forms
                         sendMailChangeAssign(wfAttr.process_id, wfAttr.subject, hid_assto_login.Value);
 
                         var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                        Response.Redirect(host_url + "Portal/Portal.aspx?m=myworklist", false);
                     }
 
                 }

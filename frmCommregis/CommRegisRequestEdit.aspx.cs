@@ -655,7 +655,7 @@ namespace WMS.frmCommregis
                         string id = dr["req_no"].ToString();
                         subject = wfAttr.subject;
                         var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                        body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='"+host_url_sendmail+"legalportal/legalportal?m=myworklist'>Click</a>";
+                        body = "คุณได้รับมอบหมายให้ตรวจสอบเอกสารเลขที่ " + dr["document_no"].ToString() + " กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='"+host_url_sendmail+"Portal/Portal?m=myworklist'>Click</a>";
 
 
 
@@ -715,7 +715,7 @@ namespace WMS.frmCommregis
 
                     }
                     var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                    Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                    Response.Redirect(host_url + "Portal/Portal.aspx?m=myworklist", false);
                 }
 
             }

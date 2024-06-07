@@ -6,9 +6,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace WMS.legalPortal
+namespace WMS.Portal
 {
-    public partial class legalPortal : System.Web.UI.Page
+    public partial class Portal : System.Web.UI.Page
     {
         #region Public
         public DbControllerBase zdb = new DbControllerBase();

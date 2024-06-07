@@ -12,7 +12,7 @@ using DocumentFormat.OpenXml.Office2010.Excel;
 using Newtonsoft.Json;
 using WMS.Class; 
 
-namespace WMS.legalPortal
+namespace WMS.Portal
 {
     public partial class loginPage : System.Web.UI.Page
     {
@@ -42,7 +42,7 @@ namespace WMS.legalPortal
                 //        // clear session 
                 //        addSession(user_name);
                 //        var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                //        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myrequest");
+                //        Response.Redirect(host_url + "Portal/Portal.aspx?m=myrequest");
                 //    }
                 //}
             }
@@ -59,7 +59,7 @@ namespace WMS.legalPortal
             //        // clear session 
             //        addSession(txtLoginName.Text);
             //        var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-            //        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myrequest");
+            //        Response.Redirect(host_url + "Portal/Portal.aspx?m=myrequest");
             //    }
             //}
             //else 

@@ -61,7 +61,7 @@
                                     <table class="w-100">
                                         <tr>
                                             <td class="bg_banner_img">
-                                                <asp:ImageButton ImageUrl="../images/AWC_Logo.png" AlternateText="Logo Awc" PostBackUrl="../legalPortal/legalPortal.aspx?m=myrequest" runat="server" />
+                                                <asp:ImageButton ImageUrl="../images/AWC_Logo.png" AlternateText="Logo Awc" PostBackUrl="../Portal/Portal.aspx?m=myrequest" runat="server" />
                                             </td>
                                         </tr>
                                         <tr>

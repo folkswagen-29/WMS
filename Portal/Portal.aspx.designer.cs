@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WMS.legalPortal
+namespace WMS.Portal
 {
 
 
-    public partial class legalPortal
+    public partial class Portal
     {
 
         /// <summary>

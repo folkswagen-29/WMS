@@ -1,4 +1,4 @@
-﻿<%@ Page Title="LegalPortal" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="Portal.aspx.cs" Inherits="WMS.legalPortal.legalPortal" %>
+﻿<%@ Page Title="Portal" Language="C#" MasterPageFile="~/frmInsurance/SiteLigalWorkFlow.Master" AutoEventWireup="true" CodeBehind="Portal.aspx.cs" Inherits="WMS.Portal.Portal" %>
 <%@ Register Src="~/userControls/ucHeader.ascx" TagPrefix="uc1" TagName="ucHeader" %>
 <%@ Register Src="~/userControls/ucTaskList.ascx" TagPrefix="uc2" TagName="ucTaskList" %>
 

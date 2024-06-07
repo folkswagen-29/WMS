@@ -157,7 +157,7 @@ namespace WMS.forms
                             zdb.ExecNonQuery(sqlupdate, zconnstr);
                         }
                         var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                        Response.Redirect(host_url+"legalportal/legalportal.aspx?m=completelist");
+                        Response.Redirect(host_url+"Portal/Portal.aspx?m=completelist");
                     }
 
                 }

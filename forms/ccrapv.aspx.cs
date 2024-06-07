@@ -275,7 +275,7 @@ namespace WMS.forms
                                 string id = dr["req_no"].ToString();
                                 subject = wfAttr.subject;
                                 var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้ถูก Reject กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "legalportal/legalportal?m=myworklist'>Click</a>";
+                                body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้ถูก Reject กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='" + host_url_sendmail + "Portal/Portal?m=myworklist'>Click</a>";
 
                                 string pathfilecommregis = "";
 
@@ -334,7 +334,7 @@ namespace WMS.forms
                         }
 
                         var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                        Response.Redirect(host_url + "Portal/Portal.aspx?m=myworklist", false);
                     }
 
                 }
@@ -567,7 +567,7 @@ namespace WMS.forms
                                     string id = dr["req_no"].ToString();
                                     subject = wfAttr.subject;
                                     var host_url_sendmail = ConfigurationManager.AppSettings["host_url"].ToString();
-                                    body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='"+host_url_sendmail+"legalportal/legalportal?m=myworklist'>Click</a>";
+                                    body = "เอกสารเลขที่ " + dr["document_no"].ToString() + " ได้รับการอนุมัติผ่านระบบแล้ว กรุณาตรวจสอบและดำเนินการผ่านระบบ <a target='_blank' href='"+host_url_sendmail+"Portal/Portal?m=myworklist'>Click</a>";
 
                                     string pathfilecommregis = "";
 
@@ -604,7 +604,7 @@ namespace WMS.forms
                         }
 
                         var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                        Response.Redirect(host_url + "Portal/Portal.aspx?m=myworklist", false);
                     }
 
                 }
@@ -624,7 +624,7 @@ namespace WMS.forms
                 Response.Write("<script> alert('This task has already been received by another user');</script>");
 
                 var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                Response.Redirect(host_url + "Portal/Portal.aspx?m=myworklist", false);
             }
             else 
             {
@@ -667,7 +667,7 @@ namespace WMS.forms
                             zdb.ExecNonQuery(sqlupdate, zconnstr);
 
                             var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                            Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                            Response.Redirect(host_url + "Portal/Portal.aspx?m=myworklist", false);
                         }
 
                     }
@@ -796,7 +796,7 @@ namespace WMS.forms
                         }
 
                         var host_url = ConfigurationManager.AppSettings["host_url"].ToString();
-                        Response.Redirect(host_url + "legalportal/legalportal.aspx?m=myworklist", false);
+                        Response.Redirect(host_url + "Portal/Portal.aspx?m=myworklist", false);
                     }
 
                 }
